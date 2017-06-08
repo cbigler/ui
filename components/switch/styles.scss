@@ -1,36 +1,32 @@
+@import "../../variables/colors.json";
 @import "variables.json";
-
-$gray: #EEE;
-$brand-primary: red;
 
 .Switch-container {
   .Switch-handle {
     outline: 0;
     display: inline-block;
-    width: 40px;
-    height: 18px;
+    width: $switchBaseWidth;
+    height: $switchBaseHeight;
     position: relative;
     cursor: pointer;
     user-select: none;
-    background-color: #B4B8BF;
-    border-radius: 18px;
+    background-color: $gray;
+    border-radius: $switchBaseHeight;
     transition: all 200ms ease;
 
     &:after {
       position: relative;
       display: block;
       content: "";
-      width: 22px;
-      height: 22px;
+      width: $switchHandleSize + $switchHandleBorderSize;
+      height: $switchHandleSize + $switchHandleBorderSize;
 
       box-sizing: border-box;
-      left: -2px;
-      top: -2px;
+      left: -1 * $switchHandleBorderSize;
+      top: -1 * $switchHandleBorderSize;
       border-radius: 50%;
       background: #fff;
-      border: 2px solid #B4B8BF;
-      -webkit-transition: all 200ms ease;
-      -moz-transition: all 200ms ease;
+      border: $switchHandleBorderSize solid $gray;
       transition: all 200ms ease;
     }
   }
@@ -40,11 +36,11 @@ $brand-primary: red;
   }
 
   .Switch-checkbox:checked + .Switch-handle {
-    background-color: #4198FF;
+    background-color: $brandPrimary;
 
     &:after {
-      left: calc(50% + 2px);
-      border-color: #4198FF;
+      left: calc(50% + #{$switchHandleBorderSize});
+      border-color: $brandPrimary;
     }
   }
 }
