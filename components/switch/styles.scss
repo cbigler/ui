@@ -1,8 +1,8 @@
 @import "../../variables/colors.json";
 @import "variables.json";
 
-.Switch-container {
-  .Switch-handle {
+.switch {
+  label {
     outline: 0;
     display: inline-block;
     width: $switchBaseWidth;
@@ -31,11 +31,11 @@
     }
   }
 
-  .Switch-checkbox {
+  input[type=checkbox] {
     display: none;
   }
 
-  .Switch-checkbox:checked + .Switch-handle {
+  input[type=checkbox]:checked + label {
     background-color: $brandPrimary;
 
     &:after {
