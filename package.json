@@ -1,0 +1,37 @@
+{
+  "name": "@density/ui",
+  "version": "4.0.0",
+  "description": "A UI framework for density projects",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run storybook",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "start-storybook -p 6006 -c .storybook",
+    "build-storybook": "build-storybook",
+    "installall": "for i in $(find components/* -type d ! -path '*node_modules*' ! -name 'template' ); do cd $i && npm install && cd -; done"
+  },
+  "keywords": [],
+  "author": "Density <team+javascript@density.io>",
+  "license": "ISC",
+  "devDependencies": {
+    "@storybook/addon-info": "^3.0.1",
+    "@storybook/react": "^3.0.1",
+    "babel-cli": "^6.24.0",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-react": "^6.23.0",
+    "css-loader": "^0.28.1",
+    "moment": "^2.18.1",
+    "node-sass": "^4.5.2",
+    "node-sass-json-importer": "^3.0.2",
+    "react-dom": "^15.4.2",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.17.0",
+    "webpack": "^2.3.2"
+  },
+  "dependencies": {
+    "@density/charts": "^0.3.7",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  }
+}

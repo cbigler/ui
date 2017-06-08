@@ -1,0 +1,50 @@
+@import "variables.json";
+
+$gray: #EEE;
+$brand-primary: red;
+
+.Switch-container {
+  .Switch-handle {
+    outline: 0;
+    display: inline-block;
+    width: 40px;
+    height: 18px;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    background-color: #B4B8BF;
+    border-radius: 18px;
+    transition: all 200ms ease;
+
+    &:after {
+      position: relative;
+      display: block;
+      content: "";
+      width: 22px;
+      height: 22px;
+
+      box-sizing: border-box;
+      left: -2px;
+      top: -2px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid #B4B8BF;
+      -webkit-transition: all 200ms ease;
+      -moz-transition: all 200ms ease;
+      transition: all 200ms ease;
+    }
+  }
+
+  .Switch-checkbox {
+    display: none;
+  }
+
+  .Switch-checkbox:checked + .Switch-handle {
+    background-color: #4198FF;
+
+    &:after {
+      left: calc(50% + 2px);
+      border-color: #4198FF;
+    }
+  }
+}
