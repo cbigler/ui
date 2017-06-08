@@ -7,60 +7,20 @@ test:
     - /bin/true
   post:
     - |
-      # Publish all component once on master
-      if [ "$CIRCLE_BRANCH" == "master" ]; then
-        echo "Publishing all components..."
-        for component in $(find components/ -maxdepth 1 -mindepth 1 -type d -printf "%f\n"); do
-          # This isn't a component, but a template for `./make-component`
-          if [ "$component" == "template" -o "$component" == "dist" ]; then
-            continue
-          fi
-
-          echo
-          echo
-          echo "================"
-          echo " $component"
-          echo "================"
-
-          # If the published version is different from this version, then publish a new version.
-          if [ \
-            "$(cat components/$component/package.json | jq .version)" != \
-            "$(npm show "@density/component-$component" --json | jq '.["dist-tags"].latest')" \
-          ]; then
-            make publish COMPONENT=$component
-          else
-            echo "Component $component is up to date."
-          fi
-        done
-
-        # Finally, try to publish the main package
-        echo
-        echo
-        echo "================"
-        echo " @density/ui"
-        echo "================"
-        make components/dist/index.js                COMPONENT=drift
-        npm publish --access public
-      else
-        echo "Packages are only published to npm on branch 'master'."
-      fi
-      exit 0
-
-    - |
       # Finally, build storybook.
       set -e
       echo "Installing dependencies..."
       npm i
-      for component in $(find components/ -maxdepth 1 -mindepth 1 -type d -printf "%f\n"); do
-        # This isn't a component, but a template for `./make-component`
-        if [ "$component" == "template" -o "$component" == "dist" ]; then
-          continue
-        fi
+      # for component in $(find components/ -maxdepth 1 -mindepth 1 -type d -printf "%f\n"); do
+      #   # This isn't a component, but a template for `./make-component`
+      #   if [ "$component" == "template" -o "$component" == "dist" ]; then
+      #     continue
+      #   fi
 
-        cd components/$component
-        npm i
-        cd ../..
-      done
+      #   cd components/$component
+      #   npm i
+      #   cd ../..
+      # done
 
       echo "Building storybook..."
       npm run build-storybook

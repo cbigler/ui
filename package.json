@@ -14,6 +14,7 @@
   "author": "Density <team+javascript@density.io>",
   "license": "ISC",
   "devDependencies": {
+    "@storybook/addon-actions": "^3.0.1",
     "@storybook/addon-info": "^3.0.1",
     "@storybook/react": "^3.0.1",
     "babel-cli": "^6.24.0",
