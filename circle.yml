@@ -67,7 +67,7 @@ test:
 
       echo "* Pulling latest deploy..."
       git clone git@github.com:densityco/ui.git deploy_ui/
-      cd deploy_components/
+      cd deploy_ui/
       git checkout gh-pages
 
       echo "* Copying dist to github pages directory..."
