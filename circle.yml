@@ -12,8 +12,9 @@ dependencies:
 test:
   override:
     - /bin/true
-#  post:
-#    - |
+  post:
+    - |
+      npm run build-storybook
 #      # Finally, build storybook.
 #      set -e
 #      node -v
