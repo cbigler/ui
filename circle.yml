@@ -12,56 +12,56 @@ dependencies:
 test:
   override:
     - /bin/true
-  post:
-    - |
-      # Finally, build storybook.
-      set -e
-      node -v
-
-      echo "Installing dependencies..."
-      # for component in $(find components/ -maxdepth 1 -mindepth 1 -type d -printf "%f\n"); do
-      #   # This isn't a component, but a template for `./make-component`
-      #   if [ "$component" == "template" -o "$component" == "dist" ]; then
-      #     continue
-      #   fi
-
-      #   cd components/$component
-      #   npm i
-      #   cd ../..
-      # done
-
-      echo "Building storybook..."
-      npm run build-storybook
-
-      echo "* Pulling latest deploy..."
-      git clone git@github.com:densityco/ui.git deploy_ui/
-      cd deploy_ui/
-      git checkout gh-pages
-
-      echo "* Copying dist to github pages directory..."
-      rm -rf $CIRCLE_BRANCH/
-      mv ../storybook-static $CIRCLE_BRANCH/
-      git add $CIRCLE_BRANCH/
-
-      echo "* Pushing..."
-      git commit --allow-empty -m "Deploy branch $CIRCLE_BRANCH to Github Pages [ci skip]"
-      git push origin gh-pages --force
-
-      # Post a link to the branch as a comment in the PR
-      echo "* Pull requests this commit is part of: $CI_PULL_REQUESTS"
-      export IFS=","
-      for pr in $CI_PULL_REQUESTS; do
-        num="$(echo $pr | awk -F'/' '{ print $NF }')"
-        if [ -z \
-          "$(curl -H "Authorization: Bearer $GITHUB_MACHINE_USER_TOKEN" \
-          https://api.github.com/repos/densityco/ui/issues/$num/comments \
-          | jq .[].user.login \
-          | grep density-machine-user)" ]; then
-
-          curl -X POST \
-          -d "{\"body\": \"Here is a link to the built storybook: https://densityco.github.io/ui/$CIRCLE_BRANCH\"}" \
-          -H "Authorization: Bearer $GITHUB_MACHINE_USER_TOKEN" \
-          https://api.github.com/repos/densityco/ui/issues/$num/comments
-
-        fi
-      done
+#  post:
+#    - |
+#      # Finally, build storybook.
+#      set -e
+#      node -v
+#
+#      echo "Installing dependencies..."
+#      # for component in $(find components/ -maxdepth 1 -mindepth 1 -type d -printf "%f\n"); do
+#      #   # This isn't a component, but a template for `./make-component`
+#      #   if [ "$component" == "template" -o "$component" == "dist" ]; then
+#      #     continue
+#      #   fi
+#
+#      #   cd components/$component
+#      #   npm i
+#      #   cd ../..
+#      # done
+#
+#      echo "Building storybook..."
+#      npm run build-storybook
+#
+#      echo "* Pulling latest deploy..."
+#      git clone git@github.com:densityco/ui.git deploy_ui/
+#      cd deploy_ui/
+#      git checkout gh-pages
+#
+#      echo "* Copying dist to github pages directory..."
+#      rm -rf $CIRCLE_BRANCH/
+#      mv ../storybook-static $CIRCLE_BRANCH/
+#      git add $CIRCLE_BRANCH/
+#
+#      echo "* Pushing..."
+#      git commit --allow-empty -m "Deploy branch $CIRCLE_BRANCH to Github Pages [ci skip]"
+#      git push origin gh-pages --force
+#
+#      # Post a link to the branch as a comment in the PR
+#      echo "* Pull requests this commit is part of: $CI_PULL_REQUESTS"
+#      export IFS=","
+#      for pr in $CI_PULL_REQUESTS; do
+#        num="$(echo $pr | awk -F'/' '{ print $NF }')"
+#        if [ -z \
+#          "$(curl -H "Authorization: Bearer $GITHUB_MACHINE_USER_TOKEN" \
+#          https://api.github.com/repos/densityco/ui/issues/$num/comments \
+#          | jq .[].user.login \
+#          | grep density-machine-user)" ]; then
+#
+#          curl -X POST \
+#          -d "{\"body\": \"Here is a link to the built storybook: https://densityco.github.io/ui/$CIRCLE_BRANCH\"}" \
+#          -H "Authorization: Bearer $GITHUB_MACHINE_USER_TOKEN" \
+#          https://api.github.com/repos/densityco/ui/issues/$num/comments
+#
+#        fi
+#      done
