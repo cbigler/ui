@@ -7,7 +7,7 @@ machine:
 dependencies:
   pre:
     - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
-    - nvm use v6
+    - node -v
 
 test:
   override:
@@ -16,6 +16,7 @@ test:
     - |
       # Finally, build storybook.
       set -e
+      node -v
 
       echo "Installing dependencies..."
       npm i
