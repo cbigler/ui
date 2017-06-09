@@ -13,7 +13,7 @@ const path = require('path');
 // }
 
 
-const jsonImporter = require('node-sass-json-importer');
+const jsonImporter = require('@density/node-sass-json-importer');
 
 // Webpack config
 module.exports = {

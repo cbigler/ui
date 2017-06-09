@@ -24,10 +24,10 @@
     "css-loader": "^0.28.1",
     "moment": "^2.18.1",
     "node-sass": "^4.5.2",
-    "node-sass-json-importer": "^3.0.2",
     "react-dom": "^15.4.2",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.17.0",
+    "@density/node-sass-json-importer": "^4.1.0",
     "webpack": "^2.3.2"
   },
   "dependencies": {

@@ -5,28 +5,28 @@
   label {
     outline: 0;
     display: inline-block;
-    width: $switchBaseWidth;
-    height: $switchBaseHeight;
+    width: $switch-base-width;
+    height: $switch-base-height;
     position: relative;
     cursor: pointer;
     user-select: none;
     background-color: $gray;
-    border-radius: $switchBaseHeight;
+    border-radius: $switch-base-height;
     transition: all 200ms ease;
 
     &:after {
       position: relative;
       display: block;
       content: "";
-      width: $switchHandleSize + $switchHandleBorderSize;
-      height: $switchHandleSize + $switchHandleBorderSize;
+      width: $switch-handle-size + $switch-handle-border-size;
+      height: $switch-handle-size + $switch-handle-border-size;
 
       box-sizing: border-box;
-      left: -1 * $switchHandleBorderSize;
-      top: -1 * $switchHandleBorderSize;
+      left: -1 * $switch-handle-border-size;
+      top: -1 * $switch-handle-border-size;
       border-radius: 50%;
       background: #fff;
-      border: $switchHandleBorderSize solid $gray;
+      border: $switch-handle-border-size solid $gray;
       transition: all 200ms ease;
     }
   }
@@ -36,11 +36,11 @@
   }
 
   input[type=checkbox]:checked + label {
-    background-color: $brandPrimary;
+    background-color: $brand-primary;
 
     &:after {
-      left: calc(50% + #{$switchHandleBorderSize});
-      border-color: $brandPrimary;
+      left: calc(50% + #{$switch-handle-border-size});
+      border-color: $brand-primary;
     }
   }
 }
