@@ -1,0 +1,13 @@
+// ==========================
+// storybook-styles.scss
+// Styles to change how the storybook looks, not the components
+// ==========================
+@import "./node_modules/normalize.css/normalize.css";
+
+// Put some spacing around each example
+#root {
+  padding-left: 10px;
+  padding-top: 10px;
+  width: 400px;
+  height: 400px;
+}

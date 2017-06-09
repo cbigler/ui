@@ -1,5 +1,4 @@
 {
-  "brandPrimary": "#4198FF",
   "grayDarkest": "#222A2E",
   "grayDarker": "#4A5159",
   "grayDark": "#8E9299",
@@ -21,5 +20,7 @@
   "brandSuccess": "#14BB83",
   "brandWarning": "#EBA916",
   "brandDanger": "#FE6B6B",
-  "brandInfo": "#B4B8BF"
+  "brandInfo": "#B4B8BF",
+
+  "textColor": "#222A2E"
 }

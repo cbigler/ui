@@ -1,7 +1,7 @@
 @import "../../variables/colors.json";
 @import "variables.json";
 
-.switch {
+@mixin make-switch($background: $brand-primary, $foreground: #fff) {
   label {
     outline: 0;
     display: inline-block;
@@ -25,7 +25,7 @@
       left: -1 * $switch-handle-border-size;
       top: -1 * $switch-handle-border-size;
       border-radius: 50%;
-      background: #fff;
+      background: $foreground;
       border: $switch-handle-border-size solid $gray;
       transition: all 200ms ease;
     }
@@ -36,11 +36,15 @@
   }
 
   input[type=checkbox]:checked + label {
-    background-color: $brand-primary;
+    background-color: $background;
 
     &:after {
       left: calc(50% + #{$switch-handle-border-size});
-      border-color: $brand-primary;
+      border-color: $background;
     }
   }
+}
+
+.switch {
+  @include make-switch;
 }
