@@ -1,19 +1,17 @@
+import * as uuid from 'uuid';
 import * as React from 'react';
 import './styles.scss';
 
-let switchId = 0;
-
 export default function Switch({enabled, onChange}) {
-  // Required to give the label and checkbox matchine identifiers.
-  const randomId = (++switchId).toString();
+  const uniqueId = uuid.v4();
 
   return <div className="switch">
     <input
       type="checkbox"
-      id={`switch-${randomId}`}
+      id={`switch-${uniqueId}`}
       checked={enabled}
       onChange={onChange}
     />
-    <label htmlFor={`switch-${randomId}`}></label>
+    <label htmlFor={`switch-${uniqueId}`}></label>
   </div>
 }

@@ -8,7 +8,7 @@ import Switch from './';
 storiesOf('Switch', module)
   .addWithInfo('Switch', () => (
     <Switch enabled={true} onChange={action("onchange")} />
-  ), {inline: true})
+  ))
   .add('Interactive', () => (
     <SwitchWrapper initialEnabledState={true} />
   ))
