@@ -34,7 +34,7 @@ test:
       npm run build-storybook
 
       # Bug in react storybook that adds undefined to the page?
-      sed -i bak 's/^[ ]*undefined//' index.html && rm index.html.bak
+      sed -i bak 's/undefined//' index.html && rm index.html.bak
 
       echo "* Pulling latest deploy..."
       git clone git@github.com:densityco/ui.git deploy_ui/
