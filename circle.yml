@@ -19,7 +19,6 @@ test:
       node -v
 
       echo "Installing dependencies..."
-      npm i
       # for component in $(find components/ -maxdepth 1 -mindepth 1 -type d -printf "%f\n"); do
       #   # This isn't a component, but a template for `./make-component`
       #   if [ "$component" == "template" -o "$component" == "dist" ]; then
