@@ -1,9 +1,3 @@
-machine:
-  node:
-    version: 6.9.5
-  npm:
-    version: 3.10.10
-
 dependencies:
   pre:
     - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
@@ -15,6 +9,8 @@ test:
     - |
       # Finally, build storybook.
       set -e
+      nvm use v6
+
       echo "Installing dependencies..."
       npm i
       # for component in $(find components/ -maxdepth 1 -mindepth 1 -type d -printf "%f\n"); do
