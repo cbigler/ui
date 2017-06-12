@@ -8,12 +8,15 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006 -c .storybook",
     "build-storybook": "build-storybook",
-    "installall": "for i in $(find components/* -type d ! -path '*node_modules*' ! -name 'template' ); do cd $i && npm install && cd -; done"
+    "installall": "for i in $(find components/* -type d ! -path '*node_modules*' ! -name 'template' ); do cd $i && npm install && cd -; done",
+    "preversion": "npm run build-spec",
+    "build-spec": "node utils/build-specs.js"
   },
   "keywords": [],
   "author": "Density <team+javascript@density.io>",
   "license": "ISC",
   "devDependencies": {
+    "@density/node-sass-json-importer": "^4.1.0",
     "@storybook/addon-actions": "^3.0.1",
     "@storybook/addon-info": "^3.0.1",
     "@storybook/react": "^3.0.1",
@@ -24,10 +27,10 @@
     "css-loader": "^0.28.1",
     "moment": "^2.18.1",
     "node-sass": "^4.5.2",
+    "pretty": "^2.0.0",
     "react-dom": "^15.4.2",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.17.0",
-    "@density/node-sass-json-importer": "^4.1.0",
     "webpack": "^2.3.2"
   },
   "dependencies": {

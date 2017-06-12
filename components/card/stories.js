@@ -2,6 +2,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import Card, {CardBody} from './';
+import './styles.scss';
 
 storiesOf('Card', module)
   .addWithInfo('Card', () => (
