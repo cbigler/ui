@@ -1,0 +1,12 @@
+// Import any global variables from "../../variables/*.json"
+
+// Local variables to the component
+@import "variables.json";
+
+@mixin make-%COMPONENTDASH%($color: $%COMPONENTDASH%-color) {
+  color: $color;
+}
+
+.%COMPONENTDASH% {
+  @include make-%COMPONENTDASH%;
+}

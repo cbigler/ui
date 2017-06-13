@@ -1,0 +1,44 @@
+#!/bin/bash
+set -e
+
+echo "Let's make a new component."
+
+printf "Enter the name of your component, in dash-case: "; read COMPONENTDASH
+printf "Enter the name of your component, in english (ie, \`My component\`): "; read COMPONENTTITLE
+printf "Describe your component: "; read COMPONENTDESC
+
+COMPONENTUPPERCAMEL="$(echo "$COMPONENTDASH" | perl -pe 's/(^|-)./uc($&)/ge;s/_//g' | sed 's/-//g')"
+
+first="$(echo $COMPONENTUPPERCAMEL | cut -c1 | tr [A-Z] [a-z])"
+second="$(echo $COMPONENTUPPERCAMEL | cut -c2-)"
+COMPONENTCAMEL="$first$second"
+
+echo "* Copying template to components/$COMPONENTDASH..."
+cp -R components/template components/$COMPONENTDASH
+
+echo "* Replacing placeholders with variations of $COMPONENTDASH..."
+for f in $(ls components/$COMPONENTDASH); do
+  sed \
+    -i .bkp \
+    -e "s/%COMPONENTDASH%/$COMPONENTDASH/g" \
+    -e "s/%COMPONENTCAMEL%/$COMPONENTCAMEL/g" \
+    -e "s/%COMPONENTTITLE%/$COMPONENTTITLE/g" \
+    -e "s/%COMPONENTUPPERCAMEL%/$COMPONENTUPPERCAMEL/g" \
+    -e "s/%COMPONENTDESC%/$COMPONENTDESC/g" \
+    components/$COMPONENTDASH/$f
+  rm -f components/$COMPONENTDASH/$f.bkp
+done
+
+echo "* Linking $COMPONENTDASH story to stories folder..."
+cd stories
+ln -s ../components/$COMPONENTDASH/story.js $COMPONENTDASH.js
+cd ..
+
+echo "Done!"
+echo "You have a new chart in components/$COMPONENTDASH:"
+echo "* components/$COMPONENTDASH/index.js contains your chart code."
+echo "* components/$COMPONENTDASH/styles.scss contains your chart styles."
+echo "* components/$COMPONENTDASH/story.js contains your react-storyboard story. Use it to present different states of your chart."
+echo
+echo "To build the storyboard and start a development server:"
+echo "=> npm run storyboard"
