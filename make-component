@@ -35,10 +35,10 @@ ln -s ../components/$COMPONENTDASH/story.js $COMPONENTDASH.js
 cd ..
 
 echo "Done!"
-echo "You have a new chart in components/$COMPONENTDASH:"
-echo "* components/$COMPONENTDASH/index.js contains your chart code."
-echo "* components/$COMPONENTDASH/styles.scss contains your chart styles."
-echo "* components/$COMPONENTDASH/story.js contains your react-storyboard story. Use it to present different states of your chart."
+echo "You have a new component in components/$COMPONENTDASH:"
+echo "* components/$COMPONENTDASH/index.js contains your component code."
+echo "* components/$COMPONENTDASH/styles.scss contains your component styles."
+echo "* components/$COMPONENTDASH/story.js contains your react-storyboard story. Use it to present different states of your component."
 echo
 echo "To build the storyboard and start a development server:"
 echo "=> npm run storyboard"
