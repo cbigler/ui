@@ -108,6 +108,10 @@ In general, try to follow these guidelines:
 
 Each component is a seperate package.
 
+## Building javascript
+All javascript files are transpiled by babel in such a way that `*.js` => `dist/*.js`. Not really
+much of interest going on here.
+
 ## Building sass
 1. First, the `styles.scss` is transpiled into `dist/styles.css`. This is to be used in non-sass
    projects, and can be imported like so from the parent project:
@@ -161,5 +165,95 @@ variables are to be separately defined / imported, and each component uses what 
 // At this point, mixins are available:
 .my-custom-foo {
   @include make-foo(crimson);
+}
+```
+
+
+# Adding Density UI to a project
+
+## 1. Install Density UI:
+
+```sh
+yarn add @density/ui@~4.0.0
+# or:
+npm i -S @density/ui@~4.0.0
+```
+
+## 2. Are you using css or sass?
+
+### CSS
+
+This is pretty easy. Just include the css file `./node_modules/@density/ui/dist/styles.css` to get
+all the non-component related styles (ie, the font, the grid system, a clearfix, etc...)
+
+Also, don't forget to add a css reset! This project is built off of `normalize.css`.
+
+To add component styles, install the respective package for that component (such as
+`@density/ui-navbar`), and add them for each component from
+`./node_modules/@density/ui-COMPONENT/dist/styles.css`.
+
+
+### SCSS
+
+This is more difficult, but still not too bad:
+
+1. First, install a sass compiler importer addon to allow sass to import variables from json files.
+   (Throughout the project we utilize json files to store common ui constants so they are importable
+   from both stylesheets and javascript)
+
+```scss
+yarn add @density/node-sass-json-importer
+# or:
+npm i -S @density/node-sass-json-importer
+```
+
+Follow the directions in that repository to add the plugin to your sass workflow, whether it be
+webpack, command line, or based on something else.
+
+2. Next, create a stylesheet in your project to hold all Density UI imports and install the css
+   reset:
+
+```sh
+mkdir styles/density-ui.scss
+yarn add normalize.css
+# or:
+npm i -S normalize.css
+```
+
+Then, import variables and styles provided by the main Density UI package:
+
+```
+// styles/density-ui.scss
+// 
+// Density UI Styles
+// 
+
+// CSS Reset
+@import "../node_modules/normalize.css/normalize.css";
+
+// Global variables like colors, spacings, etc from @density/ui
+@import "../node_modules/@density/ui/variables/colors.json";
+@import "../node_modules/@density/ui/variables/spacing.json";
+
+// Global styles like our font, grid system and more from @density/ui
+@import "../node_modules/@density/ui/styles/font";
+@import "../node_modules/@density/ui/styles/clearfix";
+@import "../node_modules/@density/ui/styles/grid";
+
+// Local styles for individual components from @density/ui-*:
+
+// For example, here's a navbar. All components follow the pattern of requiring variables and
+// requiring it's uncompiled sass.
+@import "../node_modules/@density/ui-navbar/variables.json";
+@import "../node_modules/@density/ui-navbar/dist/sass";
+```
+
+3. Use your components, and if you want to customize one, use the mixin:
+
+```
+<Navbar type="my-navbar" />
+
+.my-navbar {
+  @include make-navbar; // Mixins follow the pattern make-COMPONENT
 }
 ```

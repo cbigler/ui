@@ -11,7 +11,7 @@ BABEL = ./node_modules/.bin/babel
 NODE_SASS = ./node_modules/.bin/node-sass
 
 .PHONY: build
-build: $(foreach i,$(COMPONENT_SOURCE_FILES),$(COMPONENT_PATH_DIST)/$(notdir $i)) $(COMPONENT_PATH_DIST)/styles.css
+build: $(foreach i,$(COMPONENT_SOURCE_FILES),$(COMPONENT_PATH_DIST)/$(notdir $i)) $(COMPONENT_PATH_DIST)/styles.css dist/styles.css
 
 .PHONY: publish
 publish: clean build
@@ -19,8 +19,7 @@ publish: clean build
 
 .PHONY: clean
 clean:
-	rm -rf $(COMPONENT_PATH_DIST)
-	rm -rf components/dist
+	rm -rf $(COMPONENT_PATH_DIST) dist/
 
 $(COMPONENT_PATH_DIST):
 	mkdir -p $(COMPONENT_PATH_DIST)
@@ -33,6 +32,7 @@ $(COMPONENT_PATH_DIST)/%.js: $(COMPONENT_PATH_DIST)
 		--presets=babel-preset-es2015,babel-preset-react \
 		--plugins=babel-plugin-transform-object-rest-spread \
 		| sed -n '/styles.scss/!p' \
+		| sed -n '/"use strict"/!p' \
 		> $@
 
 # To make each stylesheet, compile to css.
@@ -47,4 +47,16 @@ $(COMPONENT_PATH_DIST)/styles.css: $(COMPONENT_PATH_DIST)
 	$(NODE_SASS) \
 		--importer node_modules/@density/node-sass-json-importer/dist/node-sass-json-importer.js \
 		$(COMPONENT_PATH)/styles.scss \
+		> $@
+
+
+# To make the main density-ui stylesheet, compile to css.
+# @density/node-sass-json-importer is used to parse json files with variables inside. Learn more:
+# https://github.com/DensityCo/node-sass-json-importer
+# ie, `styles/main.scss` => `dist/styles.css`
+dist/styles.css: styles/main.scss
+	mkdir -p dist/
+	$(NODE_SASS) \
+		--importer node_modules/@density/node-sass-json-importer/dist/node-sass-json-importer.js \
+		styles/main.scss \
 		> $@
