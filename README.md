@@ -214,7 +214,7 @@ webpack, command line, or based on something else.
    reset:
 
 ```sh
-mkdir styles/density-ui.scss
+mkdir -p styles/ && touch styles/density-ui.scss
 yarn add normalize.css
 # or:
 npm i -S normalize.css
