@@ -1,0 +1,54 @@
+// Import any global variables from "../../variables/*.json"
+@import "../../variables/colors.json";
+
+// Local variables to the component
+@import "variables.json";
+
+
+// A navbar is the wrapper component for all navbar parts.
+@mixin make-navbar {
+  position: relative;
+  z-index: $navbar-zindex;
+  box-sizing: border-box;
+  padding-left: 18px;
+  padding-right: 18px;
+  height: $navbar-height;
+  width: 100%;
+  background-color: #FFF;
+  border-bottom: 1px solid #F5F6F7;
+  transition: box-shadow 200ms ease-in-out;
+  font-family: 'Sailec', 'Helvetica', 'Arial', sans-serif !important;
+}
+
+// A navbar brand contains the logo mark, left aligned on the status bar.
+@mixin make-navbar-brand {
+  display: inline-block;
+  position: relative;
+  z-index: $navbar-brand-zindex;
+  float: left;
+  height: $navbar-height;
+  font-size: $navbar-brand-font-size;
+
+  img {
+    position: relative;
+    top: ($navbar-height - $navbar-brand-height) / 2;
+    height: $navbar-brand-height;
+  }
+}
+
+// A navbar brand contains a subtitle that's next to a navbar brand. The react component uses the
+// prop `subtitle` to represent the subtitle
+@mixin make-navbar-brand-subtitle {
+  position: relative;
+  z-index: $navbar-brand-zindex;
+  float: left;
+  height: 56px;
+  padding-left: 10px;
+  font-size: 16px;
+  line-height: 56px;
+  color: $gray;
+}
+
+.navbar { @include make-navbar; }
+.navbar-brand { @include make-navbar-brand; }
+.navbar-brand-subtitle { @include make-navbar-brand-subtitle; }

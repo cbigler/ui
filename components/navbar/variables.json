@@ -1,0 +1,8 @@
+{
+  "navbarZindex": "1000",
+  "navbarHeight": 56,
+
+  "navbarBrandZindex": "1010",
+  "navbarBrandHeight": 20,
+  "navbarBrandFontSize": 18
+}
