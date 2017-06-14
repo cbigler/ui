@@ -1,0 +1,74 @@
+$fg-columns: 12 !default;
+$fg-gutter: 0.5rem !default;
+$screen-xs-max: 767px;
+$screen-sm-min: 768px;
+$screen-sm-max: 991px;
+$screen-md-min: 992px;
+$screen-md-max: 1199px;
+$screen-lg-min: 1200px;
+
+/**
+ * Calculate column size percentage
+ */
+@function get-col-percent($column-num) {
+  @return $column-num / $fg-columns * 100%;
+}
+
+
+@mixin grid-container {
+  margin-left: -1 * $fg-gutter;
+  margin-right: -1 * $fg-gutter;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.row {
+  @include grid-container;
+}
+
+@mixin grid-column {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 0;
+  flex-shrink: 0;
+  min-height: 1px;
+  padding-left: $fg-gutter;
+  padding-right: $fg-gutter;
+}
+
+@mixin grid-width($xs, $sm, $md, $lg) {
+  @include grid-column;
+
+  flex-basis: get-col-percent($xs);
+  max-width: get-col-percent($xs);
+
+  @media (min-width: $screen-sm-min) {
+    flex-basis: get-col-percent($sm);
+    max-width: get-col-percent($sm);
+  }
+  @media (min-width: $screen-md-min) {
+    flex-basis: get-col-percent($md);
+    max-width: get-col-percent($md);
+  }
+  @media (min-width: $screen-lg-min) {
+    flex-basis: get-col-percent($lg);
+    max-width: get-col-percent($lg);
+  }
+}
+
+
+.parent {
+  @include grid-container;
+
+  .child {
+    @include grid-width(12, 6, 4, 4);
+    height: 200px;
+    
+    &-1 { border: 10px solid wheat; }
+    &-2 { border: 10px solid crimson; }
+    &-3 { border: 10px solid dodgerblue; }
+  }
+}

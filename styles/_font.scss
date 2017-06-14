@@ -1,0 +1,38 @@
+// TODO: Sailec font should be on all density UI
+$path: "https://densityco.github.io/internal-dashboard/staging-e309b8fb-970e-4f5f-a1fd-6a092c55da90/assets/fonts";
+@font-face {
+    font-family: 'Sailec';
+    src: url("#{$path}/sailec-regular.ttf") format("truetype"), url("#{$path}/sailec-regular.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Sailec';
+    src: url("#{$path}/sailec-regular-italic.ttf") format("truetype"), url("#{$path}/sailec-regular-italic.otf") format("opentype");
+    font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Sailec';
+    src: url("#{$path}/sailec-medium.ttf") format("truetype"),  url("#{$path}/sailec-medium.otf") format("opentype");
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Sailec';
+    src: url("#{$path}/sailec-medium-italic.ttf") format("truetype"), url("#{$path}/sailec-medium-italic.otf") format("opentype");
+    font-weight: 500;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Sailec';
+    src: url("#{$path}/sailec-bold.ttf") format("truetype"), url("#{$path}/sailec-bold.otf") format("opentype");
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Sailec';
+    src: url("#{$path}/sailec-bold-italic.ttf") format("truetype"), url("#{$path}/sailec-bold-italic.otf") format("opentype");
+    font-weight: bold;
+    font-style: italic;
+}
