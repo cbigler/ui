@@ -1,6 +1,5 @@
 import * as uuid from 'uuid';
 import * as React from 'react';
-import './styles.scss';
 
 export default function Card({type, children}) {
   return <div

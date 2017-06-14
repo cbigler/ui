@@ -16,6 +16,10 @@ fs.readdir('components', (err, components) => {
     throw err;
   } else {
     components.forEach(component => {
+      if (component == 'template') {
+        return;
+      }
+
       const componentPath = path.join('..', 'components', component, 'index.js')
 
       // By default, render the empty component. However, if the component exports a function named

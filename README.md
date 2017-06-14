@@ -102,3 +102,64 @@ In general, try to follow these guidelines:
   if implementation changes behind the scenes, your project is able to adapt without having to
   rework the ui. [Here's an example. It's actually really easy to
   use!](https://github.com/DensityCo/ui/blob/master/utils/build-specs.js)
+
+
+# How the build script works
+
+Each component is a seperate package.
+
+## Building sass
+1. First, the `styles.scss` is transpiled into `dist/styles.css`. This is to be used in non-sass
+   projects, and can be imported like so from the parent project:
+
+```scss
+@import "./node_modules/@density/ui-COMPONENT/dist/styles.css";
+
+// Using nicss or webpack or something that resolves the `style` key in the package.json?
+// Do this instead:
+@import "@density/ui-COMPONENT";
+```
+
+2. Next, the `styles.scss` is run through a transformation that strips out all json imports from the
+   component's scss. This is done so that parent projects can use whatever variable values it'd
+   like and not strictly couple the values to density ui (ie, so child projects can override them)>
+
+So this:
+
+```scss
+@import "variables.json";
+@mixin make-foo {}
+.foo { @include make-foo; }
+```
+
+is converted to this:
+
+```scss
+@mixin make-foo($color: wheat) {
+  color: $color;
+}
+.foo { @include make-foo; }
+```
+
+The output of this transformation is copied to `dist/_sass.scss`. Within the parent project, the
+variables are to be separately defined / imported, and each component uses what it needs:
+
+```scss
+// my-project-styles.scss
+
+// First, bring in all variables from density ui.
+@import "@density/ui/variables/colors.json";
+@import "@density/ui/variables/spacing.json";
+// ... you get it ...
+
+// Then, bring in the variables for the density ui components you need:
+@import "@density/ui-COMPONENT/variables.json";
+
+// Finally, bring in the stylesheet without variables included (variables were included previously):
+@import "@density/ui-COMPONENT/dist/sass";
+
+// At this point, mixins are available:
+.my-custom-foo {
+  @include make-foo(crimson);
+}
+```

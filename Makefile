@@ -1,4 +1,3 @@
-
 # First, ensure that `COMPONENT` has been set to tell us which component to build.
 ifndef COMPONENT
 $(error Please define COMPONENT - options are $(shell ls components/))
@@ -41,7 +40,10 @@ $(COMPONENT_PATH_DIST)/%.js: $(COMPONENT_PATH_DIST)
 # https://github.com/DensityCo/node-sass-json-importer
 # ie, charts/$COMPONENT/styles.scss => charts/$COMPONENT/dist/{_sass.scss,styles.css}
 $(COMPONENT_PATH_DIST)/styles.css: $(COMPONENT_PATH_DIST)
-	cp $(COMPONENT_PATH)/styles.scss $(COMPONENT_PATH_DIST)/_sass.scss
+	cp $(COMPONENT_PATH)/variables.json $(COMPONENT_PATH_DIST)/variables.json
+	cat $(COMPONENT_PATH)/styles.scss \
+		| sed -n '/@import.*\.json/!p' \
+		> $(COMPONENT_PATH_DIST)/_sass.scss
 	$(NODE_SASS) \
 		--importer node_modules/@density/node-sass-json-importer/dist/node-sass-json-importer.js \
 		$(COMPONENT_PATH)/styles.scss \
