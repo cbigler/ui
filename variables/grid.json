@@ -1,0 +1,10 @@
+{
+  "fgColumns": "12",
+  "fgGutter": 8,
+  "screenXsMax": 767,
+  "screenSmMin": 768,
+  "screenSmMax": 991,
+  "screenMdMin": 992,
+  "screenMdMax": 1199,
+  "screenLgMin": 1200
+}
