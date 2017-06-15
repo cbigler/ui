@@ -1,0 +1,21 @@
+// Import any global variables from "../../variables/*.json"
+@import "../../variables/spacing.json";
+
+// Local variables to the component
+@import "variables.json";
+
+@mixin make-container($full-width: false) {
+  @if $full-width {
+    width: 100%;
+  } @else {
+    width: $container-width;
+    margin: $padding-vertical-base auto;
+  }
+}
+
+.container {
+  @include make-container;
+}
+.container-full-width {
+  @include make-container(true);
+}
