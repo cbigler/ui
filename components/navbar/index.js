@@ -1,13 +1,15 @@
 import * as React from 'react';
 
-export default function Navbar({subtitle}) {
+export default function Navbar({subtitle, fullWidth}) {
   return <div className="navbar">
-    <div className="navbar-brand">
-      <img
-        src="http://style-guide.density.io/assets/images/app_bar_logo.png"
-        alt="Density Logo"
-      />
+    <div className={fullWidth ? 'navbar-full-width' : 'navbar-container'}>
+      <div className="navbar-brand">
+        <img
+          src="http://style-guide.density.io/assets/images/app_bar_logo.png"
+          alt="Density Logo"
+        />
+      </div>
+      {subtitle ? <div className="navbar-brand-subtitle">{subtitle}</div> : null}
     </div>
-    {subtitle ? <div className="navbar-brand-subtitle">{subtitle}</div> : null}
   </div>;
 }

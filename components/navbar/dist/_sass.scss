@@ -1,15 +1,10 @@
 // Import any global variables from "../../variables/*.json"
-@import "../../variables/colors.json";
-@import "../../variables/grid.json";
-
-@import "../../styles/grid";
 
 // Local variables to the component
-@import "variables.json";
 
 
 // A navbar is the wrapper component for all navbar parts.
-@mixin make-navbar($full-width: true) {
+@mixin make-navbar {
   position: relative;
   z-index: $navbar-zindex;
   box-sizing: border-box;
@@ -21,12 +16,6 @@
   border-bottom: 1px solid #F5F6F7;
   transition: box-shadow 200ms ease-in-out;
   font-family: 'Sailec', 'Helvetica', 'Arial', sans-serif !important;
-}
-
-// A navbar container makes a container-width navbar instead of a full width navbar.
-@mixin make-navbar-container($width: $navbar-width) {
-  max-width: $width;
-  margin: 0px auto;
 }
 
 // A navbar brand contains the logo mark, left aligned on the status bar.
@@ -61,4 +50,3 @@
 .navbar { @include make-navbar; }
 .navbar-brand { @include make-navbar-brand; }
 .navbar-brand-subtitle { @include make-navbar-brand-subtitle; }
-.navbar-container { @include make-navbar-container; }
