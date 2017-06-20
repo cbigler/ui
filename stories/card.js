@@ -1,1 +1,1 @@
-../components/card/stories.js
+../components/card/story.js
