@@ -1,0 +1,47 @@
+// Import any global variables from "../../variables/*.json"
+@import "../../variables/colors.json";
+@import "../../variables/spacing.json";
+@import "../../variables/fonts.json";
+
+// Local variables to the component
+@import "variables.json";
+
+// An input box is a stylized <input />.
+@mixin make-input-box($active-color: $brand-primary) {
+  display: block;
+  font-family: $font-base;
+  padding-left: $padding-horizontal-base;
+  padding-top: $padding-vertical-base / 2;
+  height: 36px;
+  font-size: $font-size-base;
+  color: $gray-darker;
+  background-color: #fff;
+  border: 1px solid $gray-light;
+  border-radius: $border-radius-small;
+
+  // On active, remove outline and add a border color.
+  // NOTE: does this have accessibility concerns?
+  outline: none;
+  &:focus {
+    border-color: $active-color;
+  }
+}
+
+// If applying to a <select></select>, apply a few more styles.
+@mixin make-input-box-select {
+  position: relative;
+
+  // Hide caret on select boxes.
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  // Add padding to right where the caret should be.
+  padding-right: $padding-horizontal-base;
+}
+
+.input-box {
+  @include make-input-box;
+}
+.input-box-select {
+  @include make-input-box-select;
+}
