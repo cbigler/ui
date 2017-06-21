@@ -20,6 +20,7 @@ fs.readdir('components', (err, components) => {
         return;
       }
 
+      console.log(`* Rendering ${component}`);
       const componentPath = path.join('..', 'components', component, 'index.js')
 
       // By default, render the empty component. However, if the component exports a function named
@@ -27,11 +28,10 @@ fs.readdir('components', (err, components) => {
       const componentSpec = require(componentPath).spec;
       let rendered;
       if (componentSpec) {
-        rendered = renderToString(componentSpec())
+        rendered = renderToString(componentSpec());
       } else {
         // Render the empty component.
         const Component = require(componentPath).default;
-        console.log('* Rendering', component);
         rendered = renderToString(React.createElement(Component, {}, null))
       }
 
