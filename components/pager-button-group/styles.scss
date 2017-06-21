@@ -6,9 +6,6 @@
 // Local variables to the component
 @import "variables.json";
 
-@mixin make-pager-button-group {
-}
-
 @mixin make-pager-button(
   $font-size: $font-size-large,
   $color: $gray,
@@ -49,9 +46,6 @@
   }
 }
 
-.pager-button-group {
-  @include make-pager-button-group;
-}
 .pager-button {
   @include make-pager-button;
 }

@@ -38,7 +38,6 @@ storiesOf('Card', module)
     </Card>
   ))
   .addWithInfo('Real example', () => {
-
     class RealExample extends React.Component {
       constructor(props) {
         super(props);
@@ -60,7 +59,7 @@ storiesOf('Card', module)
           <CardHeader>
             <div style={{display: 'flex'}}>
               <span style={{flex: 1}}>Greeter</span>
-              <IndicatorDot style={{marginTop: 4}} label="Looks peachy" />
+              <IndicatorDot style={{marginTop: 4}} type="success" label="Looks peachy" />
             </div>
             <div style={{display: 'flex', marginTop: 12, fontSize: 12, color: '#B4B8BF'}}>
               <span style={{flex: 1}}>Subtitle</span>
