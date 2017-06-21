@@ -39,13 +39,12 @@ export class InputStackItem extends React.Component {
     </div>;
   }
 }
-// export function InputStackItem(props) {
-//   return <input
-//     {...props}
-//     className={classnames(
-//       'input-stack-item',
-//       props.invalid ? 'input-stack-item-invalid' : null,
-//       props.className,
-//     )}
-//   />;
-// }
+
+// Render the spec with this data.
+export function spec() {
+  return <InputStackGroup>
+    <InputStackItem type="text" placeholder="Text box" />
+    <InputStackItem invalid type="text" value="I'm invalid :(" />
+    <InputStackItem type="password" placeholder="Another password box" />
+  </InputStackGroup>
+}

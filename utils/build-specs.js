@@ -31,6 +31,7 @@ fs.readdir('components', (err, components) => {
       } else {
         // Render the empty component.
         const Component = require(componentPath).default;
+        console.log('* Rendering', component);
         rendered = renderToString(React.createElement(Component, {}, null))
       }
 
