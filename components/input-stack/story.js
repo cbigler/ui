@@ -6,7 +6,7 @@ import './styles.scss';
 import {InputStackGroup, InputStackItem} from './';
 
 
-storiesOf('InputStacked', module)
+storiesOf('InputStack', module)
   .addWithInfo('With a bunch of text and password inputs', () => (
     <InputStackGroup>
       <InputStackItem type="text" placeholder="Text box" />

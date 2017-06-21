@@ -3,7 +3,7 @@
 // component provides normally. Basically, is a textbox is selected within a input stack, then add
 // the focus class to its parent.
 
-function makeInputStacked(elem) {
+function makeInputStack(elem) {
   // When the user focuses a box, add the focus class to a single item.
   jQuery(elem).find("input").on('focus', function() {
     var parent = jQuery(this).parent();
@@ -20,13 +20,13 @@ function makeInputStacked(elem) {
 }
 
 if (typeof jQuery !== 'undefined') {
-  jQuery.fn.inputStacked = function() {
-    return makeInputStacked(this);
+  jQuery.fn.inputStack = function() {
+    return makeInputStack(this);
   };
 }
 
 // Usage:
 // var myInputStack = document.getElementById('my-input-stack');
-// $(myInputStack).inputStacked();
+// $(myInputStack).inputStack();
 // or:
-// makeInputStacked(myInputStack)
+// makeInputStack(myInputStack)
