@@ -1,0 +1,46 @@
+// Import any global variables from "../../variables/*.json"
+@import "../../variables/colors.json";
+@import "../../variables/spacing.json";
+@import "../../variables/fonts.json";
+
+// Local variables to the component
+@import "variables.json";
+
+@mixin make-context-menu($background: #fff) {
+  position: absolute;
+  list-style-type: none;
+  box-sizing: border-box;
+  min-width: 250px;
+
+  background-color: $background;
+  border-radius: $border-radius-small;
+  overflow: hidden;
+
+  border: none;
+  box-shadow: 0px 1px 6px rgba(34, 42, 46, 0.16);
+  border: 1px solid $gray-light;
+}
+@mixin make-context-menu-item($color: $text-color) {
+  font-family: $font-base;
+  font-size: $font-size-base;
+  padding: $padding-vertical-large $padding-horizontal-small;
+  color: $color;
+  user-select: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $gray-lighter;
+  }
+
+  img {
+    vertical-align: middle;
+    padding-right: 8px;
+  }
+}
+
+.context-menu {
+  @include make-context-menu;
+}
+.context-menu-item {
+  @include make-context-menu-item;
+}
