@@ -1,7 +1,7 @@
 {
   "name": "@density/ui-%COMPONENTDASH%",
   "version": "0.0.1",
-  "description": "%COMPONENTTITLE% chart",
+  "description": "%COMPONENTTITLE% component",
   "main": "dist/index.js",
   "style": "dist/styles.css",
   "scss": "dist/_styles.scss",
