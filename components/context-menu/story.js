@@ -17,11 +17,16 @@ storiesOf('ContextMenu', module)
         <img src="http://i.imgur.com/ssuaPQs.png" />
         Bar
       </ContextMenuItem>
+      <ContextMenuItem>
+        <img src="http://i.imgur.com/ssuaPQs.png" />
+        Baz
+      </ContextMenuItem>
     </ContextMenu>
   ))
   .addWithInfo('Without icons', () => (
     <ContextMenu>
       <ContextMenuItem>Foo</ContextMenuItem>
       <ContextMenuItem>Bar</ContextMenuItem>
+      <ContextMenuItem>Baz</ContextMenuItem>
     </ContextMenu>
   ))
