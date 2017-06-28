@@ -1,0 +1,33 @@
+// Import any global variables from "../../variables/*.json"
+@import "../../variables/colors.json";
+
+// Local variables to the component
+@import "variables.json";
+
+@mixin make-fab($background: #fff, $color: $text-color, $border-width: 1px) {
+  background-color: $background;
+  color: $color;
+  width: 54px;
+  height: 54px;
+  user-select: none;
+  cursor: pointer;
+
+  text-align: center;
+  line-height: 54px - ($border-width * 2);
+  font-size: 24px;
+
+  border: $border-width solid $gray-light;
+  border-radius: 50%;
+
+  position: absolute;
+
+  box-shadow: 2px 2px 5px $gray-light;
+  transform: all 500ms ease-in-out;
+  &:active {
+    transform: scale(1.05);
+  }
+}
+
+.fab {
+  @include make-fab;
+}
