@@ -1,5 +1,6 @@
 import * as uuid from 'uuid';
 import * as React from 'react';
+import classnames from 'classnames';
 
 export default function Card({type, children}) {
   return <div
