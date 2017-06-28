@@ -7,14 +7,14 @@ export default function Card({type, children}) {
   >{children}</div>;
 }
 
-export function CardBody({children}) {
-  return <div className="card-body">{children}</div>;
+export function CardBody({children, className}) {
+  return <div className={classnames('card-body', className)}>{children}</div>;
 }
 
-export function CardHeader({children}) {
-  return <div className="card-header">{children}</div>;
+export function CardHeader({children, className}) {
+  return <div className={classnames('card-header', className)}>{children}</div>;
 }
 
-export function CardLoading({percent}) {
-  return <div className="card-loading" style={{width: `${percent}%`}} />;
+export function CardLoading({percent, className}) {
+  return <div className={classnames('card-loading', className)} style={{width: `${percent}%`}} />;
 }
