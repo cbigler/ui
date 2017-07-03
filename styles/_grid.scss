@@ -52,17 +52,3 @@
     max-width: get-col-percent($lg);
   }
 }
-
-
-.parent {
-  @include grid-container;
-
-  .child {
-    @include grid-width(12, 6, 4, 4);
-    height: 200px;
-    
-    &-1 { border: 10px solid wheat; }
-    &-2 { border: 10px solid crimson; }
-    &-3 { border: 10px solid dodgerblue; }
-  }
-}
