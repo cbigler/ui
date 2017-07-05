@@ -9,9 +9,9 @@ var _react3 = require('@storybook/react');
 var _addonActions = require('@storybook/addon-actions');
 
 
-var _ = require('./');
+var _index = require('./index');
 
-var _2 = _interopRequireDefault(_);
+var _index2 = _interopRequireDefault(_index);
 
 var _card = require('../card');
 
@@ -25,7 +25,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     null,
     'foo',
     _react2.default.createElement(
-      _2.default,
+      _index2.default,
       { onClickBackdrop: (0, _addonActions.action)('backdrop click') },
       _react2.default.createElement(
         _card2.default,
@@ -34,6 +34,31 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
           _card.CardHeader,
           null,
           'Foo'
+        ),
+        _react2.default.createElement(
+          _card.CardBody,
+          null,
+          'Bar'
+        )
+      )
+    )
+  );
+}).addWithInfo('With a close button', function () {
+  return _react2.default.createElement(
+    'div',
+    null,
+    'foo',
+    _react2.default.createElement(
+      _index2.default,
+      { onClickBackdrop: (0, _addonActions.action)('backdrop click') },
+      _react2.default.createElement(
+        _card2.default,
+        null,
+        _react2.default.createElement(
+          _card.CardHeader,
+          null,
+          'Foo',
+          _react2.default.createElement(_index.ModalClose, { onClick: (0, _addonActions.action)('close button click') })
         ),
         _react2.default.createElement(
           _card.CardBody,

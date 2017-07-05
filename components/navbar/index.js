@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export default function Navbar({subtitle, fullWidth}) {
+export default function Navbar({subtitle, fullWidth, children}) {
   return <div className="navbar">
     <div className={fullWidth ? 'navbar-full-width' : 'navbar-container'}>
       <div className="navbar-brand">
@@ -10,6 +10,7 @@ export default function Navbar({subtitle, fullWidth}) {
         />
       </div>
       {subtitle ? <div className="navbar-brand-subtitle">{subtitle}</div> : null}
+      <div className="navbar-items">{children}</div>
     </div>
   </div>;
 }

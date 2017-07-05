@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = Modal;
+exports.ModalClose = ModalClose;
 
 var _react = require("react");
 
@@ -24,6 +25,16 @@ function Modal(_ref) {
         } },
       children
     )
+  );
+}
+
+function ModalClose(_ref2) {
+  var onClick = _ref2.onClick;
+
+  return React.createElement(
+    "span",
+    { className: "modal-close", onClick: onClick },
+    "\xD7"
   );
 }
 

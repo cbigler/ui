@@ -8,8 +8,8 @@ export default function ContextMenu({className, children}) {
   </div>;
 }
 
-export function ContextMenuItem({className, children}) {
-  return <div className={classnames('context-menu-item', className)}>
+export function ContextMenuItem({className, children, onClick}) {
+  return <div onClick={onClick} className={classnames('context-menu-item', className)}>
     {children}
   </div>;
 }

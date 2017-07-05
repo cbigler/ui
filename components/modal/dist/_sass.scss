@@ -32,5 +32,12 @@
   right: 0px;
 }
 
+@mixin make-modal-close($color: $gray) {
+  color: $color;
+  float: right;
+  cursor: pointer;
+}
+
 .modal { @include make-modal; }
 .modal-backdrop { @include make-modal-backdrop; }
+.modal-close { @include make-modal-close; }

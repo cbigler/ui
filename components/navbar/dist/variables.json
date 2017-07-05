@@ -1,6 +1,7 @@
 {
   "navbarZindex": "1000",
   "navbarHeight": 56,
+  "navbarWidth": 1200,
 
   "navbarBrandZindex": "1010",
   "navbarBrandHeight": 20,

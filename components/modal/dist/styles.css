@@ -20,3 +20,8 @@
   bottom: 0px;
   left: 0px;
   right: 0px; }
+
+.modal-close {
+  color: #B4B8BF;
+  float: right;
+  cursor: pointer; }
