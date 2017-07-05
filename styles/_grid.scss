@@ -10,6 +10,11 @@
   margin-left: -1 * $fg-gutter;
   margin-right: -1 * $fg-gutter;
   box-sizing: border-box;
+
+  max-width: 1000px;
+  margin: 20px auto;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 @mixin grid-row {
