@@ -1,0 +1,1 @@
+../components/modal/story.js
