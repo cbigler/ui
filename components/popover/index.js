@@ -21,7 +21,7 @@ export default class Popover extends React.Component {
     // On every render, update the popover position.
     this.popper && this.popper.scheduleUpdate();
 
-    return <div className="popover-wrapper" ref={ref => this.wrapper = ref}>
+    return <div className="popover-wrapper" ref={ref => this.wrapper = this.props.target || ref}>
       {this.props.children}
       <div className="popover" ref={ref => this.popover = ref} style={{display: this.props.show ? 'block' : 'none'}}>
         <div className="popover-arrow" />
