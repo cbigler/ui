@@ -28,9 +28,13 @@
   border-left: $border-size solid $border-color;
 }
 
-.popover-arrow {
-  @include make-popover-arrow;
+@mixin make-popover {
+  z-index: $popover-z-index;
 }
+
+.popover { @include make-popover; }
+.popover-arrow { @include make-popover-arrow; }
+
 .popover-wrapper {
   display: inline;
 }
