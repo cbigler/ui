@@ -3,8 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import './styles.scss';
-import {InputStackGroup, InputStackItem} from './';
-
+import {InputStackGroup, InputStackItem} from './index';
 
 storiesOf('InputStack', module)
   .addWithInfo('With a bunch of text and password inputs', () => (

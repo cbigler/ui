@@ -19,6 +19,11 @@ export class InputStackItem extends React.Component {
     this.state = {focused: false};
   }
   render() {
+    const propsRest = Object.assign({}, this.props);
+    delete propsRest.invalid;
+    delete propsRest.focused;
+    delete propsRest.className;
+
     return <div className={classnames(
       'input-stack-item',
       this.props.invalid ? 'input-stack-item-invalid' : null,
@@ -26,7 +31,7 @@ export class InputStackItem extends React.Component {
       this.props.className,
     )}>
       <input
-        {...this.props}
+        {...propsRest}
         onFocus={data => {
           this.setState({focused: true});
           this.props.onFocus && this.props.onFocus(data);
