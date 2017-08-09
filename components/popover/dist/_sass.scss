@@ -1,0 +1,38 @@
+// Import any global variables from "../../variables/*.json"
+
+// Local variables to the component
+
+@mixin make-popover-arrow(
+  $color: #fff,
+  $border-color: $gray-light,
+  $border-size: 1px,
+  $pointer-size: 10px
+) {
+  // Make a box
+  display: block;
+  width: $pointer-size;
+  height: $pointer-size;
+  background-color: $color;
+
+  // Tilt the box on end, center it on the card (when tipped on its side, $pointer-size is the
+  // length of a side, not the width of the shape.)
+  transform: rotate(45deg);
+  margin-bottom: -1 * ($pointer-size / 2);
+  position: relative; 
+  left: calc(50% - #{$pointer-size / 1.414}); // sqrt(2) = 1.414
+
+  // Give the pointer borders.
+  border-top: $border-size solid $border-color;
+  border-left: $border-size solid $border-color;
+}
+
+@mixin make-popover {
+  z-index: $popover-z-index;
+}
+
+.popover { @include make-popover; }
+.popover-arrow { @include make-popover-arrow; }
+
+.popover-wrapper {
+  display: inline;
+}

@@ -32,6 +32,36 @@ storiesOf('Popover', module)
     }
     return <PopoverClick />;
   })
+  .addWithInfo('Popover with ref target works', () => {
+    class PopoverClick extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { show: false };
+      }
+
+      render() {
+        return <div>
+          <button
+            style={{width: 200, height: 50}}
+            onClick={() => this.setState({show: !this.state.show})}
+          >Open Popover</button>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <div
+            ref={ref => this.myRef = ref}
+          >Popover target</div>
+          <Popover
+            show={this.state.show}
+            popover={<Card><CardBody><p>Hello World!</p></CardBody></Card>}
+            target={this.myRef}
+          />
+        </div>
+      }
+    }
+    return <PopoverClick />;
+  })
   .addWithInfo('Wider popover with header that works', () => {
     class PopoverClick extends React.Component {
       constructor(props) {

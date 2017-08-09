@@ -1,0 +1,17 @@
+.popover {
+  z-index: 3000; }
+
+.popover-arrow {
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  transform: rotate(45deg);
+  margin-bottom: -5px;
+  position: relative;
+  left: calc(50% - 7.07214px);
+  border-top: 1px solid #E3E3E6;
+  border-left: 1px solid #E3E3E6; }
+
+.popover-wrapper {
+  display: inline; }
