@@ -1,0 +1,17 @@
+.fab {
+  background-color: #fff;
+  color: #222A2E;
+  width: 54px;
+  height: 54px;
+  user-select: none;
+  cursor: pointer;
+  text-align: center;
+  line-height: 52px;
+  font-size: 24px;
+  border: 1px solid #E3E3E6;
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: 2px 2px 5px #E3E3E6;
+  transform: all 500ms ease-in-out; }
+  .fab:active {
+    transform: scale(1.05); }

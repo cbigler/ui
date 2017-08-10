@@ -1,0 +1,40 @@
+// Import any global variables from "../../variables/*.json"
+@import "../../variables/colors.json";
+@import "../../variables/fonts.json";
+@import "../../variables/spacing.json";
+
+// Local variables to the component
+@import "variables.json";
+
+// Create a normal button.
+@mixin make-button(
+  $color: $brand-primary,
+  $button-height: 48px,
+  $font-size: $font-size-base,
+  $text-color: #fff
+) {
+  display: block;
+  width: 100%;
+  outline: none;
+
+  line-height: $button-height;
+  color: $text-color;
+  background-color: $color;
+  border-width: 0px;
+  border-radius: $border-radius-base;
+
+  font-size: $font-size;
+  text-align: center;
+  font-weight: 500;
+
+  cursor: pointer;
+  user-select: none;
+  transition: all 100ms ease-in-out;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.button { @include make-button($brand-primary, $button-height: 36px, $font-size: $font-base); }
+.button-small { @include make-button($brand-primary, $button-height: 24px, $font-size: $font-size-small); }

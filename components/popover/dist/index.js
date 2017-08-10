@@ -14,6 +14,10 @@ var _popper = require('popper.js');
 
 var _popper2 = _interopRequireDefault(_popper);
 
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
@@ -36,6 +40,15 @@ var Popover = function (_React$Component) {
   _createClass(Popover, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      // FIXME: A bit of a hack. Popper doesn't work well in a testing environment (a lack of
+      // `document.createRange`: https://github.com/tmpvar/jsdom/issues/317) so in a testing
+      // environment popper isn't used (and since the component is never rendered to a screen when
+      // testing, I think this is fine.)
+      if (process.env.NODE_ENV === 'test') {
+        this.popper = null;
+        return;
+      }
+
       this.popper = new _popper2.default(this.wrapper, this.popover, {
         modifiers: {
           arrow: {
@@ -61,9 +74,13 @@ var Popover = function (_React$Component) {
         this.props.children,
         React.createElement(
           'div',
-          { className: 'popover', ref: function ref(_ref) {
+          {
+            className: (0, _classnames2.default)('popover', this.props.className),
+            ref: function ref(_ref) {
               return _this2.popover = _ref;
-            }, style: { display: this.props.show ? 'block' : 'none' } },
+            },
+            style: { display: this.props.show ? 'block' : 'none' }
+          },
           React.createElement('div', { className: 'popover-arrow' }),
           this.props.popover
         )

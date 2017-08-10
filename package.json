@@ -10,7 +10,8 @@
     "build-storybook": "build-storybook",
     "installall": "for i in $(find components/* -type d ! -path '*node_modules*' ! -name 'template' ); do cd $i && npm install && cd -; done",
     "preversion": "npm run build-spec",
-    "build-spec": "node utils/build-specs.js"
+    "build-spec": "node utils/build-specs.js",
+    "make-component": "./make-component"
   },
   "keywords": [],
   "author": "Density <team+javascript@density.io>",

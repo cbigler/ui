@@ -1,0 +1,20 @@
+.input-box {
+  display: block;
+  font-family: "Sailec", "Helvetica", "Arial", sans-serif;
+  padding-left: 12px;
+  padding-top: 3px;
+  height: 36px;
+  font-size: 14px;
+  color: #4A5159;
+  background-color: #fff;
+  border: 1px solid #E3E3E6;
+  border-radius: 4px;
+  outline: none; }
+  .input-box:focus {
+    border-color: #4198FF; }
+
+.input-box-select {
+  position: relative;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 12px; }

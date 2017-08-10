@@ -1,0 +1,44 @@
+.card {
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  border: none;
+  color: #222A2E;
+  border: 1px solid #E3E3E6; }
+  .card .card-body {
+    font-family: "Sailec", "Helvetica", "Arial", sans-serif;
+    font-size: 14px;
+    padding: 6px 12px;
+    color: #222A2E; }
+  .card .card-header {
+    font-family: "Sailec", "Helvetica", "Arial", sans-serif;
+    font-size: 16px;
+    border-bottom: 1px solid #E3E3E6;
+    padding: 12px 12px; }
+
+.card-loading {
+  width: 100%;
+  height: 2px;
+  background-color: #4198FF;
+  transition: all 250ms ease-in-out;
+  margin-bottom: -2px; }
+
+.card-dark {
+  box-sizing: border-box;
+  background-color: #4A5159;
+  border-radius: 4px;
+  overflow: hidden;
+  border: none;
+  color: #fff;
+  border: 1px solid #E3E3E6; }
+  .card-dark .card-body {
+    font-family: "Sailec", "Helvetica", "Arial", sans-serif;
+    font-size: 14px;
+    padding: 6px 12px;
+    color: #fff; }
+  .card-dark .card-header {
+    font-family: "Sailec", "Helvetica", "Arial", sans-serif;
+    font-size: 16px;
+    border-bottom: 1px solid #E3E3E6;
+    padding: 12px 12px; }

@@ -123,15 +123,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           _react2.default.createElement(
             'button',
             {
+              style: { width: 200, height: 50 },
               onClick: function onClick() {
                 return _this4.setState({ show: !_this4.state.show });
-              },
-              style: { width: 200, height: 50 },
+              }
+            },
+            'Open Popover'
+          ),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'div',
+            {
               ref: function ref(_ref) {
                 return _this4.myRef = _ref;
               }
             },
-            'Foo'
+            'Popover target'
           ),
           _react2.default.createElement(_2.default, {
             show: this.state.show,
