@@ -13,3 +13,18 @@ storiesOf('Fab', module)
   .addWithInfo('With a plus inside', () => (
     <Fab>+</Fab>
   ))
+  .addWithInfo('Primary', () => (
+    <Fab type="primary">+</Fab>
+  ))
+  .addWithInfo('Success', () => (
+    <Fab type="success">+</Fab>
+  ))
+  .addWithInfo('Warning', () => (
+    <Fab type="warning">+</Fab>
+  ))
+  .addWithInfo('Danger', () => (
+    <Fab type="danger">+</Fab>
+  ))
+  .addWithInfo('Info', () => (
+    <Fab type="info">+</Fab>
+  ))

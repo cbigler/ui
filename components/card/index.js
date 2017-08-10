@@ -12,8 +12,8 @@ export function CardBody({children, className}) {
   return <div className={classnames('card-body', className)}>{children}</div>;
 }
 
-export function CardHeader({children, className}) {
-  return <div className={classnames('card-header', className)}>{children}</div>;
+export function CardHeader({children, size, className}) {
+  return <div className={classnames('card-header', `card-header-${size || 'base'}`, className)}>{children}</div>;
 }
 
 export function CardLoading({percent, className}) {

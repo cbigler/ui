@@ -1,0 +1,56 @@
+// Import any global variables from "../../variables/*.json"
+@import "../../variables/colors.json";
+@import "../../variables/spacing.json";
+@import "../../variables/fonts.json";
+
+// Local variables to the component
+@import "variables.json";
+
+@mixin make-toast($color: $brand-primary, $icon-color: #fff, $icon-size: 72px) {
+  box-sizing: border-box;
+  background-color: #fff;
+  overflow: hidden;
+
+  border: 1px solid $color;
+  border-radius: $border-radius-base;
+
+  min-height: $icon-size;
+  display: flex;
+  flex-direction: row;
+
+  font-family: $font-base;
+  font-size: $font-size-base;
+
+  .toast-icon {
+    display: block;
+    width: $icon-size;
+    background-color: $color;
+    margin-right: $padding-horizontal-small;
+
+    text-align: center;
+    line-height: $icon-size;
+    color: $icon-color;
+  }
+  .toast-body {
+    width: calc(100% - 100px);
+    height: $icon-size;
+    margin-right: $padding-horizontal-small;
+
+    cursor: default;
+    user-select: none;
+
+    // Vertical align the text inside of the cell.
+    display: table;
+    & > span {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+}
+
+.toast { @include make-toast; }
+.toast-primary { @include make-toast($brand-primary); }
+.toast-success { @include make-toast($brand-success); }
+.toast-info { @include make-toast($brand-info); }
+.toast-danger { @include make-toast($brand-danger); }
+.toast-warning { @include make-toast($brand-warning); }

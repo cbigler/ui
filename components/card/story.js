@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Card, {CardBody, CardHeader, CardLoading} from './';
+import Card, {CardBody, CardHeader, CardLoading} from './index';
 import IndicatorDot from '../indicator-dot';
 
 import './styles.scss';
@@ -17,6 +17,14 @@ storiesOf('Card', module)
   .addWithInfo('Card Header', () => (
     <Card>
       <CardHeader>Greeter</CardHeader>
+      <CardBody>
+        <p>Hello World!</p>
+      </CardBody>
+    </Card>
+  ))
+  .addWithInfo('Card Small Header', () => (
+    <Card>
+      <CardHeader size="small">Greeter</CardHeader>
       <CardBody>
         <p>Hello World!</p>
       </CardBody>

@@ -1,0 +1,13 @@
+// Import any global variables from "../../variables/*.json"
+
+// Local variables to the component
+@import "variables.json";
+
+@mixin make-density-mark($width: 72px) {
+  width: $width;
+  path {
+    fill: #231F20;
+  }
+}
+
+.density-mark { @include make-density-mark; }

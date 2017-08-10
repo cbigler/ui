@@ -23,11 +23,13 @@ storiesOf('Modal', module)
   .addWithInfo('With a close button', () => (
     <div>
       foo
-      <Modal onClickBackdrop={action('backdrop click')}>
+      <Modal
+        onClickBackdrop={action('backdrop click')}
+        onClose={action('close button click')}
+      >
         <Card>
           <CardHeader>
             Foo
-            <ModalClose onClick={action('close button click')} />
           </CardHeader>
           <CardBody>Bar</CardBody>
         </Card>

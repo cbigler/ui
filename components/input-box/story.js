@@ -3,8 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import './styles.scss';
-import InputBox from './';
-
+import InputBox from './index';
 
 storiesOf('InputBox', module)
   .addWithInfo('Empty', () => (
@@ -14,7 +13,7 @@ storiesOf('InputBox', module)
     <InputBox type="text" value="foo!" />
   ))
   .addWithInfo('type=password', () => (
-    <InputBox type="password" placeholder="Type your password here." />
+    <InputBox type="password" placeholder="Type your password" />
   ))
   .addWithInfo('type=select', () => (
     <InputBox type="select">
@@ -22,4 +21,7 @@ storiesOf('InputBox', module)
       <option value="bar">Bar</option>
       <option value="baz">Baz</option>
     </InputBox>
+  ))
+  .addWithInfo('disabled box', () => (
+    <InputBox disabled placeholder="I am disabled" />
   ))

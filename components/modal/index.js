@@ -1,11 +1,10 @@
 import * as React from 'react';
 
-export default function Modal({children, onClickBackdrop}) {
+export default function Modal({children, onClose, onClickBackdrop}) {
   return <div className="modal-backdrop" onClick={onClickBackdrop}>
-    <div className="modal" onClick={e => e.stopPropagation()}>{children}</div>
+    <div className="modal" onClick={e => e.stopPropagation()}>
+      {onClose ? <div className="modal-close" onClick={onClose}>&#10005;</div> : null}
+      {children}
+    </div>
   </div>;
-}
-
-export function ModalClose({onClick}) {
-  return <span className="modal-close" onClick={onClick}>&times;</span>;
 }

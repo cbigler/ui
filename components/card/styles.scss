@@ -15,15 +15,23 @@
   .card-body {
     font-family: $font-base;
     font-size: $font-size-base;
-    padding: $padding-vertical-base $padding-horizontal-base;
+    padding: $padding-vertical-base $padding-horizontal-large;
     color: $foreground;
   }
 
   .card-header {
     font-family: $font-base;
+    font-size: $font-size-x-large;
+    font-weight: bold;
+    padding: $padding-vertical-large $padding-horizontal-large;
+    padding-bottom: $padding-horizontal-base;
+  }
+  .card-header-small {
+    font-family: $font-base;
     font-size: $font-size-large;
-    border-bottom: 1px solid $gray-light;
-    padding: $padding-vertical-large $padding-horizontal-base;
+    font-weight: bold;
+    padding: $padding-vertical-base $padding-horizontal-large;
+    padding-bottom: 0px;
   }
 }
 

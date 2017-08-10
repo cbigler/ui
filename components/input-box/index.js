@@ -8,12 +8,21 @@ export default function InputBox(props) {
   case 'select':
     return <select 
       {...props}
-      className={classnames('input-box', 'input-box-select', props.className)}
+      className={classnames(
+        'input-box',
+        'input-box-select',
+        props.disabled ? 'input-box-disabled' : null,
+        props.className
+      )}
     />;
   default:
     return <input
       {...props}
-      className={classnames('input-box', props.className)}
+      className={classnames(
+        'input-box',
+        props.disabled ? 'input-box-disabled' : null,
+        props.className
+      )}
     />;
   }
 }

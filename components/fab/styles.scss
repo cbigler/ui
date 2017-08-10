@@ -1,5 +1,6 @@
 // Import any global variables from "../../variables/*.json"
 @import "../../variables/colors.json";
+@import "../../variables/timings.json";
 
 // Local variables to the component
 @import "variables.json";
@@ -22,12 +23,15 @@
   position: absolute;
 
   box-shadow: 2px 2px 5px $gray-light;
-  transform: all 500ms ease-in-out;
+  transition: all $timing-small ease-in-out;
   &:active {
     transform: scale(1.05);
   }
 }
 
-.fab {
-  @include make-fab;
-}
+.fab { @include make-fab; }
+.fab-primary { @include make-fab($brand-primary, #fff); }
+.fab-success { @include make-fab($brand-success, #fff); }
+.fab-warning { @include make-fab($brand-warning, #fff); }
+.fab-danger { @include make-fab($brand-danger, #fff); }
+.fab-info { @include make-fab($brand-info, #fff); }
