@@ -8,7 +8,7 @@ import Toast from './index';
 
 storiesOf('Toast', module)
   .addWithInfo('With multiline content', () => (
-    <Toast icon={<span>&#10004;</span>}>
+    <Toast icon={<span>&#9432;</span>}>
       To link a doorway with a space, drag the doorway from below to a space on the left.
     </Toast>
   ))
@@ -28,7 +28,7 @@ storiesOf('Toast', module)
     </Toast>
   ))
   .addWithInfo('Danger', () => (
-    <Toast type="danger" icon={<span>&times;</span>}>
-      Oh No!!!
+    <Toast type="danger" icon={<span>&#9760;</span>}>
+      Danger danger, Mr. Ranger!
     </Toast>
   ))

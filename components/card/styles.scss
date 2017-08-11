@@ -5,7 +5,7 @@
 @mixin make-card($background: #fff, $foreground: $text-color) {
   box-sizing: border-box;
   background-color: $background;
-  border-radius: $border-radius-small;
+  border-radius: $border-radius-base;
   overflow: hidden;
   border: none;
   color: $foreground;
