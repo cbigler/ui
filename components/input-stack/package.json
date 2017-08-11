@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-input-stack",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Input Stack component",
   "main": "dist/index.js",
   "style": "dist/styles.css",

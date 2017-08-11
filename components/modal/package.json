@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-modal",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "Modal popup component",
   "main": "dist/index.js",
   "style": "dist/styles.css",

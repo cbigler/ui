@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = Modal;
-exports.ModalClose = ModalClose;
 
 var _react = require("react");
 
@@ -13,6 +12,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function Modal(_ref) {
   var children = _ref.children,
+      onClose = _ref.onClose,
       onClickBackdrop = _ref.onClickBackdrop;
 
   return React.createElement(
@@ -23,18 +23,13 @@ function Modal(_ref) {
       { className: "modal", onClick: function onClick(e) {
           return e.stopPropagation();
         } },
+      onClose ? React.createElement(
+        "div",
+        { className: "modal-close", onClick: onClose },
+        "\u2715"
+      ) : null,
       children
     )
-  );
-}
-
-function ModalClose(_ref2) {
-  var onClick = _ref2.onClick;
-
-  return React.createElement(
-    "span",
-    { className: "modal-close", onClick: onClick },
-    "\xD7"
   );
 }
 

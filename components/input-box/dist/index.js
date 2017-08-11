@@ -26,11 +26,11 @@ function InputBox(props) {
     // to the right.
     case 'select':
       return React.createElement('select', _extends({}, props, {
-        className: (0, _classnames2.default)('input-box', 'input-box-select', props.className)
+        className: (0, _classnames2.default)('input-box', 'input-box-select', props.disabled ? 'input-box-disabled' : null, props.className)
       }));
     default:
       return React.createElement('input', _extends({}, props, {
-        className: (0, _classnames2.default)('input-box', props.className)
+        className: (0, _classnames2.default)('input-box', props.disabled ? 'input-box-disabled' : null, props.className)
       }));
   }
 }
