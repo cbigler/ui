@@ -3,14 +3,16 @@
 // Local variables to the component
 
 @mixin make-modal($width: 400px) {
-  // Ensure that the width of the modal is either $size or 100%.
+  position: relative;
+
+  // Ensure that the width of the modal is either $width or 100%.
   width: $width;
   @media (max-width: $width) {
     width: 100%;
     height: 100vh;
   }
 
-  & > :first-child {
+  & > :last-child {
     width: 100%;
     height: 100%;
     overflow-y: scroll;
@@ -32,9 +34,16 @@
   right: 0px;
 }
 
-@mixin make-modal-close($color: $gray) {
+@mixin make-modal-close($color: $gray, $spacing: 15px) {
+  position: absolute;
+  top: $spacing;
+  right: $spacing;
+
+  font-family: $font-base;
+  font-size: $font-size-base;
+  font-weight: bold;
+
   color: $color;
-  float: right;
   cursor: pointer;
 }
 

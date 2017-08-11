@@ -8,9 +8,9 @@ var React = _interopRequireWildcard(_react);
 
 var _react2 = require('@storybook/react');
 
-var _ = require('./');
+var _index = require('./index');
 
-var _2 = _interopRequireDefault(_);
+var _index2 = _interopRequireDefault(_index);
 
 var _indicatorDot = require('../indicator-dot');
 
@@ -29,10 +29,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 (0, _react2.storiesOf)('Card', module).addWithInfo('Card', function () {
   return React.createElement(
-    _2.default,
+    _index2.default,
     null,
     React.createElement(
-      _.CardBody,
+      _index.CardBody,
       null,
       React.createElement(
         'p',
@@ -43,15 +43,34 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
   );
 }).addWithInfo('Card Header', function () {
   return React.createElement(
-    _2.default,
+    _index2.default,
     null,
     React.createElement(
-      _.CardHeader,
+      _index.CardHeader,
       null,
       'Greeter'
     ),
     React.createElement(
-      _.CardBody,
+      _index.CardBody,
+      null,
+      React.createElement(
+        'p',
+        null,
+        'Hello World!'
+      )
+    )
+  );
+}).addWithInfo('Card Small Header', function () {
+  return React.createElement(
+    _index2.default,
+    null,
+    React.createElement(
+      _index.CardHeader,
+      { size: 'small' },
+      'Greeter'
+    ),
+    React.createElement(
+      _index.CardBody,
       null,
       React.createElement(
         'p',
@@ -62,11 +81,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
   );
 }).addWithInfo('Loading Card', function () {
   return React.createElement(
-    _2.default,
+    _index2.default,
     null,
-    React.createElement(_.CardLoading, { percent: 50 }),
+    React.createElement(_index.CardLoading, { percent: 50 }),
     React.createElement(
-      _.CardBody,
+      _index.CardBody,
       null,
       React.createElement(
         'p',
@@ -77,10 +96,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
   );
 }).addWithInfo('Dark Card', function () {
   return React.createElement(
-    _2.default,
+    _index2.default,
     { type: 'dark' },
     React.createElement(
-      _.CardBody,
+      _index.CardBody,
       null,
       React.createElement(
         'p',
@@ -116,11 +135,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       key: 'render',
       value: function render() {
         return React.createElement(
-          _2.default,
+          _index2.default,
           null,
-          React.createElement(_.CardLoading, { percent: this.state.loaded }),
+          React.createElement(_index.CardLoading, { percent: this.state.loaded }),
           React.createElement(
-            _.CardHeader,
+            _index.CardHeader,
             null,
             React.createElement(
               'div',
@@ -148,7 +167,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             )
           ),
           React.createElement(
-            _.CardBody,
+            _index.CardBody,
             null,
             React.createElement(
               'p',

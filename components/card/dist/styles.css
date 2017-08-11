@@ -9,13 +9,20 @@
   .card .card-body {
     font-family: "Sailec", "Helvetica", "Arial", sans-serif;
     font-size: 14px;
-    padding: 6px 12px;
+    padding: 20px 20px;
     color: #222A2E; }
   .card .card-header {
     font-family: "Sailec", "Helvetica", "Arial", sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 40px 20px;
+    padding-bottom: 10px; }
+  .card .card-header-small {
+    font-family: "Sailec", "Helvetica", "Arial", sans-serif;
     font-size: 16px;
-    border-bottom: 1px solid #E3E3E6;
-    padding: 12px 12px; }
+    font-weight: bold;
+    padding: 20px 20px;
+    padding-bottom: 0px; }
 
 .card-loading {
   width: 100%;
@@ -35,10 +42,17 @@
   .card-dark .card-body {
     font-family: "Sailec", "Helvetica", "Arial", sans-serif;
     font-size: 14px;
-    padding: 6px 12px;
+    padding: 20px 20px;
     color: #fff; }
   .card-dark .card-header {
     font-family: "Sailec", "Helvetica", "Arial", sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 40px 20px;
+    padding-bottom: 10px; }
+  .card-dark .card-header-small {
+    font-family: "Sailec", "Helvetica", "Arial", sans-serif;
     font-size: 16px;
-    border-bottom: 1px solid #E3E3E6;
-    padding: 12px 12px; }
+    font-weight: bold;
+    padding: 20px 20px;
+    padding-bottom: 0px; }

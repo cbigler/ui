@@ -50,15 +50,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     'foo',
     _react2.default.createElement(
       _index2.default,
-      { onClickBackdrop: (0, _addonActions.action)('backdrop click') },
+      {
+        onClickBackdrop: (0, _addonActions.action)('backdrop click'),
+        onClose: (0, _addonActions.action)('close button click')
+      },
       _react2.default.createElement(
         _card2.default,
         null,
         _react2.default.createElement(
           _card.CardHeader,
           null,
-          'Foo',
-          _react2.default.createElement(_index.ModalClose, { onClick: (0, _addonActions.action)('close button click') })
+          'Foo'
         ),
         _react2.default.createElement(
           _card.CardBody,

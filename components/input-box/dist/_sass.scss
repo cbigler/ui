@@ -6,8 +6,8 @@
 @mixin make-input-box($active-color: $brand-primary) {
   display: block;
   font-family: $font-base;
-  padding-left: $padding-horizontal-base;
-  padding-top: $padding-vertical-base / 2;
+  padding-left: $padding-horizontal-small;
+  padding-top: $padding-vertical-small / 2;
   height: 36px;
   font-size: $font-size-base;
   color: $gray-darker;
@@ -35,9 +35,12 @@
   padding-right: $padding-horizontal-base;
 }
 
-.input-box {
-  @include make-input-box;
+// If an input box is disabled
+@mixin make-input-box-disabled {
+  border-color: transparent;
+  background-color: $gray-lighter;
 }
-.input-box-select {
-  @include make-input-box-select;
-}
+
+.input-box { @include make-input-box; }
+.input-box-select { @include make-input-box-select; }
+.input-box-disabled { @include make-input-box-disabled; }
