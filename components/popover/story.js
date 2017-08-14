@@ -2,7 +2,8 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import './styles.scss';
-import Popover from './';
+import Popover from './index';
+import Button from './index';
 import Card, { CardBody, CardHeader } from '../card/index';
 
 storiesOf('Popover', module)

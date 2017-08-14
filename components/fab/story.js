@@ -25,6 +25,3 @@ storiesOf('Fab', module)
   .addWithInfo('Danger', () => (
     <Fab type="danger">+</Fab>
   ))
-  .addWithInfo('Info', () => (
-    <Fab type="info">+</Fab>
-  ))

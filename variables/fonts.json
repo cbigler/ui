@@ -17,6 +17,7 @@
 
   "fontSizeBase": 14,
   "fontWeightBase": "normal",
+  "lineHeightBase": 22,
 
   "fontSizeXSmall": 10,
   "fontSizeSmall": 12,
