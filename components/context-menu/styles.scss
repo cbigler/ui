@@ -23,7 +23,7 @@
 @mixin make-context-menu-item($color: $text-color) {
   font-family: $font-base;
   font-size: $font-size-base;
-  padding: $padding-vertical-small $padding-horizontal-small;
+  padding: 6px 14px;
   color: $color;
   user-select: none;
   cursor: pointer;

@@ -12,6 +12,96 @@
   border-radius: 50%;
   position: absolute;
   box-shadow: 2px 2px 5px #E3E3E6;
-  transform: all 500ms ease-in-out; }
+  transition: all 100ms ease-in-out; }
   .fab:active {
+    transform: scale(1.05); }
+
+.fab-primary {
+  background-color: #4198FF;
+  color: #fff;
+  width: 54px;
+  height: 54px;
+  user-select: none;
+  cursor: pointer;
+  text-align: center;
+  line-height: 52px;
+  font-size: 24px;
+  border: 1px solid #E3E3E6;
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: 2px 2px 5px #E3E3E6;
+  transition: all 100ms ease-in-out; }
+  .fab-primary:active {
+    transform: scale(1.05); }
+
+.fab-success {
+  background-color: #14BB83;
+  color: #fff;
+  width: 54px;
+  height: 54px;
+  user-select: none;
+  cursor: pointer;
+  text-align: center;
+  line-height: 52px;
+  font-size: 24px;
+  border: 1px solid #E3E3E6;
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: 2px 2px 5px #E3E3E6;
+  transition: all 100ms ease-in-out; }
+  .fab-success:active {
+    transform: scale(1.05); }
+
+.fab-warning {
+  background-color: #EBA916;
+  color: #fff;
+  width: 54px;
+  height: 54px;
+  user-select: none;
+  cursor: pointer;
+  text-align: center;
+  line-height: 52px;
+  font-size: 24px;
+  border: 1px solid #E3E3E6;
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: 2px 2px 5px #E3E3E6;
+  transition: all 100ms ease-in-out; }
+  .fab-warning:active {
+    transform: scale(1.05); }
+
+.fab-danger {
+  background-color: #FE6B6B;
+  color: #fff;
+  width: 54px;
+  height: 54px;
+  user-select: none;
+  cursor: pointer;
+  text-align: center;
+  line-height: 52px;
+  font-size: 24px;
+  border: 1px solid #E3E3E6;
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: 2px 2px 5px #E3E3E6;
+  transition: all 100ms ease-in-out; }
+  .fab-danger:active {
+    transform: scale(1.05); }
+
+.fab-info {
+  background-color: #B4B8BF;
+  color: #fff;
+  width: 54px;
+  height: 54px;
+  user-select: none;
+  cursor: pointer;
+  text-align: center;
+  line-height: 52px;
+  font-size: 24px;
+  border: 1px solid #E3E3E6;
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: 2px 2px 5px #E3E3E6;
+  transition: all 100ms ease-in-out; }
+  .fab-info:active {
     transform: scale(1.05); }

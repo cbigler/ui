@@ -13,7 +13,7 @@
 ) {
   display: inline-block;
   background-color: #fff;
-  width: $padding-vertical-small + $font-size;
+  width: $font-size + 6px; // 6px = horizontal padding
   color: $color;
 
   font-family: $font-base;
@@ -23,7 +23,7 @@
   user-select: none;
 
   text-align: center;
-  padding: $padding-vertical-small;
+  padding: 6px;
 
   // The first and last buttons have a radius on them, this gives the whole assembly a "pill" shape.
   &:first-child {

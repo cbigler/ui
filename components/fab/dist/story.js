@@ -27,5 +27,35 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     null,
     '+'
   );
+}).addWithInfo('Primary', function () {
+  return _react2.default.createElement(
+    _2.default,
+    { type: 'primary' },
+    '+'
+  );
+}).addWithInfo('Success', function () {
+  return _react2.default.createElement(
+    _2.default,
+    { type: 'success' },
+    '+'
+  );
+}).addWithInfo('Warning', function () {
+  return _react2.default.createElement(
+    _2.default,
+    { type: 'warning' },
+    '+'
+  );
+}).addWithInfo('Danger', function () {
+  return _react2.default.createElement(
+    _2.default,
+    { type: 'danger' },
+    '+'
+  );
+}).addWithInfo('Info', function () {
+  return _react2.default.createElement(
+    _2.default,
+    { type: 'info' },
+    '+'
+  );
 });
 

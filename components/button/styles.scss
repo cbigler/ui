@@ -11,21 +11,32 @@
   $color: $brand-primary,
   $button-height: 48px,
   $font-size: $font-size-base,
-  $text-color: #fff
+  $font-weight: $font-weight-base,
+  $text-color: #fff,
+  $block: true
 ) {
-  display: block;
-  width: 100%;
-  outline: none;
+  // Block buttons are 100% in width and act like divs.
+  @if $block {
+    display: block;
+    width: 100%;
+  } @else {
+    // Non-block buttons act like text and are not full width.
+    display: inline;
+    width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 
   line-height: $button-height;
   color: $text-color;
   background-color: $color;
+  outline: none;
   border-width: 0px;
   border-radius: $border-radius-base;
 
   font-size: $font-size;
+  font-weight: $font-weight;
   text-align: center;
-  font-weight: 500;
 
   cursor: pointer;
   user-select: none;
@@ -36,5 +47,30 @@
   }
 }
 
-.button { @include make-button($brand-primary, $button-height: 36px, $font-size: $font-base); }
-.button-small { @include make-button($brand-primary, $button-height: 24px, $font-size: $font-size-small); }
+.button {
+  @include make-button(
+    $brand-primary,
+    $button-height: 43px,
+    $font-size: $font-size-4,
+    $font-weight: $font-weight-4,
+    $block: true
+  );
+}
+.button-small {
+  @include make-button(
+    $brand-primary,
+    $button-height: 23px,
+    $font-size: $font-size-6,
+    $font-weight: $font-weight-6,
+    $block: false
+  );
+}
+.button-large {
+  @include make-button(
+    $brand-primary,
+    $button-height: 63px,
+    $font-size: $font-size-3,
+    $font-weight: $font-weight-3,
+    $block: true
+  );
+}

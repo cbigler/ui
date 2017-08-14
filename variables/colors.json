@@ -1,26 +1,21 @@
 {
-  "grayDarkest": "#222A2E",
-  "grayDarker": "#4A5159",
-  "grayDark": "#8E9299",
-  "gray": "#B4B8BF",
-  "grayLight": "#E3E3E6",
-  "grayLighter": "#F5F6F7",
+  "grayCinder": "#222A2E",
+
+  "grayDarkest": "#4E5457",
+  "grayDarker": "#8E9299",
+  "grayDark": "#B4B8BF",
+  "gray": "#CBCFD6",
+  "grayLight": "#E8E8ED",
+  "grayLighter": "#F0F0F2",
+  "grayLightest": "#FAFAFA",
 
   "brandPrimary": "#4198FF",
-  "brandSuccess": "#14BB83",
-  "brandWarning": "#EBA916",
-  "brandDanger": "#FE6B6B",
-  "brandInfo": "#B4B8BF",
+  "brandSuccess": "#80CD80",
+  "brandDanger": "#FF5454",
+  "brandWarning": "#FFBA08",
 
-  "textColor": "#222A2E",
-
-  "tanDarker": "#484542",
-  "tanDark": "#827F7B",
-  "tanLight": "#E5E3E1",
-  "tanLighter": "#F5F4F4",
-
-  "gold": "#E0CAA7",
-
-  "facebookBlue": "#3b5998",
-  "twitterBlue": "#4099ff"
+  "textColor": "#8E9299",
+  "headerColor": "#4E5457",
+  "inputFieldTextColor": "#CBCFD6",
+  "inputFieldTextActiveColor": "#4E5457"
 }

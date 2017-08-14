@@ -4,7 +4,7 @@ import classnames from 'classnames';
 
 export default function Card({type, children}) {
   return <div
-    className={type ? `card-${type}` : 'card'}
+    className={classnames('card', type ? `card-${type}` : null)}
   >{children}</div>;
 }
 

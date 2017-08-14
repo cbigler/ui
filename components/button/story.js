@@ -13,3 +13,6 @@ storiesOf('Button', module)
   .addWithInfo('Small button', () => (
     <Button size="small">Hello world!</Button>
   ))
+  .addWithInfo('Large button', () => (
+    <Button size="large">Hello world!</Button>
+  ))

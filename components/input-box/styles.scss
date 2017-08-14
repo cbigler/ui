@@ -9,13 +9,16 @@
 // An input box is a stylized <input />.
 @mixin make-input-box($active-color: $brand-primary) {
   display: block;
-  font-family: $font-base;
-  padding-left: $padding-horizontal-small;
-  padding-top: $padding-vertical-small / 2;
+  padding-left: 14px;
+  padding-top: 3px;
   height: 36px;
+
+  font-family: $font-base;
   font-size: $font-size-base;
+
   color: $gray-darker;
   background-color: #fff;
+
   border: 1px solid $gray-light;
   border-radius: $border-radius-small;
 
@@ -36,7 +39,7 @@
   -moz-appearance: none;
 
   // Add padding to right where the caret should be.
-  padding-right: $padding-horizontal-base;
+  padding-right: 10px;
 }
 
 // If an input box is disabled

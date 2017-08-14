@@ -25,7 +25,7 @@
     display: block;
     width: $icon-size;
     background-color: $color;
-    margin-right: $padding-horizontal-small;
+    margin-right: 14px;
 
     font-size: $font-size-x-large;
     text-align: center;
@@ -35,7 +35,7 @@
   .toast-body {
     width: calc(100% - 100px);
     height: $icon-size;
-    margin-right: $padding-horizontal-small;
+    margin-right: 14px;
 
     cursor: default;
     user-select: none;
@@ -52,6 +52,5 @@
 .toast { @include make-toast; }
 .toast-primary { @include make-toast($brand-primary); }
 .toast-success { @include make-toast($brand-success); }
-.toast-info { @include make-toast($brand-info); }
 .toast-danger { @include make-toast($brand-danger); }
 .toast-warning { @include make-toast($brand-warning); }

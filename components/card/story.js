@@ -2,6 +2,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import Card, {CardBody, CardHeader, CardLoading} from './index';
+import Button from '../button/index';
 import IndicatorDot from '../indicator-dot';
 
 import './styles.scss';
@@ -14,11 +15,15 @@ storiesOf('Card', module)
       </CardBody>
     </Card>
   ))
-  .addWithInfo('Card Header', () => (
-    <Card>
-      <CardHeader>Greeter</CardHeader>
+  .addWithInfo('Card Modal', () => (
+    <Card type="modal">
+      <CardHeader>Confirmation</CardHeader>
       <CardBody>
-        <p>Hello World!</p>
+        <p style={{margin: 0}}>This token is for a thing. Lorem Ipsum is simply dummy text of the printing and typesetting industry and this is just here to make you believe in aliens.</p>
+        <br />
+        <Button>Yes</Button>
+        <br />
+        <Button>No</Button>
       </CardBody>
     </Card>
   ))

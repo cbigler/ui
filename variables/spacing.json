@@ -1,17 +1,4 @@
 {
-  "paddingVerticalBase": 20,
-  "paddingHorizontalBase": 10,
-
-  "paddingVerticalLarge": 40,
-  "paddingHorizontalLarge": 20,
-
-  "paddingVerticalSmall": 6,
-  "paddingHorizontalSmall": 14,
-
-  "paddingVerticalXSmall": 1,
-  "paddingHorizontalXSmall": 5,
-
   "borderRadiusBase": 4,
-  "borderRadiusLarge": 6,
   "borderRadiusSmall": 2
 }

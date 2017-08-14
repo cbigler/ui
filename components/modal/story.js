@@ -5,6 +5,7 @@ import { action } from '@storybook/addon-actions';
 import './styles.scss';
 
 import Modal, { ModalClose } from './index';
+import Button from '../button/index';
 import Card, { CardHeader, CardBody } from '../card';
 
 
@@ -13,9 +14,15 @@ storiesOf('Modal', module)
     <div>
       foo
       <Modal onClickBackdrop={action('backdrop click')}>
-        <Card>
-          <CardHeader>Foo</CardHeader>
-          <CardBody>Bar</CardBody>
+        <Card type="modal">
+          <CardHeader>Confirmation</CardHeader>
+          <CardBody>
+            <p style={{margin: 0}}>This token is for a thing. Lorem Ipsum is simply dummy text of the printing and typesetting industry and this is just here to make you believe in aliens.</p>
+            <br />
+            <Button>Yes</Button>
+            <br />
+            <Button>No</Button>
+          </CardBody>
         </Card>
       </Modal>
     </div>
@@ -27,11 +34,15 @@ storiesOf('Modal', module)
         onClickBackdrop={action('backdrop click')}
         onClose={action('close button click')}
       >
-        <Card>
-          <CardHeader>
-            Foo
-          </CardHeader>
-          <CardBody>Bar</CardBody>
+        <Card type="modal">
+          <CardHeader>Confirmation</CardHeader>
+          <CardBody>
+            <p style={{margin: 0}}>This token is for a thing. Lorem Ipsum is simply dummy text of the printing and typesetting industry and this is just here to make you believe in aliens.</p>
+            <br />
+            <Button>Yes</Button>
+            <br />
+            <Button>No</Button>
+          </CardBody>
         </Card>
       </Modal>
     </div>
