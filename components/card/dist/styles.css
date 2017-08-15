@@ -4,25 +4,45 @@
   border-radius: 4px;
   overflow: hidden;
   border: none;
-  color: #222A2E;
-  border: 1px solid #E3E3E6; }
+  color: #8E9299;
+  border: 1px solid #E8E8ED; }
+  .card .card-header {
+    font-family: "Sailec", "Helvetica", "Arial", sans-serif;
+    color: #4E5457;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px 15px;
+    padding-bottom: 0px; }
   .card .card-body {
     font-family: "Sailec", "Helvetica", "Arial", sans-serif;
     font-size: 14px;
-    padding: 20px 20px;
-    color: #222A2E; }
-  .card .card-header {
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 20px; }
+
+.card-modal {
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  border: none;
+  color: #8E9299;
+  border: 1px solid #E8E8ED; }
+  .card-modal .card-header {
     font-family: "Sailec", "Helvetica", "Arial", sans-serif;
+    color: #4E5457;
     font-size: 24px;
     font-weight: bold;
-    padding: 40px 20px;
-    padding-bottom: 10px; }
-  .card .card-header-small {
-    font-family: "Sailec", "Helvetica", "Arial", sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 20px 20px;
+    padding: 40px 15px;
     padding-bottom: 0px; }
+  .card-modal .card-body {
+    font-family: "Sailec", "Helvetica", "Arial", sans-serif;
+    font-size: 14px;
+    padding-top: 40px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 20px; }
 
 .card-loading {
   width: 100%;
@@ -33,26 +53,9 @@
 
 .card-dark {
   box-sizing: border-box;
-  background-color: #4A5159;
+  background-color: #222A2E;
   border-radius: 4px;
   overflow: hidden;
   border: none;
   color: #fff;
-  border: 1px solid #E3E3E6; }
-  .card-dark .card-body {
-    font-family: "Sailec", "Helvetica", "Arial", sans-serif;
-    font-size: 14px;
-    padding: 20px 20px;
-    color: #fff; }
-  .card-dark .card-header {
-    font-family: "Sailec", "Helvetica", "Arial", sans-serif;
-    font-size: 24px;
-    font-weight: bold;
-    padding: 40px 20px;
-    padding-bottom: 10px; }
-  .card-dark .card-header-small {
-    font-family: "Sailec", "Helvetica", "Arial", sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 20px 20px;
-    padding-bottom: 0px; }
+  border: 1px solid #E8E8ED; }

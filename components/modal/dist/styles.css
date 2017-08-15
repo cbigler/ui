@@ -29,5 +29,6 @@
   font-family: "Sailec", "Helvetica", "Arial", sans-serif;
   font-size: 14px;
   font-weight: bold;
-  color: #B4B8BF;
-  cursor: pointer; }
+  color: #CBCFD6;
+  cursor: pointer;
+  user-select: none; }

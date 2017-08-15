@@ -51,11 +51,5 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     { type: 'danger' },
     '+'
   );
-}).addWithInfo('Info', function () {
-  return _react2.default.createElement(
-    _2.default,
-    { type: 'info' },
-    '+'
-  );
 });
 

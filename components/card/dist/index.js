@@ -31,7 +31,7 @@ function Card(_ref) {
   return React.createElement(
     'div',
     {
-      className: type ? 'card-' + type : 'card'
+      className: (0, _classnames2.default)('card', type ? 'card-' + type : null)
     },
     children
   );

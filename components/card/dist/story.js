@@ -12,6 +12,10 @@ var _index = require('./index');
 
 var _index2 = _interopRequireDefault(_index);
 
+var _index3 = require('../button/index');
+
+var _index4 = _interopRequireDefault(_index3);
+
 var _indicatorDot = require('../indicator-dot');
 
 var _indicatorDot2 = _interopRequireDefault(_indicatorDot);
@@ -41,22 +45,34 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       )
     )
   );
-}).addWithInfo('Card Header', function () {
+}).addWithInfo('Card Modal', function () {
   return React.createElement(
     _index2.default,
-    null,
+    { type: 'modal' },
     React.createElement(
       _index.CardHeader,
       null,
-      'Greeter'
+      'Confirmation'
     ),
     React.createElement(
       _index.CardBody,
       null,
       React.createElement(
         'p',
+        { style: { margin: 0 } },
+        'This token is for a thing. Lorem Ipsum is simply dummy text of the printing and typesetting industry and this is just here to make you believe in aliens.'
+      ),
+      React.createElement('br', null),
+      React.createElement(
+        _index4.default,
         null,
-        'Hello World!'
+        'Yes'
+      ),
+      React.createElement('br', null),
+      React.createElement(
+        _index4.default,
+        null,
+        'No'
       )
     )
   );

@@ -45,6 +45,7 @@
 
   color: $color;
   cursor: pointer;
+  user-select: none;
 }
 
 .modal { @include make-modal; }

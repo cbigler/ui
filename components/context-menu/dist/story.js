@@ -22,19 +22,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     _react2.default.createElement(
       _.ContextMenuItem,
       null,
-      _react2.default.createElement('img', { src: 'http://i.imgur.com/ssuaPQs.png' }),
+      _react2.default.createElement('img', { src: 'http://i.imgur.com/ssuaPQs.png', style: { height: 16 } }),
       'Foo'
     ),
     _react2.default.createElement(
       _.ContextMenuItem,
       null,
-      _react2.default.createElement('img', { src: 'http://i.imgur.com/ssuaPQs.png' }),
+      _react2.default.createElement('img', { src: 'http://i.imgur.com/ssuaPQs.png', style: { height: 16 } }),
       'Bar'
     ),
     _react2.default.createElement(
       _.ContextMenuItem,
       null,
-      _react2.default.createElement('img', { src: 'http://i.imgur.com/ssuaPQs.png' }),
+      _react2.default.createElement('img', { src: 'http://i.imgur.com/ssuaPQs.png', style: { height: 16 } }),
       'Baz'
     )
   );

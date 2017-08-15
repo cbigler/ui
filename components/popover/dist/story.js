@@ -9,13 +9,13 @@ var _react2 = _interopRequireDefault(_react);
 var _react3 = require('@storybook/react');
 
 
-var _ = require('./');
-
-var _2 = _interopRequireDefault(_);
-
-var _index = require('../card/index');
+var _index = require('./index');
 
 var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../card/index');
+
+var _index4 = _interopRequireDefault(_index3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29,12 +29,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 (0, _react3.storiesOf)('Popover', module).addWithInfo('A popover', function () {
   return _react2.default.createElement(
-    _2.default,
+    _index2.default,
     { show: true, popover: _react2.default.createElement(
-        _index2.default,
+        _index4.default,
         null,
         _react2.default.createElement(
-          _index.CardBody,
+          _index3.CardBody,
           null,
           _react2.default.createElement(
             'p',
@@ -64,14 +64,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         var _this2 = this;
 
         return _react2.default.createElement(
-          _2.default,
+          _index2.default,
           {
             show: this.state.show,
             popover: _react2.default.createElement(
-              _index2.default,
+              _index4.default,
               null,
               _react2.default.createElement(
-                _index.CardBody,
+                _index3.CardBody,
                 null,
                 _react2.default.createElement(
                   'p',
@@ -143,13 +143,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             },
             'Popover target'
           ),
-          _react2.default.createElement(_2.default, {
+          _react2.default.createElement(_index2.default, {
             show: this.state.show,
             popover: _react2.default.createElement(
-              _index2.default,
+              _index4.default,
               null,
               _react2.default.createElement(
-                _index.CardBody,
+                _index3.CardBody,
                 null,
                 _react2.default.createElement(
                   'p',
@@ -187,19 +187,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         var _this6 = this;
 
         return _react2.default.createElement(
-          _2.default,
+          _index2.default,
           {
             show: this.state.show,
             popover: _react2.default.createElement(
-              _index2.default,
+              _index4.default,
               null,
               _react2.default.createElement(
-                _index.CardHeader,
+                _index3.CardHeader,
                 null,
                 'Foo'
               ),
               _react2.default.createElement(
-                _index.CardBody,
+                _index3.CardBody,
                 null,
                 _react2.default.createElement(
                   'p',
