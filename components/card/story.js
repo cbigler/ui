@@ -43,6 +43,14 @@ storiesOf('Card', module)
       </CardBody>
     </Card>
   ))
+  .addWithInfo('Indeterminate Loading Card', () => (
+    <Card>
+      <CardLoading indeterminate />
+      <CardBody>
+        <p>Hello World!</p>
+      </CardBody>
+    </Card>
+  ))
   .addWithInfo('Dark Card', () => (
     <Card type="dark">
       <CardBody>

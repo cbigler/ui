@@ -6,7 +6,7 @@
   .input-stack-item:last-child input {
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
-    border-bottom-color: #B4B8BF; }
+    border-bottom-color: #CBCFD6; }
   .input-stack-item input {
     display: block;
     font-family: "Sailec", "Helvetica", "Arial", sans-serif;
@@ -35,13 +35,13 @@
     margin-top: 30px;
     margin-bottom: 60px; }
   .input-stack-item.focus:after {
-    background-color: #B4B8BF; }
+    background-color: #CBCFD6; }
 
 .input-stack-item-invalid input:focus {
-  border-color: #FE6B6B; }
+  border-color: #FF5454; }
 
 .input-stack-item-invalid.focus + .input-stack-item-invalid input {
-  border-top-color: #FE6B6B !important; }
+  border-top-color: #FF5454 !important; }
 
 .input-stack-item-invalid:after {
-  background-color: #FE6B6B; }
+  background-color: #FF5454; }

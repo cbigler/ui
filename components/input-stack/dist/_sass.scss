@@ -43,8 +43,8 @@
     background-color: #fff;
 
     width: 100%;
-    height: $height - (2 * $border-width) - (2 * $padding-vertical-base);
-    padding: $padding-vertical-base $padding-horizontal-base;
+    height: $height - (2 * $border-width) - (2 * 20px); // 20px = vertical padding around each input
+    padding: 20px 10px;
     margin-bottom: 0px;
 
     // On active, remove outline and add a border color.

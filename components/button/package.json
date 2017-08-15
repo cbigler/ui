@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-button",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Button component",
   "main": "dist/index.js",
   "style": "dist/styles.css",

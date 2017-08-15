@@ -26,12 +26,13 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function Card(_ref) {
   var type = _ref.type,
+      className = _ref.className,
       children = _ref.children;
 
   return React.createElement(
     'div',
     {
-      className: (0, _classnames2.default)('card', type ? 'card-' + type : null)
+      className: (0, _classnames2.default)('card', type ? 'card-' + type : null, className)
     },
     children
   );
@@ -61,9 +62,10 @@ function CardHeader(_ref3) {
 }
 
 function CardLoading(_ref4) {
-  var percent = _ref4.percent,
+  var indeterminate = _ref4.indeterminate,
+      percent = _ref4.percent,
       className = _ref4.className;
 
-  return React.createElement('div', { className: (0, _classnames2.default)('card-loading', className), style: { width: percent + '%' } });
+  return React.createElement('div', { className: (0, _classnames2.default)('card-loading', indeterminate ? 'card-loading-indeterminate' : null, className), style: { width: percent + '%' } });
 }
 

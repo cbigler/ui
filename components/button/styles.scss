@@ -48,6 +48,11 @@
   &:active {
     opacity: 1;
   }
+  &:disabled {
+    background-color: $gray;
+    cursor: default;
+    &:hover { opacity: 1; }
+  }
 }
 
 .button {

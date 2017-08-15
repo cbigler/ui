@@ -110,6 +110,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       )
     )
   );
+}).addWithInfo('Indeterminate Loading Card', function () {
+  return React.createElement(
+    _index2.default,
+    null,
+    React.createElement(_index.CardLoading, { indeterminate: true }),
+    React.createElement(
+      _index.CardBody,
+      null,
+      React.createElement(
+        'p',
+        null,
+        'Hello World!'
+      )
+    )
+  );
 }).addWithInfo('Dark Card', function () {
   return React.createElement(
     _index2.default,

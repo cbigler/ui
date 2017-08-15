@@ -12,6 +12,7 @@
   padding-left: 14px;
   padding-top: 3px;
   height: 43px;
+  line-height: 43px;
 
   font-family: $font-base;
   font-size: $font-size-base;
@@ -33,6 +34,7 @@
 // If applying to a <select></select>, apply a few more styles.
 @mixin make-input-box-select {
   position: relative;
+  height: 49px;
 
   // Hide caret on select boxes.
   -webkit-appearance: none;
