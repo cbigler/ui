@@ -48,8 +48,13 @@
   background-color: $gray-lightest;
   color: $gray;
 
-  &::placeholder {
+  &::placeholder,
+  &::-webkit-input-placeholder,
+  &::-moz-placeholder,
+  &:-ms-input-placeholder,
+  &:-moz-placeholder {
     color: $gray;
+    opacity: 1; // Placeholders in firefox have opacity be default. Undo that.
   }
 }
 

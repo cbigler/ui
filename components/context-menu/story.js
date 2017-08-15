@@ -10,15 +10,15 @@ storiesOf('ContextMenu', module)
   .addWithInfo('With icons', () => (
     <ContextMenu>
       <ContextMenuItem>
-        <img src="http://i.imgur.com/ssuaPQs.png" />
+        <img src="http://i.imgur.com/ssuaPQs.png" style={{height: 16}} />
         Foo
       </ContextMenuItem>
       <ContextMenuItem>
-        <img src="http://i.imgur.com/ssuaPQs.png" />
+        <img src="http://i.imgur.com/ssuaPQs.png" style={{height: 16}} />
         Bar
       </ContextMenuItem>
       <ContextMenuItem>
-        <img src="http://i.imgur.com/ssuaPQs.png" />
+        <img src="http://i.imgur.com/ssuaPQs.png" style={{height: 16}} />
         Baz
       </ContextMenuItem>
     </ContextMenu>

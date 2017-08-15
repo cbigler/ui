@@ -1,6 +1,6 @@
 {
   "fontBase": "\"Sailec\", \"Helvetica\", \"Arial\", sans-serif",
-  "fontMonospace": "\"Menlo\", \"Monaco\", \"Consolas\", \"Courier New\", monospace",
+  "fontMonospace": "\"Source Code Pro\", \"Menlo\", \"Monaco\", \"Consolas\", \"Courier New\", monospace",
 
   "fontSize1": 48,
   "fontWeight1": "normal",
