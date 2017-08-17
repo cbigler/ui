@@ -10,8 +10,9 @@
 @mixin make-input-box($active-color: $brand-primary) {
   display: block;
   padding-left: 14px;
-  height: (43px - 4px);
+  height: (43px - 7px);
   line-height: (43px - 4px);
+  padding-top: 4px;
   resize: none;
 
   font-family: $font-base;
