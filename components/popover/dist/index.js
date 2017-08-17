@@ -37,7 +37,30 @@ var Popover = function (_React$Component) {
     return _possibleConstructorReturn(this, (Popover.__proto__ || Object.getPrototypeOf(Popover)).call(this, props));
   }
 
+  // When anything else other than the popover is clicked, close the popover.
+
+
   _createClass(Popover, [{
+    key: 'initializeBackgroundClickHandler',
+    value: function initializeBackgroundClickHandler() {
+      var _this2 = this;
+
+      this.closePopover = function (event) {
+        var oldId = event.target.id;
+        event.target.id = 'popover-close-reference';
+
+        if (_this2.props.show && _this2.props.onDismiss) {
+          var clickedInsidePopover = document.querySelector('.popover-wrapper #popover-close-reference');
+          if (!clickedInsidePopover) {
+            _this2.props.onDismiss();
+          }
+        }
+
+        event.target.id = oldId;
+      };
+      window.addEventListener('click', this.closePopover, false);
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       // FIXME: A bit of a hack. Popper doesn't work well in a testing environment (a lack of
@@ -58,18 +81,46 @@ var Popover = function (_React$Component) {
         }
       });
     }
+
+    // After an update, bind a click listener to window to listen for click events outside the
+    // popover. If one is recieved, call `this.props.onDismiss`.
+
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {}
+
+    // If the popover click handler is still bound, then remove it prior to unmounting the component.
+
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      if (this.closePopover) {
+        window.removeEventListener('click', this.closePopover);
+      }
+    }
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       // On every render, update the popover position.
       this.popper && this.popper.scheduleUpdate();
 
+      // On every render, add a click handler to the the body element to listen for out of bounds
+      // click events.
+      if (this.props.show && !this.closePopover) {
+        setTimeout(function () {
+          _this3.initializeBackgroundClickHandler.apply(_this3);
+        }, 100);
+      } else if (this.closePopover) {
+        window.removeEventListener('click', this.closePopover);
+        delete this.closePopover;
+      }
+
       return React.createElement(
         'div',
         { className: 'popover-wrapper', ref: function ref(_ref2) {
-            return _this2.wrapper = _this2.props.target || _ref2;
+            return _this3.wrapper = _this3.props.target || _ref2;
           } },
         this.props.children,
         React.createElement(
@@ -77,7 +128,7 @@ var Popover = function (_React$Component) {
           {
             className: (0, _classnames2.default)('popover', this.props.className),
             ref: function ref(_ref) {
-              return _this2.popover = _ref;
+              return _this3.popover = _ref;
             },
             style: { display: this.props.show ? 'block' : 'none' }
           },

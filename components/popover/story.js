@@ -23,6 +23,7 @@ storiesOf('Popover', module)
         return <Popover
           show={this.state.show}
           popover={<Card><CardBody><p>Hello World!</p></CardBody></Card>}
+          onDismiss={() => this.setState({show: false})}
         >
           <button
             onClick={() => this.setState({show: !this.state.show})}
@@ -31,7 +32,14 @@ storiesOf('Popover', module)
         </Popover>;
       }
     }
-    return <PopoverClick />;
+    return <div>
+      <div>
+        <div>
+          <PopoverClick />
+        </div>
+      </div>
+      <div style={{background: 'red', width: 200, height: 200}} />
+    </div>
   })
   .addWithInfo('Popover with ref target works', () => {
     class PopoverClick extends React.Component {
@@ -57,6 +65,7 @@ storiesOf('Popover', module)
             show={this.state.show}
             popover={<Card><CardBody><p>Hello World!</p></CardBody></Card>}
             target={this.myRef}
+            onDismiss={() => this.setState({show: false})}
           />
         </div>
       }
@@ -79,6 +88,7 @@ storiesOf('Popover', module)
               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
             </CardBody>
           </Card>}
+          onDismiss={() => this.setState({show: false})}
         >
           <button
             onClick={() => this.setState({show: !this.state.show})}

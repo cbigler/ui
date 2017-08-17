@@ -52,11 +52,15 @@ function CardBody(_ref2) {
 function CardHeader(_ref3) {
   var children = _ref3.children,
       size = _ref3.size,
-      className = _ref3.className;
+      className = _ref3.className,
+      onClick = _ref3.onClick;
 
   return React.createElement(
     'div',
-    { className: (0, _classnames2.default)('card-header', 'card-header-' + (size || 'base'), className) },
+    {
+      className: (0, _classnames2.default)('card-header', 'card-header-' + (size || 'base'), className),
+      onClick: onClick
+    },
     children
   );
 }

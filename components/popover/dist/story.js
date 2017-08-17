@@ -79,7 +79,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   'Hello World!'
                 )
               )
-            )
+            ),
+            onDismiss: function onDismiss() {
+              return _this2.setState({ show: false });
+            }
           },
           _react2.default.createElement(
             'button',
@@ -98,7 +101,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return PopoverClick;
   }(_react2.default.Component);
 
-  return _react2.default.createElement(PopoverClick, null);
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(PopoverClick, null)
+      )
+    ),
+    _react2.default.createElement('div', { style: { background: 'red', width: 200, height: 200 } })
+  );
 }).addWithInfo('Popover with ref target works', function () {
   var PopoverClick = function (_React$Component2) {
     _inherits(PopoverClick, _React$Component2);
@@ -158,7 +174,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 )
               )
             ),
-            target: this.myRef
+            target: this.myRef,
+            onDismiss: function onDismiss() {
+              return _this4.setState({ show: false });
+            }
           })
         );
       }
@@ -207,7 +226,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
                 )
               )
-            )
+            ),
+            onDismiss: function onDismiss() {
+              return _this6.setState({ show: false });
+            }
           },
           _react2.default.createElement(
             'button',

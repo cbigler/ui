@@ -15,6 +15,15 @@ export default function InputBox(props) {
         props.className
       )}
     />;
+  case 'textarea':
+    return <textarea
+      {...props}
+      className={classnames(
+        'input-box',
+        'input-box-textarea',
+        props.className
+      )}
+    />;
   default:
     return <input
       {...props}

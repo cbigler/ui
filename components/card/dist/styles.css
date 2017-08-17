@@ -1,13 +1,10 @@
 @keyframes card-loading-indeterminate-animation {
   0% {
     position: relative;
-    left: 0px; }
-  50% {
-    position: relative;
-    left: 75%; }
+    left: -100%; }
   100% {
     position: relative;
-    left: 0px; } }
+    left: 100%; } }
 
 .card {
   box-sizing: border-box;
@@ -22,14 +19,14 @@
     color: #4E5457;
     font-size: 18px;
     font-weight: bold;
-    padding: 15px 15px;
+    padding: 20px 20px;
     padding-bottom: 0px; }
   .card .card-body {
     font-family: "Sailec", "Helvetica", "Arial", sans-serif;
     font-size: 14px;
-    padding-top: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
     padding-bottom: 20px; }
 
 .card-modal {
@@ -45,14 +42,14 @@
     color: #4E5457;
     font-size: 24px;
     font-weight: bold;
-    padding: 40px 15px;
+    padding: 40px 20px;
     padding-bottom: 0px; }
   .card-modal .card-body {
     font-family: "Sailec", "Helvetica", "Arial", sans-serif;
     font-size: 14px;
     padding-top: 40px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
     padding-bottom: 20px; }
 
 .card-loading {
@@ -60,15 +57,16 @@
   height: 2px;
   background-color: #4198FF;
   margin-bottom: -2px;
-  transition: all 250ms ease-in-out; }
+  transition: all 250ms linear; }
 
 .card-loading-indeterminate {
   width: 100%;
   height: 2px;
   background-color: #4198FF;
   margin-bottom: -2px;
-  width: 25%;
-  animation: card-loading-indeterminate-animation 1.2s infinite; }
+  width: 100%;
+  overflow: hidden;
+  animation: card-loading-indeterminate-animation 1s infinite; }
 
 .card-dark {
   box-sizing: border-box;

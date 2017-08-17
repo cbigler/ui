@@ -2,7 +2,7 @@
 @import "../../variables/spacing.json";
 @import "../../variables/fonts.json";
 
-@mixin make-card($background: #fff, $foreground: $gray-darker, $padding-horizontal: 15px, $padding-vertical: 15px) {
+@mixin make-card($background: #fff, $foreground: $gray-darker, $padding-horizontal: 20px, $padding-vertical: 20px) {
   box-sizing: border-box;
   background-color: $background;
   border-radius: $border-radius-base;
@@ -14,8 +14,8 @@
 
 @mixin make-card-header(
   $color: $gray-darkest,
-  $padding-horizontal: 15px,
-  $padding-vertical: 15px,
+  $padding-horizontal: 20px,
+  $padding-vertical: 20px,
   $font-size: $font-size-3,
   $font-weight: $font-weight-3
 ) {
@@ -30,8 +30,8 @@
 @mixin make-card-body(
   $font-size: $font-size-base,
   $font-weight: $font-weight-base,
-  $padding-vertical: 15px,
-  $padding-horizontal: 15px
+  $padding-vertical: 20px,
+  $padding-horizontal: 20px
 ) {
   font-family: $font-base;
   font-size: $font-size;

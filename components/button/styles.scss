@@ -27,7 +27,8 @@
     padding-right: 10px;
   }
 
-  line-height: $button-height;
+  line-height: $button-height - 5px;
+  height: $button-height;
   color: $text-color;
   background-color: $color;
   outline: none;

@@ -1,5 +1,5 @@
 
-@mixin make-card($background: #fff, $foreground: $gray-darker, $padding-horizontal: 15px, $padding-vertical: 15px) {
+@mixin make-card($background: #fff, $foreground: $gray-darker, $padding-horizontal: 20px, $padding-vertical: 20px) {
   box-sizing: border-box;
   background-color: $background;
   border-radius: $border-radius-base;
@@ -11,8 +11,8 @@
 
 @mixin make-card-header(
   $color: $gray-darkest,
-  $padding-horizontal: 15px,
-  $padding-vertical: 15px,
+  $padding-horizontal: 20px,
+  $padding-vertical: 20px,
   $font-size: $font-size-3,
   $font-weight: $font-weight-3
 ) {
@@ -27,8 +27,8 @@
 @mixin make-card-body(
   $font-size: $font-size-base,
   $font-weight: $font-weight-base,
-  $padding-vertical: 15px,
-  $padding-horizontal: 15px
+  $padding-vertical: 20px,
+  $padding-horizontal: 20px
 ) {
   font-family: $font-base;
   font-size: $font-size;
@@ -42,15 +42,11 @@
 @keyframes card-loading-indeterminate-animation {
   0% {
     position: relative;
-    left: 0px;
-  }
-  50% {
-    position: relative;
-    left: 75%;
+    left: -100%;
   }
   100% {
     position: relative;
-    left: 0px;
+    left: 100%;
   }
 }
 @mixin make-card-loading($color: $brand-primary, $percent: 100%, $height: 2px, $indeterminant: false) {
@@ -61,11 +57,12 @@
 
   @if $indeterminant {
     // Since the state is indeterminate, the bar has a fixed width.
-    width: 25%;
-    animation: card-loading-indeterminate-animation 1.2s infinite;
+    width: 100%;
+    overflow: hidden;
+    animation: card-loading-indeterminate-animation 1s infinite;
   } @else {
     // As the bar grows, get longer.
-    transition: all 250ms ease-in-out;
+    transition: all 250ms linear;
   }
 }
 

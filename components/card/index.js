@@ -12,8 +12,11 @@ export function CardBody({children, className}) {
   return <div className={classnames('card-body', className)}>{children}</div>;
 }
 
-export function CardHeader({children, size, className}) {
-  return <div className={classnames('card-header', `card-header-${size || 'base'}`, className)}>{children}</div>;
+export function CardHeader({children, size, className, onClick}) {
+  return <div
+    className={classnames('card-header', `card-header-${size || 'base'}`, className)}
+    onClick={onClick}
+  >{children}</div>;
 }
 
 export function CardLoading({indeterminate, percent, className}) {

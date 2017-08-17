@@ -7,6 +7,24 @@ export default class Popover extends React.Component {
     super(props);
   }
 
+  // When anything else other than the popover is clicked, close the popover.
+  initializeBackgroundClickHandler() {
+    this.closePopover = event => {
+      const oldId = event.target.id;
+      event.target.id = 'popover-close-reference';
+
+      if (this.props.show && this.props.onDismiss) {
+        const clickedInsidePopover = document.querySelector('.popover-wrapper #popover-close-reference');
+        if (!clickedInsidePopover) {
+          this.props.onDismiss();
+        }
+      }
+
+      event.target.id = oldId;
+    }
+    window.addEventListener('click', this.closePopover, false);
+  }
+
   componentDidMount() {
     // FIXME: A bit of a hack. Popper doesn't work well in a testing environment (a lack of
     // `document.createRange`: https://github.com/tmpvar/jsdom/issues/317) so in a testing
@@ -27,9 +45,32 @@ export default class Popover extends React.Component {
     });
   }
 
+  // After an update, bind a click listener to window to listen for click events outside the
+  // popover. If one is recieved, call `this.props.onDismiss`.
+  componentDidUpdate() {
+  }
+
+  // If the popover click handler is still bound, then remove it prior to unmounting the component.
+  componentWillUnmount() {
+    if (this.closePopover) {
+      window.removeEventListener('click', this.closePopover);
+    }
+  }
+
   render() {
     // On every render, update the popover position.
     this.popper && this.popper.scheduleUpdate();
+
+    // On every render, add a click handler to the the body element to listen for out of bounds
+    // click events.
+    if (this.props.show && !this.closePopover) {
+      setTimeout(() => {
+        this.initializeBackgroundClickHandler.apply(this);
+      }, 100);
+    } else if (this.closePopover) {
+      window.removeEventListener('click', this.closePopover);
+      delete this.closePopover;
+    }
 
     return <div className="popover-wrapper" ref={ref => this.wrapper = this.props.target || ref}>
       {this.props.children}

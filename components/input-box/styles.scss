@@ -10,9 +10,9 @@
 @mixin make-input-box($active-color: $brand-primary) {
   display: block;
   padding-left: 14px;
-  padding-top: 3px;
-  height: 43px;
-  line-height: 43px;
+  height: (43px - 4px);
+  line-height: (43px - 4px);
+  resize: none;
 
   font-family: $font-base;
   font-size: $font-size-base;
@@ -21,7 +21,7 @@
   background-color: #fff;
 
   border: 1px solid $gray-light;
-  border-radius: $border-radius-small;
+  border-radius: $border-radius-base;
 
   // On active, remove outline and add a border color.
   // NOTE: does this have accessibility concerns?
@@ -34,7 +34,7 @@
 // If applying to a <select></select>, apply a few more styles.
 @mixin make-input-box-select {
   position: relative;
-  height: 49px;
+  height: 43px;
 
   // Hide caret on select boxes.
   -webkit-appearance: none;
@@ -42,6 +42,13 @@
 
   // Add padding to right where the caret should be.
   padding-right: 10px;
+}
+
+// If applying to a <textarea></textarea>, apply a few more styles.
+@mixin make-input-box-textarea {
+  line-height: $line-height-base;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 // If an input box is disabled
@@ -62,4 +69,5 @@
 
 .input-box { @include make-input-box; }
 .input-box-select { @include make-input-box-select; }
+.input-box-textarea { @include make-input-box-textarea; }
 .input-box-disabled { @include make-input-box-disabled; }
