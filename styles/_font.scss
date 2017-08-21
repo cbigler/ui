@@ -1,38 +1,52 @@
-// TODO: Sailec font should be on all density UI
+// TODO: Update internal url here.
 $path: "https://densityco.github.io/internal-dashboard/staging-e309b8fb-970e-4f5f-a1fd-6a092c55da90/assets/fonts";
+$cdn-path: "https://densityco.github.io/assets/";
+
 @font-face {
-    font-family: 'Sailec';
-    src: url("#{$path}/sailec-regular.ttf") format("truetype"), url("#{$path}/sailec-regular.otf") format("opentype");
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'Sailec';
+  src: url("#{$path}/sailec-regular.ttf") format("truetype"), url("#{$path}/sailec-regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
 }
 @font-face {
-    font-family: 'Sailec';
-    src: url("#{$path}/sailec-regular-italic.ttf") format("truetype"), url("#{$path}/sailec-regular-italic.otf") format("opentype");
-    font-weight: normal;
-    font-style: italic;
+  font-family: 'Sailec';
+  src: url("#{$path}/sailec-regular-italic.ttf") format("truetype"), url("#{$path}/sailec-regular-italic.otf") format("opentype");
+  font-weight: normal;
+  font-style: italic;
 }
 @font-face {
-    font-family: 'Sailec';
-    src: url("#{$path}/sailec-medium.ttf") format("truetype"),  url("#{$path}/sailec-medium.otf") format("opentype");
-    font-weight: 500;
-    font-style: normal;
+  font-family: 'Sailec';
+  src: url("#{$path}/sailec-medium.ttf") format("truetype"),  url("#{$path}/sailec-medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
 }
 @font-face {
-    font-family: 'Sailec';
-    src: url("#{$path}/sailec-medium-italic.ttf") format("truetype"), url("#{$path}/sailec-medium-italic.otf") format("opentype");
-    font-weight: 500;
-    font-style: italic;
+  font-family: 'Sailec';
+  src: url("#{$path}/sailec-medium-italic.ttf") format("truetype"), url("#{$path}/sailec-medium-italic.otf") format("opentype");
+  font-weight: 500;
+  font-style: italic;
 }
 @font-face {
-    font-family: 'Sailec';
-    src: url("#{$path}/sailec-bold.ttf") format("truetype"), url("#{$path}/sailec-bold.otf") format("opentype");
-    font-weight: bold;
-    font-style: normal;
+  font-family: 'Sailec';
+  src: url("#{$path}/sailec-bold.ttf") format("truetype"), url("#{$path}/sailec-bold.otf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
 }
 @font-face {
-    font-family: 'Sailec';
-    src: url("#{$path}/sailec-bold-italic.ttf") format("truetype"), url("#{$path}/sailec-bold-italic.otf") format("opentype");
-    font-weight: bold;
-    font-style: italic;
+  font-family: 'Sailec';
+  src: url("#{$path}/sailec-bold-italic.ttf") format("truetype"), url("#{$path}/sailec-bold-italic.otf") format("opentype");
+  font-weight: bold;
+  font-style: italic;
+}
+
+
+// Densicons is an icon font with Density icons inside.
+@font-face {
+  font-family: 'Densicons';
+  src: url("#{$cdn-path}/fonts/densicons.7cea0ccd.ttf") format("truetype"),
+    url("#{$cdn-path}/densicons.18cfc67a.eot") format("opentype"),
+    url("#{$cdn-path}/densicons.4b646919.woff") format("woff"),
+    url("#{$cdn-path}/densicons.b9c0bcb3.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
 }
