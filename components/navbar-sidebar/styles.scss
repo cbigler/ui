@@ -1,0 +1,67 @@
+// Import any global variables from "../../variables/*.json"
+@import '../../variables/colors.json';
+@import '../../variables/fonts.json';
+@import '../../variables/timings.json';
+
+// Local variables to the component
+@import "variables.json";
+
+@mixin make-navbar-sidebar-hidden {
+  max-width: 0px;
+
+  & > li {
+    display: none;
+  }
+}
+
+@mixin make-navbar-sidebar-visible($width: 350px, $background-color: #fff) {
+  max-width: $width;
+  width: 100%;
+  background-color: $background-color;
+  list-style-type: none;
+
+  z-index: $navbar-sidebar-zindex;
+
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  border-right: 1px solid $gray-dark;
+
+  padding-left: 20px;
+
+  & > li {
+    display: block;
+  }
+}
+
+@mixin make-navbar-sidebar-item(
+  $color: $gray,
+  $font-size: $font-size-3,
+  $font-weight: $font-weight-3
+) {
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  & > a {
+    color: $color;
+    text-decoration: none;
+
+    font-family: $font-base;
+    font-size: $font-size;
+    font-weight: $font-weight;
+  }
+}
+
+.navbar-sidebar { @include make-navbar-sidebar-hidden; }
+.navbar-sidebar.visible { @include make-navbar-sidebar-visible; }
+
+.navbar-sidebar-item { @include make-navbar-sidebar-item; }
+.navbar-sidebar-item-active { @include make-navbar-sidebar-item($color: $gray-darkest); }
+
+.navbar-sidebar-item-header {
+  @include make-navbar-sidebar-item($font-size: $font-size-2, $font-weight: $font-weight-2);
+}
+.navbar-sidebar-item-header-active {
+  @include make-navbar-sidebar-item($color: $gray-darkest, $font-size: $font-size-2, $font-weight: $font-weight-2);
+}
