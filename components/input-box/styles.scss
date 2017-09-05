@@ -32,17 +32,10 @@
   }
 }
 
-// If applying to a <select></select>, apply a few more styles.
+// If applying to a <select></select>, apply a few different styles.
 @mixin make-input-box-select {
   position: relative;
   height: 43px;
-
-  // Hide caret on select boxes.
-  -webkit-appearance: none;
-  -moz-appearance: none;
-
-  // Add padding to right where the caret should be.
-  padding-right: 10px;
 }
 
 // If applying to a <textarea></textarea>, apply a few more styles.
