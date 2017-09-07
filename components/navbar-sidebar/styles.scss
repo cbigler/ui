@@ -5,9 +5,17 @@
 
 // Local variables to the component
 @import "variables.json";
+@import "../navbar/variables.json";
 
 @mixin make-navbar-sidebar-hidden {
-  max-width: 0px;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+
+  margin-top: $navbar-height;
+
+  display: none;
 
   & > li {
     display: none;
@@ -22,6 +30,7 @@
 
   z-index: $navbar-sidebar-zindex;
 
+  display: block;
   position: fixed;
   top: 0px;
   bottom: 0px;
@@ -29,6 +38,7 @@
   border-right: 1px solid $gray-dark;
 
   padding-left: 20px;
+  padding-top: 20px;
 
   & > li {
     display: block;
