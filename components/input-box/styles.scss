@@ -6,6 +6,8 @@
 // Local variables to the component
 @import "variables.json";
 
+@import "./react-select.css";
+
 // An input box is a stylized <input />.
 @mixin make-input-box($active-color: $brand-primary) {
   display: block;

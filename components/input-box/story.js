@@ -16,11 +16,15 @@ storiesOf('InputBox', module)
     <InputBox type="password" placeholder="Type your password" />
   ))
   .addWithInfo('type=select', () => (
-    <InputBox type="select">
-      <option value="foo">Foo</option>
-      <option value="bar">Bar</option>
-      <option value="baz">Baz</option>
-    </InputBox>
+    <InputBox
+      type="select"
+      options={[
+        {value: "foo", label: "Foo"},
+        {value: "bar", label: "Bar"},
+        {value: "baz", label: "Baz"},
+      ]}
+      onChange={action("selected")}
+    />
   ))
   .addWithInfo('disabled box', () => (
     <InputBox disabled placeholder="I am disabled" />
