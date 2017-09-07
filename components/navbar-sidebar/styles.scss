@@ -37,11 +37,13 @@
 
 @mixin make-navbar-sidebar-item(
   $color: $gray,
-  $font-size: $font-size-3,
-  $font-weight: $font-weight-3
+  $font-size: $font-size-base,
+  $font-weight: $font-weight-base,
+  $pad-left: 0px
 ) {
   padding-top: 10px;
   padding-bottom: 10px;
+  padding-left: $pad-left;
 
   & > a {
     color: $color;
@@ -56,12 +58,14 @@
 .navbar-sidebar { @include make-navbar-sidebar-hidden; }
 .navbar-sidebar.visible { @include make-navbar-sidebar-visible; }
 
-.navbar-sidebar-item { @include make-navbar-sidebar-item; }
-.navbar-sidebar-item-active { @include make-navbar-sidebar-item($color: $gray-darkest); }
+.navbar-sidebar-item { @include make-navbar-sidebar-item($pad-left: 10px); }
+.navbar-sidebar-item-active {
+  @include make-navbar-sidebar-item($pad-left: 10px, $color: $brand-primary, $font-weight: bold);
+}
 
 .navbar-sidebar-item-header {
-  @include make-navbar-sidebar-item($font-size: $font-size-2, $font-weight: $font-weight-2);
+  @include make-navbar-sidebar-item;
 }
 .navbar-sidebar-item-header-active {
-  @include make-navbar-sidebar-item($color: $gray-darkest, $font-size: $font-size-2, $font-weight: $font-weight-2);
+  @include make-navbar-sidebar-item($color: $brand-primary);
 }
