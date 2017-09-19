@@ -16,6 +16,7 @@ export default function DateRangePicker(props) {
   return <div className={classnames(`date-range-picker`, {
     'date-range-picker-anchor-left': !props.anchor || props.anchor === ANCHOR_LEFT,
     'date-range-picker-anchor-right': props.anchor === ANCHOR_RIGHT,
+    'date-range-picker-focused': props.focusedInput,
   }, props.className)}>
     <ReactDatesDateRangePicker
       onDatesChange={props.onChange}

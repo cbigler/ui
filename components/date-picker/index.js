@@ -13,6 +13,7 @@ export default function DatePicker(props) {
   return <div className={classnames(`date-picker`, {
     'date-picker-anchor-left': !props.anchor || props.anchor === ANCHOR_LEFT,
     'date-picker-anchor-right': props.anchor === ANCHOR_RIGHT,
+    'date-picker-focused': props.focused,
   }, props.className)}>
     <SingleDatePicker
       numberOfMonths={1}
