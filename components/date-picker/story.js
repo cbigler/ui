@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import './styles.scss';
-import DatePicker, { ANCHOR_LEFT, ANCHOR_RIGHT } from './';
+import DatePicker, { ANCHOR_LEFT, ANCHOR_RIGHT } from './index';
 import { isInclusivelyBeforeDay } from '@density/react-dates';
 
 import moment from 'moment';
