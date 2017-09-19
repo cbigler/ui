@@ -59,14 +59,14 @@
     background: #fff; }
 
 .CalendarDay--selected-span {
-  background: #4e5457;
-  border: 1px double #4e5457;
-  color: #fff; }
-  .CalendarDay--selected-span.CalendarDay--hovered, .CalendarDay--selected-span:active {
-    background: #4e5457;
-    border: 1px double #4E5457; }
-  .CalendarDay--selected-span.CalendarDay--last-in-range {
-    border-right: #4E5457; }
+    background: $brand-primary;
+    border: 1px double #4e5457;
+    color: #fff; }
+    .CalendarDay--selected-span.CalendarDay--hovered, .CalendarDay--selected-span:active {
+      background: #4e5457;
+      border: 1px double #4E5457; }
+    .CalendarDay--selected-span.CalendarDay--last-in-range {
+      border-right: #4E5457; }
 
 .CalendarDay--hovered-span,
 .CalendarDay--after-hovered-start {
@@ -80,8 +80,8 @@
 .CalendarDay--selected-start,
 .CalendarDay--selected-end,
 .CalendarDay--selected {
-  background: #4E5457;
-  border: 1px double #4E5457;
+  background: $brand-primary;
+  border: 1px double $brand-primary;
   color: #fff; }
   .CalendarDay--selected-start:active,
   .CalendarDay--selected-end:active,
@@ -544,129 +544,6 @@
   position: absolute;
   width: 1px; }
 
-.DateRangePicker {
-  position: relative;
-  display: inline-block; }
-
-.DateRangePicker__picker {
-  z-index: 1;
-  background-color: #fff;
-  position: absolute; }
-
-.DateRangePicker__picker--rtl {
-  direction: rtl; }
-
-.DateRangePicker__picker--direction-left {
-  left: 0; }
-
-.DateRangePicker__picker--direction-right {
-  right: 0; }
-
-.DateRangePicker__picker--open-down {
-  top: 72px; }
-
-.DateRangePicker__picker--open-up {
-  bottom: 72px; }
-
-.DateRangePicker__picker--portal {
-  background-color: rgba(0, 0, 0, 0.3);
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%; }
-
-.DateRangePicker__picker--full-screen-portal {
-  background-color: #fff; }
-
-.DateRangePicker__close {
-  background: none;
-  border: 0;
-  color: inherit;
-  font: inherit;
-  line-height: normal;
-  overflow: visible;
-  padding: 0;
-  cursor: pointer;
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 15px;
-  z-index: 2; }
-  .DateRangePicker__close svg {
-    height: 15px;
-    width: 15px;
-    fill: #cacccd; }
-  .DateRangePicker__close:hover, .DateRangePicker__close:focus {
-    color: #b0b3b4;
-    text-decoration: none; }
-
-.DateRangePickerInput {
-  background-color: #fff;
-  border: 1px solid #cacccd;
-  display: inline-block; }
-
-.DateRangePickerInput--disabled {
-  background: #cacccd; }
-
-.DateRangePickerInput--rtl {
-  direction: rtl; }
-
-.DateRangePickerInput__arrow {
-  display: inline-block;
-  vertical-align: middle; }
-
-.DateRangePickerInput__arrow svg {
-  vertical-align: middle;
-  fill: #484848;
-  height: 24px;
-  width: 24px; }
-
-.DateRangePickerInput__clear-dates {
-  background: none;
-  border: 0;
-  color: inherit;
-  font: inherit;
-  line-height: normal;
-  overflow: visible;
-  cursor: pointer;
-  display: inline-block;
-  vertical-align: middle;
-  padding: 10px;
-  margin: 0 10px 0 5px; }
-
-.DateRangePickerInput__clear-dates svg {
-  fill: #82888a;
-  height: 12px;
-  width: 15px;
-  vertical-align: middle; }
-
-.DateRangePickerInput__clear-dates--hide {
-  visibility: hidden; }
-
-.DateRangePickerInput__clear-dates:focus,
-.DateRangePickerInput__clear-dates--hover {
-  background: #4E5457;
-  border-radius: 50%; }
-
-.DateRangePickerInput__calendar-icon {
-  background: none;
-  border: 0;
-  color: inherit;
-  font: inherit;
-  line-height: normal;
-  overflow: visible;
-  cursor: pointer;
-  display: inline-block;
-  vertical-align: middle;
-  padding: 10px;
-  margin: 0 5px 0 10px; }
-  .DateRangePickerInput__calendar-icon svg {
-    fill: #82888a;
-    height: 15px;
-    width: 14px;
-    vertical-align: middle; }
-
 .SingleDatePicker {
   position: relative;
   display: inline-block; }
@@ -839,7 +716,11 @@
     left: -218px !important;
   }
 }
+@mixin make-date-picker-focused {
+  border-color: #4198FF;
+}
 
 .date-picker { @include make-date-picker; }
 .date-picker-anchor-left { @include make-date-picker-anchor-left; }
 .date-picker-anchor-right { @include make-date-picker-anchor-right; }
+.date-picker-focused { @include make-date-picker-focused; }
