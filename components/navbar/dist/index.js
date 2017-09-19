@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = Navbar;
+exports.NavbarItem = NavbarItem;
 
 var _react = require('react');
 
@@ -14,7 +15,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function Navbar(_ref) {
   var subtitle = _ref.subtitle,
       fullWidth = _ref.fullWidth,
-      children = _ref.children;
+      children = _ref.children,
+      onClickSidebarButton = _ref.onClickSidebarButton;
 
   return React.createElement(
     'div',
@@ -25,6 +27,14 @@ function Navbar(_ref) {
       React.createElement(
         'div',
         { className: 'navbar-brand' },
+        onClickSidebarButton ? React.createElement(
+          'button',
+          {
+            className: 'navbar-sidebar-button',
+            onClick: onClickSidebarButton
+          },
+          '='
+        ) : null,
         React.createElement('img', {
           src: 'http://style-guide.density.io/assets/images/app_bar_logo.png',
           alt: 'Density Logo'
@@ -40,6 +50,23 @@ function Navbar(_ref) {
         { className: 'navbar-items' },
         children
       )
+    )
+  );
+}
+
+function NavbarItem(_ref2) {
+  var activePage = _ref2.activePage,
+      pageName = _ref2.pageName,
+      href = _ref2.href,
+      children = _ref2.children;
+
+  return React.createElement(
+    'li',
+    { className: pageName.indexOf(activePage) >= 0 ? 'navbar-item-active' : 'navbar-item' },
+    React.createElement(
+      'a',
+      { href: href },
+      children
     )
   );
 }

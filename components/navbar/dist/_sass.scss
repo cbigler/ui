@@ -53,7 +53,32 @@
   color: $gray;
 }
 
+@mixin make-navbar-item($color: $gray, $underline-color: transparent) {
+  list-style-type: none;
+  display: inline-block;
+  border-bottom: 2px solid $underline-color;
+  height: $navbar-height - 2px;
+
+  &:first-child {
+    margin-left: 20px;
+  }
+
+  // Style each link
+  & > a {
+    line-height: $navbar-height;
+    color: $color;
+    text-decoration: none;
+    font-size: $font-size-base;
+
+    padding: 8px 0px;
+    margin: 0px 14px;
+  }
+}
+
 .navbar { @include make-navbar; }
 .navbar-brand { @include make-navbar-brand; }
 .navbar-brand-subtitle { @include make-navbar-brand-subtitle; }
 .navbar-container { @include make-navbar-container; }
+
+.navbar-item { @include make-navbar-item; }
+.navbar-item-active { @include make-navbar-item($color: $gray-darkest, $underline-color: $brand-primary); }
