@@ -46,6 +46,14 @@
   }
 }
 
+@mixin make-pager-button-disabled {
+  opacity: 0.5;
+}
+
 .pager-button {
   @include make-pager-button;
+}
+
+.pager-button.disabled {
+  @include make-pager-button-disabled;
 }
