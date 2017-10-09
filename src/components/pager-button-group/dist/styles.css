@@ -1,0 +1,28 @@
+.pager-button {
+  display: inline-block;
+  background-color: #fff;
+  width: 22px;
+  color: #CBCFD6;
+  font-family: "Sailec", "Helvetica", "Arial", sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+  padding: 6px;
+  border: 1px solid #F0F0F2; }
+  .pager-button:first-child {
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px; }
+  .pager-button:last-child {
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px; }
+  .pager-button:active {
+    color: #8E9299; }
+  .pager-button + .pager-button {
+    border-left-width: 0px; }
+
+.pager-button.disabled {
+  opacity: 0.5;
+  cursor: default; }
+  .pager-button.disabled:active {
+    color: #CBCFD6; }

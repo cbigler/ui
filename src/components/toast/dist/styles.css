@@ -1,0 +1,174 @@
+.toast {
+  box-sizing: border-box;
+  background-color: #fff;
+  overflow: hidden;
+  border: 1px solid #4198FF;
+  border-radius: 4px;
+  min-height: 72px;
+  display: flex;
+  flex-direction: row;
+  font-family: "Sailec", "Helvetica", "Arial", sans-serif;
+  font-size: 14px; }
+  .toast .toast-icon {
+    display: block;
+    width: 72px;
+    background-color: #4198FF;
+    margin-right: 14px;
+    font-family: "Densicons";
+    font-size: 24px;
+    text-align: center;
+    line-height: 72px;
+    color: #fff; }
+  .toast .toast-body {
+    width: calc(100% - 100px);
+    height: 72px;
+    margin-right: 14px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 22px;
+    cursor: default;
+    user-select: none;
+    display: table; }
+    .toast .toast-body > span {
+      display: table-cell;
+      vertical-align: middle; }
+
+.toast-primary {
+  box-sizing: border-box;
+  background-color: #fff;
+  overflow: hidden;
+  border: 1px solid #4198FF;
+  border-radius: 4px;
+  min-height: 72px;
+  display: flex;
+  flex-direction: row;
+  font-family: "Sailec", "Helvetica", "Arial", sans-serif;
+  font-size: 14px; }
+  .toast-primary .toast-icon {
+    display: block;
+    width: 72px;
+    background-color: #4198FF;
+    margin-right: 14px;
+    font-family: "Densicons";
+    font-size: 24px;
+    text-align: center;
+    line-height: 72px;
+    color: #fff; }
+  .toast-primary .toast-body {
+    width: calc(100% - 100px);
+    height: 72px;
+    margin-right: 14px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 22px;
+    cursor: default;
+    user-select: none;
+    display: table; }
+    .toast-primary .toast-body > span {
+      display: table-cell;
+      vertical-align: middle; }
+
+.toast-success {
+  box-sizing: border-box;
+  background-color: #fff;
+  overflow: hidden;
+  border: 1px solid #80CD80;
+  border-radius: 4px;
+  min-height: 72px;
+  display: flex;
+  flex-direction: row;
+  font-family: "Sailec", "Helvetica", "Arial", sans-serif;
+  font-size: 14px; }
+  .toast-success .toast-icon {
+    display: block;
+    width: 72px;
+    background-color: #80CD80;
+    margin-right: 14px;
+    font-family: "Densicons";
+    font-size: 24px;
+    text-align: center;
+    line-height: 72px;
+    color: #fff; }
+  .toast-success .toast-body {
+    width: calc(100% - 100px);
+    height: 72px;
+    margin-right: 14px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 22px;
+    cursor: default;
+    user-select: none;
+    display: table; }
+    .toast-success .toast-body > span {
+      display: table-cell;
+      vertical-align: middle; }
+
+.toast-danger {
+  box-sizing: border-box;
+  background-color: #fff;
+  overflow: hidden;
+  border: 1px solid #FF5454;
+  border-radius: 4px;
+  min-height: 72px;
+  display: flex;
+  flex-direction: row;
+  font-family: "Sailec", "Helvetica", "Arial", sans-serif;
+  font-size: 14px; }
+  .toast-danger .toast-icon {
+    display: block;
+    width: 72px;
+    background-color: #FF5454;
+    margin-right: 14px;
+    font-family: "Densicons";
+    font-size: 24px;
+    text-align: center;
+    line-height: 72px;
+    color: #fff; }
+  .toast-danger .toast-body {
+    width: calc(100% - 100px);
+    height: 72px;
+    margin-right: 14px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 22px;
+    cursor: default;
+    user-select: none;
+    display: table; }
+    .toast-danger .toast-body > span {
+      display: table-cell;
+      vertical-align: middle; }
+
+.toast-warning {
+  box-sizing: border-box;
+  background-color: #fff;
+  overflow: hidden;
+  border: 1px solid #FFBA08;
+  border-radius: 4px;
+  min-height: 72px;
+  display: flex;
+  flex-direction: row;
+  font-family: "Sailec", "Helvetica", "Arial", sans-serif;
+  font-size: 14px; }
+  .toast-warning .toast-icon {
+    display: block;
+    width: 72px;
+    background-color: #FFBA08;
+    margin-right: 14px;
+    font-family: "Densicons";
+    font-size: 24px;
+    text-align: center;
+    line-height: 72px;
+    color: #fff; }
+  .toast-warning .toast-body {
+    width: calc(100% - 100px);
+    height: 72px;
+    margin-right: 14px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 22px;
+    cursor: default;
+    user-select: none;
+    display: table; }
+    .toast-warning .toast-body > span {
+      display: table-cell;
+      vertical-align: middle; }

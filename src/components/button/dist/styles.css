@@ -1,0 +1,79 @@
+.button {
+  display: block;
+  width: 100%;
+  line-height: 38px;
+  height: 43px;
+  color: #fff;
+  background-color: #4198FF;
+  outline: none;
+  border-width: 0px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  transition: all 100ms ease-in-out; }
+  .button:hover {
+    opacity: 0.9; }
+  .button:active {
+    opacity: 1; }
+  .button:disabled {
+    background-color: #CBCFD6;
+    cursor: default; }
+    .button:disabled:hover {
+      opacity: 1; }
+
+.button-small {
+  display: inline;
+  width: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  line-height: 18px;
+  height: 23px;
+  color: #fff;
+  background-color: #4198FF;
+  outline: none;
+  border-width: 0px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  transition: all 100ms ease-in-out; }
+  .button-small:hover {
+    opacity: 0.9; }
+  .button-small:active {
+    opacity: 1; }
+  .button-small:disabled {
+    background-color: #CBCFD6;
+    cursor: default; }
+    .button-small:disabled:hover {
+      opacity: 1; }
+
+.button-large {
+  display: block;
+  width: 100%;
+  line-height: 45px;
+  height: 50px;
+  color: #fff;
+  background-color: #4198FF;
+  outline: none;
+  border-width: 0px;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  transition: all 100ms ease-in-out; }
+  .button-large:hover {
+    opacity: 0.9; }
+  .button-large:active {
+    opacity: 1; }
+  .button-large:disabled {
+    background-color: #CBCFD6;
+    cursor: default; }
+    .button-large:disabled:hover {
+      opacity: 1; }

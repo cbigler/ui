@@ -1,3 +1,4 @@
+
 {
   "name": "@density/ui",
   "version": "4.5.0",
@@ -6,8 +7,8 @@
   "scripts": {
     "start": "npm run storybook",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "storybook": "start-storybook -p 6006 -c .storybook",
-    "build-storybook": "build-storybook",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public",
     "installall": "for i in $(find components/* -type d ! -path '*node_modules*' ! -name 'template' ); do cd $i && npm install && cd -; done",
     "preversion": "npm run build-spec",
     "build-spec": "node utils/build-specs.js",
@@ -20,7 +21,9 @@
     "@density/node-sass-json-importer": "^4.1.0",
     "@storybook/addon-actions": "^3.0.1",
     "@storybook/addon-info": "^3.0.1",
-    "@storybook/react": "^3.0.1",
+    "@storybook/react": "3.1.3",
+    "@storybook/addon-actions": "^3.2.12",
+    "@storybook/addon-links": "^3.2.12",
     "babel-cli": "^6.24.0",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-es2015": "^6.24.0",
@@ -39,6 +42,9 @@
     "popper.js": "^1.10.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "uuid": "^3.0.1"
+    "uuid": "^3.0.1",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-scripts": "1.0.14"
   }
 }
