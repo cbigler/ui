@@ -1,40 +1,39 @@
-// TODO: Update internal url here.
-$path: "https://densityco.github.io/internal-dashboard/staging-e309b8fb-970e-4f5f-a1fd-6a092c55da90/assets/fonts";
 $cdn-path: "https://densityco.github.io/assets/";
 
+// The main font used throughout Density's brand is Sailec.
 @font-face {
   font-family: 'Sailec';
-  src: url("#{$path}/sailec-regular.ttf") format("truetype"), url("#{$path}/sailec-regular.otf") format("opentype");
+  src: url("#{$cdn-path}/sailec-regular.2eacbefe.ttf") format("truetype"), url("#{$cdn-path}/sailec-regular.bbd2fffa.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'Sailec';
-  src: url("#{$path}/sailec-regular-italic.ttf") format("truetype"), url("#{$path}/sailec-regular-italic.otf") format("opentype");
+  src: url("#{$cdn-path}/sailec-regular-italic.3ae02a13.ttf") format("truetype"), url("#{$cdn-path}/sailec-regular-italic.8bb5f9cc.otf") format("opentype");
   font-weight: normal;
   font-style: italic;
 }
 @font-face {
   font-family: 'Sailec';
-  src: url("#{$path}/sailec-medium.ttf") format("truetype"),  url("#{$path}/sailec-medium.otf") format("opentype");
+  src: url("#{$cdn-path}/sailec-medium.9c91853f.ttf") format("truetype"),  url("#{$cdn-path}/sailec-medium.745ebbb8.otf") format("opentype");
   font-weight: 500;
   font-style: normal;
 }
 @font-face {
   font-family: 'Sailec';
-  src: url("#{$path}/sailec-medium-italic.ttf") format("truetype"), url("#{$path}/sailec-medium-italic.otf") format("opentype");
+  src: url("#{$cdn-path}/sailec-medium-italic.5088071f.ttf") format("truetype"), url("#{$cdn-path}/sailec-medium-italic.dd7f422b.otf") format("opentype");
   font-weight: 500;
   font-style: italic;
 }
 @font-face {
   font-family: 'Sailec';
-  src: url("#{$path}/sailec-bold.ttf") format("truetype"), url("#{$path}/sailec-bold.otf") format("opentype");
+  src: url("#{$cdn-path}/sailec-bold.cbad9226.ttf") format("truetype"), url("#{$cdn-path}/sailec-bold.8f4bd467.otf") format("opentype");
   font-weight: bold;
   font-style: normal;
 }
 @font-face {
   font-family: 'Sailec';
-  src: url("#{$path}/sailec-bold-italic.ttf") format("truetype"), url("#{$path}/sailec-bold-italic.otf") format("opentype");
+  src: url("#{$cdn-path}/sailec-bold-italic.72b84256.ttf") format("truetype"), url("#{$cdn-path}/sailec-bold-italic.298dd973.otf") format("opentype");
   font-weight: bold;
   font-style: italic;
 }
