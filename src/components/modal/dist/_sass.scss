@@ -2,8 +2,9 @@
 
 // Local variables to the component
 
-@mixin make-modal($width: 400px) {
+@mixin make-modal($width: 460px) {
   position: relative;
+  margin: 20px auto;
 
   // Ensure that the width of the modal is either $width or 100%.
   width: $width;
@@ -21,9 +22,6 @@
 
 @mixin make-modal-backdrop($background: $gray-darker) {
   background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
   z-index: $modal-z-index;
 
@@ -32,6 +30,8 @@
   bottom: 0px;
   left: 0px;
   right: 0px;
+
+  overflow-y: auto;
 }
 
 @mixin make-modal-close($color: $gray, $spacing: 15px) {
