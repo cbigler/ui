@@ -45,7 +45,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     ),
     _react2.default.createElement(
       _index.NavbarSidebarItem,
-      { activePage: 'active', pageName: 'active', href: '#/active' },
+      { onClick: (0, _addonActions.action)('clicked item'), activePage: 'active', pageName: 'active', href: '#/active' },
       'Active!'
     )
   );

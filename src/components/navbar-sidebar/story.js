@@ -12,7 +12,7 @@ storiesOf('NavbarSidebar', module)
     <NavbarSidebar show={true}>
       <NavbarSidebarItem header={true} activePage="active" pageName="foo" href="#/foo">Foo!</NavbarSidebarItem>
       <NavbarSidebarItem activePage="active" pageName="foo" href="#/foo">Foo!</NavbarSidebarItem>
-      <NavbarSidebarItem activePage="active" pageName="active" href="#/active">Active!</NavbarSidebarItem>
+      <NavbarSidebarItem onClick={action('clicked item')} activePage="active" pageName="active" href="#/active">Active!</NavbarSidebarItem>
     </NavbarSidebar>
   ))
   .addWithInfo('An interactive sidebar', () => {

@@ -34,12 +34,13 @@ function NavbarSidebarItem(_ref2) {
       pageName = _ref2.pageName,
       href = _ref2.href,
       header = _ref2.header,
+      onClick = _ref2.onClick,
       children = _ref2.children;
 
   var type = header ? 'item-header' : 'item';
   return React.createElement(
     'li',
-    { className: pageName.indexOf(activePage) >= 0 ? 'navbar-sidebar-' + type + '-active' : 'navbar-sidebar-' + type },
+    { onClick: onClick, className: pageName.indexOf(activePage) >= 0 ? 'navbar-sidebar-' + type + '-active' : 'navbar-sidebar-' + type },
     React.createElement(
       'a',
       { href: href },
