@@ -67,8 +67,9 @@
     margin-left: 20px;
   }
 
-  // Style each link
-  & > a {
+  // Style each link. Typically, the link would be an `a`, but, if the link isn't clickable, it's
+  // replaced with a span (an example of this would be if the `locked` prop is set to true).
+  & > a, & > span {
     line-height: $navbar-height;
     color: $color;
     text-decoration: none;
@@ -79,6 +80,16 @@
   }
 }
 
+@mixin make-navbar-item-locked($color: $gray) {
+  color: $color;
+  text-decoration: line-through;
+
+  & > span {
+    cursor: not-allowed;
+    user-select: none;
+  }
+}
+
 .navbar { @include make-navbar; }
 .navbar-brand { @include make-navbar-brand; }
 .navbar-brand-subtitle { @include make-navbar-brand-subtitle; }
@@ -86,3 +97,6 @@
 
 .navbar-item { @include make-navbar-item; }
 .navbar-item-active { @include make-navbar-item($color: $gray-darkest, $underline-color: $brand-primary); }
+.navbar-item-locked {
+  @include make-navbar-item-locked;
+}

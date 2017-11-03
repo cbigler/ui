@@ -1,4 +1,5 @@
 import * as React from 'react';
+import classnames from 'classnames';
 
 export default function Navbar({subtitle, fullWidth, children, onClickSidebarButton}) {
   return <div className="navbar">
@@ -23,8 +24,18 @@ export default function Navbar({subtitle, fullWidth, children, onClickSidebarBut
   </div>;
 }
 
-export function NavbarItem({activePage, pageName, href, children}) {
-  return <li className={pageName.indexOf(activePage) >= 0 ? 'navbar-item-active' : 'navbar-item'}>
-    <a href={href}>{children}</a>
+export function NavbarItem({
+  activePage, pageName,
+  href,
+  children,
+  locked,
+}) {
+  return <li
+    className={classnames('navbar-item', {
+      'navbar-item-active': pageName.indexOf(activePage) >= 0,
+      'navbar-item-locked': locked,
+    })}
+  >
+    {locked ? <span>{children}</span> : <a href={href}>{children}</a>}
   </li>;
 }
