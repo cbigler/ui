@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-navbar",
-  "version": "0.0.14",
+  "version": "1.0.0",
   "description": "Navigation Bar component",
   "main": "dist/index.js",
   "style": "dist/styles.css",
@@ -10,5 +10,7 @@
   },
   "author": "Density <team+javascript@density.io>",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {
+    "classnames": "^2.2.5"
+  }
 }
