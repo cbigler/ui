@@ -53,7 +53,7 @@
   color: $gray;
 }
 
-@mixin make-navbar-item($color: $gray, $underline-color: transparent) {
+@mixin make-navbar-item($color: $gray, $underline-color: transparent, $font-weight: normal) {
   list-style-type: none;
   display: inline-block;
   border-bottom: 2px solid $underline-color;
@@ -63,15 +63,33 @@
     margin-left: 20px;
   }
 
-  // Style each link
-  & > a {
+  // Style each link. Typically, the link would be an `a`, but, if the link isn't clickable, it's
+  // replaced with a span (an example of this would be if the `locked` prop is set to true).
+  & > a, & > span {
     line-height: $navbar-height;
     color: $color;
     text-decoration: none;
     font-size: $font-size-base;
+    font-weight: $font-weight;
 
     padding: 8px 0px;
     margin: 0px 14px;
+  }
+}
+
+@mixin make-navbar-item-locked($color: $gray) {
+  color: $color;
+
+  & > span {
+    cursor: not-allowed;
+    user-select: none;
+    margin-right: 5px;
+  }
+
+  &:after {
+    font-family: 'Densicons';
+    vertical-align: middle;
+    content: '\e921'; /* FIXME: we need the right lock icon! */
   }
 }
 
@@ -81,4 +99,13 @@
 .navbar-container { @include make-navbar-container; }
 
 .navbar-item { @include make-navbar-item; }
-.navbar-item-active { @include make-navbar-item($color: $gray-darkest, $underline-color: $brand-primary); }
+.navbar-item-active {
+  @include make-navbar-item(
+    $color: $gray-darkest,
+    $underline-color: $brand-primary,
+    $font-weight: bold
+  );
+}
+.navbar-item-locked {
+  @include make-navbar-item-locked;
+}

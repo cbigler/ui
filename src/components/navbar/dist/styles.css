@@ -44,11 +44,12 @@
   height: 54px; }
   .navbar-item:first-child {
     margin-left: 20px; }
-  .navbar-item > a {
+  .navbar-item > a, .navbar-item > span {
     line-height: 56px;
     color: #CBCFD6;
     text-decoration: none;
     font-size: 14px;
+    font-weight: normal;
     padding: 8px 0px;
     margin: 0px 14px; }
 
@@ -59,10 +60,23 @@
   height: 54px; }
   .navbar-item-active:first-child {
     margin-left: 20px; }
-  .navbar-item-active > a {
+  .navbar-item-active > a, .navbar-item-active > span {
     line-height: 56px;
     color: #4E5457;
     text-decoration: none;
     font-size: 14px;
+    font-weight: bold;
     padding: 8px 0px;
     margin: 0px 14px; }
+
+.navbar-item-locked {
+  color: #CBCFD6; }
+  .navbar-item-locked > span {
+    cursor: not-allowed;
+    user-select: none;
+    margin-right: 5px; }
+  .navbar-item-locked:after {
+    font-family: 'Densicons';
+    vertical-align: middle;
+    content: '\e921';
+    /* FIXME: we need the right lock icon! */ }
