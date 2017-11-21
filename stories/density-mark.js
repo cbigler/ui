@@ -1,1 +1,0 @@
-../components/density-mark/story.js

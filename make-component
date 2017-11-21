@@ -30,7 +30,7 @@ for f in $(ls components/$COMPONENTDASH); do
 done
 
 echo "* Linking $COMPONENTDASH story to stories folder..."
-cd stories
+cd src/stories
 ln -s ../components/$COMPONENTDASH/story.js $COMPONENTDASH.js
 cd ..
 
