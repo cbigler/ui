@@ -33,9 +33,12 @@
   display: inline-block;
   position: relative;
   z-index: $navbar-brand-zindex;
-  float: left;
   height: $navbar-height;
   font-size: $navbar-brand-font-size;
+
+  @media (min-width: $screen-xs-max) {
+    float: left;
+  }
 
   img {
     position: relative;
@@ -57,9 +60,9 @@
   color: $gray;
 }
 
+// Create a normal navbar item
 @mixin make-navbar-item($color: $gray, $underline-color: transparent, $font-weight: normal) {
   list-style-type: none;
-  display: inline-block;
   border-bottom: 2px solid $underline-color;
   height: $navbar-height - 2px;
 
@@ -79,6 +82,12 @@
     padding: 8px 0px;
     margin: 0px 14px;
   }
+
+  // Don't show navbar items on small screens.
+  display: none;
+  @media (min-width: $screen-xs-max) {
+    display: inline-block;
+  }
 }
 
 @mixin make-navbar-item-locked($color: $gray) {
@@ -87,13 +96,104 @@
   & > span {
     cursor: not-allowed;
     user-select: none;
-    margin-right: 5px;
+    margin-right: 0px;
   }
 
   &:after {
+    margin-left: 10px;
     font-family: 'Densicons';
     vertical-align: middle;
     content: '\e921'; /* FIXME: we need the right lock icon! */
+    color: $brand-primary;
+  }
+}
+
+// The sidebar button rendered in the nav by the navbar component. Only visible on mobile.
+@mixin make-navbar-sidebar-button {
+  @include make-navbar-item;
+
+  background-color: transparent;
+  border-width: 0px;
+  float: left;
+  outline: none;
+
+  user-select: none;
+  margin-left: 0px;
+  margin-right: 10px;
+  height: 28px;
+  border-radius: 30px;
+  margin-top: 12px;
+  font-size: 0;
+
+  transition: all 100ms ease-in-out;
+  cursor: pointer;
+
+  // Only show sidebar button on small screens.
+  display: inline-block;
+  @media (min-width: $screen-xs-max) {
+    display: none;
+  }
+
+  &:hover { background-color: $gray-light; }
+  &:before {
+    content: '\e924';
+
+    font-family: "Densicons";
+    font-size: $font-size-base;
+    &:hover { opacity: 0.8; }
+    &:active { opacity: 1; }
+  }
+}
+
+@mixin make-navbar-mobile-sidebar {
+  display: block;
+  background-color: #fff;
+  z-index: $navbar-sidebar-zindex;
+
+  height: 100vh;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  // Start by moving the sidebar off of the screen
+  position: relative;
+  left: -100vw;
+  top: -1 * $navbar-height;
+
+  // When the sidebar is opened, slide the sidebar back onto the screen.
+  transition: all 250ms ease-in-out;
+  &.open { left: 0px; }
+}
+
+@mixin make-navbar-mobile-sidebar-close-button {
+  float: right;
+  font-family: "Densicons";
+  color: $brand-primary;
+  cursor: pointer;
+}
+
+@mixin make-navbar-mobile-item($color: $gray-cinder) {
+  display: block;
+  margin-left: 0px;
+  list-style-type: none;
+
+  line-height: $font-size-base * 2;
+
+  & > a {
+    text-decoration: none;
+    color: $color;
+  }
+}
+@mixin make-navbar-mobile-item-locked {
+  cursor: not-allowed;
+  user-select: none;
+  color: $gray;
+
+  &:after {
+    margin-left: 10px;
+    font-family: 'Densicons';
+    vertical-align: middle;
+    content: '\e921'; /* FIXME: we need the right lock icon! */
+    color: $brand-primary;
   }
 }
 
@@ -102,6 +202,7 @@
 .navbar-brand-subtitle { @include make-navbar-brand-subtitle; }
 .navbar-container { @include make-navbar-container; }
 
+// Styles for items within main navbar section.
 .navbar-item { @include make-navbar-item; }
 .navbar-item-active {
   @include make-navbar-item(
@@ -110,6 +211,16 @@
     $font-weight: bold
   );
 }
-.navbar-item-locked {
-  @include make-navbar-item-locked;
-}
+.navbar-item-locked { @include make-navbar-item-locked; }
+
+// Create navbar mobile sidebar that opens when the user clicks an icon in the mobile navbar.
+.navbar-sidebar-button { @include make-navbar-sidebar-button; }
+.navbar-mobile-sidebar { @include make-navbar-mobile-sidebar; }
+.navbar-mobile-sidebar { @include make-navbar-mobile-sidebar; }
+
+// Create styles for items within mobile navbar section
+.navbar-mobile-item { @include make-navbar-mobile-item; }
+.navbar-mobile-item-active { @include make-navbar-mobile-item($color: $gray-darkest); }
+.navbar-mobile-item-locked { @include make-navbar-mobile-item-locked; }
+
+.navbar-mobile-sidebar-close-button { @include make-navbar-mobile-sidebar-close-button; }

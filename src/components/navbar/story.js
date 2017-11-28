@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import './styles.scss';
-import Navbar, { NavbarItem } from './index';
+import Navbar, { NavbarItem, NavbarMobileItem } from './index';
 
 
 storiesOf('Navbar', module)
@@ -20,6 +20,63 @@ storiesOf('Navbar', module)
   .addWithInfo('With items', () => (
     <div className="full-width">
       <Navbar>
+        <NavbarItem
+          activePage='active-page'
+          pageName={['inactive-page']}
+          href="https://example.com"
+        >Inactive navbar item</NavbarItem>
+        <NavbarItem
+          activePage='active-page'
+          pageName={['active-page']}
+          href="https://example.com"
+        >Active navbar item</NavbarItem>
+        <NavbarItem
+          activePage='active-page'
+          pageName={['locked-page']}
+          locked={true}
+          href="https://example.com"
+        >Locked navbar item</NavbarItem>
+      </Navbar>
+    </div>
+  ))
+  .addWithInfo('With items and mobile sidebar', () => (
+    <div className="full-width">
+      <Navbar mobileSidebar={[
+        <NavbarMobileItem
+          activePage='active-page'
+          pageName={['inactive-page']}
+          href="https://example.com"
+        >Inactive navbar item</NavbarMobileItem>,
+        <NavbarMobileItem
+          activePage='active-page'
+          pageName={['active-page']}
+          href="https://example.com"
+          indent={2}
+        >Active indented navbar item</NavbarMobileItem>,
+        <NavbarMobileItem
+          activePage='active-page'
+          pageName={['locked-page']}
+          locked={true}
+          href="https://example.com"
+        >Locked navbar item</NavbarMobileItem>,
+        <NavbarMobileItem
+          activePage='active-page'
+          pageName={['inactive-page']}
+          href="https://example.com"
+        >Inactive navbar item</NavbarMobileItem>,
+        <NavbarMobileItem
+          activePage='active-page'
+          pageName={['inactive-page']}
+          href="https://example.com"
+          indent={2}
+        >One</NavbarMobileItem>,
+        <NavbarMobileItem
+          activePage='active-page'
+          pageName={['inactive-page']}
+          href="https://example.com"
+          indent={2}
+        >Two</NavbarMobileItem>,
+      ]}>
         <NavbarItem
           activePage='active-page'
           pageName={['inactive-page']}
