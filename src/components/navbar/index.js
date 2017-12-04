@@ -16,7 +16,12 @@ export default class Navbar extends React.Component {
       onClickSidebarButton,
     } = this.props;
 
+    const openSidebar = () => this.setState({open: true});
+    const closeSidebar = () => this.setState({open: false});
+
     return <div className="navbar">
+
+      {/* The normal navbar content area, shown on a computer */}
       <div className={fullWidth ? 'navbar-full-width' : 'navbar-container'}>
         <div className="navbar-brand">
           {/* Show a button to open a sidebar */}
@@ -37,6 +42,8 @@ export default class Navbar extends React.Component {
         {subtitle ? <div className="navbar-brand-subtitle">{subtitle}</div> : null}
         <div className="navbar-items">{children}</div>
       </div>
+
+      {/* The mobile version of the navbar */}
       <div className={classnames('navbar-mobile-sidebar', {open: this.state.open})}>
         <span
           role="button"
@@ -46,8 +53,11 @@ export default class Navbar extends React.Component {
             () => onClickSidebarButton ? onClickSidebarButton(false) : null
           )}
         >&#xe914;</span>
-        {/* This might be a horrible idea, injecting a `key` prop like this. */}
-        {mobileSidebar ? mobileSidebar.map((i, ct) => <span key={ct}>{i}</span>) : null}
+        {
+          mobileSidebar ?
+          mobileSidebar(closeSidebar, openSidebar).map((i, ct) => <span key={ct}>{i}</span>) :
+          null
+        }
       </div>
     </div>;
   }

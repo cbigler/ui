@@ -41,40 +41,46 @@ storiesOf('Navbar', module)
   ))
   .addWithInfo('With items and mobile sidebar', () => (
     <div className="full-width">
-      <Navbar mobileSidebar={[
+      <Navbar mobileSidebar={(onCloseSidebar, onOpenSidebar) => [
         <NavbarMobileItem
           activePage='active-page'
           pageName={['inactive-page']}
           href="https://example.com"
+          onClick={onCloseSidebar}
         >Inactive navbar item</NavbarMobileItem>,
         <NavbarMobileItem
           activePage='active-page'
           pageName={['active-page']}
           href="https://example.com"
           indent={2}
+          onClick={onCloseSidebar}
         >Active indented navbar item</NavbarMobileItem>,
         <NavbarMobileItem
           activePage='active-page'
           pageName={['locked-page']}
           locked={true}
           href="https://example.com"
+          onClick={onCloseSidebar}
         >Locked navbar item</NavbarMobileItem>,
         <NavbarMobileItem
           activePage='active-page'
           pageName={['inactive-page']}
           href="https://example.com"
+          onClick={onCloseSidebar}
         >Inactive navbar item</NavbarMobileItem>,
         <NavbarMobileItem
           activePage='active-page'
           pageName={['inactive-page']}
           href="https://example.com"
           indent={2}
+          onClick={onCloseSidebar}
         >One</NavbarMobileItem>,
         <NavbarMobileItem
           activePage='active-page'
           pageName={['inactive-page']}
           href="https://example.com"
           indent={2}
+          onClick={onCloseSidebar}
         >Two</NavbarMobileItem>,
       ]}>
         <NavbarItem

@@ -122,7 +122,8 @@ function NavbarItem(_ref) {
       pageName = _ref.pageName,
       href = _ref.href,
       children = _ref.children,
-      locked = _ref.locked;
+      locked = _ref.locked,
+      onClick = _ref.onClick;
 
   return React.createElement(
     'li',
@@ -130,7 +131,8 @@ function NavbarItem(_ref) {
       className: (0, _classnames2.default)('navbar-item', {
         'navbar-item-active': pageName.indexOf(activePage) >= 0,
         'navbar-item-locked': locked
-      })
+      }),
+      onClick: onClick
     },
     locked ? React.createElement(
       'span',
@@ -150,7 +152,8 @@ function NavbarMobileItem(_ref2) {
       href = _ref2.href,
       children = _ref2.children,
       locked = _ref2.locked,
-      indent = _ref2.indent;
+      indent = _ref2.indent,
+      onClick = _ref2.onClick;
 
   return React.createElement(
     'li',
@@ -159,7 +162,8 @@ function NavbarMobileItem(_ref2) {
         'navbar-mobile-item-active': pageName.indexOf(activePage) >= 0,
         'navbar-mobile-item-locked': locked
       }),
-      style: { paddingLeft: indent ? (indent - 1) * 10 : 0 }
+      style: { paddingLeft: indent ? (indent - 1) * 10 : 0 },
+      onClick: onClick
     },
     locked ? React.createElement(
       'span',
