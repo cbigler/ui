@@ -61,7 +61,7 @@
 }
 
 // Create a normal navbar item
-@mixin make-navbar-item($color: $gray, $underline-color: transparent, $font-weight: normal) {
+@mixin make-navbar-item($color: $gray-cinder, $underline-color: transparent, $font-weight: normal) {
   list-style-type: none;
   border-bottom: 2px solid $underline-color;
   height: $navbar-height - 2px;
@@ -90,13 +90,12 @@
   }
 }
 
-@mixin make-navbar-item-locked($color: $gray) {
-  color: $color;
-
+@mixin make-navbar-item-locked {
   & > span {
     cursor: not-allowed;
     user-select: none;
     margin-right: 0px;
+    color: $gray;
   }
 
   &:after {
@@ -207,7 +206,7 @@
 .navbar-item { @include make-navbar-item; }
 .navbar-item-active {
   @include make-navbar-item(
-    $color: $gray-darkest,
+    $color: $gray-cinder,
     $underline-color: $brand-primary,
     $font-weight: bold
   );

@@ -59,12 +59,14 @@ export function NavbarItem({
   href,
   children,
   locked,
+  onClick,
 }) {
   return <li
     className={classnames('navbar-item', {
       'navbar-item-active': pageName.indexOf(activePage) >= 0,
       'navbar-item-locked': locked,
     })}
+    onClick={onClick}
   >
     {locked ? <span>{children}</span> : <a href={href}>{children}</a>}
   </li>;
@@ -76,6 +78,7 @@ export function NavbarMobileItem({
   children,
   locked,
   indent,
+  onClick,
 }) {
   return <li
     className={classnames('navbar-mobile-item', {
@@ -83,6 +86,7 @@ export function NavbarMobileItem({
       'navbar-mobile-item-locked': locked,
     })}
     style={{paddingLeft: indent ? ((indent - 1) * 10) : 0}}
+    onClick={onClick}
   >
     {locked ? <span>{children}</span> : <a href={href}>{children}</a>}
   </li>;
