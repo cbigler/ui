@@ -3,6 +3,8 @@
   "navbarHeight": 56,
   "navbarWidth": 1000,
 
+  "navbarSidebarZindex": "1100",
+
   "navbarBrandZindex": "1010",
   "navbarBrandHeight": 20,
   "navbarBrandFontSize": 18
