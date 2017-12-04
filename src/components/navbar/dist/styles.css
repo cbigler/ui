@@ -87,8 +87,7 @@
     margin-left: 10px;
     font-family: 'Densicons';
     vertical-align: middle;
-    content: '\e921';
-    /* FIXME: we need the right lock icon! */
+    content: '\e941';
     color: #4198FF; }
 
 .navbar-sidebar-button {
@@ -147,9 +146,11 @@
   position: relative;
   left: -100vw;
   top: -56px;
+  opacity: 0;
   transition: all 250ms ease-in-out; }
   .navbar-mobile-sidebar.open {
-    left: 0px; }
+    left: 0px;
+    opacity: 1; }
 
 .navbar-mobile-sidebar {
   display: block;
@@ -161,9 +162,11 @@
   position: relative;
   left: -100vw;
   top: -56px;
+  opacity: 0;
   transition: all 250ms ease-in-out; }
   .navbar-mobile-sidebar.open {
-    left: 0px; }
+    left: 0px;
+    opacity: 1; }
 
 .navbar-mobile-item {
   display: block;
@@ -191,8 +194,7 @@
     margin-left: 10px;
     font-family: 'Densicons';
     vertical-align: middle;
-    content: '\e921';
-    /* FIXME: we need the right lock icon! */
+    content: '\e941';
     color: #4198FF; }
 
 .navbar-mobile-sidebar-close-button {

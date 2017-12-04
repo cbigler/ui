@@ -99,7 +99,7 @@
     margin-left: 10px;
     font-family: 'Densicons';
     vertical-align: middle;
-    content: '\e921'; /* FIXME: we need the right lock icon! */
+    content: '\e941';
     color: $brand-primary;
   }
 }
@@ -154,10 +154,11 @@
   position: relative;
   left: -100vw;
   top: -1 * $navbar-height;
+  opacity: 0;
 
   // When the sidebar is opened, slide the sidebar back onto the screen.
   transition: all 250ms ease-in-out;
-  &.open { left: 0px; }
+  &.open { left: 0px; opacity: 1; }
 }
 
 @mixin make-navbar-mobile-sidebar-close-button {
@@ -188,7 +189,7 @@
     margin-left: 10px;
     font-family: 'Densicons';
     vertical-align: middle;
-    content: '\e921'; /* FIXME: we need the right lock icon! */
+    content: '\e941';
     color: $brand-primary;
   }
 }
