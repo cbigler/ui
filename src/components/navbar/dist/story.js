@@ -70,59 +70,67 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     { className: 'full-width' },
     _react2.default.createElement(
       _index2.default,
-      { mobileSidebar: [_react2.default.createElement(
-          _index.NavbarMobileItem,
-          {
-            activePage: 'active-page',
-            pageName: ['inactive-page'],
-            href: 'https://example.com'
-          },
-          'Inactive navbar item'
-        ), _react2.default.createElement(
-          _index.NavbarMobileItem,
-          {
-            activePage: 'active-page',
-            pageName: ['active-page'],
-            href: 'https://example.com',
-            indent: 2
-          },
-          'Active indented navbar item'
-        ), _react2.default.createElement(
-          _index.NavbarMobileItem,
-          {
-            activePage: 'active-page',
-            pageName: ['locked-page'],
-            locked: true,
-            href: 'https://example.com'
-          },
-          'Locked navbar item'
-        ), _react2.default.createElement(
-          _index.NavbarMobileItem,
-          {
-            activePage: 'active-page',
-            pageName: ['inactive-page'],
-            href: 'https://example.com'
-          },
-          'Inactive navbar item'
-        ), _react2.default.createElement(
-          _index.NavbarMobileItem,
-          {
-            activePage: 'active-page',
-            pageName: ['inactive-page'],
-            href: 'https://example.com',
-            indent: 2
-          },
-          'One'
-        ), _react2.default.createElement(
-          _index.NavbarMobileItem,
-          {
-            activePage: 'active-page',
-            pageName: ['inactive-page'],
-            href: 'https://example.com',
-            indent: 2
-          },
-          'Two'
-        )] },
+      { mobileSidebar: function mobileSidebar(onCloseSidebar, onOpenSidebar) {
+          return [_react2.default.createElement(
+            _index.NavbarMobileItem,
+            {
+              activePage: 'active-page',
+              pageName: ['inactive-page'],
+              href: 'https://example.com',
+              onClick: onCloseSidebar
+            },
+            'Inactive navbar item'
+          ), _react2.default.createElement(
+            _index.NavbarMobileItem,
+            {
+              activePage: 'active-page',
+              pageName: ['active-page'],
+              href: 'https://example.com',
+              indent: 2,
+              onClick: onCloseSidebar
+            },
+            'Active indented navbar item'
+          ), _react2.default.createElement(
+            _index.NavbarMobileItem,
+            {
+              activePage: 'active-page',
+              pageName: ['locked-page'],
+              locked: true,
+              href: 'https://example.com',
+              onClick: onCloseSidebar
+            },
+            'Locked navbar item'
+          ), _react2.default.createElement(
+            _index.NavbarMobileItem,
+            {
+              activePage: 'active-page',
+              pageName: ['inactive-page'],
+              href: 'https://example.com',
+              onClick: onCloseSidebar
+            },
+            'Inactive navbar item'
+          ), _react2.default.createElement(
+            _index.NavbarMobileItem,
+            {
+              activePage: 'active-page',
+              pageName: ['inactive-page'],
+              href: 'https://example.com',
+              indent: 2,
+              onClick: onCloseSidebar
+            },
+            'One'
+          ), _react2.default.createElement(
+            _index.NavbarMobileItem,
+            {
+              activePage: 'active-page',
+              pageName: ['inactive-page'],
+              href: 'https://example.com',
+              indent: 2,
+              onClick: onCloseSidebar
+            },
+            'Two'
+          )];
+        } },
       _react2.default.createElement(
         _index.NavbarItem,
         {

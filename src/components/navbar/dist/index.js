@@ -52,6 +52,13 @@ var Navbar = function (_React$Component) {
           onClickSidebarButton = _props.onClickSidebarButton;
 
 
+      var openSidebar = function openSidebar() {
+        return _this2.setState({ open: true });
+      };
+      var closeSidebar = function closeSidebar() {
+        return _this2.setState({ open: false });
+      };
+
       return React.createElement(
         'div',
         { className: 'navbar' },
@@ -101,7 +108,7 @@ var Navbar = function (_React$Component) {
             },
             '\uE914'
           ),
-          mobileSidebar ? mobileSidebar.map(function (i, ct) {
+          mobileSidebar ? mobileSidebar(closeSidebar, openSidebar).map(function (i, ct) {
             return React.createElement(
               'span',
               { key: ct },
