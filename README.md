@@ -19,6 +19,11 @@ Each component has a number of different files:
   flags) that would be handy to be able to access from both javascript and scss. By defining our
   variables in a generic data format it's readable from any system.
 
+## Publishing a new component version
+```
+make publish COMPONENT=navbar
+```
+
 ## Styles
 
 Styles are written in Sass. Each component has a mixin that implements the construction of the
