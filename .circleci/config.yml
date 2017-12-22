@@ -25,30 +25,39 @@ jobs:
               cd ../..
             done
       - run:
-          name: "Build storybook"
+          name: "Build and publish the main package and each subcomponent to npm"
           command: |
-            echo "Building storybook..."
-            npm run build-storybook
+            if [ "$CIRCLE_BRANCH" != "master" ]; then
+              echo "* Skipping, branch is not the main repository branch."
+              exit 0
+            fi
 
-            # Bug in react storybook that adds undefined to the page?
-            sed -i bak 's/undefined//' storybook-static/index.html && rm storybook-static/index.html.bak
+            for component in $(find components/ -maxdepth 1 -mindepth 1 -type d -printf "%f\n"); do
+              echo "****************"
+              echo "* Publishing $component"
+              echo "****************"
+              set -x
+              make publish COMPONENT=$component
+              set +x
+              echo
+            done
 
-            echo "* Pulling latest deploy..."
-            git clone git@github.com:densityco/ui.git deploy_ui/
-            cd deploy_ui/
-            git checkout gh-pages
-
-            echo "* Copying dist to github pages directory..."
-            rm -rf $CIRCLE_BRANCH/
-            mv ../storybook-static $CIRCLE_BRANCH/
-            git add $CIRCLE_BRANCH/
-
-            echo "* Pushing..."
-            git config user.email "engineering@density.io"
-            git config user.name "CI"
-            git commit --allow-empty -m "Deploy branch $CIRCLE_BRANCH to Github Pages [ci skip]"
-            git push origin gh-pages --force
-
+            echo "****************"
+            echo "* Publishing main package"
+            echo "****************"
+            npm publish .
+      - run:
+          name: "Build preview"
+          command: npm run build-storybook
+      - run:
+          name: "Push preview to the cloud"
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y awscli
+            aws s3 sync storybook-static/ s3://ui-preview.density.rodeo/$CIRCLE_BRANCH --region us-east-1
+      - run:
+          name: "Post preview link to any pull requests commit is part of"
+          command: |
             # Post a link to the branch as a comment in the PR
             echo "* Pull requests this commit is part of: $CI_PULL_REQUESTS"
             export IFS=","
@@ -61,7 +70,7 @@ jobs:
                 | grep density-machine-user)" ]; then
 
                 curl -X POST \
-                -d "{\"body\": \"Here is a link to the built storybook: https://densityco.github.io/ui/$CIRCLE_BRANCH\"}" \
+                -d "{\"body\": \"Storybook preview: https://ui-preview.density.rodeo/$CIRCLE_BRANCH\"}" \
                 -H "Authorization: Bearer $GITHUB_MACHINE_USER_TOKEN" \
                 https://api.github.com/repos/densityco/ui/issues/$num/comments
 

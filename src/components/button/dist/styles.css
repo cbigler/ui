@@ -8,12 +8,17 @@
   outline: none;
   border-width: 0px;
   border-radius: 4px;
+  font-family: "Sailec", "Helvetica", "Arial", sans-serif;
   font-size: 14px;
   font-weight: bold;
   text-align: center;
   cursor: pointer;
   user-select: none;
-  transition: all 100ms ease-in-out; }
+  transition: all 100ms ease-in-out;
+  /* Add some padding to the top of the button to adust the vertical text position to fix the salec
+   * baseline problem
+   */
+  padding-top: 5px; }
   .button:hover {
     opacity: 0.9; }
   .button:active {
@@ -36,12 +41,17 @@
   outline: none;
   border-width: 0px;
   border-radius: 4px;
+  font-family: "Sailec", "Helvetica", "Arial", sans-serif;
   font-size: 10px;
   font-weight: bold;
   text-align: center;
   cursor: pointer;
   user-select: none;
-  transition: all 100ms ease-in-out; }
+  transition: all 100ms ease-in-out;
+  /* Add some padding to the top of the button to adust the vertical text position to fix the salec
+   * baseline problem
+   */
+  padding-top: 5px; }
   .button-small:hover {
     opacity: 0.9; }
   .button-small:active {
@@ -62,12 +72,17 @@
   outline: none;
   border-width: 0px;
   border-radius: 4px;
+  font-family: "Sailec", "Helvetica", "Arial", sans-serif;
   font-size: 18px;
   font-weight: bold;
   text-align: center;
   cursor: pointer;
   user-select: none;
-  transition: all 100ms ease-in-out; }
+  transition: all 100ms ease-in-out;
+  /* Add some padding to the top of the button to adust the vertical text position to fix the salec
+   * baseline problem
+   */
+  padding-top: 5px; }
   .button-large:hover {
     opacity: 0.9; }
   .button-large:active {
