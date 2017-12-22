@@ -48,17 +48,13 @@ jobs:
             npm publish .
       - run:
           name: "Build preview"
-          command: |
-            npm run build-storybook
-
-            # Bug in react storybook that adds undefined to the page?
-            sed -i bak 's/undefined//' storybook-static/index.html && rm storybook-static/index.html.bak
+          command: npm run build-storybook
       - run:
           name: "Push preview to the cloud"
           command: |
             sudo apt-get update
-            sudi apt-get install -y awscli
-            aws s3 sync build/ s3://ui-preview.density.rodeo/$CIRCLE_BRANCH --region us-east-1
+            sudo apt-get install -y awscli
+            aws s3 sync storybook-static/ s3://ui-preview.density.rodeo/$CIRCLE_BRANCH --region us-east-1
       - run:
           name: "Post preview link to any pull requests commit is part of"
           command: |
