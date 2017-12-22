@@ -36,9 +36,9 @@ jobs:
               echo "****************"
               echo "* Publishing $component"
               echo "****************"
-              set -x
+              set +e
               make publish COMPONENT=$component
-              set +x
+              set -e
               echo
             done
 
