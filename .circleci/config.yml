@@ -33,6 +33,11 @@ jobs:
             fi
 
             for component in $(find components/ -maxdepth 1 -mindepth 1 -type d -printf "%f\n"); do
+              # This isn't a component, but a template for `./make-component`
+              if [ "$component" == "template" -o "$component" == "dist" ]; then
+                continue
+              fi
+
               echo "****************"
               echo "* Publishing $component"
               echo "****************"
@@ -45,7 +50,9 @@ jobs:
             echo "****************"
             echo "* Publishing main package"
             echo "****************"
+            set +e
             npm publish .
+            set -e
       - run:
           name: "Build preview"
           command: npm run build-storybook
