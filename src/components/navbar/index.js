@@ -69,6 +69,7 @@ export function NavbarItem({
   href,
   children,
   locked,
+  lockedReason,
   onClick,
 }) {
   return <li
@@ -79,6 +80,10 @@ export function NavbarItem({
     onClick={onClick}
   >
     {locked ? <span>{children}</span> : <a href={href}>{children}</a>}
+    {lockedReason ? <div className="navbar-item-tooltip">
+      <div className="navbar-item-tooltip-pointer" />
+      {lockedReason}
+    </div> : null}
   </li>;
 }
 

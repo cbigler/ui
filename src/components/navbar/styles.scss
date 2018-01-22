@@ -2,6 +2,7 @@
 @import "../../variables/colors.json";
 @import "../../variables/fonts.json";
 @import "../../variables/grid.json";
+@import "../../variables/spacing.json";
 
 // Local variables to the component
 @import "variables.json";
@@ -92,7 +93,7 @@
 
 @mixin make-navbar-item-locked {
   & > span {
-    cursor: not-allowed;
+    cursor: default;
     user-select: none;
     margin-right: 0px;
     color: $gray;
@@ -104,6 +105,49 @@
     vertical-align: middle;
     content: '\e941';
     color: $brand-primary;
+  }
+
+  // If the user hovers over the navbar item, show the tooltip.
+  .navbar-item-tooltip { display: none; }
+  &:hover .navbar-item-tooltip { display: block; }
+}
+@mixin make-navbar-item-tooltip($border-width: 1px, $caret-size: 6px) {
+  position: absolute;
+
+  max-width: 225px;
+  min-height: 30px;
+  font-size: $font-size-base;
+  padding: 20px;
+
+  background-color: #fff;
+  border: $border-width solid $brand-primary;
+  border-radius: $border-radius-base;
+
+  // Position the navbar locked reason tooltip to be in line with the text of the navbar item above
+  // it.
+  margin-left: 16px;
+
+  // Ensure that the tooltip cannot be interacted with.
+  user-select: none;
+  cursor: default;
+
+  .navbar-item-tooltip-pointer {
+    display: block;
+    position: absolute;
+
+    // Calculate the amount to offset the caret vertically so that only the top half of the square
+    // will peek up over the top of the tooltip.
+    top: -1 * ($caret-size / 1.414); // sqrt(2) = 1.414
+    left: 30px;
+
+    transform: rotate(45deg); // <- sqrt(2) because this is a 45-45-90 right triangle
+
+    width: $caret-size;
+    height: $caret-size;
+    background-color: #fff;
+
+    border-top: $border-width solid $brand-primary;
+    border-left: $border-width solid $brand-primary;
   }
 }
 
@@ -212,6 +256,7 @@
   );
 }
 .navbar-item-locked { @include make-navbar-item-locked; }
+.navbar-item-tooltip { @include make-navbar-item-tooltip; }
 
 // Create navbar mobile sidebar that opens when the user clicks an icon in the mobile navbar.
 .navbar-sidebar-button { @include make-navbar-sidebar-button; }
