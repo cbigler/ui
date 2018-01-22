@@ -97,6 +97,7 @@ storiesOf('Navbar', module)
           activePage='active-page'
           pageName={['locked-page']}
           locked={true}
+          lockedReason="Insights will be unlocked once your units are configured."
           href="https://example.com"
         >Locked navbar item</NavbarItem>
       </Navbar>

@@ -13,6 +13,9 @@ NODE_SASS = ./node_modules/.bin/node-sass
 .PHONY: build
 build: $(foreach i,$(COMPONENT_SOURCE_FILES),$(COMPONENT_PATH_DIST)/$(notdir $i)) $(COMPONENT_PATH_DIST)/styles.css dist/styles.css
 
+bump:
+	cd $(COMPONENT_PATH) && yarn version
+
 .PHONY: publish
 publish: clean build
 	cd $(COMPONENT_PATH) && npm publish --access public

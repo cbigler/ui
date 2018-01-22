@@ -2,7 +2,7 @@
 
 Density UI is a collection of Density-branded controls and styles for use in web projects.
 
-A built storybook can be found [here](https://densityco.github.com/ui/master) with usage examples
+A built storybook can be found [here](https://ui-preview.density.rodeo/master) with usage examples
 for each react component.
 
 ## How it works
