@@ -5,16 +5,25 @@ import { action } from '@storybook/addon-actions';
 import './styles.scss';
 import Navbar, { NavbarItem, NavbarMobileItem } from './index';
 
+import { grayLight } from '../../../variables/colors.json';
+
 
 storiesOf('Navbar', module)
   .addWithInfo('Navigation Bar', () => (
     <div className="full-width">
       <Navbar />
-    </div>
-  ))
-  .addWithInfo('With label', () => (
-    <div className="full-width">
-      <Navbar subtitle="Dashboard" />
+
+      <div style={{
+        background: grayLight,
+        marginLeft: -10,
+        marginRight: -10,
+        boxSizing: 'border-box',
+        maxWidth: 1000,
+        height: 100,
+        margin: '20px auto',
+        paddingLeft: 10,
+        paddingRight: 10,
+      }} />
     </div>
   ))
   .addWithInfo('With items', () => (
@@ -24,21 +33,80 @@ storiesOf('Navbar', module)
           activePage='active-page'
           pageName={['inactive-page']}
           href="https://example.com"
-        >Inactive navbar item</NavbarItem>
+        >Onboarding</NavbarItem>
         <NavbarItem
           activePage='active-page'
           pageName={['active-page']}
           href="https://example.com"
-        >Active navbar item</NavbarItem>
+        >Live</NavbarItem>
         <NavbarItem
           activePage='active-page'
           pageName={['locked-page']}
           locked={true}
           href="https://example.com"
-        >Locked navbar item</NavbarItem>
+        >Insights</NavbarItem>
       </Navbar>
+
+      <div style={{
+        background: grayLight,
+        marginLeft: -10,
+        marginRight: -10,
+        boxSizing: 'border-box',
+        maxWidth: 1000,
+        height: 100,
+        margin: '20px auto',
+        paddingLeft: 10,
+        paddingRight: 10,
+      }} />
     </div>
   ))
+  .addWithInfo('Interactive navbar', () => {
+    class AdjustingNavbar extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          activePage: 'onboarding',
+        };
+      }
+      render() {
+        return <div className="full-width">
+          <Navbar>
+            <NavbarItem
+              activePage={this.state.activePage}
+              pageName={['onboarding']}
+              href="#"
+              onClick={() => this.setState({activePage: 'onboarding'})}
+            >Onboarding</NavbarItem>
+            <NavbarItem
+              activePage={this.state.activePage}
+              pageName={['live']}
+              href="#"
+              onClick={() => this.setState({activePage: 'live'})}
+            >Live</NavbarItem>
+            <NavbarItem
+              activePage='active-page'
+              pageName={['insights']}
+              locked={true}
+              href="https://example.com"
+            >Insights</NavbarItem>
+          </Navbar>
+
+          <div style={{
+            background: grayLight,
+            marginLeft: -10,
+            marginRight: -10,
+            boxSizing: 'border-box',
+            maxWidth: 1000,
+            height: 100,
+            margin: '20px auto',
+            paddingLeft: 10,
+            paddingRight: 10,
+          }} />
+        </div>
+      }
+    }
+    return <AdjustingNavbar />;
+  })
   .addWithInfo('With items and mobile sidebar', () => (
     <div className="full-width">
       <Navbar mobileSidebar={(onCloseSidebar, onOpenSidebar) => [
@@ -100,6 +168,17 @@ storiesOf('Navbar', module)
           href="https://example.com"
         >Locked navbar item</NavbarItem>
       </Navbar>
+      <div style={{
+        background: grayLight,
+        marginLeft: -10,
+        marginRight: -10,
+        boxSizing: 'border-box',
+        maxWidth: 1000,
+        height: 100,
+        margin: '20px auto',
+        paddingLeft: 10,
+        paddingRight: 10,
+      }} />
     </div>
   ))
   .addWithInfo('With full width', () => (

@@ -63,8 +63,8 @@
 // Create a normal navbar item
 @mixin make-navbar-item($color: $gray-cinder, $underline-color: transparent, $font-weight: normal) {
   list-style-type: none;
-  border-bottom: 2px solid $underline-color;
-  height: $navbar-height - 2px;
+  border-bottom: 3px solid $underline-color;
+  height: $navbar-height - 3px;
 
   &:first-child {
     margin-left: 20px;
@@ -79,8 +79,18 @@
     font-size: $font-size-base;
     font-weight: $font-weight;
 
-    padding: 8px 0px;
-    margin: 0px 14px;
+    // Fun hack: https://stackoverflow.com/a/27850452/4115328
+    // Adjust the letter spacing of such that the bold font is the same width as the non-bold one.
+    // This crazy formula is completely sailec specific.
+    @if $font-weight == bold {
+      letter-spacing: -1 * ($font-size-base / 100);
+    }
+
+    text-align: center;
+
+    padding: 0px 12px;
+    margin: 0px 2px;
+    display: inline-block;
   }
 
   // Don't show navbar items on small screens.
