@@ -44,12 +44,10 @@
 
 @keyframes card-loading-indeterminate-animation {
   0% {
-    position: relative;
-    left: -100%;
+    transform: translate(-100%,0px);
   }
   100% {
-    position: relative;
-    left: 100%;
+    transform: translate(100%,0px);
   }
 }
 @mixin make-card-loading($color: $brand-primary, $percent: 100%, $height: 2px, $indeterminant: false) {
@@ -62,7 +60,9 @@
     // Since the state is indeterminate, the bar has a fixed width.
     width: 100%;
     overflow: hidden;
-    animation: card-loading-indeterminate-animation 1s infinite;
+    animation-name: card-loading-indeterminate-animation;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
   } @else {
     // As the bar grows, get longer.
     transition: all 250ms linear;
