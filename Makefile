@@ -136,7 +136,7 @@ $1-patch: $1-version-patch
 # ie, components/card/index.js => components/card/dist/index.js
 .SECONDEXPANSION:
 $$($(1)_COMPONENT_PATH_DIST)/%.js: $$($(1)_COMPONENT_PATH_DIST)
-	$(BABEL) $$($(1)_COMPONENT_PATH)/$(@F) \
+	$(BABEL) $$($(1)_COMPONENT_PATH)/$$(@F) \
 		--ignore=node_modules,$$($(1)_COMPONENT_PATH_DIST) \
 		--presets=babel-preset-es2015,babel-preset-react \
 		--plugins=babel-plugin-transform-object-rest-spread \
