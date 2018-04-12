@@ -120,6 +120,9 @@ jobs:
       - restore_cache:
           key: node_modules-{{checksum "./package.json"}}
       - run:
+        name: "Add npm token to npmrc"
+        command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
+      - run:
           name: "Publish to npm registry"
           command: |
             for component in $(make components-list); do
