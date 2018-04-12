@@ -3,3 +3,4 @@ node_modules/
 npm-debug.log
 components/*/dist
 src/components/*/dist
+.DS_Store
