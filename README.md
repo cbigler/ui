@@ -19,11 +19,6 @@ Each component has a number of different files:
   flags) that would be handy to be able to access from both javascript and scss. By defining our
   variables in a generic data format it's readable from any system.
 
-## Publishing a new component version
-```
-make publish COMPONENT=navbar
-```
-
 ## Styles
 
 Styles are written in Sass. Each component has a mixin that implements the construction of the
@@ -84,13 +79,7 @@ rendering](https://facebook.github.io/react/docs/react-dom-server.html). It's im
 one source of truth, and there's a likelyhood especially after a while that either the spec or the
 react component will be forgotten when an update happens, causing inconsistencies.
 
-## "Marionetting" server-side rendered components
-If a component requires scripting to make itself work, seriously consider writing code in the
-component to provide interactivity to those who render ui components serverside. Most likely (since
-ui components should be kept simple) it should be pretty basic.
-
 # Writing a UI component
-
 In general, try to follow these guidelines:
 
 - Use stateless components. If that's going to be difficult for a particular component, then
@@ -110,7 +99,6 @@ In general, try to follow these guidelines:
 
 
 # How the build script works
-
 Each component is a seperate package.
 
 ## Building javascript
@@ -137,7 +125,9 @@ So this:
 
 ```scss
 @import "variables.json";
-@mixin make-foo {}
+@mixin make-foo($color: wheat) {
+  color: $color;
+}
 .foo { @include make-foo; }
 ```
 
