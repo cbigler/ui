@@ -169,8 +169,6 @@ variables are to be separately defined / imported, and each component uses what 
 ## 1. Install Density UI:
 
 ```sh
-yarn add @density/ui@~4.0.0
-# or:
 npm i -S @density/ui@~4.0.0
 ```
 
@@ -197,8 +195,6 @@ This is more difficult, but still not too bad:
    from both stylesheets and javascript)
 
 ```scss
-yarn add @density/node-sass-json-importer
-# or:
 npm i -S @density/node-sass-json-importer
 ```
 
@@ -210,8 +206,6 @@ webpack, command line, or based on something else.
 
 ```sh
 mkdir -p styles/ && touch styles/density-ui.scss
-yarn add normalize.css
-# or:
 npm i -S normalize.css
 ```
 
