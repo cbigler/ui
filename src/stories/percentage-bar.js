@@ -1,0 +1,1 @@
+../components/percentage-bar/story.js
