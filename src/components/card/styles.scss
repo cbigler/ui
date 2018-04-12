@@ -25,6 +25,10 @@
   font-weight: $font-weight;
   padding: $padding-vertical $padding-horizontal;
   padding-bottom: 0px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 @mixin make-card-body(
