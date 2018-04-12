@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Card, {CardBody, CardHeader, CardLoading} from './index';
+import Card, {CardBody, CardHeader, CardLoading, CardWell, CardWellHighlight} from './index';
 import Button from '../button/index';
 import IndicatorDot from '../indicator-dot';
 
@@ -26,6 +26,139 @@ storiesOf('Card', module)
         <Button>No</Button>
       </CardBody>
     </Card>
+  ))
+  .addWithInfo('Card Well', () => (
+    <div>
+      <Card style={{width: 300}}>
+        <CardHeader>Confirmation</CardHeader>
+        <CardWell>
+          The distance from the
+          earth to the moon is <CardWellHighlight>384,400 km</CardWellHighlight>.
+        </CardWell>
+        <CardBody>
+          <p style={{margin: 0}}>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry and this is just here to make you believe in aliens.
+          </p>
+          <br />
+          <Button>Yes</Button>
+          <br />
+          <Button>No</Button>
+        </CardBody>
+      </Card>
+      <br/>
+      <Card style={{width: 500}}>
+        <CardHeader>Confirmation</CardHeader>
+        <CardWell>
+          The distance from the
+          earth to the moon is <CardWellHighlight>384,400 km</CardWellHighlight>.
+        </CardWell>
+        <CardBody>
+          <p style={{margin: 0}}>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry and this is just here to make you believe in aliens.
+          </p>
+          <br />
+          <Button>Yes</Button>
+          <br />
+          <Button>No</Button>
+        </CardBody>
+      </Card>
+      <br/>
+      <Card style={{width: 700}}>
+        <CardHeader>Confirmation</CardHeader>
+        <CardWell>
+          The distance from the
+          earth to the moon is <CardWellHighlight>384,400 km</CardWellHighlight>.
+        </CardWell>
+        <CardBody>
+          <p style={{margin: 0}}>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry and this is just here to make you believe in aliens.
+          </p>
+          <br />
+          <Button>Yes</Button>
+          <br />
+          <Button>No</Button>
+        </CardBody>
+      </Card>
+    </div>
+  ))
+  .addWithInfo('Card Well (no header)', () => (
+    <div>
+      <Card style={{width: 300}}>
+        <CardWell>
+          The distance from the
+          earth to the moon is <CardWellHighlight>384,400 km</CardWellHighlight>.
+        </CardWell>
+        <CardBody>
+          <p style={{margin: 0}}>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry and this is just here to make you believe in aliens.
+          </p>
+          <br />
+          <Button>Yes</Button>
+          <br />
+          <Button>No</Button>
+        </CardBody>
+      </Card>
+      <br/>
+      <Card style={{width: 500}}>
+        <CardWell>
+          The distance from the
+          earth to the moon is <CardWellHighlight>384,400 km</CardWellHighlight>.
+        </CardWell>
+        <CardBody>
+          <p style={{margin: 0}}>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry and this is just here to make you believe in aliens.
+          </p>
+          <br />
+          <Button>Yes</Button>
+          <br />
+          <Button>No</Button>
+        </CardBody>
+      </Card>
+      <br/>
+      <Card style={{width: 700}}>
+        <CardWell>
+          The distance from the
+          earth to the moon is <CardWellHighlight>384,400 km</CardWellHighlight>.
+        </CardWell>
+        <CardBody>
+          <p style={{margin: 0}}>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry and this is just here to make you believe in aliens.
+          </p>
+          <br />
+          <Button>Yes</Button>
+          <br />
+          <Button>No</Button>
+        </CardBody>
+      </Card>
+    </div>
+  ))
+  .addWithInfo('Responsive Card Well', () => (
+    <div style={{resize: 'both', overflow: 'auto'}}>
+      <span style={{fontFamily: 'Sailec'}}>Resize the card horizontally to see its responsive behavior!</span>
+      <br/>
+      <Card style={{resize: 'horizontal', overflow: 'auto'}}>
+        <CardWell>
+          On average, peak utilization of <CardWellHighlight>18%</CardWellHighlight> happens
+          around <CardWellHighlight>5:15p</CardWellHighlight> during <CardWellHighlight>open hours</CardWellHighlight>
+        </CardWell>
+        <CardBody>
+          <p style={{margin: 0}}>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry and this is just here to make you believe in aliens.
+          </p>
+          <br />
+          <Button>Yes</Button>
+          <br />
+          <Button>No</Button>
+        </CardBody>
+      </Card>
+    </div>
   ))
   .addWithInfo('Card Modal with long header', () => (
     <Card type="modal">
