@@ -1,3 +1,4 @@
+SHELL := /bin/bash
 BABEL = ./node_modules/.bin/babel
 NODE_SASS = ./node_modules/.bin/node-sass
 
