@@ -1,65 +1,6 @@
 version: 2
 
 jobs:
-  build:
-    docker:
-      - image: circleci/node:6.11
-
-    steps:
-      - checkout
-      - run:
-          name: "Install dependencies"
-          command: |
-            npm i
-            for component in $(make components-list); do
-              pushd components/$component && npm i && popd
-            done
-      - run:
-          name: "Build and publish the main package and each subcomponent to npm"
-          command: |
-            if [ "$CIRCLE_BRANCH" != "trunk" ]; then
-              echo "* Skipping, branch is not the main repository branch."
-              exit 0
-            fi
-
-            for component in $(make components-list); do
-              echo "****************"
-              echo "* Publishing $component"
-              echo "****************"
-              set +e
-              make $component-publish
-              set -e
-              echo
-            done
-
-            echo "****************"
-            echo "* Publishing main package"
-            echo "****************"
-            set +e
-            make publish
-            set -e
-      - run:
-          name: "Build preview"
-          command: npm run build-storybook
-      - run:
-          name: "Push preview to the cloud"
-          command: |
-            echo "* Installing amazon's cli..."
-            sudo apt-get update
-            sudo apt-get install -y python-pip python-dev
-            sudo pip install -U 'awscli>=1.15'
-
-            echo "* Copying to S3..."
-            aws s3 sync storybook-static/ s3://ui-preview.density.rodeo/${CIRCLE_SHA1} --region us-east-1
-      - run:
-          name: "Post preview link to any pull requests commit is part of"
-          command: |
-            echo "* Posting status to commit ${CIRCLE_SHA1}"
-            curl -X POST \
-            -d "{\"state\":\"success\", \"context\": \"ci-preview\", \"target_url\": \"https://ui-preview.density.rodeo/$CIRCLE_BRANCH\"}" \
-            -H "Authorization: Bearer $GITHUB_MACHINE_USER_TOKEN" \
-            https://api.github.com/repos/densityco/dashboard/statuses/${CIRCLE_SHA1}
-
   preview:
     docker:
       - image: circleci/node:8.11
@@ -92,24 +33,26 @@ jobs:
             - "./node_modules"
 
       - run:
-          name: "Build and publish the main package and each subcomponent to npm"
+          name: "Build preview"
+          command: npm run build-storybook
+      - run:
+          name: "Push preview to the cloud"
           command: |
-            for component in $(make components-list); do
-              echo "****************"
-              echo "* Publishing $component"
-              echo "****************"
-              set +e
-              make $component-publish
-              set -e
-              echo
-            done
+            echo "* Installing amazon's cli..."
+            sudo apt-get update
+            sudo apt-get install -y python-pip python-dev
+            sudo pip install -U 'awscli>=1.15'
 
-            echo "****************"
-            echo "* Publishing main package"
-            echo "****************"
-            set +e
-            make publish
-            set -e
+            echo "* Copying to S3..."
+            aws s3 sync storybook-static/ s3://ui-preview.density.rodeo/${CIRCLE_SHA1} --region us-east-1
+      - run:
+          name: "Post preview link to any pull requests commit is part of"
+          command: |
+            echo "* Posting status to commit ${CIRCLE_SHA1}"
+            curl -X POST \
+            -d "{\"state\":\"success\", \"context\": \"ci-preview\", \"target_url\": \"https://ui-preview.density.rodeo/$CIRCLE_BRANCH\"}" \
+            -H "Authorization: Bearer $GITHUB_MACHINE_USER_TOKEN" \
+            https://api.github.com/repos/densityco/dashboard/statuses/${CIRCLE_SHA1}
 
   publish:
     docker:
