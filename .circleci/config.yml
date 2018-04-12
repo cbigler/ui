@@ -6,23 +6,13 @@ jobs:
       - image: circleci/node:6.11
 
     steps:
-      - run:
-          name: "Add npm token to npmrc"
-          command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
       - checkout
       - run:
           name: "Install dependencies"
           command: |
             npm i
-            for component in $(find components/ -maxdepth 1 -mindepth 1 -type d -printf "%f\n"); do
-              # This isn't a component, but a template for `./make-component`
-              if [ "$component" == "template" -o "$component" == "dist" ]; then
-                continue
-              fi
-
-              cd components/$component
-              npm i
-              cd ../..
+            for component in $(make components-list); do
+              pushd components/$component && npm i && popd
             done
       - run:
           name: "Build and publish the main package and each subcomponent to npm"
@@ -32,17 +22,12 @@ jobs:
               exit 0
             fi
 
-            for component in $(find components/ -maxdepth 1 -mindepth 1 -type d -printf "%f\n"); do
-              # This isn't a component, but a template for `./make-component`
-              if [ "$component" == "template" -o "$component" == "dist" ]; then
-                continue
-              fi
-
+            for component in $(make components-list); do
               echo "****************"
               echo "* Publishing $component"
               echo "****************"
               set +e
-              make publish COMPONENT=$component
+              make $component-publish
               set -e
               echo
             done
@@ -51,7 +36,7 @@ jobs:
             echo "* Publishing main package"
             echo "****************"
             set +e
-            npm publish .
+            make publish
             set -e
       - run:
           name: "Build preview"
@@ -59,9 +44,13 @@ jobs:
       - run:
           name: "Push preview to the cloud"
           command: |
+            echo "* Installing amazon's cli..."
             sudo apt-get update
-            sudo apt-get install -y awscli
-            aws s3 sync storybook-static/ s3://ui-preview.density.rodeo/$CIRCLE_BRANCH --region us-east-1
+            sudo apt-get install -y python-pip python-dev
+            sudo pip install -U 'awscli>=1.15'
+
+            echo "* Copying to S3..."
+            aws s3 sync storybook-static/ s3://ui-preview.density.rodeo/${CIRCLE_SHA1} --region us-east-1
       - run:
           name: "Post preview link to any pull requests commit is part of"
           command: |
@@ -70,3 +59,97 @@ jobs:
             -d "{\"state\":\"success\", \"context\": \"ci-preview\", \"target_url\": \"https://ui-preview.density.rodeo/$CIRCLE_BRANCH\"}" \
             -H "Authorization: Bearer $GITHUB_MACHINE_USER_TOKEN" \
             https://api.github.com/repos/densityco/dashboard/statuses/${CIRCLE_SHA1}
+
+  preview:
+    docker:
+      - image: circleci/node:8.11
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: "Print out versions"
+          command: |
+            echo "node -v = $(node -v)"
+            echo "npm -v = $(npm -v)"
+            echo "yarn --version = $(yarn --version)"
+
+      - restore_cache:
+          key: node_modules-{{checksum "./package.json"}}
+      - run:
+          name: "Install dependencies"
+          command: |
+            echo "# Top level package"
+            npm i
+            echo
+            for component in $(make components-list); do
+              echo "# ${component}"
+              pushd components/${component} && npm i && popd
+              echo
+            done
+      - save_cache:
+          key: node_modules-{{checksum "./package.json"}}
+          paths:
+            - "./node_modules"
+
+      - run:
+          name: "Build and publish the main package and each subcomponent to npm"
+          command: |
+            for component in $(make components-list); do
+              echo "****************"
+              echo "* Publishing $component"
+              echo "****************"
+              set +e
+              make $component-publish
+              set -e
+              echo
+            done
+
+            echo "****************"
+            echo "* Publishing main package"
+            echo "****************"
+            set +e
+            make publish
+            set -e
+
+  publish:
+    docker:
+      - image: circleci/node:8.11
+    resource_class: small
+    steps:
+      - checkout
+      - restore_cache:
+          key: node_modules-{{checksum "./package.json"}}
+      - run:
+          name: "Publish to npm registry"
+          command: |
+            for component in $(make components-list); do
+              echo "****************"
+              echo "* Publishing $component"
+              echo "****************"
+              set +e
+              make $component-publish
+              set -e
+              echo
+            done
+
+            echo "****************"
+            echo "* Publishing main package"
+            echo "****************"
+            set +e
+            make publish
+            set -e
+
+workflows:
+  version: 2
+  npm-deployment:
+    jobs:
+      # For all pushes, build/deploy to `https://ui-preview.density.rodeo/SHA`
+      - preview
+
+      # Trunk is published to npm
+      - publish:
+          requires:
+            - preview
+          filters:
+            branches:
+              only: trunk
