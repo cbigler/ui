@@ -114,6 +114,9 @@
     vertical-align: middle;
     content: '\e941';
     color: $brand-primary;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
@@ -147,6 +150,9 @@
   &:before {
     content: '\e924';
 
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
     font-family: "Densicons";
     font-size: $font-size-base;
     &:hover { opacity: 0.8; }
@@ -179,6 +185,8 @@
   font-family: "Densicons";
   color: $brand-primary;
   cursor: pointer;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 @mixin make-navbar-mobile-item($color: $gray-cinder) {
@@ -199,11 +207,14 @@
   color: $gray;
 
   &:after {
+    color: $brand-primary;
     margin-left: 10px;
+
     font-family: 'Densicons';
     vertical-align: middle;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     content: '\e941';
-    color: $brand-primary;
   }
 }
 
