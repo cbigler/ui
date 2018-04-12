@@ -1,4 +1,5 @@
 SHELL := /bin/bash
+
 BABEL = ./node_modules/.bin/babel
 NODE_SASS = ./node_modules/.bin/node-sass
 
@@ -37,6 +38,7 @@ component:
 .PHONY: clean
 clean:
 	rm -rf dist/
+	rm -rf components/*/dist/
 
 .PHONY: build
 build: dist/styles.css
@@ -111,6 +113,8 @@ $1-publish: $1-clean $1-build
 $$($(1)_COMPONENT_PATH_DIST):
 	mkdir -p $$@
 
+# In the below case, pushd and popd are build used to ensure that the user returns back to the
+# directory that they started in.
 .SECONDEXPANSION:
 $1-version:
 	@pushd $$($(1)_COMPONENT_PATH) > /dev/null && \
