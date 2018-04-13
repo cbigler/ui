@@ -2,6 +2,8 @@
 
 Density UI is a collection of Density-branded controls and styles for use in web projects.
 
+<img src="graphic.png" />
+
 ## How it works
 
 Each component has a number of different files:
