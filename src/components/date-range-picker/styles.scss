@@ -6,6 +6,11 @@
 // Local variables to the component
 @import "variables.json";
 
+// equates rgba($brand-primary, 30%).
+// needed a solid color due to using for borders + background
+// (opacity was stacking)
+$brand-primary-light: #B2D6FF;
+
 // Styles from `react-dates`.
 .CalendarDay {
   border: 1px solid #e4e7e7;
@@ -59,9 +64,10 @@
     background: #fff; }
 
 .CalendarDay--selected-span {
-  background: $brand-primary;
-  border: 1px double $brand-primary;
+  background: $brand-primary-light;
+  border: 1px double $brand-primary-light;
   color: #fff; }
+
   .CalendarDay--selected-span.CalendarDay--hovered, .CalendarDay--selected-span:active {
     background: $brand-primary;
     border: 1px double $brand-primary; }
@@ -70,8 +76,8 @@
 
 .CalendarDay--hovered-span,
 .CalendarDay--after-hovered-start {
-  background: $brand-primary;
-  border: 1px double $brand-primary;
+  background: $brand-primary-light;
+  border: 1px double $brand-primary-light;
   color: #fff; }
   .CalendarDay--hovered-span:active,
   .CalendarDay--after-hovered-start:active {
@@ -729,9 +735,12 @@
   .DateRangePicker__picker { top: 54px; }
   .DateInput__display-text {
     color: $gray-cinder;
-    height: 23px;
+    height: 24px;
   }
-  .DateInput__display-text--focused { background-color: $gray-light; }
+  .DateInput__display-text--focused {
+    background-color: $brand-primary;
+    color: white;
+  }
   .DayPickerKeyboardShortcuts__show { display: none; }
 
   .DateInput--open-down.DateInput--with-caret::before { top: 45px; }
