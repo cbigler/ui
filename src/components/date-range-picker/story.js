@@ -11,7 +11,7 @@ storiesOf('DateRangePicker', module)
   .addWithInfo('Open, start date selected', () => (
     <DateRangePicker
       onChange={action('dates change')}
-      onFocusChange={action('focus')} 
+      onFocusChange={action('focus')}
       focusedInput={START_DATE_ACTIVE}
       startDate={moment.utc()}
       endDate={moment.utc().subtract(1, 'day')}
@@ -22,7 +22,7 @@ storiesOf('DateRangePicker', module)
       <DateRangePicker
         anchor={ANCHOR_RIGHT}
         onChange={action('dates change')}
-        onFocusChange={action('focus')} 
+        onFocusChange={action('focus')}
         focusedInput={START_DATE_ACTIVE}
         startDate={moment.utc()}
         endDate={moment.utc().subtract(1, 'day')}
@@ -47,6 +47,53 @@ storiesOf('DateRangePicker', module)
 
           focusedInput={this.state.focus}
           onFocusChange={focus => this.setState({focus})}
+        />;
+      }
+    }
+
+    return <Wrapper />;
+  })
+  .addWithInfo('Interactive with ', () => {
+    const commonRanges = [
+      {
+        name: "This week",
+        startDate: moment.utc().subtract(1, 'week'),
+        endDate: moment.utc()
+      },
+      {
+        name: "Last week",
+        startDate: moment.utc().subtract(1, 'week'),
+        endDate: moment.utc().subtract(2, 'week')
+      },
+      {
+        name: "This month",
+        startDate: moment.utc().subtract(1, 'month'),
+        endDate: moment.utc()
+      },
+      {
+        name: "Last month",
+        startDate: moment.utc().subtract(1, 'month'),
+        endDate: moment.utc().subtract(2, 'month')
+      }
+    ]
+
+    class Wrapper extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          focus: null,
+          startDate: moment.utc(),
+          endDate: moment.utc().add(1, 'day'),
+        };
+      }
+      render() {
+        return <DateRangePicker
+          startDate={this.state.startDate}
+          endDate={this.state.endDate}
+          onChange={e => this.setState({ startDate: e.startDate, endDate: e.endDate })}
+          focusedInput={this.state.focus}
+          onFocusChange={focus => this.setState({ focus }) }
+          commonRanges={commonRanges}
         />;
       }
     }
