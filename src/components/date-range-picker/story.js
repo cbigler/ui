@@ -62,8 +62,8 @@ storiesOf('DateRangePicker', module)
       },
       {
         name: "Last week",
-        startDate: moment.utc().subtract(1, 'week'),
-        endDate: moment.utc().subtract(2, 'week')
+        startDate: moment.utc().subtract(2, 'week'),
+        endDate: moment.utc().subtract(1, 'week')
       },
       {
         name: "This month",
@@ -72,8 +72,13 @@ storiesOf('DateRangePicker', module)
       },
       {
         name: "Last month",
-        startDate: moment.utc().subtract(1, 'month'),
-        endDate: moment.utc().subtract(2, 'month')
+        startDate: moment.utc().subtract(2, 'month'),
+        endDate: moment.utc().subtract(1, 'month')
+      },
+      {
+        name: "Next month",
+        startDate: moment.utc().add(1, 'month'),
+        endDate: moment.utc().add(2, 'month')
       }
     ]
 
@@ -94,6 +99,12 @@ storiesOf('DateRangePicker', module)
           focusedInput={this.state.focus}
           onFocusChange={focus => this.setState({ focus }) }
           commonRanges={commonRanges}
+          onSelectCommonRange={commonRange => {
+            this.setState({
+              startDate: commonRange.startDate,
+              endDate: commonRange.endDate
+            })
+          }}
         />;
       }
     }

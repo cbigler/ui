@@ -41,45 +41,20 @@ function CommonRangeList(props) {
 
 // exposed component that renders both the date range picker and
 // common range list, and binds them together
-export default class DateRangePicker extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      startDate: props.startDate,
-      endDate: props.endDate
-    };
-  }
+export default function DateRangePicker(props) {
+  const commonRangeList = Array.isArray(props.commonRanges) ? (
+    <CommonRangeList
+      onSelectCommonRange={props.onSelectCommonRange}
+      commonRanges={props.commonRanges}
+    />
+  ) : null
 
-  render() {
-    // conditionally render the common range list
-    // (if commonRanges is passed into the component)
-    const commonRangeList = Array.isArray(this.props.commonRanges) ? (
-      <CommonRangeList
-        onSelectCommonRange={ selectedCommonRange =>
-          this.setState({
-            startDate: selectedCommonRange.startDate,
-            endDate: selectedCommonRange.endDate
-          }
-        )}
-        commonRanges={this.props.commonRanges}
-      />
-    ) : null
+  const pickerProps = Object.assign({}, props);
+  delete pickerProps.commonRanges
+  delete pickerProps.onSelectCommonRange
 
-    // startDate and endDate should be moved from props (passed into component)
-    // to the state (manipulatable by sibling components)
-    // they will default to those passed into props
-    const pickerProps = Object.assign({}, this.props);
-    delete pickerProps.startDate
-    delete pickerProps.endDate
-    delete pickerProps.commonRanges
-
-    return <div className='date-range-wrapper'>
-      <ReactDateRangePicker
-        startDate={this.state.startDate}
-        endDate={this.state.endDate}
-        {...pickerProps}
-      />
-      {commonRangeList}
-    </div>;
-  }
+  return <div className='date-range-wrapper'>
+    <ReactDateRangePicker {...pickerProps} />
+    {commonRangeList}
+  </div>;
 }
