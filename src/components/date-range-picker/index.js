@@ -53,7 +53,7 @@ export default class DateRangePicker extends React.Component {
   render() {
     // conditionally render the common range list
     // (if commonRanges is passed into the component)
-    const commonRangeList = this.props.commonRanges instanceof Array ? (
+    const commonRangeList = Array.isArray(this.props.commonRanges) ? (
       <CommonRangeList
         onSelectCommonRange={ selectedCommonRange =>
           this.setState({
