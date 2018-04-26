@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-date-picker",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Date Picker component",
   "main": "dist/index.js",
   "style": "dist/styles.css",
@@ -12,7 +12,6 @@
   "license": "MIT",
   "dependencies": {
     "@density/react-dates": "^12.6.0",
-    "moment": "^2.18.1",
     "react-addons-shallow-compare": "^15.6.0"
   }
 }
