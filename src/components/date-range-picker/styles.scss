@@ -780,7 +780,6 @@ $brand-primary-light: #B2D6FF;
     border-radius: $border-radius-base;
     background-color: #fff;
     cursor: pointer;
-    font-family: Densicons;
     z-index: 4;
 
     // BR: the following is ugly and I hate it, but due to the funkiness of the
@@ -791,6 +790,7 @@ $brand-primary-light: #B2D6FF;
   }
 
   [class^="common-range-icon"] {
+    font-family: Densicons;
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
@@ -845,6 +845,9 @@ $brand-primary-light: #B2D6FF;
     flex-direction: column;
 
     li {
+      font-weight: 300;
+      font-family: $font-base;
+
       padding: 15px;
       flex: 1;
       cursor: pointer;
@@ -858,7 +861,9 @@ $brand-primary-light: #B2D6FF;
 
   .common-range-subtitle {
     color: $gray;
+    font-family: $font-base;
     font-size: $font-size-small;
+    font-weight: 300;
     margin-left: 8px;
   }
 
