@@ -1,6 +1,7 @@
 import * as React from 'react';
 import classnames from 'classnames';
 import { DateRangePicker as ReactDatesDateRangePicker } from '@density/react-dates';
+import Button from '@density/ui-button'
 
 export const ANCHOR_RIGHT = 'ANCHOR_RIGHT',
   ANCHOR_LEFT = 'ANCHOR_LEFT',
@@ -28,15 +29,46 @@ function ReactDateRangePicker(props) {
 }
 
 // selectable list of common ranges
-function CommonRangeList(props) {
-  return <ul className='common-range-list'>
-    {props.commonRanges.map((r, i) =>
-      <li
-        onClick={() => props.onSelectCommonRange(r)}
-        key={i}
-      >{r.name}</li>
-    )}
-  </ul>
+class CommonRangeList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { showList: false };
+  }
+
+  render() {
+    return <div className={classnames('common-range-list', {
+        'open': this.state.showList
+      })}>
+      <div
+        className={classnames('common-range-list-backdrop', {
+          'open': this.state.showList
+        })}
+        onClick={() =>
+          this.setState({ showList: !this.state.showList })
+        }/>
+      <div
+        className="common-range-list-toggle"
+        onClick={() =>
+          this.setState({ showList: !this.state.showList })
+        }>
+          <i className='common-range-icon' />
+          <i className={classnames('common-range-icon-caret', {
+            'flipped': this.state.showList
+          })} />
+        </div>
+      <ul className='common-range-list-items'>
+        {this.props.commonRanges.map((r, i) =>
+          <li
+            onClick={() => {
+              this.setState({showList: false});
+              this.props.onSelectCommonRange(r);
+            }}
+            key={i}
+          >{r.name}</li>
+        )}
+      </ul>
+    </div>
+  }
 }
 
 // exposed component that renders both the date range picker and
