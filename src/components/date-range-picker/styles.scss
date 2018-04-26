@@ -781,6 +781,7 @@ $brand-primary-light: #B2D6FF;
     background-color: #fff;
     cursor: pointer;
     font-family: Densicons;
+    z-index: 4;
 
     // BR: the following is ugly and I hate it, but due to the funkiness of the
     // adjacent date picker input
@@ -815,6 +816,8 @@ $brand-primary-light: #B2D6FF;
     transform: rotate(180deg);
     display: inline-block;
     color: $brand-primary;
+    position: relative;
+    top: -2px;
 
     &:before {
       content: "\e90b";
