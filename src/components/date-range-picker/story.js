@@ -189,5 +189,5 @@ storiesOf('DateRangePicker', module)
       }
     }
 
-    return <Wrapper style={{width: '200px'}} />;
+    return <Wrapper />;
   })
