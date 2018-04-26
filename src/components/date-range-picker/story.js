@@ -152,9 +152,42 @@ storiesOf('DateRangePicker', module)
               endDate: commonRange.endDate
             })
           }}
+          onOpenCommonRangeList={action('common range list opened')}
         />;
       }
     }
 
     return <Wrapper />;
+  })
+  .addWithInfo('Interactive with common date ranges and subtitles', () => {
+    class Wrapper extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          focus: null,
+          startDate: moment.utc(),
+          endDate: moment.utc().add(1, 'day'),
+        };
+      }
+      render() {
+        return <DateRangePicker
+          startDate={this.state.startDate}
+          endDate={this.state.endDate}
+          onChange={e => this.setState({ startDate: e.startDate, endDate: e.endDate })}
+          focusedInput={this.state.focus}
+          onFocusChange={focus => this.setState({ focus })}
+          commonRanges={commonRanges}
+          showCommonRangeSubtitles={true}
+          onSelectCommonRange={commonRange => {
+            this.setState({
+              startDate: commonRange.startDate,
+              endDate: commonRange.endDate
+            })
+          }}
+          onOpenCommonRangeList={action('common range list opened')}
+        />;
+      }
+    }
+
+    return <Wrapper style={{width: '200px'}} />;
   })

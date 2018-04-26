@@ -1,12 +1,12 @@
 import * as React from 'react';
 import classnames from 'classnames';
 import { DateRangePicker as ReactDatesDateRangePicker } from '@density/react-dates';
-import Button from '@density/ui-button'
 
 export const ANCHOR_RIGHT = 'ANCHOR_RIGHT',
   ANCHOR_LEFT = 'ANCHOR_LEFT',
   START_DATE_ACTIVE = 'startDate',
   END_DATE_ACTIVE = 'endDate';
+
 
 // internal date range picker (via ReactDates)
 function ReactDateRangePicker(props) {
@@ -48,9 +48,10 @@ class CommonRangeList extends React.Component {
         }/>
       <div
         className="common-range-list-toggle"
-        onClick={() =>
-          this.setState({ showList: !this.state.showList })
-        }>
+        onClick={() => {
+          this.props.onOpenCommonRangeList && this.props.onOpenCommonRangeList();
+          this.setState({ showList: !this.state.showList });
+        }}>
           <i className='common-range-icon' />
           <i className={classnames('common-range-icon-caret', {
             'flipped': this.state.showList
@@ -64,7 +65,14 @@ class CommonRangeList extends React.Component {
               this.props.onSelectCommonRange(r);
             }}
             key={i}
-          >{r.name}</li>
+          >
+            <span className='common-range-title'>{r.name}</span>
+            {this.props.showCommonRangeSubtitles ? (
+              <span className='common-range-subtitle'>
+                ({r.startDate.format('MM/DD')} - {r.endDate.format('MM/DD')})
+              </span>
+            ) : null}
+          </li>
         )}
       </ul>
     </div>
@@ -77,13 +85,17 @@ export default function DateRangePicker(props) {
   const commonRangeList = Array.isArray(props.commonRanges) ? (
     <CommonRangeList
       onSelectCommonRange={props.onSelectCommonRange}
+      onOpenCommonRangeList={props.onOpenCommonRangeList}
       commonRanges={props.commonRanges}
+      showCommonRangeSubtitles={props.showCommonRangeSubtitles}
     />
   ) : null
 
   const pickerProps = Object.assign({}, props);
   delete pickerProps.commonRanges
   delete pickerProps.onSelectCommonRange
+  delete pickerProps.showCommonRangeSubtitles
+  delete pickerProps.onOpenCommonRangeList
 
   return <div className='date-range-wrapper'>
     <ReactDateRangePicker {...pickerProps} />
