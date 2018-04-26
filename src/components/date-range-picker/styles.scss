@@ -6,6 +6,11 @@
 // Local variables to the component
 @import "variables.json";
 
+// equates rgba($brand-primary, 30%).
+// needed a solid color due to using for borders + background
+// (opacity was stacking)
+$brand-primary-light: #B2D6FF;
+
 // Styles from `react-dates`.
 .CalendarDay {
   border: 1px solid #e4e7e7;
@@ -59,9 +64,10 @@
     background: #fff; }
 
 .CalendarDay--selected-span {
-  background: $brand-primary;
-  border: 1px double $brand-primary;
+  background: $brand-primary-light;
+  border: 1px double $brand-primary-light;
   color: #fff; }
+
   .CalendarDay--selected-span.CalendarDay--hovered, .CalendarDay--selected-span:active {
     background: $brand-primary;
     border: 1px double $brand-primary; }
@@ -70,8 +76,8 @@
 
 .CalendarDay--hovered-span,
 .CalendarDay--after-hovered-start {
-  background: $brand-primary;
-  border: 1px double $brand-primary;
+  background: $brand-primary-light;
+  border: 1px double $brand-primary-light;
   color: #fff; }
   .CalendarDay--hovered-span:active,
   .CalendarDay--after-hovered-start:active {
@@ -729,9 +735,12 @@
   .DateRangePicker__picker { top: 54px; }
   .DateInput__display-text {
     color: $gray-cinder;
-    height: 23px;
+    height: 24px;
   }
-  .DateInput__display-text--focused { background-color: $gray-light; }
+  .DateInput__display-text--focused {
+    background-color: $brand-primary;
+    color: white;
+  }
   .DayPickerKeyboardShortcuts__show { display: none; }
 
   .DateInput--open-down.DateInput--with-caret::before { top: 45px; }
@@ -756,3 +765,126 @@
 .date-range-picker-anchor-left { @include make-date-range-picker-anchor-left; }
 .date-range-picker-anchor-right { @include make-date-range-picker-anchor-right; }
 .date-range-picker-focused { @include make-date-range-picker-focused; }
+
+// Common Range List
+@mixin make-common-range-list() {
+  display: inline-block;
+  padding-left: 15px;
+  position: relative;
+  font-family: $font-base;
+  font-size: $font-size-base;
+  user-select: none;
+
+  .common-range-list-toggle {
+    border: 1px solid $gray-light;
+    border-radius: $border-radius-base;
+    background-color: #fff;
+    cursor: pointer;
+    font-family: Densicons;
+    z-index: 4;
+
+    // BR: the following is ugly and I hate it, but due to the funkiness of the
+    // adjacent date picker input
+    height: 32px;
+    line-height: 34px;
+    padding: 4px 15px;
+  }
+
+  [class^="common-range-icon"] {
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .common-range-icon {
+    color: $gray-darker;
+
+    &:before {
+      content: "\e906";
+    }
+  }
+
+  .common-range-icon-caret {
+    font-size: 10px;
+    margin-left: 15px;
+    transform: rotate(180deg);
+    display: inline-block;
+    color: $brand-primary;
+    position: relative;
+    top: -2px;
+
+    &:before {
+      content: "\e90b";
+    }
+
+    &.flipped {
+      transform: rotate(0deg);
+    }
+  }
+
+  .common-range-list-items {
+    list-style: none;
+    display: none;
+    position: absolute;
+    right: 0;
+    text-align: left;
+    min-width: 160px;
+    padding-left: 0;
+    margin-top: 19px;
+    border-radius: $border-radius-base;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.07);
+    z-index: 4; // above the calendar _and_ backdrop
+    display: none;
+    flex-direction: column;
+
+    li {
+      padding: 15px;
+      flex: 1;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    li:hover {
+      background-color: $gray-lighter;
+    }
+  }
+
+  .common-range-subtitle {
+    color: $gray;
+    font-size: $font-size-small;
+    margin-left: 8px;
+  }
+
+  .common-range-list-backdrop {
+    z-index: 3; // above the calendar, below the range list
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: none;
+    display: none;
+  }
+
+  // toggled on styles
+  &.open .common-range-list-backdrop {
+    display: block;
+  }
+
+  &.open .common-range-list-toggle {
+    border: 1px solid $brand-primary;
+  }
+
+  &.open .common-range-list-items {
+    display: inline-flex;
+  }
+}
+
+.common-range-list { @include make-common-range-list; }
