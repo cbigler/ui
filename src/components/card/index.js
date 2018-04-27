@@ -15,9 +15,9 @@ export function CardBody({children, className}) {
 
 export function CardHeader({children, size, className, onClick}) {
   return <div
-    className={classnames('card-header', `card-header-${size || 'base'}`, className)}
-    onClick={onClick}
-  >{children}</div>;
+      className={classnames('card-header', `card-header-${size || 'base'}`, className)}
+      onClick={onClick}
+    ><div className="card-header-children-wrapper">{children} </div></div>;
 }
 
 export function CardWell({children, className}) {
@@ -30,9 +30,11 @@ export function CardWellHighlight({children, className}) {
 }
 
 export function CardLoading({indeterminate, percent, className}) {
-  return <div className={classnames(
-    'card-loading',
-    indeterminate ? `card-loading-indeterminate` : null,
-    className
-  )} style={{width: `${percent}%`}} />;
+  return <div className="card-loading-wrapper">
+    <div className={classnames(
+      'card-loading',
+      indeterminate ? `card-loading-indeterminate` : null,
+      className
+    )} style={{width: `${percent}%`}} />;
+  </div>
 }
