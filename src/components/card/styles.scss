@@ -25,18 +25,19 @@
   padding: $padding-vertical $padding-horizontal;
   padding-bottom: 0px;
 
-  // Add ellipsis if header is too wide.
-  .card-header-children-wrapper {
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
   // Add spacing between card headers and card wells
   & + .card-well {
     margin-top: 20px;
   }
+}
+
+@mixin make-card-title {
+  // Add ellipsis if title is too wide for its container
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 @mixin make-card-body(
@@ -115,6 +116,7 @@
 .card {
   @include make-card;
   .card-header { @include make-card-header($font-size: $font-size-3, $font-weight: $font-weight-3); }
+  .card-title { @include make-card-title; }
   .card-body { @include make-card-body; }
 }
 

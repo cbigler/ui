@@ -17,7 +17,7 @@ export function CardHeader({children, size, className, onClick}) {
   return <div
       className={classnames('card-header', `card-header-${size || 'base'}`, className)}
       onClick={onClick}
-    ><div className="card-header-children-wrapper">{children} </div></div>;
+    >{children}</div>;
 }
 
 export function CardWell({children, className}) {
