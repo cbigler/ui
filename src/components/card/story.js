@@ -162,7 +162,7 @@ storiesOf('Card', module)
   ))
   .addWithInfo('Card Modal with long header', () => (
     <Card type="modal">
-      <CardHeader>Set Capacity: a really really really long title</CardHeader>
+      <CardHeader><span>Set Capacity: a really really really long title</span></CardHeader>
       <CardBody>
         <p style={{margin: 0}}>This token is for a thing. Lorem Ipsum is simply dummy text of the printing and typesetting industry and this is just here to make you believe in aliens.</p>
         <br />
