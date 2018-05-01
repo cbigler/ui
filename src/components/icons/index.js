@@ -437,7 +437,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconCheveronDownCircle: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconChevronDownCircle: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconChevronDownCircle" transform="rotate(90 10 9)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -450,7 +450,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconCheveronDown: ({color, width, height}) => <svg width={width || "18"} height={height || "10"} viewBox="0 0 18 10" xmlns="http://www.w3.org/2000/svg">
+  IconChevronDown: ({color, width, height}) => <svg width={width || "18"} height={height || "10"} viewBox="0 0 18 10" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconChevronDown" transform="translate(-1 -5)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -461,7 +461,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconCheveronUpCircle: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconChevronUpCircle: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconChevronUpCircle" transform="rotate(-90 9 10)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -474,7 +474,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconCheveronUp: ({color, width, height}) => <svg width={width || "18"} height={height || "10"} viewBox="0 0 18 10" xmlns="http://www.w3.org/2000/svg">
+  IconChevronUp: ({color, width, height}) => <svg width={width || "18"} height={height || "10"} viewBox="0 0 18 10" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconChevronUp" transform="translate(-1 -5)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -484,7 +484,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconCheveronLeftCircle: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconChevronLeftCircle: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconChevronLeftCircle" transform="rotate(-180 9.5 9.5)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -497,7 +497,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconCheveronLeft: ({color, width, height}) => <svg width={width || "10"} height={height || "18"} viewBox="0 0 10 18" xmlns="http://www.w3.org/2000/svg">
+  IconChevronLeft: ({color, width, height}) => <svg width={width || "10"} height={height || "18"} viewBox="0 0 10 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconChevronLeft" transform="translate(-5 -1)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -508,7 +508,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconCheveronRightCircle: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconChevronRightCircle: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconChevronRightCircle" transform="translate(-1 -1)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -521,7 +521,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconCheveronRight: ({color, width, height}) => <svg width={width || "10"} height={height || "18"} viewBox="0 0 10 18" xmlns="http://www.w3.org/2000/svg">
+  IconChevronRight: ({color, width, height}) => <svg width={width || "10"} height={height || "18"} viewBox="0 0 10 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconChevronRight" transform="translate(-5 -1)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
