@@ -4,7 +4,6 @@ import { action } from '@storybook/addon-actions';
 
 import colorVariables from '@density/ui/variables/colors.json';
 
-import './styles.scss';
 import Icons from './';
 const { IconImageUpload } = Icons;
 
