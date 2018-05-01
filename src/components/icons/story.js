@@ -20,6 +20,9 @@ storiesOf('Icons', module)
   .addWithInfo('A sample icon in a random hex color', () => (
     <IconImageUpload color="#FFBA08" />
   ))
+  .addWithInfo(`A sample icon that's sized smaller`, () => (
+    <IconImageUpload width={10} height={10} />
+  ))
   .addWithInfo('All Icons', () => (
     <div style={{
       display: 'grid',

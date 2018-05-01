@@ -4,7 +4,7 @@ import colorVariables from '@density/ui/variables/colors.json';
 
 // A list of all density icons.
 const ICONS = {
-  IconImageUpload: ({color}) => <svg width='18' height='18' viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'>
+  IconImageUpload: ({color, width, height}) => <svg width={width || '18'} height={height || '18'} viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'>
     <g id='Page-1' fill='none' fillRule='evenodd'>
         <g id='IconImageUpload' transform='translate(-1 -1)'>
             <rect id='bounds' fillOpacity='0' fill={color} width='20' height='20'
@@ -20,7 +20,7 @@ const ICONS = {
         </g>
     </g>
   </svg>,
-  IconImage: ({color}) => <svg width='18' height='18' viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'>
+  IconImage: ({color, width, height}) => <svg width={width || '18'} height={height || '18'} viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'>
       <g id='Page-1' fill='none' fillRule='evenodd'>
           <g id='IconImage' transform='translate(-1 -1)'>
               <rect id='bounds' fillOpacity='0' fill={color} width='20' height='20'
@@ -34,7 +34,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconInfo: ({color}) => <svg width='18' height='18' viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'>
+  IconInfo: ({color, width, height}) => <svg width={width || '18'} height={height || '18'} viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'>
       <g id='Page-1' fill='none' fillRule='evenodd'>
           <g id='IconInfo' transform='translate(-1 -1)'>
               <rect id='bounds' fillOpacity='0' fill={color} width='20' height='20'
@@ -49,7 +49,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconStopWatch: ({color}) => <svg width='16' height='18' viewBox='0 0 16 18' xmlns='http://www.w3.org/2000/svg'>
+  IconStopWatch: ({color, width, height}) => <svg width={width || '16'} height={height || '18'} viewBox='0 0 16 18' xmlns='http://www.w3.org/2000/svg'>
       <g id='Page-1' fill='none' fillRule='evenodd'>
           <g id='IconStopWatch' transform='translate(-2 -1)' fill={color} fillRule='nonzero'>
               <path d='M16.25,11 C16.25,7.54821356 13.4517864,4.75 10,4.75 C6.54821356,4.75 3.75,7.54821356 3.75,11 C3.75,14.4517864 6.54821356,17.25 10,17.25 C13.4517864,17.25 16.25,14.4517864 16.25,11 Z M17.75,11 C17.75,15.2802136 14.2802136,18.75 10,18.75 C5.71978644,18.75 2.25,15.2802136 2.25,11 C2.25,6.71978644 5.71978644,3.25 10,3.25 C14.2802136,3.25 17.75,6.71978644 17.75,11 Z'
@@ -63,7 +63,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconGym: ({color}) => <svg width="18" height="12" viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
+  IconGym: ({color, width, height}) => <svg width={width || "18"} height={height || "12"} viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconGym" transform="translate(-1 -4)" fill={color} fillRule="nonzero">
               <path d="M5,15.75 C4.58578644,15.75 4.25,15.4142136 4.25,15 L4.25,5 C4.25,4.58578644 4.58578644,4.25 5,4.25 L8,4.25 C8.41421356,4.25 8.75,4.58578644 8.75,5 L8.75,15 C8.75,15.4142136 8.41421356,15.75 8,15.75 L5,15.75 Z M7.25,14.25 L7.25,5.75 L5.75,5.75 L5.75,14.25 L7.25,14.25 Z"
@@ -79,7 +79,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconPerson: ({color}) => <svg width="14" height="18" viewBox="0 0 14 18" xmlns="http://www.w3.org/2000/svg">
+  IconPerson: ({color, width, height}) => <svg width={width || "14"} height={height || "18"} viewBox="0 0 14 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconPerson" transform="translate(-3 -1)" fill={color} fillRule="nonzero">
               <path d="M12.6785667,6 C12.6785667,4.18162825 11.4514724,2.75 10.0000111,2.75 C8.54854979,2.75 7.32145556,4.18162825 7.32145556,6 C7.32145556,7.81837175 8.54854979,9.25 10.0000111,9.25 C11.4514724,9.25 12.6785667,7.81837175 12.6785667,6 Z M14.1785667,6 C14.1785667,8.59988312 12.3356329,10.75 10.0000111,10.75 C7.66438931,10.75 5.82145556,8.59988312 5.82145556,6 C5.82145556,3.40011688 7.66438931,1.25 10.0000111,1.25 C12.3356329,1.25 14.1785667,3.40011688 14.1785667,6 Z"
@@ -91,7 +91,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconLightning: ({color}) => <svg width="16" height="18" viewBox="0 0 16 18" xmlns="http://www.w3.org/2000/svg">
+  IconLightning: ({color, width, height}) => <svg width={width || "16"} height={height || "18"} viewBox="0 0 16 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconLightning" transform="translate(-2 -1)" fill={color} fillRule="nonzero">
               <path d="M7.91531294,12.7794118 L3,12.7794118 C2.33182136,12.7794118 1.99719627,11.9715553 2.46966991,11.4990817 L12.3961405,1.57261109 C12.9557578,1.01299383 13.8882515,1.58930666 13.6379831,2.340112 L11.9817459,7.30882353 L16.8970588,7.30882353 C17.5652375,7.30882353 17.8998626,8.11667997 17.4273889,8.58915362 L7.50091832,18.5156242 C6.94130106,19.0752415 6.00880731,18.4989286 6.25907576,17.7481233 L7.91531294,12.7794118 Z M4.81066017,11.2794118 L8.95588235,11.2794118 C9.46780065,11.2794118 9.8292776,11.7809343 9.66739483,12.2665826 L8.68677244,15.2084497 L15.0863987,8.80882353 L10.9411765,8.80882353 C10.4292582,8.80882353 10.0677812,8.30730104 10.229664,7.8216527 L11.2102864,4.87978556 L4.81066017,11.2794118 Z"
@@ -99,7 +99,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconBucket: ({color}) => <svg width="16" height="14" viewBox="0 0 16 14" xmlns="http://www.w3.org/2000/svg">
+  IconBucket: ({color, width, height}) => <svg width={width || "16"} height={height || "14"} viewBox="0 0 16 14" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconBucket" transform="translate(-2 -3)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -116,7 +116,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconPlane: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconPlane: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconPlane" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
               <path d="M7.25,7.53647451 L1.6645898,10.3291796 C1.41050178,10.4562236 1.25,10.715921 1.25,11 L1.25,14 C1.25,14.5119183 1.75152249,14.8733953 2.23717082,14.7115125 L7.25,13.0405694 L7.25,14.5364745 L5.6645898,15.3291796 C5.41050178,15.4562236 5.25,15.715921 5.25,16 L5.25,18 C5.25,18.4142136 5.58578644,18.75 6,18.75 L14,18.75 C14.4142136,18.75 14.75,18.4142136 14.75,18 L14.75,16 C14.75,15.715921 14.5894982,15.4562236 14.3354102,15.3291796 L12.75,14.5364745 L12.75,13.0405694 L17.7628292,14.7115125 C18.2484775,14.8733953 18.75,14.5119183 18.75,14 L18.75,11 C18.75,10.715921 18.5894982,10.4562236 18.3354102,10.3291796 L12.75,7.53647451 L12.75,4 L11.25,4 L11.25,8 C11.25,8.28407904 11.4105018,8.54377638 11.6645898,8.67082039 L17.25,11.4635255 L17.25,12.9594306 L12.2371708,11.2884875 C11.7515225,11.1266047 11.25,11.4880817 11.25,12 L11.25,15 C11.25,15.284079 11.4105018,15.5437764 11.6645898,15.6708204 L13.25,16.4635255 L13.25,17.25 L6.75,17.25 L6.75,16.4635255 L8.3354102,15.6708204 C8.58949822,15.5437764 8.75,15.284079 8.75,15 L8.75,12 C8.75,11.4880817 8.24847751,11.1266047 7.76282918,11.2884875 L2.75,12.9594306 L2.75,11.4635255 L8.3354102,8.67082039 C8.58949822,8.54377638 8.75,8.28407904 8.75,8 L8.75,4 L7.25,4 L7.25,7.53647451 Z"
@@ -126,7 +126,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconMoney: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconMoney: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconMoney" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
               <path d="M2.75,10 C2.75,14.0040087 5.99599134,17.25 10,17.25 C14.0040798,17.25 17.25,14.0040486 17.25,10 C17.25,5.99588023 14.0041198,2.75 10,2.75 C5.99595135,2.75 2.75,5.99592021 2.75,10 Z M1.25,10 C1.25,5.16748987 5.16752745,1.25 10,1.25 C14.8325469,1.25 18.75,5.1674531 18.75,10 C18.75,14.8324725 14.8325101,18.75 10,18.75 C5.16756422,18.75 1.25,14.8324358 1.25,10 Z"
@@ -139,7 +139,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconSoup: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconSoup: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconSoup" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
               <path d="M2.78892499,10.7465793 C3.16684474,14.3667532 6.25018659,17.1914069 10,17.1914069 C13.7498823,17.1914069 16.8331675,14.3667845 17.2110765,10.7465793 L2.78892499,10.7465793 Z M18.75,9.99657931 C18.75,14.7997474 14.8313527,18.6914069 10,18.6914069 C5.16872164,18.6914069 1.25,14.7997109 1.25,9.99657931 C1.25,9.58236575 1.58578644,9.24657931 2,9.24657931 L18,9.24657931 C18.4142136,9.24657931 18.75,9.58236575 18.75,9.99657931 Z"
@@ -153,7 +153,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconDragDrop: ({color}) => <svg width="18" height="17" viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
+  IconDragDrop: ({color, width, height}) => <svg width={width || "18"} height={height || "17"} viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconDragDrop" transform="translate(-1 -2)" fill={color} fillRule="nonzero">
               <g id="Group-4" transform="translate(1 2)">
@@ -173,7 +173,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconZoom: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconZoom: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconZoom" transform="translate(-1 -1)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -191,7 +191,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconSearch: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconSearch: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconSearch" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
               <g id="Group" transform="translate(0 1)">
@@ -203,7 +203,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconShare: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconShare: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconShare" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
               <path d="M17.2499556,8.75 L17.2499556,17.25 L2.74995556,17.25 L2.74995556,8.75 L7.75006667,8.75 L7.75006667,7.25 L1.99995556,7.25 C1.58574199,7.25 1.24995556,7.58578644 1.24995556,8 L1.24995556,18 C1.24995556,18.4142136 1.58574199,18.75 1.99995556,18.75 L17.9999556,18.75 C18.4141691,18.75 18.7499556,18.4142136 18.7499556,18 L18.7499556,8 C18.7499556,7.58578644 18.4141691,7.25 17.9999556,7.25 L12.2499556,7.25 L12.2499556,8.75 L17.2499556,8.75 Z"
@@ -215,7 +215,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconDownload: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconDownload: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconDownload" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
               <path d="M17.25,4.75 L17.25,17.25 L2.75,17.25 L2.75,4.75 L7.75011111,4.75 L7.75011111,3.25 L2,3.25 C1.58578644,3.25 1.25,3.58578644 1.25,4 L1.25,18 C1.25,18.4142136 1.58578644,18.75 2,18.75 L18,18.75 C18.4142136,18.75 18.75,18.4142136 18.75,18 L18.75,4 C18.75,3.58578644 18.4142136,3.25 18,3.25 L12.25,3.25 L12.25,4.75 L17.25,4.75 Z"
@@ -227,7 +227,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconExport: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconExport: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconExport" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
               <path d="M15.25,17.25 L2.75,17.25 L2.75,4.75 L10.75,4.75 L10.75,3.25 L2,3.25 C1.58578644,3.25 1.25,3.58578644 1.25,4 L1.25,18 C1.25,18.4142136 1.58578644,18.75 2,18.75 L16,18.75 C16.4142136,18.75 16.75,18.4142136 16.75,18 L16.75,9.25 L15.25,9.25 L15.25,17.25 Z"
@@ -239,7 +239,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconCircle: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconCircle: ({color, width, height}) => <svg width={width || "18"} height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconCircle" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
               <path d="M10,17.25 C14.0040798,17.25 17.25,14.0040486 17.25,10 C17.25,5.99588023 14.0041198,2.75 10,2.75 C5.99595135,2.75 2.75,5.99592021 2.75,10 C2.75,14.0040087 5.99599134,17.25 10,17.25 Z M10,18.75 C5.16756422,18.75 1.25,14.8324358 1.25,10 C1.25,5.16748987 5.16752745,1.25 10,1.25 C14.8325469,1.25 18.75,5.1674531 18.75,10 C18.75,14.8324725 14.8325101,18.75 10,18.75 Z"
@@ -247,7 +247,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconProgress: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconProgress: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconProgress" transform="translate(-1 -1)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -266,7 +266,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconClock: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconClock: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconClock" transform="translate(-1 -1)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -279,7 +279,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconGlobe: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconGlobe: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconGlobe" transform="translate(-1 -1)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -296,7 +296,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconShow: ({color}) => <svg width="18" height="14" viewBox="0 0 18 14" xmlns="http://www.w3.org/2000/svg">
+  IconShow: ({color, width, height}) => <svg width={width || "18"} height={height || "14"} viewBox="0 0 18 14" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconShow" transform="translate(-1 -3)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -309,7 +309,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconHide: ({color}) => <svg width="18" height="14" viewBox="0 0 18 14" xmlns="http://www.w3.org/2000/svg">
+  IconHide: ({color, width, height}) => <svg width={width || "18"} height={height || "14"} viewBox="0 0 18 14" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconHide" transform="translate(-1 -3)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -321,7 +321,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconLocate: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconLocate: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconLocate" transform="translate(-1 -1)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -339,7 +339,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconCards: ({color}) => <svg width="18" height="17" viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
+  IconCards: ({color, width, height}) => <svg width={width || "18"} height={height || "17"} viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconCards" transform="translate(-1 -2)" fill={color} fillRule="nonzero">
               <path d="M2,18.75 C1.58578644,18.75 1.25,18.4142136 1.25,18 L1.25,10 C1.25,9.58578644 1.58578644,9.25 2,9.25 L18,9.25 C18.4142136,9.25 18.75,9.58578644 18.75,10 L18.75,18 C18.75,18.4142136 18.4142136,18.75 18,18.75 L2,18.75 Z M2.75,17.25 L17.25,17.25 L17.25,10.75 L2.75,10.75 L2.75,17.25 Z"
@@ -351,7 +351,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconSquare: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconSquare: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconSquare" transform="translate(-1 -1)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -361,7 +361,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconMenu: ({color}) => <svg width="18" height="12" viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
+  IconMenu: ({color, width, height}) => <svg width={width || "18"} height={height || "12"} viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconMenu" transform="translate(-1 -4)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -375,7 +375,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconRefresh: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconRefresh: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconRefresh" transform="translate(-1 -1)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -391,7 +391,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconTag: ({color}) => <svg width="19" height="19" viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
+  IconTag: ({color, width, height}) => <svg width={width || "19"} height={height || "19"} viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconTag">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -401,7 +401,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconCalendar: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconCalendar: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconCalendar" transform="translate(-1 -1)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -417,7 +417,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconList: ({color}) => <svg width="16" height="12" viewBox="0 0 16 12" xmlns="http://www.w3.org/2000/svg">
+  IconList: ({color, width, height}) => <svg width={width || "16"} height={height || "12"} viewBox="0 0 16 12" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconList" transform="translate(-2 -4)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -437,7 +437,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconCheveronDownCircle: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconCheveronDownCircle: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconChevronDownCircle" transform="rotate(90 10 9)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -450,7 +450,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconCheveronDown: ({color}) => <svg width="18" height="10" viewBox="0 0 18 10" xmlns="http://www.w3.org/2000/svg">
+  IconCheveronDown: ({color, width, height}) => <svg width={width || "18"} height={height || "10"} viewBox="0 0 18 10" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconChevronDown" transform="translate(-1 -5)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -461,7 +461,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconCheveronUpCircle: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconCheveronUpCircle: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconChevronUpCircle" transform="rotate(-90 9 10)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -474,7 +474,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconCheveronUp: ({color}) => <svg width="18" height="10" viewBox="0 0 18 10" xmlns="http://www.w3.org/2000/svg">
+  IconCheveronUp: ({color, width, height}) => <svg width={width || "18"} height={height || "10"} viewBox="0 0 18 10" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconChevronUp" transform="translate(-1 -5)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -484,7 +484,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconCheveronLeftCircle: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconCheveronLeftCircle: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconChevronLeftCircle" transform="rotate(-180 9.5 9.5)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -497,7 +497,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconCheveronLeft: ({color}) => <svg width="10" height="18" viewBox="0 0 10 18" xmlns="http://www.w3.org/2000/svg">
+  IconCheveronLeft: ({color, width, height}) => <svg width={width || "10"} height={height || "18"} viewBox="0 0 10 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconChevronLeft" transform="translate(-5 -1)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -508,7 +508,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconCheveronRightCircle: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconCheveronRightCircle: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconChevronRightCircle" transform="translate(-1 -1)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -521,7 +521,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconCheveronRight: ({color}) => <svg width="10" height="18" viewBox="0 0 10 18" xmlns="http://www.w3.org/2000/svg">
+  IconCheveronRight: ({color, width, height}) => <svg width={width || "10"} height={height || "18"} viewBox="0 0 10 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconChevronRight" transform="translate(-5 -1)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -532,7 +532,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconNo: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconNo: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconNo" transform="translate(-1 -1)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -545,7 +545,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconArrowRight: ({color}) => <svg width="17" height="12" viewBox="0 0 17 12" xmlns="http://www.w3.org/2000/svg">
+  IconArrowRight: ({color, width, height}) => <svg width={width || "17"} height={height || "12"} viewBox="0 0 17 12" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconArrowRight" transform="rotate(90 11 7)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -557,7 +557,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconArrowLeft: ({color}) => <svg width="17" height="12" viewBox="0 0 17 12" xmlns="http://www.w3.org/2000/svg">
+  IconArrowLeft: ({color, width, height}) => <svg width={width || "17"} height={height || "12"} viewBox="0 0 17 12" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconArrowLeft" transform="rotate(-90 7.5 8.5)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -569,7 +569,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconLogout: ({color}) => <svg width="18" height="17" viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
+  IconLogout: ({color, width, height}) => <svg width={width || "18"} height={height || "17"} viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconLogout" transform="translate(-1 -2)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -583,7 +583,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconError: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconError: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconError" transform="translate(-1 -1)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
@@ -599,7 +599,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconCalendar: ({color}) => <svg width="19" height="16" viewBox="0 0 19 16" xmlns="http://www.w3.org/2000/svg">
+  IconCalendar: ({color, width, height}) => <svg width={width || "19"} height={height || "16"} viewBox="0 0 19 16" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconCalendar" transform="translate(0 -3)" fill={color} fillRule="nonzero">
               <path d="M6,3.25 L18,3.25 C18.4142136,3.25 18.75,3.58578644 18.75,4 L18.75,18 C18.75,18.4142136 18.4142136,18.75 18,18.75 L6,18.75 L6,17.25 L17.25,17.25 L17.25,4.75 L6,4.75 L6,3.25 Z"
@@ -619,7 +619,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconDoorway: ({color}) => <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+  IconDoorway: ({color, width, height}) => <svg width={width || "16"} height={height || "16"} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
     <g id="Page-1" fill="none" fillRule="evenodd">
         <g id="IconDoorway" transform="translate(-2 -2)" fill={color}>
             <rect id="Rectangle-6" x="2" y="17" width="16" height="1" />
@@ -628,7 +628,7 @@ const ICONS = {
         </g>
     </g>
   </svg>,
-  IconCopy: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconCopy: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconCopy" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
               <path d="M16.6666667,17.25 C16.9857864,17.25 17.25,16.9857864 17.25,16.6666667 L17.25,7.33333333 C17.25,7.01421356 16.9857864,6.75 16.6666667,6.75 L9.33333333,6.75 C9.01421356,6.75 8.75,7.01421356 8.75,7.33333333 L8.75,16.6666667 C8.75,16.9857864 9.01421356,17.25 9.33333333,17.25 L16.6666667,17.25 Z M16.6666667,18.75 L9.33333333,18.75 C8.18578644,18.75 7.25,17.8142136 7.25,16.6666667 L7.25,7.33333333 C7.25,6.18578644 8.18578644,5.25 9.33333333,5.25 L16.6666667,5.25 C17.8142136,5.25 18.75,6.18578644 18.75,7.33333333 L18.75,16.6666667 C18.75,17.8142136 17.8142136,18.75 16.6666667,18.75 Z"
@@ -638,7 +638,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconLink: ({color}) => <svg width="18" height="8" viewBox="0 0 18 8" xmlns="http://www.w3.org/2000/svg">
+  IconLink: ({color, width, height}) => <svg width={width || "18"} height={height || "8"} viewBox="0 0 18 8" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconLink" transform="translate(-1 -6)" fill={color} fillRule="nonzero">
               <path d="M8.83291837,13.3074687 C10.0181987,12.7203169 10.75,11.6192286 10.75,9.99999549 C10.75,9.9451753 10.758826,9.82161211 10.7866704,9.65454562 C10.833755,9.37203866 10.9181305,9.09078735 11.0458202,8.83540835 C11.3917281,8.14359363 11.9821194,7.75 13,7.75 L15,7.75 C16.2426756,7.75 17.25,8.75732291 17.25,9.99999549 C17.25,11.2426681 16.2426756,12.249991 15,12.249991 L12.25,12.249991 L12.25,13.749991 L15,13.749991 C17.0711022,13.749991 18.75,12.0710957 18.75,9.99999549 C18.75,7.92889528 17.0711022,6.25 15,6.25 L13,6.25 C11.3928806,6.25 10.2957719,6.98140468 9.70417981,8.16458715 C9.36150269,8.84994036 9.25,9.51895548 9.25,9.99999549 C9.25,11.030064 8.85680133,11.6216815 8.16708163,11.9633477 C7.9167821,12.0873385 7.6411264,12.1690533 7.36337439,12.2143313 C7.19546246,12.2417036 7.0677587,12.2503005 7.00422982,12.2500037 L5,12.249991 C3.75732442,12.249991 2.75,11.2426681 2.75,9.99999549 C2.75,8.75732291 3.75732442,7.75 5,7.75 L7.75,7.75 L7.75,6.25 L5,6.25 C2.9288978,6.25 1.25,7.92889528 1.25,9.99999549 C1.25,12.0710957 2.9288978,13.749991 5,13.749991 L6.99803062,13.749991 C7.48887744,13.7521615 8.15451742,13.643528 8.83291837,13.3074687 Z"
@@ -646,7 +646,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconLinkBroken: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconLinkBroken: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconLinkBroken" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
               <path d="M7.75,6.25 L5,6.25 C2.92889755,6.25 1.25,7.92889755 1.25,10 C1.25,12.0711025 2.92889755,13.75 5,13.75 L7.75,13.75 L7.75,12.25 L5,12.25 C3.75732467,12.25 2.75,11.2426753 2.75,10 C2.75,8.75732467 3.75732467,7.75 5,7.75 L7.75,7.75 L7.75,6.25 Z"
@@ -668,7 +668,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconTrash: ({color}) => <svg width="16" height="18" viewBox="0 0 16 18" xmlns="http://www.w3.org/2000/svg">
+  IconTrash: ({color, width, height}) => <svg width={width || "16"} height={height || "18"} viewBox="0 0 16 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconTrash" transform="translate(-2 -1)" fill={color} fillRule="nonzero">
               <g id="Group-2" transform="translate(3 2)">
@@ -682,7 +682,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconDownload: ({color}) => <svg width="14" height="17" viewBox="0 0 14 17" xmlns="http://www.w3.org/2000/svg">
+  IconDownload: ({color, width, height}) => <svg width={width || "14"} height={height || "17"} viewBox="0 0 14 17" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconDownload" transform="rotate(-180 8.5 9)" fill={color} fillRule="nonzero">
               <g id="Group-5" transform="translate(3 1)">
@@ -695,7 +695,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconArrowDown: ({color}) => <svg width="12" height="17" viewBox="0 0 12 17" xmlns="http://www.w3.org/2000/svg">
+  IconArrowDown: ({color, width, height}) => <svg width={width || "12"} height={height || "17"} viewBox="0 0 12 17" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconArrowDown" transform="rotate(-180 8 9)" fill={color} fillRule="nonzero">
               <polygon id="Stroke-1" points="10.75 18 10.75 2 9.25 2 9.25 18" />
@@ -704,7 +704,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconArrowUp: ({color}) => <svg width="12" height="17" viewBox="0 0 12 17" xmlns="http://www.w3.org/2000/svg">
+  IconArrowUp: ({color, width, height}) => <svg width={width || "12"} height={height || "17"} viewBox="0 0 12 17" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconArrowUp" transform="translate(-4 -1)" fill={color} fillRule="nonzero">
               <polygon id="Stroke-1" points="10.75 18 10.75 2 9.25 2 9.25 18" />
@@ -713,7 +713,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconMinus: ({color}) => <svg width="18" height="2" viewBox="0 0 18 2" xmlns="http://www.w3.org/2000/svg">
+  IconMinus: ({color, width, height}) => <svg width={width || "18"} height={height || "2"} viewBox="0 0 18 2" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconMinus" transform="translate(-1 -9)" fill={color} fillRule="nonzero">
               <polygon id="Stroke-3" points="18.75 9.25 1.25 9.25 1.25 10.75 18.75 10.75"
@@ -721,7 +721,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconSwitch: ({color}) => <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+  IconSwitch: ({color, width, height}) => <svg width={width || "16"} height={height || "16"} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconSwitch" transform="translate(-2 -2)" fill={color}>
               <g id="Group-3" transform="translate(2 2)">
@@ -737,7 +737,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconPlus: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconPlus: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconPlus" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
               <polygon id="Stroke-3" points="18.75 9.25 1.25 9.25 1.25 10.75 18.75 10.75"
@@ -747,7 +747,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconMinusCircle: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconMinusCircle: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconMinusCircle" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
               <path d="M17.25,10 C17.25,5.99588023 14.0041198,2.75 10,2.75 C5.99595135,2.75 2.75,5.99592021 2.75,10 C2.75,14.0040087 5.99599134,17.25 10,17.25 C14.0040798,17.25 17.25,14.0040486 17.25,10 Z M18.75,10 C18.75,14.8324725 14.8325101,18.75 10,18.75 C5.16756422,18.75 1.25,14.8324358 1.25,10 C1.25,5.16748987 5.16752745,1.25 10,1.25 C14.8325469,1.25 18.75,5.1674531 18.75,10 Z"
@@ -757,7 +757,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconPlusCircle: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconPlusCircle: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconPlusCircle" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
               <polygon id="Stroke-1" points="10.7775862 13.5865069 10.7775862 6.46866548 9.27758621 6.46866548 9.27758621 13.5865069"
@@ -769,7 +769,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconClose: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconClose: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconClose" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
               <polygon id="Stroke-1" points="2.58884595 18.4785453 18.4785011 2.58889009 17.4178409 1.52822991 1.52818578 17.4178851"
@@ -779,7 +779,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconCloseCircle: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconCloseCircle: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconCloseCircle" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
               <polygon id="Stroke-1" points="8.04137931 13.0744533 13.0744533 8.04137931 12.0137931 6.98071914 6.98071914 12.0137931"
@@ -791,7 +791,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconCloseSquare: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconCloseSquare: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconCloseSquare" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
               <path d="M2.08275862,18.7224138 C1.66854506,18.7224138 1.33275862,18.3866274 1.33275862,17.9724138 L1.33275862,2.08275862 C1.33275862,1.66854506 1.66854506,1.33275862 2.08275862,1.33275862 L17.9724138,1.33275862 C18.3866274,1.33275862 18.7224138,1.66854506 18.7224138,2.08275862 L18.7224138,17.9724138 C18.7224138,18.3866274 18.3866274,18.7224138 17.9724138,18.7224138 L2.08275862,18.7224138 Z M2.83275862,17.2224138 L17.2224138,17.2224138 L17.2224138,2.83275862 L2.83275862,2.83275862 L2.83275862,17.2224138 Z"
@@ -803,7 +803,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconCheck: ({color}) => <svg width="18" height="15" viewBox="0 0 18 15" xmlns="http://www.w3.org/2000/svg">
+  IconCheck: ({color, width, height}) => <svg width={width || "18"} height={height || "15"} viewBox="0 0 18 15" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconCheck" transform="translate(-1 -3)" fill={color} fillRule="nonzero">
               <path d="M2,9.90864889 L0.939339828,10.9693091 L7.08957687,17.1195461 C7.40333178,17.433301 7.91939692,17.4075619 8.20037493,17.0641444 L18.7911358,4.11988108 L17.6301999,3.1700244 L7.5642289,15.4728778 L2,9.90864889 Z"
@@ -811,7 +811,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconCheckCircle: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconCheckCircle: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconCheckCircle" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
               <path d="M7.04827586,9.96002948 L5.98761569,11.0206897 L8.50415267,13.5372266 C8.8202354,13.8533094 9.34089039,13.8244728 9.62013437,13.4754178 L14.0610694,7.92424899 L12.8897662,6.98720642 L8.97229359,11.8840472 L7.04827586,9.96002948 Z"
@@ -821,7 +821,7 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconCheckSquare: ({color}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+  IconCheckSquare: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconCheckSquare" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
               <path d="M2,18.75 C1.58578644,18.75 1.25,18.4142136 1.25,18 L1.25,2 C1.25,1.58578644 1.58578644,1.25 2,1.25 L18,1.25 C18.4142136,1.25 18.75,1.58578644 18.75,2 L18.75,18 C18.75,18.4142136 18.4142136,18.75 18,18.75 L2,18.75 Z M2.75,17.25 L17.25,17.25 L17.25,2.75 L2.75,2.75 L2.75,17.25 Z"
