@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import colorVariables from '../../variables/colors.json';
+import colorVariables from '@density/ui/variables/colors.json';
 
 import './styles.scss';
 import Icons from './';
@@ -11,6 +11,15 @@ const { IconImageUpload } = Icons;
 storiesOf('Icons', module)
   .addWithInfo('A sample icon', () => (
     <IconImageUpload />
+  ))
+  .addWithInfo('A sample icon in brand-primary color', () => (
+    <IconImageUpload color="primary" />
+  ))
+  .addWithInfo('A sample icon in gray-darker color', () => (
+    <IconImageUpload color="darker" />
+  ))
+  .addWithInfo('A sample icon in a random hex color', () => (
+    <IconImageUpload color="#FFBA08" />
   ))
   .addWithInfo('All Icons', () => (
     <div style={{
