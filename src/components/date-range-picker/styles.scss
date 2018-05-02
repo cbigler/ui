@@ -525,7 +525,7 @@ $brand-primary-light: #B2D6FF;
     user-select: none; }
 
 .DateInput__display-text {
-  padding: 4px 8px;
+  padding: 4px 6px;
   white-space: nowrap;
   overflow: hidden; }
 
@@ -676,8 +676,8 @@ $brand-primary-light: #B2D6FF;
 // Override styles in react dates
 @mixin make-date-range-picker($active-color: $brand-primary) {
   display: inline-block;
-  padding-left: 14px;
-  padding-right: 14px;
+  padding-left: 4px;
+  padding-right: 4px;
   height: (43px - 7px);
   line-height: (43px - 4px);
   padding-top: 4px;
