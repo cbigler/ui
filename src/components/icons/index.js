@@ -380,14 +380,14 @@ const ICONS = {
           <g id="IconRefresh" transform="translate(-1 -1)">
               <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
               />
-              <polyline id="Stroke-1" stroke={color} strokeWidth="1.5" strokeLinecap="square"
+              <polyline id="Stroke-1" stroke={color} strokeWidth="2" strokeLinecap="square"
               strokeLinejoin="round" points="2 2 2 7 7 7" />
-              <polyline id="Stroke-3" stroke={color} strokeWidth="1.5" strokeLinecap="square"
+              <polyline id="Stroke-3" stroke={color} strokeWidth="2" strokeLinecap="square"
               strokeLinejoin="round" points="18 18 18 13 13 13" />
               <path d="M17.4184333,13.0001333 C16.2316556,15.9319111 13.3573222,18.0000222 9.99998889,18.0000222 C5.58176667,18.0000222 1.99998889,14.4182444 1.99998889,10.0000222"
-              id="Stroke-5" stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
+              id="Stroke-5" stroke={color} strokeWidth="2" strokeLinejoin="round" />
               <path d="M2.58156667,6.99986667 C3.76834444,4.06808889 6.64267778,1.99997778 10.0000111,1.99997778 C14.4182333,1.99997778 18.0000111,5.58175556 18.0000111,9.99997778"
-              id="Stroke-7" stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
+              id="Stroke-7" stroke={color} strokeWidth="2" strokeLinejoin="round" />
           </g>
       </g>
   </svg>,
