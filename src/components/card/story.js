@@ -208,10 +208,6 @@ storiesOf('Card', module)
       constructor(props) {
         super(props);
         this.state = {loading: false};
-
-        // setTimeout(() => {
-        //   this.setState({loading: true});
-        // }, 1000);
       }
       render() {
         const loader = this.state.loading ? <CardLoading indeterminate /> : null;

@@ -9,6 +9,7 @@
   border: none;
   color: $foreground;
   border: 1px solid $gray-light;
+  position: relative;
 }
 
 @mixin make-card-header(
