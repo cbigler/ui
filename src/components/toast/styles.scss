@@ -9,7 +9,10 @@
 @mixin make-toast($color: $brand-primary, $icon-color: #fff, $icon-size: 72px) {
   box-sizing: border-box;
   background-color: #fff;
-  overflow: hidden;
+
+  position: relative;
+
+  width: 100%;
 
   border: 1px solid $color;
   border-radius: $border-radius-base;
@@ -21,40 +24,127 @@
   font-family: $font-base;
   font-size: $font-size-base;
 
-  .toast-icon {
-    display: block;
-    width: $icon-size;
-    background-color: $color;
-    margin-right: 14px;
-
-    font-size: $font-size-x-large;
-    text-align: center;
-    line-height: $icon-size;
-    color: $icon-color;
-  }
-  .toast-body {
-    width: calc(100% - 100px);
-    height: $icon-size;
-    margin-right: 14px;
-
-    font-size: $font-size-base;
-    font-weight: $font-weight-base;
-    line-height: $line-height-base;
-
-    cursor: default;
-    user-select: none;
-
-    // Vertical align the text inside of the cell.
-    display: table;
-    & > span {
-      display: table-cell;
-      vertical-align: middle;
-    }
-  }
+  &:hover .toast-dismiss { display: block; }
 }
 
-.toast { @include make-toast; }
-.toast-primary { @include make-toast($brand-primary); }
-.toast-success { @include make-toast($brand-success); }
-.toast-danger { @include make-toast($brand-danger); }
-.toast-warning { @include make-toast($brand-warning); }
+// The toast icon is on the left side of the toast and contains a centered toast icon.
+@mixin make-toast-icon($color: $brand-primary, $icon-size: 72px, $icon-color: #fff) {
+  width: $icon-size;
+  background-color: $color;
+
+  font-size: $font-size-x-large;
+  color: $icon-color;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+@mixin make-toast-icon-glyph($icon-size: 72px) {
+  width: $icon-size;
+  text-align: center;
+}
+
+// The toast body is the right side of the toast; it contains an optional toast header and toast
+// text.
+@mixin make-toast-body {
+  height: auto;
+
+  font-size: $font-size-base;
+  font-weight: $font-weight-base;
+  line-height: $line-height-base;
+
+  cursor: default;
+  user-select: none;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+// The header of the toast. THis is within a toast body.
+@mixin make-toast-header($color: $brand-primary) {
+  font-size: $font-size-base;
+  color: $color;
+  font-weight: 500;
+
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+// The main content of the toast. This is within a toast body.
+@mixin make-toast-text {
+  color: $gray-cinder;
+  margin-bottom: 12px;
+
+  // If the toast doesn't have a title above it, add a similar amount of margin to its top such
+  // that its content remains centered in the flex parent.
+  &.no-title { margin-top: 12px; }
+}
+
+// The "dismissal" x button in the upper left corner of the toast.
+@mixin make-toast-dismiss {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  font-size: 18px;
+  color: $gray-dark;
+  cursor: pointer;
+
+  display: none;
+}
+
+// ----------------------------------------------------------------------------
+// Create all versions of the toast - primary, success, warning, danger.
+// ----------------------------------------------------------------------------
+
+.toast-primary {
+  @include make-toast($brand-primary);
+
+  .toast-icon { @include make-toast-icon($brand-primary); }
+  .toast-icon-glyph { @include make-toast-icon-glyph; }
+
+  .toast-body { @include make-toast-body; }
+  .toast-header { @include make-toast-header($brand-primary); }
+  .toast-text { @include make-toast-text; }
+}
+
+.toast-success {
+  @include make-toast($brand-success);
+
+  .toast-icon { @include make-toast-icon($brand-success); }
+  .toast-icon-glyph { @include make-toast-icon-glyph; }
+
+  .toast-body { @include make-toast-body; }
+  .toast-header { @include make-toast-header($brand-success); }
+  .toast-text { @include make-toast-text; }
+}
+
+.toast-warning {
+  @include make-toast($brand-warning);
+
+  .toast-icon { @include make-toast-icon($brand-warning); }
+  .toast-icon-glyph { @include make-toast-icon-glyph; }
+
+  .toast-body { @include make-toast-body; }
+  .toast-header { @include make-toast-header($brand-warning); }
+  .toast-text { @include make-toast-text; }
+}
+
+.toast-danger {
+  @include make-toast($brand-danger);
+
+  .toast-icon { @include make-toast-icon($brand-danger); }
+  .toast-icon-glyph { @include make-toast-icon-glyph; }
+
+  .toast-body { @include make-toast-body; }
+  .toast-header { @include make-toast-header($brand-danger); }
+  .toast-text { @include make-toast-text; }
+}
+
+.toast-dismiss {
+  @include make-toast-dismiss;
+}

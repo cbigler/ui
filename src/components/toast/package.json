@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-toast",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "description": "Toast component",
   "main": "dist/index.js",
   "style": "dist/styles.css",
