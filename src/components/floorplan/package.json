@@ -1,0 +1,17 @@
+{
+  "name": "@density/ui-floorplan",
+  "version": "0.0.1",
+  "description": "Floorplan interface component",
+  "main": "dist/index.js",
+  "style": "dist/styles.css",
+  "scss": "dist/_styles.scss",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Density <team+javascript@density.io>",
+  "license": "MIT",
+  "dependencies": {
+    "react-svg-pan-zoom": "^2.16.1",
+    "uuid": "^3.2.1"
+  }
+}
