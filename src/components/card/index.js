@@ -20,8 +20,8 @@ export function CardHeader({children, size, className, onClick}) {
     >{children}</div>;
 }
 
-export function CardWell({children, className}) {
-  return <div className={classnames('card-well', className)}>{children}</div>;
+export function CardWell({children, type, className}) {
+  return <div className={classnames('card-well', `card-well-${type}`, className)}>{children}</div>;
 }
 export function CardWellHighlight({children, className}) {
   return <span className={classnames('card-well-highlight', className)}>
