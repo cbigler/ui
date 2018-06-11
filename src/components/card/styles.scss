@@ -58,16 +58,18 @@
 
 @mixin make-card-well(
   $font-size: $font-size-3,
-  $font-weight: $font-weight-3
+  $font-weight: $font-weight-3,
+  $color: $gray-cinder,
+  $background: $gray-lightest
 ) {
   font-family: $font-base;
   font-size: $font-size;
   font-weight: $font-weight;
   text-align: center;
   line-height: 28px;
-  color: $gray-cinder;
+  color: $color;
 
-  background-color: $gray-lightest;
+  background-color: $background;
   padding-top: 80px;
   padding-bottom: 80px;
   padding-left: 20px;
@@ -143,6 +145,7 @@
 }
 
 .card-well { @include make-card-well; }
+.card-well-dark { @include make-card-well($color: #fff, $background: $gray-cinder); }
 .card-well-highlight { @include make-card-well-highlight; }
 
 
