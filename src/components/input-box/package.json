@@ -11,6 +11,7 @@
   "author": "Density <team+javascript@density.io>",
   "license": "MIT",
   "dependencies": {
+    "@density/ui-icons": "^0.1.2",
     "react-select": "^1.0.0-rc.5"
   }
 }
