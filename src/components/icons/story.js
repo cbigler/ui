@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import colorVariables from '@density/ui/variables/colors.json';
+import colorVariables from '../../variables/colors.json';
 
 import Icons from './';
 const { IconImageUpload } = Icons;
