@@ -151,7 +151,7 @@
 .card-well-dark {
   @include make-card-well(
     $color: $gray-dark,
-    $font-weight: lighter,
+    $font-weight: 400,
     $background: $gray-cinder,
   );
 }
