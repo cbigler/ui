@@ -96,13 +96,24 @@ export class SelectBox extends React.Component {
   }
 
   render() {
-    const { value, choices } = this.props;
+    const { value, choices, className, id, disabled } = this.props;
     const { opened } = this.state;
 
-    return <div className="input-box-select-box">
+    // Allow `value` to either be:
+    // 1. The raw element in `choices` (ie, choices.indexOf(value) isn't -1)
+    // 2. An id of an element in `choices`
+    let selectedValue;
+    if (value && value.id) {
+      selectedValue = value;
+    } else if (choices) {
+      selectedValue = choices.find(i => i.id === value);
+    } else {
+      selectedValue = null;
+    }
+
+    return <div className={classnames("input-box-select-box", className)}>
       <div
-        className="input-box-select-box-value"
-        aria-label="Space Hierarchy"
+        className={classnames(`input-box-select-box-value`, {disabled})}
 
         onFocus={() => this.onMenuFocus(null)}
         onBlur={this.onMenuBlur}
@@ -114,9 +125,13 @@ export class SelectBox extends React.Component {
 
         aria-expanded={opened}
         aria-autocomplete="list"
-        tabIndex="0"
+        tabIndex={disabled ? -1 : 0}
+        id={id}
       >
-        {value ? <span>{value.label}</span> : <span className="input-box-select-placeholder">No selection</span>}
+        {selectedValue ?
+          <span>{selectedValue.label}</span> :
+          <span className="input-box-select-placeholder">No selection</span>
+        }
         <IconChevronDown color="primary" width={12} height={12} />
       </div>
 
@@ -127,7 +142,7 @@ export class SelectBox extends React.Component {
         onMouseLeave={() => { this.menuInFocus = false; }}
       >
         <ul>
-          {choices.map(choice => {
+          {(choices || []).map(choice => {
             return <li
               key={choice.id}
               ref={r => { this.choiceNodes[choice.id] = r; }}
@@ -138,7 +153,7 @@ export class SelectBox extends React.Component {
 
               id={`input-box-select-${choice.id.toString().replace(' ', '-')}`}
               role="option"
-              aria-selected={value && value.id === choice.id}
+              aria-selected={selectedValue && selectedValue.id === choice.id}
               tabIndex={!choice.disabled && opened ? 0 : -1}
 
               onFocus={() => this.onMenuFocus(choice)}

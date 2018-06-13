@@ -57,6 +57,19 @@ storiesOf('InputBox', module)
 
     return <Wrapper />;
   })
+  .addWithInfo('type=select, disabled', () => (
+    <InputBox
+      type="select"
+      disabled
+      choices={[
+        {id: 0, label: "Foo"},
+        {id: 1, label: "Bar"},
+        {id: 2, label: "Disabled", disabled: true},
+        {id: 3, label: "Baz"},
+      ]}
+      onChange={action("selected")}
+    />
+  ))
   .addWithInfo('disabled box', () => (
     <InputBox disabled placeholder="I am disabled" />
   ))
