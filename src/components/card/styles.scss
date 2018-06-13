@@ -156,7 +156,7 @@
   );
 }
 .card-well-dark .card-well-highlight {
-  @include make-card-well-highlight($color: #fff);
+  @include make-card-well-highlight($color: #fff, $font-weight: 500);
 }
 
 
