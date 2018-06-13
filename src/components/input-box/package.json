@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-input-box",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Input Box chart",
   "main": "dist/index.js",
   "style": "dist/styles.css",
