@@ -60,7 +60,7 @@
   $font-size: $font-size-3,
   $font-weight: $font-weight-3,
   $color: $gray-cinder,
-  $background: $gray-lightest
+  $background: $gray-lightest,
 ) {
   font-family: $font-base;
   font-size: $font-size;
@@ -76,9 +76,10 @@
   padding-right: 20px;
 }
 
-@mixin make-card-well-highlight {
-  color: $brand-primary;
+@mixin make-card-well-highlight($color: $brand-primary, $font-weight: $font-weight-3) {
+  color: $color;
   white-space: nowrap; /* don't wrap in the middle of a highlighted item */
+  font-weight: $font-weight;
 }
 
 
@@ -145,8 +146,18 @@
 }
 
 .card-well { @include make-card-well; }
-.card-well-dark { @include make-card-well($color: #fff, $background: $gray-cinder); }
 .card-well-highlight { @include make-card-well-highlight; }
+
+.card-well-dark {
+  @include make-card-well(
+    $color: $gray-dark,
+    $font-weight: 400,
+    $background: $gray-cinder,
+  );
+}
+.card-well-dark .card-well-highlight {
+  @include make-card-well-highlight($color: #fff, $font-weight: 500);
+}
 
 
 .card-loading-wrapper { @include make-card-loading-wrapper; }

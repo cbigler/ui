@@ -18,10 +18,54 @@ storiesOf('InputBox', module)
   .addWithInfo('type=select', () => (
     <InputBox
       type="select"
-      options={[
-        {value: "foo", label: "Foo"},
-        {value: "bar", label: "Bar"},
-        {value: "baz", label: "Baz"},
+      choices={[
+        {id: 0, label: "Foo"},
+        {id: 1, label: "Bar"},
+        {id: 2, label: "Disabled", disabled: true},
+        {id: 3, label: "Baz"},
+      ]}
+      onChange={action("selected")}
+    />
+  ))
+  .addWithInfo('type=select, interactive', () => {
+    class Wrapper extends React.Component {
+      constructor(props) {
+        super(props);
+
+        const choices = [
+          {id: 0, label: "Foo"},
+          {id: 1, label: "Bar"},
+          {id: 2, label: "Disabled", disabled: true},
+          {id: 3, label: "Baz"},
+        ];
+
+        this.state = {
+          value: choices[0],
+          choices,
+        };
+      }
+
+      render() {
+        return <InputBox
+          type="select"
+          value={this.state.value}
+          choices={this.state.choices}
+          onChange={value => this.setState({value})}
+        />;
+      }
+    }
+
+    return <Wrapper />;
+  })
+  .addWithInfo('type=select, disabled', () => (
+    <InputBox
+      type="select"
+      disabled
+      choices={[
+        {id: 0, label: "Foo"},
+        {id: 1, label: "Bar"},
+        {id: 2, label: "Disabled", disabled: true},
+        {id: 3, label: "Baz"},
       ]}
       onChange={action("selected")}
     />

@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-card",
-  "version": "0.7.0",
+  "version": "0.7.3",
   "description": "Card component",
   "main": "dist/index.js",
   "style": "dist/styles.css",
