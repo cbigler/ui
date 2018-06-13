@@ -111,7 +111,7 @@ export class SelectBox extends React.Component {
       selectedValue = null;
     }
 
-    return <div className={classnames("input-box-select-box", className)}>
+    return <div className={classnames('input-box-select-box', className)}>
       <div
         className={classnames(`input-box-select-box-value`, {disabled})}
 
