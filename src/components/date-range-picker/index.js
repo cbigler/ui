@@ -53,7 +53,9 @@ class CommonRangeList extends React.Component {
           this.setState({ showList: !this.state.showList });
         }}>
           <i className='common-range-icon' />
-          <i className='common-range-icon-caret' />
+          <i className={classnames('common-range-icon-caret', {
+            'flipped': this.state.showList
+          })} />
         </div>
       <ul className='common-range-list-items'>
         {this.props.commonRanges.map((r, i) =>

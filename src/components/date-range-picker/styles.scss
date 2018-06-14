@@ -808,6 +808,10 @@ $brand-primary-light: #B2D6FF;
     &:before {
       content: "\e90b";
     }
+
+    &.flipped {
+      transform: rotate(0deg);
+    }
   }
 
   .common-range-list-items {
