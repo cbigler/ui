@@ -250,6 +250,18 @@ storiesOf('Card', module)
       </CardBody>
     </Card>
   ))
+  .addWithInfo('Indeterminate Loading Card w/ Dark Card Well', () => (
+    <Card>
+      <CardLoading indeterminate />
+      <CardWell type="dark">
+        On average, peak utilization of <CardWellHighlight>18%</CardWellHighlight> happens
+        around <CardWellHighlight>5:15p</CardWellHighlight> during <CardWellHighlight>open hours</CardWellHighlight>
+      </CardWell>
+      <CardBody>
+        <p>Hello World!</p>
+      </CardBody>
+    </Card>
+  ))
   .addWithInfo('Dark Card', () => (
     <Card type="dark">
       <CardBody>

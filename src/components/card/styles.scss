@@ -75,7 +75,7 @@
   padding-left: 20px;
   padding-right: 20px;
 
-  &:first-child {
+  &:first-child, .card-loading-wrapper:first-child + & {
     border-top-left-radius: $border-radius-base;
     border-top-right-radius: $border-radius-base;
   }
