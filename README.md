@@ -5,6 +5,14 @@ Density UI is a collection of Density-branded controls and styles for use in web
 
 <img src="graphic.png" />
 
+## Quick-start development (using react-storybook)
+
+```sh
+npm install
+npm run installall
+npm start
+```
+
 ## How it works
 
 Each component has a number of different files:
@@ -169,7 +177,7 @@ variables are to be separately defined / imported, and each component uses what 
 ## 1. Install Density UI:
 
 ```sh
-npm i -S @density/ui@~4.0.0
+npm i -S @density/ui@~5.0.1
 ```
 
 ## 2. Are you using css or sass?
