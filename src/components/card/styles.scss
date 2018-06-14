@@ -60,7 +60,7 @@
   $font-size: $font-size-3,
   $font-weight: $font-weight-3,
   $color: $gray-cinder,
-  $background: $gray-lightest,
+  $background: $gray-lightest
 ) {
   font-family: $font-base;
   font-size: $font-size;
@@ -98,15 +98,17 @@
   position: absolute;
   left: 0;
   right: 0;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
 
-@mixin make-card-loading($color: $brand-primary, $percent: 100%, $height: 2px, $indeterminant: false) {
+@mixin make-card-loading($color: $brand-primary, $percent: 100%, $height: 2px, $indeterminate: false) {
   width: $percent;
   height: $height;
   background-color: $color;
   margin-bottom: -1 * $height;
 
-  @if $indeterminant {
+  @if $indeterminate {
     // Since the state is indeterminate, the bar has a fixed width.
     width: 100%;
     overflow: hidden;
@@ -152,7 +154,7 @@
   @include make-card-well(
     $color: $gray-dark,
     $font-weight: 400,
-    $background: $gray-cinder,
+    $background: $gray-cinder
   );
 }
 .card-well-dark .card-well-highlight {
@@ -162,7 +164,7 @@
 
 .card-loading-wrapper { @include make-card-loading-wrapper; }
 .card-loading { @include make-card-loading; }
-.card-loading-indeterminate { @include make-card-loading($indeterminant: true); }
+.card-loading-indeterminate { @include make-card-loading($indeterminate: true); }
 .card-dark {
   @include make-card($gray-cinder, #fff);
 }
