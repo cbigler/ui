@@ -679,6 +679,7 @@ $brand-primary-light: #B2D6FF;
 
   font-family: $font-base;
   font-size: $font-size-base;
+  font-weight: normal;
 
   color: $gray-darker;
   background-color: #fff;
@@ -763,6 +764,7 @@ $brand-primary-light: #B2D6FF;
   position: relative;
   font-family: $font-base;
   font-size: $font-size-base;
+  font-weight: normal;
   user-select: none;
 
   .common-range-list-toggle {
