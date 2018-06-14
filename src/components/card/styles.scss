@@ -60,7 +60,7 @@
   $font-size: $font-size-3,
   $font-weight: $font-weight-3,
   $color: $gray-cinder,
-  $background: $gray-lightest,
+  $background: $gray-lightest
 ) {
   font-family: $font-base;
   font-size: $font-size;
@@ -74,6 +74,15 @@
   padding-bottom: 80px;
   padding-left: 20px;
   padding-right: 20px;
+
+  &:first-child {
+    border-top-left-radius: $border-radius-base;
+    border-top-right-radius: $border-radius-base;
+  }
+  &:last-child {
+    border-bottom-left-radius: $border-radius-base;
+    border-bottom-right-radius: $border-radius-base;
+  }
 }
 
 @mixin make-card-well-highlight($color: $brand-primary, $font-weight: $font-weight-3) {
@@ -152,7 +161,7 @@
   @include make-card-well(
     $color: $gray-dark,
     $font-weight: 400,
-    $background: $gray-cinder,
+    $background: $gray-cinder
   );
 }
 .card-well-dark .card-well-highlight {
