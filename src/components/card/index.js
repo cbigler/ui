@@ -35,6 +35,6 @@ export function CardLoading({indeterminate, percent, className}) {
       'card-loading',
       indeterminate ? `card-loading-indeterminate` : null,
       className
-    )} style={{width: `${percent}%`}} />;
+    )} style={{width: `${percent}%`}} />
   </div>
 }
