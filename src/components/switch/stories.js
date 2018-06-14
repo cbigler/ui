@@ -10,6 +10,9 @@ storiesOf('Switch', module)
   .addWithInfo('Switch', () => (
     <Switch enabled={true} onChange={action("onchange")} />
   ))
+  .addWithInfo('Disabled Switch', () => (
+    <Switch enabled={true} disabled={true} onChange={action("onchange")} />
+  ))
   .add('Interactive', () => (
     <SwitchWrapper initialEnabledState={true} />
   ))
