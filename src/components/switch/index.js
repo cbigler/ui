@@ -1,10 +1,10 @@
-import * as uuid from 'uuid';
-import * as React from 'react';
+import React from 'react';
+import uuid from 'uuid';
 
-export default function Switch({enabled, onChange}) {
+export default function Switch({enabled, disabled, onChange}) {
   const uniqueId = uuid.v4();
 
-  return <div className="switch">
+  return <div className={`switch ${disabled ? 'disabled' : ''}`}>
     <input
       type="checkbox"
       id={`switch-${uniqueId}`}
