@@ -764,11 +764,6 @@ $brand-primary-light: #B2D6FF;
   .input-box-select-box-value { width: $value-width; }
   .input-box-select-box-menu { width: $menu-width; }
 
-  // Adjust caret vertical position when input box is focused
-  .input-box-select-box-value:focus .input-box-caret {
-    transform: rotate(180deg) translate(0px, 3px);
-  }
-
   // Right align the select box menu with the select box value if the date
   // picker is right aligned.
   &.right .input-box-select-box-menu {
