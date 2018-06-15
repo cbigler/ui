@@ -8,10 +8,10 @@ import Switch from './';
 
 storiesOf('Switch', module)
   .addWithInfo('Switch', () => (
-    <Switch enabled={true} onChange={action("onchange")} />
+    <Switch value={true} onChange={action("onchange")} />
   ))
   .addWithInfo('Disabled Switch', () => (
-    <Switch enabled={true} disabled={true} onChange={action("onchange")} />
+    <Switch value={true} disabled={true} onChange={action("onchange")} />
   ))
   .add('Interactive', () => (
     <SwitchWrapper initialEnabledState={true} />
@@ -30,7 +30,7 @@ class SwitchWrapper extends React.Component {
   }
   render() {
     return <Switch
-      enabled={this.state.enabled}
+      value={this.state.enabled}
       onChange={event => {
         this.setState({enabled: !this.state.enabled})
         this.props.onChange && this.props.onChange(event);
