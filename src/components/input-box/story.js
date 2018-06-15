@@ -40,7 +40,7 @@ storiesOf('InputBox', module)
         ];
 
         this.state = {
-          value: choices[0],
+          value: null,
           choices,
         };
       }
