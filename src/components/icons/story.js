@@ -32,8 +32,8 @@ storiesOf('Icons', module)
     }}>
       {Object.keys(Icons).map(iconName => {
         const IconComponent = Icons[iconName];
-        return <div style={{fontFamily: 'Sailec'}}>
-          <IconComponent key={iconName} />
+        return <div key={iconName} style={{fontFamily: 'Sailec'}}>
+          <IconComponent />
           <span style={{marginLeft: 10, fontSize: 14, verticalAlign: 4, color: colorVariables.grayDarker}}>{iconName}</span>
         </div>;
       })}
