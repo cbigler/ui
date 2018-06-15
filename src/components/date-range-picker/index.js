@@ -2,6 +2,8 @@ import * as React from 'react';
 import classnames from 'classnames';
 import { DateRangePicker as ReactDatesDateRangePicker } from '@density/react-dates';
 
+import InputBox from '@density/ui-input-box';
+
 export const ANCHOR_RIGHT = 'ANCHOR_RIGHT',
   ANCHOR_LEFT = 'ANCHOR_LEFT',
   START_DATE_ACTIVE = 'startDate',
@@ -83,11 +85,19 @@ class CommonRangeList extends React.Component {
 // common range list, and binds them together
 export default function DateRangePicker(props) {
   const commonRangeList = Array.isArray(props.commonRanges) ? (
-    <CommonRangeList
-      onSelectCommonRange={props.onSelectCommonRange}
-      onOpenCommonRangeList={props.onOpenCommonRangeList}
-      commonRanges={props.commonRanges}
-      showCommonRangeSubtitles={props.showCommonRangeSubtitles}
+    <InputBox
+      type="select"
+      className="date-range-picker-common-range-list"
+      value={{id: 'icon', label: <span>foo</span>}}
+      choices={props.commonRanges.map(range => Object.assign({}, range, {
+        label: <span>
+          {range.name || range.label}
+          {props.showCommonRangeSubtitles ? <span className='common-range-subtitle'>
+            ({range.startDate.format('MM/DD')} - {range.endDate.format('MM/DD')})
+          </span> : null}
+        </span>,
+      }))}
+      onChange={props.onSelectCommonRange}
     />
   ) : null
 
