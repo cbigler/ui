@@ -132,7 +132,9 @@ export class SelectBox extends React.Component {
           <span>{selectedValue.label}</span> :
           <span className="input-box-select-placeholder">No selection</span>
         }
-        <IconChevronDown color="primary" width={12} height={12} />
+        <div className="input-box-caret">
+          <IconChevronDown color="primary" width={12} height={12} />
+        </div>
       </div>
 
       <div
