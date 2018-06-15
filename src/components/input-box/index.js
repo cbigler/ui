@@ -98,19 +98,20 @@ export class SelectBox extends React.Component {
         onBlur={this.onMenuBlur}
         onKeyDown={e => {
           if (e.keyCode === 27 /* escape */) {
-            e.target.blur();
+            this.selectBoxValueRef.blur();
           }
         }}
         onMouseDown={e => {
           if (this.state.opened) {
             e.preventDefault();
-            e.target.blur();
+            this.selectBoxValueRef.blur();
           }
         }}
 
         aria-expanded={opened}
         aria-autocomplete="list"
         tabIndex={disabled ? -1 : 0}
+        ref={r => { this.selectBoxValueRef = r; }}
         id={id}
       >
         {selectedValue ?
@@ -145,7 +146,7 @@ export class SelectBox extends React.Component {
                 if (e.keyCode === 13 /* enter */) {
                   this.onMenuItemSelected(choice);
                 } else if (e.keyCode === 27 /* escape */) {
-                  e.target.blur();
+                  this.selectBoxValueRef.blur();
                 }
               }}
               onMouseDown={e => choice.disabled && e.preventDefault()}
