@@ -106,7 +106,7 @@
       }
     }
 
-    &:focus {
+    &.opened {
       border-color: $brand-primary;
       outline: none;
 
