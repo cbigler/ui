@@ -111,7 +111,7 @@
       outline: none;
 
       // When focused, flip the caret.
-      svg { transform: rotate(180deg); }
+      .input-box-caret { transform: rotate(180deg); }
     }
 
     // When disabled, a selectbox is grayed out and can't be clicked.
