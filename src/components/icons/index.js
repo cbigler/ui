@@ -404,16 +404,16 @@ const ICONS = {
   IconCalendar: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
     <g id='Page-1' fill='none' fillRule='evenodd'>
       <g id='IconCalendar' transform='translate(-1 -1)'>
-        <rect id='bounds' fillOpacity='0' fill='#E3E3E6' width='20' height='20'
+        <rect id='bounds' fillOpacity='0' fill={color} width='20' height='20'
         />
         <path d='M2,18.75 L18,18.75 C18.4142136,18.75 18.75,18.4142136 18.75,18 L18.75,4 C18.75,3.58578644 18.4142136,3.25 18,3.25 L2,3.25 C1.58578644,3.25 1.25,3.58578644 1.25,4 L1.25,18 C1.25,18.4142136 1.58578644,18.75 2,18.75 Z M2.75,4.75 L17.25,4.75 L17.25,17.25 L2.75,17.25 L2.75,4.75 Z'
-        id='icon-square' fill='#000' fillRule='nonzero' />
+        id='icon-square' fill={color} fillRule='nonzero' />
         <path d='M2,9.75 L17,9.75 C17.4142136,9.75 17.75,9.41421356 17.75,9 C17.75,8.58578644 17.4142136,8.25 17,8.25 L2,8.25 C1.58578644,8.25 1.25,8.58578644 1.25,9 C1.25,9.41421356 1.58578644,9.75 2,9.75 Z'
-        id='Path-3' fill='#000' fillRule='nonzero' />
+        id='Path-3' fill={color} fillRule='nonzero' />
         <path d='M6.75,6 L6.75,2 C6.75,1.58578644 6.41421356,1.25 6,1.25 C5.58578644,1.25 5.25,1.58578644 5.25,2 L5.25,6 C5.25,6.41421356 5.58578644,6.75 6,6.75 C6.41421356,6.75 6.75,6.41421356 6.75,6 Z'
-        id='Path-4' fill='#000' fillRule='nonzero' />
+        id='Path-4' fill={color} fillRule='nonzero' />
         <path d='M14.75,6 L14.75,2 C14.75,1.58578644 14.4142136,1.25 14,1.25 C13.5857864,1.25 13.25,1.58578644 13.25,2 L13.25,6 C13.25,6.41421356 13.5857864,6.75 14,6.75 C14.4142136,6.75 14.75,6.41421356 14.75,6 Z'
-        id='Path-4-Copy' fill='#000' fillRule='nonzero' />
+        id='Path-4-Copy' fill={color} fillRule='nonzero' />
       </g>
     </g>
   </svg>,
@@ -595,26 +595,6 @@ const ICONS = {
               />
               <path d="M10,14 L10,13.9219" id="Stroke-5" stroke={color} strokeWidth="1.5"
               strokeLinecap="square" strokeLinejoin="round" transform="rotate(-180 10 13.96)"
-              />
-          </g>
-      </g>
-  </svg>,
-  IconCalendar: ({color, width, height}) => <svg width={width || "19"} height={height || "16"} viewBox="0 0 19 16" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconCalendar" transform="translate(0 -3)" fill={color} fillRule="nonzero">
-              <path d="M6,3.25 L18,3.25 C18.4142136,3.25 18.75,3.58578644 18.75,4 L18.75,18 C18.75,18.4142136 18.4142136,18.75 18,18.75 L6,18.75 L6,17.25 L17.25,17.25 L17.25,4.75 L6,4.75 L6,3.25 Z"
-              id="Combined-Shape" />
-              <path d="M12.5,11.75 L7.5,11.75 C7.08578644,11.75 6.75,11.4142136 6.75,11 L6.75,4 C6.75,3.58578644 7.08578644,3.25 7.5,3.25 C7.91421356,3.25 8.25,3.58578644 8.25,4 L8.25,10.25 L11.75,10.25 L11.75,4 C11.75,3.58578644 12.0857864,3.25 12.5,3.25 C12.9142136,3.25 13.25,3.58578644 13.25,4 L13.25,11 C13.25,11.4142136 12.9142136,11.75 12.5,11.75 Z"
-              id="Combined-Shape" />
-              <polygon id="Path-10" points="6.47338867 3.25 4 3.25 3 4.75 6.47338867 4.75"
-              />
-              <polygon id="Path-10-Copy" points="5.47338867 6.75 2 6.75 1 8.25 4.47338867 8.25"
-              />
-              <polygon id="Path-10-Copy-2" points="5.47338867 10.25 1 10.25 0 11.75 4.47338867 11.75"
-              />
-              <polygon id="Path-10-Copy-3" points="5.47338867 13.75 2 13.75 1 15.25 4.47338867 15.25"
-              />
-              <polygon id="Path-10-Copy-4" points="6.47338867 17.25 1 17.25 0 18.75 6.47338867 18.75"
               />
           </g>
       </g>
