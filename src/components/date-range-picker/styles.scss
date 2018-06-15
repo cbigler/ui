@@ -752,150 +752,35 @@ $brand-primary-light: #B2D6FF;
   border-color: $brand-primary;
 }
 
+@mixin make-common-range-list($value-width: 41px, $menu-width: 200px) {
+  padding-left: 15px;
+  font-family: $font-base;
+  font-size: $font-size-base;
+  font-weight: normal;
+  user-select: none;
+
+  // Define an explicit width for the the select box value and the menu.
+  // This is required so that if right aligned the menu can be moved left.
+  .input-box-select-box-value { width: $value-width; }
+  .input-box-select-box-menu { width: $menu-width; }
+
+  // Right align the select box menu with the select box value if the date
+  // picker is right aligned.
+  &.right .input-box-select-box-menu {
+    $select-box-value-width-including-padding: ($value-width + 15px + 15px);
+    margin-left: -1 * ($menu-width - $select-box-value-width-including-padding);
+  }
+}
+
+@mixin make-date-range-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.date-range-picker-wrapper { @include make-date-range-wrapper; }
 .date-range-picker { @include make-date-range-picker; }
 .date-range-picker-anchor-left { @include make-date-range-picker-anchor-left; }
 .date-range-picker-anchor-right { @include make-date-range-picker-anchor-right; }
 .date-range-picker-focused { @include make-date-range-picker-focused; }
 
-// Common Range List
-@mixin old() {
-  display: inline-block;
-  padding-left: 15px;
-  position: relative;
-  font-family: $font-base;
-  font-size: $font-size-base;
-  font-weight: normal;
-  user-select: none;
-
-  .common-range-list-toggle {
-    border: 1px solid $gray-light;
-    border-radius: $border-radius-base;
-    background-color: #fff;
-    cursor: pointer;
-    z-index: 4;
-
-    // BR: the following is ugly and I hate it, but due to the funkiness of the
-    // adjacent date picker input
-    height: 33px;
-    line-height: 36px;
-    padding: 4px 15px;
-  }
-
-  [class^="common-range-icon"] {
-    font-family: Densicons;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-  }
-
-  .common-range-icon {
-    color: $gray-dark;
-
-    &:before {
-      content: "\e906";
-    }
-  }
-
-  .common-range-icon-caret {
-    font-size: 10px;
-    margin-left: 15px;
-    transform: rotate(180deg);
-    display: inline-block;
-    color: $brand-primary;
-    position: relative;
-    top: -2px;
-
-    &:before {
-      content: "\e90b";
-    }
-
-    &.flipped {
-      transform: rotate(0deg);
-    }
-  }
-
-  .common-range-list-items {
-    list-style: none;
-    display: none;
-    position: absolute;
-    right: 0;
-    text-align: left;
-    min-width: 160px;
-    padding-left: 0;
-    margin-top: 8px;
-    border-radius: $border-radius-base;
-    background-color: #fff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.07);
-    z-index: 4; // above the calendar _and_ backdrop
-    display: none;
-    flex-direction: column;
-
-    li {
-      font-weight: 300;
-      font-family: $font-base;
-
-      padding: 15px;
-      flex: 1;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    li:hover {
-      background-color: $gray-lighter;
-    }
-  }
-
-  .common-range-subtitle {
-    color: $gray;
-    font-family: $font-base;
-    font-size: $font-size-small;
-    font-weight: 300;
-    margin-left: 8px;
-  }
-
-  .common-range-list-backdrop {
-    z-index: 3; // above the calendar, below the range list
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    background: none;
-    display: none;
-  }
-
-  // toggled on styles
-  &.open .common-range-list-backdrop {
-    display: block;
-  }
-
-  &.open .common-range-list-toggle {
-    border: 1px solid $brand-primary;
-  }
-
-  &.open .common-range-list-items {
-    display: inline-flex;
-  }
-}
-
-@mixin make-common-range-list {
-  padding-left: 15px;
-  font-family: $font-base;
-  font-size: $font-size-base;
-  font-weight: normal;
-  user-select: none;
-
-  .input-box-select-box-value {
-    width: 41px;
-  }
-}
-
-.date-range-wrapper {
-  display: flex;
-  flex-direction: row;
-}
-.date-range-picker-common-range-list {
-  @include make-common-range-list;
-}
+.date-range-picker-common-range-list { @include make-common-range-list; }
