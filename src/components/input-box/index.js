@@ -105,6 +105,7 @@ export class SelectBox extends React.Component {
           if (this.state.opened) {
             e.preventDefault();
             this.selectBoxValueRef.blur();
+            this.onMenuBlur();
           }
         }}
 
