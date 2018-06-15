@@ -14,7 +14,7 @@ storiesOf('Switch', module)
     <Switch value={true} disabled={true} onChange={action("onchange")} />
   ))
   .add('Interactive', () => (
-    <SwitchWrapper initialEnabledState={true} />
+    <SwitchWrapper initialValueState={true} />
   ))
 
 
@@ -26,13 +26,13 @@ storiesOf('Switch', module)
 class SwitchWrapper extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {enabled: props.initialEnabledState};
+    this.state = {value: props.initialValueState};
   }
   render() {
     return <Switch
       value={this.state.enabled}
       onChange={event => {
-        this.setState({enabled: !this.state.enabled})
+        this.setState({value: !this.state.value})
         this.props.onChange && this.props.onChange(event);
       }}
     />;
