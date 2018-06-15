@@ -54,8 +54,8 @@ export class SelectBox extends React.Component {
 
     // Called when the user focuses either the value or an item in the menu part of the box.
     this.onMenuFocus = choice => {
-      this.menuInFocus = true;
       this.setState({opened: true});
+      this.menuInFocus = true;
       this.focusedChoice = choice;
     };
 
@@ -119,7 +119,13 @@ export class SelectBox extends React.Component {
         onBlur={this.onMenuBlur}
         onKeyUp={e => {
           if (e.keyCode === 27 /* escape */) {
-            this.onMenuBlur();
+            e.target.blur();
+          }
+        }}
+        onMouseDown={e => {
+          if (this.menuInFocus) {
+            e.preventDefault();
+            e.target.blur();
           }
         }}
 
