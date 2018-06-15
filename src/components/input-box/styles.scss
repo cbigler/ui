@@ -106,6 +106,8 @@
       }
     }
 
+    & > .input-box-caret { height:12px; }
+
     &.opened {
       border-color: $brand-primary;
       outline: none;
