@@ -82,7 +82,7 @@ export class SelectBox extends React.Component {
     // 1. The raw element in `choices` (ie, choices.indexOf(value) isn't -1)
     // 2. An id of an element in `choices`
     let selectedValue;
-    if (value && value.id) {
+    if (value && !(typeof(value.id) === undefined || typeof(value.id) === null)) {
       selectedValue = value;
     } else if (choices) {
       selectedValue = choices.find(i => i.id === value);
