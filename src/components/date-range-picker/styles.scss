@@ -761,6 +761,7 @@ $brand-primary-light: #B2D6FF;
 
   // Define an explicit width for the the select box value and the menu.
   // This is required so that if right aligned the menu can be moved left.
+  width: auto;
   .input-box-select-box-value { width: $value-width; }
   .input-box-select-box-menu { width: $menu-width; }
 
