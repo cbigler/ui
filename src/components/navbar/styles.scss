@@ -121,28 +121,36 @@
   }
 
   // If the user hovers over the navbar item, show the tooltip.
-  .navbar-item-tooltip { display: none; }
-  &:hover .navbar-item-tooltip { display: block; }
+  .navbar-item-tooltip {
+    opacity: 0;
+    pointer-events: none;
+  }
+  &:hover .navbar-item-tooltip {
+    opacity: 1;
+  }
 }
 @mixin make-navbar-item-tooltip($border-width: 1px, $caret-size: 6px) {
   position: absolute;
 
   max-width: 225px;
-  min-height: 30px;
   font-size: $font-size-base;
   padding: 20px;
 
   background-color: #fff;
   border: $border-width solid $brand-primary;
   border-radius: $border-radius-base;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
 
   // Position the navbar locked reason tooltip to be in line with the text of the navbar item above
   // it.
   margin-left: 16px;
+  margin-top: -4px;
 
   // Ensure that the tooltip cannot be interacted with.
   user-select: none;
   cursor: default;
+
+  transition: all 100ms ease-in-out;
 
   .navbar-item-tooltip-pointer {
     display: block;

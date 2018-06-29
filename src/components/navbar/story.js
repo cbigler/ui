@@ -87,6 +87,14 @@ storiesOf('Navbar', module)
               activePage='active-page'
               pageName={['insights']}
               locked={true}
+              lockedReason="This is why I'm locked!"
+              href="https://example.com"
+            >Insights</NavbarItem>
+            <NavbarItem
+              activePage='active-page'
+              pageName={['insights']}
+              locked={false}
+              lockedReason="This is why I'm locked!"
               href="https://example.com"
             >Insights</NavbarItem>
           </Navbar>
