@@ -10,51 +10,60 @@ import moment from 'moment';
 // used in multiple stories
 const commonRanges = [
   {
-    name: "Week to date",
+    id: 'WEEK_TO_DATE',
+    name: 'Week to date',
     startDate: moment.utc().startOf('week'),
     endDate: moment.utc()
   },
   {
-    name: "Month to date",
+    id: 'MONTH_TO_DATE',
+    name: 'Month to date',
     startDate: moment.utc().startOf('month'),
     endDate: moment.utc()
   },
   {
-    name: "Quarter to date",
+    id: 'QUARTER_TO_DATE',
+    name: 'Quarter to date',
     startDate: moment.utc().startOf('quarter'),
     endDate: moment.utc()
   },
   {
-    name: "Last week",
+    id: 'LAST_WEEK',
+    name: 'Last week',
     startDate: moment.utc().startOf('week').subtract(1, 'week'),
     endDate: moment.utc().endOf('week').subtract(1, 'week')
   },
   {
-    name: "Last month",
+    id: 'LAST_MONTH',
+    name: 'Last month',
     startDate: moment.utc().startOf('month').subtract(1, 'month'),
     endDate: moment.utc().endOf('month').subtract(1, 'month')
   },
   {
-    name: "Last Quarter",
+    id: 'LAST_QUARTER',
+    name: 'Last Quarter',
     startDate: moment.utc().startOf('quarter').subtract(1, 'quarter'),
     endDate: moment.utc().endOf('quarter').subtract(1, 'quarter')
   },
   {
-    name: "Last 7 days",
+    id: 'LAST_7_DAYS',
+    name: 'Last 7 days',
     startDate: moment.utc().subtract(1, 'week'),
     endDate: moment.utc()
   },
   {
-    name: "Last 30 days",
+    id: 'LAST_30_DAYS',
+    name: 'Last 30 days',
     startDate: moment.utc().subtract(1, 'month'),
     endDate: moment.utc()
   },
   {
-    name: "Last 90 days",
+    id: 'LAST_90_DAYS',
+    name: 'Last 90 days',
     startDate: moment.utc().subtract(1, 'quarter'),
     endDate: moment.utc()
-  }
-]
+  },
+];
 
 storiesOf('DateRangePicker', module)
   .addWithInfo('Open, start date selected', () => (

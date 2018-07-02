@@ -6,8 +6,6 @@
 // Local variables to the component
 @import "variables.json";
 
-@import "./react-select.css";
-
 // An input box is a stylized <input />.
 @mixin make-input-box($active-color: $brand-primary) {
   display: block;
@@ -34,12 +32,6 @@
   }
 }
 
-// If applying to a <select></select>, apply a few different styles.
-@mixin make-input-box-select {
-  position: relative;
-  height: 43px;
-}
-
 // If applying to a <textarea></textarea>, apply a few more styles.
 @mixin make-input-box-textarea {
   line-height: $line-height-base;
@@ -64,6 +56,144 @@
 }
 
 .input-box { @include make-input-box; }
-.input-box-select { @include make-input-box-select; }
 .input-box-textarea { @include make-input-box-textarea; }
 .input-box-disabled { @include make-input-box-disabled; }
+
+
+// Extract common styles into a placeholder selector for selectbox menu list and value
+%input-box-select-common {
+  font-family: $font-base;
+
+  width: calc(100% - 15px - 15px);
+
+  background-color: #fff;
+  border: 1px solid $gray-light;
+  border-radius: 4px;
+
+  padding-left: 15px;
+  padding-right: 15px;
+
+  user-select: none;
+}
+
+@mixin make-input-box-select {
+  &-box {
+    position: relative;
+    width: 200px;
+
+    font-weight: normal;
+  }
+
+  // Select box value - this is the always visible region that shows the currently selected item.
+  &-box-value {
+    @extend %input-box-select-common;
+    height: (43px - 1px - 1px); /* (for borders) */
+
+    font-size: $font-size-base;
+    color: $gray-cinder;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    cursor: pointer;
+
+    & > span {
+      margin-right: auto;
+
+      &:active {
+        opacity: 0.9;
+      }
+    }
+
+    & > .input-box-caret { height:12px; }
+
+    &.opened {
+      border-color: $brand-primary;
+      outline: none;
+
+      // When focused, flip the caret.
+      .input-box-caret { transform: rotate(180deg); }
+    }
+
+    // When disabled, a selectbox is grayed out and can't be clicked.
+    &.disabled {
+      background-color: $gray-lighter;
+      pointer-events: none;
+    }
+  }
+
+  // Select box menu - this is the menu that is hidden and shown when the user clicks on the select
+  // box value.
+  &-box-menu {
+    @extend %input-box-select-common;
+
+    position: absolute;
+    top: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+
+    width: 100%;
+
+    z-index: 100;
+    color: $gray-cinder;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 100ms ease-in-out;
+    user-select: none;
+
+    // When opened, fade in the select box and enable pointer events.
+    // NOTE: when the select box is closed, it isn't given `display: none`, because giving it that
+    // would make the animation difficult. Instead, it's given `pointer-events: none`, which causes
+    // any clicks to not occur on that element and instead be handled by the element underneath it.
+    opacity: 0;
+    pointer-events: none;
+    &.opened {
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+
+  &-box-menu ul {
+    list-style-type: none;
+    padding-left: 0px;
+    margin: 0px;
+  }
+
+  &-box-menu li {
+    line-height: 36px;
+    font-size: $font-size-base;
+    cursor: pointer;
+
+    padding-left: 15px;
+    padding-right: 15px;
+
+    &:focus {
+      color: $brand-primary;
+      outline: none;
+    }
+
+    &:hover {
+      background-color: $gray-lightest;
+    }
+
+    &.disabled {
+      color: $gray-dark;
+    }
+  }
+
+  &-box-item-highlight {
+    margin-left: 10px;
+    color: $gray-dark;
+    font-style: italic;
+  }
+
+  &-placeholder {
+    color: $gray;
+  }
+}
+
+.input-box-select {
+  @include make-input-box-select;
+}

@@ -43,6 +43,15 @@
       border-color: $background;
     }
   }
+
+  &.disabled input[type=checkbox] + label,
+  &.disabled input[type=checkbox]:checked + label {
+    pointer-events: none;
+    background-color: $gray-light;
+  }
+  &.disabled input[type=checkbox]:checked + label:after {
+    border-color: $gray-light;
+  }
 }
 
 .switch {

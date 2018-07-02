@@ -519,6 +519,7 @@
     user-select: none; }
 
 .DateInput__display-text {
+  height: 25px !important;
   padding: 4px 8px;
   white-space: nowrap;
   overflow: hidden; }
@@ -659,13 +660,13 @@
   display: inline-block;
   padding-left: 4px;
   padding-right: 4px;
-  height: (43px - 7px);
-  line-height: (43px - 4px);
+  height: (43px - 6px);
   padding-top: 4px;
   resize: none;
 
   font-family: $font-base;
   font-size: $font-size-base;
+  font-weight: normal;
 
   color: $gray-darker;
   background-color: #fff;

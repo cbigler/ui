@@ -138,6 +138,60 @@ storiesOf('Card', module)
       </Card>
     </div>
   ))
+  .addWithInfo('Dark Card Well (no header)', () => (
+    <div>
+      <Card style={{width: 300}}>
+        <CardWell type="dark">
+          The distance from the
+          earth to the moon is <CardWellHighlight>384,400 km</CardWellHighlight>.
+        </CardWell>
+        <CardBody>
+          <p style={{margin: 0}}>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry and this is just here to make you believe in aliens.
+          </p>
+          <br />
+          <Button>Yes</Button>
+          <br />
+          <Button>No</Button>
+        </CardBody>
+      </Card>
+      <br/>
+      <Card style={{width: 500}}>
+        <CardWell type="dark">
+          The distance from the
+          earth to the moon is <CardWellHighlight>384,400 km</CardWellHighlight>.
+        </CardWell>
+        <CardBody>
+          <p style={{margin: 0}}>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry and this is just here to make you believe in aliens.
+          </p>
+          <br />
+          <Button>Yes</Button>
+          <br />
+          <Button>No</Button>
+        </CardBody>
+      </Card>
+      <br/>
+      <Card style={{width: 700}}>
+        <CardWell type="dark">
+          The distance from the
+          earth to the moon is <CardWellHighlight>384,400 km</CardWellHighlight>.
+        </CardWell>
+        <CardBody>
+          <p style={{margin: 0}}>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry and this is just here to make you believe in aliens.
+          </p>
+          <br />
+          <Button>Yes</Button>
+          <br />
+          <Button>No</Button>
+        </CardBody>
+      </Card>
+    </div>
+  ))
   .addWithInfo('Responsive Card Well', () => (
     <div style={{resize: 'both', overflow: 'auto'}}>
       <span style={{fontFamily: 'Sailec'}}>Resize the card horizontally to see its responsive behavior!</span>
@@ -191,6 +245,18 @@ storiesOf('Card', module)
   .addWithInfo('Indeterminate Loading Card', () => (
     <Card>
       <CardLoading indeterminate />
+      <CardBody>
+        <p>Hello World!</p>
+      </CardBody>
+    </Card>
+  ))
+  .addWithInfo('Indeterminate Loading Card w/ Dark Card Well', () => (
+    <Card>
+      <CardLoading indeterminate />
+      <CardWell type="dark">
+        On average, peak utilization of <CardWellHighlight>18%</CardWellHighlight> happens
+        around <CardWellHighlight>5:15p</CardWellHighlight> during <CardWellHighlight>open hours</CardWellHighlight>
+      </CardWell>
       <CardBody>
         <p>Hello World!</p>
       </CardBody>
