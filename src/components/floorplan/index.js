@@ -95,7 +95,11 @@ export default class Floorplan extends Component {
     this.state = {
       selectedId: null,
       panZoomMatrix: {a: 1, b: 0, c: 0, d: 1, e: 0, f: 0},
-      selectedItemMoving: false,
+      selectedShapeMoving: false,
+
+      // Display the tooltip following the cursor offscreen until the first mousemove event.
+      lastMouseX: -1000,
+      lastMouseY: -1000,
     };
 
     this.shapeRefs = {};
@@ -118,7 +122,7 @@ export default class Floorplan extends Component {
     }
 
     const { shapes, onClick } = this.props;
-    const { selectedItemMoving, selectedId, panZoomMatrix } = this.state;
+    const { selectedShapeMoving, selectedId, panZoomMatrix } = this.state;
 
     const scaleFactor = 1 / panZoomMatrix.a;
 
@@ -130,175 +134,226 @@ export default class Floorplan extends Component {
     // selected shape.
     this.lastSelectedShape = selectedShape || this.lastSelectedShape;
 
-    return <div
-      className="floorplan"
-      ref={r => {
-        const firstUpdate = typeof this.container === 'undefined';
-        this.container = r;
-        if (firstUpdate) {
-          this.forceUpdate();
-        }
-      }}
-      onMouseMove={e => {
-        // Selected shape is being moved, update its x and y coordinates.
-        if (selectedItemMoving) {
-          if (e.buttons > 0) {
-            // Calculate the distance that the mouse has moved since the last update.
-            const deltaX = (e.clientX * scaleFactor) - this.lastMouseX;
-            const deltaY = (e.clientY * scaleFactor) - this.lastMouseY;
-
-            // Add that delta to the current x and y coords.
-            let x = selectedShape.x + deltaX;
-            let y = selectedShape.y + deltaY;
-
-            // Call a callback, passing those new coords. This callback
-            // should update the state of the component, moving the shapes.
-            this.props.onItemMovement(selectedId, x, y);
-
-            // Update the last mouse positions with the current positions - for the next frame.
-            this.lastMouseX = e.clientX * scaleFactor;
-            this.lastMouseY = e.clientY * scaleFactor;
-          } else {
-            // Item is no longer being moved, unset the `selectedItemMoving` flag.
-            this.setState({selectedItemMoving: false});
-
-            // Remove the last mouse variables, as they are no longer needed.
-            delete this.lastMouseX;
-            delete this.lastMouseY;
+    return (
+      <div
+        className="floorplan"
+        ref={r => {
+          const firstUpdate = typeof this.container === 'undefined';
+          this.container = r;
+          if (firstUpdate) {
+            this.forceUpdate();
           }
-        }
-      }}
-    >
+        }}
+        onMouseOut={() => {
+          this.setState({
+            lastMouseX: -1000,
+            lastMouseY: -1000,
+          });
+        }}
+        onMouseMove={e => {
+          // Selected shape is being moved, update its x and y coordinates.
+          if (selectedShapeMoving) {
+            if (e.buttons > 0) {
+              // Calculate the distance that the mouse has moved since the last update.
+              const deltaX = (e.clientX * scaleFactor) - this.state.lastMouseX;
+              const deltaY = (e.clientY * scaleFactor) - this.state.lastMouseY;
 
-      {(() => {
-        let styles = {};
+              // Add that delta to the current x and y coords.
+              let x = selectedShape.x + deltaX;
+              let y = selectedShape.y + deltaY;
 
-        if (this.lastSelectedShape) {
-          // Figure out where popup should be. Use the position of the shape on the canvas to get
-          // the upper left hand x and y coordinates.
-          let {x, y} = this.shapeRefs[this.lastSelectedShape.id].getBoundingClientRect();
-
-          // Add offsets such that the x and y coordinates refer to the middle of the shape, not the
-          // top left.
-          x += this.lastSelectedShape.width / 2;
-          y += this.lastSelectedShape.height / 2;
-
-          // Offset the popup by the required amount.
-          x += POPUP_HORIZONTAL_OFFSET_FROM_SELECTED_ITEM_IN_PX;
-          y += POPUP_VERTICAL_OFFSET_FROM_SELECTED_ITEM_IN_PX;
-
-          // Ensure that the popup can't overflow the bounds of its container.
-          let popupBounds = this.popupRef.getBoundingClientRect();
-          if (x < 10) { x = 10; }
-          if (x > width - popupBounds.width - 20) { x = width - popupBounds.width - 20; }
-
-          if (y < 10) { y = 10; }
-          if (y > height - popupBounds.height - 20) {
-            y = y - popupBounds.height - this.lastSelectedShape.height - 24;
+              // Call a callback, passing those new coords. This callback
+              // should update the state of the component, moving the shapes.
+              this.props.onShapeMovement(selectedId, x, y);
+            } else {
+              // Item is no longer being moved, unset the `selectedShapeMoving` flag.
+              this.setState({selectedShapeMoving: false});
+            }
           }
 
-          // Assign position.
-          styles.left = x;
-          styles.top = y;
-        }
-
-        const shouldPopupBeOpen = selectedShape && !selectedItemMoving;
-        styles.opacity = shouldPopupBeOpen ? 1 : 0;
-        styles.pointerEvents = shouldPopupBeOpen ? 'all' : 'none';
-
-        return <div
-          className="floorplan-popup"
-          style={styles}
-          ref={r => { this.popupRef = r; }}
-        >
-          {this.lastSelectedShape ? this.lastSelectedShape.popup(this.lastSelectedShape) : null}
-        </div>;
-      })()}
-
-      <ReactSVGPanZoom
-        width={width}
-        height={height}
-        ref={r => { this.panZoom = r; }}
-
-        /* When a shape is selected, do not allow the canvas to move */
-        tool={selectedId ? TOOL_NONE : TOOL_AUTO}
-
-        /* https://github.com/chrvadala/react-svg-pan-zoom/blob/master/docs/documentation.md */
-        detectWheel={true}
-        detectPinchGesture={true}
-        detectAutoPan={false}
-        disableDoubleClickZoomWithToolAuto={false}
-
-        toolbarPosition="none"
-        miniaturePosition="none"
-        background="#B4B8BF"
-
-        onChangeValue={value => this.setState({panZoomMatrix: value})}
-        onZoom={() => this.setState({selectedItemMoving: false, selectedId: null})}
+          // Update the last mouse positions with the current positions - for the next frame.
+          this.setState({
+            lastMouseX: e.clientX * scaleFactor,
+            lastMouseY: e.clientY * scaleFactor,
+          });
+        }}
       >
-        <svg
-          className="floorplan-svg"
+        {(() => {
+          let styles = {};
+
+          if (this.lastSelectedShape) {
+            // Was the selected shape deleted?
+            if (!this.shapeRefs[this.lastSelectedShape.id]) {
+              this.lastSelectedShape = null;
+              return null;
+            }
+
+            // Figure out where popup should be. Use the position of the shape on the canvas to get
+            // the upper left hand x and y coordinates.
+            let {x, y} = this.shapeRefs[this.lastSelectedShape.id].getBoundingClientRect();
+
+            // Add offsets such that the x and y coordinates refer to the middle of the shape, not the
+            // top left.
+            x += this.lastSelectedShape.width / 2;
+            y += this.lastSelectedShape.height / 2;
+
+            // Offset the popup by the required amount.
+            x += POPUP_HORIZONTAL_OFFSET_FROM_SELECTED_ITEM_IN_PX;
+            y += POPUP_VERTICAL_OFFSET_FROM_SELECTED_ITEM_IN_PX;
+
+            // Ensure that the popup can't overflow the bounds of its container.
+            let popupBounds = this.popupRef.getBoundingClientRect();
+            if (x < 10) { x = 10; }
+            if (x > width - popupBounds.width - 20) { x = width - popupBounds.width - 20; }
+
+            if (y < 10) { y = 10; }
+            if (y > height - popupBounds.height - 20) {
+              y = y - popupBounds.height - this.lastSelectedShape.height - 24;
+            }
+
+            // Assign position.
+            styles.left = x;
+            styles.top = y;
+          }
+
+          const shouldPopupBeOpen = selectedShape && !selectedShapeMoving;
+          styles.opacity = shouldPopupBeOpen ? 1 : 0;
+          styles.pointerEvents = shouldPopupBeOpen ? 'all' : 'none';
+
+          return <div
+            className="floorplan-popup"
+            style={styles}
+            ref={r => { this.popupRef = r; }}
+          >
+            {this.lastSelectedShape ? this.lastSelectedShape.popup(this.lastSelectedShape) : null}
+          </div>;
+        })()}
+
+        {!selectedShape ? (
+          <div
+            className="floorplan-cursor"
+            style={{left: (this.state.lastMouseX / scaleFactor) + 20, top: (this.state.lastMouseY / scaleFactor) - 13}}
+          >
+            Click to add a doorway
+          </div>
+        ) : null}
+
+        <ReactSVGPanZoom
           width={width}
           height={height}
-          viewBox={`0 0 ${width} ${height}`}
+          ref={r => { this.panZoom = r; }}
+
+          /* When a shape is selected, do not allow the canvas to move */
+          tool={selectedId ? TOOL_NONE : TOOL_AUTO}
+
+          /* https://github.com/chrvadala/react-svg-pan-zoom/blob/master/docs/documentation.md */
+          detectWheel={true}
+          detectPinchGesture={true}
+          detectAutoPan={false}
+          disableDoubleClickZoomWithToolAuto={false}
+
+          toolbarPosition="none"
+          miniaturePosition="none"
+          background="#B4B8BF"
+
+          onChangeValue={value => this.setState({panZoomMatrix: value})}
+          onZoom={() => this.setState({
+            selectedShapeMoving: false,
+            selectedId: null,
+
+            // On zoom. reset these values so that they can be
+            // recomputed with the new scale factor.
+            lastMouseX: -1000,
+            lastMouseY: -1000,
+          })}
+          onClick={e => {
+            if (selectedShape) {
+              return;
+            }
+
+            // The user clicked the background without a shape selected, so create a new shape!
+            if (this.props.onCreateShape) {
+              const x = e.x;
+              const y = e.y;
+              console.log('NEW COORDS', x, y);
+              this.props.onCreateShape(x, y);
+            }
+          }}
         >
-          <g className="floorplan-layer-image">
-            <image
-              xlinkHref="https://i.imgur.com/FkE7cxK.png"
-              x={0}
-              y={0}
-              onClick={() => this.setState({selectedItemMoving: false, selectedId: null})}
-            />
-          </g>
+          <svg
+            className="floorplan-svg"
+            width={width}
+            height={height}
+            viewBox={`0 0 ${width} ${height}`}
+          >
+            <g className="floorplan-layer-image">
+              <image
+                xlinkHref="https://i.imgur.com/FkE7cxK.png"
+                x={0}
+                y={0}
+                onClick={() => this.setState({selectedShapeMoving: false, selectedId: null})}
+              />
+            </g>
 
-          <g className="floorplan-layer-shapes">
-            {shapes.map((shape, index) => {
-              const translateX = shape.x - (shape.width/2);
-              const translateY = shape.y - (shape.height/2);
-              return <g
-                className="floorplan-shape"
-                transform={`translate(${translateX},${translateY})`}
-                key={shape.id}
-                style={{cursor: 'pointer'}}
-                onClick={() => {
-                  this.setState({selectedItemMoving: false, selectedId: shape.id});
-                }}
-                onMouseMove={e => {
-                  // If the user started clicking and dragging on an shape, then
-                  // start moving that shape.
-                  if (shape.allowMovement && !selectedItemMoving && e.buttons > 0) {
-                    // Set initial x and y mouse positions. This is used to calculate mouse deltas
-                    // on future mousemoves.
-                    this.lastMouseX = e.clientX * scaleFactor;
-                    this.lastMouseY = e.clientY * scaleFactor;
-
+            <g className="floorplan-layer-shapes">
+              {shapes.map((shape, index) => {
+                const translateX = shape.x - (shape.width/2);
+                const translateY = shape.y - (shape.height/2);
+                return <g
+                  className="floorplan-shape"
+                  transform={`translate(${translateX},${translateY})`}
+                  key={shape.id}
+                  style={{cursor: 'pointer'}}
+                  onClick={e => {
                     this.setState({
                       selectedId: shape.id,
-
-                      // Set the flag indicating that the currently selected doorway is being moved.
-                      selectedItemMoving: true,
+                      selectedShapeMoving: false,
                     });
-                  }
-                }}
-                ref={r => { this.shapeRefs[shape.id] = r; }}
-              >
-                {/* Render the given shape on the floorplan */}
-                <shape.shape
-                  selected={selectedId === shape.id}
-                  isMoving={selectedId === shape.id && selectedItemMoving}
-                  index={index}
-                  /* I'd love to apply a css scale transformation instead, but it'd need a 
-                   * transform-origin property, and that would effect the transform already
-                   * being done. */
-                  scale={scaleFactor}
 
-                  shape={shape}
-                />
-              </g>;
-            })}
-          </g>
-        </svg>
-      </ReactSVGPanZoom>
-    </div>;
+                    // Ensure that the click event won't make its way to the floorplan
+                    // and create a new shape.
+                    e.stopPropagation();
+                  }}
+                  onMouseMove={e => {
+                    // The above only applies to the actively selected shape.
+                    if (selectedId !== shape.id) {
+                      return;
+                    }
+
+                    // If the user started clicking and dragging on an shape, then
+                    // start moving that shape.
+                    if (shape.allowMovement && !selectedShapeMoving && e.buttons > 0) {
+                      // Set initial x and y mouse positions. This is used to calculate mouse deltas
+                      // on future mousemoves.
+                      this.setState({
+                        lastMouseX: e.clientX * scaleFactor,
+                        lastMouseY: e.clientY * scaleFactor,
+
+                        // Set the flag indicating the currently selected doorway is being moved.
+                        selectedShapeMoving: true,
+                      });
+                    }
+                  }}
+                  ref={r => { this.shapeRefs[shape.id] = r; }}
+                >
+                  {/* Render the given shape on the floorplan */}
+                  <shape.shape
+                    selected={selectedId === shape.id}
+                    isMoving={selectedId === shape.id && selectedShapeMoving}
+                    index={index}
+                    /* I'd love to apply a css scale transformation instead, but it'd need a 
+                     * transform-origin property, and that would effect the transform already
+                     * being done. */
+                    scale={scaleFactor}
+
+                    shape={shape}
+                  />
+                </g>;
+              })}
+            </g>
+          </svg>
+        </ReactSVGPanZoom>
+      </div>
+    );
   }
 }

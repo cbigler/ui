@@ -10,7 +10,7 @@ import Floorplan, { DPU, CIRCLE } from './';
 import uuid from 'uuid';
 
 storiesOf('Floorplan', module)
-  .addWithInfo('With a text body', () => {
+  .addWithInfo('With a few movable doorways', () => {
 
     class FloorplanWrapper extends React.Component {
       constructor(props) {
@@ -28,6 +28,11 @@ storiesOf('Floorplan', module)
           <h3>Popup</h3>
           <h5 style={{margin: 0, color: '#4E5457'}}>Has access to this data:</h5>
           <pre>{JSON.stringify(shape, null, 2)}</pre>
+          <button onClick={() => {
+            this.setState({
+              shapes: this.state.shapes.filter(i => i.id !== shape.id),
+            });
+          }}>Delete</button>
         </div>;
 
         this.state = {
@@ -64,7 +69,7 @@ storiesOf('Floorplan', module)
         return <div style={{width: '100vw', height: '100vh'}}>
           <Floorplan
             shapes={this.state.shapes}
-            onItemMovement={(id, x, y) => {
+            onShapeMovement={(id, x, y) => {
               this.setState({
                 shapes: this.state.shapes.map(s => {
                   if (s.id === id) {
@@ -73,6 +78,21 @@ storiesOf('Floorplan', module)
                     return s;
                   }
                 }),
+              });
+            }}
+
+            onCreateShape={(x, y) => {
+              const id = uuid.v4();
+              this.setState({
+                shapes: [...this.state.shapes, {
+                  id, x, y,
+                  shape: CIRCLE,
+                  popup: this.shapePopup,
+                  width: 40,
+                  height: 40,
+                  allowMovement: true,
+                  name: `My new doorway with id ${id}`,
+                }],
               });
             }}
           />
