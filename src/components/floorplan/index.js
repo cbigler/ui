@@ -3,6 +3,12 @@ import { applyToPoint } from 'transformation-matrix';
 
 import {ReactSVGPanZoom, TOOL_NONE, TOOL_AUTO} from 'react-svg-pan-zoom';
 
+import colorVariables from '@density/ui/variables/colors.json';
+import fontVariables from '@density/ui/variables/fonts.json';
+
+const POPUP_VERTICAL_OFFSET_FROM_SELECTED_ITEM_IN_PX = 28;
+const POPUP_HORIZONTAL_OFFSET_FROM_SELECTED_ITEM_IN_PX = -150;
+
 export const DPU = ({selected, shape}) => <g className="DPU" transform="scale(0.75)">
   <rect
     x={shape.placement === 1 ? -10 : 50}
@@ -31,6 +37,58 @@ export const DPU = ({selected, shape}) => <g className="DPU" transform="scale(0.
   ></path>
 </g>;
 
+export const CIRCLE = ({scale, selected, index}) => <g className="Circle">
+  <circle
+    cx={21}
+    cy={21}
+    r={26 * scale}
+    style={{
+      opacity: selected ? 0.35 : 0,
+      fill: colorVariables.brandPrimary, /* must be here for transition to work */
+                                         /* see https://stackoverflow.com/a/20012937/4115328 */
+      transition: "all 200ms ease-in-out",
+    }}
+  />
+  <circle
+    cx={21}
+    cy={21}
+    r={18 * scale}
+    fill={colorVariables.brandPrimary}
+  />
+  <text
+    transform="translate(21,21)"
+    textAnchor="middle"
+    alignmentBaseline="middle"
+    fill="#fff"
+    fontFamily={fontVariables.fontBase}
+    fontSize={12 * scale}
+    fontWeight="600"
+  >{index+1}</text>
+</g>;
+
+export class PlannerPopup extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+    };
+  }
+
+  render() {
+    return (
+      <div className="interactive-floorplan-popup">
+        <label for="interactive-floorplan-doorway-name">Doorway Name</label>
+        <span
+          className="interactive-floorplan-doorway-name"
+          id="interactive-floorplan-doorway-name"
+        >Conference Room 1</span>
+
+        <label for="interactive-floorplan-doorway-name">Doorway Name</label>
+      </div>
+    );
+  }
+}
+
 export default class Floorplan extends Component {
   constructor(props) {
     super(props);
@@ -38,6 +96,8 @@ export default class Floorplan extends Component {
       selectedId: null,
       panZoomMatrix: {a: 1, b: 0, c: 0, d: 1, e: 0, f: 0},
     };
+
+    this.shapeRefs = {};
   }
   componentWillMount() {
     this.onResize = () => this.forceUpdate();
@@ -79,20 +139,42 @@ export default class Floorplan extends Component {
         let styles = {};
 
         if (this.lastSelectedShape) {
-          const point = applyToPoint(this.state.panZoomMatrix, {
-            x: this.lastSelectedShape.x - (this.lastSelectedShape.width/2) - 3,
-            y: this.lastSelectedShape.y + (this.lastSelectedShape.height/2),
-          });
+          // Figure out where popup should be. Use the position of the shape on the canvas to get
+          // the upper left hand x and y coordinates.
+          let {x, y} = this.shapeRefs[this.lastSelectedShape.id].getBoundingClientRect();
 
-          styles.top = point.y + 10;
-          styles.left = point.x;
+          // Add offsets such that the x and y coordinates refer to the middle of the shape, not the
+          // top left.
+          x += this.lastSelectedShape.width / 2;
+          y += this.lastSelectedShape.height / 2;
+
+          // Offset the popup by the required amount.
+          x += POPUP_HORIZONTAL_OFFSET_FROM_SELECTED_ITEM_IN_PX;
+          y += POPUP_VERTICAL_OFFSET_FROM_SELECTED_ITEM_IN_PX;
+
+
+          let popupBounds = this.popupRef.getBoundingClientRect();
+          if (x < 10) { x = 10; }
+          if (x > width - popupBounds.width - 20) { x = width - popupBounds.width - 20; }
+
+          if (y < 10) { y = 10; }
+          if (y > height - popupBounds.height - 20) {
+            y = y - popupBounds.height - this.lastSelectedShape.height - 24;
+          }
+
+          styles.left = x;
+          styles.top = y;
         }
 
         styles.opacity = selectedShape ? 1 : 0;
         styles.pointerEvents = selectedShape ? 'all' : 'none';
 
-        return <div className="floorplan-popup" style={styles}>
-          {selectedShape ? selectedShape.popup(selectedShape) : null}
+        return <div
+          className="floorplan-popup"
+          style={styles}
+          ref={r => { this.popupRef = r; }}
+        >
+          {this.lastSelectedShape ? this.lastSelectedShape.popup(this.lastSelectedShape) : null}
         </div>;
       })()}
 
@@ -125,7 +207,7 @@ export default class Floorplan extends Component {
         >
           <g className="floorplan-layer-image">
             <image
-              xlinkHref="https://hackathon-floorplan-generator.surge.sh/floorplan_3000.jpg"
+              xlinkHref="https://i.imgur.com/FkE7cxK.png"
               x={0}
               y={0}
               onClick={() => this.setState({selectedId: null})}
@@ -133,21 +215,33 @@ export default class Floorplan extends Component {
           </g>
 
           <g className="floorplan-layer-shapes">
-            {shapes.map(shape => {
+            {shapes.map((shape, index) => {
+              const translateX = shape.x - (shape.width/2);
+              const translateY = shape.y - (shape.height/2);
+              const scaleFactor = 1 / this.state.panZoomMatrix.a;
               return <g
                 className="floorplan-shape"
-                transform={`translate(${shape.x - (shape.width/2)},${shape.y - (shape.height/2)})`}
+                transform={`translate(${translateX},${translateY})`}
                 key={shape.id}
                 style={{cursor: 'pointer'}}
                 onClick={() => {
                   this.setState({selectedId: shape.id});
                 }}
+                ref={r => { this.shapeRefs[shape.id] = r; }}
               >
-                {/* Render the given shape on the floorplan */}
-                <shape.shape
-                  selected={selectedId === shape.id}
-                  shape={shape}
-                />
+                <g
+                  // transform={`scale(${1 / this.state.panZoomMatrix.a})`}
+                  // transform={`scale(2)`}
+                  // style={{transformOrigin: 'center'}}
+                >
+                  {/* Render the given shape on the floorplan */}
+                  <shape.shape
+                    selected={selectedId === shape.id}
+                    shape={shape}
+                    index={index}
+                    scale={scaleFactor}
+                  />
+                </g>
               </g>;
             })}
           </g>

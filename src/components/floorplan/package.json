@@ -11,6 +11,7 @@
   "author": "Density <team+javascript@density.io>",
   "license": "MIT",
   "dependencies": {
+    "@density/ui": "^5.0.1",
     "react-svg-pan-zoom": "^2.16.1",
     "uuid": "^3.2.1"
   }

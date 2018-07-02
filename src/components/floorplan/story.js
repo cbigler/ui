@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import InputBox from '../input-box/index';
 
 import './styles.scss';
-import Floorplan, { DPU } from './';
+import Floorplan, { DPU, CIRCLE } from './';
 
 import uuid from 'uuid';
 
@@ -17,48 +17,41 @@ storiesOf('Floorplan', module)
         super(props);
 
 
-        this.shapePopup = shape => <div>
-          <InputBox
-            value={shape.name}
-            style={{width: 'calc(100% - 16px)'}}
-            onChange={e => this.setState({
-              shapes: this.state.shapes.map(i => {
-                if (i.id === shape.id) {
-                  return Object.assign({}, shape, {name: e.target.value});
-                } else {
-                  return i;
-                }
-              }),
-            })}
-          />
+        this.shapePopup = shape => <div style={{
+          width: 509,
+          height: 281,
+          padding: 20,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContents: 'center',
+        }}>
+          <h3>Popup</h3>
+          <h5 style={{margin: 0, color: '#4E5457'}}>Has access to this data:</h5>
+          <pre>{JSON.stringify(shape, null, 2)}</pre>
         </div>;
 
         this.state = {
           shapes: [
             {
               id: uuid.v4(),
-              shape: DPU,
-
-              placement: 1,
-              x: 350,
+              shape: CIRCLE,
+              x: 300,
               y: 300,
               width: 40,
               height: 40,
 
-              name: "DPU 1",
+              name: "Conference Room 1",
               popup: this.shapePopup,
             },
             {
               id: uuid.v4(),
-              shape: DPU,
-
-              placement: -1,
-              x: 550,
-              y: 400,
+              shape: CIRCLE,
+              x: 646,
+              y: 450,
               width: 40,
               height: 40,
 
-              name: "Random DPU in middle of room",
+              name: "Cafeteria 1",
               popup: this.shapePopup,
             },
           ],
