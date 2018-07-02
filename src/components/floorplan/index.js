@@ -144,12 +144,6 @@ export default class Floorplan extends Component {
             this.forceUpdate();
           }
         }}
-        onMouseOut={() => {
-          this.setState({
-            lastMouseX: -1000,
-            lastMouseY: -1000,
-          });
-        }}
         onMouseMove={e => {
           // Selected shape is being moved, update its x and y coordinates.
           if (selectedShapeMoving) {
@@ -275,7 +269,6 @@ export default class Floorplan extends Component {
             if (this.props.onCreateShape) {
               const x = e.x;
               const y = e.y;
-              console.log('NEW COORDS', x, y);
               this.props.onCreateShape(x, y);
             }
           }}
