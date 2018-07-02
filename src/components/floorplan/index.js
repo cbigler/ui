@@ -95,6 +95,7 @@ export default class Floorplan extends Component {
     this.state = {
       selectedId: null,
       panZoomMatrix: {a: 1, b: 0, c: 0, d: 1, e: 0, f: 0},
+      selectedItemMoving: false,
     };
 
     this.shapeRefs = {};
@@ -117,7 +118,9 @@ export default class Floorplan extends Component {
     }
 
     const { shapes, onClick } = this.props;
-    const { selectedId } = this.state;
+    const { selectedItemMoving, selectedId, panZoomMatrix } = this.state;
+
+    const scaleFactor = 1 / panZoomMatrix.a;
 
     // Given the selected id, get a reference to the selected shape.
     const selectedShape = selectedId ? shapes.find(i => i.id === selectedId) : null;
@@ -127,13 +130,45 @@ export default class Floorplan extends Component {
     // selected shape.
     this.lastSelectedShape = selectedShape || this.lastSelectedShape;
 
-    return <div className="floorplan" ref={r => {
-      const firstUpdate = typeof this.container === 'undefined';
-      this.container = r;
-      if (firstUpdate) {
-        this.forceUpdate();
-      }
-    }}>
+    return <div
+      className="floorplan"
+      ref={r => {
+        const firstUpdate = typeof this.container === 'undefined';
+        this.container = r;
+        if (firstUpdate) {
+          this.forceUpdate();
+        }
+      }}
+      onMouseMove={e => {
+        // Selected shape is being moved, update its x and y coordinates.
+        if (selectedItemMoving) {
+          if (e.buttons > 0) {
+            // Calculate the distance that the mouse has moved since the last update.
+            const deltaX = (e.clientX * scaleFactor) - this.lastMouseX;
+            const deltaY = (e.clientY * scaleFactor) - this.lastMouseY;
+
+            // Add that delta to the current x and y coords.
+            let x = selectedShape.x + deltaX;
+            let y = selectedShape.y + deltaY;
+
+            // Call a callback, passing those new coords. This callback
+            // should update the state of the component, moving the shapes.
+            this.props.onItemMovement(selectedId, x, y);
+
+            // Update the last mouse positions with the current positions - for the next frame.
+            this.lastMouseX = e.clientX * scaleFactor;
+            this.lastMouseY = e.clientY * scaleFactor;
+          } else {
+            // Item is no longer being moved, unset the `selectedItemMoving` flag.
+            this.setState({selectedItemMoving: false});
+
+            // Remove the last mouse variables, as they are no longer needed.
+            delete this.lastMouseX;
+            delete this.lastMouseY;
+          }
+        }
+      }}
+    >
 
       {(() => {
         let styles = {};
@@ -152,7 +187,7 @@ export default class Floorplan extends Component {
           x += POPUP_HORIZONTAL_OFFSET_FROM_SELECTED_ITEM_IN_PX;
           y += POPUP_VERTICAL_OFFSET_FROM_SELECTED_ITEM_IN_PX;
 
-
+          // Ensure that the popup can't overflow the bounds of its container.
           let popupBounds = this.popupRef.getBoundingClientRect();
           if (x < 10) { x = 10; }
           if (x > width - popupBounds.width - 20) { x = width - popupBounds.width - 20; }
@@ -162,12 +197,14 @@ export default class Floorplan extends Component {
             y = y - popupBounds.height - this.lastSelectedShape.height - 24;
           }
 
+          // Assign position.
           styles.left = x;
           styles.top = y;
         }
 
-        styles.opacity = selectedShape ? 1 : 0;
-        styles.pointerEvents = selectedShape ? 'all' : 'none';
+        const shouldPopupBeOpen = selectedShape && !selectedItemMoving;
+        styles.opacity = shouldPopupBeOpen ? 1 : 0;
+        styles.pointerEvents = shouldPopupBeOpen ? 'all' : 'none';
 
         return <div
           className="floorplan-popup"
@@ -197,7 +234,7 @@ export default class Floorplan extends Component {
         background="#B4B8BF"
 
         onChangeValue={value => this.setState({panZoomMatrix: value})}
-        onZoom={() => this.setState({selectedId: null})}
+        onZoom={() => this.setState({selectedItemMoving: false, selectedId: null})}
       >
         <svg
           className="floorplan-svg"
@@ -210,7 +247,7 @@ export default class Floorplan extends Component {
               xlinkHref="https://i.imgur.com/FkE7cxK.png"
               x={0}
               y={0}
-              onClick={() => this.setState({selectedId: null})}
+              onClick={() => this.setState({selectedItemMoving: false, selectedId: null})}
             />
           </g>
 
@@ -218,30 +255,45 @@ export default class Floorplan extends Component {
             {shapes.map((shape, index) => {
               const translateX = shape.x - (shape.width/2);
               const translateY = shape.y - (shape.height/2);
-              const scaleFactor = 1 / this.state.panZoomMatrix.a;
               return <g
                 className="floorplan-shape"
                 transform={`translate(${translateX},${translateY})`}
                 key={shape.id}
                 style={{cursor: 'pointer'}}
                 onClick={() => {
-                  this.setState({selectedId: shape.id});
+                  this.setState({selectedItemMoving: false, selectedId: shape.id});
+                }}
+                onMouseMove={e => {
+                  // If the user started clicking and dragging on an shape, then
+                  // start moving that shape.
+                  if (shape.allowMovement && !selectedItemMoving && e.buttons > 0) {
+                    // Set initial x and y mouse positions. This is used to calculate mouse deltas
+                    // on future mousemoves.
+                    this.lastMouseX = e.clientX * scaleFactor;
+                    this.lastMouseY = e.clientY * scaleFactor;
+
+                    this.setState({
+                      selectedId: shape.id,
+
+                      // Set the flag indicating that the currently selected doorway is being moved.
+                      selectedItemMoving: true,
+                    });
+                  }
                 }}
                 ref={r => { this.shapeRefs[shape.id] = r; }}
               >
-                <g
-                  // transform={`scale(${1 / this.state.panZoomMatrix.a})`}
-                  // transform={`scale(2)`}
-                  // style={{transformOrigin: 'center'}}
-                >
-                  {/* Render the given shape on the floorplan */}
-                  <shape.shape
-                    selected={selectedId === shape.id}
-                    shape={shape}
-                    index={index}
-                    scale={scaleFactor}
-                  />
-                </g>
+                {/* Render the given shape on the floorplan */}
+                <shape.shape
+                  selected={selectedId === shape.id}
+                  isMoving={selectedId === shape.id && selectedItemMoving}
+                  index={index}
+                  /* I'd love to apply a css scale transformation instead, but it'd need a 
+                   * transform-origin property, and that would effect the transform already
+                   * being done. */
+                  scale={scaleFactor}
+
+                  shape={shape}
+                />
               </g>;
             })}
           </g>

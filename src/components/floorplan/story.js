@@ -39,6 +39,7 @@ storiesOf('Floorplan', module)
               y: 300,
               width: 40,
               height: 40,
+              allowMovement: true,
 
               name: "Conference Room 1",
               popup: this.shapePopup,
@@ -50,6 +51,7 @@ storiesOf('Floorplan', module)
               y: 450,
               width: 40,
               height: 40,
+              allowMovement: true,
 
               name: "Cafeteria 1",
               popup: this.shapePopup,
@@ -60,7 +62,20 @@ storiesOf('Floorplan', module)
 
       render() {
         return <div style={{width: '100vw', height: '100vh'}}>
-          <Floorplan shapes={this.state.shapes} />
+          <Floorplan
+            shapes={this.state.shapes}
+            onItemMovement={(id, x, y) => {
+              this.setState({
+                shapes: this.state.shapes.map(s => {
+                  if (s.id === id) {
+                    return Object.assign({}, s, {x, y});
+                  } else {
+                    return s;
+                  }
+                }),
+              });
+            }}
+          />
         </div>;
       }
     }
