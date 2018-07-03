@@ -82,6 +82,7 @@ export default class Floorplan extends Component {
       cursorTagText,
       onCreateShape,
       onShapeMovement,
+      onShapeClick,
     } = this.props;
     const width = this.props.width || 800;
     const height = this.props.height || 500;
@@ -269,6 +270,10 @@ export default class Floorplan extends Component {
                   key={shape.id}
                   style={{cursor: 'pointer'}}
                   onClick={e => {
+                    if (onShapeClick) {
+                      onShapeClick(shape.id);
+                    }
+
                     this.setState({
                       selectedId: shape.id,
                       selectedShapeMoving: false,

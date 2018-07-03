@@ -23,6 +23,8 @@ shape allows a popup to be shown around it and if a flag is set for it to be mov
   and y coordinates that the shape has been moved to. This function is expected to update the
   coordinates of the shape indicated by the first argument in the `shapes` prop in order for shape
   movement to work properly.
+- `onShapeClick: (String) => any` - Called when a shape has been clicked. The id of the clicked
+  shape is passed as the single argument to the callback.
 
 ### `Shape: Object`
 - `id: String` - id of the shape.
