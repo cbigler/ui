@@ -55,15 +55,6 @@ export const CIRCLE = ({scale, selected, index}) => <g className="Circle">
     r={18 * scale}
     fill={colorVariables.brandPrimary}
   />
-  <text
-    transform="translate(21,21)"
-    textAnchor="middle"
-    alignmentBaseline="middle"
-    fill="#fff"
-    fontFamily={fontVariables.fontBase}
-    fontSize={12 * scale}
-    fontWeight="600"
-  >{index+1}</text>
 </g>;
 
 export class PlannerPopup extends Component {
@@ -131,7 +122,7 @@ export default class Floorplan extends Component {
 
     // Also, store a reference to the last shape to be selected. This is used so that popups and
     // other things that fade out after the shape is deselected can stay positioned next to the
-    // selected shape.
+    // selected shape as they fade out.
     this.lastSelectedShape = selectedShape || this.lastSelectedShape;
 
     return (
@@ -176,9 +167,13 @@ export default class Floorplan extends Component {
           let styles = {};
 
           if (this.lastSelectedShape) {
-            // Was the selected shape deleted?
+            // Was the selected shape deleted? If so, don't render the popup, and deselect the
+            // active shape if one is selected.
             if (!this.shapeRefs[this.lastSelectedShape.id]) {
-              this.lastSelectedShape = null;
+              this.lastSelectedShape = null; // Remove "last" selected shape.
+              setTimeout(() => { // Remove currently delected shape.
+                this.setState({selectedId: null});
+              }, 100);
               return null;
             }
 
