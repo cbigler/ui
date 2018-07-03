@@ -75,24 +75,16 @@ export default class Floorplan extends Component {
 
     this.shapeRefs = {};
   }
-  componentWillMount() {
-    this.onResize = () => this.forceUpdate();
-    window.addEventListener('resize', this.onResize);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.onResize);
-  }
-
   render() {
-    let bbox, width = 500, height = 500;
-    if (this.container) {
-      bbox = this.container.getBoundingClientRect();
-      width = bbox.width;
-      height = bbox.height;
-    }
-
-    const { shapes, image, cursorTagText, onCreateShape, onShapeMovement } = this.props;
+    const {
+      shapes,
+      image,
+      cursorTagText,
+      onCreateShape,
+      onShapeMovement,
+    } = this.props;
+    const width = this.props.width || 800;
+    const height = this.props.height || 500;
     const { hoveringOverShape, selectedShapeMoving, selectedId, panZoomMatrix } = this.state;
 
     const scaleFactor = 1 / panZoomMatrix.a;

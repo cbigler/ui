@@ -7,6 +7,8 @@ shape allows a popup to be shown around it and if a flag is set for it to be mov
 ![screenshot.png](screenshot.png)
 
 ## Props
+- `width: Number` - width of floorplan control in pixels
+- `height: Number` - height of floorplan control in pixels
 - `shapes: [Shape]` - an array of shapes to render on the floorplan. See below for a definition of
   `Shape`. *required*
 - `image: String` - a url to an image that will be rendered as the floorplan's background image.
