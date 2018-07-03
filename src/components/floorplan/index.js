@@ -59,29 +59,6 @@ export const CIRCLE = ({scale, selected, index}) => <g className="Circle">
   />
 </g>;
 
-export class PlannerPopup extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-    };
-  }
-
-  render() {
-    return (
-      <div className="interactive-floorplan-popup">
-        <label for="interactive-floorplan-doorway-name">Doorway Name</label>
-        <span
-          className="interactive-floorplan-doorway-name"
-          id="interactive-floorplan-doorway-name"
-        >Conference Room 1</span>
-
-        <label for="interactive-floorplan-doorway-name">Doorway Name</label>
-      </div>
-    );
-  }
-}
-
 export default class Floorplan extends Component {
   constructor(props) {
     super(props);
