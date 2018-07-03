@@ -189,7 +189,7 @@ export default class Floorplan extends Component {
             style={styles}
             ref={r => { this.popupRef = r; }}
           >
-            {this.lastSelectedShape ? this.lastSelectedShape.popup(this.lastSelectedShape) : null}
+            {this.lastSelectedShape ? this.lastSelectedShape.popup(this.lastSelectedShape, this) : null}
           </div>;
         })()}
 
