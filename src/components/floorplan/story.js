@@ -68,6 +68,7 @@ storiesOf('Floorplan', module)
       render() {
         return <div style={{width: '100vw', height: '100vh'}}>
           <Floorplan
+            image="https://i.imgur.com/FkE7cxK.png"
             shapes={this.state.shapes}
             onShapeMovement={(id, x, y) => {
               this.setState({

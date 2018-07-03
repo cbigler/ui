@@ -3,6 +3,8 @@ import { applyToPoint } from 'transformation-matrix';
 
 import {ReactSVGPanZoom, TOOL_NONE, TOOL_AUTO} from 'react-svg-pan-zoom';
 
+import { IconPlus } from '@density/ui-icons';
+
 import colorVariables from '@density/ui/variables/colors.json';
 import fontVariables from '@density/ui/variables/fonts.json';
 
@@ -87,6 +89,7 @@ export default class Floorplan extends Component {
       selectedId: null,
       panZoomMatrix: {a: 1, b: 0, c: 0, d: 1, e: 0, f: 0},
       selectedShapeMoving: false,
+      hoveringOverShape: false,
 
       // Display the tooltip following the cursor offscreen until the first mousemove event.
       lastMouseX: -1000,
@@ -112,8 +115,8 @@ export default class Floorplan extends Component {
       height = bbox.height;
     }
 
-    const { shapes, onClick } = this.props;
-    const { selectedShapeMoving, selectedId, panZoomMatrix } = this.state;
+    const { shapes, image, onCreateShape, onShapeMovement } = this.props;
+    const { hoveringOverShape, selectedShapeMoving, selectedId, panZoomMatrix } = this.state;
 
     const scaleFactor = 1 / panZoomMatrix.a;
 
@@ -149,7 +152,9 @@ export default class Floorplan extends Component {
 
               // Call a callback, passing those new coords. This callback
               // should update the state of the component, moving the shapes.
-              this.props.onShapeMovement(selectedId, x, y);
+              if (onShapeMovement) {
+                onShapeMovement(selectedId, x, y);
+              }
             } else {
               // Item is no longer being moved, unset the `selectedShapeMoving` flag.
               this.setState({selectedShapeMoving: false});
@@ -162,6 +167,7 @@ export default class Floorplan extends Component {
             lastMouseY: e.clientY * scaleFactor,
           });
         }}
+        style={!selectedShape ? {cursor: 'none'} : {}}
       >
         {(() => {
           let styles = {};
@@ -218,12 +224,15 @@ export default class Floorplan extends Component {
           </div>;
         })()}
 
-        {!selectedShape ? (
-          <div
-            className="floorplan-cursor"
-            style={{left: (this.state.lastMouseX / scaleFactor) + 20, top: (this.state.lastMouseY / scaleFactor) - 13}}
-          >
-            Click to add a doorway
+        {!hoveringOverShape && !selectedShape ? (
+          <div className="floorplan-cursor" style={{
+            left: (this.state.lastMouseX / scaleFactor),
+            top: (this.state.lastMouseY / scaleFactor),
+          }}>
+            <IconPlus color="primary" />
+            <span className="floorplan-cursor-tag">
+              Click to add a doorway
+            </span>
           </div>
         ) : null}
 
@@ -261,10 +270,8 @@ export default class Floorplan extends Component {
             }
 
             // The user clicked the background without a shape selected, so create a new shape!
-            if (this.props.onCreateShape) {
-              const x = e.x;
-              const y = e.y;
-              this.props.onCreateShape(x, y);
+            if (onCreateShape) {
+              onCreateShape(e.x, e.y);
             }
           }}
         >
@@ -276,7 +283,7 @@ export default class Floorplan extends Component {
           >
             <g className="floorplan-layer-image">
               <image
-                xlinkHref="https://i.imgur.com/FkE7cxK.png"
+                xlinkHref={image}
                 x={0}
                 y={0}
                 onClick={() => this.setState({selectedShapeMoving: false, selectedId: null})}
@@ -323,6 +330,8 @@ export default class Floorplan extends Component {
                     }
                   }}
                   ref={r => { this.shapeRefs[shape.id] = r; }}
+                  onMouseEnter={() => this.setState({hoveringOverShape: true})}
+                  onMouseLeave={() => this.setState({hoveringOverShape: false})}
                 >
                   {/* Render the given shape on the floorplan */}
                   <shape.shape

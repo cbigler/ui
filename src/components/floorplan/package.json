@@ -12,6 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "@density/ui": "^5.0.1",
+    "@density/ui-icons": "^0.1.5",
     "react-svg-pan-zoom": "^2.16.1",
     "uuid": "^3.2.1"
   }
