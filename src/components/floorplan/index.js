@@ -123,7 +123,7 @@ export default class Floorplan extends Component {
               // Call a callback, passing those new coords. This callback
               // should update the state of the component, moving the shapes.
               if (onShapeMovement) {
-                onShapeMovement(selectedId, x, y);
+                onShapeMovement(selectedId, x, y, this);
               }
             } else {
               // Item is no longer being moved, unset the `selectedShapeMoving` flag.
@@ -241,7 +241,7 @@ export default class Floorplan extends Component {
 
             // The user clicked the background without a shape selected, so create a new shape!
             if (onCreateShape) {
-              onCreateShape(e.x, e.y);
+              onCreateShape(e.x, e.y, this);
             }
           }}
         >
