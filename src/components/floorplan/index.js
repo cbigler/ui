@@ -115,7 +115,7 @@ export default class Floorplan extends Component {
       height = bbox.height;
     }
 
-    const { shapes, image, onCreateShape, onShapeMovement } = this.props;
+    const { shapes, image, cursorTagText, onCreateShape, onShapeMovement } = this.props;
     const { hoveringOverShape, selectedShapeMoving, selectedId, panZoomMatrix } = this.state;
 
     const scaleFactor = 1 / panZoomMatrix.a;
@@ -231,7 +231,7 @@ export default class Floorplan extends Component {
           }}>
             <IconPlus color="primary" />
             <span className="floorplan-cursor-tag">
-              Click to add a doorway
+              {cursorTagText || 'Click to add a doorway'}
             </span>
           </div>
         ) : null}
