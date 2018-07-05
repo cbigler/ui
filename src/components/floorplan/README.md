@@ -13,6 +13,7 @@ shape allows a popup to be shown around it and if a flag is set for it to be mov
   `Shape`. *required*
 - `image: String` - a url to an image that will be rendered as the floorplan's background image.
   *required*
+- `imageRotation: Number` - an optional number of degrees to rotate the floorplan.
 - `cursorTagText: String` - Text to display in the cursor tag that is visible when no shape is
   selected. Defaults to `Click to add a doorway`.
 - `onCreateShape: (Number, Number) => any` - Called when the user clicks the background of the

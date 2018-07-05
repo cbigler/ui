@@ -102,6 +102,7 @@ export default class Floorplan extends Component {
     const {
       shapes,
       image,
+      imageRotation,
       cursorTagText,
       onCreateShape,
       onShapeMovement,
@@ -288,12 +289,26 @@ export default class Floorplan extends Component {
             height={height}
             viewBox={`0 0 ${width} ${height}`}
           >
-            <g className="floorplan-layer-image">
+            <g className="floorplan-layer-image" ref={r => { this.floorplanLayerImage = r; }}>
               <image
                 xlinkHref={image}
                 x={0}
                 y={0}
                 onClick={() => this.selectShape(null)}
+                transform={(() => {
+                  // If an `imageRotation` prop was specified, rotate the floorplan about its center
+                  // that many degrees.
+                  if (imageRotation && this.floorplanLayerImage) {
+                    const bbox = this.floorplanLayerImage.getBBox();
+                    return `rotate(
+                      ${imageRotation},
+                      ${bbox.width / 2},
+                      ${bbox.height / 2}
+                    )`.replace(/[\n ]/g, '');
+                  } else {
+                    return '';
+                  }
+                })()}
               />
             </g>
 
