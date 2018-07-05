@@ -59,10 +59,27 @@ export const CIRCLE = ({scale, selected, index}) => <g className="Circle">
   />
 </g>;
 
+async function getImageDimensions(src) {
+  const img = document.createElement('img');
+  img.src = src;
+  img.styles = 'visibility: hidden; position: absolute; top: -100000000px; left: -100000000px;'
+  document.body.appendChild(img);
+
+  // Wait for image to load.
+  await new Promise(resolve => { img.onload = resolve; });
+
+  const {width, height} = img.getBoundingClientRect();
+  document.body.removeChild(img);
+
+  return { width, height };
+}
+
 export default class Floorplan extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
+
       selectedId: null,
       panZoomMatrix: {a: 1, b: 0, c: 0, d: 1, e: 0, f: 0},
 
@@ -73,6 +90,9 @@ export default class Floorplan extends Component {
       // Display the tooltip following the cursor offscreen until the first mousemove event.
       lastMouseX: -1000,
       lastMouseY: -1000,
+
+      floorplanWidth: 0,
+      floorplanHeight: 0,
     };
 
     this.shapeRefs = {};
@@ -88,14 +108,34 @@ export default class Floorplan extends Component {
     });
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     window.addEventListener('blur', this.removeTooltipWhenWindowBlurs);
+
+    // When the component initially loads, get the width and height of the passed image.
+    const {width, height} = await getImageDimensions(this.props.image);
+    this.setState({
+      loading: false,
+      floorplanWidth: width,
+      floorplanHeight: height,
+    });
   }
   componentWillUnmount() {
     window.removeEventListener('blur', this.removeTooltipWhenWindowBlurs);
   }
   removeTooltipWhenWindowBlurs() {
     this.setState({mouseWithinFloorplanBounds: false});
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // When the image changes, we need to update the valued
+    if (nextProps.image !== this.props.image) {
+      const {width, height} = getImageDimensions(nextProps.image);
+      console.log('WIDTH', width, height);
+      this.setState({
+        floorplanWidth: width,
+        floorplanHeight: height,
+      });
+    }
   }
 
   render() {
@@ -116,6 +156,8 @@ export default class Floorplan extends Component {
       selectedId,
       panZoomMatrix,
       mouseWithinFloorplanBounds,
+      floorplanWidth,
+      floorplanHeight,
     } = this.state;
 
     const scaleFactor = 1 / panZoomMatrix.a;
@@ -288,12 +330,15 @@ export default class Floorplan extends Component {
             width={width}
             height={height}
             viewBox={`0 0 ${width} ${height}`}
+            xmlns='http://www.w3.org/2000/svg'
           >
             <g className="floorplan-layer-image" ref={r => { this.floorplanLayerImage = r; }}>
               <image
                 xlinkHref={image}
                 x={0}
                 y={0}
+                width={floorplanWidth}
+                height={floorplanHeight}
                 onClick={() => this.selectShape(null)}
                 transform={(() => {
                   // If an `imageRotation` prop was specified, rotate the floorplan about its center
