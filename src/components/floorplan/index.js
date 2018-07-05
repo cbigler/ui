@@ -65,8 +65,10 @@ export default class Floorplan extends Component {
     this.state = {
       selectedId: null,
       panZoomMatrix: {a: 1, b: 0, c: 0, d: 1, e: 0, f: 0},
+
       selectedShapeMoving: false,
       hoveringOverShape: false,
+      mouseWithinFloorplanBounds: false,
 
       // Display the tooltip following the cursor offscreen until the first mousemove event.
       lastMouseX: -1000,
@@ -74,7 +76,28 @@ export default class Floorplan extends Component {
     };
 
     this.shapeRefs = {};
+    this.removeTooltipWhenWindowBlurs = this.removeTooltipWhenWindowBlurs.bind(this);
   }
+
+  selectShape(shapeId) {
+    if (shapeId && shapeId.id) { shapeId = shapeId.id; }
+    this.setState({
+      selectedId: shapeId,
+      selectedShapeMoving: false,
+      hoveringOverShape: false,
+    });
+  }
+
+  componentDidMount() {
+    window.addEventListener('blur', this.removeTooltipWhenWindowBlurs);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('blur', this.removeTooltipWhenWindowBlurs);
+  }
+  removeTooltipWhenWindowBlurs() {
+    this.setState({mouseWithinFloorplanBounds: false});
+  }
+
   render() {
     const {
       shapes,
@@ -86,7 +109,13 @@ export default class Floorplan extends Component {
     } = this.props;
     const width = this.props.width || 800;
     const height = this.props.height || 500;
-    const { hoveringOverShape, selectedShapeMoving, selectedId, panZoomMatrix } = this.state;
+    const {
+      hoveringOverShape,
+      selectedShapeMoving,
+      selectedId,
+      panZoomMatrix,
+      mouseWithinFloorplanBounds,
+    } = this.state;
 
     const scaleFactor = 1 / panZoomMatrix.a;
 
@@ -101,13 +130,7 @@ export default class Floorplan extends Component {
     return (
       <div
         className="floorplan"
-        ref={r => {
-          const firstUpdate = typeof this.container === 'undefined';
-          this.container = r;
-          if (firstUpdate) {
-            this.forceUpdate();
-          }
-        }}
+        ref={r => { this.container = r; }}
         onMouseMove={e => {
           // Selected shape is being moved, update its x and y coordinates.
           if (selectedShapeMoving) {
@@ -133,11 +156,25 @@ export default class Floorplan extends Component {
 
           // Update the last mouse positions with the current positions - for the next frame.
           this.setState({
+            mouseWithinFloorplanBounds: true,
             lastMouseX: e.clientX * scaleFactor,
             lastMouseY: e.clientY * scaleFactor,
           });
         }}
         style={!selectedShape ? {cursor: 'none'} : {}}
+
+        onMouseOut={e => {
+          // When the mouse leaves the floorplan, ensure the element that the event was received on
+          // is a decendant of the floorplan wrapper div. If so, then hide the cursor tooltip.
+          let element = e.target;
+          while (element) {
+            if (element === this.container) {
+              this.setState({mouseWithinFloorplanBounds: false});
+              break;
+            }
+            element = element.parentElement;
+          }
+        }}
       >
         {(() => {
           let styles = {};
@@ -147,8 +184,8 @@ export default class Floorplan extends Component {
             // active shape if one is selected.
             if (!this.shapeRefs[this.lastSelectedShape.id]) {
               this.lastSelectedShape = null; // Remove "last" selected shape.
-              setTimeout(() => { // Remove currently delected shape.
-                this.setState({selectedId: null});
+              setTimeout(() => { // Remove currently selected shape.
+                this.selectShape(null);
               }, 100);
               return null;
             }
@@ -194,7 +231,7 @@ export default class Floorplan extends Component {
           </div>;
         })()}
 
-        {!hoveringOverShape && !selectedShape ? (
+        {mouseWithinFloorplanBounds && !hoveringOverShape && !selectedShape ? (
           <div className="floorplan-cursor" style={{
             left: (this.state.lastMouseX / scaleFactor),
             top: (this.state.lastMouseY / scaleFactor),
@@ -256,7 +293,7 @@ export default class Floorplan extends Component {
                 xlinkHref={image}
                 x={0}
                 y={0}
-                onClick={() => this.setState({selectedShapeMoving: false, selectedId: null})}
+                onClick={() => this.selectShape(null)}
               />
             </g>
 
@@ -274,10 +311,7 @@ export default class Floorplan extends Component {
                       onShapeClick(shape.id);
                     }
 
-                    this.setState({
-                      selectedId: shape.id,
-                      selectedShapeMoving: false,
-                    });
+                    this.selectShape(shape);
 
                     // Ensure that the click event won't make its way to the floorplan
                     // and create a new shape.
