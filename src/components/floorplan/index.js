@@ -210,6 +210,17 @@ export default class Floorplan extends Component {
 
         // Called when the user moves their mouse or drags within the floorplan canvas.
         onMouseMove={e => {
+          // If the event occured within the floorplan popup, then it's not prrof that the mouse is
+          // moving over the canvas, because touch devices can produce a mouse event when the popup
+          // closes.
+          let element = e.target;
+          while (element) {
+            if (element.className === 'floorplan-popup') {
+              return;
+            }
+            element = element.parentElement;
+          }
+
           // Selected shape is being moved, update its x and y coordinates.
           if (selectedShapeMoving) {
             if (e.buttons > 0) {
@@ -246,9 +257,20 @@ export default class Floorplan extends Component {
         //    `mouseWithinFloorplanBounds` to `true`.
         // 2. User finishes dragging. This sets `mouseWithinFloorplanBounds` to false, ensureing
         //    that the cursor will not be shown.
+        //
+        // IMPORTANT CAVEAT: If this event is prevented within the floorplan popup, most
+        // "traditional" interactions like clicking on links, buttons, or focusing textboxes break.
+        // So, this event is only prevented within the `g.floorplan-container` group within the svg.
         onTouchEnd={e => {
-          e.preventDefault();
-          this.setState({mouseWithinFloorplanBounds: false});
+          let element = e.target;
+          while (element) {
+            if (element.className && element.className.baseVal === 'floorplan-container') {
+              e.preventDefault();
+              this.setState({mouseWithinFloorplanBounds: false});
+              break;
+            }
+            element = element.parentElement;
+          }
         }}
         style={!selectedShape ? {cursor: 'none'} : {}}
 
@@ -293,7 +315,7 @@ export default class Floorplan extends Component {
             x += POPUP_HORIZONTAL_OFFSET_FROM_SELECTED_ITEM_IN_PX;
             y += POPUP_VERTICAL_OFFSET_FROM_SELECTED_ITEM_IN_PX;
 
-            // Ensure that the popup can't overflow the bounds of its container.
+            // Ensure that the popup can't overflow the horizontal  bounds of its container.
             let popupBounds = this.popupRef.getBoundingClientRect();
             if (x < 10) { x = 10; }
             if (x > width - popupBounds.width - 20) { x = width - popupBounds.width - 20; }
@@ -305,7 +327,6 @@ export default class Floorplan extends Component {
 
           styles.opacity = shouldPopupBeOpen ? 1 : 0;
           styles.pointerEvents = shouldPopupBeOpen ? 'all' : 'none';
-          styles.touchAction = shouldPopupBeOpen ? 'auto' : 'none';
 
           return <div
             className="floorplan-popup"
@@ -314,8 +335,10 @@ export default class Floorplan extends Component {
             onTouchStart={e => {
               // When the popup is closed, disable touch events.
               if (!shouldPopupBeOpen) {
+                console.log('PREVENTING TOUCH START');
                 e.preventDefault();
               }
+              e.stopPropagation();
             }}
           >
             {this.lastSelectedShape ? this.lastSelectedShape.popup(this.lastSelectedShape, this) : null}
@@ -374,7 +397,6 @@ export default class Floorplan extends Component {
           }}
         >
           <svg
-            className="floorplan-svg"
             width={width}
             height={height}
             viewBox={`0 0 ${width} ${height}`}

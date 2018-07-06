@@ -16,7 +16,7 @@ storiesOf('Floorplan', module)
         super(props);
 
 
-        this.shapePopup = shape => <div style={{
+        this.shapePopup = (shape, floorplan) => <div style={{
           width: 509,
           height: 281,
           padding: 20,
@@ -24,10 +24,11 @@ storiesOf('Floorplan', module)
           flexDirection: 'column',
           justifyContents: 'center',
         }}>
-          <h3>Popup</h3>
+          <input type="text" />
           <h5 style={{margin: 0, color: '#4E5457'}}>Has access to this data:</h5>
           <pre>{JSON.stringify(shape, null, 2)}</pre>
-          <button onClick={() => {
+          <button onClick={e => {
+            floorplan.selectShape(null);
             this.setState({
               shapes: this.state.shapes.filter(i => i.id !== shape.id),
             });
