@@ -65,36 +65,41 @@ storiesOf('Floorplan', module)
       }
 
       render() {
-        return <Floorplan
-          image="https://i.imgur.com/FkE7cxK.png"
-          shapes={this.state.shapes}
-          onShapeMovement={(id, x, y) => {
-            this.setState({
-              shapes: this.state.shapes.map(s => {
-                if (s.id === id) {
-                  return Object.assign({}, s, {x, y});
-                } else {
-                  return s;
-                }
-              }),
-            });
-          }}
+        return <div>
+          <p>navbar here</p>
+          <p>navbar here</p>
+          <p>navbar here</p>
+          <Floorplan
+            image="https://i.imgur.com/FkE7cxK.png"
+            shapes={this.state.shapes}
+            onShapeMovement={(id, x, y) => {
+              this.setState({
+                shapes: this.state.shapes.map(s => {
+                  if (s.id === id) {
+                    return Object.assign({}, s, {x, y});
+                  } else {
+                    return s;
+                  }
+                }),
+              });
+            }}
 
-          onCreateShape={(x, y) => {
-            const id = uuid.v4();
-            this.setState({
-              shapes: [...this.state.shapes, {
-                id, x, y,
-                shape: CIRCLE,
-                popup: this.shapePopup,
-                width: 40,
-                height: 40,
-                allowMovement: true,
-                name: `My new doorway with id ${id}`,
-              }],
-            });
-          }}
-        />;
+            onCreateShape={(x, y) => {
+              const id = uuid.v4();
+              this.setState({
+                shapes: [...this.state.shapes, {
+                  id, x, y,
+                  shape: CIRCLE,
+                  popup: this.shapePopup,
+                  width: 40,
+                  height: 40,
+                  allowMovement: true,
+                  name: `My new doorway with id ${id}`,
+                }],
+              });
+            }}
+          />
+        </div>;
       }
     }
 

@@ -97,19 +97,40 @@ export default class Floorplan extends Component {
 
     this.shapeRefs = {};
     this.removeTooltipWhenWindowBlurs = this.removeTooltipWhenWindowBlurs.bind(this);
+    this.disallowPanZoomOnAppleDevices = this.disallowPanZoomOnAppleDevices.bind(this);
+    this.selectShape = this.selectShape.bind(this);
   }
 
   selectShape(shapeId) {
+    const height = this.props.height || 600;
     if (shapeId && shapeId.id) { shapeId = shapeId.id; }
+
     this.setState({
       selectedId: shapeId,
       selectedShapeMoving: false,
       hoveringOverShape: false,
+    }, () => {
+
+      // If a shape was selected that would display the popup outside of the visible area of the
+      // interactive floorplan visualization, then adjust the position of the visualization.
+      if (shapeId) {
+        const {x, y} = this.shapeRefs[shapeId].getBoundingClientRect();
+        const popupBounds = this.popupRef.getBoundingClientRect();
+
+        const yDistanceFromPopupToBottomOfFloorplan = height - y;
+        if (yDistanceFromPopupToBottomOfFloorplan < popupBounds.height) {
+          const distanceToMoveViewUp = popupBounds.height - yDistanceFromPopupToBottomOfFloorplan;
+          this.panZoom.pan(0, -1 * distanceToMoveViewUp);
+        }
+      }
+
     });
   }
 
   async componentDidMount() {
     window.addEventListener('blur', this.removeTooltipWhenWindowBlurs);
+    document.addEventListener('touchmove', this.disallowPanZoomOnAppleDevices, {passive: false});
+
 
     // When the component initially loads, get the width and height of the passed image.
     const {width, height} = await getImageDimensions(this.props.image);
@@ -121,16 +142,28 @@ export default class Floorplan extends Component {
   }
   componentWillUnmount() {
     window.removeEventListener('blur', this.removeTooltipWhenWindowBlurs);
+    document.removeEventListener('touchmove', this.disallowPanZoomOnAppleDevices, {passive: false});
   }
   removeTooltipWhenWindowBlurs() {
     this.setState({mouseWithinFloorplanBounds: false});
+  }
+
+  // A nice hack required to diable mobile safari's pinch to zoom behavior.
+  disallowPanZoomOnAppleDevices() {
+    let element = event.target;
+    while (element) {
+      if (element.className === 'floorplan') {
+        event.preventDefault();
+        return;
+      }
+      element = element.parentElement;
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     // When the image changes, we need to update the valued
     if (nextProps.image !== this.props.image) {
       const {width, height} = getImageDimensions(nextProps.image);
-      console.log('WIDTH', width, height);
       this.setState({
         floorplanWidth: width,
         floorplanHeight: height,
@@ -148,8 +181,8 @@ export default class Floorplan extends Component {
       onShapeMovement,
       onShapeClick,
     } = this.props;
-    const width = this.props.width || 800;
-    const height = this.props.height || 500;
+    const width = this.props.width || 1000;
+    const height = this.props.height || 600;
     const {
       hoveringOverShape,
       selectedShapeMoving,
@@ -174,6 +207,8 @@ export default class Floorplan extends Component {
       <div
         className="floorplan"
         ref={r => { this.container = r; }}
+
+        // Called when the user moves their mouse or drags within the floorplan canvas.
         onMouseMove={e => {
           // Selected shape is being moved, update its x and y coordinates.
           if (selectedShapeMoving) {
@@ -204,6 +239,17 @@ export default class Floorplan extends Component {
             lastMouseY: e.clientY * scaleFactor,
           });
         }}
+
+        // After a drag, ensure that the mouseWithinFloorplanBounds value is set to false to keep the 
+        // creation cursor from showing up. Example scenario:
+        // 1. User drags around the canvas. This calls `onMouseMove`, which sets
+        //    `mouseWithinFloorplanBounds` to `true`.
+        // 2. User finishes dragging. This sets `mouseWithinFloorplanBounds` to false, ensureing
+        //    that the cursor will not be shown.
+        onTouchEnd={e => {
+          e.preventDefault();
+          this.setState({mouseWithinFloorplanBounds: false});
+        }}
         style={!selectedShape ? {cursor: 'none'} : {}}
 
         onMouseOut={e => {
@@ -221,6 +267,7 @@ export default class Floorplan extends Component {
       >
         {(() => {
           let styles = {};
+          const shouldPopupBeOpen = selectedShape && !selectedShapeMoving;
 
           if (this.lastSelectedShape) {
             // Was the selected shape deleted? If so, don't render the popup, and deselect the
@@ -251,24 +298,25 @@ export default class Floorplan extends Component {
             if (x < 10) { x = 10; }
             if (x > width - popupBounds.width - 20) { x = width - popupBounds.width - 20; }
 
-            if (y < 10) { y = 10; }
-            if (y > height - popupBounds.height - 20) {
-              y = y - popupBounds.height - this.lastSelectedShape.height - 24;
-            }
-
             // Assign position.
             styles.left = x;
             styles.top = y;
           }
 
-          const shouldPopupBeOpen = selectedShape && !selectedShapeMoving;
           styles.opacity = shouldPopupBeOpen ? 1 : 0;
           styles.pointerEvents = shouldPopupBeOpen ? 'all' : 'none';
+          styles.touchAction = shouldPopupBeOpen ? 'auto' : 'none';
 
           return <div
             className="floorplan-popup"
             style={styles}
             ref={r => { this.popupRef = r; }}
+            onTouchStart={e => {
+              // When the popup is closed, disable touch events.
+              if (!shouldPopupBeOpen) {
+                e.preventDefault();
+              }
+            }}
           >
             {this.lastSelectedShape ? this.lastSelectedShape.popup(this.lastSelectedShape, this) : null}
           </div>;
@@ -289,7 +337,7 @@ export default class Floorplan extends Component {
         <ReactSVGPanZoom
           width={width}
           height={height}
-          ref={r => { this.panZoom = r; }}
+          ref={r => { this.panZoom = r; window.panZoom = r; }}
 
           /* When a shape is selected, do not allow the canvas to move */
           tool={selectedId ? TOOL_NONE : TOOL_AUTO}
@@ -332,89 +380,115 @@ export default class Floorplan extends Component {
             viewBox={`0 0 ${width} ${height}`}
             xmlns='http://www.w3.org/2000/svg'
           >
-            <g className="floorplan-layer-image" ref={r => { this.floorplanLayerImage = r; }}>
-              <image
-                xlinkHref={image}
-                x={0}
-                y={0}
-                width={floorplanWidth}
-                height={floorplanHeight}
-                onClick={() => this.selectShape(null)}
-                transform={(() => {
-                  // If an `imageRotation` prop was specified, rotate the floorplan about its center
-                  // that many degrees.
-                  if (imageRotation && this.floorplanLayerImage) {
-                    const bbox = this.floorplanLayerImage.getBBox();
-                    return `rotate(
-                      ${imageRotation},
-                      ${bbox.width / 2},
-                      ${bbox.height / 2}
-                    )`.replace(/[\n ]/g, '');
-                  } else {
-                    return '';
-                  }
-                })()}
-              />
-            </g>
+            <g className="floorplan-container">
+              <g className="floorplan-layer-image" ref={r => { this.floorplanLayerImage = r; }}>
+                <image
+                  xlinkHref={image}
+                  x={0}
+                  y={0}
+                  width={floorplanWidth}
+                  height={floorplanHeight}
+                  onClick={() => this.selectShape(null)}
+                  onTouchStart={e => {
+                    // Deselect the currently active shape
+                    this.selectShape(null);
 
-            <g className="floorplan-layer-shapes">
-              {shapes.map((shape, index) => {
-                const translateX = shape.x - (shape.width/2);
-                const translateY = shape.y - (shape.height/2);
-                return <g
-                  className="floorplan-shape"
-                  transform={`translate(${translateX},${translateY})`}
-                  key={shape.id}
-                  style={{cursor: 'pointer'}}
-                  onClick={e => {
-                    if (onShapeClick) {
-                      onShapeClick(shape.id);
-                    }
-
-                    this.selectShape(shape);
-
-                    // Ensure that the click event won't make its way to the floorplan
-                    // and create a new shape.
-                    e.stopPropagation();
+                    // After the user taps on something, disable the adding cursor.
+                    this.setState({mouseWithinFloorplanBounds: false});
+                    e.preventDefault();
                   }}
-                  onMouseMove={e => {
-                    // The above only applies to the actively selected shape.
-                    if (selectedId !== shape.id) {
-                      return;
+                  transform={(() => {
+                    // If an `imageRotation` prop was specified, rotate the floorplan about its center
+                    // that many degrees.
+                    if (imageRotation && this.floorplanLayerImage) {
+                      const bbox = this.floorplanLayerImage.getBBox();
+                      return `rotate(
+                        ${imageRotation},
+                        ${bbox.width / 2},
+                        ${bbox.height / 2}
+                      )`.replace(/[\n ]/g, '');
+                    } else {
+                      return '';
                     }
+                  })()}
+                />
+              </g>
 
-                    // If the user started clicking and dragging on an shape, then
-                    // start moving that shape.
-                    if (shape.allowMovement && !selectedShapeMoving && e.buttons > 0) {
-                      // Set initial x and y mouse positions. This is used to calculate mouse deltas
-                      // on future mousemoves.
-                      this.setState({
-                        lastMouseX: e.clientX * scaleFactor,
-                        lastMouseY: e.clientY * scaleFactor,
+              <g className="floorplan-layer-shapes">
+                {shapes.map((shape, index) => {
+                  const translateX = shape.x - (shape.width/2);
+                  const translateY = shape.y - (shape.height/2);
+                  return <g
+                    className="floorplan-shape"
+                    transform={`translate(${translateX},${translateY})`}
+                    key={shape.id}
+                    style={{cursor: 'pointer'}}
+                    onClick={e => {
+                      if (onShapeClick) {
+                        onShapeClick(shape.id);
+                      }
 
-                        // Set the flag indicating the currently selected doorway is being moved.
-                        selectedShapeMoving: true,
-                      });
-                    }
-                  }}
-                  ref={r => { this.shapeRefs[shape.id] = r; }}
-                  onMouseEnter={() => this.setState({hoveringOverShape: true})}
-                  onMouseLeave={() => this.setState({hoveringOverShape: false})}
-                >
-                  {/* Render the given shape on the floorplan */}
-                  <shape.shape
-                    selected={selectedId === shape.id}
-                    isMoving={selectedId === shape.id && selectedShapeMoving}
-                    index={index}
-                    /* I'd love to apply a css scale transformation instead, but it'd need a 
-                     * transform-origin property, and that would effect the transform already
-                     * being done. */
-                    scale={scaleFactor}
+                      this.selectShape(shape);
 
-                    shape={shape}
-                  />
-                </g>;
-              })}
+                      // Ensure that the click event won't make its way to the floorplan
+                      // and create a new shape.
+                      e.stopPropagation();
+                    }}
+                    onTouchStart={e => {
+                      if (onShapeClick) {
+                        onShapeClick(shape.id);
+                      }
+
+                      e.preventDefault();
+
+                      // Scenario: the user taps on a shape. The svgpanzoom component seems to
+                      // interecept this tap as the first part of the next tap interaction, so when
+                      // the popup is closed the next drag gets messed up.
+                      if (!this.state.selectShape) {
+                        e.stopPropagation();
+                      }
+
+                      this.selectShape(shape);
+                    }}
+                    onMouseMove={e => {
+                      // The above only applies to the actively selected shape.
+                      if (selectedId !== shape.id) {
+                        return;
+                      }
+
+                      // If the user started clicking and dragging on an shape, then
+                      // start moving that shape.
+                      if (shape.allowMovement && !selectedShapeMoving && e.buttons > 0) {
+                        // Set initial x and y mouse positions. This is used to calculate mouse deltas
+                        // on future mousemoves.
+                        this.setState({
+                          lastMouseX: e.clientX * scaleFactor,
+                          lastMouseY: e.clientY * scaleFactor,
+
+                          // Set the flag indicating the currently selected doorway is being moved.
+                          selectedShapeMoving: true,
+                        });
+                      }
+                    }}
+                    ref={r => { this.shapeRefs[shape.id] = r; }}
+                    onMouseEnter={() => this.setState({hoveringOverShape: true})}
+                    onMouseLeave={() => this.setState({hoveringOverShape: false})}
+                  >
+                    {/* Render the given shape on the floorplan */}
+                    <shape.shape
+                      selected={selectedId === shape.id}
+                      isMoving={selectedId === shape.id && selectedShapeMoving}
+                      index={index}
+                      /* I'd love to apply a css scale transformation instead, but it'd need a 
+                       * transform-origin property, and that would effect the transform already
+                       * being done. */
+                      scale={scaleFactor}
+
+                      shape={shape}
+                    />
+                  </g>;
+                })}
+              </g>
             </g>
           </svg>
         </ReactSVGPanZoom>

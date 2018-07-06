@@ -7,9 +7,14 @@
 @import "variables.json";
 
 @mixin make-floorplan($color: $floorplan-color) {
+
   // Hack to hide a rect that the pan zoom component makes
   g[transform*=matrix] > rect {
     display: none;
+  }
+
+  .floorplan-container {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
 }
 
