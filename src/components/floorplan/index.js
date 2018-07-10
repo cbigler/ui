@@ -9,8 +9,9 @@ import { IconPlus } from '@density/ui-icons';
 import colorVariables from '@density/ui/variables/colors.json';
 import fontVariables from '@density/ui/variables/fonts.json';
 
-const POPUP_VERTICAL_OFFSET_FROM_SELECTED_ITEM_IN_PX = 28;
+const POPUP_VERTICAL_OFFSET_FROM_SELECTED_ITEM_IN_PX = -40;
 const POPUP_HORIZONTAL_OFFSET_FROM_SELECTED_ITEM_IN_PX = -150;
+const CREATE_SHAPE_TOUCH_EXACTNESS_IN_PX = 20;
 
 export const DPU = ({selected, shape}) => <g className="DPU" transform="scale(0.75)">
   <rect
@@ -87,6 +88,7 @@ export default class Floorplan extends Component {
       selectedShapeMoving: false,
       hoveringOverShape: false,
       mouseWithinFloorplanBounds: false,
+      deviceSupportsTouch: false,
 
       // Display the tooltip following the cursor offscreen until the first mousemove event.
       lastMouseX: -1000,
@@ -195,6 +197,7 @@ export default class Floorplan extends Component {
       mouseWithinFloorplanBounds,
       floorplanWidth,
       floorplanHeight,
+      showTouchDeviceAddHint,
     } = this.state;
 
     const scaleFactor = 1 / panZoomMatrix.a;
@@ -393,6 +396,12 @@ export default class Floorplan extends Component {
           </div>
         ) : null}
 
+        {showTouchDeviceAddHint ? (
+          <div className="floorplan-touch-create-hint" style={{left: width / 2}}>
+            Press and hold to create a doorway.
+          </div>
+        ) : null}
+
         <ReactSVGPanZoom
           width={width}
           height={height}
@@ -431,30 +440,40 @@ export default class Floorplan extends Component {
               onCreateShape(e.x, e.y, this);
             }
           }}
+
           onTouchStart={e => {
             const touches = e.originalEvent.touches,
                   SVGViewer = e.SVGViewer,
                   value = e.value;
-            if (touches > 1) {
+
+            // Creating a new shape doesn't happen with multiple concurrent touches.
+            if (touches.length > 1) {
               return;
             }
+
+            // Ensure that a shape isn't already selected.
+            if (selectedShape) {
+              return;
+            }
+
+            this.createShapeShowHintTimeout = window.setTimeout(() => {
+              const touchDeltaX = Math.abs(this.createShapeInitialTouch.clientX - this.createShapeFinalTouch.clientX);
+              const touchDeltaY = Math.abs(this.createShapeInitialTouch.clientY - this.createShapeFinalTouch.clientY);
+
+              if (touchDeltaX < CREATE_SHAPE_TOUCH_EXACTNESS_IN_PX && touchDeltaY < CREATE_SHAPE_TOUCH_EXACTNESS_IN_PX) {
+                this.setState({showTouchDeviceAddHint: true});
+              }
+            }, 150);
 
             this.createShapeInitialTouch = touches[0];
             this.createShapeFinalTouch = touches[0];
             this.createShapeTimeout = window.setTimeout(() => {
-              console.log('INITIAL', this.createShapeInitialTouch.clientX, this.createShapeInitialTouch.clientY);
-              console.log('FINAL', this.createShapeFinalTouch.clientX, this.createShapeFinalTouch.clientY);
-
               const touchDeltaX = Math.abs(this.createShapeInitialTouch.clientX - this.createShapeFinalTouch.clientX);
               const touchDeltaY = Math.abs(this.createShapeInitialTouch.clientY - this.createShapeFinalTouch.clientY);
-              console.log('DELTAS', touchDeltaX, touchDeltaY);
 
-              if (touchDeltaX < 20 && touchDeltaY < 20) {
+              if (touchDeltaX < CREATE_SHAPE_TOUCH_EXACTNESS_IN_PX && touchDeltaY < CREATE_SHAPE_TOUCH_EXACTNESS_IN_PX) {
                 const points = ViewerTouchEvent.touchesToPoints(touches, SVGViewer, value);
-
-                if (selectedShape) {
-                  return;
-                }
+                this.setState({showTouchDeviceAddHint: false});
 
                 // The user clicked the background without a shape selected, so create a new shape!
                 if (onCreateShape) {
@@ -466,9 +485,19 @@ export default class Floorplan extends Component {
           onTouchMove={e => {
             const event = e.originalEvent;
             this.createShapeFinalTouch = event.touches[0];
+
+            const touchDeltaX = Math.abs(this.createShapeInitialTouch.clientX - this.createShapeFinalTouch.clientX);
+            const touchDeltaY = Math.abs(this.createShapeInitialTouch.clientY - this.createShapeFinalTouch.clientY);
+
+            if (touchDeltaX > CREATE_SHAPE_TOUCH_EXACTNESS_IN_PX && touchDeltaY > CREATE_SHAPE_TOUCH_EXACTNESS_IN_PX) {
+              this.setState({showTouchDeviceAddHint: false});
+            }
           }}
           onTouchEnd={e => {
             window.clearTimeout(this.createShapeTimeout);
+            window.clearTimeout(this.createShapeShowHintTimeout);
+
+            this.setState({showTouchDeviceAddHint: false});
           }}
         >
           <svg
