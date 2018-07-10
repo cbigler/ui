@@ -88,7 +88,7 @@ export default class Floorplan extends Component {
       selectedShapeMoving: false,
       hoveringOverShape: false,
       mouseWithinFloorplanBounds: false,
-      deviceSupportsTouch: false,
+      showTouchDeviceAddHint: false,
 
       // Display the tooltip following the cursor offscreen until the first mousemove event.
       lastMouseX: -1000,
@@ -133,10 +133,22 @@ export default class Floorplan extends Component {
     });
   }
 
+  showTouchDeviceAddHint() {
+    this.setState({showTouchDeviceAddHint: true}, () => {
+      window.setTimeout(() => {
+        this.setState({showTouchDeviceAddHint: false});
+      }, 1000);
+    });
+  }
+
   async componentDidMount() {
     window.addEventListener('blur', this.removeTooltipWhenWindowBlurs);
     document.addEventListener('touchmove', this.disallowPanZoomOnAppleDevices, {passive: false});
 
+    // If the device supports touch events, then show the hint immediately for a bit.
+    if (this.props.deviceSupportsTouch) {
+      window.setTimeout(() => this.showTouchDeviceAddHint(), 500);
+    }
 
     // When the component initially loads, get the width and height of the passed image.
     const {width, height} = await getImageDimensions(this.props.image);
@@ -366,6 +378,9 @@ export default class Floorplan extends Component {
           styles.opacity = shouldPopupBeOpen ? 1 : 0;
           styles.pointerEvents = shouldPopupBeOpen ? 'all' : 'none';
           styles.userSelect = shouldPopupBeOpen ? 'all' : 'none';
+          styles.WebkitUserSelect = shouldPopupBeOpen ? 'all' : 'none';
+          // Hide the blue select with the drag points. Like "user-select: none;".
+          styles.WebkitTouchCallout = shouldPopupBeOpen ? 'all' : 'none';
 
           return <div
             className="floorplan-popup"
@@ -374,7 +389,6 @@ export default class Floorplan extends Component {
             onTouchStart={e => {
               // When the popup is closed, disable touch events.
               if (!shouldPopupBeOpen) {
-                console.log('PREVENTING TOUCH START');
                 e.preventDefault();
               }
               e.stopPropagation();
@@ -396,11 +410,12 @@ export default class Floorplan extends Component {
           </div>
         ) : null}
 
-        {showTouchDeviceAddHint ? (
-          <div className="floorplan-touch-create-hint" style={{left: width / 2}}>
-            Press and hold to create a doorway.
-          </div>
-        ) : null}
+        <div
+          className="floorplan-touch-create-hint"
+          style={showTouchDeviceAddHint ? {left: width / 2, opacity: 1} : {left: width / 2}}
+        >
+          Press and hold to create a doorway.
+        </div>
 
         <ReactSVGPanZoom
           width={width}
@@ -456,14 +471,7 @@ export default class Floorplan extends Component {
               return;
             }
 
-            this.createShapeShowHintTimeout = window.setTimeout(() => {
-              const touchDeltaX = Math.abs(this.createShapeInitialTouch.clientX - this.createShapeFinalTouch.clientX);
-              const touchDeltaY = Math.abs(this.createShapeInitialTouch.clientY - this.createShapeFinalTouch.clientY);
-
-              if (touchDeltaX < CREATE_SHAPE_TOUCH_EXACTNESS_IN_PX && touchDeltaY < CREATE_SHAPE_TOUCH_EXACTNESS_IN_PX) {
-                this.setState({showTouchDeviceAddHint: true});
-              }
-            }, 150);
+            this.createShapeTouchStartTimestamp = Date.now();
 
             this.createShapeInitialTouch = touches[0];
             this.createShapeFinalTouch = touches[0];
@@ -473,7 +481,6 @@ export default class Floorplan extends Component {
 
               if (touchDeltaX < CREATE_SHAPE_TOUCH_EXACTNESS_IN_PX && touchDeltaY < CREATE_SHAPE_TOUCH_EXACTNESS_IN_PX) {
                 const points = ViewerTouchEvent.touchesToPoints(touches, SVGViewer, value);
-                this.setState({showTouchDeviceAddHint: false});
 
                 // The user clicked the background without a shape selected, so create a new shape!
                 if (onCreateShape) {
@@ -494,10 +501,23 @@ export default class Floorplan extends Component {
             }
           }}
           onTouchEnd={e => {
+            // The user has released their touch, before the timeout has fired, so clear the
+            // timeout.
             window.clearTimeout(this.createShapeTimeout);
-            window.clearTimeout(this.createShapeShowHintTimeout);
 
-            this.setState({showTouchDeviceAddHint: false});
+            const touchDeltaX = Math.abs(this.createShapeInitialTouch.clientX - this.createShapeFinalTouch.clientX);
+            const touchDeltaY = Math.abs(this.createShapeInitialTouch.clientY - this.createShapeFinalTouch.clientY);
+            const touchDuration = Date.now() - this.createShapeTouchStartTimestamp;
+
+            // Did the user just tap on the background and not hold? If so, then show them a hint
+            // telling them that they should press and hold.
+            if (
+              touchDeltaX < CREATE_SHAPE_TOUCH_EXACTNESS_IN_PX &&
+              touchDeltaY < CREATE_SHAPE_TOUCH_EXACTNESS_IN_PX &&
+              touchDuration < 500
+            ) {
+              this.showTouchDeviceAddHint();
+            }
           }}
         >
           <svg

@@ -71,6 +71,7 @@ storiesOf('Floorplan', module)
           <p>navbar here</p>
           <p>navbar here</p>
           <Floorplan
+            deviceSupportsTouch={true}
             image="https://i.imgur.com/FkE7cxK.png"
             shapes={this.state.shapes}
             onShapeMovement={(id, x, y) => {
