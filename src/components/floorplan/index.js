@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { applyToPoint } from 'transformation-matrix';
 
 import {ReactSVGPanZoom, TOOL_NONE, TOOL_AUTO} from 'react-svg-pan-zoom';
+import ViewerTouchEvent from 'react-svg-pan-zoom/build-commonjs/events/viewer-touch-event.js';
 
 import { IconPlus } from '@density/ui-icons';
 
@@ -101,29 +102,32 @@ export default class Floorplan extends Component {
     this.selectShape = this.selectShape.bind(this);
   }
 
-  selectShape(shapeId) {
-    const height = this.props.height || 600;
-    if (shapeId && shapeId.id) { shapeId = shapeId.id; }
+  async selectShape(shapeId) {
+    return new Promise(resolve => {
+      const height = this.props.height || 600;
+      if (shapeId && shapeId.id) { shapeId = shapeId.id; }
 
-    this.setState({
-      selectedId: shapeId,
-      selectedShapeMoving: false,
-      hoveringOverShape: false,
-    }, () => {
+      this.setState({
+        selectedId: shapeId,
+        selectedShapeMoving: false,
+        hoveringOverShape: false,
+      }, () => {
 
-      // If a shape was selected that would display the popup outside of the visible area of the
-      // interactive floorplan visualization, then adjust the position of the visualization.
-      if (shapeId) {
-        const {x, y} = this.shapeRefs[shapeId].getBoundingClientRect();
-        const popupBounds = this.popupRef.getBoundingClientRect();
+        // If a shape was selected that would display the popup outside of the visible area of the
+        // interactive floorplan visualization, then adjust the position of the visualization.
+        if (shapeId) {
+          const {x, y} = this.shapeRefs[shapeId].getBoundingClientRect();
+          const popupBounds = this.popupRef.getBoundingClientRect();
 
-        const yDistanceFromPopupToBottomOfFloorplan = height - y;
-        if (yDistanceFromPopupToBottomOfFloorplan < popupBounds.height) {
-          const distanceToMoveViewUp = popupBounds.height - yDistanceFromPopupToBottomOfFloorplan;
-          this.panZoom.pan(0, -1 * distanceToMoveViewUp);
+          const yDistanceFromPopupToBottomOfFloorplan = height - y;
+          if (yDistanceFromPopupToBottomOfFloorplan < popupBounds.height) {
+            const distanceToMoveViewUp = popupBounds.height - yDistanceFromPopupToBottomOfFloorplan;
+            this.panZoom.pan(0, -1 * (distanceToMoveViewUp + 20));
+          }
         }
-      }
 
+        return resolve();
+      });
     });
   }
 
@@ -207,6 +211,7 @@ export default class Floorplan extends Component {
       <div
         className="floorplan"
         ref={r => { this.container = r; }}
+        style={!selectedShape ? {cursor: 'none'} : {}}
 
         // Called when the user moves their mouse or drags within the floorplan canvas.
         onMouseMove={e => {
@@ -251,28 +256,30 @@ export default class Floorplan extends Component {
           });
         }}
 
-        // After a drag, ensure that the mouseWithinFloorplanBounds value is set to false to keep the 
-        // creation cursor from showing up. Example scenario:
-        // 1. User drags around the canvas. This calls `onMouseMove`, which sets
-        //    `mouseWithinFloorplanBounds` to `true`.
-        // 2. User finishes dragging. This sets `mouseWithinFloorplanBounds` to false, ensureing
-        //    that the cursor will not be shown.
-        //
-        // IMPORTANT CAVEAT: If this event is prevented within the floorplan popup, most
-        // "traditional" interactions like clicking on links, buttons, or focusing textboxes break.
-        // So, this event is only prevented within the `g.floorplan-container` group within the svg.
-        onTouchEnd={e => {
+        onTouchEnd={async e => {
           let element = e.target;
+
+          // If the user tapped inside of the floorplan (ie, not in the popup), then ensure that
+          // that a mousemove event won't be fired. We don't want to prevent a tap when it happens
+          // in the popup though, because if we do then users cannot interact with input boxes or
+          // other ui controls.
           while (element) {
             if (element.className && element.className.baseVal === 'floorplan-container') {
               e.preventDefault();
-              this.setState({mouseWithinFloorplanBounds: false});
               break;
             }
             element = element.parentElement;
           }
+
+          // Reselect the shape. This adjusts the position of the popup to match the new shape
+          // position.
+          await this.selectShape(selectedShape);
+
+          // Now that the item is no longer being moved and the popup is positioned in the correct
+          // location, disable the moving flag. This then re-shows the popup, which is now
+          // positioned correctly.
+          this.setState({ selectedShapeMoving: false });
         }}
-        style={!selectedShape ? {cursor: 'none'} : {}}
 
         onMouseOut={e => {
           // When the mouse leaves the floorplan, ensure the element that the event was received on
@@ -285,6 +292,34 @@ export default class Floorplan extends Component {
             }
             element = element.parentElement;
           }
+        }}
+
+        onTouchMove={e => {
+          e.preventDefault();
+
+          // Selected shape is being moved, update its x and y coordinates.
+          if (selectedShapeMoving) {
+            // Calculate the distance that the mouse has moved since the last update.
+            const deltaX = (e.touches[0].clientX * scaleFactor) - this.state.lastMouseX;
+            const deltaY = (e.touches[0].clientY * scaleFactor) - this.state.lastMouseY;
+
+            // Add that delta to the current x and y coords.
+            let x = selectedShape.x + deltaX;
+            let y = selectedShape.y + deltaY;
+
+            // Call a callback, passing those new coords. This callback
+            // should update the state of the component, moving the shapes.
+            if (onShapeMovement) {
+              onShapeMovement(selectedId, x, y, this);
+            }
+          }
+
+          // Update the last mouse positions with the current positions - for the next frame.
+          this.setState({
+            mouseWithinFloorplanBounds: false,
+            lastMouseX: e.touches[0].clientX * scaleFactor,
+            lastMouseY: e.touches[0].clientY * scaleFactor,
+          });
         }}
       >
         {(() => {
@@ -327,6 +362,7 @@ export default class Floorplan extends Component {
 
           styles.opacity = shouldPopupBeOpen ? 1 : 0;
           styles.pointerEvents = shouldPopupBeOpen ? 'all' : 'none';
+          styles.userSelect = shouldPopupBeOpen ? 'all' : 'none';
 
           return <div
             className="floorplan-popup"
@@ -394,6 +430,45 @@ export default class Floorplan extends Component {
             if (onCreateShape) {
               onCreateShape(e.x, e.y, this);
             }
+          }}
+          onTouchStart={e => {
+            const touches = e.originalEvent.touches,
+                  SVGViewer = e.SVGViewer,
+                  value = e.value;
+            if (touches > 1) {
+              return;
+            }
+
+            this.createShapeInitialTouch = touches[0];
+            this.createShapeFinalTouch = touches[0];
+            this.createShapeTimeout = window.setTimeout(() => {
+              console.log('INITIAL', this.createShapeInitialTouch.clientX, this.createShapeInitialTouch.clientY);
+              console.log('FINAL', this.createShapeFinalTouch.clientX, this.createShapeFinalTouch.clientY);
+
+              const touchDeltaX = Math.abs(this.createShapeInitialTouch.clientX - this.createShapeFinalTouch.clientX);
+              const touchDeltaY = Math.abs(this.createShapeInitialTouch.clientY - this.createShapeFinalTouch.clientY);
+              console.log('DELTAS', touchDeltaX, touchDeltaY);
+
+              if (touchDeltaX < 20 && touchDeltaY < 20) {
+                const points = ViewerTouchEvent.touchesToPoints(touches, SVGViewer, value);
+
+                if (selectedShape) {
+                  return;
+                }
+
+                // The user clicked the background without a shape selected, so create a new shape!
+                if (onCreateShape) {
+                  onCreateShape(points[0].x, points[0].y, this);
+                }
+              }
+            }, 750);
+          }}
+          onTouchMove={e => {
+            const event = e.originalEvent;
+            this.createShapeFinalTouch = event.touches[0];
+          }}
+          onTouchEnd={e => {
+            window.clearTimeout(this.createShapeTimeout);
           }}
         >
           <svg
@@ -486,6 +561,26 @@ export default class Floorplan extends Component {
                         this.setState({
                           lastMouseX: e.clientX * scaleFactor,
                           lastMouseY: e.clientY * scaleFactor,
+
+                          // Set the flag indicating the currently selected doorway is being moved.
+                          selectedShapeMoving: true,
+                        });
+                      }
+                    }}
+                    onTouchMove={e => {
+                      // The above only applies to the actively selected shape.
+                      if (selectedId !== shape.id) {
+                        return;
+                      }
+
+                      // If the user started clicking and dragging on an shape, then
+                      // start moving that shape.
+                      if (shape.allowMovement && !selectedShapeMoving) {
+                        // Set initial x and y mouse positions. This is used to calculate mouse deltas
+                        // on future mousemoves.
+                        this.setState({
+                          lastMouseX: e.touches[0].clientX * scaleFactor,
+                          lastMouseY: e.touches[0].clientY * scaleFactor,
 
                           // Set the flag indicating the currently selected doorway is being moved.
                           selectedShapeMoving: true,
