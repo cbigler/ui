@@ -254,7 +254,18 @@ export default class Floorplan extends Component {
 
           // After the user taps on something, disable the adding cursor.
           this.setState({mouseWithinFloorplanBounds: false});
-          e.preventDefault();
+
+          // If the user tapped inside of the floorplan (ie, not in the popup), then ensure that
+          // that a mousemove event won't be fired. We don't want to prevent a tap when it happens
+          // in the popup though, because if we do then users cannot interact with input boxes or
+          // other ui controls.
+          while (element) {
+            if (element.className && element.className.baseVal === 'floorplan-container') {
+              e.preventDefault();
+              break;
+            }
+            element = element.parentElement;
+          }
         }}
 
         onMouseMove={e => {
