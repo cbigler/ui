@@ -375,6 +375,8 @@ export default class Floorplan extends Component {
             // the upper left hand x and y coordinates.
             let {x, y} = this.shapeRefs[this.lastSelectedShape.id].getBoundingClientRect();
 
+            // Subtract the parent's position from the popup's position in order to position within
+            // the context of the parent.
             let parent = this.container.getBoundingClientRect();
             x -= parent.x;
             y -= parent.y;
@@ -403,12 +405,12 @@ export default class Floorplan extends Component {
           }
 
           styles.opacity = shouldPopupBeOpen ? 1 : 0;
-          styles.pointerEvents = shouldPopupBeOpen ? 'all' : 'none';
-          styles.userSelect = shouldPopupBeOpen ? 'all' : 'none';
+          styles.pointerEvents = shouldPopupBeOpen ? 'auto' : 'none';
+          styles.userSelect = shouldPopupBeOpen ? 'auto' : 'none';
 
           // Required for iPad / apple devices :(
-          styles.WebkitUserSelect = shouldPopupBeOpen ? 'all' : 'none';
-          styles.WebkitTouchCallout = shouldPopupBeOpen ? 'all' : 'none';
+          styles.WebkitUserSelect = shouldPopupBeOpen ? 'auto' : 'none';
+          styles.WebkitTouchCallout = shouldPopupBeOpen ? 'auto' : 'none';
 
           return <div
             className="floorplan-popup"
@@ -448,7 +450,7 @@ export default class Floorplan extends Component {
         <ReactSVGPanZoom
           width={width}
           height={height}
-          ref={r => { this.panZoom = r; window.panZoom = r; }}
+          ref={r => { this.panZoom = r; }}
 
           /* When a shape is selected, do not allow the canvas to move */
           tool={selectedId ? TOOL_NONE : TOOL_AUTO}
@@ -508,13 +510,34 @@ export default class Floorplan extends Component {
               const touchDeltaY = Math.abs(this.createShapeInitialTouch.clientY - this.createShapeFinalTouch.clientY);
 
               if (touchDeltaX < CREATE_SHAPE_TOUCH_EXACTNESS_IN_PX && touchDeltaY < CREATE_SHAPE_TOUCH_EXACTNESS_IN_PX) {
+                // Use an internal react-svg-pan-zoom method to project the touch coordinates to
+                // the svg's coordinate plane.
+                // ref https://github.com/chrvadala/react-svg-pan-zoom/blob/9ae28d625fe29d5f96ff014194824c95dee95a81/src/events/viewer-touch-event.js#L19
                 const points = ViewerTouchEvent.touchesToPoints(touches, SVGViewer, value);
 
-                // The user clicked the background without a shape selected, so create a new shape!
+                // The user tapped the background without a shape selected, so create a new shape!
                 if (onCreateShape) {
-                  const id = await onCreateShape(points[0].x, points[0].y, this);
+                  const result = await onCreateShape(points[0].x, points[0].y, this);
+
+                  if (typeof result !== 'undefined') {
+                    console.warn('Density UI Floorplan: onCreateShape should return a promise that resolves to the id of the created shape, instead recevied undefined.');
+                    return;
+                  }
+
+                  // Extract the id from the data resolved from onCreateShape.
+                  let id;
+                  if (result && result.id) {
+                    id = result.id; /* user resolved the created item */
+                  } else {
+                    id = result; /* user resolved the id itself */
+                  }
+
+                  // 1st: Set the creation animiation id property to the id of the shape that was
+                  // just created.
                   this.setState({creationAnimationId: id}, () => {
                     window.setTimeout(() => {
+                      // 2nd: Reset the creation animation state back to null once the animation has
+                      // completed, which hides the animation id.
                       this.setState({creationAnimationId: null});
                     }, 400);
                   });

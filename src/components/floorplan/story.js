@@ -6,6 +6,8 @@ import InputBox from '../input-box/index';
 
 import './styles.scss';
 import Floorplan, { DPU, CIRCLE } from './';
+import RadioButton from '../radio-button';
+import Button from '../button';
 
 import uuid from 'uuid';
 
@@ -114,24 +116,46 @@ storiesOf('Floorplan', module)
         super(props);
 
 
-        this.shapePopup = (shape, floorplan) => <div style={{
-          width: 509,
-          height: 281,
-          padding: 20,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContents: 'center',
-        }}>
-          <input type="text" />
-          <h5 style={{margin: 0, color: '#4E5457'}}>Has access to this data:</h5>
-          <pre>{JSON.stringify(shape, null, 2)}</pre>
-          <button onClick={e => {
-            floorplan.selectShape(null);
-            this.setState({
-              shapes: this.state.shapes.filter(i => i.id !== shape.id),
-            });
-          }}>Delete</button>
-        </div>;
+        this.shapePopup = (doorway, floorplan) => (
+          <div className="floorplan-detail-popup">
+            <label className="floorplan-detail-label" htmlFor="floorplan-detail-doorway-name">
+              Doorway Name
+            </label>
+            <input
+              className="floorplan-detail-transparent-input"
+              type="text"
+              placeholder="Give this doorway a unique name ..."
+            />
+
+            <label className="floorplan-detail-label" htmlFor="floorplan-detail-unit-location">
+              Unit Location
+              <span className="floorplan-detail-label-small">
+                (Will the unit be mounted inside or outside of the space?)
+              </span>
+            </label>
+
+            <fieldset className="floorplan-detail-radio-set" id="floorplan-detail-unit-location">
+              <RadioButton text="Inside" />
+              <RadioButton text="Outside" />
+            </fieldset>
+
+            <Button
+              disabled={false}
+              onClick={() => {
+                alert('Clicked!')
+              }}
+            >Done</Button>
+
+            <span
+              role="button"
+              tabIndex="0"
+              className="floorplan-detail-delete-link"
+              onClick={() => {
+                alert('Click!!!');
+              }}
+            >Remove Doorway</span>
+          </div>
+        );
 
         this.state = {
           shapes: [
