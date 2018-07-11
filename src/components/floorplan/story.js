@@ -86,7 +86,7 @@ storiesOf('Floorplan', module)
               });
             }}
 
-            onCreateShape={(x, y) => {
+            onCreateShape={async (x, y) => {
               const id = uuid.v4();
               this.setState({
                 shapes: [...this.state.shapes, {
@@ -99,6 +99,7 @@ storiesOf('Floorplan', module)
                   name: `My new doorway with id ${id}`,
                 }],
               });
+              return id;
             }}
           />
         </div>;

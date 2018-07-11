@@ -90,6 +90,9 @@ export default class Floorplan extends Component {
       mouseWithinFloorplanBounds: false,
       showTouchDeviceAddHint: false,
 
+      // Show a creation animation for the shape with this id
+      creationAnimationId: null,
+
       // Display the tooltip following the cursor offscreen until the first mousemove event.
       lastMouseX: -1000,
       lastMouseY: -1000,
@@ -210,6 +213,7 @@ export default class Floorplan extends Component {
       floorplanWidth,
       floorplanHeight,
       showTouchDeviceAddHint,
+      creationAnimationId,
     } = this.state;
 
     const scaleFactor = 1 / panZoomMatrix.a;
@@ -378,8 +382,9 @@ export default class Floorplan extends Component {
           styles.opacity = shouldPopupBeOpen ? 1 : 0;
           styles.pointerEvents = shouldPopupBeOpen ? 'all' : 'none';
           styles.userSelect = shouldPopupBeOpen ? 'all' : 'none';
+
+          // Required for iPad / apple devices :(
           styles.WebkitUserSelect = shouldPopupBeOpen ? 'all' : 'none';
-          // Hide the blue select with the drag points. Like "user-select: none;".
           styles.WebkitTouchCallout = shouldPopupBeOpen ? 'all' : 'none';
 
           return <div
@@ -475,7 +480,7 @@ export default class Floorplan extends Component {
 
             this.createShapeInitialTouch = touches[0];
             this.createShapeFinalTouch = touches[0];
-            this.createShapeTimeout = window.setTimeout(() => {
+            this.createShapeTimeout = window.setTimeout(async () => {
               const touchDeltaX = Math.abs(this.createShapeInitialTouch.clientX - this.createShapeFinalTouch.clientX);
               const touchDeltaY = Math.abs(this.createShapeInitialTouch.clientY - this.createShapeFinalTouch.clientY);
 
@@ -484,10 +489,15 @@ export default class Floorplan extends Component {
 
                 // The user clicked the background without a shape selected, so create a new shape!
                 if (onCreateShape) {
-                  onCreateShape(points[0].x, points[0].y, this);
+                  const id = await onCreateShape(points[0].x, points[0].y, this);
+                  this.setState({creationAnimationId: id}, () => {
+                    window.setTimeout(() => {
+                      this.setState({creationAnimationId: null});
+                    }, 400);
+                  });
                 }
               }
-            }, 750);
+            }, 500);
           }}
           onTouchMove={e => {
             const event = e.originalEvent;
@@ -654,6 +664,22 @@ export default class Floorplan extends Component {
                     />
                   </g>;
                 })}
+              </g>
+
+              <g className="floorplan-layer-creation-animation">
+                {creationAnimationId ? (() => {
+                  const createdShape = shapes.find(i => i.id === creationAnimationId);
+                  return (
+                    <circle
+                      className="floorplan-layer-creation-animation-circle"
+                      cx={createdShape.x}
+                      cy={createdShape.y}
+                      r={20}
+                      fill={colorVariables.brandPrimary}
+                      stroke={colorVariables.brandPrimary}
+                    />
+                  );
+                })() : null}
               </g>
             </g>
           </svg>

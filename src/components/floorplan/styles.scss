@@ -29,10 +29,6 @@
   border: 1px solid #B4B8BF;
 	box-shadow: 0 0 4px 0 rgba(0,0,0,0.2);
 
-  // Hide the blue select with the drag points. Like "user-select: none;".
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-
   cursor: default;
 
   // When `opacity: 1` is applied, fade in the popup.
@@ -83,7 +79,7 @@
   line-height: 43px;
   height: 43px;
 
-  background-color: $brand-primary;
+  background-color: $gray-cinder;
   font-family: $font-base;
   text-align: center;
   color: #fff;
@@ -102,3 +98,25 @@
 .floorplan-popup { @include make-floorplan-popup; }
 .floorplan-cursor { @include make-floorplan-cursor; }
 .floorplan-touch-create-hint { @include make-floorplan-touch-create-hint; }
+
+@keyframes floorplan-layer-creation-animation {
+  0% {
+    opacity: 0;
+    stroke-width: 50px;
+  }
+
+  50% {
+    opacity: 0.2;
+    stroke-width: 75px;
+  }
+
+  100% {
+    opacity: 1;
+    stroke-width: 0px;
+  }
+}
+
+.floorplan-layer-creation-animation-circle {
+  animation-name: floorplan-layer-creation-animation;
+  animation-duration: 400ms;
+}
