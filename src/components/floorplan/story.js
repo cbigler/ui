@@ -71,6 +71,104 @@ storiesOf('Floorplan', module)
           <p>navbar here</p>
           <p>navbar here</p>
           <Floorplan
+            deviceSupportsTouch={false}
+            image="https://i.imgur.com/FkE7cxK.png"
+            shapes={this.state.shapes}
+            onShapeMovement={(id, x, y) => {
+              this.setState({
+                shapes: this.state.shapes.map(s => {
+                  if (s.id === id) {
+                    return Object.assign({}, s, {x, y});
+                  } else {
+                    return s;
+                  }
+                }),
+              });
+            }}
+
+            onCreateShape={async (x, y) => {
+              const id = uuid.v4();
+              this.setState({
+                shapes: [...this.state.shapes, {
+                  id, x, y,
+                  shape: CIRCLE,
+                  popup: this.shapePopup,
+                  width: 40,
+                  height: 40,
+                  allowMovement: true,
+                  name: `My new doorway with id ${id}`,
+                }],
+              });
+              return id;
+            }}
+          />
+        </div>;
+      }
+    }
+
+    return <FloorplanWrapper />;
+  })
+  .add('With a few movable doorways, showing the touch event hint on start', () => {
+    class FloorplanWrapper extends React.Component {
+      constructor(props) {
+        super(props);
+
+
+        this.shapePopup = (shape, floorplan) => <div style={{
+          width: 509,
+          height: 281,
+          padding: 20,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContents: 'center',
+        }}>
+          <input type="text" />
+          <h5 style={{margin: 0, color: '#4E5457'}}>Has access to this data:</h5>
+          <pre>{JSON.stringify(shape, null, 2)}</pre>
+          <button onClick={e => {
+            floorplan.selectShape(null);
+            this.setState({
+              shapes: this.state.shapes.filter(i => i.id !== shape.id),
+            });
+          }}>Delete</button>
+        </div>;
+
+        this.state = {
+          shapes: [
+            {
+              id: uuid.v4(),
+              shape: CIRCLE,
+              x: 300,
+              y: 300,
+              width: 40,
+              height: 40,
+              allowMovement: true,
+
+              name: "Conference Room 1",
+              popup: this.shapePopup,
+            },
+            {
+              id: uuid.v4(),
+              shape: CIRCLE,
+              x: 646,
+              y: 450,
+              width: 40,
+              height: 40,
+              allowMovement: true,
+
+              name: "Cafeteria 1",
+              popup: this.shapePopup,
+            },
+          ],
+        };
+      }
+
+      render() {
+        return <div>
+          <p>navbar here</p>
+          <p>navbar here</p>
+          <p>navbar here</p>
+          <Floorplan
             deviceSupportsTouch={true}
             image="https://i.imgur.com/FkE7cxK.png"
             shapes={this.state.shapes}

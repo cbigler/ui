@@ -9,7 +9,7 @@ import { IconPlus } from '@density/ui-icons';
 import colorVariables from '@density/ui/variables/colors.json';
 import fontVariables from '@density/ui/variables/fonts.json';
 
-const POPUP_VERTICAL_OFFSET_FROM_SELECTED_ITEM_IN_PX = -40;
+const POPUP_VERTICAL_OFFSET_FROM_SELECTED_ITEM_IN_PX = 40;
 const POPUP_HORIZONTAL_OFFSET_FROM_SELECTED_ITEM_IN_PX = -150;
 const CREATE_SHAPE_TOUCH_EXACTNESS_IN_PX = 20;
 
@@ -88,6 +88,8 @@ export default class Floorplan extends Component {
       selectedShapeMoving: false,
       hoveringOverShape: false,
       mouseWithinFloorplanBounds: false,
+
+      // Controlling of the message on touch devices explaining how to add a doorway.
       showTouchDeviceAddHint: false,
 
       // Show a creation animation for the shape with this id
@@ -108,37 +110,43 @@ export default class Floorplan extends Component {
   }
 
   async selectShape(shapeId) {
-    return new Promise(resolve => {
-      const height = this.props.height || 600;
-      if (shapeId && shapeId.id) { shapeId = shapeId.id; }
+    return new Promise((resolve, reject) => {
+      try {
+        const height = this.props.height || 600;
+        if (shapeId && shapeId.id) { shapeId = shapeId.id; }
 
-      this.setState({
-        selectedId: shapeId,
-        selectedShapeMoving: false,
-        hoveringOverShape: false,
-      }, () => {
+        this.setState({
+          selectedId: shapeId,
+          selectedShapeMoving: false,
+          hoveringOverShape: false,
+        }, () => {
+          // If a shape was selected that would display the popup outside of the visible area of the
+          // interactive floorplan visualization, then adjust the position of the visualization.
+          if (shapeId) {
+            const {x, y} = this.shapeRefs[shapeId].getBoundingClientRect();
+            const popupBounds = this.popupRef.getBoundingClientRect();
 
-        // If a shape was selected that would display the popup outside of the visible area of the
-        // interactive floorplan visualization, then adjust the position of the visualization.
-        if (shapeId) {
-          const {x, y} = this.shapeRefs[shapeId].getBoundingClientRect();
-          const popupBounds = this.popupRef.getBoundingClientRect();
-
-          const yDistanceFromPopupToBottomOfFloorplan = height - y;
-          if (yDistanceFromPopupToBottomOfFloorplan < popupBounds.height) {
-            const distanceToMoveViewUp = popupBounds.height - yDistanceFromPopupToBottomOfFloorplan;
-            this.panZoom.pan(0, -1 * (distanceToMoveViewUp + 20));
+            const yDistanceFromPopupToBottomOfFloorplan = height - y;
+            if (yDistanceFromPopupToBottomOfFloorplan < popupBounds.height) {
+              const distanceToMoveViewUp = (popupBounds.height - yDistanceFromPopupToBottomOfFloorplan) + 20;
+              const scaleFactor = 1 / this.state.panZoomMatrix.a;
+              this.panZoom.pan(0, -1 * distanceToMoveViewUp * scaleFactor);
+            }
           }
-        }
 
-        return resolve();
-      });
+          return resolve();
+        });
+      } catch (err) {
+        return reject(err);
+      }
     });
   }
 
   showTouchDeviceAddHint() {
+    // 1st: Show the hint, and give it a class name that makes it fade in.
     this.setState({showTouchDeviceAddHint: true}, () => {
       window.setTimeout(() => {
+        // 2nd: Give the hint a classname that makes it fade out.
         this.setState({showTouchDeviceAddHint: false});
       }, 1000);
     });
@@ -146,9 +154,14 @@ export default class Floorplan extends Component {
 
   async componentDidMount() {
     window.addEventListener('blur', this.removeTooltipWhenWindowBlurs);
+
+    // Apple devices will by default use touch events to support pinch/zoom. We need to tap into
+    // those events to use when panning and zomming the canvas, so call `.preventDefault()` on those
+    // events if they happen.
     document.addEventListener('touchmove', this.disallowPanZoomOnAppleDevices, {passive: false});
 
-    // If the device supports touch events, then show the hint immediately for a bit.
+    // If the device supports touch events, then show the hint immediately to explain to the user
+    // how to create doorways.
     if (this.props.deviceSupportsTouch) {
       window.setTimeout(() => this.showTouchDeviceAddHint(), 500);
     }
@@ -168,9 +181,9 @@ export default class Floorplan extends Component {
   removeTooltipWhenWindowBlurs() {
     this.setState({mouseWithinFloorplanBounds: false});
   }
-
-  // A nice hack required to diable mobile safari's pinch to zoom behavior.
   disallowPanZoomOnAppleDevices() {
+    // Detect if the element receiving the touch event is a child within the `floorplan`, and if so,
+    // call `.preventDefault()` on the event.
     let element = event.target;
     while (element) {
       if (element.className === 'floorplan') {
@@ -182,7 +195,7 @@ export default class Floorplan extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // When the image changes, we need to update the valued
+    // If the image changes, we need to update the stored width and height of the image.
     if (nextProps.image !== this.props.image) {
       const {width, height} = getImageDimensions(nextProps.image);
       this.setState({
@@ -198,6 +211,7 @@ export default class Floorplan extends Component {
       image,
       imageRotation,
       cursorTagText,
+
       onCreateShape,
       onShapeMovement,
       onShapeClick,
@@ -216,6 +230,8 @@ export default class Floorplan extends Component {
       creationAnimationId,
     } = this.state;
 
+    // Calculate a value representing the current zoom level. This value is < 1 when the user zooms
+    // in and > 1 when the user zooms out.
     const scaleFactor = 1 / panZoomMatrix.a;
 
     // Given the selected id, get a reference to the selected shape.
@@ -232,9 +248,8 @@ export default class Floorplan extends Component {
         ref={r => { this.container = r; }}
         style={!selectedShape ? {cursor: 'none'} : {}}
 
-        // Called when the user moves their mouse or drags within the floorplan canvas.
         onMouseMove={e => {
-          // If the event occured within the floorplan popup, then it's not prrof that the mouse is
+          // If the event occured within the floorplan popup, then it's not proof that the mouse is
           // moving over the canvas, because touch devices can produce a mouse event when the popup
           // closes.
           let element = e.target;
@@ -360,6 +375,10 @@ export default class Floorplan extends Component {
             // the upper left hand x and y coordinates.
             let {x, y} = this.shapeRefs[this.lastSelectedShape.id].getBoundingClientRect();
 
+            let parent = this.container.getBoundingClientRect();
+            x -= parent.x;
+            y -= parent.y;
+
             // Add offsets such that the x and y coordinates refer to the middle of the shape, not the
             // top left.
             x += this.lastSelectedShape.width / 2;
@@ -377,6 +396,10 @@ export default class Floorplan extends Component {
             // Assign position.
             styles.left = x;
             styles.top = y;
+          } else {
+            // When not selected, ensure the popup is placed offscreen.
+            styles.left = -100000;
+            styles.top = -100000;
           }
 
           styles.opacity = shouldPopupBeOpen ? 1 : 0;
@@ -514,6 +537,10 @@ export default class Floorplan extends Component {
             // The user has released their touch, before the timeout has fired, so clear the
             // timeout.
             window.clearTimeout(this.createShapeTimeout);
+
+            if (!this.createShapeInitialTouch) {
+              return;
+            }
 
             const touchDeltaX = Math.abs(this.createShapeInitialTouch.clientX - this.createShapeFinalTouch.clientX);
             const touchDeltaY = Math.abs(this.createShapeInitialTouch.clientY - this.createShapeFinalTouch.clientY);
