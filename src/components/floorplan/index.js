@@ -528,7 +528,7 @@ export default class Floorplan extends Component {
                 if (onCreateShape) {
                   const result = await onCreateShape(points[0].x, points[0].y, this);
 
-                  if (typeof result !== 'undefined') {
+                  if (typeof result === 'undefined') {
                     console.warn('Density UI Floorplan: onCreateShape should return a promise that resolves to the id of the created shape, instead recevied undefined.');
                     return;
                   }
