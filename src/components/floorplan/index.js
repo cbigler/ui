@@ -248,6 +248,15 @@ export default class Floorplan extends Component {
         ref={r => { this.container = r; }}
         style={!selectedShape ? {cursor: 'none'} : {}}
 
+        onTouchStart={e => {
+          // Deselect the currently active shape
+          this.selectShape(null);
+
+          // After the user taps on something, disable the adding cursor.
+          this.setState({mouseWithinFloorplanBounds: false});
+          e.preventDefault();
+        }}
+
         onMouseMove={e => {
           // If the event occured within the floorplan popup, then it's not proof that the mouse is
           // moving over the canvas, because touch devices can produce a mouse event when the popup
@@ -595,14 +604,6 @@ export default class Floorplan extends Component {
                   width={floorplanWidth}
                   height={floorplanHeight}
                   onClick={() => this.selectShape(null)}
-                  onTouchStart={e => {
-                    // Deselect the currently active shape
-                    this.selectShape(null);
-
-                    // After the user taps on something, disable the adding cursor.
-                    this.setState({mouseWithinFloorplanBounds: false});
-                    e.preventDefault();
-                  }}
                   transform={(() => {
                     // If an `imageRotation` prop was specified, rotate the floorplan about its center
                     // that many degrees.

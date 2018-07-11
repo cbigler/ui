@@ -8,6 +8,7 @@
 
 @mixin make-floorplan($color: $floorplan-color) {
   position: relative;
+  touch-action: none;
 
   // Hack to hide a rect that the pan zoom component makes
   g[transform*=matrix] > rect {
@@ -121,3 +122,68 @@
   animation-name: floorplan-layer-creation-animation;
   animation-duration: 400ms;
 }
+
+
+
+// .floorplan-detail-popup {
+//   display: flex;
+//   flex-direction: column;
+//   justify-contents: center;
+//
+//   width: 509px;
+//   position: relative;
+//
+//   padding-top: 40px;
+//   padding-bottom: 20px;
+//   padding-left: 20px;
+//   padding-right: 20px;
+// }
+//
+// .floorplan-detail-transparent-input {
+//   font-family: $font-base;
+//   font-size: 14px;
+//   border: 0px;
+//   outline: none;
+//
+//   margin-top: 10px;
+//   padding-top: 10px;
+//   padding-bottom: 10px;
+//   margin-bottom: 30px;
+//
+//   &::placeholder { color: $gray-dark; }
+// }
+//
+// .floorplan-detail-label {
+//   font-size: 12px;
+//   font-weight: 600;
+//   user-select: none;
+// }
+// .floorplan-detail-label-small {
+//   color: $gray-darker;
+//   font-weight: 400;
+//   margin-left: 5px;
+// }
+//
+// .floorplan-detail-radio-set {
+//   border: 0px;
+//   padding: 0px;
+//
+//   margin-top: 20px;
+//   margin-bottom: 40px;
+//
+//   display: flex;
+//   flex-direction: row;
+// }
+//
+// .floorplan-detail-delete-link {
+//   position: absolute;
+//   top: 40px;
+//   right: 20px;
+//
+//   color: $brand-danger;
+//   text-decoration: underline;
+//
+//   cursor: pointer;
+//   &:hover { opacity: 0.8; }
+//   &:active { opacity: 1; }
+// }
