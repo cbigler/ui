@@ -96,7 +96,7 @@
   transition: all 250ms ease-in-out;
 }
 
-.floorplan { @include make-floorplan; }
+.floorplan-root { @include make-floorplan; }
 .floorplan-popup { @include make-floorplan-popup; }
 .floorplan-cursor { @include make-floorplan-cursor; }
 .floorplan-touch-create-hint { @include make-floorplan-touch-create-hint; }

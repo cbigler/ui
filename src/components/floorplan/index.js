@@ -186,7 +186,7 @@ export default class Floorplan extends Component {
     // call `.preventDefault()` on the event.
     let element = event.target;
     while (element) {
-      if (element.className === 'floorplan') {
+      if (element.className && element.className.baseVal === 'floorplan-container') {
         event.preventDefault();
         return;
       }
@@ -244,28 +244,27 @@ export default class Floorplan extends Component {
 
     return (
       <div
-        className="floorplan"
+        className="floorplan-root"
         ref={r => { this.container = r; }}
         style={!selectedShape ? {cursor: 'none'} : {}}
 
         onTouchStart={e => {
+          // If the event occured within the floorplan popup, then it's a mouse event in the popup
+          // itself and shouldn't dismiss it!
+          let element = e.target;
+          while (element) {
+            if (element.className === 'floorplan-popup') {
+              return;
+            }
+            element = element.parentElement;
+          }
+
           // Deselect the currently active shape
           this.selectShape(null);
 
           // After the user taps on something, disable the adding cursor.
           this.setState({mouseWithinFloorplanBounds: false});
-
-          // If the user tapped inside of the floorplan (ie, not in the popup), then ensure that
-          // that a mousemove event won't be fired. We don't want to prevent a tap when it happens
-          // in the popup though, because if we do then users cannot interact with input boxes or
-          // other ui controls.
-          while (element) {
-            if (element.className && element.className.baseVal === 'floorplan-container') {
-              e.preventDefault();
-              break;
-            }
-            element = element.parentElement;
-          }
+          e.preventDefault();
         }}
 
         onMouseMove={e => {
@@ -340,7 +339,7 @@ export default class Floorplan extends Component {
           // is a decendant of the floorplan wrapper div. If so, then hide the cursor tooltip.
           let element = e.target;
           while (element) {
-            if (element === this.container) {
+            if (element.className && element.className.baseVal === 'floorplan-container') {
               this.setState({mouseWithinFloorplanBounds: false});
               break;
             }
@@ -441,7 +440,6 @@ export default class Floorplan extends Component {
               if (!shouldPopupBeOpen) {
                 e.preventDefault();
               }
-              e.stopPropagation();
             }}
           >
             {this.lastSelectedShape ? this.lastSelectedShape.popup(this.lastSelectedShape, this) : null}
@@ -557,7 +555,7 @@ export default class Floorplan extends Component {
                   this.setState({creationAnimationId: id}, () => {
                     window.setTimeout(() => {
                       // 2nd: Reset the creation animation state back to null once the animation has
-                      // completed, which hides the animation id.
+                      // completed, which hides the animation element.
                       this.setState({creationAnimationId: null});
                     }, 400);
                   });
