@@ -339,7 +339,7 @@ export default class Floorplan extends Component {
           // is a decendant of the floorplan wrapper div. If so, then hide the cursor tooltip.
           let element = e.target;
           while (element) {
-            if (element.className && element.className.baseVal === 'floorplan-container') {
+            if (element.className === 'floorplan-root') {
               this.setState({mouseWithinFloorplanBounds: false});
               break;
             }
