@@ -411,10 +411,10 @@ export default class Floorplan extends Component {
 
             // Ensure that the popup can't overflow the horizontal  bounds of its container.
             if (this.popupRef) {
-              let popupBounds = this.popupRef.getBoundingClientRect();
-              if (x < 10) { x = 10; }
-              if (x > width - popupBounds.width - 20) { x = width - popupBounds.width - 20; }
+              this.popupBounds = this.popupRef.getBoundingClientRect();
             }
+            if (x < 10) { x = 10; }
+            if (x > width - this.popupBounds.width - 20) { x = width - this.popupBounds.width - 20; }
 
             // Assign position.
             styles.left = x;
