@@ -115,6 +115,11 @@ export default class Floorplan extends Component {
         const height = this.props.height || 600;
         if (shapeId && shapeId.id) { shapeId = shapeId.id; }
 
+        // Call a callback when the active shape is deselected
+        if (shapeId === null && this.props.onShapeDeselect) {
+          this.props.onShapeDeselect(this.state.selectedId);
+        }
+
         this.setState({
           selectedId: shapeId,
           selectedShapeMoving: false,
