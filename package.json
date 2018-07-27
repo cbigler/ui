@@ -35,12 +35,13 @@
     "webpack": "^2.3.2"
   },
   "dependencies": {
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
     "classnames": "^2.2.5",
     "normalize.css": "^7.0.0",
     "popper.js": "^1.10.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "uuid": "^3.0.1",
-    "react-scripts": "1.0.14"
+    "react-scripts": "1.0.14",
+    "uuid": "^3.0.1"
   }
 }
