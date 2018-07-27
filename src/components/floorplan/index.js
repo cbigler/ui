@@ -61,19 +61,21 @@ export const CIRCLE = ({scale, selected, index}) => <g className="Circle">
   />
 </g>;
 
-async function getImageDimensions(src) {
+function getImageDimensions(src) {
   const img = document.createElement('img');
   img.src = src;
   img.styles = 'visibility: hidden; position: absolute; top: -100000000px; left: -100000000px;'
   document.body.appendChild(img);
 
-  // Wait for image to load.
-  await new Promise(resolve => { img.onload = resolve; });
+  return new Promise(resolve => {
+    // Wait for image to load.
+    img.onload = () => {
+      const {width, height} = img.getBoundingClientRect();
+      document.body.removeChild(img);
 
-  const {width, height} = img.getBoundingClientRect();
-  document.body.removeChild(img);
-
-  return { width, height };
+      resolve({ width, height });
+    }
+  });
 }
 
 export default class Floorplan extends Component {
