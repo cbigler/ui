@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-floorplan",
-  "version": "0.3.4",
+  "version": "0.3.6",
   "description": "Floorplan interface component",
   "main": "dist/index.js",
   "style": "dist/styles.css",
@@ -14,6 +14,7 @@
     "@density/ui": "^5.0.1",
     "@density/ui-icons": "^0.1.5",
     "react-svg-pan-zoom": "^2.16.1",
+    "regenerator-runtime": "^0.12.0",
     "uuid": "^3.2.1"
   }
 }

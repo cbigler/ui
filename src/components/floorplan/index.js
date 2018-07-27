@@ -9,6 +9,8 @@ import { IconPlus } from '@density/ui-icons';
 import colorVariables from '@density/ui/variables/colors.json';
 import fontVariables from '@density/ui/variables/fonts.json';
 
+import regeneratorRuntime from "regenerator-runtime";
+
 const POPUP_VERTICAL_OFFSET_FROM_SELECTED_ITEM_IN_PX = 40;
 const POPUP_HORIZONTAL_OFFSET_FROM_SELECTED_ITEM_IN_PX = -150;
 const CREATE_SHAPE_TOUCH_EXACTNESS_IN_PX = 20;
