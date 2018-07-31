@@ -51,8 +51,10 @@
     padding: 20px;
     margin-bottom: 0px;
 
+    border-radius: 0px;
+    -webkit-appearance: none;
+
     // On active, remove outline and add a border color.
-    // NOTE: does this have accessibility concerns?
     outline: none;
     border: $border-width solid #CBCFD6;
     border-bottom-color: transparent;
