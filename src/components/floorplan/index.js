@@ -203,10 +203,10 @@ export default class Floorplan extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  async componentWillReceiveProps(nextProps) {
     // If the image changes, we need to update the stored width and height of the image.
     if (nextProps.image !== this.props.image) {
-      const {width, height} = getImageDimensions(nextProps.image);
+      const {width, height} = await getImageDimensions(nextProps.image);
       this.setState({
         floorplanWidth: width,
         floorplanHeight: height,
