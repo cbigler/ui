@@ -627,15 +627,24 @@ export default class Floorplan extends Component {
                   transform={(() => {
                     // If an `imageRotation` prop was specified, rotate the floorplan about its center
                     // that many degrees.
-                    if (imageRotation && this.floorplanLayerImage) {
+                    if (typeof imageRotation === 'number' && this.floorplanLayerImage) {
                       const bbox = this.floorplanLayerImage.getBBox();
-                      return `rotate(
-                        ${imageRotation},
-                        ${bbox.width / 2},
-                        ${bbox.height / 2}
-                      )`.replace(/[\n ]/g, '');
+
+                      // A lookup table of translations for ach rotation value. I couldn't find a
+                      // function that generalizes this quite perfectly :(
+                      switch (imageRotation % 360) {
+                      case 90:
+                        return `rotate(90), translate(${0}, ${-1 * bbox.width})`;
+                      case 180:
+                        return `rotate(180), translate(${-1 * bbox.width}, ${-1 * bbox.height})`;
+                      case 270:
+                        return `rotate(270), translate(${-1 * bbox.height}, ${0})`;
+                      case 0:
+                      default:
+                        return 'rotate(0)';
+                      }
                     } else {
-                      return '';
+                      return 'rotate(0)';
                     }
                   })()}
                 />

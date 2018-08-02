@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import InputBox from '../input-box/index';
 
 import './styles.scss';
-import Floorplan, { DPU, CIRCLE } from './';
+import Floorplan, { DPU, CIRCLE } from './index';
 import RadioButton from '../radio-button';
 import Button from '../button';
 
@@ -410,7 +410,7 @@ storiesOf('Floorplan', module)
 
     return <FloorplanWrapper />;
   })
-  .add('With a 180-degree rotated floorplan', () => {
+  .add('With a 90-degree rotated floorplan', () => {
     class FloorplanWrapper extends React.Component {
       constructor(props) {
         super(props);
@@ -439,25 +439,13 @@ storiesOf('Floorplan', module)
             {
               id: uuid.v4(),
               shape: CIRCLE,
-              x: 300,
-              y: 300,
+              x: 0,
+              y: 0,
               width: 40,
               height: 40,
               allowMovement: false,
 
               name: "Conference Room 1",
-              popup: this.shapePopup,
-            },
-            {
-              id: uuid.v4(),
-              shape: CIRCLE,
-              x: 646,
-              y: 450,
-              width: 40,
-              height: 40,
-              allowMovement: false,
-
-              name: "Cafeteria 1",
               popup: this.shapePopup,
             },
           ],
@@ -467,7 +455,7 @@ storiesOf('Floorplan', module)
       render() {
         return <Floorplan
           image="https://i.imgur.com/FkE7cxK.png"
-          imageRotation={180}
+          imageRotation={90}
           shapes={this.state.shapes}
           onShapeMovement={(id, x, y) => {
             this.setState({
