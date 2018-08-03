@@ -488,6 +488,7 @@ export default class Floorplan extends Component {
           detectWheel={true}
           detectPinchGesture={true}
           detectAutoPan={false}
+          preventPanOutside={false}
           disableDoubleClickZoomWithToolAuto={false}
 
           toolbarPosition="none"
