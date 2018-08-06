@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-icons",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Density Icons component",
   "main": "dist/index.js",
   "style": "dist/styles.css",

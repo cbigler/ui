@@ -837,6 +837,36 @@ const ICONS = {
           </g>
       </g>
   </svg>,
+  IconRotate: ({color, width, height}) => <svg xmlns='http://www.w3.org/2000/svg' xmlnsXlink='http://www.w3.org/1999/xlink' height={height || 31.5} width={width || 31.5}>
+    <defs>
+        <rect id='rect-0' x='0.75' y='0.75' width='30' height='30' rx='0' ry='0'
+        />
+        <path id='path-1' d='M3.7500166666667383,20.249966666666637 L3.7500166666667383,24.749966666666637 L8.250016666666738,24.749966666666637'
+        />
+        <path id='path-2' d='M27.75001666666674,11.249966666666637 L27.75001666666674,6.749966666666637 L23.25001666666674,6.749966666666637'
+        />
+        <path id='path-3' d='M26.87766666666669,8.250099999999943 C25.097500000000018,12.647766666666607 20.786000000000016,15.749933333333274 15.750000000000012,15.749933333333274 C9.122666666666671,15.749933333333274 3.75,10.377266666666609 3.75,3.7499333333332743'
+        />
+        <path id='path-4' d='M4.622366666666721,23.24983333333333 C6.402533333333391,18.852166666666665 10.714033333333397,15.75 15.750033333333402,15.75 C22.37736666666674,15.75 27.750033333333413,21.122666666666664 27.750033333333413,27.75'
+        />
+        <path id='path-5' d='M12.750016666666738,18.749966666666637 L18.75001666666674,18.749966666666637 L18.75001666666674,12.749966666666637 L12.750016666666738,12.749966666666637 L12.750016666666738,18.749966666666637Z'
+        />
+    </defs>
+    <use xlinkHref='#rect-0' fill={color} fillOpacity='0' />
+    <use xlinkHref='#path-1' fillOpacity='0' stroke={color} strokeWidth='1.5'
+    strokeLinecap='square' strokeLinejoin='round' transform='matrix(1 0 0 -1 0 45)'
+    />
+    <use xlinkHref='#path-2' fillOpacity='0' stroke={color} strokeWidth='1.5'
+    strokeLinecap='square' strokeLinejoin='round' transform='matrix(1 0 0 -1 0 18)'
+    />
+    <use xlinkHref='#path-3' fillOpacity='0' stroke={color} strokeWidth='1.5'
+    strokeLinejoin='round' transform='matrix(1 0 0 -1 0 19.5)' />
+    <use xlinkHref='#path-4' fillOpacity='0' stroke={color} strokeWidth='1.5'
+    strokeLinejoin='round' transform='matrix(1 0 0 -1 0 43.5)' />
+    <use xlinkHref='#path-5' fillOpacity='0' stroke={color} strokeWidth='1.5'
+    strokeLinecap='square' strokeLinejoin='round' transform='matrix(1 0 0 -1 0 31.5)'
+    />
+  </svg>,
   IconFloorplans: ({color, width, height}) => <svg width={width || 20} height={height || 18} viewBox='0 0 20 18' xmlns='http://www.w3.org/2000/svg'>
     <g id='Page-1' fill='none' fillRule='evenodd'>
         <g id='IconFloorplans' transform='translate(0 -1)'>
@@ -850,7 +880,7 @@ const ICONS = {
             strokeLinejoin='round' points='16 12 19 12 19 2 7 2 7 5' />
         </g>
     </g>
-</svg>
+</svg>,
 };
 
 // Wrap each icon in a component.
