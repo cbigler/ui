@@ -482,7 +482,6 @@ storiesOf('Floorplan', module)
                 name: `My new doorway with id ${id}`,
               }],
             }, () => {
-              console.log('SELECT');
               floorplan.selectShape(id);
             });
           }}
