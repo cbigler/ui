@@ -77,6 +77,11 @@ function getImageDimensions(src) {
 
       resolve({ width, height });
     }
+    // Handle errors (if it gets rendered with an undefined "src")
+    img.onerror = () => {
+      document.body.removeChild(img);
+      resolve({ width: 0, height: 0 });
+    }
   });
 }
 
