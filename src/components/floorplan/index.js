@@ -617,6 +617,22 @@ export default class Floorplan extends Component {
             xmlns='http://www.w3.org/2000/svg'
           >
             <g className="floorplan-container">
+
+              {/*
+                Render a really large rectangle behind the floorplan.
+                Use this to trap any clicks outside of the floorplan
+              */}
+              <rect
+                className="floorplan-layer-backdrop-click-catcher"
+                x={-1 * floorplanWidth / this.state.panZoomMatrix.a}
+                y={-1 * floorplanHeight / this.state.panZoomMatrix.a}
+                width={floorplanWidth * 3 / this.state.panZoomMatrix.a}
+                height={floorplanHeight * 3 / this.state.panZoomMatrix.a}
+                fill="transparent"
+                onClick={() => this.selectShape(null)}
+              />
+
+              {/* The floorplan image itself */}
               <g className="floorplan-layer-image" ref={r => { this.floorplanLayerImage = r; }}>
                 <image
                   xlinkHref={image}
@@ -649,6 +665,7 @@ export default class Floorplan extends Component {
                 />
               </g>
 
+              {/* All doorways / shapes drawn on top of the floorplan */}
               <g className="floorplan-layer-shapes">
                 {shapes.map((shape, index) => {
                   const translateX = shape.x - (shape.width/2);
@@ -745,6 +762,7 @@ export default class Floorplan extends Component {
                 })}
               </g>
 
+              {/* A layer for rendering the creation animation for a shape */}
               <g className="floorplan-layer-creation-animation">
                 {creationAnimationId ? (() => {
                   const createdShape = shapes.find(i => i.id === creationAnimationId);
