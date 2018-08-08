@@ -640,10 +640,7 @@ export default class Floorplan extends Component {
                   y={0}
                   width={floorplanWidth}
                   height={floorplanHeight}
-                  onClick={e => {
-                    this.selectShape(null);
-                    e.stopPropagation();
-                  }}
+                  onClick={e => this.selectShape(null)}
                   transform={(() => {
                     // If an `imageRotation` prop was specified, rotate the floorplan about its center
                     // that many degrees.

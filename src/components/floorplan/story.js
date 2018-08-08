@@ -469,7 +469,7 @@ storiesOf('Floorplan', module)
             });
           }}
 
-          onCreateShape={(x, y) => {
+          onCreateShape={(x, y, floorplan) => {
             const id = uuid.v4();
             this.setState({
               shapes: [...this.state.shapes, {
@@ -481,6 +481,9 @@ storiesOf('Floorplan', module)
                 allowMovement: true,
                 name: `My new doorway with id ${id}`,
               }],
+            }, () => {
+              console.log('SELECT');
+              floorplan.selectShape(id);
             });
           }}
         />;
