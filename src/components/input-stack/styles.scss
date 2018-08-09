@@ -62,6 +62,7 @@
   input:focus {
     border-color: $valid-color;
   }
+  input::placeholder { color: $gray; }
   &.focus + & input {
     border-top-color: transparent;
   }

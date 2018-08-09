@@ -33,6 +33,7 @@
   &:focus {
     border-color: $active-color;
   }
+  &::placeholder { color: $gray; }
 }
 
 // If applying to a <textarea></textarea>, apply a few more styles.
