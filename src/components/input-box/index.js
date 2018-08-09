@@ -37,16 +37,25 @@ export class SelectBox extends React.Component {
 
     this.state = {
       opened: false,
+      visible: false,
     };
 
     // Called when the user focuses either the value or an item in the menu part of the box.
     this.onMenuFocus = () => {
-      this.setState({opened: true});
+      this.setState({visible: true, opened: false}, () => {
+        setTimeout(() => {
+          this.setState({opened: true});
+        }, 0);
+      });
     };
 
     // Called when the user blurs either the value or an item in the menu part of the box.
     this.onMenuBlur = () => {
-      this.setState({opened: false});
+      this.setState({opened: false}, () => {
+        setTimeout(() => {
+          this.setState({visible: false});
+        }, 250);
+      });
     };
 
     // Called when the user selects an item within the menu of the select box.
@@ -62,7 +71,7 @@ export class SelectBox extends React.Component {
 
   render() {
     const { value, choices, className, id, disabled } = this.props;
-    const { opened } = this.state;
+    const { visible, opened } = this.state;
 
     // Allow `value` to either be:
     // 1. The raw element in `choices` (ie, choices.indexOf(value) isn't -1)
@@ -113,7 +122,7 @@ export class SelectBox extends React.Component {
 
       <div
         role="listbox"
-        className={classnames('input-box-select-box-menu', {opened})}
+        className={classnames('input-box-select-box-menu', {opened, visible})}
       >
         <ul>
           {(choices || []).map(choice => {
