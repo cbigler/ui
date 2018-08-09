@@ -33,6 +33,7 @@
   &:focus {
     border-color: $active-color;
   }
+  &::placeholder { color: $gray; }
 }
 
 // If applying to a <textarea></textarea>, apply a few more styles.
@@ -100,6 +101,7 @@
     align-items: center;
 
     cursor: pointer;
+    outline: none;
 
     & > span {
       margin-right: auto;
@@ -113,7 +115,6 @@
 
     &.opened {
       border-color: $brand-primary;
-      outline: none;
 
       // When focused, flip the caret.
       .input-box-caret { transform: rotate(180deg); }
@@ -146,6 +147,8 @@
     transition: all 100ms ease-in-out;
     user-select: none;
 
+    display: none;
+
     // When opened, fade in the select box and enable pointer events.
     // NOTE: when the select box is closed, it isn't given `display: none`, because giving it that
     // would make the animation difficult. Instead, it's given `pointer-events: none`, which causes
@@ -155,6 +158,9 @@
     &.opened {
       opacity: 1;
       pointer-events: all;
+    }
+    &.visible {
+      display: block;
     }
   }
 
@@ -171,10 +177,10 @@
 
     padding-left: 15px;
     padding-right: 15px;
+    outline: none;
 
     &:focus {
       color: $brand-primary;
-      outline: none;
     }
 
     &:hover {
