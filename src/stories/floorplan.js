@@ -1,0 +1,1 @@
+../components/floorplan/story.js

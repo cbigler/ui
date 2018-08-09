@@ -24,6 +24,9 @@
   border: 1px solid $gray-light;
   border-radius: $border-radius-base;
 
+  // Remove shadow on inside of boxes on ios
+  -webkit-appearance: none;
+
   // On active, remove outline and add a border color.
   // NOTE: does this have accessibility concerns?
   outline: none;
