@@ -1,0 +1,53 @@
+// Import any global variables from "../../variables/*.json"
+@import "../../variables/colors.json";
+@import "../../variables/fonts.json";
+
+// Local variables to the component
+@import "variables.json";
+
+@mixin make-info-popup() {
+  &-container {
+    margin-left: 5px;
+    margin-right: 5px;
+    outline: none;
+  }
+  &-icon {
+    vertical-align: top;
+    vertical-align: -moz-middle-with-baseline;
+    vertical-align: -webkit-baseline-middle;
+    user-select: none;
+  }
+  &-popup {
+    background-color: #fff;
+    padding: 10px;
+
+    border: 1px solid $gray;
+    border-radius: 4px;
+
+    font-family: $font-base;
+    font-size: 14px;
+
+    position: absolute;
+    top: 25px;
+    left: 0px;
+
+    display: block;
+    width: 300px;
+
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 250ms ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+
+    &.visible {
+      pointer-events: auto;
+      user-select: auto;
+      opacity: 1;
+    }
+  }
+}
+
+.info-popup {
+  @include make-info-popup;
+}
