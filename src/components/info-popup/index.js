@@ -8,6 +8,7 @@ export default class InfoPopup extends Component {
     super(props);
 
     this.state = {
+      top: 0,
       left: 0,
       visible: false,
     };
@@ -38,6 +39,8 @@ export default class InfoPopup extends Component {
 
     const windowWidth = window.innerWidth;
 
+    let top = iconBBox.y + 15;
+
     // Craft a "left" value that will ensure that the popup is centered underneath the (i).
     let left = iconBBox.x + (iconBBox.width / 2) - (popupBBox.width / 2);
 
@@ -51,7 +54,7 @@ export default class InfoPopup extends Component {
       left = windowWidth - popupBBox.width - 20;
     }
 
-    this.setState({left});
+    this.setState({top, left});
   }
 
   // When the user touches the body outside of the popup, dismiss any open popups.
@@ -77,8 +80,8 @@ export default class InfoPopup extends Component {
   }
 
   render() {
-    const { infoIconColor, children } = this.props;
-    const { left, visible } = this.state;
+    const { infoIconColor, target, children } = this.props;
+    const { top, left, visible } = this.state;
 
     return <span
       className="info-popup-container"
@@ -92,19 +95,19 @@ export default class InfoPopup extends Component {
       onBlur={e => this.onHide(e)}
     >
       <span
-        className="info-popup-icon"
+        className={classnames('info-popup-icon', {'stock-target': !target})}
         ref={r => { this.icon = r; }}
       >
-        <IconInfo
+        {target || <IconInfo
           width={20}
           height={20}
           color={infoIconColor || 'primary'}
-        />
+        />}
       </span>
 
       <div
         className={classnames('info-popup-popup', {visible})}
-        style={{left}}
+        style={{top, left}}
         ref={r => { this.popup = r; }}
       >
         {children}
