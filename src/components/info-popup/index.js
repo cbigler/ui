@@ -80,7 +80,7 @@ export default class InfoPopup extends Component {
   }
 
   render() {
-    const { infoIconColor, target, children } = this.props;
+    const { infoIconColor, singleLine, target, children } = this.props;
     const { top, left, visible } = this.state;
 
     return <span
@@ -106,7 +106,7 @@ export default class InfoPopup extends Component {
       </span>
 
       <div
-        className={classnames('info-popup-popup', {visible})}
+        className={classnames('info-popup-popup', {visible, 'single-line': singleLine})}
         style={{top, left}}
         ref={r => { this.popup = r; }}
       >

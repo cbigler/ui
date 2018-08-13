@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import './styles.scss';
 import InfoPopup from './index';
 
-import Card, { CardHeader, CardBody } from '../card/index';
+import Card, { CardHeader, CardBody, CardWell } from '../card/index';
 
 
 storiesOf('InfoPopup', module)
@@ -38,8 +38,18 @@ storiesOf('InfoPopup', module)
         <InfoPopup>
           <h3>Utilization</h3>
           <p>A measure of lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla diam orci, lacinia ac vestibulum ut, vehicula at eros. Pellentesque molestie eu odio nec volutpat. Fusce cursus sapien quis massa tincidunt pellentesque. Sed molestie orci a augue auctor iaculis. Donec pharetra fringilla sem in convallis. Maecenas diam nisi, hendrerit rhoncus aliquam et, bibendum et felis. Nunc nec tortor interdum, mattis lectus nec, aliquet lectus. Vivamus hendrerit pharetra metus ut pulvinar.</p>
+          <br/>
         </InfoPopup>
       </CardHeader>
+      <CardWell type="dark">
+        The distance from the earth to the{' '}
+        <InfoPopup
+          singleLine
+          target={<span style={{borderBottom: '1px dotted silver'}}>moon</span>}
+        >
+          <span style={{color: '#222A2E'}}>A thing in space</span>
+        </InfoPopup>
+      </CardWell>
       <CardBody>
         foo bar baz
       </CardBody>

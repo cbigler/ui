@@ -7,22 +7,26 @@
 
 @mixin make-info-popup() {
   &-container {
-    margin-left: 5px;
-    margin-right: 5px;
     outline: none;
   }
   &-icon {
+    cursor: pointer;
     padding-bottom: 20px;
     &.stock-target {
       vertical-align: top;
       vertical-align: -moz-middle-with-baseline;
       vertical-align: -webkit-baseline-middle;
       user-select: none;
+      margin-left: 5px;
+      margin-right: 5px;
     }
   }
   &-popup {
     background-color: #fff;
-    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
 
     border: 1px solid $gray;
     border-radius: 4px;
@@ -31,7 +35,7 @@
     font-size: 14px;
 
     position: absolute;
-    top: 30px;
+    top: 0px;
     left: 0px;
 
     display: block;
@@ -47,6 +51,13 @@
       pointer-events: auto;
       user-select: auto;
       opacity: 1;
+    }
+
+    &.single-line {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      white-space: nowrap;
+      width: auto;
     }
   }
 }
