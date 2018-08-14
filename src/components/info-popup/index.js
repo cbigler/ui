@@ -105,12 +105,14 @@ export default class InfoPopup extends Component {
         />}
       </span>
 
-      <div
-        className={classnames('info-popup-popup', {visible, 'single-line': singleLine})}
-        style={{top, left}}
-        ref={r => { this.popup = r; }}
-      >
-        {children}
+      <div className="info-popup-wrapper">
+        <div
+          className={classnames('info-popup-popup', {visible, 'single-line': singleLine})}
+          style={{top, left}}
+          ref={r => { this.popup = r; }}
+        >
+          {children}
+        </div>
       </div>
     </span>;
   }

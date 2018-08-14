@@ -21,6 +21,11 @@
       margin-right: 5px;
     }
   }
+  &-wrapper {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
   &-popup {
     background-color: #fff;
     padding-top: 10px;
@@ -46,6 +51,7 @@
     opacity: 0;
     pointer-events: none;
     user-select: none;
+    z-index: 999;
 
     &.visible {
       pointer-events: auto;
