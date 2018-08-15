@@ -33,13 +33,14 @@ export default class InfoPopup extends Component {
     if (!this.popup || !this.icon) {
       return;
     }
+    const { verticalPopupOffset } = this.props;
 
     const popupBBox = this.popup.getBoundingClientRect();
     const iconBBox = this.icon.getBoundingClientRect();
 
     const windowWidth = window.innerWidth;
 
-    let top = iconBBox.y + 15;
+    let top = iconBBox.bottom - 15 + (verticalPopupOffset || 0);
 
     // Craft a "left" value that will ensure that the popup is centered underneath the (i).
     let left = iconBBox.x + (iconBBox.width / 2) - (popupBBox.width / 2);
@@ -116,4 +117,17 @@ export default class InfoPopup extends Component {
       </div>
     </span>;
   }
+}
+
+export function InfoPopupCardWellHighlight(p) {
+  const props = Object.assign({}, p);
+  const {target, children} = props;
+  delete props.target;
+  delete props.children;
+
+  return (
+    <InfoPopup target={<span className="info-popup-card-well-highlight">{target}</span>} {...props}>
+      {children}
+    </InfoPopup>
+  );
 }

@@ -28,16 +28,15 @@
   }
   &-popup {
     background-color: #fff;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 20px;
 
     border: 1px solid $gray;
     border-radius: 4px;
 
     font-family: $font-base;
     font-size: 14px;
+    font-weight: normal;
+    color: $gray-cinder;
 
     position: absolute;
     top: 0px;
@@ -71,3 +70,6 @@
 .info-popup {
   @include make-info-popup;
 }
+
+.info-popup-card-well-highlight { border-bottom: 1px dotted $gray-cinder; }
+.card-well-dark .info-popup-card-well-highlight { border-bottom: 1px dotted $gray; }

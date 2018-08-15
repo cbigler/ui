@@ -12,3 +12,7 @@ A few attributes about it:
 - `children: ReactElement | String` - The contents to render inside of the popup.
 - `infoIconColor: string` - A hex color to use when coloring the info icon. Defaults to the value of
   brand primary.
+- `singleLine: string` - If the popup is a single line in height, adjust the padding on the popup to
+  make it look better.
+- `verticalPopupOffset: number` - A number of pixels to shift the popup up or down. Used to adjust
+  the gap between the popup and the target in different situations.
