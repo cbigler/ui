@@ -162,7 +162,7 @@ export default class Floorplan extends Component {
       window.setTimeout(() => {
         // 2nd: Give the hint a classname that makes it fade out.
         this.setState({showTouchDeviceAddHint: false});
-      }, 1000);
+      }, 1500);
     });
   }
 
@@ -174,20 +174,20 @@ export default class Floorplan extends Component {
     // events if they happen.
     document.addEventListener('touchmove', this.disallowPanZoomOnAppleDevices, {passive: false});
 
-    // If the device supports touch events, then show the hint immediately to explain to the user
-    // how to create doorways.
-    if (this.props.deviceSupportsTouch) {
-      window.setTimeout(() => this.showTouchDeviceAddHint(), 500);
-    }
-
     // When the component initially loads, get the width and height of the passed image.
     const {width, height} = await getImageDimensions(this.props.image);
-    setTimeout(() => {
+    window.setTimeout(() => {
       this.setState({
         loading: false,
         floorplanWidth: width,
         floorplanHeight: height,
       });
+
+      // If the device supports touch events, then show the hint immediately to explain to the user
+      // how to create doorways.
+      if (this.props.deviceSupportsTouch) {
+        window.setTimeout(() => this.showTouchDeviceAddHint(), 1000);
+      }
     }, 500);
   }
   componentWillUnmount() {
