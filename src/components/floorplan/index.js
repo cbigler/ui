@@ -182,11 +182,13 @@ export default class Floorplan extends Component {
 
     // When the component initially loads, get the width and height of the passed image.
     const {width, height} = await getImageDimensions(this.props.image);
-    this.setState({
-      loading: false,
-      floorplanWidth: width,
-      floorplanHeight: height,
-    });
+    setTimeout(() => {
+      this.setState({
+        loading: false,
+        floorplanWidth: width,
+        floorplanHeight: height,
+      });
+    }, 500);
   }
   componentWillUnmount() {
     window.removeEventListener('blur', this.removeTooltipWhenWindowBlurs);
@@ -200,7 +202,7 @@ export default class Floorplan extends Component {
     // call `.preventDefault()` on the event.
     let element = event.target;
     while (element) {
-      if (element.className && element.className.baseVal === 'floorplan-container') {
+      if (element.className && element.className === 'floorplan-root') {
         event.preventDefault();
         return;
       }
@@ -233,6 +235,7 @@ export default class Floorplan extends Component {
     const width = this.props.width || 1000;
     const height = this.props.height || 600;
     const {
+      loading,
       hoveringOverShape,
       selectedShapeMoving,
       selectedId,
@@ -479,6 +482,13 @@ export default class Floorplan extends Component {
           style={showTouchDeviceAddHint ? {left: width / 2, opacity: 1} : {left: width / 2}}
         >
           Press and hold to create a doorway.
+        </div>
+
+        <div
+          className="floorplan-touch-create-hint"
+          style={loading ? {left: width / 2, opacity: 1} : {left: width / 2}}
+        >
+          Loading floorplan image ...
         </div>
 
         <ReactSVGPanZoom
