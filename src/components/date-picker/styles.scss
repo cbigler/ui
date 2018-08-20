@@ -658,8 +658,8 @@
 // Override styles in react dates
 @mixin make-date-picker($active-color: $brand-primary) {
   display: inline-block;
-  padding-left: 4px;
-  padding-right: 4px;
+  padding-left: 12px;
+  padding-right: 12px;
   height: (43px - 6px);
   padding-top: 4px;
   resize: none;
@@ -679,9 +679,24 @@
     border-color: $active-color;
   }
 
+  .date-picker-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .date-picker-icon {
+    transform: translate(0px, 1px);
+    cursor: pointer;
+    &:hover { opacity: 0.8; }
+    &:active { opacity: 1; }
+  }
+  .date-picker-icon.left { margin-right: 14px; }
+  .date-picker-icon.right { margin-left: 14px; }
+
   .SingleDatePickerInput {
     border: 0px;
     height: 32px;
+    transform: translate(0px, -2.5px);
   }
   .DateInput {
     font-weight: $font-weight-base;

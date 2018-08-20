@@ -46,12 +46,15 @@ storiesOf('DatePicker', module)
     class Wrapper extends React.Component {
       constructor(props) {
         super(props);
-        this.state = { focus: false };
+        this.state = { focus: false, date: moment.utc() };
       }
       render() {
         return <DatePicker
-          date={moment.utc()}
-          onChange={action('date')}
+          date={this.state.date}
+          onChange={date => {
+            action('date')(date);
+            this.setState({date});
+          }}
           focused={this.state.focus}
           onFocusChange={e => this.setState({focus: e.focused})}
         />;
