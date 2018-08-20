@@ -689,6 +689,9 @@
     cursor: pointer;
     &:hover { opacity: 0.8; }
     &:active { opacity: 1; }
+    &.disabled {
+      &:hover { opacity: 1; }
+    }
   }
   .date-picker-icon.left { margin-right: 14px; }
   .date-picker-icon.right { margin-left: 14px; }

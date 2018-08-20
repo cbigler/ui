@@ -19,6 +19,16 @@ storiesOf('DatePicker', module)
       anchor={ANCHOR_LEFT}
     />
   ))
+  .addWithInfo('Example usage with disabled arrows', () => (
+    <DatePicker
+      date={moment.utc()}
+      onChange={action('date')}
+      focused={true}
+      onFocusChange={action('focus change')}
+      anchor={ANCHOR_LEFT}
+      arrowRightDisabled arrowLeftDisabled
+    />
+  ))
   .addWithInfo('Anchor to the right', () => (
     <div style={{paddingLeft: 300}}>
       <DatePicker
