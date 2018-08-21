@@ -73,8 +73,21 @@ export class CardTable extends Component {
     return (
       <div className="card-table">
         <div className="card-table-scroll" ref={r => { this.container = r; }}>
-          <div className={classnames('card-table-arrow', {visible: this.state.showArrow})}>
-            <IconArrowRight width={20} height={20} color="white" />
+          <div
+            className={classnames('card-table-arrow', {visible: this.state.showArrow})}
+            onClick={() => {
+              this.container.focus();
+
+              // Animate the scroll position a bit to the left to indicate that the table can be
+              // scrolled horizontally.
+              for (let frame = 0; frame < 100; frame++) {
+                window.setTimeout(() => {
+                  this.container.scrollLeft = Math.sqrt(frame * 100);
+                }, frame * 2);
+              }
+            }}
+          >
+            <IconArrowRight width={16} height={16} color="white" />
           </div>
           <table ref={r => { this.table = r; }}>
             <thead>

@@ -182,8 +182,8 @@
 }
 @mixin make-card-table-arrow {
   position: absolute;
-  right: 20px;
-  top: 100px;
+  right: 10px;
+  top: 25px;
 
   background-color: $brand-primary;
   padding: 8px;
@@ -193,8 +193,17 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border: 1px solid darken($brand-primary, 3%);
 
-  & > svg { transform: translate(0px, 1px); }
-  &.visible { opacity: 0.9; }
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  pointer-events: none;
+
+  & > svg { transform: translate(1px, 0px); }
+  &.visible {
+    opacity: 0.9;
+    pointer-events: auto;
+    &:hover { opacity: 1; }
+  }
 }
 
 // A normal card.
