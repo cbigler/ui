@@ -61,10 +61,12 @@ export class CardTable extends Component {
     }
   }
   componentDidMount() {
+    window.addEventListener('resize', this.onScroll);
     this.container.addEventListener('scroll', this.onScroll);
     this.onScroll();
   }
   componentWillUnmount() {
+    window.removeEventListener('resize', this.onScroll);
     this.container.removeEventListener('scroll', this.onScroll);
   }
 
