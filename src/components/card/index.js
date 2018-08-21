@@ -1,6 +1,7 @@
 import * as uuid from 'uuid';
-import * as React from 'react';
+import React, { Component } from 'react';
 import classnames from 'classnames';
+import { IconArrowRight } from '@density/ui-icons';
 
 export default function Card({type, style, className, children}) {
   return <div
@@ -37,4 +38,60 @@ export function CardLoading({indeterminate, percent, className}) {
       className
     )} style={{width: `${percent}%`}} />
   </div>
+}
+
+export class CardTable extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showArrow: false,
+    };
+
+    this.onScroll = this.onScroll.bind(this);
+  }
+
+  onScroll() {
+    const container = this.container.getBoundingClientRect();
+    const table = this.table.getBoundingClientRect();
+
+    let showArrow = table.width > container.width && table.x >= container.x;
+
+    if (showArrow !== this.state.showArrow) {
+      this.setState({showArrow});
+    }
+  }
+  componentDidMount() {
+    this.container.addEventListener('scroll', this.onScroll);
+    this.onScroll();
+  }
+  componentWillUnmount() {
+    this.container.removeEventListener('scroll', this.onScroll);
+  }
+
+  render() {
+    const { headings, data, mapDataItemToRow } = this.props;
+    return (
+      <div className="card-table">
+        <div className="card-table-scroll" ref={r => { this.container = r; }}>
+          <div className={classnames('card-table-arrow', {visible: this.state.showArrow})}>
+            <IconArrowRight width={20} height={20} color="white" />
+          </div>
+          <table ref={r => { this.table = r; }}>
+            <thead>
+              <tr>
+                {headings.map(heading => <th key={heading}><span>{heading}</span></th>)}
+              </tr>
+            </thead>
+            <tbody>
+              {data.map(row => (
+                <tr key={row.id}>
+                  {mapDataItemToRow(row).map(item => <td key={item}>{item}</td>)}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  }
 }

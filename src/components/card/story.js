@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Card, {CardBody, CardHeader, CardLoading, CardWell, CardWellHighlight} from './index';
+import Card, {CardBody, CardHeader, CardLoading, CardWell, CardWellHighlight, CardTable} from './index';
 import Button from '../button/index';
 import IndicatorDot from '../indicator-dot';
 
@@ -213,6 +213,38 @@ storiesOf('Card', module)
         </CardBody>
       </Card>
     </div>
+  ))
+  .addWithInfo('Card Table', () => (
+    <Card style={{width: 500}}>
+      <CardHeader>Example Card with Table</CardHeader>
+      <CardTable
+        headings={['Foo', 'Bar']}
+        mapDataItemToRow={item => item.contents}
+        data={[
+          {id: 0, contents: [1, 2]},
+          {id: 1, contents: ['foo', 'bar']},
+        ]}
+      />
+    </Card>
+  ))
+  .addWithInfo('Scrolling Card Table', () => (
+    <Card style={{width: 500}}>
+      <CardHeader>Example Card with Table</CardHeader>
+      <CardTable
+        headings={['Timestamp', 'Local Time', 'Event', 'Current Count', 'Count Change', 'Doorway Name', 'Doorway ID']}
+        mapDataItemToRow={item => item.contents}
+        data={[
+          {id: 0, contents: ['2018-08-21T13:40:24.376Z', '2018-08-21T09:40:24.376-0400', 'Exit', 42, -1, 'Office Doorway', 'drw_546312900847862380']},
+          {id: 1, contents: ['2018-08-21T13:40:24.376Z', '2018-08-21T09:40:24.376-0400', 'Exit', 42, -1, 'Office Doorway', 'drw_546312900847862380']},
+          {id: 2, contents: ['2018-08-21T13:40:24.376Z', '2018-08-21T09:40:24.376-0400', 'Exit', 42, -1, 'Office Doorway', 'drw_546312900847862380']},
+          {id: 3, contents: ['2018-08-21T13:40:24.376Z', '2018-08-21T09:40:24.376-0400', 'Exit', 42, -1, 'Office Doorway', 'drw_546312900847862380']},
+          {id: 4, contents: ['2018-08-21T13:40:24.376Z', '2018-08-21T09:40:24.376-0400', 'Exit', 42, -1, 'Office Doorway', 'drw_546312900847862380']},
+          {id: 5, contents: ['2018-08-21T13:40:24.376Z', '2018-08-21T09:40:24.376-0400', 'Exit', 42, -1, 'Office Doorway', 'drw_546312900847862380']},
+          {id: 6, contents: ['2018-08-21T13:40:24.376Z', '2018-08-21T09:40:24.376-0400', 'Exit', 42, -1, 'Office Doorway', 'drw_546312900847862380']},
+          {id: 7, contents: ['2018-08-21T13:40:24.376Z', '2018-08-21T09:40:24.376-0400', 'Exit', 42, -1, 'Office Doorway', 'drw_546312900847862380']},
+        ]}
+      />
+    </Card>
   ))
   .addWithInfo('Card Modal with long header', () => (
     <Card type="modal">
