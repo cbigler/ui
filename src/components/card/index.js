@@ -1,7 +1,6 @@
 import * as uuid from 'uuid';
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import { IconArrowRight } from '@density/ui-icons';
 
 export default function Card({type, style, className, children}) {
   return <div
@@ -90,7 +89,7 @@ export class CardTable extends Component {
             <tbody>
               {data.map(row => (
                 <tr key={row.id}>
-                  {mapDataItemToRow(row).map(item => <td key={item}>{item}</td>)}
+                  {mapDataItemToRow(row).map((item, index) => <td key={`${row.id}-${item}-${index}`}>{item}</td>)}
                 </tr>
               ))}
             </tbody>

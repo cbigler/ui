@@ -246,6 +246,145 @@ storiesOf('Card', module)
       />
     </Card>
   ))
+  .addWithInfo('Repeat keys bug', () => (
+    <Card style={{width: 500}}>
+      <CardHeader>Example Card with Table</CardHeader>
+      <CardTable
+        mapDataItemToRow={item => item.contents}
+        headings={[
+          "Timestamp",
+          "Local Time",
+          "Event",
+          "Current Count",
+          "Count Change",
+          "Doorway Name",
+          "Doorway ID\r"
+        ]}
+        data={[
+          {
+            "contents": [
+              "2018-08-22T18:49:40.222Z",
+              "2018-08-22T14:49:40.222-0400",
+              "Entrance",
+              "3",
+              "1",
+              "Cafeteria Doorway",
+              "drw_546312903230227056\r"
+            ],
+            "id": "2018-08-22T18:49:40.222Z"
+          },
+          {
+            "contents": [
+              "2018-08-22T18:49:37.815Z",
+              "2018-08-22T14:49:37.815-0400",
+              "Exit",
+              "53",
+              "-1",
+              "Office Doorway",
+              "drw_546312900847862380\r"
+            ],
+            "id": "2018-08-22T18:49:37.815Z"
+          },
+          {
+            "contents": [
+              "2018-08-22T18:49:14.227Z",
+              "2018-08-22T14:49:14.227-0400",
+              "Entrance",
+              "2",
+              "1",
+              "Cafeteria Doorway",
+              "drw_546312903230227056\r"
+            ],
+            "id": "2018-08-22T18:49:14.227Z"
+          },
+          {
+            "contents": [
+              "2018-08-22T18:49:12.082Z",
+              "2018-08-22T14:49:12.082-0400",
+              "Entrance",
+              "54",
+              "1",
+              "Office Doorway",
+              "drw_546312900847862380\r"
+            ],
+            "id": "2018-08-22T18:49:12.082Z"
+          },
+          {
+            "contents": [
+              "2018-08-22T18:49:10.758Z",
+              "2018-08-22T14:49:10.758-0400",
+              "Exit",
+              "0",
+              "-1",
+              "Conference Room Doorway",
+              "drw_546312902051627630\r"
+            ],
+            "id": "2018-08-22T18:49:10.758Z"
+          },
+          {
+            "contents": [
+              "2018-08-22T18:49:08.968Z",
+              "2018-08-22T14:49:08.968-0400",
+              "Exit",
+              "53",
+              "-1",
+              "Office Doorway",
+              "drw_546312900847862380\r"
+            ],
+            "id": "2018-08-22T18:49:08.968Z"
+          },
+          {
+            "contents": [
+              "2018-08-22T18:49:07.988Z",
+              "2018-08-22T14:49:07.988-0400",
+              "Entrance",
+              "54",
+              "1",
+              "Office Doorway",
+              "drw_546312900847862380\r"
+            ],
+            "id": "2018-08-22T18:49:07.988Z"
+          },
+          {
+            "contents": [
+              "2018-08-22T18:49:05.281Z",
+              "2018-08-22T14:49:05.281-0400",
+              "Exit",
+              "53",
+              "-1",
+              "Office Doorway",
+              "drw_546312900847862380\r"
+            ],
+            "id": "2018-08-22T18:49:05.281Z"
+          },
+          {
+            "contents": [
+              "2018-08-22T18:49:02.707Z",
+              "2018-08-22T14:49:02.707-0400",
+              "Entrance",
+              "1",
+              "1",
+              "Cafeteria Doorway",
+              "drw_546312903230227056\r"
+            ],
+            "id": "2018-08-22T18:49:02.707Z"
+          },
+          {
+            "contents": [
+              "2018-08-22T18:48:55.928Z",
+              "2018-08-22T14:48:55.928-0400",
+              "Exit",
+              "0",
+              "-1",
+              "Conference Room Doorway",
+              "drw_546312902051627630\r"
+            ],
+            "id": "2018-08-22T18:48:55.928Z"
+          }
+        ]}
+      />
+    </Card>
+  ))
   .addWithInfo('Card Modal with long header', () => (
     <Card type="modal">
       <CardHeader><span class="card-title">Set Capacity: a really really really long title</span></CardHeader>
