@@ -16,7 +16,9 @@
   "author": "Density <team+javascript@density.io>",
   "license": "ISC",
   "devDependencies": {
+    "@density/node-sass-json-importer": "^4.1.0",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "node-sass": "^4.9.3",
     "pretty": "^2.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
