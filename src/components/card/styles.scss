@@ -137,6 +137,63 @@
   }
 }
 
+@mixin make-card-table(
+  $background: #fff,
+  $foreground: $gray-cinder,
+  $padding-vertical: 20px,
+) {
+  position: relative;
+  background-color: $background;
+  color: $foreground;
+  font-family: $font-base;
+  font-size: 14px;
+  margin-top: $padding-vertical;
+
+  // When the user scrolls to the edge of the card table, show a shadow to indicate that they can
+  // scroll either to the left, right, or in both directions.
+  &-scroll-left { box-shadow: inset 30px 0 20px -30px rgba(0, 0, 0, 0.5); }
+  &-scroll-right { box-shadow: inset -30px 0 20px -30px rgba(0, 0, 0, 0.5); }
+  &-scroll-both {
+    box-shadow: inset 30px 0 20px -30px rgba(0, 0, 0, 0.5),
+                inset -30px 0 20px -30px rgba(0, 0, 0, 0.5);
+  }
+
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  table > thead > tr > th {
+    white-space: nowrap;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    line-height: 38px;
+    border-top: 1px solid $gray-lighter;
+    border-bottom: 1px solid $gray-lighter;
+    text-align: left;
+  }
+  table > tbody > tr > td {
+    padding-left: 20px;
+    padding-right: 20px;
+
+    padding-top: 5px;
+    line-height: 38px;
+
+    border-bottom: 1px solid $gray-lighter;
+    text-align: left;
+
+    white-space: nowrap;
+  }
+  table > tbody > tr:last-of-type > td {
+    border-bottom: 1px solid transparent;
+  }
+}
+@mixin make-card-table-scroll {
+  overflow-x: auto;
+}
+
 // A normal card.
 .card {
   @include make-card;
@@ -184,3 +241,6 @@
 .card-dark {
   @include make-card($gray-cinder, #fff);
 }
+
+.card-table { @include make-card-table(#fff, $gray-cinder); }
+.card-table-scroll { @include make-card-table-scroll; }
