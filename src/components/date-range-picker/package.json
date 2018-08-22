@@ -12,8 +12,8 @@
   "license": "MIT",
   "dependencies": {
     "@density/react-dates": "^12.6.0",
-    "@density/ui-icons": "^0.2.0",
-    "@density/ui-input-box": "^2.1.4",
+    "@density/ui-icons": "^0.2.2",
+    "@density/ui-input-box": "^2.1.5",
     "react-addons-shallow-compare": "^15.6.0"
   }
 }

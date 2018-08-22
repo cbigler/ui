@@ -10,7 +10,6 @@ export const ANCHOR_RIGHT = 'ANCHOR_RIGHT',
   START_DATE_ACTIVE = 'startDate',
   END_DATE_ACTIVE = 'endDate';
 
-
 // internal date range picker (via ReactDates)
 function ReactDateRangePicker(props) {
   const restProps = Object.assign({}, props);
