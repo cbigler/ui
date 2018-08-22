@@ -11,6 +11,6 @@
   "author": "Density <team+javascript@density.io>",
   "license": "MIT",
   "dependencies": {
-    "@density/ui": "^4.9.0"
+    "@density/ui": "^5.0.3"
   }
 }
