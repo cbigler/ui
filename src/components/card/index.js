@@ -44,7 +44,8 @@ export class CardTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showArrow: false,
+      showLeftArrow: false,
+      showRightArrow: false,
     };
 
     this.onScroll = this.onScroll.bind(this);
@@ -54,10 +55,11 @@ export class CardTable extends Component {
     const container = this.container.getBoundingClientRect();
     const table = this.table.getBoundingClientRect();
 
-    let showArrow = table.width > container.width && table.x >= container.x;
+    let showLeftArrow = table.width > container.width && table.left < container.left;
+    let showRightArrow = table.width > container.width && table.right > container.right;
 
-    if (showArrow !== this.state.showArrow) {
-      this.setState({showArrow});
+    if (showLeftArrow !== this.state.showLeftArrow || showRightArrow !== this.state.showRightArrow) {
+      this.setState({showLeftArrow, showRightArrow});
     }
   }
   componentDidMount() {
@@ -73,24 +75,12 @@ export class CardTable extends Component {
   render() {
     const { headings, data, mapDataItemToRow } = this.props;
     return (
-      <div className="card-table">
+      <div className={classnames('card-table', {
+        'card-table-scroll-left': this.state.showLeftArrow,
+        'card-table-scroll-right': this.state.showRightArrow,
+        'card-table-scroll-both': this.state.showLeftArrow && this.state.showRightArrow,
+      })}>
         <div className="card-table-scroll" ref={r => { this.container = r; }}>
-          <div
-            className={classnames('card-table-arrow', {visible: this.state.showArrow})}
-            onClick={() => {
-              this.container.focus();
-
-              // Animate the scroll position a bit to the left to indicate that the table can be
-              // scrolled horizontally.
-              for (let frame = 0; frame < 100; frame++) {
-                window.setTimeout(() => {
-                  this.container.scrollLeft = Math.sqrt(frame * 100);
-                }, frame * 2);
-              }
-            }}
-          >
-            <IconArrowRight width={16} height={16} color="white" />
-          </div>
           <table ref={r => { this.table = r; }}>
             <thead>
               <tr>

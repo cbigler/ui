@@ -147,7 +147,17 @@
   color: $foreground;
   font-family: $font-base;
   font-size: 14px;
-  padding-top: $padding-vertical;
+  margin-top: $padding-vertical;
+
+  // When the user scrolls to the edge of the card table, show a shadow to indicate that they can
+  // scroll either to the left, right, or in both directions.
+  &-scroll-left { box-shadow: inset 30px 0 20px -30px rgba(0, 0, 0, 0.5); }
+  &-scroll-right { box-shadow: inset -30px 0 20px -30px rgba(0, 0, 0, 0.5); }
+  &-scroll-both {
+    box-shadow: inset 30px 0 20px -30px rgba(0, 0, 0, 0.5),
+                inset -30px 0 20px -30px rgba(0, 0, 0, 0.5);
+  }
+
 
   table {
     border-collapse: collapse;
@@ -180,30 +190,8 @@
     border-bottom: 1px solid transparent;
   }
 }
-@mixin make-card-table-arrow {
-  position: absolute;
-  right: 10px;
-  top: 25px;
-
-  background-color: $brand-primary;
-  padding: 8px;
-  border-radius: 50%;
-  opacity: 0;
-  transition: all 100ms ease-in-out;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid darken($brand-primary, 3%);
-
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-  pointer-events: none;
-
-  & > svg { transform: translate(1px, 0px); }
-  &.visible {
-    opacity: 0.9;
-    pointer-events: auto;
-    &:hover { opacity: 1; }
-  }
+@mixin make-card-table-scroll {
+  overflow-x: auto;
 }
 
 // A normal card.
@@ -255,5 +243,4 @@
 }
 
 .card-table { @include make-card-table(#fff, $gray-cinder); }
-.card-table-scroll { overflow-x: auto; }
-.card-table-arrow { @include make-card-table-arrow; }
+.card-table-scroll { @include make-card-table-scroll; }
