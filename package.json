@@ -17,12 +17,15 @@
   "license": "ISC",
   "devDependencies": {
     "@density/node-sass-json-importer": "^4.1.0",
+    "@storybook/addon-info": "^3.4.10",
+    "@storybook/react": "^3.4.10",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "node-sass": "^4.9.3",
     "pretty": "^2.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-scripts": "^1.1.4"
+    "react-scripts": "^1.1.4",
+    "sass-loader": "^7.1.0"
   },
   "dependencies": {
     "classnames": "^2.2.5",
