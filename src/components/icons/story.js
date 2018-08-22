@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 
 import colorVariables from '../../variables/colors.json';
 
-import Icons from './';
+import Icons from './index';
 const { IconImageUpload } = Icons;
 
 storiesOf('Icons', module)
