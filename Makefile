@@ -45,7 +45,7 @@ build: dist/styles.css
 
 .PHONY: publish
 publish: clean build
-	npm publish --access public
+	npm publish --access public --verbose
 
 dist/:
 	mkdir -p dist/
@@ -105,7 +105,7 @@ $1-build: $$($(1)_COMPONENT_SOURCE_FILES_DIST) $$($(1)_COMPONENT_PATH_DIST)/styl
 .SECONDEXPANSION:
 $1-publish: $1-clean $1-build
 	pushd $$($(1)_COMPONENT_PATH) > /dev/null && \
-	npm publish --access public && \
+	npm publish --access public --verbose && \
 	popd > /dev/null
 
 # Create components/card/dist if it doesn't exist
