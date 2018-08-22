@@ -9,7 +9,6 @@
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
     "installall": "for i in $(find components/* -type d ! -path '*node_modules*' ! -name 'template' ); do cd $i && npm install && cd -; done",
-    "preversion": "npm run build-spec",
     "build-spec": "node utils/build-specs.js",
     "make-component": "./make-component"
   },
@@ -17,31 +16,15 @@
   "author": "Density <team+javascript@density.io>",
   "license": "ISC",
   "devDependencies": {
-    "@density/node-sass-json-importer": "^4.1.0",
-    "@storybook/addon-actions": "^3.2.12",
-    "@storybook/addon-info": "^3.0.1",
-    "@storybook/addon-links": "^3.2.12",
-    "@storybook/react": "^3.4.2",
-    "babel-cli": "^6.24.0",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-es2015": "^6.24.0",
-    "babel-preset-react": "^6.23.0",
-    "css-loader": "^0.28.1",
-    "moment": "^2.19.3",
-    "node-sass": "^4.9.2",
-    "pretty": "^2.0.0",
-    "sass-loader": "^6.0.3",
-    "style-loader": "^0.17.0",
-    "webpack": "^2.3.2"
-  },
-  "dependencies": {
     "babel-plugin-transform-async-to-generator": "^6.24.1",
-    "classnames": "^2.2.5",
-    "normalize.css": "^7.0.0",
-    "popper.js": "^1.10.2",
+    "pretty": "^2.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-scripts": "^1.1.4",
+    "react-scripts": "^1.1.4"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "normalize.css": "^7.0.0",
     "uuid": "^3.0.1"
   }
 }
