@@ -19,6 +19,7 @@
     "@density/node-sass-json-importer": "^4.1.0",
     "@storybook/addon-info": "^3.4.10",
     "@storybook/react": "^3.4.10",
+    "babel-cli": "^6.26.0",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "node-sass": "^4.9.3",
     "pretty": "^2.0.0",
