@@ -34,7 +34,7 @@ storiesOf('Card', module)
       <Card style={{width: 300}}>
         <CardHeader>
           Confirmation
-          <InfoPopup horizontalIconOffset={4} verticalIconOffset={-2}>
+          <InfoPopup horizontalIconOffset={4} verticalIconOffset={1}>
             foo bar baz
           </InfoPopup>
           <span style={{marginLeft: 'auto'}}>

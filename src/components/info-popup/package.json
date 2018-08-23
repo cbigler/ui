@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-info-popup",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "Info Popup component",
   "main": "dist/index.js",
   "style": "dist/styles.css",
