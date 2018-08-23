@@ -33,16 +33,12 @@ storiesOf('Card', module)
     <div>
       <Card style={{width: 300}}>
         <CardHeader>
-          <span style={{display: 'flex'}}>
-            <span>
-              Confirmation
-              <InfoPopup verticalPopupOffset={-15}>
-                foo bar baz
-              </InfoPopup>
-            </span>
-            <span style={{marginLeft: 'auto'}}>
-              <IconRefresh color="primary" />
-            </span>
+          Confirmation
+          <InfoPopup horizontalIconOffset={4} verticalIconOffset={-2}>
+            foo bar baz
+          </InfoPopup>
+          <span style={{marginLeft: 'auto'}}>
+            <IconRefresh color="primary" />
           </span>
         </CardHeader>
         <CardWell>

@@ -16,3 +16,8 @@ A few attributes about it:
   make it look better.
 - `verticalPopupOffset: number` - A number of pixels to shift the popup up or down. Used to adjust
   the gap between the popup and the target in different situations.
+- `verticalIconOffset: number` = A number of pixels to shift the `(i)` icon in the vertical
+  direction. Vertically positioning the icon next to text is sometimes difficult and this can help
+  make it easier.
+- `horizontalIconOffset: number` = A number of pixels to shift the `(i)` icon in the horizontal
+  direction.

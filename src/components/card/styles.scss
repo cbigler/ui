@@ -27,9 +27,9 @@
   padding: $padding-vertical $padding-horizontal;
   transform: translate(0px, 2px); /* font baseline hack for sailec */
 
-  & > * {
-    vertical-align: top;
-  }
+  display: flex;
+  flex-direction: row;
+  height: $font-size;
 }
 
 @mixin make-card-title {

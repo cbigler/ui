@@ -35,6 +35,7 @@ export default class InfoPopup extends Component {
     }
     const { verticalPopupOffset } = this.props;
 
+    const containerBBox = this.container.getBoundingClientRect();
     const popupBBox = this.popup.getBoundingClientRect();
     const iconBBox = this.icon.getBoundingClientRect();
 
@@ -55,7 +56,15 @@ export default class InfoPopup extends Component {
       left = windowWidth - popupBBox.width - 20;
     }
 
-    this.setState({top, left});
+    // `left` and `top` are relative to the upper left hand corner of the screen. That isn't going
+    // to work though since all positions are relative to `,info-popup-container` as to avoid using
+    // positioning systems from upper containers outside of this component.
+
+    // Use `left` / `top` values offset from `.info-popup-container` instead of the root.
+    this.setState({
+      top: top - containerBBox.y,
+      left: left - containerBBox.x,
+    });
   }
 
   // When the user touches the body outside of the popup, dismiss any open popups.
@@ -81,7 +90,14 @@ export default class InfoPopup extends Component {
   }
 
   render() {
-    const { infoIconColor, singleLine, target, children } = this.props;
+    const {
+      infoIconColor,
+      singleLine,
+      horizontalIconOffset,
+      verticalIconOffset,
+      target,
+      children,
+    } = this.props;
     const { top, left, visible } = this.state;
 
     return <span
@@ -94,6 +110,8 @@ export default class InfoPopup extends Component {
       tabIndex={0}
       onFocus={e => this.onShow(e)}
       onBlur={e => this.onHide(e)}
+      style={{transform: `translate(${horizontalIconOffset || 0}px, ${verticalIconOffset || 0}px)`}}
+      ref={r => { this.container = r; }}
     >
       <span
         className={classnames('info-popup-icon', {'stock-target': !target})}
