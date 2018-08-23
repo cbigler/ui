@@ -4,6 +4,8 @@ import { storiesOf } from '@storybook/react';
 import Card, {CardBody, CardHeader, CardLoading, CardWell, CardWellHighlight, CardTable} from './index';
 import Button from '../button/index';
 import IndicatorDot from '../indicator-dot';
+import { IconRefresh } from '../icons';
+import InfoPopup from '../info-popup';
 
 import './styles.scss';
 
@@ -30,7 +32,19 @@ storiesOf('Card', module)
   .addWithInfo('Card Well', () => (
     <div>
       <Card style={{width: 300}}>
-        <CardHeader>Confirmation</CardHeader>
+        <CardHeader>
+          <span style={{display: 'flex'}}>
+            <span>
+              Confirmation
+              <InfoPopup verticalPopupOffset={-15}>
+                foo bar baz
+              </InfoPopup>
+            </span>
+            <span style={{marginLeft: 'auto'}}>
+              <IconRefresh color="primary" />
+            </span>
+          </span>
+        </CardHeader>
         <CardWell>
           The distance from the
           earth to the moon is <CardWellHighlight>384,400 km</CardWellHighlight>.

@@ -15,7 +15,7 @@
 @mixin make-card-header(
   $color: $gray-darkest,
   $padding-horizontal: 20px,
-  $padding-vertical: 20px,
+  $padding-vertical: 30px,
   $font-size: $font-size-3,
   $font-weight: $font-weight-3
 ) {
@@ -23,12 +23,12 @@
   color: $color;
   font-size: $font-size;
   font-weight: $font-weight;
-  padding: $padding-vertical $padding-horizontal;
-  padding-bottom: 0px;
 
-  // Add spacing between card headers and card wells
-  & + .card-well {
-    margin-top: 20px;
+  padding: $padding-vertical $padding-horizontal;
+  transform: translate(0px, 2px); /* font baseline hack for sailec */
+
+  & > * {
+    vertical-align: top;
   }
 }
 
