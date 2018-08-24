@@ -69,7 +69,7 @@ function getImageDimensions(src) {
   img.styles = 'visibility: hidden; position: absolute; top: -100000000px; left: -100000000px;'
   document.body.appendChild(img);
 
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     // Wait for image to load.
     img.onload = () => {
       const {width, height} = img.getBoundingClientRect();
