@@ -224,7 +224,10 @@ export default class Floorplan extends Component {
   async componentWillReceiveProps(nextProps) {
     // If the image changes, we need to update the stored width and height of the image.
     if (nextProps.image !== this.props.image) {
-      // Is image dimensions calculation is already in progress.
+
+      // Is image dimensions calculation is already in progress? If so, don't do it again. This is
+      // to avoid a race that can occur if the component's props are updated immediately after the
+      // component is rendered.
       if (this.getImageDimensionsLock) { return; }
 
       const {width, height} = await getImageDimensions(nextProps.image);
