@@ -143,12 +143,10 @@
   $foreground: $gray-cinder,
   $padding-vertical: 20px,
 ) {
-  position: relative;
   background-color: $background;
   color: $foreground;
   font-family: $font-base;
   font-size: 14px;
-  margin-top: $padding-vertical;
 
   // When the user scrolls to the edge of the card table, show a shadow to indicate that they can
   // scroll either to the left, right, or in both directions.
