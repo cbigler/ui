@@ -116,6 +116,9 @@ export default class Floorplan extends Component {
     this.removeTooltipWhenWindowBlurs = this.removeTooltipWhenWindowBlurs.bind(this);
     this.disallowPanZoomOnAppleDevices = this.disallowPanZoomOnAppleDevices.bind(this);
     this.selectShape = this.selectShape.bind(this);
+
+    // Ensure that only one "getImageDimensions" operation is happening at the same time.
+    this.getImageDimensionsLock = false;
   }
 
   async selectShape(shapeId) {
@@ -175,15 +178,22 @@ export default class Floorplan extends Component {
     document.addEventListener('touchmove', this.disallowPanZoomOnAppleDevices, {passive: false});
 
     // When the component initially loads, get the width and height of the passed image.
+    this.getImageDimensionsLock = true;
     const {width, height} = await getImageDimensions(this.props.image);
-    window.setTimeout(() => {
+    this.getImageDimensionsLock = false;
+
+    // Delay briefly to ensure that the loading message doesn't "flicker" and the user has a chance
+    // to read it.
+    this.loadingTimeout = window.setTimeout(() => {
+      delete this.loadingTimeout;
+
       this.setState({
         loading: false,
         floorplanWidth: width,
         floorplanHeight: height,
       });
 
-      // If the device supports touch events, then show the hint immediately to explain to the user
+      // If the device supports touch events, then show the hint afterward to explain to the user
       // how to create doorways.
       if (this.props.deviceSupportsTouch) {
         window.setTimeout(() => this.showTouchDeviceAddHint(), 1000);
@@ -193,6 +203,7 @@ export default class Floorplan extends Component {
   componentWillUnmount() {
     window.removeEventListener('blur', this.removeTooltipWhenWindowBlurs);
     document.removeEventListener('touchmove', this.disallowPanZoomOnAppleDevices, {passive: false});
+    this.loadingTimeout && window.clearTimeout(this.loadingTimeout);
   }
   removeTooltipWhenWindowBlurs() {
     this.setState({mouseWithinFloorplanBounds: false});
@@ -213,6 +224,9 @@ export default class Floorplan extends Component {
   async componentWillReceiveProps(nextProps) {
     // If the image changes, we need to update the stored width and height of the image.
     if (nextProps.image !== this.props.image) {
+      // Is image dimensions calculation is already in progress.
+      if (this.getImageDimensionsLock) { return; }
+
       const {width, height} = await getImageDimensions(nextProps.image);
       this.setState({
         floorplanWidth: width,
