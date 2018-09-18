@@ -727,12 +727,12 @@
 
 @mixin make-date-picker-anchor-left {
   .SingleDatePicker__picker {
-    left: -14px !important;
+    left: -45px !important;
   }
 }
 @mixin make-date-picker-anchor-right {
   .SingleDatePicker__picker {
-    left: -218px !important;
+    left: -185px !important;
   }
 }
 @mixin make-date-picker-focused {
