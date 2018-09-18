@@ -1,9 +1,11 @@
-import * as React from 'react';
+import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Card, {CardBody, CardHeader, CardLoading, CardWell, CardWellHighlight} from './index';
+import Card, {CardBody, CardHeader, CardLoading, CardWell, CardWellHighlight, CardTable} from './index';
 import Button from '../button/index';
 import IndicatorDot from '../indicator-dot';
+import { IconRefresh } from '../icons';
+import InfoPopup from '../info-popup';
 
 import './styles.scss';
 
@@ -30,7 +32,15 @@ storiesOf('Card', module)
   .addWithInfo('Card Well', () => (
     <div>
       <Card style={{width: 300}}>
-        <CardHeader>Confirmation</CardHeader>
+        <CardHeader>
+          Confirmation
+          <InfoPopup horizontalIconOffset={4} verticalIconOffset={1}>
+            foo bar baz
+          </InfoPopup>
+          <span style={{marginLeft: 'auto'}}>
+            <IconRefresh color="primary" />
+          </span>
+        </CardHeader>
         <CardWell>
           The distance from the
           earth to the moon is <CardWellHighlight>384,400 km</CardWellHighlight>.
@@ -213,6 +223,177 @@ storiesOf('Card', module)
         </CardBody>
       </Card>
     </div>
+  ))
+  .addWithInfo('Card Table', () => (
+    <Card style={{width: 500}}>
+      <CardHeader>Example Card with Table</CardHeader>
+      <CardTable
+        headings={['Foo', 'Bar']}
+        mapDataItemToRow={item => item.contents}
+        data={[
+          {id: 0, contents: [1, 2]},
+          {id: 1, contents: ['foo', 'bar']},
+        ]}
+      />
+    </Card>
+  ))
+  .addWithInfo('Scrolling Card Table', () => (
+    <Card style={{width: 500}}>
+      <CardHeader>Example Card with Table</CardHeader>
+      <CardTable
+        headings={['Timestamp', 'Local Time', 'Event', 'Current Count', 'Count Change', 'Doorway Name', 'Doorway ID']}
+        mapDataItemToRow={item => item.contents}
+        data={[
+          {id: 0, contents: ['2018-08-21T13:40:24.376Z', '2018-08-21T09:40:24.376-0400', 'Exit', 42, -1, 'Office Doorway', 'drw_546312900847862380']},
+          {id: 1, contents: ['2018-08-21T13:40:24.376Z', '2018-08-21T09:40:24.376-0400', 'Exit', 42, -1, 'Office Doorway', 'drw_546312900847862380']},
+          {id: 2, contents: ['2018-08-21T13:40:24.376Z', '2018-08-21T09:40:24.376-0400', 'Exit', 42, -1, 'Office Doorway', 'drw_546312900847862380']},
+          {id: 3, contents: ['2018-08-21T13:40:24.376Z', '2018-08-21T09:40:24.376-0400', 'Exit', 42, -1, 'Office Doorway', 'drw_546312900847862380']},
+          {id: 4, contents: ['2018-08-21T13:40:24.376Z', '2018-08-21T09:40:24.376-0400', 'Exit', 42, -1, 'Office Doorway', 'drw_546312900847862380']},
+          {id: 5, contents: ['2018-08-21T13:40:24.376Z', '2018-08-21T09:40:24.376-0400', 'Exit', 42, -1, 'Office Doorway', 'drw_546312900847862380']},
+          {id: 6, contents: ['2018-08-21T13:40:24.376Z', '2018-08-21T09:40:24.376-0400', 'Exit', 42, -1, 'Office Doorway', 'drw_546312900847862380']},
+          {id: 7, contents: ['2018-08-21T13:40:24.376Z', '2018-08-21T09:40:24.376-0400', 'Exit', 42, -1, 'Office Doorway', 'drw_546312900847862380']},
+        ]}
+      />
+    </Card>
+  ))
+  .addWithInfo('Repeat keys bug', () => (
+    <Card style={{width: 500}}>
+      <CardHeader>Example Card with Table</CardHeader>
+      <CardTable
+        mapDataItemToRow={item => item.contents}
+        headings={[
+          "Timestamp",
+          "Local Time",
+          "Event",
+          "Current Count",
+          "Count Change",
+          "Doorway Name",
+          "Doorway ID\r"
+        ]}
+        data={[
+          {
+            "contents": [
+              "2018-08-22T18:49:40.222Z",
+              "2018-08-22T14:49:40.222-0400",
+              "Entrance",
+              "3",
+              "1",
+              "Cafeteria Doorway",
+              "drw_546312903230227056\r"
+            ],
+            "id": "2018-08-22T18:49:40.222Z"
+          },
+          {
+            "contents": [
+              "2018-08-22T18:49:37.815Z",
+              "2018-08-22T14:49:37.815-0400",
+              "Exit",
+              "53",
+              "-1",
+              "Office Doorway",
+              "drw_546312900847862380\r"
+            ],
+            "id": "2018-08-22T18:49:37.815Z"
+          },
+          {
+            "contents": [
+              "2018-08-22T18:49:14.227Z",
+              "2018-08-22T14:49:14.227-0400",
+              "Entrance",
+              "2",
+              "1",
+              "Cafeteria Doorway",
+              "drw_546312903230227056\r"
+            ],
+            "id": "2018-08-22T18:49:14.227Z"
+          },
+          {
+            "contents": [
+              "2018-08-22T18:49:12.082Z",
+              "2018-08-22T14:49:12.082-0400",
+              "Entrance",
+              "54",
+              "1",
+              "Office Doorway",
+              "drw_546312900847862380\r"
+            ],
+            "id": "2018-08-22T18:49:12.082Z"
+          },
+          {
+            "contents": [
+              "2018-08-22T18:49:10.758Z",
+              "2018-08-22T14:49:10.758-0400",
+              "Exit",
+              "0",
+              "-1",
+              "Conference Room Doorway",
+              "drw_546312902051627630\r"
+            ],
+            "id": "2018-08-22T18:49:10.758Z"
+          },
+          {
+            "contents": [
+              "2018-08-22T18:49:08.968Z",
+              "2018-08-22T14:49:08.968-0400",
+              "Exit",
+              "53",
+              "-1",
+              "Office Doorway",
+              "drw_546312900847862380\r"
+            ],
+            "id": "2018-08-22T18:49:08.968Z"
+          },
+          {
+            "contents": [
+              "2018-08-22T18:49:07.988Z",
+              "2018-08-22T14:49:07.988-0400",
+              "Entrance",
+              "54",
+              "1",
+              "Office Doorway",
+              "drw_546312900847862380\r"
+            ],
+            "id": "2018-08-22T18:49:07.988Z"
+          },
+          {
+            "contents": [
+              "2018-08-22T18:49:05.281Z",
+              "2018-08-22T14:49:05.281-0400",
+              "Exit",
+              "53",
+              "-1",
+              "Office Doorway",
+              "drw_546312900847862380\r"
+            ],
+            "id": "2018-08-22T18:49:05.281Z"
+          },
+          {
+            "contents": [
+              "2018-08-22T18:49:02.707Z",
+              "2018-08-22T14:49:02.707-0400",
+              "Entrance",
+              "1",
+              "1",
+              "Cafeteria Doorway",
+              "drw_546312903230227056\r"
+            ],
+            "id": "2018-08-22T18:49:02.707Z"
+          },
+          {
+            "contents": [
+              "2018-08-22T18:48:55.928Z",
+              "2018-08-22T14:48:55.928-0400",
+              "Exit",
+              "0",
+              "-1",
+              "Conference Room Doorway",
+              "drw_546312902051627630\r"
+            ],
+            "id": "2018-08-22T18:48:55.928Z"
+          }
+        ]}
+      />
+    </Card>
   ))
   .addWithInfo('Card Modal with long header', () => (
     <Card type="modal">

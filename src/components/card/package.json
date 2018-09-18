@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-card",
-  "version": "0.7.6",
+  "version": "1.0.4",
   "description": "Card component",
   "main": "dist/index.js",
   "style": "dist/styles.css",
@@ -10,5 +10,7 @@
   },
   "author": "Density <team+javascript@density.io>",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {
+    "@density/ui-icons": "^0.1.6"
+  }
 }
