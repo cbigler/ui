@@ -71,7 +71,7 @@
     $block: true
   );
 }
-.button-small {
+.buttonSmall {
   @include make-button(
     $brand-primary,
     $button-height: 23px,
@@ -80,7 +80,7 @@
     $block: false
   );
 }
-.button-large {
+.buttonLarge {
   @include make-button(
     $brand-primary,
     $button-height: 50px,
