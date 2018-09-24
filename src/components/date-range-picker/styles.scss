@@ -1,10 +1,7 @@
-// Import any global variables from "../../variables/*.json"
-@import "../../variables/colors.json";
-@import "../../variables/spacing.json";
-@import "../../variables/fonts.json";
-
-// Local variables to the component
-@import "variables.json";
+// Import any global ../variables from "../../../variables/*.json"
+@import "../../../variables/colors.json";
+@import "../../../variables/spacing.json";
+@import "../../../variables/fonts.json";
 
 // equates rgba($brand-primary, 30%).
 // needed a solid color due to using for borders + background

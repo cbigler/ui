@@ -2,9 +2,6 @@
 @import "../../variables/colors.json";
 @import "../../variables/timings.json";
 
-// Local variables to the component
-@import "variables.json";
-
 @mixin make-fab($background: #fff, $color: $text-color, $border-width: 1px) {
   background-color: $background;
   color: $color;

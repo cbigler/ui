@@ -1,1 +1,0 @@
-../components/fab/story.js

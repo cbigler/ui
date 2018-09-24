@@ -1,7 +1,7 @@
-// Import any global variables from "../../variables/*.json"
-@import "../../variables/colors.json";
-@import "../../variables/fonts.json";
-@import "../../variables/spacing.json";
+// Import any global ../variables from "../../../variables/*.json"
+@import "../../../variables/colors.json";
+@import "../../../variables/fonts.json";
+@import "../../../variables/spacing.json";
 
 // Create a normal button.
 @mixin make-button(

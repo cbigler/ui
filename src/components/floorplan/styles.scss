@@ -1,12 +1,9 @@
 // Import any global variables from "../../variables/*.json"
-@import "../../variables/fonts.json";
-@import "../../variables/colors.json";
-@import "../../variables/spacing.json";
+@import "../../../variables/fonts.json";
+@import "../../../variables/colors.json";
+@import "../../../variables/spacing.json";
 
-// Local variables to the component
-@import "variables.json";
-
-@mixin make-floorplan($color: $floorplan-color) {
+@mixin make-floorplan {
   position: relative;
   touch-action: none;
 

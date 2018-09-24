@@ -1,1 +1,0 @@
-../components/input-box/story.js

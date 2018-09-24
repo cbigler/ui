@@ -1,1 +1,0 @@
-../components/switch/stories.js
