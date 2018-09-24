@@ -8,9 +8,8 @@ Density UI is a collection of Density-branded controls and styles for use in web
 ## Quick-start development (using react-storybook)
 
 ```sh
-npm install
-npm run installall
-npm start
+make bootstrap
+make start
 ```
 
 ## How it works

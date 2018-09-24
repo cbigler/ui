@@ -3,6 +3,8 @@ SHELL := /bin/bash
 BABEL = ./node_modules/.bin/babel
 NODE_SASS = ./node_modules/.bin/node-sass
 
+PORT ?= 9009
+
 .PHONY: help
 help:
 	@echo "Density UI Makefile"
@@ -35,6 +37,23 @@ help:
 component:
 	./make-component
 
+.PHONY: bootstrap
+bootstrap:
+	@echo "Verifying you are running node >= v10..."
+	@node -e 'major = parseInt(process.version.split(".")[0].slice(1), 10); if (major < 10) { throw new Error("Node >= v10 is required!"); process.exit(1); }'
+	@echo
+	@echo "Installing dependencies in main package..."
+	npm i
+	@echo
+	@echo "Installing dependencies in each sub component..."
+	for i in $(shell $(MAKE) components-list); do \
+		pushd src/components/$$i && npm i && popd; \
+	done
+
+.PHONY: start
+start:
+	@./node_modules/.bin/start-storybook -p $(PORT) -s public
+
 .PHONY: clean
 clean:
 	rm -rf dist/
@@ -65,7 +84,7 @@ minor: version-patch
 
 .PHONY: components-list
 components-list:
-	@find components/ \
+	@find src/components/ \
 		-maxdepth 1 -mindepth 1 \
 		-type d \
 		! -name "template" ! -name "dist" \
@@ -84,13 +103,13 @@ dist/styles.css: dist/
 
 
 define GEN_RULE
-$(1)_COMPONENT_PATH = components/$(1)
-$(1)_COMPONENT_PATH_DIST = components/$(1)/dist
-$(1)_COMPONENT_SOURCE_FILES = $(shell ls components/$(1)/*.js)
+$(1)_COMPONENT_PATH = src/components/$(1)
+$(1)_COMPONENT_PATH_DIST = src/components/$(1)/dist
+$(1)_COMPONENT_SOURCE_FILES = $(shell ls src/components/$(1)/*.js)
 
 
-# ie, components/card/foo.js => components/card/dist/foo.js
-$(1)_COMPONENT_SOURCE_FILES_DIST = $(foreach i,$(shell ls components/$(1)/*.js),components/$(1)/dist/$(notdir $i))
+# ie, src/components/card/foo.js => src/components/card/dist/foo.js
+$(1)_COMPONENT_SOURCE_FILES_DIST = $(foreach i,$(shell ls src/components/$(1)/*.js),src/components/$(1)/dist/$(notdir $i))
 
 # SECONDEXPANSION expands twice, producing something like card_COMPONENT_PATH_DIST in the below
 # target (for example)
@@ -108,7 +127,7 @@ $1-publish: $1-clean $1-build
 	npm publish --access public && \
 	popd > /dev/null
 
-# Create components/card/dist if it doesn't exist
+# Create src/components/card/dist if it doesn't exist
 .SECONDEXPANSION:
 $$($(1)_COMPONENT_PATH_DIST):
 	mkdir -p $$@
@@ -133,7 +152,7 @@ $1-minor: $1-version-minor
 $1-patch: $1-version-patch
 
 # To make each transpiled file, compile the source file with the same name
-# ie, components/card/index.js => components/card/dist/index.js
+# ie, src/components/card/index.js => src/components/card/dist/index.js
 .SECONDEXPANSION:
 $$($(1)_COMPONENT_PATH_DIST)/%.js: $$($(1)_COMPONENT_PATH_DIST)
 	$(BABEL) $$($(1)_COMPONENT_PATH)/$$(@F) \
@@ -147,7 +166,7 @@ $$($(1)_COMPONENT_PATH_DIST)/%.js: $$($(1)_COMPONENT_PATH_DIST)
 # To make each stylesheet, compile to css.
 # @density/node-sass-json-importer is used to parse json files with variables inside. Learn more:
 # https://github.com/DensityCo/node-sass-json-importer
-# ie, components/card/styles.scss => components/card/dist/{_sass.scss,styles.css}
+# ie, src/components/card/styles.scss => src/components/card/dist/{_sass.scss,styles.css}
 .SECONDEXPANSION:
 $$($(1)_COMPONENT_PATH_DIST)/styles.css: $$($(1)_COMPONENT_PATH_DIST)
 	cp $$($(1)_COMPONENT_PATH)/variables.json $$($(1)_COMPONENT_PATH_DIST)/variables.json
@@ -161,4 +180,4 @@ $$($(1)_COMPONENT_PATH_DIST)/styles.css: $$($(1)_COMPONENT_PATH_DIST)
 
 endef
 
-$(foreach component_name,$(shell ls components),$(eval $(call GEN_RULE,$(component_name))))
+$(foreach component_name,$(shell ls src/components),$(eval $(call GEN_RULE,$(component_name))))
