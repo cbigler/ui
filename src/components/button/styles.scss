@@ -3,9 +3,6 @@
 @import "../../variables/fonts.json";
 @import "../../variables/spacing.json";
 
-// Local variables to the component
-@import "variables.json";
-
 // Create a normal button.
 @mixin make-button(
   $color: $brand-primary,

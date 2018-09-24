@@ -3,11 +3,6 @@
   "version": "0.1.4",
   "description": "Button component",
   "main": "dist/index.js",
-  "style": "dist/styles.css",
-  "scss": "dist/_styles.scss",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "Density <team+javascript@density.io>",
   "license": "MIT",
   "dependencies": {
