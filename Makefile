@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-WEBPACK = $(shell realpath ./node_modules/.bin/webpack)
+WEBPACK = $(shell realpath ./node_modules/.bin/webpack 2> /dev/null)
 
 PORT ?= 9009
 
