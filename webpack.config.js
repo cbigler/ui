@@ -1,14 +1,22 @@
 // webpack.config.js
 // This file is copied into src/components/<my component> and `webpack` is run inside to build a
 // production bundle that is deployed.
+//
+// Some reference materials since webpack is a beast:
+// - https://webpack.js.org/guides/author-libraries/
+//
 const path = require('path');
 const jsonImporter = require('@density/node-sass-json-importer');
+
+const componentName = __dirname.match(/\/components\/(.+)/)[1];
 
 module.exports = {
   entry: './index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js',
+    library: `densityUi${componentName.replace('-', '')}`,
+    libraryTarget: 'umd',
   },
   externals: {
     react: {
@@ -22,7 +30,7 @@ module.exports = {
       commonjs2: 'react-dom',
       commonjs: 'react-dom',
       amd: 'react-dom'
-    }
+    },
   },
   module: {
     loaders: [
