@@ -1,7 +1,5 @@
 SHELL := /bin/bash
-
-BABEL = ./node_modules/.bin/babel
-NODE_SASS = ./node_modules/.bin/node-sass
+WEBPACK = $(shell realpath ./node_modules/.bin/webpack)
 
 PORT ?= 9009
 
@@ -10,9 +8,12 @@ help:
 	@echo "Density UI Makefile"
 	@echo
 	@echo
+	@echo "# Initialization targets"
+	@printf "\t- make bootstrap\t\tinitializes the project and installs all dependencies\n"
+	@echo
 	@echo "# Project-level targets"
 	@printf "\t- make help\t\tshows this help page.\n"
-	@printf "\t- make component\truns ./make-component, an interactive helper script to help generate new ui components.\n"
+	@printf "\t- make component\truns ./utils/make-component, an interactive helper script to help generate new ui components.\n"
 	@printf "\t- make components-list\treturns a list of all components in the components/ directory\n"
 	@printf "\t- make clean\tremoves the built artifacts in the dist/ directory\n"
 	@printf "\t- make build\tbuilds the main package's styles, and puts them into dist/\n"
@@ -108,9 +109,6 @@ $(1)_COMPONENT_PATH_DIST = src/components/$(1)/dist
 $(1)_COMPONENT_SOURCE_FILES = $(shell ls src/components/$(1)/*.js)
 
 
-# ie, src/components/card/foo.js => src/components/card/dist/foo.js
-$(1)_COMPONENT_SOURCE_FILES_DIST = $(foreach i,$(shell ls src/components/$(1)/*.js),src/components/$(1)/dist/$(notdir $i))
-
 # SECONDEXPANSION expands twice, producing something like card_COMPONENT_PATH_DIST in the below
 # target (for example)
 # More info: https://www.gnu.org/software/make/manual/html_node/Secondary-Expansion.html
@@ -119,7 +117,7 @@ $1-clean:
 	rm -rf $$($(1)_COMPONENT_PATH_DIST)
 
 .SECONDEXPANSION:
-$1-build: $$($(1)_COMPONENT_SOURCE_FILES_DIST) $$($(1)_COMPONENT_PATH_DIST)/styles.css
+$1-build: $$($(1)_COMPONENT_PATH_DIST)/index.js
 
 .SECONDEXPANSION:
 $1-publish: $1-clean $1-build
@@ -151,32 +149,17 @@ $1-major: $1-version-major
 $1-minor: $1-version-minor
 $1-patch: $1-version-patch
 
-# To make each transpiled file, compile the source file with the same name
+# To make each transpiled file, compile the source file with the same name via webpack:
+# - Webpack calls into babel via babel-loader
+# - Webpack compiles scss with sass-loader (and node-sass)
+#   - @density/node-sass-json-importer is used to parse json files with vars inside. Learn more:
+#   - https://github.com/DensityCo/node-sass-json-importer
 # ie, src/components/card/index.js => src/components/card/dist/index.js
 .SECONDEXPANSION:
 $$($(1)_COMPONENT_PATH_DIST)/%.js: $$($(1)_COMPONENT_PATH_DIST)
-	$(BABEL) $$($(1)_COMPONENT_PATH)/$$(@F) \
-		--ignore=node_modules,$$($(1)_COMPONENT_PATH_DIST) \
-		--presets=babel-preset-es2015,babel-preset-react \
-		--plugins=babel-plugin-transform-object-rest-spread,babel-plugin-transform-async-to-generator \
-		| sed -n '/styles.scss/!p' \
-		| sed -n '/"use strict"/!p' \
-		> $$@
-
-# To make each stylesheet, compile to css.
-# @density/node-sass-json-importer is used to parse json files with variables inside. Learn more:
-# https://github.com/DensityCo/node-sass-json-importer
-# ie, src/components/card/styles.scss => src/components/card/dist/{_sass.scss,styles.css}
-.SECONDEXPANSION:
-$$($(1)_COMPONENT_PATH_DIST)/styles.css: $$($(1)_COMPONENT_PATH_DIST)
-	cp $$($(1)_COMPONENT_PATH)/variables.json $$($(1)_COMPONENT_PATH_DIST)/variables.json
-	cat $$($(1)_COMPONENT_PATH)/styles.scss \
-		| sed -n '/@import.*\.json/!p' \
-		> $$($(1)_COMPONENT_PATH_DIST)/_sass.scss
-	$(NODE_SASS) \
-		--importer node_modules/@density/node-sass-json-importer/dist/node-sass-json-importer.js \
-		$$($(1)_COMPONENT_PATH)/styles.scss \
-		> $$@
+	cp webpack.config.js $$($(1)_COMPONENT_PATH)/webpack.config.js
+	cd $$($(1)_COMPONENT_PATH) && $(WEBPACK)
+	rm -rf $$($(1)_COMPONENT_PATH)/webpack.config.js
 
 endef
 
