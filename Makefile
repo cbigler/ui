@@ -36,7 +36,7 @@ help:
 
 .PHONY: component
 component:
-	./make-component
+	./utils/make-component
 
 .PHONY: bootstrap
 bootstrap:
