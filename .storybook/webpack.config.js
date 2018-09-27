@@ -1,7 +1,20 @@
+const fs = require('fs');
 const path = require('path');
 const jsonImporter = require('@density/node-sass-json-importer');
 
+// Create aliases when importing each component to reference the current component state in this
+// project. For example,
+// @density/ui-button => /Users/ryan/w/densityco/ui/src/components/button/index.js
+const alias = {};
+const COMPONENTS_BASE_PATH = path.join(__dirname, '..', 'src', 'components');
+fs.readdirSync(COMPONENTS_BASE_PATH).forEach(component => {
+  alias[`@density/ui-${component}`] = path.normalize(
+    path.join(COMPONENTS_BASE_PATH, component, 'index.js')
+  );
+});
+
 module.exports = {
+  resolve: { alias },
   module: {
     rules: [
       // *.scss files are processed through three steps:
