@@ -38,9 +38,15 @@ module.exports = {
         commonjs: 'prop-types',
         amd: 'prop-types'
       },
+      'moment': {
+        root: 'moment',
+        commonjs2: 'moment',
+        commonjs: 'moment',
+        amd: 'moment',
+      },
     },
     /* all density ui-related packages are peerdependencies, so they are required from the parent project */
-    /^@density-ui/,
+    /^@density\/ui/,
   ],
   module: {
     loaders: [
