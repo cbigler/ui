@@ -1,6 +1,7 @@
-import React from 'react';
-
-import colorVariables from '@density/ui/variables/colors.json';
+// NOTE: using `require` here is needed since we have to use `module.exports` below. Webpack won't
+// let you mix `import/export` and `module.exports`.
+const React = require('react');
+const colorVariables = require('@density/ui/variables/colors.json');
 
 // A list of all density icons.
 const ICONS = {
