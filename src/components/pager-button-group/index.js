@@ -1,5 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import classnames from 'classnames';
+
+import styles from './styles.scss';
 
 export default function PagerButtonGroup({
   showFirstLastButtons,
@@ -14,9 +16,9 @@ export default function PagerButtonGroup({
   onClickStart,
   onClickEnd,
 }) {
-  return <div className="pager-button-group">
+  return <div className={styles.pagerButtonGroup}>
     {showFirstLastButtons ? <div
-      className={classnames('pager-button', {disabled: disabledStart})}
+      className={classnames(styles.pagerButton, {[styles.pagerButtonDisabled]: disabledStart})}
       onClick={e => {
         if (!disabledStart) {
           onClickStart(e);
@@ -25,7 +27,7 @@ export default function PagerButtonGroup({
     >&laquo;</div> : null}
 
     <div
-      className={classnames('pager-button', {disabled: disabledPrevious})}
+      className={classnames(styles.pagerButton, {[styles.pagerButtonDisabled]: disabledPrevious})}
       onClick={e => {
         if (!disabledPrevious) {
           onClickPrevious(e);
@@ -33,7 +35,7 @@ export default function PagerButtonGroup({
       }}
     >&lsaquo;</div>
     <div
-      className={classnames('pager-button', {disabled: disabledNext})}
+      className={classnames(styles.pagerButton, {[styles.pagerButtonDisabled]: disabledNext})}
       onClick={e => {
         if (!disabledNext) {
           onClickNext(e);
@@ -42,7 +44,7 @@ export default function PagerButtonGroup({
     >&rsaquo;</div>
 
     {showFirstLastButtons ? <div
-      className={classnames('pager-button', {disabled: disabledEnd})}
+      className={classnames(styles.pagerButton, {[styles.pagerButtonDisabled]: disabledEnd})}
       onClick={e => {
         if (!disabledEnd) {
           onClickEnd(e);
