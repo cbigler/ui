@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-percentage-bar",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Percentage Bar component",
   "main": "dist/index.js",
   "style": "dist/styles.css",
