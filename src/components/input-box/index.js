@@ -1,35 +1,26 @@
-import * as React from 'react';
+import React from 'react';
 import classnames from 'classnames';
 
 import { IconChevronDown } from '@density/ui-icons';
 
+import styles from './styles.scss';
+
 export default function InputBox(props) {
   switch (props.type) {
-  // Selects need a custom class added to them so that they'll hide the caret and add some padding
-  // to the right.
   case 'select':
     return <SelectBox {...props} />;
   case 'textarea':
     return <textarea
       {...props}
-      className={classnames(
-        'input-box',
-        'input-box-textarea',
-        props.className
-      )}
+      className={classnames(styles.inputBox, styles.inputBoxTextarea)}
     />;
   default:
     return <input
       {...props}
-      className={classnames(
-        'input-box',
-        props.disabled ? 'input-box-disabled' : null,
-        props.className
-      )}
+      className={classnames(styles.inputBox, props.disabled ? styles.inputBoxDisabled : null)}
     />;
   }
 }
-
 
 export class SelectBox extends React.Component {
   constructor(props) {
@@ -37,25 +28,16 @@ export class SelectBox extends React.Component {
 
     this.state = {
       opened: false,
-      visible: false,
     };
 
     // Called when the user focuses either the value or an item in the menu part of the box.
     this.onMenuFocus = () => {
-      this.setState({visible: true, opened: false}, () => {
-        setTimeout(() => {
-          this.setState({opened: true});
-        }, 0);
-      });
+      this.setState({opened: true});
     };
 
     // Called when the user blurs either the value or an item in the menu part of the box.
-    this.onMenuBlur = () => {
-      this.setState({opened: false}, () => {
-        setTimeout(() => {
-          this.setState({visible: false});
-        }, 250);
-      });
+    this.onMenuBlur = (e) => {
+      this.setState({opened: false});
     };
 
     // Called when the user selects an item within the menu of the select box.
@@ -71,7 +53,7 @@ export class SelectBox extends React.Component {
 
   render() {
     const { value, choices, className, id, disabled } = this.props;
-    const { visible, opened } = this.state;
+    const { opened } = this.state;
 
     // Allow `value` to either be:
     // 1. The raw element in `choices` (ie, choices.indexOf(value) isn't -1)
@@ -85,11 +67,14 @@ export class SelectBox extends React.Component {
       selectedValue = null;
     }
 
-    return <div className={classnames('input-box-select-box', className)}>
+    return <div className={classnames(styles.inputBoxSelectBox, className)}>
       <div
         id={id}
         ref={r => { this.selectBoxValueRef = r; }}
-        className={classnames(`input-box-select-box-value`, {disabled, opened})}
+        className={classnames(styles.inputBoxSelectBoxValue, {
+          [styles.inputBoxSelectBoxValueDisabled]: disabled,
+          [styles.inputBoxSelectBoxValueOpened]: opened,
+        })}
         tabIndex={disabled ? -1 : 0}
         aria-expanded={opened}
         aria-autocomplete="list"
@@ -113,25 +98,29 @@ export class SelectBox extends React.Component {
       >
         {selectedValue ?
           <span>{selectedValue.label}</span> :
-          <span className="input-box-select-placeholder">No selection</span>
+          <span className={styles.inputBoxSelectPlaceholder}>No selection</span>
         }
-        <div className="input-box-caret">
+        <div className={classnames(styles.inputBoxSelectBoxValueCaret, {
+          [styles.inputBoxSelectBoxValueCaretOpened]: opened,
+        })}>
           <IconChevronDown color="primary" width={12} height={12} />
         </div>
       </div>
 
       <div
         role="listbox"
-        className={classnames('input-box-select-box-menu', {opened, visible})}
+        className={classnames(styles.inputBoxSelectBoxMenu, {
+          [styles.inputBoxSelectBoxMenuOpened]: opened,
+        })}
       >
-        <ul>
+        <ul className={styles.inputBoxSelectBoxMenuUl}>
           {(choices || []).map(choice => {
             const { id, label, disabled } = choice;
             return <li
               key={id}
               id={`input-box-select-${String(id).replace(' ', '-')}`}
               role="option"
-              className={classnames('input-box-select-box-menu-item', { disabled })}
+              className={classnames(styles.inputBoxSelectBoxMenuLi, { disabled })}
               tabIndex={!choice.disabled && opened ? 0 : -1}
               aria-selected={selectedValue && selectedValue.id === choice.id}
 
