@@ -10,7 +10,7 @@ storiesOf('InputBox', module)
     <InputBox type="text" />
   ))
   .addWithInfo('type=text', () => (
-    <InputBox type="text" value="foo!" />
+    <InputBox type="text" defaultValue="foo!" />
   ))
   .addWithInfo('type=password', () => (
     <InputBox type="password" placeholder="Type your password" />
