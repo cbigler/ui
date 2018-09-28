@@ -5,71 +5,70 @@
 // Local variables to the component
 @import "variables.json";
 
-@mixin make-info-popup() {
-  &-container {
-    outline: none;
-  }
-  &-icon {
-    cursor: pointer;
-    padding-bottom: 20px;
-    &.stock-target {
-      vertical-align: top;
-      vertical-align: -moz-middle-with-baseline;
-      vertical-align: -webkit-baseline-middle;
-      user-select: none;
-      margin-left: 5px;
-      margin-right: 5px;
-    }
-  }
-  &-wrapper {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-  }
-  &-popup {
-    background-color: #fff;
-    padding: 20px;
+.infoPopupContainer {
+  outline: none;
+  position: relative;
+}
+.infoPopupIcon {
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+.infoPopupIconVisible {
+  padding-bottom: 20px;
+}
+.infoPopupStockTarget {
+  vertical-align: top;
+  vertical-align: -moz-middle-with-baseline;
+  vertical-align: -webkit-baseline-middle;
+  user-select: none;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.infoPopupWrapper {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.infoPopupPopup {
+  background-color: #fff;
+  padding: 20px;
 
-    border: 1px solid $gray;
-    border-radius: 4px;
+  border: 1px solid $gray;
+  border-radius: 4px;
 
-    font-family: $font-base;
-    font-size: 14px;
-    font-weight: normal;
-    color: $gray-cinder;
+  font-family: $font-base;
+  font-size: 14px;
+  font-weight: normal;
+  color: $gray-cinder;
 
-    position: absolute;
-    top: 0px;
-    left: 0px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
 
-    display: block;
-    width: 300px;
+  display: block;
+  width: 300px;
 
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-    transition: all 250ms ease-in-out;
-    opacity: 0;
-    pointer-events: none;
-    user-select: none;
-    z-index: 999;
-
-    &.visible {
-      pointer-events: auto;
-      user-select: auto;
-      opacity: 1;
-    }
-
-    &.single-line {
-      padding-top: 5px;
-      padding-bottom: 5px;
-      white-space: nowrap;
-      width: auto;
-    }
-  }
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 200ms ease-in-out;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+  z-index: 999;
 }
 
-.info-popup {
-  @include make-info-popup;
+.infoPopupPopupVisible {
+  pointer-events: auto;
+  user-select: auto;
+  opacity: 1;
 }
 
-.info-popup-card-well-highlight { border-bottom: 1px dotted $gray-cinder; }
+.infoPopupPopupSingleLine {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  white-space: nowrap;
+  width: auto;
+}
+
+
+.infoPopupCardWellHighlight { border-bottom: 1px dotted $gray-cinder; }
 .card-well-dark .info-popup-card-well-highlight { border-bottom: 1px dotted $gray; }
