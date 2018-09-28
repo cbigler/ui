@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-pager-button-group",
-  "version": "0.1.5",
+  "version": "1.0.0",
   "description": "Pager Button Group component",
   "main": "dist/index.js",
   "author": "Density <engineering+javascript@density.io>",
