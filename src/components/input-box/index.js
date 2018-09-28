@@ -12,11 +12,13 @@ export default function InputBox(props) {
   case 'textarea':
     return <textarea
       {...props}
+      style={{width: props.width}}
       className={classnames(styles.inputBox, styles.inputBoxTextarea)}
     />;
   default:
     return <input
       {...props}
+      style={{width: props.width}}
       className={classnames(styles.inputBox, props.disabled ? styles.inputBoxDisabled : null)}
     />;
   }
@@ -52,7 +54,7 @@ export class SelectBox extends React.Component {
   }
 
   render() {
-    const { value, choices, className, id, disabled } = this.props;
+    const { width, value, choices, id, disabled } = this.props;
     const { opened } = this.state;
 
     // Allow `value` to either be:
@@ -67,7 +69,7 @@ export class SelectBox extends React.Component {
       selectedValue = null;
     }
 
-    return <div className={classnames(styles.inputBoxSelectBox, className)}>
+    return <div className={classnames(styles.inputBoxSelectBox)} style={{width}}>
       <div
         id={id}
         ref={r => { this.selectBoxValueRef = r; }}
