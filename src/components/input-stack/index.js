@@ -1,13 +1,13 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import React from 'react';
 import classnames from 'classnames';
 
-import {inputStackHeight} from './variables';
+import { inputStackHeight } from './variables';
+import styles from './styles.scss';
 
 export function InputStackGroup(props) {
   return <div
     {...props}
-    className={classnames("input-stack-group", props.className)}
+    className={classnames(styles.inputStackGroup)}
   >
     <div>{props.children}</div>
   </div>;
@@ -25,10 +25,9 @@ export class InputStackItem extends React.Component {
     delete propsRest.className;
 
     return <div className={classnames(
-      'input-stack-item',
-      this.props.invalid ? 'input-stack-item-invalid' : null,
-      this.state.focused ? 'focus' : null,
-      this.props.className,
+      styles.inputStackItem,
+      this.props.invalid ? styles.inputStackItemInvalid : null,
+      this.state.focused ? styles.inputStackItemFocus : null,
     )}>
       <input
         {...propsRest}
@@ -43,13 +42,4 @@ export class InputStackItem extends React.Component {
       />
     </div>;
   }
-}
-
-// Render the spec with this data.
-export function spec() {
-  return <InputStackGroup>
-    <InputStackItem type="text" placeholder="Text box" />
-    <InputStackItem invalid type="text" value="I'm invalid :(" />
-    <InputStackItem type="password" placeholder="Another password box" />
-  </InputStackGroup>
 }
