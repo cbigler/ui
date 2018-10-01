@@ -5,6 +5,7 @@ import {ReactSVGPanZoom, TOOL_NONE, TOOL_AUTO} from 'react-svg-pan-zoom';
 import ViewerTouchEvent from 'react-svg-pan-zoom/build-commonjs/events/viewer-touch-event.js';
 
 import { IconPlus } from '@density/ui-icons';
+import propTypes from 'prop-types';
 
 import colorVariables from '@density/ui/variables/colors.json';
 import fontVariables from '@density/ui/variables/fonts.json';
@@ -807,3 +808,31 @@ export default class Floorplan extends Component {
     );
   }
 }
+Floorplan.propTypes = {
+  deviceSupportsTouch: propTypes.bool,
+
+  image: propTypes.oneOfType([
+    propTypes.oneOf([null]),
+    propTypes.string,
+  ]).isRequired,
+  imageRotation: propTypes.number,
+
+  shapes: propTypes.arrayOf(propTypes.shape({
+    id: propTypes.any.isRequired,
+    shape: propTypes.func.isRequired,
+    x: propTypes.number.isRequired,
+    y: propTypes.number.isRequired,
+    width: propTypes.number.isRequired,
+    height: propTypes.number.isRequired,
+    allowMovement: propTypes.bool,
+
+    name: propTypes.string.isRequired,
+    popup: propTypes.node.isRequired,
+  })).isRequired,
+
+  cursorTagText: propTypes.node,
+  onShapeClick: propTypes.func,
+  onShapeDeselect: propTypes.func,
+  onShapeMovement: propTypes.func,
+  onCreateShape: propTypes.func,
+};

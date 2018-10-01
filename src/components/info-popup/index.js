@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import propTypes from 'prop-types';
 
 import { IconInfo } from '@density/ui-icons';
 import styles from './styles.scss';
@@ -143,6 +144,14 @@ export default class InfoPopup extends Component {
     </span>;
   }
 }
+InfoPopup.propTypes = {
+  infoIconColor: propTypes.string,
+  singleLine: propTypes.bool,
+  horizontalIconOffset: propTypes.number,
+  verticalIconOffset: propTypes.number,
+  target: propTypes.node,
+  children: propTypes.node.isRequired,
+};
 
 export function InfoPopupCardWellHighlight(p) {
   const props = Object.assign({}, p);
@@ -156,3 +165,7 @@ export function InfoPopupCardWellHighlight(p) {
     </InfoPopup>
   );
 }
+InfoPopupCardWellHighlight.propTypes = {
+  target: propTypes.node.isRequired,
+  children: propTypes.node.isRequired,
+};

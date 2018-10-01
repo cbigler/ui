@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 
 export default function DensityMark({size, color}) {
   return (
@@ -10,6 +11,11 @@ export default function DensityMark({size, color}) {
     </svg>
   );
 }
+DensityMark.propTypes = {
+  size: propTypes.number,
+  color: propTypes.string,
+};
+
 export function DensityLogo({size, color}) {
   return <div className="density-mark">
     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 945.71064 201.92023' height={size || 100}>
@@ -37,3 +43,7 @@ export function DensityLogo({size, color}) {
     </svg>
   </div>;
 }
+DensityLogo.propTypes = {
+  size: propTypes.number,
+  color: propTypes.string,
+};

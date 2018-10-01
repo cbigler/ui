@@ -1,6 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import camelcase from 'camelcase';
+import propTypes from 'prop-types';
 
 import styles from './styles.scss';
 
@@ -17,3 +18,9 @@ export default function Button(props) {
     size ? styles[camelcase(`button-${size}`)] : null,
   )}>{children}</button>;
 }
+Button.propTypes = {
+  onClick: propTypes.func,
+  children: propTypes.node.isRequired,
+  size: propTypes.oneOf(['small', 'large']),
+  disabled: propTypes.bool,
+};

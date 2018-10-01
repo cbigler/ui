@@ -1,6 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
 import { DateRangePicker as ReactDatesDateRangePicker } from '@density/react-dates';
+import propTypes from 'prop-types';
+import moment from 'moment';
 
 import InputBox from '@density/ui-input-box';
 import { IconCalendar } from '@density/ui-icons';
@@ -69,3 +71,31 @@ export default function DateRangePicker(props) {
     {commonRangeList}
   </div>;
 }
+DateRangePicker.propTypes = {
+  onChange: propTypes.func,
+  onFocusChange: propTypes.func,
+  focusedInput: propTypes.oneOf([
+    null,
+    START_DATE_ACTIVE,
+    END_DATE_ACTIVE,
+  ]).isRequired,
+  anchor: propTypes.oneOf([ANCHOR_LEFT, ANCHOR_RIGHT]),
+
+  startDate: propTypes.oneOfType([
+    propTypes.instanceOf(moment),
+    propTypes.string, /* for moment to parse */
+    propTypes.number,
+  ]).isRequired,
+  endDate: propTypes.oneOfType([
+    propTypes.instanceOf(moment),
+    propTypes.string, /* for moment to parse */
+    propTypes.number,
+  ]).isRequired,
+
+  commonRanges: propTypes.arrayOf(propTypes.shape({
+    id: propTypes.any,
+    name: propTypes.node,
+    label: propTypes.node,
+  })),
+  onSelectCommonRange: propTypes.func,
+};

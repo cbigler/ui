@@ -2,6 +2,7 @@
 // let you mix `import/export` and `module.exports`.
 const React = require('react');
 const colorVariables = require('@density/ui/variables/colors.json');
+const propTypes = require('prop-types');
 
 // A list of all density icons.
 const ICONS = {
@@ -901,6 +902,11 @@ for (let iconName in ICONS) {
 
     }));
   }
+  ICON_COMPONENTS[iconName].propTypes = {
+    color: propTypes.string,
+    width: propTypes.number,
+    height: propTypes.number,
+  };
 
   // Since the name of the function of each component is `IconComponent`, add a name that React will
   // use when debugging to make icons easier to identify.

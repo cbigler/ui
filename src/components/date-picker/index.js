@@ -2,6 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import { SingleDatePicker } from '@density/react-dates';
 import { IconArrowLeft, IconArrowRight } from '@density/ui-icons';
+import propTypes from 'prop-types';
 
 import styles from './styles.scss';
 
@@ -61,3 +62,13 @@ export default function DatePicker(props) {
     </div>
   </div>;
 }
+DatePicker.propTypes = Object.assign(
+  {},
+  SingleDatePicker.propTypes, /* inherit from react-dates */
+  {
+    onChange: propTypes.func,
+    anchor: propTypes.oneOf([ANCHOR_LEFT, ANCHOR_RIGHT]),
+    arrowRightDisabled: propTypes.bool,
+    arrowLeftDisabled: propTypes.bool,
+  },
+);

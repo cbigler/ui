@@ -1,5 +1,6 @@
 import React from 'react';
 import { v4 } from 'uuid';
+import propTypes from 'prop-types';
 
 import styles from './styles.scss';
 
@@ -19,3 +20,8 @@ export default function RadioButton({checked, onChange, text}) {
     >{text}</label>
   </div>;
 }
+RadioButton.propTypes = {
+  checked: propTypes.bool,
+  onChange: propTypes.func,
+  text: propTypes.node,
+};

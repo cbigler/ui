@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import propTypes from 'prop-types';
 
 import styles from './styles.scss';
 
@@ -53,3 +54,17 @@ export default function PagerButtonGroup({
     >&raquo;</div> : null}
   </div>;
 }
+
+PagerButtonGroup.propTypes = {
+  onClickNext: propTypes.func.isRequired,
+  onClickPrevious: propTypes.func.isRequired,
+
+  showFirstLastButtons: propTypes.bool,
+  onClickStart: propTypes.func,
+  onClickEnd: propTypes.func,
+
+  disabledStart: propTypes.bool,
+  disabledEnd: propTypes.bool,
+  disabledNext: propTypes.bool,
+  disabledPrevious: propTypes.bool,
+};

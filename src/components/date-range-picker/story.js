@@ -76,7 +76,6 @@ storiesOf('DateRangePicker', module)
     />
   ))
   .addWithInfo('With common date ranges', () => {
-
     return <DateRangePicker
       onChange={action('dates change')}
       onFocusChange={action('focus')}

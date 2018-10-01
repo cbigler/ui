@@ -60,3 +60,8 @@ export default class PercentageBar extends React.Component {
     </div>;
   }
 }
+PercentageBar.propTypes = {
+  percentage: propTypes.number.isRequired,
+  percentageFormatter: propTypes.func,
+  breakWidth: propTypes.number.isRequired,
+};

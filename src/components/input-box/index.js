@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import propTypes from 'prop-types';
 
 import { IconChevronDown } from '@density/ui-icons';
 
@@ -23,6 +24,15 @@ export default function InputBox(props) {
     />;
   }
 }
+InputBox.propTypes = {
+  type: propTypes.string,
+  value: propTypes.any,
+  choices: propTypes.arrayOf(propTypes.shape({
+    id: propTypes.any,
+    label: propTypes.node,
+    disabled: propTypes.bool,
+  })),
+};
 
 export class SelectBox extends React.Component {
   constructor(props) {
@@ -114,7 +124,7 @@ export class SelectBox extends React.Component {
         className={classnames(styles.inputBoxSelectBoxMenu, {
           [styles.inputBoxSelectBoxMenuOpened]: opened,
         })}
-        style={{width: listBoxWidth || 'auto'}}
+        style={{width: listBoxWidth || width}}
       >
         <ul className={styles.inputBoxSelectBoxMenuUl}>
           {(choices || []).map(choice => {
@@ -155,3 +165,11 @@ export class SelectBox extends React.Component {
     </div>;
   }
 }
+SelectBox.propTypes = {
+  value: propTypes.any,
+  choices: propTypes.arrayOf(propTypes.shape({
+    id: propTypes.any,
+    label: propTypes.node,
+    disabled: propTypes.bool,
+  })),
+};

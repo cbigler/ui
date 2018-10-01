@@ -3,15 +3,16 @@ import classnames from 'classnames';
 
 import { inputStackHeight } from './variables';
 import styles from './styles.scss';
+import propTypes from 'prop-types';
 
-export function InputStackGroup(props) {
-  return <div
-    {...props}
-    className={classnames(styles.inputStackGroup)}
-  >
-    <div>{props.children}</div>
+export function InputStackGroup({children}) {
+  return <div className={styles.inputStackGroup}>
+    <div>{children}</div>
   </div>;
 }
+InputStackGroup.propTypes = {
+  children: propTypes.node,
+};
 
 export class InputStackItem extends React.Component {
   constructor(props) {
@@ -43,3 +44,7 @@ export class InputStackItem extends React.Component {
     </div>;
   }
 }
+InputStackItem.propTypes = {
+  invalid: propTypes.bool,
+  focused: propTypes.bool,
+};

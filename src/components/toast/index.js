@@ -1,6 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import colorVariables from '@density/ui/variables/colors.json';
+import propTypes from 'prop-types';
 
 import { IconClose } from '@density/ui-icons';
 
@@ -42,3 +43,11 @@ export default function Toast({
     </div>
   </div>;
 }
+Toast.propTypes = {
+  icon: propTypes.node,
+  type: propTypes.oneOf(['primary', 'success', 'warning', 'danger']).isRequired,
+  title: propTypes.node.isRequired,
+
+  onDismiss: propTypes.func,
+  children: propTypes.node.isRequired,
+};
