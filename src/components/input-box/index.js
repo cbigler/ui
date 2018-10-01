@@ -54,7 +54,7 @@ export class SelectBox extends React.Component {
   }
 
   render() {
-    const { width, value, choices, id, disabled } = this.props;
+    const { width, listBoxWidth, value, choices, id, disabled } = this.props;
     const { opened } = this.state;
 
     // Allow `value` to either be:
@@ -114,6 +114,7 @@ export class SelectBox extends React.Component {
         className={classnames(styles.inputBoxSelectBoxMenu, {
           [styles.inputBoxSelectBoxMenuOpened]: opened,
         })}
+        style={{width: listBoxWidth || 'auto'}}
       >
         <ul className={styles.inputBoxSelectBoxMenuUl}>
           {(choices || []).map(choice => {
