@@ -5,6 +5,8 @@ import { DateRangePicker as ReactDatesDateRangePicker } from '@density/react-dat
 import InputBox from '@density/ui-input-box';
 import { IconCalendar } from '@density/ui-icons';
 
+import styles from './styles.scss';
+
 export const ANCHOR_RIGHT = 'ANCHOR_RIGHT',
   ANCHOR_LEFT = 'ANCHOR_LEFT',
   START_DATE_ACTIVE = 'startDate',
@@ -17,10 +19,10 @@ function ReactDateRangePicker(props) {
   delete restProps.anchor;
   delete restProps.className;
 
-  return <div className={classnames(`date-range-picker`, {
-    'date-range-picker-anchor-left': !props.anchor || props.anchor === ANCHOR_LEFT,
-    'date-range-picker-anchor-right': props.anchor === ANCHOR_RIGHT,
-    'date-range-picker-focused': props.focusedInput,
+  return <div className={classnames(styles.dateRangePicker, {
+    [styles.dateRangePickerAnchorLeft]: !props.anchor || props.anchor === ANCHOR_LEFT,
+    [styles.dateRangePickerAnchorRight]: props.anchor === ANCHOR_RIGHT,
+    [styles.dateRangePickerFocused]: props.focusedInput,
   }, props.className)}>
     <ReactDatesDateRangePicker
       onDatesChange={props.onChange}
@@ -34,21 +36,26 @@ function ReactDateRangePicker(props) {
 // common range list, and binds them together
 export default function DateRangePicker(props) {
   const commonRangeList = Array.isArray(props.commonRanges) ? (
-    <InputBox
-      type="select"
+    <div
       className={classnames(
-        "date-range-picker-common-range-list",
-        {right: props.anchor === ANCHOR_RIGHT}
+        styles.dateRangePickerCommonRangeList,
+        {[styles.right]: props.anchor === ANCHOR_RIGHT}
       )}
-      value={{
-        id: 'icon',
-        label: <IconCalendar width={14} height={14} color="dark" />,
-      }}
-      choices={props.commonRanges.map(range => Object.assign({}, range, {
-        label: <span>{range.name || range.label}</span>,
-      }))}
-      onChange={props.onSelectCommonRange}
-    />
+    >
+      <InputBox
+        type="select"
+        width={70 /* px */}
+        listBoxWidth={200 /* px */}
+        value={{
+          id: 'icon',
+          label: <IconCalendar width={14} height={14} color="dark" />,
+        }}
+        choices={props.commonRanges.map(range => Object.assign({}, range, {
+          label: <span>{range.name || range.label}</span>,
+        }))}
+        onChange={props.onSelectCommonRange}
+      />
+    </div>
   ) : null;
 
   const pickerProps = Object.assign({}, props);
@@ -57,7 +64,7 @@ export default function DateRangePicker(props) {
   delete pickerProps.showCommonRangeSubtitles
   delete pickerProps.onOpenCommonRangeList
 
-  return <div className='date-range-picker-wrapper'>
+  return <div className={styles.dateRangePickerWrapper}>
     <ReactDateRangePicker {...pickerProps} />
     {commonRangeList}
   </div>;
