@@ -2,6 +2,8 @@ import * as uuid from 'uuid';
 import React, { Component } from 'react';
 import classnames from 'classnames';
 
+import './styles.scss';
+
 export default function Card({type, style, className, children}) {
   return <div
     className={classnames('card', type ? `card-${type}` : null, className)}

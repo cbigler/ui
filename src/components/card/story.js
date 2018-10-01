@@ -6,8 +6,6 @@ import Button from '../button/index';
 import { IconRefresh } from '../icons';
 import InfoPopup from '../info-popup';
 
-import './styles.scss';
-
 storiesOf('Card', module)
   .addWithInfo('Card', () => (
     <Card>
