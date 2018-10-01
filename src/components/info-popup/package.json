@@ -7,5 +7,10 @@
   "license": "MIT",
   "dependencies": {
     "classnames": "^2.2.6"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "prop-types": "*",
+    "@density/ui": "*"
   }
 }

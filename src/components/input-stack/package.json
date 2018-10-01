@@ -5,5 +5,9 @@
   "main": "dist/index.js",
   "author": "Density <team+javascript@density.io>",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*",
+    "prop-types": "*"
+  }
 }

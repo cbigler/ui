@@ -3,9 +3,13 @@
   "version": "0.1.4",
   "description": "Button component",
   "main": "dist/index.js",
-  "author": "Density <team+javascript@density.io>",
+  "author": "Density <engineering+javascript@density.io>",
   "license": "MIT",
   "dependencies": {
     "camelcase": "^5.0.0"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "prop-types": "*"
   }
 }

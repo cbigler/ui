@@ -3,17 +3,17 @@
   "version": "1.0.6",
   "description": "Date Range Picker component",
   "main": "dist/index.js",
-  "style": "dist/styles.css",
-  "scss": "dist/_styles.scss",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Density <team+javascript@density.io>",
+  "author": "Density <engineering+javascript@density.io>",
   "license": "MIT",
   "dependencies": {
     "@density/react-dates": "^12.6.0",
-    "@density/ui-icons": "^0.2.2",
-    "@density/ui-input-box": "^2.1.5",
     "react-addons-shallow-compare": "^15.6.0"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "prop-types": "*",
+    "moment": "*",
+    "@density/ui-icons": "*",
+    "@density/ui-input-box": "*"
   }
 }
