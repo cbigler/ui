@@ -46,7 +46,7 @@ export default function Toast({
 Toast.propTypes = {
   icon: propTypes.node,
   type: propTypes.oneOf(['primary', 'success', 'warning', 'danger']).isRequired,
-  title: propTypes.node.isRequired,
+  title: propTypes.node,
 
   onDismiss: propTypes.func,
   children: propTypes.node.isRequired,

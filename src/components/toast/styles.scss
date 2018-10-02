@@ -3,13 +3,6 @@
 @import "../../../variables/spacing.json";
 @import "../../../variables/fonts.json";
 
-// Local variables to the component
-@import "variables.json";
-
-// ----------------------------------------------------------------------------
-// Create all versions of the toast - primary, success, warning, danger.
-// ----------------------------------------------------------------------------
-
 .toast {
   box-sizing: border-box;
   background-color: #fff;
@@ -94,6 +87,7 @@
 .toastText {
   color: $gray-cinder;
   margin-bottom: 12px;
+  text-align: left;
 
   // If the toast doesn't have a title above it, add a similar amount of margin to its top such
   // that its content remains centered in the flex parent.

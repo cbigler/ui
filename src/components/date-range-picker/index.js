@@ -78,7 +78,7 @@ DateRangePicker.propTypes = {
     null,
     START_DATE_ACTIVE,
     END_DATE_ACTIVE,
-  ]).isRequired,
+  ]),
   anchor: propTypes.oneOf([ANCHOR_LEFT, ANCHOR_RIGHT]),
 
   startDate: propTypes.oneOfType([

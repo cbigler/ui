@@ -62,13 +62,12 @@ export default function DatePicker(props) {
     </div>
   </div>;
 }
-DatePicker.propTypes = Object.assign(
-  {},
-  SingleDatePicker.propTypes, /* inherit from react-dates */
-  {
-    onChange: propTypes.func,
-    anchor: propTypes.oneOf([ANCHOR_LEFT, ANCHOR_RIGHT]),
-    arrowRightDisabled: propTypes.bool,
-    arrowLeftDisabled: propTypes.bool,
-  },
-);
+DatePicker.propTypes = {
+  date: propTypes.any.isRequired,
+  onChange: propTypes.func,
+  focused: propTypes.bool,
+  onFocusChange: propTypes.func,
+  anchor: propTypes.oneOf([ANCHOR_LEFT, ANCHOR_RIGHT]),
+  arrowRightDisabled: propTypes.bool,
+  arrowLeftDisabled: propTypes.bool,
+};

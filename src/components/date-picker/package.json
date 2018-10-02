@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-date-picker",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Date Picker component",
   "main": "dist/index.js",
   "author": "Density <engineering+javascript@density.io>",

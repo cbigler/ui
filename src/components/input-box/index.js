@@ -133,7 +133,9 @@ export class SelectBox extends React.Component {
               key={id}
               id={`input-box-select-${String(id).replace(' ', '-')}`}
               role="option"
-              className={classnames(styles.inputBoxSelectBoxMenuLi, { disabled })}
+              className={classnames(styles.inputBoxSelectBoxMenuLi, {
+                [styles.inputBoxSelectBoxMenuLiDisabled]: disabled,
+              })}
               tabIndex={!choice.disabled && opened ? 0 : -1}
               aria-selected={selectedValue && selectedValue.id === choice.id}
 
