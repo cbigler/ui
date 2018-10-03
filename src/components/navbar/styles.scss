@@ -36,6 +36,8 @@
   z-index: $navbar-brand-zindex;
   height: $navbar-height;
   font-size: $navbar-brand-font-size;
+  display: flex;
+  align-items: center;
 
   @media (min-width: $screen-xs-max) {
     float: left;
