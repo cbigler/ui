@@ -1,0 +1,13 @@
+{
+  "name": "@density/ui-fonts",
+  "version": "0.0.1",
+  "description": "Fonts component",
+  "main": "dist/index.js",
+  "author": "Density <engineering+javascript@density.io>",
+  "license": "MIT",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*",
+    "prop-types": "*"
+  }
+}
