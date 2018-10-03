@@ -1,6 +1,5 @@
 import React from 'react';
 import classnames from 'classnames';
-import camelcase from 'camelcase';
 import propTypes from 'prop-types';
 
 import styles from './styles.scss';
@@ -13,9 +12,14 @@ export default function Button(props) {
     children: undefined,
   });
 
+  const buttonSize = ({
+    small: 'buttonSmall',
+    large: 'buttonLarge',
+  })[size];
+
   return <button {...restProps} className={classnames(
     styles.button,
-    size ? styles[camelcase(`button-${size}`)] : null,
+    size ? styles[buttonSize] : null,
   )}>{children}</button>;
 }
 Button.propTypes = {
