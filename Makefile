@@ -91,16 +91,6 @@ components-list:
 		! -name "template" ! -name "dist" \
 		-exec basename '{}' ';'
 
-# To make the main density-ui stylesheet, compile to css.
-# @density/node-sass-json-importer is used to parse json files with variables inside. Learn more:
-# https://github.com/DensityCo/node-sass-json-importer
-# ie, `styles/main.scss` => `dist/styles.css`
-dist/styles.css: dist/
-	$(NODE_SASS) \
-		--importer node_modules/@density/node-sass-json-importer/dist/node-sass-json-importer.js \
-		styles/main.scss \
-		> $@
-
 
 
 define GEN_RULE

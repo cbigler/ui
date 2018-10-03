@@ -12,7 +12,6 @@ fs.readdirSync(COMPONENTS_BASE_PATH).forEach(component => {
     path.join(COMPONENTS_BASE_PATH, component, 'index.js')
   );
 });
-console.log(alias)
 
 module.exports = {
   resolve: { alias },
