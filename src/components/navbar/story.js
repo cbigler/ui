@@ -2,7 +2,6 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import './styles.scss';
 import Navbar, { NavbarItem, NavbarMobileItem } from './index';
 
 import { grayLight } from '../../../variables/colors.json';

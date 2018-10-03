@@ -4,6 +4,8 @@ import classnames from 'classnames';
 import { IconLock } from '@density/ui-icons';
 import { DensityLogo } from '@density/ui-density-mark';
 
+import './styles.scss';
+
 export default class Navbar extends React.Component {
   constructor(props) {
     super(props);
