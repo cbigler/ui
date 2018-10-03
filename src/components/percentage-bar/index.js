@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import propTypes from 'prop-types';
 
 // By default, hide the percentage bar below screen widths of this width.
 const PERCENTAGE_BAR_DEFAULT_BREAK_WIDTH = 768;
