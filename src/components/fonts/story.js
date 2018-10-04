@@ -11,11 +11,9 @@ storiesOf('Fonts', module)
       This component, when imported, adds the Density standard font (Sailec) into your page.
       Matter of fact, this text is in Sailec!
     </p>
-    <p>
-      <pre style={{background: '#ddd', padding: 20, lineHeight: 2}}>
-        // Include in your javascript<br/>
-        import '@density/ui-fonts';
-      </pre>
-    </p>
+    <pre style={{background: '#ddd', padding: 20, lineHeight: 2}}>
+      // Include in your javascript bundle<br/>
+      import '@density/ui-fonts';
+    </pre>
     </span>
   ))

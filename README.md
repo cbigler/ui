@@ -147,6 +147,18 @@ npm i -S normalize.css
 If using webpack, add `import 'normalize.css/normalize.css';`.
 Otherwise, include `node_modules/normalize.css/normalize.css` in your css / sass
 
+
+(optional) If you want the Density font (Sailec), install it too:
+```
+npm i -S @density/ui-fonts
+```
+and add it into your javascript bundle with:
+```
+import '@density/ui-fonts';
+```
+
+
+
 2. Install the density ui components you'd like:
 ```
 npm i -S @density/ui-button
