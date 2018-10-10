@@ -1,26 +1,15 @@
 // Import any global variables from "../../variables/*.json"
-@import "../../variables/colors.json";
-@import "../../variables/fonts.json";
-@import "../../variables/grid.json";
-
-// Local variables to the component
-@import "variables.json";
+@import "../../../variables/colors.json";
+@import "../../../variables/fonts.json";
+@import "../../../variables/grid.json";
 
 $percentage-bar-sailec-baseline-hack: 2px;
-
-@mixin make-percentage-bar($color: $percentage-bar-color) {
-  color: $color;
-}
-
-.percentage-bar {
-  @include make-percentage-bar;
-}
 
 $percentage-bar-container-height: 43px; /* The "row height" of the container */
 $percentage-bar-height: 4px; /* THe height of the shaded bar itself within the container */
 $percentage-bar-percentage-text-spacing: 8px; /* Spacing to the left of the formatted percentage*/
 
-.percentage-bar-container {
+.percentageBarContainer {
   font-family: $font-base;
   display: flex;
   flex-direction: row;
@@ -31,7 +20,7 @@ $percentage-bar-percentage-text-spacing: 8px; /* Spacing to the left of the form
 }
 
 // The utilization bar that visually represents space utilization in a horizontal fashion
-.percentage-bar {
+.percentageBar {
   display: none; /* overridden in media query below */
   background-color: $gray-light;
 
@@ -48,7 +37,7 @@ $percentage-bar-percentage-text-spacing: 8px; /* Spacing to the left of the form
     display: inline-block;
   }
 }
-.percentage-bar-colored-section {
+.percentageBarColoredSection {
   /* a width is set as an inline style in the component, which overrides the style set below */
   width: 0%;
 
@@ -57,7 +46,7 @@ $percentage-bar-percentage-text-spacing: 8px; /* Spacing to the left of the form
   transition: all 250ms ease-in-out;
 }
 
-.percentage-bar-text {
+.percentageBarText {
   width: 32px;
   margin-right: $percentage-bar-percentage-text-spacing;
   font-weight: bold;
@@ -69,7 +58,7 @@ $percentage-bar-percentage-text-spacing: 8px; /* Spacing to the left of the form
   }
 }
 
-.percentage-bar-text.disabled {
+.percentageBarTextDisabled {
   color: $gray;
   font-size: $font-size-large;
 }

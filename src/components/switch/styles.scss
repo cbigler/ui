@@ -1,4 +1,4 @@
-@import "../../variables/colors.json";
+@import "../../../variables/colors.json";
 @import "variables.json";
 
 @mixin make-switch($background: $brand-primary, $foreground: #fff) {

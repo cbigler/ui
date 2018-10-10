@@ -3,7 +3,7 @@ version: 2
 jobs:
   preview:
     docker:
-      - image: circleci/node:8.11
+      - image: circleci/node:10.7.0
     resource_class: small
     steps:
       - checkout
@@ -15,20 +15,14 @@ jobs:
             echo "yarn --version = $(yarn --version)"
 
       - restore_cache:
-          key: node_modules-{{checksum "./package.json"}}
+          key: node_modules-{{checksum "./package.json"}}-v2
       - run:
           name: "Install dependencies"
           command: |
             echo "# Top level package"
-            npm i
-            echo
-            for component in $(make components-list); do
-              echo "# ${component}"
-              pushd components/${component} && npm i && popd
-              echo
-            done
+            make bootstrap
       - save_cache:
-          key: node_modules-{{checksum "./package.json"}}
+          key: node_modules-{{checksum "./package.json"}}-v2
           paths:
             - "./node_modules"
 
@@ -56,7 +50,7 @@ jobs:
 
   publish:
     docker:
-      - image: circleci/node:8.11
+      - image: circleci/node:10.7.0
     resource_class: small
     steps:
       - checkout

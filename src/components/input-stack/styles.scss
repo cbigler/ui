@@ -1,7 +1,7 @@
 // Import any global variables from "../../variables/*.json"
-@import "../../variables/colors.json";
-@import "../../variables/spacing.json";
-@import "../../variables/fonts.json";
+@import "../../../variables/colors.json";
+@import "../../../variables/spacing.json";
+@import "../../../variables/fonts.json";
 
 // Local variables to the component
 @import "variables.json";
@@ -44,6 +44,7 @@
   input {
     display: block;
     font-family: $font-base;
+    font-size: 16px;
     background-color: #fff;
 
     width: calc(100% - 40px);
@@ -63,7 +64,7 @@
     border-color: $valid-color;
   }
   input::placeholder { color: $gray; }
-  &.focus + & input {
+  &Focus + & input {
     border-top-color: transparent;
   }
 
@@ -108,9 +109,9 @@
   }
 }
 
-.input-stack-item {
+.inputStackItem {
   @include make-input-stack-item;
 }
-.input-stack-item-invalid {
+.inputStackItemInvalid {
   @include make-input-stack-item-invalid;
 }

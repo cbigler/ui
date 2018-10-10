@@ -13,11 +13,11 @@ first="$(echo $COMPONENTUPPERCAMEL | cut -c1 | tr [A-Z] [a-z])"
 second="$(echo $COMPONENTUPPERCAMEL | cut -c2-)"
 COMPONENTCAMEL="$first$second"
 
-echo "* Copying template to components/$COMPONENTDASH..."
-cp -R components/template components/$COMPONENTDASH
+echo "* Copying template to src/components/$COMPONENTDASH..."
+cp -R src/components/template src/components/$COMPONENTDASH
 
 echo "* Replacing placeholders with variations of $COMPONENTDASH..."
-for f in $(ls components/$COMPONENTDASH); do
+for f in $(ls src/components/$COMPONENTDASH); do
   sed \
     -i .bkp \
     -e "s/%COMPONENTDASH%/$COMPONENTDASH/g" \
@@ -25,20 +25,15 @@ for f in $(ls components/$COMPONENTDASH); do
     -e "s/%COMPONENTTITLE%/$COMPONENTTITLE/g" \
     -e "s/%COMPONENTUPPERCAMEL%/$COMPONENTUPPERCAMEL/g" \
     -e "s/%COMPONENTDESC%/$COMPONENTDESC/g" \
-    components/$COMPONENTDASH/$f
-  rm -f components/$COMPONENTDASH/$f.bkp
+    src/components/$COMPONENTDASH/$f
+  rm -f src/components/$COMPONENTDASH/$f.bkp
 done
 
-echo "* Linking $COMPONENTDASH story to stories folder..."
-cd src/stories
-ln -s ../components/$COMPONENTDASH/story.js $COMPONENTDASH.js
-cd ..
-
 echo "Done!"
-echo "You have a new component in components/$COMPONENTDASH:"
-echo "* components/$COMPONENTDASH/index.js contains your component code."
-echo "* components/$COMPONENTDASH/styles.scss contains your component styles."
-echo "* components/$COMPONENTDASH/story.js contains your react-storyboard story. Use it to present different states of your component."
+echo "You have a new component in src/components/$COMPONENTDASH:"
+echo "* src/components/$COMPONENTDASH/index.js contains your component code."
+echo "* src/components/$COMPONENTDASH/styles.scss contains your component styles."
+echo "* src/components/$COMPONENTDASH/story.js contains your react-storyboard story. Use it to present different states of your component."
 echo
 echo "To build the storyboard and start a development server:"
 echo "=> npm run storyboard"

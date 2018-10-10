@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-navbar",
-  "version": "2.5.1",
+  "version": "2.6.1",
   "description": "Navigation Bar component",
   "main": "dist/index.js",
   "style": "dist/styles.css",

@@ -8,10 +8,17 @@ import PagerButtonGroup from './index';
 
 storiesOf('PagerButtonGroup', module)
   .addWithInfo('Default view', () => (
-    <PagerButtonGroup />
+    <PagerButtonGroup
+      onClickNext={action('next')}
+      onClickPrevious={action('previous')}
+    />
   ))
   .addWithInfo('First and last buttons', () => (
-    <PagerButtonGroup showFirstLastButtons />
+    <PagerButtonGroup
+      onClickNext={action('next')}
+      onClickPrevious={action('previous')}
+      showFirstLastButtons
+    />
   ))
   .addWithInfo('Click handlers', () => (
     <PagerButtonGroup

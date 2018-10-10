@@ -3,11 +3,8 @@ import { storiesOf } from '@storybook/react';
 
 import Card, {CardBody, CardHeader, CardLoading, CardWell, CardWellHighlight, CardTable} from './index';
 import Button from '../button/index';
-import IndicatorDot from '../indicator-dot';
 import { IconRefresh } from '../icons';
 import InfoPopup from '../info-popup';
-
-import './styles.scss';
 
 storiesOf('Card', module)
   .addWithInfo('Card', () => (
@@ -397,7 +394,7 @@ storiesOf('Card', module)
   ))
   .addWithInfo('Card Modal with long header', () => (
     <Card type="modal">
-      <CardHeader><span class="card-title">Set Capacity: a really really really long title</span></CardHeader>
+      <CardHeader><span className="card-title">Set Capacity: a really really really long title</span></CardHeader>
       <CardBody>
         <p style={{margin: 0}}>This token is for a thing. Lorem Ipsum is simply dummy text of the printing and typesetting industry and this is just here to make you believe in aliens.</p>
         <br />
@@ -486,42 +483,4 @@ storiesOf('Card', module)
     }
 
     return <IndeterminateLoaderToggleable />;
-  })
-  .addWithInfo('Real example', () => {
-    class RealExample extends React.Component {
-      constructor(props) {
-        super(props);
-        this.state = {loaded: 0};
-
-        setTimeout(() => {
-          this.setState({loaded: 50});
-        }, 1000);
-        setTimeout(() => {
-          this.setState({loaded: 100});
-        }, 1500);
-        setTimeout(() => {
-          this.setState({loaded: 0});
-        }, 2000);
-      }
-      render() {
-        return <Card>
-          <CardLoading percent={this.state.loaded} />
-          <CardHeader>
-            <div style={{display: 'flex'}}>
-              <span style={{flex: 1}}>Greeter</span>
-              <IndicatorDot style={{marginTop: 4}} type="success" label="Looks peachy" />
-            </div>
-            <div style={{display: 'flex', marginTop: 12, fontSize: 12, color: '#B4B8BF'}}>
-              <span style={{flex: 1}}>Subtitle</span>
-              <span>Type</span>
-            </div>
-          </CardHeader>
-          <CardBody>
-            <p>Hello World!</p>
-          </CardBody>
-        </Card>
-      }
-    }
-
-    return <RealExample />;
   })

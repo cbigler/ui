@@ -76,7 +76,6 @@ storiesOf('DateRangePicker', module)
     />
   ))
   .addWithInfo('With common date ranges', () => {
-
     return <DateRangePicker
       onChange={action('dates change')}
       onFocusChange={action('focus')}
@@ -88,7 +87,7 @@ storiesOf('DateRangePicker', module)
     />;
   })
   .addWithInfo('Floated right', () => (
-    <div style={{paddingLeft: 400, width: 400}}>
+    <div style={{paddingLeft: 500, width: 400}}>
       <DateRangePicker
         anchor={ANCHOR_RIGHT}
         onChange={action('dates change')}
@@ -100,7 +99,7 @@ storiesOf('DateRangePicker', module)
     </div>
   ))
   .addWithInfo('Floated right with common date ranges', () => {
-    return <div style={{paddingLeft: 400, width: 400}}>
+    return <div style={{paddingLeft: 500, width: 400}}>
       <DateRangePicker
         anchor={ANCHOR_RIGHT}
         onChange={action('dates change')}

@@ -1,6 +1,6 @@
-@import "../../variables/colors.json";
-@import "../../variables/spacing.json";
-@import "../../variables/fonts.json";
+@import "../../../variables/colors.json";
+@import "../../../variables/spacing.json";
+@import "../../../variables/fonts.json";
 
 @mixin make-card($background: #fff, $foreground: $gray-darker, $padding-horizontal: 20px, $padding-vertical: 20px) {
   box-sizing: border-box;
@@ -194,52 +194,52 @@
 }
 
 // A normal card.
-.card {
+:global(.card) {
   @include make-card;
-  .card-header { @include make-card-header($font-size: $font-size-3, $font-weight: $font-weight-3); }
-  .card-title { @include make-card-title; }
-  .card-body { @include make-card-body; }
+  :global(.card-header) { @include make-card-header($font-size: $font-size-3, $font-weight: $font-weight-3); }
+  :global(.card-title) { @include make-card-title; }
+  :global(.card-body) { @include make-card-body; }
 }
 
 // A modal card.
-.card-modal {
+:global(.card-modal) {
   @include make-card($padding-vertical: 40px, $padding-horizontal: 20px);
 
-  .card-header {
+  :global(.card-header) {
     @include make-card-header(
       $font-size: $font-size-2,
       $font-weight: $font-weight-2,
       $padding-vertical: 40px
     );
   }
-  .card-body {
+  :global(.card-body) {
     @include make-card-body(
       $padding-vertical: 40px
     );
   }
 }
 
-.card-well { @include make-card-well; }
-.card-well-highlight { @include make-card-well-highlight; }
+:global(.card-well) { @include make-card-well; }
+:global(.card-well-highlight) { @include make-card-well-highlight; }
 
-.card-well-dark {
+:global(.card-well-dark) {
   @include make-card-well(
     $color: $gray-dark,
     $font-weight: 400,
     $background: $gray-cinder
   );
 }
-.card-well-dark .card-well-highlight {
+:global(.card-well-dark .card-well-highlight) {
   @include make-card-well-highlight($color: #fff, $font-weight: 500);
 }
 
 
-.card-loading-wrapper { @include make-card-loading-wrapper; }
-.card-loading { @include make-card-loading; }
-.card-loading-indeterminate { @include make-card-loading($indeterminate: true); }
-.card-dark {
+:global(.card-loading-wrapper) { @include make-card-loading-wrapper; }
+:global(.card-loading) { @include make-card-loading; }
+:global(.card-loading-indeterminate) { @include make-card-loading($indeterminate: true); }
+:global(.card-dark) {
   @include make-card($gray-cinder, #fff);
 }
 
-.card-table { @include make-card-table(#fff, $gray-cinder); }
-.card-table-scroll { @include make-card-table-scroll; }
+:global(.card-table) { @include make-card-table(#fff, $gray-cinder); }
+:global(.card-table-scroll) { @include make-card-table-scroll; }

@@ -2,6 +2,9 @@ import React from 'react';
 import classnames from 'classnames';
 import { SingleDatePicker } from '@density/react-dates';
 import { IconArrowLeft, IconArrowRight } from '@density/ui-icons';
+import propTypes from 'prop-types';
+
+import styles from './styles.scss';
 
 export const ANCHOR_RIGHT = 'ANCHOR_RIGHT', ANCHOR_LEFT = 'ANCHOR_LEFT';
 
@@ -13,14 +16,18 @@ export default function DatePicker(props) {
   delete restProps.arrowRightDisabled;
   delete restProps.arrowLeftDisabled;
 
-  return <div className={classnames(`date-picker`, {
-    'date-picker-anchor-left': !props.anchor || props.anchor === ANCHOR_LEFT,
-    'date-picker-anchor-right': props.anchor === ANCHOR_RIGHT,
-    'date-picker-focused': props.focused,
-  }, props.className)}>
-    <div className="date-picker-container">
+  return <div className={classnames(styles.datePicker, {
+    [styles.datePickerAnchorLeft]: !props.anchor || props.anchor === ANCHOR_LEFT,
+    [styles.datePickerAnchorRight]: props.anchor === ANCHOR_RIGHT,
+    [styles.datePickerFocused]: props.focused,
+  })}>
+    <div className={styles.datePickerContainer}>
       <div
-        className={classnames('date-picker-icon', 'left', {disabled: props.arrowLeftDisabled})}
+        className={classnames(
+          styles.datePickerIcon,
+          styles.datePickerIconLeft,
+          {[styles.datePickerIconDisabled]: props.arrowLeftDisabled},
+        )}
         role="button"
         onClick={() => {
           if (!props.arrowLeftDisabled) {
@@ -37,7 +44,11 @@ export default function DatePicker(props) {
         {...restProps}
       />
       <div
-        className={classnames('date-picker-icon', 'right', {disabled: props.arrowRightDisabled})}
+        className={classnames(
+          styles.datePickerIcon,
+          styles.datePickerIconRight,
+          {[styles.datePickerIconDisabled]: props.arrowLeftDisabled},
+        )}
         role="button"
         onClick={() => {
           if (!props.arrowRightDisabled) {
@@ -51,3 +62,12 @@ export default function DatePicker(props) {
     </div>
   </div>;
 }
+DatePicker.propTypes = {
+  date: propTypes.any.isRequired,
+  onChange: propTypes.func,
+  focused: propTypes.bool,
+  onFocusChange: propTypes.func,
+  anchor: propTypes.oneOf([ANCHOR_LEFT, ANCHOR_RIGHT]),
+  arrowRightDisabled: propTypes.bool,
+  arrowLeftDisabled: propTypes.bool,
+};

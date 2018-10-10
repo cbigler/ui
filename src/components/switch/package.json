@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "description": "Switch component",
   "main": "dist/index.js",
-  "style": "dist/styles.css",
-  "scss": "dist/_styles.scss",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Density <team+javascript@density.io>",
+  "author": "Density <engineering+javascript@density.io>",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*",
+    "prop-types": "*"
+  }
 }

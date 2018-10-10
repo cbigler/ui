@@ -5,11 +5,14 @@ import {ReactSVGPanZoom, TOOL_NONE, TOOL_AUTO} from 'react-svg-pan-zoom';
 import ViewerTouchEvent from 'react-svg-pan-zoom/build-commonjs/events/viewer-touch-event.js';
 
 import { IconPlus } from '@density/ui-icons';
+import propTypes from 'prop-types';
 
 import colorVariables from '@density/ui/variables/colors.json';
 import fontVariables from '@density/ui/variables/fonts.json';
 
-import regeneratorRuntime from "regenerator-runtime";
+import styles from './styles.scss';
+
+import "regenerator-runtime";
 
 const POPUP_VERTICAL_OFFSET_FROM_SELECTED_ITEM_IN_PX = 40;
 const POPUP_HORIZONTAL_OFFSET_FROM_SELECTED_ITEM_IN_PX = -150;
@@ -218,7 +221,7 @@ export default class Floorplan extends Component {
     // call `.preventDefault()` on the event.
     let element = event.target;
     while (element) {
-      if (element.className && element.className === 'floorplan-root') {
+      if (element.className && element.className === styles.floorplanRoot) {
         event.preventDefault();
         return;
       }
@@ -281,7 +284,7 @@ export default class Floorplan extends Component {
 
     return (
       <div
-        className="floorplan-root"
+        className={styles.floorplanRoot}
         ref={r => { this.container = r; }}
         style={!selectedShape ? {cursor: 'none'} : {}}
 
@@ -290,7 +293,7 @@ export default class Floorplan extends Component {
           // itself and shouldn't dismiss it!
           let element = e.target;
           while (element) {
-            if (element.className === 'floorplan-popup') {
+            if (element.className === styles.floorplanPopup) {
               return;
             }
             element = element.parentElement;
@@ -310,7 +313,7 @@ export default class Floorplan extends Component {
           // closes.
           let element = e.target;
           while (element) {
-            if (element.className === 'floorplan-popup') {
+            if (element.className === styles.floorplanPopup) {
               return;
             }
             element = element.parentElement;
@@ -354,7 +357,7 @@ export default class Floorplan extends Component {
           // in the popup though, because if we do then users cannot interact with input boxes or
           // other ui controls.
           while (element) {
-            if (element.className && element.className.baseVal === 'floorplan-container') {
+            if (element.className && element.className.baseVal === styles.floorplanContainer) {
               e.preventDefault();
               break;
             }
@@ -376,7 +379,7 @@ export default class Floorplan extends Component {
           // is a decendant of the floorplan wrapper div. If so, then hide the cursor tooltip.
           let element = e.target;
           while (element) {
-            if (element.className === 'floorplan-root') {
+            if (element.className === styles.floorplanRoot) {
               this.setState({mouseWithinFloorplanBounds: false});
               break;
             }
@@ -413,7 +416,7 @@ export default class Floorplan extends Component {
         }}
       >
         {(() => {
-          let styles = {};
+          let popupStyles = {};
           const shouldPopupBeOpen = selectedShape && !selectedShapeMoving;
 
           if (this.lastSelectedShape) {
@@ -454,25 +457,25 @@ export default class Floorplan extends Component {
             if (x > width - this.popupBounds.width - 20) { x = width - this.popupBounds.width - 20; }
 
             // Assign position.
-            styles.left = x;
-            styles.top = y;
+            popupStyles.left = x;
+            popupStyles.top = y;
           } else {
             // When not selected, ensure the popup is placed offscreen.
-            styles.left = -100000;
-            styles.top = -100000;
+            popupStyles.left = -100000;
+            popupStyles.top = -100000;
           }
 
-          styles.opacity = shouldPopupBeOpen ? 1 : 0;
-          styles.pointerEvents = shouldPopupBeOpen ? 'auto' : 'none';
-          styles.userSelect = shouldPopupBeOpen ? 'auto' : 'none';
+          popupStyles.opacity = shouldPopupBeOpen ? 1 : 0;
+          popupStyles.pointerEvents = shouldPopupBeOpen ? 'auto' : 'none';
+          popupStyles.userSelect = shouldPopupBeOpen ? 'auto' : 'none';
 
           // Required for iPad / apple devices :(
-          styles.WebkitUserSelect = shouldPopupBeOpen ? 'auto' : 'none';
-          styles.WebkitTouchCallout = shouldPopupBeOpen ? 'auto' : 'none';
+          popupStyles.WebkitUserSelect = shouldPopupBeOpen ? 'auto' : 'none';
+          popupStyles.WebkitTouchCallout = shouldPopupBeOpen ? 'auto' : 'none';
 
           return <div
-            className="floorplan-popup"
-            style={styles}
+            className={styles.floorplanPopup}
+            style={popupStyles}
             ref={r => { this.popupRef = r; }}
             onTouchStart={e => {
               // When the popup is closed, disable touch events.
@@ -486,26 +489,26 @@ export default class Floorplan extends Component {
         })()}
 
         {mouseWithinFloorplanBounds && !hoveringOverShape && !selectedShape ? (
-          <div className="floorplan-cursor" style={{
+          <div className={styles.floorplanCursor} style={{
             left: (this.state.lastMouseX / scaleFactor),
             top: (this.state.lastMouseY / scaleFactor),
           }}>
             <IconPlus color="primary" />
-            <span className="floorplan-cursor-tag">
+            <span className={styles.floorplanCursorTag}>
               {cursorTagText || 'Click to add a doorway'}
             </span>
           </div>
         ) : null}
 
         <div
-          className="floorplan-touch-create-hint"
+          className={styles.floorplanTouchCreateHint}
           style={showTouchDeviceAddHint ? {left: width / 2, opacity: 1} : {left: width / 2}}
         >
           Press and hold to create a doorway.
         </div>
 
         <div
-          className="floorplan-touch-create-hint"
+          className={styles.floorplanTouchCreateHint}
           style={loading ? {left: width / 2, opacity: 1} : {left: width / 2}}
         >
           Loading floorplan image ...
@@ -651,9 +654,9 @@ export default class Floorplan extends Component {
             viewBox={`0 0 ${width} ${height}`}
             xmlns='http://www.w3.org/2000/svg'
           >
-            <g className="floorplan-container">
+            <g className={styles.floorplanContainer}>
               {/* The floorplan image itself */}
-              <g className="floorplan-layer-image" ref={r => { this.floorplanLayerImage = r; }}>
+              <g className={styles.floorplanLayerImage} ref={r => { this.floorplanLayerImage = r; }}>
                 <image
                   xlinkHref={image}
                   x={0}
@@ -691,7 +694,7 @@ export default class Floorplan extends Component {
                   const translateX = shape.x - (shape.width/2);
                   const translateY = shape.y - (shape.height/2);
                   return <g
-                    className="floorplan-shape"
+                    className={styles.floorplanShape}
                     transform={`translate(${translateX},${translateY})`}
                     key={shape.id}
                     style={{cursor: 'pointer'}}
@@ -783,12 +786,12 @@ export default class Floorplan extends Component {
               </g>
 
               {/* A layer for rendering the creation animation for a shape */}
-              <g className="floorplan-layer-creation-animation">
+              <g className={styles.floorplanLayerCreationAnimation}>
                 {creationAnimationId ? (() => {
                   const createdShape = shapes.find(i => i.id === creationAnimationId);
                   return (
                     <circle
-                      className="floorplan-layer-creation-animation-circle"
+                      className={styles.floorplanLayerCreationAnimationCircle}
                       cx={createdShape.x}
                       cy={createdShape.y}
                       r={20}
@@ -805,3 +808,31 @@ export default class Floorplan extends Component {
     );
   }
 }
+Floorplan.propTypes = {
+  deviceSupportsTouch: propTypes.bool,
+
+  image: propTypes.oneOfType([
+    propTypes.oneOf([null]),
+    propTypes.string,
+  ]).isRequired,
+  imageRotation: propTypes.number,
+
+  shapes: propTypes.arrayOf(propTypes.shape({
+    id: propTypes.any.isRequired,
+    shape: propTypes.func.isRequired,
+    x: propTypes.number.isRequired,
+    y: propTypes.number.isRequired,
+    width: propTypes.number.isRequired,
+    height: propTypes.number.isRequired,
+    allowMovement: propTypes.bool,
+
+    name: propTypes.string.isRequired,
+    popup: propTypes.node.isRequired,
+  })).isRequired,
+
+  cursorTagText: propTypes.node,
+  onShapeClick: propTypes.func,
+  onShapeDeselect: propTypes.func,
+  onShapeMovement: propTypes.func,
+  onCreateShape: propTypes.func,
+};

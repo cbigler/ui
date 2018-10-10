@@ -1,26 +1,20 @@
 // Import any global variables from "../../variables/*.json"
-@import "../../variables/fonts.json";
-@import "../../variables/colors.json";
-@import "../../variables/spacing.json";
+@import "../../../variables/fonts.json";
+@import "../../../variables/colors.json";
+@import "../../../variables/spacing.json";
 
-// Local variables to the component
-@import "variables.json";
-
-@mixin make-floorplan($color: $floorplan-color) {
+.floorplanRoot {
   position: relative;
   touch-action: none;
 
   // Hack to hide a rect that the pan zoom component makes
-  g[transform*=matrix] > rect {
-    display: none;
-  }
+  :global(g[transform*=matrix] > rect) { display: none; }
 
-  .floorplan-container {
+  .floorplanContainer {
     -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
 }
-
-@mixin make-floorplan-popup {
+.floorplanPopup {
   position: absolute;
   min-width: 400px;
   min-height: 200px;
@@ -41,8 +35,7 @@
 
   font-family: $font-base;
 }
-
-@mixin make-floorplan-cursor {
+.floorplanCursor {
   position: fixed;
   z-index: 1;
   white-space: nowrap;
@@ -54,22 +47,20 @@
   & > svg {
     transform: translate(-10px, -13px);
   }
-
-  .floorplan-cursor-tag {
-    color: #fff;
-    background-color: $gray-cinder;
-    padding: 7px;
-    border-radius: 4px;
-
-    font-family: $font-base;
-    font-size: 12px;
-
-    position: relative;
-    top: -17px;
-  }
 }
+.floorplanCursorTag {
+  color: #fff;
+  background-color: $gray-cinder;
+  padding: 7px;
+  border-radius: 4px;
 
-@mixin make-floorplan-touch-create-hint {
+  font-family: $font-base;
+  font-size: 12px;
+
+  position: relative;
+  top: -17px;
+}
+.floorplanTouchCreateHint {
   position: absolute;
   top: 40px;
   z-index: 5;
@@ -96,12 +87,7 @@
   transition: all 250ms ease-in-out;
 }
 
-.floorplan-root { @include make-floorplan; }
-.floorplan-popup { @include make-floorplan-popup; }
-.floorplan-cursor { @include make-floorplan-cursor; }
-.floorplan-touch-create-hint { @include make-floorplan-touch-create-hint; }
-
-@keyframes floorplan-layer-creation-animation {
+@keyframes floorplanLayerCreationAnimation {
   0% {
     opacity: 0;
     stroke-width: 50px;
@@ -118,72 +104,7 @@
   }
 }
 
-.floorplan-layer-creation-animation-circle {
-  animation-name: floorplan-layer-creation-animation;
+.floorplanLayerCreationAnimationCircle {
+  animation-name: floorplanLayerCreationAnimation;
   animation-duration: 400ms;
 }
-
-
-
-// .floorplan-detail-popup {
-//   display: flex;
-//   flex-direction: column;
-//   justify-contents: center;
-//
-//   width: 509px;
-//   position: relative;
-//
-//   padding-top: 40px;
-//   padding-bottom: 20px;
-//   padding-left: 20px;
-//   padding-right: 20px;
-// }
-//
-// .floorplan-detail-transparent-input {
-//   font-family: $font-base;
-//   font-size: 14px;
-//   border: 0px;
-//   outline: none;
-//
-//   margin-top: 10px;
-//   padding-top: 10px;
-//   padding-bottom: 10px;
-//   margin-bottom: 30px;
-//
-//   &::placeholder { color: $gray-dark; }
-// }
-//
-// .floorplan-detail-label {
-//   font-size: 12px;
-//   font-weight: 600;
-//   user-select: none;
-// }
-// .floorplan-detail-label-small {
-//   color: $gray-darker;
-//   font-weight: 400;
-//   margin-left: 5px;
-// }
-//
-// .floorplan-detail-radio-set {
-//   border: 0px;
-//   padding: 0px;
-//
-//   margin-top: 20px;
-//   margin-bottom: 40px;
-//
-//   display: flex;
-//   flex-direction: row;
-// }
-//
-// .floorplan-detail-delete-link {
-//   position: absolute;
-//   top: 40px;
-//   right: 20px;
-//
-//   color: $brand-danger;
-//   text-decoration: underline;
-//
-//   cursor: pointer;
-//   &:hover { opacity: 0.8; }
-//   &:active { opacity: 1; }
-// }

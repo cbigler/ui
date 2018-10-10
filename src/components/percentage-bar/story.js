@@ -8,7 +8,7 @@ import PercentageBar from './';
 const INFINITELY_LARGE_BREAK_WIDTH = 9999999999999999999;
 
 storiesOf('PercentageBar', module)
-  .addWithInfo('Just a one-hot-encoded percentage', () => (
+  .addWithInfo('Just a percentage in the range 0...1', () => (
     <div>
       <PercentageBar percentage={0} percentageFormatter={n => null} />
       <PercentageBar percentage={0} />

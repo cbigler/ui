@@ -1,5 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import classnames from 'classnames';
+
+import { IconLock } from '@density/ui-icons';
+import { DensityLogo } from '@density/ui-density-mark';
+
+import './styles.scss';
 
 export default class Navbar extends React.Component {
   constructor(props) {
@@ -34,10 +39,7 @@ export default class Navbar extends React.Component {
           /> : null}
 
           {/* Render the logo */}
-          <img
-            src="http://style-guide.density.io/assets/images/app_bar_logo.png"
-            alt="Density Logo"
-          />
+          <DensityLogo size={20} />
         </div>
         {subtitle ? <div className="navbar-brand-subtitle">{subtitle}</div> : null}
         <div className="navbar-items">{children}</div>

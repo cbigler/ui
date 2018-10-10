@@ -1,17 +1,16 @@
 {
   "name": "@density/ui-info-popup",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Info Popup component",
   "main": "dist/index.js",
-  "style": "dist/styles.css",
-  "scss": "dist/_styles.scss",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Density <team+javascript@density.io>",
+  "author": "Density <engineering+javascript@density.io>",
   "license": "MIT",
   "dependencies": {
-    "@density/ui-icons": "^0.2.2",
     "classnames": "^2.2.6"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "prop-types": "*",
+    "@density/ui": "*"
   }
 }

@@ -1,1 +1,0 @@
-../components/date-picker/story.js

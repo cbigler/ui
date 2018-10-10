@@ -10,7 +10,7 @@ storiesOf('InputBox', module)
     <InputBox type="text" />
   ))
   .addWithInfo('type=text', () => (
-    <InputBox type="text" value="foo!" />
+    <InputBox type="text" defaultValue="foo!" />
   ))
   .addWithInfo('type=password', () => (
     <InputBox type="password" placeholder="Type your password" />
@@ -75,4 +75,10 @@ storiesOf('InputBox', module)
   ))
   .addWithInfo('textarea', () => (
     <InputBox type="textarea" placeholder="I am a textarea." style={{height: 300}} />
+  ))
+  .addWithInfo('input box with custom width', () => (
+    <InputBox type="text" width={300} placeholder="I am disabled" />
+  ))
+  .addWithInfo('select box with custom width', () => (
+    <InputBox type="select" width={300} />
   ))

@@ -1,7 +1,7 @@
 {
-  "name": "@density/ui-radio-button",
-  "version": "1.1.0",
-  "description": "Radio Button component",
+  "name": "@density/ui-fonts",
+  "version": "0.0.1",
+  "description": "Fonts component",
   "main": "dist/index.js",
   "author": "Density <engineering+javascript@density.io>",
   "license": "MIT",

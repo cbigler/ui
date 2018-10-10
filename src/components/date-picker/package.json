@@ -1,18 +1,17 @@
 {
   "name": "@density/ui-date-picker",
-  "version": "1.2.0",
+  "version": "2.1.0",
   "description": "Date Picker component",
   "main": "dist/index.js",
-  "style": "dist/styles.css",
-  "scss": "dist/_styles.scss",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Density <team+javascript@density.io>",
+  "author": "Density <engineering+javascript@density.io>",
   "license": "MIT",
   "dependencies": {
     "@density/react-dates": "^12.6.0",
-    "@density/ui-icons": "^0.2.2",
     "react-addons-shallow-compare": "^15.6.0"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "prop-types": "*",
+    "moment": "*"
   }
 }

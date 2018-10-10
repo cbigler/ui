@@ -1,13 +1,9 @@
-// Import any global variables from "../../variables/*.json"
-@import "../../variables/colors.json";
-@import "../../variables/spacing.json";
-@import "../../variables/fonts.json";
+// Import any global variables from "../../../variables/*.json"
+@import "../../../variables/colors.json";
+@import "../../../variables/spacing.json";
+@import "../../../variables/fonts.json";
 
-// Local variables to the component
-@import "variables.json";
-
-// An input box is a stylized <input />.
-@mixin make-input-box($active-color: $brand-primary) {
+.inputBox {
   display: block;
   padding-left: 14px;
   height: (43px - 7px);
@@ -31,20 +27,16 @@
   // NOTE: does this have accessibility concerns?
   outline: none;
   &:focus {
-    border-color: $active-color;
+    border-color: $brand-primary;
   }
   &::placeholder { color: $gray; }
 }
-
-// If applying to a <textarea></textarea>, apply a few more styles.
-@mixin make-input-box-textarea {
+.inputBoxTextarea {
   line-height: $line-height-base;
   padding-top: 16px;
   padding-bottom: 16px;
 }
-
-// If an input box is disabled
-@mixin make-input-box-disabled {
+.inputboxDisabled {
   border-color: transparent;
   background-color: $gray-lightest;
   color: $gray;
@@ -55,17 +47,13 @@
   &:-ms-input-placeholder,
   &:-moz-placeholder {
     color: $gray;
-    opacity: 1; // Placeholders in firefox have opacity be default. Undo that.
+    opacity: 1; // Placeholders in firefox have opacity by default. Undo that.
   }
 }
 
-.input-box { @include make-input-box; }
-.input-box-textarea { @include make-input-box-textarea; }
-.input-box-disabled { @include make-input-box-disabled; }
-
 
 // Extract common styles into a placeholder selector for selectbox menu list and value
-%input-box-select-common {
+%inputBoxSelectCommon {
   font-family: $font-base;
 
   width: calc(100% - 15px - 15px);
@@ -80,8 +68,8 @@
   user-select: none;
 }
 
-@mixin make-input-box-select {
-  &-box {
+.inputBoxSelect {
+  &Box {
     position: relative;
     width: 200px;
 
@@ -89,8 +77,8 @@
   }
 
   // Select box value - this is the always visible region that shows the currently selected item.
-  &-box-value {
-    @extend %input-box-select-common;
+  &BoxValue {
+    @extend %inputBoxSelectCommon;
     height: (43px - 1px - 1px); /* (for borders) */
 
     font-size: $font-size-base;
@@ -111,17 +99,16 @@
       }
     }
 
-    & > .input-box-caret { height:12px; }
+    &Caret { height: 12px; }
+    // When focused, flip the caret.
+    &CaretOpened  { transform: rotate(180deg); }
 
-    &.opened {
+    &Opened {
       border-color: $brand-primary;
-
-      // When focused, flip the caret.
-      .input-box-caret { transform: rotate(180deg); }
     }
 
     // When disabled, a selectbox is grayed out and can't be clicked.
-    &.disabled {
+    &Disabled {
       background-color: $gray-lighter;
       pointer-events: none;
     }
@@ -129,8 +116,8 @@
 
   // Select box menu - this is the menu that is hidden and shown when the user clicks on the select
   // box value.
-  &-box-menu {
-    @extend %input-box-select-common;
+  &BoxMenu {
+    @extend %inputBoxSelectCommon;
 
     position: absolute;
     top: 50px;
@@ -147,30 +134,25 @@
     transition: all 100ms ease-in-out;
     user-select: none;
 
-    display: none;
-
     // When opened, fade in the select box and enable pointer events.
     // NOTE: when the select box is closed, it isn't given `display: none`, because giving it that
     // would make the animation difficult. Instead, it's given `pointer-events: none`, which causes
     // any clicks to not occur on that element and instead be handled by the element underneath it.
     opacity: 0;
     pointer-events: none;
-    &.opened {
+    &Opened {
       opacity: 1;
       pointer-events: all;
     }
-    &.visible {
-      display: block;
-    }
   }
 
-  &-box-menu ul {
+  &BoxMenuUl {
     list-style-type: none;
     padding-left: 0px;
     margin: 0px;
   }
 
-  &-box-menu li {
+  &BoxMenuLi {
     line-height: 36px;
     font-size: $font-size-base;
     cursor: pointer;
@@ -187,22 +169,18 @@
       background-color: $gray-lightest;
     }
 
-    &.disabled {
+    &Disabled {
       color: $gray-dark;
     }
   }
 
-  &-box-item-highlight {
+  &BoxItemHighlight {
     margin-left: 10px;
     color: $gray-dark;
     font-style: italic;
   }
 
-  &-placeholder {
+  &Placeholder {
     color: $gray;
   }
-}
-
-.input-box-select {
-  @include make-input-box-select;
 }

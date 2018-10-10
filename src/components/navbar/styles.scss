@@ -1,8 +1,8 @@
 // Import any global variables from "../../variables/*.json"
-@import "../../variables/colors.json";
-@import "../../variables/fonts.json";
-@import "../../variables/grid.json";
-@import "../../variables/spacing.json";
+@import "../../../variables/colors.json";
+@import "../../../variables/fonts.json";
+@import "../../../variables/grid.json";
+@import "../../../variables/spacing.json";
 
 // Local variables to the component
 @import "variables.json";
@@ -36,6 +36,8 @@
   z-index: $navbar-brand-zindex;
   height: $navbar-height;
   font-size: $navbar-brand-font-size;
+  display: flex;
+  align-items: center;
 
   @media (min-width: $screen-xs-max) {
     float: left;
@@ -270,31 +272,33 @@
   }
 }
 
-.navbar { @include make-navbar; }
-.navbar-brand { @include make-navbar-brand; }
-.navbar-brand-subtitle { @include make-navbar-brand-subtitle; }
-.navbar-container { @include make-navbar-container; }
+:global {
+  .navbar { @include make-navbar; }
+  .navbar-brand { @include make-navbar-brand; }
+  .navbar-brand-subtitle { @include make-navbar-brand-subtitle; }
+  .navbar-container { @include make-navbar-container; }
 
-// Styles for items within main navbar section.
-.navbar-item { @include make-navbar-item; }
-.navbar-item-active {
-  @include make-navbar-item(
-    $color: $gray-cinder,
-    $underline-color: $brand-primary,
-    $font-weight: bold
-  );
+  // Styles for items within main navbar section.
+  .navbar-item { @include make-navbar-item; }
+  .navbar-item-active {
+    @include make-navbar-item(
+      $color: $gray-cinder,
+      $underline-color: $brand-primary,
+      $font-weight: bold
+    );
+  }
+  .navbar-item-locked { @include make-navbar-item-locked; }
+  .navbar-item-tooltip { @include make-navbar-item-tooltip; }
+
+  // Create navbar mobile sidebar that opens when the user clicks an icon in the mobile navbar.
+  .navbar-sidebar-button { @include make-navbar-sidebar-button; }
+  .navbar-mobile-sidebar { @include make-navbar-mobile-sidebar; }
+  .navbar-mobile-sidebar { @include make-navbar-mobile-sidebar; }
+
+  // Create styles for items within mobile navbar section
+  .navbar-mobile-item { @include make-navbar-mobile-item; }
+  .navbar-mobile-item-active { @include make-navbar-mobile-item($color: $gray-darkest); }
+  .navbar-mobile-item-locked { @include make-navbar-mobile-item-locked; }
+
+  .navbar-mobile-sidebar-close-button { @include make-navbar-mobile-sidebar-close-button; }
 }
-.navbar-item-locked { @include make-navbar-item-locked; }
-.navbar-item-tooltip { @include make-navbar-item-tooltip; }
-
-// Create navbar mobile sidebar that opens when the user clicks an icon in the mobile navbar.
-.navbar-sidebar-button { @include make-navbar-sidebar-button; }
-.navbar-mobile-sidebar { @include make-navbar-mobile-sidebar; }
-.navbar-mobile-sidebar { @include make-navbar-mobile-sidebar; }
-
-// Create styles for items within mobile navbar section
-.navbar-mobile-item { @include make-navbar-mobile-item; }
-.navbar-mobile-item-active { @include make-navbar-mobile-item($color: $gray-darkest); }
-.navbar-mobile-item-locked { @include make-navbar-mobile-item-locked; }
-
-.navbar-mobile-sidebar-close-button { @include make-navbar-mobile-sidebar-close-button; }

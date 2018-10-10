@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import propTypes from 'prop-types';
 
 import { IconInfo } from '@density/ui-icons';
+import styles from './styles.scss';
 
 export default class InfoPopup extends Component {
   constructor(props) {
@@ -41,7 +43,7 @@ export default class InfoPopup extends Component {
 
     const windowWidth = window.innerWidth;
 
-    let top = iconBBox.bottom - 15 + (verticalPopupOffset || 0);
+    let top = iconBBox.bottom + 3 + (verticalPopupOffset || 0);
 
     // Craft a "left" value that will ensure that the popup is centered underneath the (i).
     let left = iconBBox.x + (iconBBox.width / 2) - (popupBBox.width / 2);
@@ -73,7 +75,7 @@ export default class InfoPopup extends Component {
 
     // Ensure the touch occured outside of the popup.
     while (element) {
-      if (element.className === 'info-popup-container') {
+      if (element.className === styles.infoPopupContainer) {
         return;
       }
       element = element.parentNode;
@@ -101,7 +103,7 @@ export default class InfoPopup extends Component {
     const { top, left, visible } = this.state;
 
     return <span
-      className="info-popup-container"
+      className={styles.infoPopupContainer}
       onMouseEnter={e => this.onShow(e)}
       onMouseLeave={e => this.onHide(e)}
 
@@ -114,7 +116,10 @@ export default class InfoPopup extends Component {
       ref={r => { this.container = r; }}
     >
       <span
-        className={classnames('info-popup-icon', {'stock-target': !target})}
+        className={classnames(styles.infoPopupIcon, {
+          [styles.infoPopupStockTarget]: !target,
+          [styles.infoPopupIconVisible]: visible,
+        })}
         ref={r => { this.icon = r; }}
       >
         {target || <IconInfo
@@ -124,9 +129,12 @@ export default class InfoPopup extends Component {
         />}
       </span>
 
-      <div className="info-popup-wrapper">
+      <div className={styles.infoPopupWrapper}>
         <div
-          className={classnames('info-popup-popup', {visible, 'single-line': singleLine})}
+          className={classnames(styles.infoPopupPopup, {
+            [styles.infoPopupPopupVisible]: visible,
+            [styles.infoPopupPopupSingleLine]: singleLine,
+          })}
           style={{top, left}}
           ref={r => { this.popup = r; }}
         >
@@ -136,6 +144,14 @@ export default class InfoPopup extends Component {
     </span>;
   }
 }
+InfoPopup.propTypes = {
+  infoIconColor: propTypes.string,
+  singleLine: propTypes.bool,
+  horizontalIconOffset: propTypes.number,
+  verticalIconOffset: propTypes.number,
+  target: propTypes.node,
+  children: propTypes.node.isRequired,
+};
 
 export function InfoPopupCardWellHighlight(p) {
   const props = Object.assign({}, p);
@@ -144,8 +160,12 @@ export function InfoPopupCardWellHighlight(p) {
   delete props.children;
 
   return (
-    <InfoPopup target={<span className="info-popup-card-well-highlight">{target}</span>} {...props}>
+    <InfoPopup target={<span className={styles.infoPopupCardWellHighlight}>{target}</span>} {...props}>
       {children}
     </InfoPopup>
   );
 }
+InfoPopupCardWellHighlight.propTypes = {
+  target: propTypes.node.isRequired,
+  children: propTypes.node.isRequired,
+};

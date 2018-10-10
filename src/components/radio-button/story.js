@@ -15,7 +15,7 @@ storiesOf('RadioButton', module)
   ))
   .addWithInfo('Two radio buttons, one locked on, one locked off', () => (
     <div>
-      <RadioButton text="Foo" checked={true} />
-      <RadioButton text="Bar" checked={false} />
+      <RadioButton text="Foo" defaultChecked={true} readOnly />
+      <RadioButton text="Bar" defaultChecked={false} readOnly />
     </div>
   ))

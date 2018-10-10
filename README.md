@@ -8,9 +8,8 @@ Density UI is a collection of Density-branded controls and styles for use in web
 ## Quick-start development (using react-storybook)
 
 ```sh
-npm install
-npm run installall
-npm start
+make bootstrap
+make start
 ```
 
 ## How it works
@@ -18,53 +17,44 @@ npm start
 Each component has a number of different files:
 - `index.js` contains the code to render the markup of a component in a react context. Its default
   export is the component.
-- `stories.js` contains a number of stories used to render the component in different states. Think
+- `story.js` contains a number of stories used to render the component in different states. Think
   of these like visual tests that one can quickly run through to determine if a component is
   working.
-- `styles.scss` contains all styles required to render the ui component, implemeted primarily as
-  mixins. [More details](#styles)
-- `variables.json` defines a number of display-related variables (such as colors, spacings, and
-  flags) that would be handy to be able to access from both javascript and scss. By defining our
-  variables in a generic data format it's readable from any system.
+- `styles.scss` contains all styles required to render the ui component. This uses [css
+  modules](https://github.com/css-modules/css-modules), which allows styles to be scoped to a given
+  component.
 
 ## Styles
 
-Styles are written in Sass. Each component has a mixin that implements the construction of the
-component, and creates a class that uses the mixin. Something like this:
+Styles are currently written in Sass, using [css
+modules](https://github.com/css-modules/css-modules). In the css modules spec, classnames are by
+convention in camelcase, which allows them to be imported into javascript and given to react nodes.
+A basic example of this is below:
 
 ```scss
-@mixin make-list($spacing: 20px) {
-  margin-top: $spacing;
-  margin-bottom: $spacing;
-}
+// styles.scss
 
-.list {
-  @include make-list;
+.myCoolStyle {
+  color: red;
 }
 ```
 
-Advantages to this strategy:
-- The intention is to use mixins as the primary method for applying styles to rendered html, not
-  classes. This will hopfully allow us to embrace [symantic class
-  names](https://css-tricks.com/semantic-class-names/).
-- Since Sass isn't used everywhere and components rendered by react expect classes to exist, class
-  names are still created by each component's stylesheet.
-- The mixin makes it very clear what common configurable parameters each component has.
+```jsx
+// component.js
 
-Here's a usage example of the above styles:
+import styles from './styles.scss';
 
+const component = () => (
+  <div className={styles.myCoolStyle}>Hello world!</div>
+)
 ```
-// Markup
-<ul class="capture-list">
-  <li>...</li>
-  <li>...</li>
-</ul>
 
-// SCSS
-.capture-list {
-  @include make-list;
-}
-```
+Because of how css modules work internally, the classname added to that div isn't actually
+`myCoolStyle` - it actually (in a production environment) looks like this: `dui-fef83hw429fe`. There
+are some pros and cons to this approach, but the biggest pro by far is that it's now impossible to
+target elements by their associated `className` from outside the density ui context. And, it helps
+to enforce the process of developing in the density ui repository, then publishing to npm and using
+that package in a target project.
 
 ## Variables
 
@@ -81,12 +71,6 @@ json files as well as sass and css. We've also added a couple handy features:
 - If the value of a key is numeric, then the value is in units of pixels. Previously, numbers were
   brought into the styles as just raw numbers and this caused some issues.
 
-## Component Specifications
-In addition, a `spec.html` is auto generated from the react component definition using [server-side
-rendering](https://facebook.github.io/react/docs/react-dom-server.html). It's important we have only
-one source of truth, and there's a likelyhood especially after a while that either the spec or the
-react component will be forgotten when an update happens, causing inconsistencies.
-
 # Writing a UI component
 In general, try to follow these guidelines:
 
@@ -98,159 +82,99 @@ In general, try to follow these guidelines:
 - Keep ui components as simple as possible and don't be afraid to break apart components into
   smaller, more composable components.
 
-- If building a static site, give react's server-side rendering a try, especially if you were
-  thinking of using a templating engine like nunjucks or handlebars anyway. It makes using our
-  components much simpler and abstracts away the details of manually creating markup. In addition,
-  if implementation changes behind the scenes, your project is able to adapt without having to
-  rework the ui. [Here's an example. It's actually really easy to
-  use!](https://github.com/DensityCo/ui/blob/master/utils/build-specs.js)
-
 
 # How the build script works
-Each component is a seperate package.
+*NOTE: this whole process used to use babel and node-sass, and now uses webpack.*
 
-## Building javascript
-All javascript files are transpiled by babel in such a way that `*.js` => `dist/*.js`. Not really
-much of interest going on here.
+Each Density UI sub-component is a seperate package within `./src/components`. Each package can be
+built in two ways: either for development or for deployment to npm.
 
-## Building sass
-1. First, the `styles.scss` is transpiled into `dist/styles.css`. This is to be used in non-sass
-   projects, and can be imported like so from the parent project:
+## Development build process
+Density UI components are built to be developed within React Storybook. This environment can be
+started with `make start`, and manifests itself as a live reloading dev server that runs on port
+`9009`. The webpack configuration for this can be found at `./.storybook/webpack.config.js`, and
+this webpack configuration is used by react storybook.
 
-```scss
-@import "./node_modules/@density/ui-COMPONENT/dist/styles.css";
+A few particulars of this build environment:
+- If any package that starts with `@density/ui` (ie, `@density/ui/variables/colors.json`,
+  `@density/ui-icons`, etc) is imported, the local version of that package is used. This allows easy
+  development across multiple packages - for example, if yur component requires a new icon be added
+  to the density icons in `@density/ui-icons`, you can add that icon and not have to publish that
+  change to npm to use it.
+- Css modules are set to use slightly more verbose class names to make debugging easier. For
+  example, class names in this mode will look like `dui-styles-button-1SZwRzu8`.
+- Babel is not explicitly used, since react storybook includes it separately to transpile jsx.
+- Since the `css-loader` is used, webpack will build the styles associated with your component into
+  the resulting javascript bundle. Therefore, you don't have to manage a separate css and javascript
+  bundle, which is quite convenient.
 
-// Using nicss or webpack or something that resolves the `style` key in the package.json?
-// Do this instead:
-@import "@density/ui-COMPONENT";
-```
+## Deployment build process
+This Density UI deployment build process is run when a user wants to publish a new package change to
+npm. It's a bit more complicated than the local development build process, as it brings in a few
+more dependencies and sets some settings to more aggressive values. It's still webpack based, and
+the configuration file can be found in the root of this repository in `./webpack.config.js`.
 
-2. Next, the `styles.scss` is run through a transformation that strips out all json imports from the
-   component's scss. This is done so that parent projects can use whatever variable values it'd
-   like and not strictly couple the values to density ui (ie, so child projects can override them)>
+When executed via `make mycomponent-build`, the webpack configuration file is copied into the
+requisite component directory, the directory is traversed into, and the webpack cli is run, passing
+in an entrypoint of `./index.js` (from within the component's directory). Once invoked, webpack does
+a number of things:
 
-So this:
+- New javascript features are transpiled down to es5 via `babel` and `@babel/preset-env`. Jsx is
+  transpiled via `@babel/preset-jsx`. Async and await are transpiled into generators, which are then
+  rewritten by babel to use [regenerator /
+  regenerator-runtime](https://github.com/facebook/regenerator).
+- Sass is compiled into css with node-sass, which is then fed into webpack's `css-loader`. This is
+  configured to use terse classnames (ie, like `dui-2nr7dte5se8e`) and as a result produces a
+  javascript module that applies the given css with the terse classnames when the bundle is
+  executed.
+- Finally, webpack bundles both css and javascript together into a single bundle, and wraps it in
+  some code that extracts dependencies such as `react` and `prop-types` from the parent context to
+  ensure that we are only using one version in the whole project.
 
-```scss
-@import "variables.json";
-@mixin make-foo($color: wheat) {
-  color: $color;
-}
-.foo { @include make-foo; }
-```
-
-is converted to this:
-
-```scss
-@mixin make-foo($color: wheat) {
-  color: $color;
-}
-.foo { @include make-foo; }
-```
-
-The output of this transformation is copied to `dist/_sass.scss`. Within the parent project, the
-variables are to be separately defined / imported, and each component uses what it needs:
-
-```scss
-// my-project-styles.scss
-
-// First, bring in all variables from density ui.
-@import "@density/ui/variables/colors.json";
-@import "@density/ui/variables/spacing.json";
-// ... you get it ...
-
-// Then, bring in the variables for the density ui components you need:
-@import "@density/ui-COMPONENT/variables.json";
-
-// Finally, bring in the stylesheet without variables included (variables were included previously):
-@import "@density/ui-COMPONENT/dist/sass";
-
-// At this point, mixins are available:
-.my-custom-foo {
-  @include make-foo(crimson);
-}
-```
+Finally, this output bundle is placed in `dist/index.js` and the package is published with hts
+`main` field in the `package.json` pointing to it.
 
 
 # Adding Density UI to a project
+This is pretty easy.
 
-## 1. Install Density UI:
-
+1. Install a css reset:
+Normalize.css is recommended:
 ```sh
-npm i -S @density/ui@~5.0.1
-```
-
-## 2. Are you using css or sass?
-
-### CSS
-
-This is pretty easy. Just include the css file `./node_modules/@density/ui/dist/styles.css` to get
-all the non-component related styles (ie, the font, the grid system, a clearfix, etc...)
-
-Also, don't forget to add a css reset! This project is built off of `normalize.css`.
-
-To add component styles, install the respective package for that component (such as
-`@density/ui-navbar`), and add them for each component from
-`./node_modules/@density/ui-COMPONENT/dist/styles.css`.
-
-
-### SCSS
-
-This is more difficult, but still not too bad:
-
-1. First, install a sass compiler importer addon to allow sass to import variables from json files.
-   (Throughout the project we utilize json files to store common ui constants so they are importable
-   from both stylesheets and javascript)
-
-```scss
-npm i -S @density/node-sass-json-importer
-```
-
-Follow the directions in that repository to add the plugin to your sass workflow, whether it be
-webpack, command line, or based on something else.
-
-2. Next, create a stylesheet in your project to hold all Density UI imports and install the css
-   reset:
-
-```sh
-mkdir -p styles/ && touch styles/density-ui.scss
 npm i -S normalize.css
 ```
 
-Then, import variables and styles provided by the main Density UI package:
+If using webpack, add `import 'normalize.css/normalize.css';`.
+Otherwise, include `node_modules/normalize.css/normalize.css` in your css / sass
 
+
+(optional) If you want the Density font (Sailec), install it too:
 ```
-// styles/density-ui.scss
-// 
-// Density UI Styles
-// 
-
-// CSS Reset
-@import "../node_modules/normalize.css/normalize.css";
-
-// Global variables like colors, spacings, etc from @density/ui
-@import "../node_modules/@density/ui/variables/colors.json";
-@import "../node_modules/@density/ui/variables/spacing.json";
-
-// Global styles like our font, grid system and more from @density/ui
-@import "../node_modules/@density/ui/styles/font";
-@import "../node_modules/@density/ui/styles/clearfix";
-@import "../node_modules/@density/ui/styles/grid";
-
-// Local styles for individual components from @density/ui-*:
-
-// For example, here's a navbar. All components follow the pattern of requiring variables and
-// requiring it's uncompiled sass.
-@import "../node_modules/@density/ui-navbar/variables.json";
-@import "../node_modules/@density/ui-navbar/dist/sass";
+npm i -S @density/ui-fonts
+```
+and add it into your javascript bundle with:
+```
+import '@density/ui-fonts';
 ```
 
-3. Use your components, and if you want to customize one, use the mixin:
 
+
+2. Install the density ui components you'd like:
 ```
-<Navbar type="my-navbar" />
+npm i -S @density/ui-button
+```
 
-.my-navbar {
-  @include make-navbar; // Mixins follow the pattern make-COMPONENT
-}
+If the component requires dependencies, npm will warn you as to what they are (via
+peerdependencies). Some components require the main `@density/ui` package for colors, font sizes,
+etc. Others (for example) require moment.
+
+Before the component can be used, you'll need to satisfy all of the component's peerdependencies by
+installing them.
+
+3. Use the component:
+```
+// foo.js
+import Button from '@density/ui-button';
+
+// Use `Button`!
 ```

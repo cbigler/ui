@@ -1,1 +1,0 @@
-../components/info-popup/story.js

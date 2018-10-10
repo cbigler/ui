@@ -1,6 +1,6 @@
 // Import any global variables from "../../variables/*.json"
-@import "../../variables/colors.json";
-@import "../../variables/fonts.json";
+@import "../../../variables/colors.json";
+@import "../../../variables/fonts.json";
 
 // Local variables to the component
 @import "variables.json";
@@ -11,40 +11,40 @@ $radio-inactive-data-uri: "data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0a
 
 $radio-pressed-data-uri: "data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD0iMThweCIgaGVpZ2h0PSIxOHB4IiB2aWV3Qm94PSIwIDAgMTggMTgiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+DQogICAgPCEtLSBHZW5lcmF0b3I6IFNrZXRjaCA0Ni4yICg0NDQ5NikgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+DQogICAgPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+DQogICAgPGRlZnM+PC9kZWZzPg0KICAgIDxnIGlkPSJEZXYtVG9vbHMiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPg0KICAgICAgICA8ZyBpZD0iZGV2LTAwMS0yLXIxIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNTQ1LjAwMDAwMCwgLTQyMS4wMDAwMDApIiBzdHJva2U9IiM4RTkyOTkiPg0KICAgICAgICAgICAgPGcgaWQ9Im1vZGFsLWNyZWF0ZS1zcGFjZSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDEwLjAwMDAwMCwgODAuMDAwMDAwKSI+DQogICAgICAgICAgICAgICAgPGcgaWQ9ImVtYWlsLWNvcHktMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjAuMDAwMDAwLCAzMTcuMDAwMDAwKSI+DQogICAgICAgICAgICAgICAgICAgIDxnIGlkPSJHcm91cC0zLUNvcHkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDExNi4wMDAwMDAsIDIzLjAwMDAwMCkiPg0KICAgICAgICAgICAgICAgICAgICAgICAgPGcgaWQ9IlNlbGVjdGVkLVJhZGlvIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLjAwMDAwMCwgMi4wMDAwMDApIj4NCiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cmVjdCBpZD0iUmVjdGFuZ2xlLTMtQ29weS03IiB4PSItMC41IiB5PSItMC41IiB3aWR0aD0iMTciIGhlaWdodD0iMTciIHJ4PSI4LjUiPjwvcmVjdD4NCiAgICAgICAgICAgICAgICAgICAgICAgIDwvZz4NCiAgICAgICAgICAgICAgICAgICAgPC9nPg0KICAgICAgICAgICAgICAgIDwvZz4NCiAgICAgICAgICAgIDwvZz4NCiAgICAgICAgPC9nPg0KICAgIDwvZz4NCjwvc3ZnPg==";
 
-@mixin make-radio-button {
+.radioButton {
   font-family: $font-base;
   font-size: $font-size-base;
-
-  // An active radio button should have a darker label than an inactive radio button.
-  input[type=radio] + label { color: $gray-darker; }
-  input[type=radio]:checked + label { color: $gray-darkest; }
-
-  // Hide the actual radio button
-  input[type=radio] { display: none; }
-
-  // We're taking advantage of the :before on the label to render the radio button with that, using
-  // a data uri svg as the literal button.
-  input[type=radio] + label:before {
-    content: ' ';
-    display: inline-block;
-    background-image: url($radio-inactive-data-uri);
-
-    width: 18px;
-    height: 18px;
-    margin-right: 10px;
-
-    position: relative;
-    bottom: -4px;
-  }
-  input[type=radio]:checked + label:before {
-    background-image: url($radio-active-data-uri);
-  }
-
-  // Darken the radio button on hover.
-  input[type=radio]:not(:checked) + label:hover:before {
-    background-image: url($radio-pressed-data-uri);
-    opacity: 0.8;
-  }
 }
 
-.radio-button { @include make-radio-button; }
+// An active radio button should have a darker label than an inactive radio button.
+.radioButtonInput + .radioButtonLabel { color: $gray-darker; }
+.radioButtonInput:checked + .radioButtonLabel { color: $gray-darkest; }
+
+
+// Hide the actual radio button
+.radioButtonInput { display: none; }
+
+// We're taking advantage of the :before on the label to render the radio button with that, using
+// a data uri svg as the literal button.
+.radioButtonInput + .radioButtonLabel:before {
+  content: ' ';
+  display: inline-block;
+  background-image: url($radio-inactive-data-uri);
+
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+
+  position: relative;
+  bottom: -4px;
+}
+
+.radioButtonInput:checked + .radioButtonLabel:before {
+  background-image: url($radio-active-data-uri);
+}
+
+// Darken the radio button on hover.
+.radioButtonInput:not(:checked) + .radioButtonLabel:hover:before {
+  background-image: url($radio-pressed-data-uri);
+  opacity: 0.8;
+}
