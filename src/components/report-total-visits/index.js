@@ -35,6 +35,7 @@ function ReportCardOccupancyBar({totalWidth, segments}) {
                 className={styles.occupancyBarSegmentLabel}
                 style={{ color: OCCUPANCY_BAR_COLORS[ct] }}
               >
+                <span className={styles.occupancyBarSegmentLabelBefore}></span>
                 <span className={styles.occupancyBarSegmentLabelInner}>
                   {segment}
                 </span>

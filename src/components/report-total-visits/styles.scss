@@ -66,10 +66,10 @@
   // width: https://stackoverflow.com/a/37472468/4115328
   height: 13px;
   line-height: 13px;
-  &:before {
-    content: '';
-    display: inline-block;
-  }
+}
+.occupancyBarSegmentLabelBefore {
+  display: inline-block;
+  width: 1px;
 }
 .occupancyBarSegmentLabelInner {
   display: inline-block;
