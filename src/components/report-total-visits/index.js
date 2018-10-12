@@ -17,6 +17,7 @@ const OCCUPANCY_BAR_COLORS = [
 ];
 function ReportCardOccupancyBar({totalWidth, segments}) {
   const totalSegmentValue = segments.reduce((a, b) => a + b, 0);
+  const multipleTimeSegmentsShown = segments.length > 1;
 
   return (
     <div className={styles.occupancyBarContainer}>
@@ -27,19 +28,24 @@ function ReportCardOccupancyBar({totalWidth, segments}) {
         {segments.map((segment, ct) => {
           return (
             <div
-              className={styles.occupancyBarSection}
+              className={classnames(
+                styles.occupancyBarSection,
+                multipleTimeSegmentsShown ? styles.occupancyBarSectionContainsLabels : null,
+              )}
               style={{ width: `${segment / totalSegmentValue * 100}%` }}
               key={segment}
             >
-              <span
-                className={styles.occupancyBarSegmentLabel}
-                style={{ color: OCCUPANCY_BAR_COLORS[ct] }}
-              >
-                <span className={styles.occupancyBarSegmentLabelBefore}></span>
-                <span className={styles.occupancyBarSegmentLabelInner}>
-                  {segment}
+              {multipleTimeSegmentsShown ? (
+                <span
+                  className={styles.occupancyBarSegmentLabel}
+                  style={{ color: OCCUPANCY_BAR_COLORS[ct] }}
+                >
+                  <span className={styles.occupancyBarSegmentLabelBefore}></span>
+                  <span className={styles.occupancyBarSegmentLabelInner}>
+                    {segment}
+                  </span>
                 </span>
-              </span>
+              ) : null}
               <div
                 className={styles.occupancyBarSegment}
                 style={{ backgroundColor: OCCUPANCY_BAR_COLORS[ct] }}
@@ -47,7 +53,10 @@ function ReportCardOccupancyBar({totalWidth, segments}) {
             </div>
           );
         })}
-        <span className={styles.occupancyBarLabel}>
+        <span className={classnames(
+          styles.occupancyBarLabel,
+          !multipleTimeSegmentsShown ? styles.occupancyBarLabelPrimary : null,
+        )}>
           <span className={styles.occupancyBarLabelSpacer}>
             {totalSegmentValue}
           </span>

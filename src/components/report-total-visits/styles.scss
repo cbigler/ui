@@ -55,8 +55,9 @@
 .occupancyBarSection {
   display: flex;
   flex-direction: column;
-  margin-bottom: 16px;
 }
+.occupancyBarSectionContainsLabels { margin-bottom: 16px; }
+
 .occupancyBarSegmentLabel {
   text-align: center;
   font-size: 11px;
@@ -91,6 +92,7 @@
   @media (min-width: 460px) { width: 10%; }
   transition: width 250ms ease-in-out;
 }
+.occupancyBarLabelPrimary { color: $brand-primary; }
 .occupancyBarLabelSpacer {
   margin-left: 10px;
 }
