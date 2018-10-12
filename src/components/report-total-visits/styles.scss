@@ -1,0 +1,96 @@
+// Import any global variables from "../../../variables/*.json"
+@import "../../../variables/colors.json";
+
+// Local variables to the component
+@import "variables.json";
+
+.header {
+  font-size: 16px;
+  font-weight: 400;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.headerBold {
+  font-weight: 600;
+}
+
+.dayList {
+  margin: 0px;
+  margin-top: 20px;
+  padding-left: 0px;
+}
+.dayListItem {
+  list-style-type: none;
+  height: 40px;
+  font-size: 14px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.dayName {
+  width: 48px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.dayNameHighlight {
+  font-weight: 600;
+}
+
+
+
+
+.occupancyBarContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.occupancyBar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.occupancyBarSection {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+.occupancyBarSegmentLabel {
+  text-align: center;
+  font-size: 11px;
+  overflow: hidden;
+
+  // Using this technique to hide the segment label when it will no longer fit into the container's
+  // width: https://stackoverflow.com/a/37472468/4115328
+  height: 13px;
+  line-height: 13px;
+  &:before {
+    content: '';
+    display: inline-block;
+  }
+}
+.occupancyBarSegmentLabelInner {
+  display: inline-block;
+  white-space: nowrap;
+}
+.occupancyBarSegment {
+  background-color: $gray-dark;
+  height: 4px;
+}
+.occupancyBarLabel {
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: visible;
+
+  // On mobile, make the text bounding box larger to ensure that it doesn't run off the edge.
+  // On desktop, this can be smaller, because 10% evaluates to a larger pixel value.
+  width: 20%;
+  @media (min-width: 460px) { width: 10%; }
+  transition: width 250ms ease-in-out;
+}
+.occupancyBarLabelSpacer {
+  margin-left: 10px;
+}

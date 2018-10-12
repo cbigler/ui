@@ -1,0 +1,15 @@
+{
+  "name": "@density/ui-report-total-visits",
+  "version": "0.0.1",
+  "description": "Report Total Visits component",
+  "main": "dist/index.js",
+  "author": "Density <engineering+javascript@density.io>",
+  "license": "MIT",
+  "dependencies": {
+    "classnames": "^2.2.6"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "prop-types": "*"
+  }
+}
