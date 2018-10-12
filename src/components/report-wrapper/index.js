@@ -1,4 +1,7 @@
 import React from 'react';
+import propTypes from 'prop-types';
+import moment from 'moment';
+
 import classnames from 'classnames';
 
 import { IconArrowRight } from '@density/ui-icons';
@@ -30,6 +33,10 @@ export function ReportCard({children, noPadding}) {
     </div>
   );
 }
+ReportCard.propTypes = {
+  noPadding: propTypes.bool,
+  children: propTypes.node.isRequired,
+};
 
 export default function ReportWrapper({
   title,
@@ -46,3 +53,9 @@ export default function ReportWrapper({
     {children}
   </div>;
 }
+ReportWrapper.propTypes = {
+  title: propTypes.string.isRequired,
+  startDate: propTypes.any.isRequired,
+  endDate: propTypes.any.isRequired,
+  children: propTypes.node,
+};
