@@ -27,7 +27,8 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-scripts": "^1.1.5",
-    "sass-loader": "^7.1.0"
+    "sass-loader": "^7.1.0",
+    "moment": "^2.22.2"
   },
   "dependencies": {
     "classnames": "^2.2.5",
