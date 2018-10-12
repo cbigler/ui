@@ -38,6 +38,41 @@
   font-weight: 600;
 }
 
+.timeSegmentListWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.timeSegmentList {
+  padding-left: 0px;
+  list-style-type: none;
+  margin-top: 20px;
+  margin-bottom: 0px;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.timeSegmentListItem {
+  white-space: nowrap;
+  font-size: 12px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+
+  display: flex;
+  flex-direction: row;
+}
+.timeSegmentColor {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background-color: $gray-dark; // Will be overridden.
+  margin-right: 10px;
+}
+.timeSegmentName {
+  height: 12px;
+}
+
 
 
 

@@ -31,6 +31,7 @@ storiesOf('ReportTotalVisits', module)
         startDate={moment('2018-03-14T00:00:00-04:00')}
         endDate={moment('2018-03-20T00:00:00-04:00')}
 
+        segmentNames={['Before opening', 'Breakfast', 'Lunch', 'Dinner']}
         segments={[
           [20, 500, 600, 100],
           [1, 400, 500, 600],

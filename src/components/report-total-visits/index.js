@@ -70,9 +70,13 @@ export default function ReportTotalVisits({
   title,
   startDate,
   endDate,
+
   segments,
+  segmentNames,
 }) {
   const numberOfDaysInRange = moment.duration(startDate.diff(endDate)).days();
+
+  const multipleTimeSegmentsShown = segments.length > 0 ? (segments[0].length > 1) : false;
 
   const largestMagnitudeOccupancy = Math.max.apply(Math,
     segments.map(segment => (
@@ -113,6 +117,23 @@ export default function ReportTotalVisits({
             return days;
           })()}
         </ul>
+        {multipleTimeSegmentsShown ? (
+          <div className={styles.timeSegmentListWrapper}>
+            <ul className={styles.timeSegmentList}>
+              {segmentNames.map((name, index) => {
+                return (
+                  <li key={name} className={styles.timeSegmentListItem}>
+                    <div
+                      className={styles.timeSegmentColor}
+                      style={{backgroundColor: OCCUPANCY_BAR_COLORS[index]}}
+                    />
+                    <span className={styles.timeSegmentName}>{name}</span>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ) : null}
       </ReportCard>
     </ReportWrapper>
   );
