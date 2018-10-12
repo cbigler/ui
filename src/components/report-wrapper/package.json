@@ -1,0 +1,16 @@
+{
+  "name": "@density/ui-report-wrapper",
+  "version": "0.0.1",
+  "description": "Report wrapper component",
+  "main": "dist/index.js",
+  "author": "Density <engineering+javascript@density.io>",
+  "license": "MIT",
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "moment": "^2.22.2"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "prop-types": "*"
+  }
+}

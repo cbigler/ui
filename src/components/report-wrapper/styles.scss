@@ -1,0 +1,89 @@
+// Import any global variables from "../../../variables/*.json"
+@import "../../../variables/fonts.json";
+@import "../../../variables/colors.json";
+
+// Local variables to the component
+@import "variables.json";
+
+.reportWrapper {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  min-width: 320px;
+  max-width: 800px;
+}
+
+.reportHeader {
+  display: flex;
+  // On mobile, place the date range under the header text.
+  flex-direction: column;
+  @media screen and (min-width: 360px) {
+    // On desktop, place the date range to the right of the header text.
+    flex-direction: row;
+  }
+
+  font-family: $font-base;
+  margin-bottom: 10px;
+}
+.reportHeaderText {
+  color: $gray-darker;
+  font-size: 16px;
+  font-weight: normal;
+
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-right: 10px;
+
+  // Add ellipsis to text that is really long on mobile+desktop
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.reportHeaderDateRange {
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+
+  // On mobile, the date range is under the header.
+  margin-left: 0px;
+  margin-top: 10px;
+  @media screen and (min-width: 360px) {
+    // On desktop, the date range is to the right of the header.
+    margin-left: auto;
+    margin-top: 0px;
+  }
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.reportHeaderDateRangeTextStart { margin-right: 5px; }
+.reportHeaderDateRangeTextEnd { margin-left: 5px; }
+
+
+
+
+
+
+
+.reportCard {
+  position: relative;
+
+  background-color: #fff;
+  color: $gray-cinder;
+  border: 1px solid $gray;
+  border-radius: 4px;
+
+  font-family: $font-base;
+
+  // On smaller screens, use 10px of padding.
+  padding: 10px;
+  @media screen and (min-width: 360px) {
+    // On smaller screens, use 10px of padding.
+    padding: 20px;
+  }
+}
+.reportCardNoPadding {
+  padding: 0px;
+}
