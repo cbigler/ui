@@ -7,7 +7,6 @@ import styles from './styles.scss';
 
 import ReportWrapper, { ReportCard } from '@density/ui-report-wrapper';
 import colorVariables from '@density/ui/variables/colors.json';
-import { reportTotalVisitsOccupancyBarLabelWidthInPx } from './variables.json';
 
 const OCCUPANCY_BAR_COLORS = [
   colorVariables.brandPrimary,
