@@ -1,0 +1,23 @@
+// Import any global variables from "../../../variables/*.json"
+
+// Local variables to the component
+@import "variables.json";
+
+.chartContainer {
+  width: 100%;
+}
+
+.reportTimeSegmentBreakdownHeader {
+  margin-top: 0px;
+  margin-bottom: 30px;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.reportTimeSegmentBreakdownHeaderHighlight {
+  font-weight: bold;
+}
+
+.reportTimeSegmentBreakdownItemHighlight {
+  font-weight: bold;
+}
