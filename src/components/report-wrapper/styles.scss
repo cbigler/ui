@@ -14,25 +14,75 @@
   max-width: 800px;
 }
 
+
+// ----------------------------------------------------------------------------
+// Report header, left, and right aligned sides
+// ----------------------------------------------------------------------------
 .reportHeader {
   display: flex;
-  // On mobile, place the date range under the header text.
-  flex-direction: column;
-  @media screen and (min-width: 360px) {
-    // On desktop, place the date range to the right of the header text.
-    flex-direction: row;
-  }
+  flex-direction: row;
 
   font-family: $font-base;
-  margin-bottom: 10px;
+  padding-bottom: 20px;
+
+  border-top: 1px solid $gray;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+
+  cursor: default;
+
+  // On smaller screens, use 10px of padding and no borders on the left and right.
+  padding: 10px;
+  @media screen and (min-width: 360px) {
+    // On larger screens, use 20px of padding and add borders back to the left and right.
+    padding: 20px;
+    border-left: 1px solid $gray;
+    border-right: 1px solid $gray;
+  }
 }
-.reportHeaderText {
+.reportHeaderLeft {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  // Add ellipsis to text that is really long on mobile+desktop
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.reportHeaderRightMobile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // Hide this version of the right header on desktop (ie, this one is mobile only)
+  @media screen and (min-width: 360px) {
+    display: none;
+  }
+}
+.reportHeaderRightDesktop {
+  // Hide this version of the header on mobile
+  display: none;
+
+  // And show on desktop
+  @media screen and (min-width: 360px) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+
+// ----------------------------------------------------------------------------
+// Report header left side contents
+// ----------------------------------------------------------------------------
+.reportHeaderTitle {
   color: $gray-darker;
   font-size: 16px;
   font-weight: normal;
 
   margin-top: 0px;
-  margin-bottom: 0px;
+  margin-bottom: 10px;
   margin-right: 10px;
 
   // Add ellipsis to text that is really long on mobile+desktop
@@ -40,26 +90,58 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.reportHeaderSpaces {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+
+// ----------------------------------------------------------------------------
+// Report header right side contents
+// ----------------------------------------------------------------------------
+.reportHeaderDetailsLink {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  height: 20px;
+  margin-bottom: 10px;
+
+  font-size: 13px;
+  color: $gray-darker;
+  font-family: $font-base;
+}
+.reportHeaderDetailsLinkText {
+  margin-left: auto;
+  margin-right: 4px;
+}
+
 .reportHeaderDateRange {
   font-size: 14px;
   font-weight: bold;
   white-space: nowrap;
 
-  // On mobile, the date range is under the header.
-  margin-left: 0px;
-  margin-top: 10px;
-  @media screen and (min-width: 360px) {
-    // On desktop, the date range is to the right of the header.
-    margin-left: auto;
-    margin-top: 0px;
-  }
-
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.reportHeaderDateRangeTextStart { margin-right: 5px; }
-.reportHeaderDateRangeTextEnd { margin-left: 5px; }
+.reportHeaderDateRangeMobile {
+  // On mobile, add spacing above the date range so it isn't right up against the spaces text
+  margin-top: 10px;
+
+  // On desktop, hide this vontrol (it's shown on the right) and remove the spacing
+  @media screen and (min-width: 360px) {
+    margin-bottom: 0px;
+    display: none;
+  }
+}
+.reportHeaderDateRangeTextStart {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.reportHeaderDateRangeTextEnd {
+  margin-left: 5px;
+}
 
 
 
@@ -69,19 +151,23 @@
 
 .reportCard {
   position: relative;
+  font-family: $font-base;
 
   background-color: #fff;
   color: $gray-cinder;
-  border: 1px solid $gray;
-  border-radius: 4px;
 
-  font-family: $font-base;
+  border-top: 1px solid $gray;
+  border-bottom: 1px solid $gray;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 
-  // On smaller screens, use 10px of padding.
+  // On smaller screens, use 10px of padding and no borders on the left and right.
   padding: 10px;
   @media screen and (min-width: 360px) {
-    // On smaller screens, use 10px of padding.
+    // On larger screens, use 20px of padding and add borders back to the left and right.
     padding: 20px;
+    border-left: 1px solid $gray;
+    border-right: 1px solid $gray;
   }
 }
 .reportCardNoPadding {
