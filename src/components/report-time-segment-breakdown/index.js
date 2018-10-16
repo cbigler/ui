@@ -207,25 +207,34 @@ class ReportTimeSegmentBreakdownChart extends Component {
               </g>;
             })()}
 
-            {/* Render circle around rate of entry peak */}
-            <circle
-              r={13}
-              cx={xScale(this.convertTimeToSeconds(peakRateOfEntryTimestamp))}
-              cy={yScale(peakRateOfEntryQuantity)}
-              fill={addAlphaToHex(colorVariables.brandWarning, 0.35)}
-              stroke={colorVariables.brandWarning}
-              strokeWidth={2}
-            />
+            {(() => {
+              const occupancyX = xScale(this.convertTimeToSeconds(peakOccupancyTimestamp));
+              const peakRateOfEntryX = xScale(this.convertTimeToSeconds(peakRateOfEntryTimestamp));
+              return (
+                <g>
+                  {/* Render circle around occupancy peak */}
+                  <circle
+                    r={13}
+                    cx={occupancyX}
+                    cy={yScale(peakOccupancyQuantity)}
+                    fill={addAlphaToHex(colorVariables.brandSuccess, 0.37)}
+                    stroke={colorVariables.brandSuccess}
+                    strokeWidth={2}
+                  />
 
-            {/* Render circle around occupancy peak */}
-            <circle
-              r={13}
-              cx={xScale(this.convertTimeToSeconds(peakOccupancyTimestamp))}
-              cy={yScale(peakOccupancyQuantity)}
-              fill={addAlphaToHex(colorVariables.brandSuccess, 0.37)}
-              stroke={colorVariables.brandSuccess}
-              strokeWidth={2}
-            />
+                  {/* Render circle around rate of entry peak */}
+                  <circle
+                    r={13}
+                    cx={peakRateOfEntryX}
+                    cy={yScale(peakRateOfEntryQuantity) + (occupancyX === peakRateOfEntryX ? -5 : 0)}
+                    fill={addAlphaToHex(colorVariables.brandWarning, 0.35)}
+                    stroke={colorVariables.brandWarning}
+                    strokeWidth={2}
+                  />
+                </g>
+              );
+            })()}
+
           </svg>
         ) : null}
       </div>
