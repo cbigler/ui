@@ -1,4 +1,5 @@
 // Import any global variables from "../../../variables/*.json"
+@import "../../../variables/colors.json";
 
 // Local variables to the component
 @import "variables.json";
@@ -18,6 +19,42 @@
   font-weight: bold;
 }
 
-.reportTimeSegmentBreakdownItemHighlight {
-  font-weight: bold;
+
+.reportTimeSegmentBreakdownList {
+  padding-left: 0px;
+  list-style: none;
+
+  display: flex;
+  flex-direction: column;
 }
+.reportTimeSegmentBreakdownItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.reportTimeSegmentBreakdownItemBubble {
+  display: flex;
+  flex-direction: row;
+
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+
+  background-color: $gray;
+  border: 2px solid $gray-darker;
+
+  margin-right: 10px;
+}
+.reportTimeSegmentBreakdownItemLabel {
+  flex: 1;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+
+
+.reportTimeSegmentBreakdownItemHighlight { font-weight: bold; }
+
