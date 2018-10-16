@@ -4,5 +4,5 @@
 @import "variables.json";
 
 .%COMPONENTCAMEL% {
-  color: $%COMPONENTCAMEL%Color;
+  color: $%COMPONENTDASH%-color;
 }
