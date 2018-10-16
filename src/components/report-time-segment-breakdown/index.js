@@ -207,6 +207,7 @@ class ReportTimeSegmentBreakdownChart extends Component {
               </g>;
             })()}
 
+            {/* Render the circles on top of the chart to indicate key points */}
             {(() => {
               const occupancyX = xScale(this.convertTimeToSeconds(peakOccupancyTimestamp));
               const peakRateOfEntryX = xScale(this.convertTimeToSeconds(peakRateOfEntryTimestamp));
