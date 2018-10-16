@@ -141,4 +141,7 @@ ReportTotalVisits.propTypes = {
   title: propTypes.string.isRequired,
   startDate: propTypes.instanceOf(moment).isRequired,
   endDate: propTypes.instanceOf(moment).isRequired,
+
+  segments: propTypes.arrayOf(propTypes.arrayOf(propTypes.number)).isRequired,
+  segmentNames: propTypes.arrayOf(propTypes.string), /* not required when only one segment is passed */
 };

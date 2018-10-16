@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import propTypes from 'prop-types';
 import styles from './styles.scss';
 
 import moment from 'moment';
@@ -266,6 +267,7 @@ export default function ReportTimeSegmentBreakdown({
   title,
   startDate,
   endDate,
+  spaces,
 
   timeSegment,
   points,
@@ -281,6 +283,7 @@ export default function ReportTimeSegmentBreakdown({
       title={title}
       startDate={startDate}
       endDate={endDate}
+      spaces={spaces}
     >
       <ReportCard>
         <h2 className={styles.reportTimeSegmentBreakdownHeader}>
@@ -337,3 +340,34 @@ export default function ReportTimeSegmentBreakdown({
     </ReportWrapper>
   );
 }
+
+ReportTimeSegmentBreakdown.propTypes = {
+  title: propTypes.string.isRequired,
+  startDate: propTypes.instanceOf(moment).isRequired,
+  endDate: propTypes.instanceOf(moment).isRequired,
+  spaces: propTypes.arrayOf(propTypes.string).isRequired,
+
+  timeSegment: propTypes.shape({
+    id: propTypes.string,
+    name: propTypes.string,
+    start: propTypes.string,
+    end: propTypes.string,
+    days: propTypes.arrayOf(propTypes.string),
+    spaces: propTypes.arrayOf(propTypes.any),
+  }).isRequired,
+
+  points: propTypes.arrayOf(
+    propTypes.shape({
+      timestamp: propTypes.string,
+      value: propTypes.number,
+    }),
+  ).isRequired,
+
+  dailyAverage: propTypes.number,
+
+  peakRateOfEntryTimestamp: propTypes.string.isRequired,
+  peakRateOfEntryQuantity: propTypes.number.isRequired,
+
+  peakOccupancyTimestamp: propTypes.string.isRequired,
+  peakOccupancyQuantity: propTypes.number.isRequired,
+};
