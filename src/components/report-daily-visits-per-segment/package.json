@@ -1,0 +1,15 @@
+{
+  "name": "@density/ui-report-daily-visits-per-segment",
+  "version": "0.0.1",
+  "description": "Daily visits per segment report component",
+  "main": "dist/index.js",
+  "author": "Density <engineering+javascript@density.io>",
+  "license": "MIT",
+  "dependencies": {
+    "hex-rgb": "^3.0.0"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "prop-types": "*"
+  }
+}

@@ -1,0 +1,95 @@
+// Import any global variables from "../../../variables/*.json"
+@import "../../../variables/colors.json";
+
+// Local variables to the component
+@import "variables.json";
+
+.verticalLayout {
+  display: flex;
+  flex-direction: column;
+  table-layout: fixed;
+}
+
+.maximumMinimumStatement {
+  line-height: 24px;
+  margin-bottom: 10px;
+}
+.maximumMinimumStatementHighlight {
+  font-weight: bold;
+  white-space: nowrap;
+}
+.maximumMinimumStatementRowContainer {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tableWrapper {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+}
+
+
+
+.segmentTableTimeSegmentLabels {
+  display: flex;
+  flex-direction: column;
+}
+.segmentTableTimeSegmentLabelCell {
+  width: 85px;
+  height: 30px;
+
+  margin: 0.5px;
+  margin-right: 10px;
+  font-size: 12px;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  line-height: 32px;
+
+  &:first-of-type { margin-top: 43px; }
+}
+
+
+
+.segmentTable {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.segmentTableRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.segmentTableRowCellHeader {
+  flex: 1;
+  height: 30px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+
+  display: flex;
+  flex-direction: column;
+
+  font-size: 12px;
+  font-weight: normal;
+  text-align: center;
+  color: $gray-dark;
+}
+
+.segmentTableCell {
+  background-color: $brand-primary;
+  color: #fff;
+  height: 30px;
+  flex: 1;
+  margin: 0.5px;
+
+  font-size: 11px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 36px;
+}
