@@ -42,11 +42,11 @@ storiesOf('ReportTimeSegmentBreakdown', module)
 
         dailyAverage={3124}
 
-        peakRateOfEntryTimestamp="12:45:00"
-        peakRateOfEntryQuantity={4}
+        peakRateOfEntryTimestamp="12:00:00"
+        peakRateOfEntryQuantity={3}
 
-        peakOccupancyTimestamp="10:20:00"
-        peakOccupancyQuantity={1}
+        peakOccupancyTimestamp="15:00:00"
+        peakOccupancyQuantity={7}
       />
     </div>
   ))
@@ -85,11 +85,11 @@ storiesOf('ReportTimeSegmentBreakdown', module)
 
         dailyAverage={3124}
 
-        peakRateOfEntryTimestamp="12:45:00"
-        peakRateOfEntryQuantity={4}
+        peakRateOfEntryTimestamp="12:00:00"
+        peakRateOfEntryQuantity={3}
 
-        peakOccupancyTimestamp="12:45:00"
-        peakOccupancyQuantity={4}
+        peakOccupancyTimestamp="12:00:00"
+        peakOccupancyQuantity={3}
       />
     </div>
   ))

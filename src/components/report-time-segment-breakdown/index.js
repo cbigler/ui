@@ -73,7 +73,7 @@ class ReportTimeSegmentBreakdownChart extends Component {
     this.state = { width: null, height: 150 };
     this.onResize = this.onResize.bind(this);
 
-    this.chartTopSpacing = 10;
+    this.chartTopSpacing = 20;
     this.xAxisMarkTopSpacing = 25;
     this.xAxisMarkFontSize = 16;
   }
@@ -88,7 +88,11 @@ class ReportTimeSegmentBreakdownChart extends Component {
 
   onResize() {
     const width = this.container.clientWidth;
-    this.setState({width});
+    const idealHeight = width / 3;
+    this.setState({
+      width,
+      height: Math.max(150, idealHeight),
+    });
   }
 
   convertTimeToSeconds(time) {
@@ -143,7 +147,7 @@ class ReportTimeSegmentBreakdownChart extends Component {
         0,
         Math.max.apply(Math, points.map(i => i.value)),
       ])
-      .range([graphHeight, 0])
+      .range([graphHeight, this.chartTopSpacing])
 
     return (
       <div ref={r => { this.container = r; }} className={styles.chartContainer}>
@@ -213,7 +217,7 @@ class ReportTimeSegmentBreakdownChart extends Component {
               const occupancyX = xScale(this.convertTimeToSeconds(peakOccupancyTimestamp));
               const peakRateOfEntryX = xScale(this.convertTimeToSeconds(peakRateOfEntryTimestamp));
               return (
-                <g>
+                <g transform={`translate(0,${this.chartTopSpacing})`}>
                   {/* Render circle around occupancy peak */}
                   <circle
                     r={13}
