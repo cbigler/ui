@@ -12,6 +12,7 @@ storiesOf('ReportTotalVisits', module)
         title="Cafeteria meal visits"
         startDate={moment('2018-03-14T00:00:00-04:00')}
         endDate={moment('2018-03-20T00:00:00-04:00')}
+        spaces={["Space 1"]}
 
         segments={[
           [500],
@@ -30,6 +31,7 @@ storiesOf('ReportTotalVisits', module)
         title="Cafeteria meal visits"
         startDate={moment('2018-03-14T00:00:00-04:00')}
         endDate={moment('2018-03-20T00:00:00-04:00')}
+        spaces={["Space 1"]}
 
         segmentNames={['Before opening', 'Breakfast', 'Lunch', 'Dinner']}
         segments={[

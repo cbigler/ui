@@ -87,7 +87,7 @@ export default function ReportWrapper({
       title={title}
       startDate={startDate}
       endDate={endDate}
-      spaces={spaces || ['foo', 'bar', 'baz']}
+      spaces={spaces}
     />
     {children}
   </div>;

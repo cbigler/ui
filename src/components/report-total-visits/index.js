@@ -69,6 +69,7 @@ export default function ReportTotalVisits({
   title,
   startDate,
   endDate,
+  spaces,
 
   segments,
   segmentNames,
@@ -88,6 +89,7 @@ export default function ReportTotalVisits({
       title={title}
       startDate={startDate}
       endDate={endDate}
+      spaces={spaces}
     >
       <ReportCard>
         <h3 className={styles.header}>
@@ -141,6 +143,7 @@ ReportTotalVisits.propTypes = {
   title: propTypes.string.isRequired,
   startDate: propTypes.instanceOf(moment).isRequired,
   endDate: propTypes.instanceOf(moment).isRequired,
+  spaces: propTypes.arrayOf(propTypes.string).isRequired,
 
   segments: propTypes.arrayOf(propTypes.arrayOf(propTypes.number)).isRequired,
   segmentNames: propTypes.arrayOf(propTypes.string), /* not required when only one segment is passed */
