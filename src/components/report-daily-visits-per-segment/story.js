@@ -15,7 +15,7 @@ storiesOf('ReportDailyVisitsPerSegment', module)
         endDate={moment('2018-03-18T00:00:00-04:00')}
         spaces={["Space 1"]}
 
-        timeSegments={[
+        timeSegmentNames={[
           'Before Open',
           'Breakfast',
           'Between',
@@ -42,7 +42,7 @@ storiesOf('ReportDailyVisitsPerSegment', module)
         endDate={moment('2018-03-18T00:00:00-04:00')}
         spaces={["Space 1"]}
 
-        timeSegments={[
+        timeSegmentNames={[
           'Before Open',
           'Breakfast',
           'Between',
@@ -57,6 +57,33 @@ storiesOf('ReportDailyVisitsPerSegment', module)
           [811, 904, 811, 904, 811],
           [873, 832, 873, 832, 873],
           [782, 741, 782, 741, 782],
+        ]}
+      />
+    </div>
+  ))
+  .addWithInfo('With 7 days', () => (
+    <div style={{width: '100%',paddingTop: 100}}>
+      <ReportDailyVisitsPerSegment
+        title="Daily Segment Visits"
+        startDate={moment('2018-03-14T00:00:00-04:00')}
+        endDate={moment('2018-03-20T00:00:00-04:00')}
+        spaces={["Space 1"]}
+
+        timeSegmentNames={[
+          'Before Open',
+          'Breakfast',
+          'Between',
+          'Lunch',
+          'Dinner',
+          'After Close',
+        ]}
+        data={[
+          [824, 921, 824, 921, 824, 824, 921],
+          [911, 902, 911, 902, 911, 911, 902],
+          [870, 872, 945, 872, 870, 870, 870],
+          [811, 904, 811, 904, 811, 811, 904],
+          [873, 832, 873, 832, 873, 873, 832],
+          [782, 741, 782, 700, 782, 782, 741],
         ]}
       />
     </div>

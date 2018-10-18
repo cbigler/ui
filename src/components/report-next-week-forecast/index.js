@@ -89,7 +89,7 @@ class ReportNextWeekForecastChart extends Component {
                 <text
                   fontSize={12}
                   fontWeight={busiestDay.slice(0, 3) === day ? 'bold' : 'normal'}
-                  alignmentBaseline="middle"
+                  transform="translate(0,3)"
                 >{day}</text>
 
                 {/* The bar that contains the standard deviation info */}
@@ -112,17 +112,15 @@ class ReportNextWeekForecastChart extends Component {
                 />
 
                 <text
-                  transform={`translate(${this.barLeftOffset + barWidthInPx + barHighWidthInPx + 10},2)`}
+                  transform={`translate(${this.barLeftOffset + barWidthInPx + barHighWidthInPx + 10},6)`}
                 >
                   <tspan
                     fill={colorVariables.brandPrimary}
                     fontWeight="bold"
-                    alignmentBaseline="middle"
                   >{data[index].visits}</tspan>
                   <tspan
                     fill={colorVariables.brandPrimary}
                     fontWeight="normal"
-                    alignmentBaseline="middle"
                     opacity={0.45}
                   > &plusmn; {data[index].stdDev}</tspan>
                 </text>

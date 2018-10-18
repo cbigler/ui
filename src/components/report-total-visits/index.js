@@ -72,7 +72,7 @@ export default function ReportTotalVisits({
   spaces,
 
   segments,
-  segmentNames,
+  timeSegmentNames,
 }) {
   const numberOfDaysInRange = moment.duration(startDate.diff(endDate)).days();
 
@@ -121,7 +121,7 @@ export default function ReportTotalVisits({
         {multipleTimeSegmentsShown ? (
           <div className={styles.timeSegmentListWrapper}>
             <ul className={styles.timeSegmentList}>
-              {segmentNames.map((name, index) => {
+              {timeSegmentNames.map((name, index) => {
                 return (
                   <li key={name} className={styles.timeSegmentListItem}>
                     <div
@@ -146,5 +146,5 @@ ReportTotalVisits.propTypes = {
   spaces: propTypes.arrayOf(propTypes.string).isRequired,
 
   segments: propTypes.arrayOf(propTypes.arrayOf(propTypes.number)).isRequired,
-  segmentNames: propTypes.arrayOf(propTypes.string), /* not required when only one segment is passed */
+  timeSegmentNames: propTypes.arrayOf(propTypes.string), /* not required when only one segment is passed */
 };

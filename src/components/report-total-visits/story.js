@@ -33,7 +33,7 @@ storiesOf('ReportTotalVisits', module)
         endDate={moment('2018-03-20T00:00:00-04:00')}
         spaces={["Space 1"]}
 
-        segmentNames={['Before opening', 'Breakfast', 'Lunch', 'Dinner']}
+        timeSegmentNames={['Before opening', 'Breakfast', 'Lunch', 'Dinner']}
         segments={[
           [20, 500, 600, 100],
           [1, 400, 500, 600],

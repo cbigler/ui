@@ -112,7 +112,7 @@ class ReportTimeSegmentBreakdownChart extends Component {
       let label = i.asHours();
       marks.push({
         value: i.asSeconds(),
-        label: label > 12 ? `${label-12}p` : `${label}a`,
+        label: moment.utc().startOf('day').add(label, 'hours').format('ha').slice(0, -1),
       });
     }
 
@@ -250,7 +250,7 @@ class ReportTimeSegmentBreakdownChart extends Component {
 
 function formatTime(time) {
   return moment.utc(moment.duration(time).asMilliseconds())
-    .format('hh:mma')
+    .format('h:mma')
     .slice(0, -1); /* am -> a */
 }
 

@@ -44,7 +44,7 @@ export default function ReportDailyVisitsPerSegment({
   spaces,
 
   data,
-  timeSegments,
+  timeSegmentNames,
 
   cellColorThreshold,
   cellMinimumOpacity,
@@ -68,8 +68,8 @@ export default function ReportDailyVisitsPerSegment({
     throw new Error(`The duration of time between the start date and end date exceeds 7 days (${days.length} days), this isn't permitted.`);
   }
 
-  if (data.length !== timeSegments.length) {
-    throw new Error(`The number of rows of data does not match the length of timeSegments (${data.length} days != ${timeSegments.length} days)`);
+  if (data.length !== timeSegmentNames.length) {
+    throw new Error(`The number of rows of data does not match the length of timeSegmentNames (${data.length} days != ${timeSegmentNames.length} days)`);
   }
 
   if (data[0].length !== days.length) {
@@ -82,7 +82,7 @@ export default function ReportDailyVisitsPerSegment({
   const maxima = data.map((row, rowIndex) => {
     return row.map((col, colIndex) => {
       if (col === maxValue) {
-        return {timeSegmentName: timeSegments[rowIndex], dayOfWeek: days[colIndex][2], value: maxValue};
+        return {timeSegmentName: timeSegmentNames[rowIndex], dayOfWeek: days[colIndex][2], value: maxValue};
       } else {
         return null;
       }
@@ -92,7 +92,7 @@ export default function ReportDailyVisitsPerSegment({
   const minima = data.map((row, rowIndex) => {
     return row.map((col, colIndex) => {
       if (col === minValue) {
-        return {timeSegmentName: timeSegments[rowIndex], dayOfWeek: days[colIndex][2], value: minValue};
+        return {timeSegmentName: timeSegmentNames[rowIndex], dayOfWeek: days[colIndex][2], value: minValue};
       } else {
         return null;
       }
@@ -122,8 +122,8 @@ export default function ReportDailyVisitsPerSegment({
 
           <div className={styles.tableWrapper}>
             <div className={styles.segmentTableTimeSegmentLabels}>
-              {timeSegments.map(ts => (
-                <span className={styles.segmentTableTimeSegmentLabelCell}>{ts}</span>
+              {timeSegmentNames.map(ts => (
+                <span key={ts} className={styles.segmentTableTimeSegmentLabelCell}>{ts}</span>
               ))}
             </div>
             <div className={styles.segmentTable}>
@@ -171,4 +171,13 @@ ReportDailyVisitsPerSegment.defaultProps = {
   cellColorThreshold: 0.45,
   cellMinimumOpacity: 0.2,
   cellMaximumOpacity: 1.0,
+};
+ReportDailyVisitsPerSegment.propTypes = {
+  title: propTypes.string.isRequired,
+  startDate: propTypes.instanceOf(moment).isRequired,
+  endDate: propTypes.instanceOf(moment).isRequired,
+  spaces: propTypes.arrayOf(propTypes.string).isRequired,
+
+  timeSegmentNames: propTypes.arrayOf(propTypes.string).isRequired,
+  data: propTypes.arrayOf(propTypes.arrayOf(propTypes.number)).isRequired,
 };
