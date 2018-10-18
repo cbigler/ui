@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import moment from 'moment';
 import classnames from 'classnames';
+import commaNumber from 'comma-number';
 
 import styles from './styles.scss';
 
@@ -31,7 +32,7 @@ function ReportCardOccupancyBar({totalWidth, segments}) {
                 styles.occupancyBarSection,
                 multipleTimeSegmentsShown ? styles.occupancyBarSectionContainsLabels : null,
               )}
-              style={{ width: `${segment / totalSegmentValue * 100}%` }}
+              style={{ width: `${totalSegmentValue ? segment / totalSegmentValue * 100 : 0}%` }}
               key={segment}
             >
               {multipleTimeSegmentsShown ? (
@@ -56,8 +57,11 @@ function ReportCardOccupancyBar({totalWidth, segments}) {
           styles.occupancyBarLabel,
           !multipleTimeSegmentsShown ? styles.occupancyBarLabelPrimary : null,
         )}>
-          <span className={styles.occupancyBarLabelSpacer}>
-            {totalSegmentValue}
+        <span
+          className={styles.occupancyBarLabelSpacer}
+          style={{marginLeft: totalSegmentValue === 0 ? 0 : undefined}}
+        >
+            {commaNumber(totalSegmentValue)}
           </span>
         </span>
       </div>
