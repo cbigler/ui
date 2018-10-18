@@ -43,27 +43,13 @@ export default function ReportDailyVisitsPerSegment({
   endDate,
   spaces,
 
+  data,
+  timeSegments,
+
   cellColorThreshold,
   cellMinimumOpacity,
   cellMaximumOpacity,
 }) {
-  const data = [
-    [824, 921, 824, 921, 824],
-    [911, 902, 911, 902, 911],
-    [945, 872, 945, 872, 945],
-    [811, 904, 811, 904, 811],
-    [873, 832, 873, 832, 873],
-    [782, 741, 782, 741, 782],
-  ];
-  const timeSegments = [
-    'Before Open',
-    'Breakfast',
-    'Between',
-    'Lunch',
-    'Dinner',
-    'After Close',
-  ];
-
   // Return a list of all days between the start and end date.
   const days = (function() {
     const days = [];
