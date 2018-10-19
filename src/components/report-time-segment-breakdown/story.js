@@ -74,10 +74,11 @@ storiesOf('ReportTimeSegmentBreakdown', module)
         points={[
           {timestamp: '11:00:00', value: 1},
           {timestamp: '12:00:00', value: 4},
-          {timestamp: '13:00:00', value: 4},
-          {timestamp: '14:00:00', value: 6},
-          {timestamp: '15:00:00', value: 7},
-          {timestamp: '16:00:00', value: 4},
+          {timestamp: '13:00:00', value: 8},
+          {timestamp: '13:45:00', value: 10},
+          {timestamp: '14:15:00', value: 3},
+          {timestamp: '15:00:00', value: 2.5},
+          {timestamp: '16:00:00', value: 1},
         ]}
 
         dailyAverage={821}
@@ -86,6 +87,47 @@ storiesOf('ReportTimeSegmentBreakdown', module)
         peakRateOfEntryQuantity={3}
 
         peakOccupancyTimestamp="15:00:00"
+        peakOccupancyQuantity={7}
+      />
+    </div>
+  ))
+  .addWithInfo('With one bubble being at the start of the time range and one at the end', () => (
+    <div style={{width: '100%',paddingTop: 100}}>
+      <ReportTimeSegmentBreakdown
+        title="Lunch Average Breakdown"
+        startDate={moment('2018-03-14T00:00:00-04:00')}
+        endDate={moment('2018-03-20T00:00:00-04:00')}
+        spaces={["Space 1"]}
+        timeSegment={{
+          id: 'tsm_XXX',
+          name: 'Lunch',
+          start: '11:00:00',
+          end: '16:00:00',
+          days: [
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
+          ],
+          spaces: [ /* ... */ ],
+        }}
+        points={[
+          {timestamp: '11:00:00', value: 1},
+          {timestamp: '12:00:00', value: 4},
+          {timestamp: '13:00:00', value: 8},
+          {timestamp: '13:45:00', value: 10},
+          {timestamp: '14:15:00', value: 3},
+          {timestamp: '15:00:00', value: 2.5},
+          {timestamp: '16:00:00', value: 1},
+        ]}
+
+        dailyAverage={821}
+
+        peakRateOfEntryTimestamp="11:00:00"
+        peakRateOfEntryQuantity={3}
+
+        peakOccupancyTimestamp="16:00:00"
         peakOccupancyQuantity={7}
       />
     </div>

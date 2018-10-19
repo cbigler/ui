@@ -4,11 +4,10 @@ import styles from './styles.scss';
 
 import moment from 'moment';
 import * as d3Scale from 'd3-scale'; /* note: this package doesn't have a `default` export */
-import * as d3Array from 'd3-array';
 import commaNumber from 'comma-number';
 import hexRgb from 'hex-rgb';
 
-import ReportWrapper, { ReportCard } from '@density/ui-report-wrapper';
+import ReportWrapper, { ReportPadding, ReportCard } from '@density/ui-report-wrapper';
 import colorVariables from '@density/ui/variables/colors.json';
 
 // ----------------------------------------------------------------------------
@@ -132,7 +131,7 @@ class ReportTimeSegmentBreakdownChart extends Component {
     // NOTE: d3.bisector would be great here, but I couldn't figure it out. So, I wrote my own
     // implmentation.
     let leftBisectorIndex = 0, rightBisectorIndex = 1; // left-most section
-    for (let i = 0; i < pointsTimestamp.length-2; i++) {
+    for (let i = 0; i < pointsTimestamp.length-1; i++) {
       if (pointsTimestamp[i] < valueTimestamp && valueTimestamp <= pointsTimestamp[i+1]) {
         leftBisectorIndex = i;
         rightBisectorIndex = i+1;
@@ -178,7 +177,7 @@ class ReportTimeSegmentBreakdownChart extends Component {
         this.convertTimeToSeconds(timeSegment.start),
         this.convertTimeToSeconds(timeSegment.end),
       ])
-      .range([0, width]);
+      .range([0+20, width-20]);
 
     const yScale = d3Scale.scaleLinear()
       .domain([
@@ -192,7 +191,6 @@ class ReportTimeSegmentBreakdownChart extends Component {
         {/* When the width is unknown, the chart cannot be rendered. */}
         {width !== null ? (
           <svg width={width} height={height}>
-
             {/* Render bottom axis every hour */}
             {this.generateXAxisMarks().map(({value, label}, index, xAxisMarks) => (
               <text
@@ -234,7 +232,12 @@ class ReportTimeSegmentBreakdownChart extends Component {
                 {/* The chart background */}
                 <path
                   transform={`translate(0,${this.chartTopSpacing})`}
-                  d={`M0,${yScale(0)}   ${curve}   L${width},${yScale(0)} L0,${yScale(0)}`}
+                  d={`
+                    M0,${yScale(0)}
+                    ${curve}
+                    L${xScale(this.convertTimeToSeconds(timeSegment.end))},${yScale(0)}
+                    L${xScale(this.convertTimeToSeconds(timeSegment.start))},${yScale(0)}
+                  `}
                   fill={colorVariables.brandPrimary}
                   opacity={0.18}
                 />
@@ -280,7 +283,6 @@ class ReportTimeSegmentBreakdownChart extends Component {
                 </g>
               );
             })()}
-
           </svg>
         ) : null}
       </div>
@@ -329,13 +331,17 @@ export default function ReportTimeSegmentBreakdown({
       endDate={endDate}
       spaces={spaces}
     >
-      <ReportCard>
-        <h2 className={styles.reportTimeSegmentBreakdownHeader}>
-          You had a daily average of{' '}
-          <span className={styles.reportTimeSegmentBreakdownHeaderHighlight}>
-            {commaNumber(dailyAverage)}
-          </span> visitors.
-        </h2>
+      <ReportCard noPadding>
+        <ReportPadding>
+          <h2 className={styles.reportTimeSegmentBreakdownHeader}>
+            <span className={styles.reportTimeSegmentBreakdownHeaderHighlight}>
+              {timeSegment.name}
+            </span> had a daily average of{' '}
+            <span className={styles.reportTimeSegmentBreakdownHeaderHighlight}>
+              {commaNumber(dailyAverage)}
+            </span> visitors.
+          </h2>
+        </ReportPadding>
         <ReportTimeSegmentBreakdownChart
           timeSegment={timeSegment}
           points={points}
@@ -344,42 +350,44 @@ export default function ReportTimeSegmentBreakdown({
           peakOccupancyTimestamp={peakOccupancyTimestamp}
           peakOccupancyQuantity={peakOccupancyQuantity}
         />
-        <ul className={styles.reportTimeSegmentBreakdownList}>
-          <li className={styles.reportTimeSegmentBreakdownItem}>
-            <div
-              className={styles.reportTimeSegmentBreakdownItemBubble}
-              style={{
-                backgroundColor: addAlphaToHex(colorVariables.brandWarning, 0.35),
-                borderColor: colorVariables.brandWarning,
-              }}
-            />
-            <span className={styles.reportTimeSegmentBreakdownItemLabel}>
-              Peak rate of entry of{' '}
-              <span className={styles.reportTimeSegmentBreakdownItemHighlight}>
-                {peakRateOfEntryQuantity} {peoplePluralizer(peakRateOfEntryQuantity)} / min
+        <ReportPadding>
+          <ul className={styles.reportTimeSegmentBreakdownList}>
+            <li className={styles.reportTimeSegmentBreakdownItem}>
+              <div
+                className={styles.reportTimeSegmentBreakdownItemBubble}
+                style={{
+                  backgroundColor: addAlphaToHex(colorVariables.brandWarning, 0.35),
+                  borderColor: colorVariables.brandWarning,
+                }}
+              />
+              <span className={styles.reportTimeSegmentBreakdownItemLabel}>
+                Peak rate of entry of{' '}
+                <span className={styles.reportTimeSegmentBreakdownItemHighlight}>
+                  {peakRateOfEntryQuantity} {peoplePluralizer(peakRateOfEntryQuantity)} / min
+                </span>
+                {' '}happened around{' '}
+                <span className={styles.reportTimeSegmentBreakdownItemHighlight}>{formatTime(peakRateOfEntryTimestamp)}</span>
               </span>
-              {' '}happened around{' '}
-              <span className={styles.reportTimeSegmentBreakdownItemHighlight}>{formatTime(peakRateOfEntryTimestamp)}</span>
-            </span>
-          </li>
-          <li className={styles.reportTimeSegmentBreakdownItem}>
-            <div
-              className={styles.reportTimeSegmentBreakdownItemBubble}
-              style={{
-                backgroundColor: addAlphaToHex(colorVariables.brandSuccess, 0.37),
-                borderColor: colorVariables.brandSuccess,
-              }}
-            />
-            <span className={styles.reportTimeSegmentBreakdownItemLabel}>
-              Peak occupancy of{' '}
-              <span className={styles.reportTimeSegmentBreakdownItemHighlight}>
-                {peakOccupancyQuantity} {peoplePluralizer(peakOccupancyQuantity)}
+            </li>
+            <li className={styles.reportTimeSegmentBreakdownItem}>
+              <div
+                className={styles.reportTimeSegmentBreakdownItemBubble}
+                style={{
+                  backgroundColor: addAlphaToHex(colorVariables.brandSuccess, 0.37),
+                  borderColor: colorVariables.brandSuccess,
+                }}
+              />
+              <span className={styles.reportTimeSegmentBreakdownItemLabel}>
+                Peak occupancy of{' '}
+                <span className={styles.reportTimeSegmentBreakdownItemHighlight}>
+                  {peakOccupancyQuantity} {peoplePluralizer(peakOccupancyQuantity)}
+                </span>
+                {' '}happened around{' '}
+                <span className={styles.reportTimeSegmentBreakdownItemHighlight}>{formatTime(peakOccupancyTimestamp)}</span>
               </span>
-              {' '}happened around{' '}
-              <span className={styles.reportTimeSegmentBreakdownItemHighlight}>{formatTime(peakOccupancyTimestamp)}</span>
-            </span>
-          </li>
-        </ul>
+            </li>
+          </ul>
+        </ReportPadding>
       </ReportCard>
     </ReportWrapper>
   );

@@ -63,10 +63,19 @@ function ReportWrapperHeader({
   );
 }
 
+export function ReportPadding({children}) {
+  return (
+    <div className={styles.reportPadding}>{children}</div>
+  );
+}
+ReportPadding.propTypes = {
+  children: propTypes.node.isRequired,
+};
+
 export function ReportCard({children, noPadding}) {
   return (
-    <div className={classnames(styles.reportCard, noPadding ? styles.reportCardNoPadding : null)}>
-      {children}
+    <div className={styles.reportCard}>
+      {noPadding ? children : <ReportPadding>{children}</ReportPadding>}
     </div>
   );
 }
