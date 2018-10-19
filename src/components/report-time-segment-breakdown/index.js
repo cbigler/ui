@@ -4,6 +4,7 @@ import styles from './styles.scss';
 
 import moment from 'moment';
 import * as d3Scale from 'd3-scale'; /* note: this package doesn't have a `default` export */
+import * as d3Array from 'd3-array';
 import commaNumber from 'comma-number';
 import hexRgb from 'hex-rgb';
 
@@ -119,6 +120,43 @@ class ReportTimeSegmentBreakdownChart extends Component {
     return marks;
   }
 
+  calculateYValueAlongCurveFromXValue(value) {
+    const { points } = this.props;
+
+    // Pre-parse all the timestamps to speed up the calculations below and reduce repeated work.
+    const valueTimestamp = this.convertTimeToSeconds(value);
+    const pointsTimestamp = points.map(a => this.convertTimeToSeconds(a.timestamp));
+
+    // Calculate the left and right bisector of this value. These are used to know between which two
+    // points our arbitrary point lies.
+    // NOTE: d3.bisector would be great here, but I couldn't figure it out. So, I wrote my own
+    // implmentation.
+    let leftBisectorIndex = 0, rightBisectorIndex = 1; // left-most section
+    for (let i = 0; i < pointsTimestamp.length-2; i++) {
+      if (pointsTimestamp[i] < valueTimestamp && valueTimestamp <= pointsTimestamp[i+1]) {
+        leftBisectorIndex = i;
+        rightBisectorIndex = i+1;
+        break;
+      }
+    }
+
+    // Calculate a value indicating how far through the section bounded by `leftBisectorIndex` and
+    // `rightBisectorIndex` the point indicated by `value` is. This value should be within 0...1 .
+    let percentageThroughSection = (
+      (valueTimestamp - pointsTimestamp[leftBisectorIndex]) /
+      (pointsTimestamp[rightBisectorIndex] - pointsTimestamp[leftBisectorIndex])
+    );
+
+    // Use this percentage to determine a decimal index indicating the position of the point
+    // referred to by `value`.
+    const index = points[leftBisectorIndex].value + (percentageThroughSection * (
+      points[rightBisectorIndex].value - points[leftBisectorIndex].value
+    ));
+
+    return index;
+  }
+
+
   render() {
     const {
       startTime,
@@ -215,14 +253,16 @@ class ReportTimeSegmentBreakdownChart extends Component {
             {/* Render the circles on top of the chart to indicate key points */}
             {(() => {
               const occupancyX = xScale(this.convertTimeToSeconds(peakOccupancyTimestamp));
+              const occupancyY = yScale(this.calculateYValueAlongCurveFromXValue(peakOccupancyTimestamp));
               const peakRateOfEntryX = xScale(this.convertTimeToSeconds(peakRateOfEntryTimestamp));
+              const peakRateOfEntryY = yScale(this.calculateYValueAlongCurveFromXValue(peakRateOfEntryTimestamp));
               return (
                 <g transform={`translate(0,${this.chartTopSpacing})`}>
                   {/* Render circle around occupancy peak */}
                   <circle
                     r={13}
                     cx={occupancyX}
-                    cy={yScale(peakOccupancyQuantity)}
+                    cy={occupancyY}
                     fill={addAlphaToHex(colorVariables.brandSuccess, 0.37)}
                     stroke={colorVariables.brandSuccess}
                     strokeWidth={2}
@@ -232,7 +272,7 @@ class ReportTimeSegmentBreakdownChart extends Component {
                   <circle
                     r={13}
                     cx={peakRateOfEntryX}
-                    cy={yScale(peakRateOfEntryQuantity) + (occupancyX === peakRateOfEntryX ? -5 : 0)}
+                    cy={peakRateOfEntryY + (occupancyX === peakRateOfEntryX ? -5 : 0)}
                     fill={addAlphaToHex(colorVariables.brandWarning, 0.35)}
                     stroke={colorVariables.brandWarning}
                     strokeWidth={2}

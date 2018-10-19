@@ -7,7 +7,7 @@ import moment from 'moment';
 import ReportTimeSegmentBreakdown from './';
 
 storiesOf('ReportTimeSegmentBreakdown', module)
-  .addWithInfo('With data', () => (
+  .addWithInfo('At breakfast', () => (
     <div style={{width: '100%',paddingTop: 100}}>
       <ReportTimeSegmentBreakdown
         title="Breakfast Average Breakdown"
@@ -42,7 +42,47 @@ storiesOf('ReportTimeSegmentBreakdown', module)
 
         dailyAverage={3124}
 
-        peakRateOfEntryTimestamp="12:00:00"
+        peakRateOfEntryTimestamp="12:30:00"
+        peakRateOfEntryQuantity={3}
+
+        peakOccupancyTimestamp="15:00:00"
+        peakOccupancyQuantity={7}
+      />
+    </div>
+  ))
+  .addWithInfo('At lunch', () => (
+    <div style={{width: '100%',paddingTop: 100}}>
+      <ReportTimeSegmentBreakdown
+        title="Lunch Average Breakdown"
+        startDate={moment('2018-03-14T00:00:00-04:00')}
+        endDate={moment('2018-03-20T00:00:00-04:00')}
+        spaces={["Space 1"]}
+        timeSegment={{
+          id: 'tsm_XXX',
+          name: 'Lunch',
+          start: '11:00:00',
+          end: '16:00:00',
+          days: [
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
+          ],
+          spaces: [ /* ... */ ],
+        }}
+        points={[
+          {timestamp: '11:00:00', value: 1},
+          {timestamp: '12:00:00', value: 4},
+          {timestamp: '13:00:00', value: 4},
+          {timestamp: '14:00:00', value: 6},
+          {timestamp: '15:00:00', value: 7},
+          {timestamp: '16:00:00', value: 4},
+        ]}
+
+        dailyAverage={821}
+
+        peakRateOfEntryTimestamp="12:10:00"
         peakRateOfEntryQuantity={3}
 
         peakOccupancyTimestamp="15:00:00"
