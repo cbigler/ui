@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 
 import moment from 'moment';
 
-import ReportWrapper, { ReportCard } from './';
+import ReportWrapper, { ReportCard, ReportPadding } from './';
 
 storiesOf('ReportWrapper', module)
   .addWithInfo('ReportWrapper with ReportCard inside', () => (
@@ -41,6 +41,7 @@ storiesOf('ReportWrapper', module)
         title="Cafeteria meal visits abc def ghi jkl"
         startDate={moment.utc()}
         endDate={moment.utc().subtract(2, 'days')}
+        spaces={["Space 1", "Space 2"]}
       >
         <ReportCard noPadding>
           Hello world
@@ -54,10 +55,27 @@ storiesOf('ReportWrapper', module)
         title="Cafeteria meal visits abc def ghi jkl"
         startDate={moment.utc()}
         endDate={moment.utc().subtract(2, 'days')}
+        spaces={["Space 1", "Space 2"]}
       >
         <div>
           Hello world
         </div>
+      </ReportWrapper>
+    </div>
+  ))
+  .addWithInfo('ReportWrapper with ReportCard (with no padding) inside, with seperate padded sections', () => (
+    <div style={{width: '100%', paddingTop: 100}}>
+      <ReportWrapper
+        title="Cafeteria meal visits abc def ghi jkl"
+        startDate={moment.utc()}
+        endDate={moment.utc().subtract(2, 'days')}
+        spaces={["Space 1", "Space 2"]}
+      >
+        <ReportCard noPadding>
+          <ReportPadding>This has padding</ReportPadding>
+          <span>This does not</span>
+          <ReportPadding>This has padding</ReportPadding>
+        </ReportCard>
       </ReportWrapper>
     </div>
   ))
