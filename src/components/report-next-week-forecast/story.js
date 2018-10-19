@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 
 import moment from 'moment';
 
-import ReportNextWeekForecast, { DAYS } from './';
+import ReportNextWeekForecast from './';
 
 storiesOf('ReportNextWeekForecast', module)
   .addWithInfo('Default view', () => (
@@ -14,7 +14,7 @@ storiesOf('ReportNextWeekForecast', module)
         startDate={moment("2018-03-14T00:00:00-04:00")}
         endDate={moment("2018-03-18T00:00:00-04:00")}
         spaces={["Cafe Bruno"]}
-        busiestDay={DAYS.FRIDAY}
+        busiestDay={moment("2018-03-18T00:00:00-04:00")}
         forecasts={[
           {
             visits: 300,

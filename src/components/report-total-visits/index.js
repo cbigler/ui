@@ -77,6 +77,7 @@ export default function ReportTotalVisits({
 
   segments,
   timeSegmentNames,
+  busiestDate,
 }) {
   const numberOfDaysInRange = moment.duration(startDate.diff(endDate)).days();
 
@@ -97,17 +98,17 @@ export default function ReportTotalVisits({
     >
       <ReportCard>
         <h3 className={styles.header}>
-          <span className={styles.headerBold}>Friday</span> was your busiest day
+          <span className={styles.headerBold}>{busiestDate.format('dddd')}</span> was your busiest day
         </h3>
         <ul className={styles.dayList}>
           {(() => {
             const days = [];
             let index = 0;
-            for (let day = startDate.clone(); day.isBefore(endDate); day = day.clone().add(1, 'day')) {
+            for (let day = startDate.clone(); day.isSameOrBefore(endDate); day = day.clone().add(1, 'day')) {
               days.push(
                 <li key={day.format()} className={styles.dayListItem}>
                   {/* The day of the week */}
-                  <span className={classnames(styles.dayName, day.format('ddd') === 'Fri' ? styles.dayNameHighlight : null)}>
+                  <span className={classnames(styles.dayName, day.format() === busiestDate.format() ? styles.dayNameHighlight : null)}>
                     {day.format('ddd')}
                   </span>
 

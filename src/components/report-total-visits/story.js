@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import moment from 'moment';
 
-import ReportTotalVisits from './';
+import ReportTotalVisits, { DAYS } from './';
 
 storiesOf('ReportTotalVisits', module)
   .addWithInfo('With one time segment', () => (
@@ -13,6 +13,7 @@ storiesOf('ReportTotalVisits', module)
         startDate={moment('2018-03-14T00:00:00-04:00')}
         endDate={moment('2018-03-20T00:00:00-04:00')}
         spaces={["Space 1"]}
+        busiestDate={moment('2018-03-20T00:00:00-04:00')}
 
         segments={[
           [500],
@@ -21,6 +22,7 @@ storiesOf('ReportTotalVisits', module)
           [300],
           [10],
           [1000],
+          [350],
         ]}
       />
     </div>
@@ -32,6 +34,7 @@ storiesOf('ReportTotalVisits', module)
         startDate={moment('2018-03-14T00:00:00-04:00')}
         endDate={moment('2018-03-20T00:00:00-04:00')}
         spaces={["Space 1"]}
+        busiestDate={moment('2018-03-20T00:00:00-04:00')}
 
         timeSegmentNames={['Before opening', 'Breakfast', 'Lunch', 'Dinner']}
         segments={[
@@ -41,6 +44,7 @@ storiesOf('ReportTotalVisits', module)
           [0, 0, 0, 0],
           [220, 510, 630, 780],
           [0, 5, 520, 74],
+          [200, 0, 50, 325],
         ]}
       />
     </div>

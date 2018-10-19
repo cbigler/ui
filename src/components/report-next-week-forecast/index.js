@@ -7,16 +7,6 @@ import styles from './styles.scss';
 import ReportWrapper, { ReportCard } from '@density/ui-report-wrapper';
 import colorVariables from '@density/ui/variables/colors.json';
 
-export const DAYS = {
-  MONDAY: 'Monday',
-  TUESDAY: 'Tuesday',
-  WEDNESDAY: 'Wednesday',
-  THURSDAY: 'Thursday',
-  FRIDAY: 'Friday',
-  SATURDAY: 'Saturday',
-  SUNDAY: 'Sunday',
-};
-
 class ReportNextWeekForecastChart extends Component {
   constructor(props) {
     super(props);
@@ -42,6 +32,7 @@ class ReportNextWeekForecastChart extends Component {
 
   render() {
     const { startDate, endDate, data, busiestDay } = this.props;
+            console.log('D', busiestDay)
     const { width, height } = this.state;
 
     const maximumBarContainerWidthInPx = width ? width - 150 : 0;
@@ -83,13 +74,12 @@ class ReportNextWeekForecastChart extends Component {
 
             const barHighWidthInPx = (data[index].high / maximumBarCombinedWidth) * maximumBarContainerWidthInPx;
             const barLowWidthInPx = (data[index].low / maximumBarCombinedWidth) * maximumBarContainerWidthInPx;
-
             return (
               <g key={day} transform={`translate(0,${(index * this.columnHeight)+(this.columnHeight/2)})`}>
                 {/* The day of the week */}
                 <text
                   fontSize={12}
-                  fontWeight={busiestDay.slice(0, 3) === day ? 'bold' : 'normal'}
+                  fontWeight={busiestDay.format('dddd').slice(0, 3) === day ? 'bold' : 'normal'}
                   transform="translate(0,3)"
                 >{day}</text>
 
@@ -152,10 +142,10 @@ export default function ReportNextWeekForecast({
       <ReportCard>
         <span className={styles.timePeriod}>Based on the past 3 months</span>
         <h2 className={styles.header}>
-          <span className={styles.headerHighlight}>{busiestDay}</span> will be your busiest day
+          <span className={styles.headerHighlight}>{busiestDay.format('dddd')}</span> will be your busiest day
         </h2>
         <ReportNextWeekForecastChart
-          busiestDay={DAYS.SATURDAY}
+          busiestDay={busiestDay}
           startDate={startDate}
           endDate={endDate}
           data={forecasts}
@@ -171,7 +161,7 @@ ReportNextWeekForecast.propTypes = {
   endDate: propTypes.instanceOf(moment).isRequired,
   spaces: propTypes.arrayOf(propTypes.string).isRequired,
 
-  busiestDay: propTypes.oneOf(Object.values(DAYS)).isRequired,
+  busiestDay: propTypes.instanceOf(moment).isRequired,
   forecasts: propTypes.arrayOf(propTypes.shape({
     visits: propTypes.number,
     high: propTypes.number,
