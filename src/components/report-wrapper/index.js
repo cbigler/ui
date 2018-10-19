@@ -47,9 +47,6 @@ function ReportWrapperHeader({
         <div className={styles.reportHeaderRightDesktop}>
           <span className={styles.reportHeaderDetailsLink}>
             <span className={styles.reportHeaderDetailsLinkText}>Details</span>
-            <span>
-              <IconArrowRight width={12} height={12} color={colorVariables.brandPrimary} />
-            </span>
           </span>
           <ReportWrapperHeaderDateRange startDate={startDate} endDate={endDate} />
         </div>

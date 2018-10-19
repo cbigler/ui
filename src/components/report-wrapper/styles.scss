@@ -77,9 +77,9 @@
 // Report header left side contents
 // ----------------------------------------------------------------------------
 .reportHeaderTitle {
-  color: $gray-darker;
+  color: $gray-cinder;
   font-size: 16px;
-  font-weight: normal;
+  font-weight: bold;
 
   margin-top: 0px;
   margin-bottom: 10px;
@@ -92,7 +92,8 @@
 }
 .reportHeaderSpaces {
   font-size: 14px;
-  font-weight: bold;
+  color: $gray-darkest;
+  font-weight: 600;
 }
 
 
@@ -113,7 +114,9 @@
 }
 .reportHeaderDetailsLinkText {
   margin-left: auto;
-  margin-right: 4px;
+  font-weight: 600;
+  color: $brand-primary;
+  text-decoration: underline;
 }
 
 .reportHeaderDateRange {
