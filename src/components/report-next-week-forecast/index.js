@@ -24,6 +24,7 @@ class ReportNextWeekForecastChart extends Component {
     this.onResize = this.onResize.bind(this);
 
     this.barLeftOffset = 50;
+    this.columnHeight = 30;
   }
 
   componentDidMount() {
@@ -72,7 +73,7 @@ class ReportNextWeekForecastChart extends Component {
 
     return (
       <div ref={r => { this.container = r; }} className={styles.chartContainer}>
-        <svg width={width} height={days.length * 40}>
+        <svg width={width} height={days.length * this.columnHeight - (this.columnHeight/4)}>
           {days.map((day, index) => {
             if (!data[index]) {
               throw new Error(`No ${index} value found in forecast array prop - does your date range cover a longer period of time then you've passed in forecasts for?`);
@@ -84,7 +85,7 @@ class ReportNextWeekForecastChart extends Component {
             const barLowWidthInPx = (data[index].low / maximumBarCombinedWidth) * maximumBarContainerWidthInPx;
 
             return (
-              <g key={day} transform={`translate(0,${(index * 40)+20})`}>
+              <g key={day} transform={`translate(0,${(index * this.columnHeight)+(this.columnHeight/2)})`}>
                 {/* The day of the week */}
                 <text
                   fontSize={12}

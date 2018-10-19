@@ -88,10 +88,9 @@ class ReportTimeSegmentBreakdownChart extends Component {
 
   onResize() {
     const width = this.container.clientWidth;
-    const idealHeight = width / 3;
     this.setState({
       width,
-      height: Math.max(150, idealHeight),
+      height: width / 3,
     });
   }
 
