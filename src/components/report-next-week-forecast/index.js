@@ -32,7 +32,6 @@ class ReportNextWeekForecastChart extends Component {
 
   render() {
     const { startDate, endDate, data, busiestDay } = this.props;
-            console.log('D', busiestDay)
     const { width, height } = this.state;
 
     const maximumBarContainerWidthInPx = width ? width - 150 : 0;
