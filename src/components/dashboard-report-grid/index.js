@@ -72,7 +72,7 @@ export default class DashboardReportGrid extends Component {
         return reportHeights[reports[index].id];
       });
       return (
-        <div>
+        <div className={styles.dashboardReportGridWrapper}>
           {reportsWithoutHeights}
           <div className={styles.dashboardReportGrid}>
             <div className={styles.dashboardReportGridColumn}>{reportsWithHeights}</div>
@@ -111,7 +111,7 @@ export default class DashboardReportGrid extends Component {
       );
 
       return (
-        <div>
+        <div className={styles.dashboardReportGridWrapper}>
           {reportsWithoutHeights}
           <div className={styles.dashboardReportGrid}>
             <div className={styles.dashboardReportGridColumn}>{columnA}</div>

@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-dashboard-report-grid",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Dashboard Report Grid component",
   "main": "dist/index.js",
   "author": "Density <engineering+javascript@density.io>",

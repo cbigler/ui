@@ -3,11 +3,13 @@
 // Local variables to the component
 @import "variables.json";
 
+.dashboardReportGridWrapper {
+  max-width: 1440px;
+}
+
 .dashboardReportGrid {
   display: flex;
   flex-direction: row;
-
-  max-width: 1440px;
 }
 .dashboardReportGridColumn {
   flex: 1;
