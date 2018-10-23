@@ -66,7 +66,7 @@ storiesOf('DashboardReportGrid', module)
           id: 2,
           report: (
             <ReportTimeSegmentBreakdown
-              title="Lunch Average Breakdown"
+              title="Lunch Average Breakdown TWO"
               startDate={moment('2018-03-14T00:00:00-04:00')}
               endDate={moment('2018-03-20T00:00:00-04:00')}
               spaces={["Space 1"]}

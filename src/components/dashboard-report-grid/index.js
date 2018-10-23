@@ -86,7 +86,10 @@ export default class DashboardReportGrid extends Component {
       }).reduce(
         ({columnA, columnATotalHeight, columnB, columnBTotalHeight}, reportComponent, index) => {
           const reportId = reports[index].id;
+          // Option one: arrange such that higher numbered reports are higher up the list
           if (columnATotalHeight <= columnBTotalHeight) {
+          // Option two: always arrange from left to right
+          // if (index % 2 === 0) {
             // Add to column a
             return {
               columnA: [...columnA, reportComponent],
