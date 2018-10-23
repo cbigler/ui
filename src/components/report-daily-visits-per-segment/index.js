@@ -5,7 +5,7 @@ import moment from 'moment';
 
 import styles from './styles.scss';
 
-import ReportWrapper, { ReportCard } from '@density/ui-report-wrapper';
+import ReportWrapper, { ReportCard, ReportSubHeader } from '@density/ui-report-wrapper';
 import colorVariables from '@density/ui/variables/colors.json';
 import hexRgb from 'hex-rgb';
 
@@ -14,10 +14,10 @@ function addAlphaToHex(hex, alpha) {
   return `rgba(${color.red}, ${color.green}, ${color.blue}, ${alpha})`;
 }
 
-function MaximumMinimumStatement({title, examples, value}) {
+function MaximumMinimumStatement({title, examples, value, titleLight}) {
   return (
     <div className={styles.maximumMinimumStatement}>
-      <span className={styles.maximumMinimumStatementHighlight}>
+      <span className={classnames(styles.maximumMinimumStatementTitle, {[styles.light]: titleLight})}>
         {title}:
       </span> {examples.map((m, index) => (
         [
@@ -106,19 +106,21 @@ export default function ReportDailyVisitsPerSegment({
       endDate={endDate}
       spaces={spaces}
     >
+      <ReportSubHeader>
+        <MaximumMinimumStatement
+          title="Max"
+          value={maxValue}
+          examples={maxima}
+        />
+        <MaximumMinimumStatement
+          title="Min"
+          value={minValue}
+          examples={minima}
+          titleLight
+        />
+      </ReportSubHeader>
       <ReportCard>
         <div className={styles.verticalLayout}>
-
-          <MaximumMinimumStatement
-            title="Max"
-            value={maxValue}
-            examples={maxima}
-          />
-          <MaximumMinimumStatement
-            title="Min"
-            value={minValue}
-            examples={minima}
-          />
 
           <div className={styles.tableWrapper}>
             <div className={styles.segmentTableTimeSegmentLabels}>
@@ -149,8 +151,8 @@ export default function ReportDailyVisitsPerSegment({
                         className={styles.segmentTableCell}
                         key={index /* I think this is what we want here, since the position of cells shouldn't change? */}
                         style={{
-                          backgroundColor: addAlphaToHex(colorVariables.brandPrimary, alpha),
-                          color: textColorPrimary ? colorVariables.brandPrimary : '#fff',
+                          backgroundColor: addAlphaToHex(colorVariables.reportBlue, alpha),
+                          color: textColorPrimary ? colorVariables.reportBlue : '#fff',
                         }}
                       >
                         {minValue === value ? 'MIN' : ''}
