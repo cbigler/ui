@@ -6,7 +6,7 @@ import commaNumber from 'comma-number';
 
 import styles from './styles.scss';
 
-import ReportWrapper, { ReportCard, ReportSubHeader } from '@density/ui-report-wrapper';
+import ReportWrapper, { ReportCard, ReportSubHeader, ReportOptionBar } from '@density/ui-report-wrapper';
 import colorVariables from '@density/ui/variables/colors.json';
 
 const OCCUPANCY_BAR_COLORS = [
@@ -33,7 +33,7 @@ function ReportCardOccupancyBar({totalWidth, segments}) {
                 multipleTimeSegmentsShown ? styles.occupancyBarSectionContainsLabels : null,
               )}
               style={{ width: `${totalSegmentValue ? segment / totalSegmentValue * 100 : 0}%` }}
-              key={segment}
+              key={`${segment},${ct}`}
             >
               {multipleTimeSegmentsShown ? (
                 <span
@@ -100,21 +100,13 @@ export default function ReportTotalVisits({
         title={<span><strong>{busiestDate.format('dddd')}</strong> was your busiest day</span>}
       >
         {multipleTimeSegmentsShown ? (
-          <div className={styles.timeSegmentListWrapper}>
-            <ul className={styles.timeSegmentList}>
-              {timeSegmentNames.map((name, index) => {
-                return (
-                  <li key={name} className={styles.timeSegmentListItem}>
-                    <div
-                      className={styles.timeSegmentColor}
-                      style={{backgroundColor: OCCUPANCY_BAR_COLORS[index]}}
-                    />
-                    <span className={styles.timeSegmentName}>{name}</span>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+          <ReportOptionBar
+            options={timeSegmentNames.map((name, index) => ({
+              id: index,
+              color: OCCUPANCY_BAR_COLORS[index],
+              label: name,
+            }))}
+          />
         ) : null}
       </ReportSubHeader>
       <ReportCard>

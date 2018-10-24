@@ -10,6 +10,71 @@ import colorVariables from '@density/ui/variables/colors.json';
 import styles from './styles.scss';
 
 
+export function ReportPadding({children}) {
+  return (
+    <div className={styles.reportPadding}>{children}</div>
+  );
+}
+ReportPadding.propTypes = {
+  children: propTypes.node.isRequired,
+};
+
+export function ReportCard({children, noPadding}) {
+  return (
+    <div className={styles.reportCard}>
+      {noPadding ? children : <ReportPadding>{children}</ReportPadding>}
+    </div>
+  );
+}
+ReportCard.propTypes = {
+  noPadding: propTypes.bool,
+  children: propTypes.node.isRequired,
+};
+
+export function ReportSubHeader({
+  title,
+  children
+}) {
+  const titleNode = title ?
+    <h2 className={styles.reportSubHeaderTitle}>{title}</h2> :
+    null;
+
+  return <div className={styles.reportSubHeader}>
+    {titleNode}
+    <div className={styles.reportSubHeaderContent}>{children}</div>
+  </div>;
+}
+ReportSubHeader.propTypes = {
+  title: propTypes.node,
+  children: propTypes.node
+};
+
+export function ReportOptionBar({options}) {
+  return (
+    <ul className={styles.reportOptionBarList}>
+      {options.map(({id, label, color}) => (
+        <li key={id} className={styles.reportOptionBarItem}>
+          <div
+            className={styles.reportOptionBarCircle}
+            style={{backgroundColor: color}}
+          />
+          <span className={styles.reportOptionBarLabel}>{label}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+ReportOptionBar.propTypes = {
+  options: propTypes.arrayOf(propTypes.shape({
+    id: propTypes.any.isRequired,
+    label: propTypes.node.isRequired,
+    color: propTypes.string.isRequired,
+  })).isRequired,
+};
+
+
+
+
 function ReportWrapperHeaderDateRange({startDate, endDate}) {
   return (
     <div className={styles.reportHeaderDateRange}>
@@ -60,45 +125,6 @@ function ReportWrapperHeader({
     </div>
   );
 }
-
-export function ReportPadding({children}) {
-  return (
-    <div className={styles.reportPadding}>{children}</div>
-  );
-}
-ReportPadding.propTypes = {
-  children: propTypes.node.isRequired,
-};
-
-export function ReportCard({children, noPadding}) {
-  return (
-    <div className={styles.reportCard}>
-      {noPadding ? children : <ReportPadding>{children}</ReportPadding>}
-    </div>
-  );
-}
-ReportCard.propTypes = {
-  noPadding: propTypes.bool,
-  children: propTypes.node.isRequired,
-};
-
-export function ReportSubHeader({
-  title,
-  children
-}) {
-  const titleNode = title ?
-    <h2 className={styles.reportSubHeaderTitle}>{title}</h2> :
-    null;
-
-  return <div className={styles.reportSubHeader}>
-    {titleNode}
-    <div className={styles.reportSubHeaderContent}>{children}</div>
-  </div>;
-}
-ReportSubHeader.propTypes = {
-  title: propTypes.node,
-  children: propTypes.node
-};
 
 export default function ReportWrapper({
   title,
