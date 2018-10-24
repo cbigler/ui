@@ -9,10 +9,11 @@ import colorVariables from '@density/ui/variables/colors.json';
 
 import styles from './styles.scss';
 
+
 function ReportWrapperHeaderDateRange({startDate, endDate}) {
   return (
     <div className={styles.reportHeaderDateRange}>
-      <span><IconCalendar width={12} height={12} color={colorVariables.grayCinder} /></span>
+      <span><IconCalendar width={12} height={12} color={colorVariables.grayDarker} /></span>
       <span className={styles.reportHeaderDateRangeTextStart}>{startDate.format('MMM DD')}</span>
       <span><IconArrowRight width={12} height={12} color={colorVariables.grayDarker} /></span>
       <span className={styles.reportHeaderDateRangeTextEnd}>{endDate.format('MMM DD')}</span>
@@ -79,6 +80,24 @@ export function ReportCard({children, noPadding}) {
 ReportCard.propTypes = {
   noPadding: propTypes.bool,
   children: propTypes.node.isRequired,
+};
+
+export function ReportSubHeader({
+  title,
+  children
+}) {
+  const titleNode = title ?
+    <h2 className={styles.reportSubHeaderTitle}>{title}</h2> :
+    null;
+
+  return <div className={styles.reportSubHeader}>
+    {titleNode}
+    <div className={styles.reportSubHeaderContent}>{children}</div>
+  </div>;
+}
+ReportSubHeader.propTypes = {
+  title: propTypes.node,
+  children: propTypes.node
 };
 
 export default function ReportWrapper({
