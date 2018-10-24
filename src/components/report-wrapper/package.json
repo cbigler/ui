@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-report-wrapper",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Report wrapper component",
   "main": "dist/index.js",
   "author": "Density <engineering+javascript@density.io>",
