@@ -57,15 +57,11 @@ start:
 
 .PHONY: clean
 clean:
-	rm -rf dist/
 	rm -rf components/*/dist/
 
-.PHONY: build
-build: dist/styles.css
-
 .PHONY: publish
-publish: clean build
-	npm publish --access public
+publish: clean
+	npm publish --access public --verbose
 
 dist/:
 	mkdir -p dist/
