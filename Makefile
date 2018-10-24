@@ -61,7 +61,7 @@ clean:
 
 .PHONY: publish
 publish: clean
-	npm publish --access public --verbose
+	npm publish --access public
 
 dist/:
 	mkdir -p dist/
