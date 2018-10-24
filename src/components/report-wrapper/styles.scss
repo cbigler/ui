@@ -164,6 +164,10 @@
   margin-bottom: 15px;
 
   color: $gray-cinder;
+
+  &.noBody {
+    margin-bottom: 0px;
+  }
 }
 .reportSubHeaderContent {
   font-size: 12px;

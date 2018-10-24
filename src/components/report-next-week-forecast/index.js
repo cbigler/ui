@@ -6,6 +6,7 @@ import moment from 'moment';
 import styles from './styles.scss';
 import ReportWrapper, { ReportCard, ReportSubHeader } from '@density/ui-report-wrapper';
 import colorVariables from '@density/ui/variables/colors.json';
+import spacingVariables from '@density/ui/variables/spacing.json';
 
 class ReportNextWeekForecastChart extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class ReportNextWeekForecastChart extends Component {
     this.onResize = this.onResize.bind(this);
 
     this.barLeftOffset = 50;
-    this.columnHeight = 30;
+    this.columnHeight = spacingVariables.reportRowHeight;
   }
 
   componentDidMount() {
@@ -141,7 +142,7 @@ export default function ReportNextWeekForecast({
     >
 
       <ReportSubHeader
-        title={<span><strong>{busiestDay.format('dddd')}</strong> will be your busiest day</span>}
+        title={<span><strong>{busiestDay.format('dddd')}</strong> will be your busiest day.</span>}
       >
         <strong>Based on the past 3 months</strong>
       </ReportSubHeader>

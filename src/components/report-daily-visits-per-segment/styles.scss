@@ -1,5 +1,6 @@
 // Import any global variables from "../../../variables/*.json"
 @import "../../../variables/colors.json";
+@import "../../../variables/spacing.json";
 
 // Local variables to the component
 @import "variables.json";
@@ -42,7 +43,6 @@
 .tableWrapper {
   display: flex;
   flex-direction: row;
-  margin-top: 10px;
 }
 
 
@@ -53,7 +53,7 @@
 }
 .segmentTableTimeSegmentLabelCell {
   width: 85px;
-  height: 30px;
+  height: $report-row-height;
 
   margin: 0.5px;
   margin-right: 10px;
@@ -65,7 +65,7 @@
 
   line-height: 32px;
 
-  &:first-of-type { margin-top: 43px; }
+  &:first-of-type { margin-top: $report-row-height + 2px; }
 }
 
 
@@ -83,7 +83,7 @@
 
 .segmentTableRowCellHeader {
   flex: 1;
-  height: 30px;
+  height: $report-row-height - (6px * 2);
   margin-top: 6px;
   margin-bottom: 6px;
 
@@ -99,7 +99,7 @@
 .segmentTableCell {
   background-color: $brand-primary;
   color: #fff;
-  height: 30px;
+  height: $report-row-height;
   flex: 1;
   margin: 0.5px;
 

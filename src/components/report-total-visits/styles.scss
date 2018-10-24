@@ -1,5 +1,6 @@
 // Import any global variables from "../../../variables/*.json"
 @import "../../../variables/colors.json";
+@import "../../../variables/spacing.json";
 
 .header {
   font-size: 16px;
@@ -18,7 +19,7 @@
 }
 .dayListItem {
   list-style-type: none;
-  height: 40px;
+  height: $report-row-height;
   font-size: 12px;
 
   display: flex;

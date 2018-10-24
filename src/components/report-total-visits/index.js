@@ -97,7 +97,7 @@ export default function ReportTotalVisits({
       spaces={spaces}
     >
       <ReportSubHeader
-        title={<span><strong>{busiestDate.format('dddd')}</strong> was your busiest day</span>}
+        title={<span><strong>{busiestDate.format('dddd')}</strong> was your busiest day.</span>}
       >
         {multipleTimeSegmentsShown ? (
           <ReportOptionBar

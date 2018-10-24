@@ -9,7 +9,6 @@ import colorVariables from '@density/ui/variables/colors.json';
 
 import styles from './styles.scss';
 
-
 export function ReportPadding({children}) {
   return (
     <div className={styles.reportPadding}>{children}</div>
@@ -35,9 +34,12 @@ export function ReportSubHeader({
   title,
   children
 }) {
-  const titleNode = title ?
-    <h2 className={styles.reportSubHeaderTitle}>{title}</h2> :
-    null;
+  const titleNode = title ? (
+    <h2 className={classnames(
+      styles.reportSubHeaderTitle,
+      {[styles.noBody]: !children}
+    )}>{title}</h2>
+  ) : null;
 
   return <div className={styles.reportSubHeader}>
     {titleNode}

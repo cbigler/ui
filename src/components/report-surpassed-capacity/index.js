@@ -6,6 +6,7 @@ import ReportWrapper, { ReportCard, ReportSubHeader, ReportOptionBar } from '@de
 
 import styles from './styles.scss';
 import colorVariables from '@density/ui/variables/colors.json';
+import spacingVariables from '@density/ui/variables/spacing.json';
 
 const OVER_CAPACITY_COLOR = '#D0021B',
       BUSY_COLOR = '#FF7988',
@@ -27,7 +28,7 @@ class SurpassedCapacityChart extends Component {
     this.state = { width: 300 };
     this.onResize = this.onResize.bind(this);
 
-    this.columnHeight = 30;
+    this.columnHeight = spacingVariables.reportRowHeight;
     this.xAxisMarkFontSize = 16;
     this.yAxisMarkFontSize = 14;
     this.barSpacingLeft = 48;
