@@ -6,14 +6,14 @@ import commaNumber from 'comma-number';
 
 import styles from './styles.scss';
 
-import ReportWrapper, { ReportCard } from '@density/ui-report-wrapper';
+import ReportWrapper, { ReportCard, ReportSubHeader } from '@density/ui-report-wrapper';
 import colorVariables from '@density/ui/variables/colors.json';
 
 const OCCUPANCY_BAR_COLORS = [
-  colorVariables.brandPrimary,
-  colorVariables.brandDanger,
-  colorVariables.brandWarning,
-  colorVariables.brandSuccess,
+  colorVariables.reportBlue,
+  colorVariables.reportOrange,
+  colorVariables.reportYellow,
+  colorVariables.reportGreen,
 ];
 function ReportCardOccupancyBar({totalWidth, segments}) {
   const totalSegmentValue = segments.reduce((a, b) => a + b, 0);
@@ -96,10 +96,28 @@ export default function ReportTotalVisits({
       endDate={endDate}
       spaces={spaces}
     >
+      <ReportSubHeader
+        title={<span><strong>{busiestDate.format('dddd')}</strong> was your busiest day</span>}
+      >
+        {multipleTimeSegmentsShown ? (
+          <div className={styles.timeSegmentListWrapper}>
+            <ul className={styles.timeSegmentList}>
+              {timeSegmentNames.map((name, index) => {
+                return (
+                  <li key={name} className={styles.timeSegmentListItem}>
+                    <div
+                      className={styles.timeSegmentColor}
+                      style={{backgroundColor: OCCUPANCY_BAR_COLORS[index]}}
+                    />
+                    <span className={styles.timeSegmentName}>{name}</span>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ) : null}
+      </ReportSubHeader>
       <ReportCard>
-        <h3 className={styles.header}>
-          <span className={styles.headerBold}>{busiestDate.format('dddd')}</span> was your busiest day
-        </h3>
         <ul className={styles.dayList}>
           {(() => {
             const days = [];
@@ -123,23 +141,6 @@ export default function ReportTotalVisits({
             return days;
           })()}
         </ul>
-        {multipleTimeSegmentsShown ? (
-          <div className={styles.timeSegmentListWrapper}>
-            <ul className={styles.timeSegmentList}>
-              {timeSegmentNames.map((name, index) => {
-                return (
-                  <li key={name} className={styles.timeSegmentListItem}>
-                    <div
-                      className={styles.timeSegmentColor}
-                      style={{backgroundColor: OCCUPANCY_BAR_COLORS[index]}}
-                    />
-                    <span className={styles.timeSegmentName}>{name}</span>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        ) : null}
       </ReportCard>
     </ReportWrapper>
   );

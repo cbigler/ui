@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import moment from 'moment';
 
 import styles from './styles.scss';
-import ReportWrapper, { ReportCard } from '@density/ui-report-wrapper';
+import ReportWrapper, { ReportCard, ReportSubHeader } from '@density/ui-report-wrapper';
 import colorVariables from '@density/ui/variables/colors.json';
 
 class ReportNextWeekForecastChart extends Component {
@@ -88,7 +88,7 @@ class ReportNextWeekForecastChart extends Component {
                   y={-6}
                   width={barLowWidthInPx + barHighWidthInPx}
                   height={12}
-                  fill={colorVariables.brandPrimary}
+                  fill={colorVariables.reportBlue}
                   opacity={0.25}
                 />
 
@@ -98,18 +98,18 @@ class ReportNextWeekForecastChart extends Component {
                   y={-2}
                   width={barWidthInPx}
                   height={4}
-                  fill={colorVariables.brandPrimary}
+                  fill={colorVariables.reportBlue}
                 />
 
                 <text
                   transform={`translate(${this.barLeftOffset + barWidthInPx + barHighWidthInPx + 10},6)`}
                 >
                   <tspan
-                    fill={colorVariables.brandPrimary}
+                    fill={colorVariables.reportBlue}
                     fontWeight="bold"
                   >{data[index].visits}</tspan>
                   <tspan
-                    fill={colorVariables.brandPrimary}
+                    fill={colorVariables.reportBlue}
                     fontWeight="normal"
                     opacity={0.45}
                   > &plusmn; {data[index].stdDev}</tspan>
@@ -131,6 +131,7 @@ export default function ReportNextWeekForecast({
   busiestDay,
   forecasts,
 }) {
+
   return (
     <ReportWrapper
       title={title}
@@ -138,11 +139,13 @@ export default function ReportNextWeekForecast({
       endDate={endDate}
       spaces={spaces}
     >
+
+      <ReportSubHeader
+        title={<span><strong>{busiestDay.format('dddd')}</strong> will be your busiest day</span>}
+      >
+        <strong>Based on the past 3 months</strong>
+      </ReportSubHeader>
       <ReportCard>
-        <span className={styles.timePeriod}>Based on the past 3 months</span>
-        <h2 className={styles.header}>
-          <span className={styles.headerHighlight}>{busiestDay.format('dddd')}</span> will be your busiest day
-        </h2>
         <ReportNextWeekForecastChart
           busiestDay={busiestDay}
           startDate={startDate}

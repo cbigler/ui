@@ -17,5 +17,11 @@
   "textColor": "#8E9299",
   "headerColor": "#4E5457",
   "inputFieldTextColor": "#CBCFD6",
-  "inputFieldTextActiveColor": "#4E5457"
+  "inputFieldTextActiveColor": "#4E5457",
+
+  "reportBlue": "#3663E5",
+  "reportBlueLight": "#97A6D4",
+  "reportGreen": "#319256",
+  "reportYellow": "#F7BA43",
+  "reportOrange": "#F26B40"
 }
