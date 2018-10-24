@@ -80,8 +80,8 @@ version-%:
 
 .PHONY: major minor patch
 patch: version-patch
-major: version-patch
-minor: version-patch
+major: version-major
+minor: version-minor
 
 .PHONY: components-list
 components-list:
