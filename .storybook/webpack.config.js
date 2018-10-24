@@ -47,6 +47,15 @@ module.exports = {
         ],
         include: path.resolve(__dirname, '../'),
       },
+
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+        ],
+        include: path.resolve(__dirname, '../'),
+      },
     ],
   },
 };
