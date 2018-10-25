@@ -18,6 +18,7 @@ help:
 	@printf "\t- make clean\tremoves the built artifacts in the dist/ directory\n"
 	@printf "\t- make build\tbuilds the main package's styles, and puts them into dist/\n"
 	@printf "\t- make publish\tpublishes the main @density/ui package to npm\n"
+	@printf "\t- make export-variables\texport all density ui variables so that they can be used in a non-bundler environment\n"
 	@echo
 	@echo
 	@echo "# Component-level targets"
@@ -50,6 +51,10 @@ bootstrap:
 	for i in $(shell $(MAKE) components-list); do \
 		pushd src/components/$$i && npm i && popd; \
 	done
+
+.PHONY: export-variables
+export-variables:
+	@node export-variables.js
 
 .PHONY: start
 start:
