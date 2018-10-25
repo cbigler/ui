@@ -51,6 +51,10 @@ bootstrap:
 		pushd src/components/$$i && npm i && popd; \
 	done
 
+.PHONY: export-variables
+export-variables:
+	@node export-variables.js
+
 .PHONY: start
 start:
 	@./node_modules/.bin/start-storybook -p $(PORT) -s public
