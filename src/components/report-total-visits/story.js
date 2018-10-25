@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import moment from 'moment';
 
-import ReportTotalVisits, { DAYS } from './';
+import ReportTotalVisits, { DAYS } from './index';
 
 storiesOf('ReportTotalVisits', module)
   .addWithInfo('With one time segment', () => (
@@ -13,7 +13,6 @@ storiesOf('ReportTotalVisits', module)
         startDate={moment('2018-03-14T00:00:00-04:00')}
         endDate={moment('2018-03-20T00:00:00-04:00')}
         spaces={["Space 1"]}
-        busiestDate={moment('2018-03-20T00:00:00-04:00')}
 
         segments={[
           [500],
@@ -23,6 +22,46 @@ storiesOf('ReportTotalVisits', module)
           [10],
           [1000],
           [350],
+        ]}
+      />
+    </div>
+  ))
+  .addWithInfo('With one time segment and multiple "busiest days"', () => (
+    <div style={{width: '100%', paddingTop: 100}}>
+      <ReportTotalVisits
+        title="Cafeteria meal visits"
+        startDate={moment('2018-03-14T00:00:00-04:00')}
+        endDate={moment('2018-03-20T00:00:00-04:00')}
+        spaces={["Space 1"]}
+
+        segments={[
+          [500],
+          [100],
+          [1000],
+          [300],
+          [10],
+          [1000],
+          [350],
+        ]}
+      />
+    </div>
+  ))
+  .addWithInfo('With one time segment and all segments containing zero', () => (
+    <div style={{width: '100%', paddingTop: 100}}>
+      <ReportTotalVisits
+        title="Cafeteria meal visits"
+        startDate={moment('2018-03-14T00:00:00-04:00')}
+        endDate={moment('2018-03-20T00:00:00-04:00')}
+        spaces={["Space 1"]}
+
+        segments={[
+          [0],
+          [0],
+          [0],
+          [0],
+          [0],
+          [0],
+          [0],
         ]}
       />
     </div>

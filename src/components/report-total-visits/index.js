@@ -69,6 +69,15 @@ function ReportCardOccupancyBar({totalWidth, segments}) {
   );
 }
 
+function getMaximumsByKey(data, keyFunction) {
+  const keyedData = data.map(keyFunction);
+  const maxValue = Math.max.apply(Math, keyedData);
+
+  return data.filter((_, index) => {
+    return keyedData[index] === maxValue;
+  });
+}
+
 export default function ReportTotalVisits({
   title,
   startDate,
@@ -77,7 +86,6 @@ export default function ReportTotalVisits({
 
   segments,
   timeSegmentNames,
-  busiestDate,
 }) {
   const numberOfDaysInRange = moment.duration(startDate.diff(endDate)).days();
 
@@ -89,6 +97,15 @@ export default function ReportTotalVisits({
     ))
   );
 
+  const totalCountPerSegment = segments.map((s, index) => ({
+    count: s.reduce((a, b) => a + b, 0),
+    day: startDate.clone().add(index, 'days'),
+  }));
+
+  const highestCount = getMaximumsByKey(totalCountPerSegment, s => s.count);
+
+  const highestCountIsZero = highestCount.length > 0 ? highestCount[0].count === 0 : false;
+
   return (
     <ReportWrapper
       title={title}
@@ -97,7 +114,21 @@ export default function ReportTotalVisits({
       spaces={spaces}
     >
       <ReportSubHeader
-        title={<span><strong>{busiestDate.format('dddd')}</strong> was your busiest day.</span>}
+        title={highestCountIsZero ? (
+          <span><strong>No events</strong> for this time range.</span>
+        ) : (
+          <span>
+            {highestCount.reduce((acc, i, index) => [
+              ...acc,
+              <strong key={index}>{i.day.format('dddd')}</strong>,
+              // i.day.format('dddd'),
+              ...(index < highestCount.length-2 ? [', '] : []),
+              ...(index === highestCount.length-2 ? [', and '] : []),
+            ], [])}
+            {' '} {highestCount.length === 1 ? 'was' : 'were'} your busiest{' '}
+            {highestCount.length === 1 ? 'day' : 'days'}.
+          </span>
+        )}
       >
         {multipleTimeSegmentsShown ? (
           <ReportOptionBar
@@ -118,7 +149,12 @@ export default function ReportTotalVisits({
               days.push(
                 <li key={day.format()} className={styles.dayListItem}>
                   {/* The day of the week */}
-                  <span className={classnames(styles.dayName, day.format() === busiestDate.format() ? styles.dayNameHighlight : null)}>
+                  <span className={classnames(
+                    styles.dayName,
+                    highestCount.find(i => (
+                      i.day.format('MM/DD/YYYY') === day.format('MM/DD/YYYY')
+                    )) ? styles.dayNameHighlight : null
+                  )}>
                     {day.format('ddd')}
                   </span>
 
