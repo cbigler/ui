@@ -9,13 +9,13 @@ import styles from './styles.scss';
 import ReportWrapper, { ReportCard, ReportSubHeader, ReportOptionBar } from '@density/ui-report-wrapper';
 import colorVariables from '@density/ui/variables/colors.json';
 
-const OCCUPANCY_BAR_COLORS = [
+const DEFAULT_OCCUPANCY_BAR_COLORS = [
   colorVariables.reportBlue,
   colorVariables.reportOrange,
   colorVariables.reportYellow,
   colorVariables.reportGreen,
 ];
-function ReportCardOccupancyBar({totalWidth, segments}) {
+function ReportCardOccupancyBar({totalWidth, segments, timeSegmentColors}) {
   const totalSegmentValue = segments.reduce((a, b) => a + b, 0);
   const multipleTimeSegmentsShown = segments.length > 1;
 
@@ -38,7 +38,7 @@ function ReportCardOccupancyBar({totalWidth, segments}) {
               {multipleTimeSegmentsShown ? (
                 <span
                   className={styles.occupancyBarSegmentLabel}
-                  style={{ color: OCCUPANCY_BAR_COLORS[ct] }}
+                  style={{ color: timeSegmentColors[ct] }}
                 >
                   <span className={styles.occupancyBarSegmentLabelBefore}></span>
                   <span className={styles.occupancyBarSegmentLabelInner}>
@@ -48,7 +48,7 @@ function ReportCardOccupancyBar({totalWidth, segments}) {
               ) : null}
               <div
                 className={styles.occupancyBarSegment}
-                style={{ backgroundColor: OCCUPANCY_BAR_COLORS[ct] }}
+                style={{ backgroundColor: timeSegmentColors[ct] }}
               />
             </div>
           );
@@ -86,10 +86,31 @@ export default function ReportTotalVisits({
 
   segments,
   timeSegmentNames,
+  timeSegmentColors,
 }) {
+  timeSegmentColors = timeSegmentColors || DEFAULT_OCCUPANCY_BAR_COLORS;
   const numberOfDaysInRange = moment.duration(startDate.diff(endDate)).days();
 
   const multipleTimeSegmentsShown = segments.length > 0 ? (segments[0].length > 1) : false;
+
+  if (segments.length === 0) {
+    throw new Error(`At least one time segment must be passed.`);
+  }
+
+  if (!timeSegmentNames && segments[0].length > 1) {
+    throw new Error(`A list of time segment names is required when more than one time segment is specified.`);
+  }
+  if (!timeSegmentColors && segments[0].length > 1) {
+    throw new Error(`A list of time segment colors is required when more than one time segment is specified.`);
+  }
+
+  if (timeSegmentNames) {
+    segments.forEach((segment, index) => {
+      if (segment.length !== timeSegmentNames.length) {
+        throw new Error(`Segment ${index} does not contain ${timeSegmentNames.length} items - since there are ${timeSegmentNames.length} time segments, it must!`);
+      }
+    });
+  }
 
   const largestMagnitudeOccupancy = Math.max.apply(Math,
     segments.map(segment => (
@@ -134,7 +155,7 @@ export default function ReportTotalVisits({
           <ReportOptionBar
             options={timeSegmentNames.map((name, index) => ({
               id: index,
-              color: OCCUPANCY_BAR_COLORS[index],
+              color: timeSegmentColors[index],
               label: name,
             }))}
           />
@@ -161,6 +182,7 @@ export default function ReportTotalVisits({
                   <ReportCardOccupancyBar
                     totalWidth={largestMagnitudeOccupancy}
                     segments={segments[index]}
+                    timeSegmentColors={timeSegmentColors}
                   />
                 </li>
               );
@@ -181,4 +203,5 @@ ReportTotalVisits.propTypes = {
 
   segments: propTypes.arrayOf(propTypes.arrayOf(propTypes.number)).isRequired,
   timeSegmentNames: propTypes.arrayOf(propTypes.string), /* not required when only one segment is passed */
+  timeSegmentColors: propTypes.arrayOf(propTypes.string), /* not required when only one segment is passed */
 };

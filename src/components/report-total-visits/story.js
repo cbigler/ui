@@ -4,8 +4,9 @@ import { action } from '@storybook/addon-actions';
 import moment from 'moment';
 
 import ReportTotalVisits, { DAYS } from './index';
+import colorVariables from '../../../variables/colors.json';
 
-storiesOf('ReportTotalVisits', module)
+storiesOf('Reports.TotalVisits', module)
   .addWithInfo('With one time segment', () => (
     <div style={{width: '100%', paddingTop: 100}}>
       <ReportTotalVisits
@@ -84,6 +85,28 @@ storiesOf('ReportTotalVisits', module)
           [220, 510, 630, 780],
           [0, 5, 520, 74],
           [200, 0, 50, 325],
+        ]}
+      />
+    </div>
+  ))
+  .addWithInfo('With two time segments, and custom colors', () => (
+    <div style={{width: '100%', paddingTop: 100}}>
+      <ReportTotalVisits
+        title="Cafeteria meal visits"
+        startDate={moment('2018-03-14T00:00:00-04:00')}
+        endDate={moment('2018-03-20T00:00:00-04:00')}
+        spaces={["Space 1"]}
+
+        timeSegmentNames={["Ryan Test Group", "Working Hours"]}
+        timeSegmentColors={['red', 'chartreuse']}
+        segments={[
+          [0, 0],
+          [20, 520],
+          [30, 514],
+          [0, 510],
+          [0, 522],
+          [0, 522],
+          [0, 522],
         ]}
       />
     </div>
