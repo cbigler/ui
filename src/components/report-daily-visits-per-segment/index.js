@@ -37,6 +37,10 @@ function MaximumMinimumStatement({title, examples, value, titleLight}) {
   );
 }
 
+function isNumeric(n) {
+  return typeof n === 'number';
+}
+
 export default function ReportDailyVisitsPerSegment({
   title,
   startDate,
@@ -76,8 +80,8 @@ export default function ReportDailyVisitsPerSegment({
     throw new Error(`The number of columns of data does not match the number of days between startDate and endDate (${data[0].length} days != ${days.length} days)`);
   }
 
-  const minValue = Math.min.apply(Math, data.map(v => Math.min.apply(Math, v)));
-  const maxValue = Math.max.apply(Math, data.map(v => Math.max.apply(Math, v)));
+  const minValue = Math.min.apply(Math, data.map(v => Math.min.apply(Math, v.filter(isNumeric))));
+  const maxValue = Math.max.apply(Math, data.map(v => Math.max.apply(Math, v.filter(isNumeric))));
 
   const maxima = data.map((row, rowIndex) => {
     return row.map((col, colIndex) => {
@@ -143,8 +147,16 @@ export default function ReportDailyVisitsPerSegment({
                   key={index /* I think this is what we want here, since the position of rows shouldn't change? */}
                 >
                   {row.map((value, index) => {
-                    const percentageShaded = (value - minValue) / (maxValue - minValue); /* 0...1 */
-                    const alpha = cellMinimumOpacity + (percentageShaded * (cellMaximumOpacity - cellMinimumOpacity));
+                    let percentageShaded, alpha;
+                    if (isNumeric(value)) {
+                      // The day has a daily visits number, so calculate it's opacity.
+                      percentageShaded = (value - minValue) / (maxValue - minValue); /* 0...1 */
+                      alpha = cellMinimumOpacity + (percentageShaded * (cellMaximumOpacity - cellMinimumOpacity));
+                    } else {
+                      // No daily visits were found for this day and time segment, so make it
+                      // completely transparent.
+                      alpha = 0;
+                    }
                     const textColorPrimary = alpha < cellColorThreshold;
                     return (
                       <div
@@ -181,5 +193,9 @@ ReportDailyVisitsPerSegment.propTypes = {
   spaces: propTypes.arrayOf(propTypes.string).isRequired,
 
   timeSegmentNames: propTypes.arrayOf(propTypes.string).isRequired,
-  data: propTypes.arrayOf(propTypes.arrayOf(propTypes.number)).isRequired,
+  data: propTypes.arrayOf(
+    propTypes.arrayOf(
+      propTypes.oneOfType([propTypes.number, propTypes.any /* null or undefined */]),
+    ),
+  ).isRequired,
 };

@@ -88,3 +88,30 @@ storiesOf('ReportDailyVisitsPerSegment', module)
       />
     </div>
   ))
+  .addWithInfo('With a few time segments that are missing days of data', () => (
+    <div style={{width: '100%',paddingTop: 100}}>
+      <ReportDailyVisitsPerSegment
+        title="Daily Segment Visits"
+        startDate={moment('2018-03-14T00:00:00-04:00')}
+        endDate={moment('2018-03-20T00:00:00-04:00')}
+        spaces={["Space 1"]}
+
+        timeSegmentNames={[
+          'Before Open',
+          'Breakfast',
+          'Between',
+          'Lunch',
+          'Dinner',
+          'After Close',
+        ]}
+        data={[
+          [null, 921, 824, 921, 824, 824, null],
+          [911, 902, 911, 902, 911, 911, null],
+          [870, 872, 945, 872, 870, 870, null],
+          [null, 904, 811, 904, 811, 811, null],
+          [null, 832, 873, 832, 873, 873, 832],
+          [null, 741, 782, 700, 782, 782, 741],
+        ]}
+      />
+    </div>
+  ))
