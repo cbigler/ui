@@ -28,6 +28,10 @@ storiesOf('ReportTimeSegmentBreakdown', module)
           ],
           spaces: [ /* ... */ ],
         }}
+        timeSegmentGroup={{
+          id: 'tsg_YYY',
+          name: 'Breakfast',
+        }}
         points={[
           {timestamp: '09:00:00', value: 1},
           {timestamp: '10:00:00', value: 2},
@@ -71,6 +75,10 @@ storiesOf('ReportTimeSegmentBreakdown', module)
           ],
           spaces: [ /* ... */ ],
         }}
+        timeSegmentGroup={{
+          id: 'tsg_YYY',
+          name: 'Lunch',
+        }}
         points={[
           {timestamp: '11:00:00', value: 1},
           {timestamp: '12:00:00', value: 4},
@@ -112,6 +120,10 @@ storiesOf('ReportTimeSegmentBreakdown', module)
           ],
           spaces: [ /* ... */ ],
         }}
+        timeSegmentGroup={{
+          id: 'tsg_YYY',
+          name: 'Lunch',
+        }}
         points={[
           {timestamp: '11:00:00', value: 1},
           {timestamp: '12:00:00', value: 4},
@@ -152,6 +164,10 @@ storiesOf('ReportTimeSegmentBreakdown', module)
             'Friday',
           ],
           spaces: [ /* ... */ ],
+        }}
+        timeSegmentGroup={{
+          id: 'tsg_YYY',
+          name: 'Breakfast',
         }}
         points={[
           {timestamp: '09:00:00', value: 1},
@@ -195,6 +211,10 @@ storiesOf('ReportTimeSegmentBreakdown', module)
             'Friday',
           ],
           spaces: [ /* ... */ ],
+        }}
+        timeSegmentGroup={{
+          id: 'tsg_YYY',
+          name: 'Breakfast',
         }}
         points={[
           {timestamp: '09:00:00', value: 1},

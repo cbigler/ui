@@ -302,6 +302,7 @@ export default function ReportTimeSegmentBreakdown({
   spaces,
 
   timeSegment,
+  timeSegmentGroup,
   points,
   dailyAverage,
 
@@ -320,7 +321,7 @@ export default function ReportTimeSegmentBreakdown({
       <ReportSubHeader
         title={
           <span>
-            <strong>{timeSegment.name}</strong> had a daily average of {' '}
+            <strong>{timeSegmentGroup.name}</strong> had a daily average of {' '}
             <strong>{commaNumber(dailyAverage)}</strong> visitors.
           </span>
         }
@@ -384,12 +385,16 @@ ReportTimeSegmentBreakdown.propTypes = {
   spaces: propTypes.arrayOf(propTypes.string).isRequired,
 
   timeSegment: propTypes.shape({
-    id: propTypes.string,
-    name: propTypes.string,
-    start: propTypes.string,
-    end: propTypes.string,
-    days: propTypes.arrayOf(propTypes.string),
-    spaces: propTypes.arrayOf(propTypes.any),
+    id: propTypes.string.isRequired,
+    name: propTypes.string.isRequired,
+    start: propTypes.string.isRequired,
+    end: propTypes.string.isRequired,
+    days: propTypes.arrayOf(propTypes.string).isRequired,
+    spaces: propTypes.arrayOf(propTypes.any).isRequired,
+  }).isRequired,
+  timeSegmentGroup: propTypes.shape({
+    id: propTypes.string.isRequired,
+    name: propTypes.string.isRequired,
   }).isRequired,
 
   points: propTypes.arrayOf(
