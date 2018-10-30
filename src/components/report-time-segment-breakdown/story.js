@@ -421,6 +421,10 @@ storiesOf('ReportTimeSegmentBreakdown', module)
           {
             "timestamp": "13:55:00",
             "value": 105.2
+          },
+          {
+            "timestamp": "14:00:00",
+            "value": 105.2
           }
         ]}
 
