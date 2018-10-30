@@ -143,6 +143,14 @@ export default function ReportDailyVisitsPerSegment({
     }).filter(i => i !== null);
   }).reduce((acc, i) => [...acc, ...i], []); // <- "flatMap"
 
+  // If a column of data (ie, a day) is empty, then don't render it in the header or the table.
+  const skipDayIndexes = [];
+  for (let colIndex = 0; colIndex < data[0].length; colIndex++) {
+    if (data.every(row => row[colIndex] === null)) {
+      skipDayIndexes.push(colIndex);
+    }
+  }
+
   return (
     <ReportWrapper
       title={title}
@@ -192,12 +200,18 @@ export default function ReportDailyVisitsPerSegment({
             </div>
             <div className={styles.segmentTable}>
               <div className={classnames(styles.segmentTableRow, styles.segmentTableRowHeader)}>
-                {days.map(day => (
-                  <div key={day[1]} className={styles.segmentTableRowCellHeader}>
-                    <span>{day[0]}</span>
-                    <span>{day[1]}</span>
-                  </div>
-                ))}
+                {days.map((day, dayIndex) => {
+                  if (skipDayIndexes.indexOf(dayIndex) >= 0) {
+                    return null;
+                  } else {
+                    return (
+                      <div key={day[1]} className={styles.segmentTableRowCellHeader}>
+                        <span>{day[0]}</span>
+                        <span>{day[1]}</span>
+                      </div>
+                    );
+                  }
+                })}
               </div>
               {data.map((row, index) => (
                 <div
@@ -205,6 +219,8 @@ export default function ReportDailyVisitsPerSegment({
                   key={index /* I think this is what we want here, since the position of rows shouldn't change? */}
                 >
                   {row.map((value, index) => {
+                    if (skipDayIndexes.indexOf(index) >= 0) { return null; }
+
                     let percentageShaded, alpha;
                     if (isNumeric(value)) {
                       // The day has a daily visits number, so calculate it's opacity.

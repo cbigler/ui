@@ -142,6 +142,33 @@ storiesOf('ReportDailyVisitsPerSegment', module)
       />
     </div>
   ))
+  .addWithInfo('With two complete days of data missing (those days shouldn\'t show up)', () => (
+    <div style={{width: '100%',paddingTop: 100}}>
+      <ReportDailyVisitsPerSegment
+        title="Daily Segment Visits"
+        startDate={moment('2018-03-14T00:00:00-04:00')}
+        endDate={moment('2018-03-20T00:00:00-04:00')}
+        spaces={["Space 1"]}
+
+        timeSegmentNames={[
+          'Before Open',
+          'Breakfast',
+          'Between',
+          'Lunch',
+          'Dinner',
+          'After Close',
+        ]}
+        data={[
+          [null, 921, 824, 921, 824, 824, null],
+          [null, 902, 911, 902, 911, 911, null],
+          [null, 872, 945, 872, 870, 870, null],
+          [null, 904, 811, 904, 811, 811, null],
+          [null, 832, 873, 832, 873, 873, null],
+          [null, 741, 782, 700, 782, 782, null],
+        ]}
+      />
+    </div>
+  ))
   .addWithInfo('Min and max the same', () => (
     <div style={{width: '100%',paddingTop: 100}}>
       <ReportDailyVisitsPerSegment
