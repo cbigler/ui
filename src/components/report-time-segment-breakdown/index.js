@@ -108,9 +108,9 @@ class ReportTimeSegmentBreakdownChart extends Component {
 
     const marks = [];
     for (let i = start; i.asHours() <= end.asHours(); i = i.clone().add(1, 'hour')) {
-      let label = i.asHours();
+      let label = i.hours();
       marks.push({
-        value: i.asSeconds(),
+        value: label * 3600, // convert label to seconds
         label: moment.utc().startOf('day').add(label, 'hours').format('ha').slice(0, -1),
       });
     }
