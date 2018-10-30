@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import colorVariables from '@density/ui/variables/colors.json';
 
 import moment from 'moment';
 
@@ -61,6 +62,7 @@ storiesOf('ReportTimeSegmentBreakdown', module)
         startDate={moment('2018-03-14T00:00:00-04:00')}
         endDate={moment('2018-03-20T00:00:00-04:00')}
         spaces={["Space 1"]}
+        color={colorVariables.reportBlue}
         timeSegment={{
           id: 'tsm_XXX',
           name: 'Lunch',

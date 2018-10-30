@@ -161,6 +161,7 @@ class ReportTimeSegmentBreakdownChart extends Component {
       endTime,
       points,
       timeSegment,
+      color,
 
       peakRateOfEntryTimestamp,
       peakRateOfEntryQuantity,
@@ -237,7 +238,7 @@ class ReportTimeSegmentBreakdownChart extends Component {
                   d={`M0,${yScale(0)}   ${curve}   M0,${yScale(0)}`}
                   fill="transparent"
                   strokeWidth={4}
-                  stroke={colorVariables.reportOrange}
+                  stroke={color}
                 />
               </g>;
             })()}
@@ -257,8 +258,8 @@ class ReportTimeSegmentBreakdownChart extends Component {
                     r={8}
                     cx={occupancyX}
                     cy={occupancyY + circleVerticalOffset}
-                    fill={colorVariables.reportOrange}
-                    stroke={colorVariables.reportOrange}
+                    fill={color}
+                    stroke={color}
                     strokeWidth={4}
                   />
 
@@ -268,7 +269,7 @@ class ReportTimeSegmentBreakdownChart extends Component {
                     cx={peakRateOfEntryX}
                     cy={peakRateOfEntryY - circleVerticalOffset}
                     fill={colorVariables.grayLightest}
-                    stroke={colorVariables.reportOrange}
+                    stroke={color}
                     strokeWidth={4}
                   />
                 </g>
@@ -300,6 +301,7 @@ export default function ReportTimeSegmentBreakdown({
   startDate,
   endDate,
   spaces,
+  color,
 
   timeSegment,
   timeSegmentGroup,
@@ -332,7 +334,7 @@ export default function ReportTimeSegmentBreakdown({
               className={styles.reportTimeSegmentBreakdownItemBubble}
               style={{
                 backgroundColor: colorVariables.grayLightest,
-                borderColor: colorVariables.reportOrange,
+                borderColor: color,
               }}
             />
             <span className={styles.reportTimeSegmentBreakdownItemLabel}>
@@ -348,8 +350,8 @@ export default function ReportTimeSegmentBreakdown({
             <div
               className={styles.reportTimeSegmentBreakdownItemBubble}
               style={{
-                backgroundColor: colorVariables.reportOrange,
-                borderColor: colorVariables.reportOrange,
+                backgroundColor: color,
+                borderColor: color,
               }}
             />
             <span className={styles.reportTimeSegmentBreakdownItemLabel}>
@@ -368,6 +370,7 @@ export default function ReportTimeSegmentBreakdown({
         <ReportTimeSegmentBreakdownChart
           timeSegment={timeSegment}
           points={points}
+          color={color}
           peakRateOfEntryQuantity={peakRateOfEntryQuantity}
           peakRateOfEntryTimestamp={peakRateOfEntryTimestamp}
           peakOccupancyTimestamp={peakOccupancyTimestamp}
@@ -383,6 +386,7 @@ ReportTimeSegmentBreakdown.propTypes = {
   startDate: propTypes.instanceOf(moment).isRequired,
   endDate: propTypes.instanceOf(moment).isRequired,
   spaces: propTypes.arrayOf(propTypes.string).isRequired,
+  color: propTypes.string.isRequired,
 
   timeSegment: propTypes.shape({
     id: propTypes.string.isRequired,
@@ -411,4 +415,7 @@ ReportTimeSegmentBreakdown.propTypes = {
 
   peakOccupancyTimestamp: propTypes.string.isRequired,
   peakOccupancyQuantity: propTypes.number.isRequired,
+};
+ReportTimeSegmentBreakdown.defaultProps = {
+  color: colorVariables.reportOrange,
 };
