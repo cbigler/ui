@@ -231,6 +231,10 @@ export default function ReportSurpassedCapacity({
   quietBusyThreshold,
   busyOverCapacityThreshold,
 }) {
+  // For each day, calculate all metrics this report needs:
+  // - Peak count and timestamp of that peak count
+  // - Total number of seconds that of time that we were either over capacity, busy, or quiet.
+  // - name of the day.
   let overCapacityOnChart = false;
   let busyOnChart = false;
   const metricsPerDayInSeconds = data.map((day, index) => {
@@ -303,7 +307,7 @@ export default function ReportSurpassedCapacity({
               <span>
                 {daysWithPeakCount.map(metrics => {
                   return (
-                    <span className={styles.header}>
+                    <span key={metrics.day} className={styles.header}>
                       <strong>{metrics.day}</strong>{' '}
                       was busy for{' '}
                       <strong>{moment.duration(metrics.analytics.busy, 'seconds').humanize()}</strong>
@@ -320,7 +324,7 @@ export default function ReportSurpassedCapacity({
               <span>
                 {daysWithPeakCount.map(metrics => {
                   return (
-                    <span className={styles.header}>
+                    <span key={metrics.day} className={styles.header}>
                       <strong>{metrics.day}</strong>{' '}
                       was over capacity for{' '}
                       <strong>{moment.duration(metrics.analytics.over, 'seconds').humanize()}</strong>
