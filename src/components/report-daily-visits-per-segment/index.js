@@ -151,17 +151,35 @@ export default function ReportDailyVisitsPerSegment({
       spaces={spaces}
     >
       <ReportSubHeader>
-        <MaximumMinimumStatement
-          title="Max"
-          value={maxValue}
-          examples={maxima}
-        />
-        <MaximumMinimumStatement
-          title="Min"
-          value={minValue}
-          examples={minima}
-          titleLight
-        />
+        {maxValue === -Infinity ? (
+          // In the case that there is no data rendered on the chart
+          <div className={styles.maximumMinimumStatement}>
+            <span className={styles.maximumMinimumStatementTitle}>
+              No max found.
+            </span>
+          </div>
+        ) : (
+          <MaximumMinimumStatement
+            title="Max"
+            value={maxValue}
+            examples={maxima}
+          />
+        )}
+        {minValue === Infinity ? (
+          // In the case that there is no data rendered on the chart
+          <div className={styles.maximumMinimumStatement}>
+            <span className={classnames(styles.maximumMinimumStatementTitle, styles.light)}>
+              No min found.
+            </span>
+          </div>
+        ) : (
+          <MaximumMinimumStatement
+            title="Min"
+            value={minValue}
+            examples={minima}
+            titleLight
+          />
+        )}
       </ReportSubHeader>
       <ReportCard>
         <div className={styles.verticalLayout}>
@@ -208,6 +226,7 @@ export default function ReportDailyVisitsPerSegment({
                         }}
                       >
                         {minValue === value ? 'MIN' : ''}
+                        {minValue === value && maxValue === value ? ' & ' : ''}
                         {maxValue === value ? 'MAX' : ''}
                       </div>
                     );

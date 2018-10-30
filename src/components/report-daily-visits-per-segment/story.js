@@ -115,3 +115,57 @@ storiesOf('ReportDailyVisitsPerSegment', module)
       />
     </div>
   ))
+  .addWithInfo('With only missing data', () => (
+    <div style={{width: '100%',paddingTop: 100}}>
+      <ReportDailyVisitsPerSegment
+        title="Daily Segment Visits"
+        startDate={moment('2018-03-14T00:00:00-04:00')}
+        endDate={moment('2018-03-20T00:00:00-04:00')}
+        spaces={["Space 1"]}
+
+        timeSegmentNames={[
+          'Before Open',
+          'Breakfast',
+          'Between',
+          'Lunch',
+          'Dinner',
+          'After Close',
+        ]}
+        data={[
+          [null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null],
+        ]}
+      />
+    </div>
+  ))
+  .addWithInfo('Min and max the same', () => (
+    <div style={{width: '100%',paddingTop: 100}}>
+      <ReportDailyVisitsPerSegment
+        title="Daily Segment Visits"
+        startDate={moment('2018-03-14T00:00:00-04:00')}
+        endDate={moment('2018-03-20T00:00:00-04:00')}
+        spaces={["Space 1"]}
+
+        timeSegmentNames={[
+          'Before Open',
+          'Breakfast',
+          'Between',
+          'Lunch',
+          'Dinner',
+          'After Close',
+        ]}
+        data={[
+          [10, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null],
+        ]}
+      />
+    </div>
+  ))
