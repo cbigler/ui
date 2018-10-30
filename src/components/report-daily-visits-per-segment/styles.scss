@@ -5,6 +5,8 @@
 // Local variables to the component
 @import "variables.json";
 
+$report-daily-visits-per-segment-large-row-height: 50px;
+
 .verticalLayout {
   display: flex;
   flex-direction: column;
@@ -63,9 +65,18 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 
-  line-height: 32px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  transition: all 250ms ease-in-out;
 
   &:first-of-type { margin-top: $report-row-height + 2px; }
+
+  // When the card gets bigger, make the height of each row larger.
+  @media screen and (min-width: 768px) {
+    height: $report-daily-visits-per-segment-large-row-height;
+  }
 }
 
 
@@ -104,11 +115,25 @@
   flex: 1;
   margin: 0.5px;
 
-  font-weight: bold;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 250ms ease-in-out;
+
   line-height: 36px;
   font-size: 10px;
-  @media screen and (min-width: 460px) {
+  @media screen and (min-width: 768px) {
     font-size: 12px;
+    height: $report-daily-visits-per-segment-large-row-height;
+  }
+}
+.segmentTableMinMax {
+  font-weight: bold;
+}
+.segmentTableValue {
+  display: none;
+  @media screen and (min-width: 768px) {
+    display: inline;
   }
 }

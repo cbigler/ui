@@ -191,7 +191,6 @@ export default function ReportDailyVisitsPerSegment({
       </ReportSubHeader>
       <ReportCard>
         <div className={styles.verticalLayout}>
-
           <div className={styles.tableWrapper}>
             <div className={styles.segmentTableTimeSegmentLabels}>
               {timeSegmentNames.map(ts => (
@@ -241,9 +240,15 @@ export default function ReportDailyVisitsPerSegment({
                           color: textColorPrimary ? colorVariables.reportBlue : '#fff',
                         }}
                       >
-                        {minValue === value ? 'MIN' : ''}
-                        {minValue === value && maxValue === value ? ' & ' : ''}
-                        {maxValue === value ? 'MAX' : ''}
+                        <strong className={styles.segmentTableMaxMin}>
+                          {minValue === value ? 'MIN' : ''}
+                          {minValue === value && maxValue === value ? ' & ' : ''}
+                          {maxValue === value ? 'MAX' : ''}
+                        </strong>
+                        <span className={styles.segmentTableValue}>
+                          {maxValue === value || minValue === value ? ': ' : null}
+                          {value}
+                        </span>
                       </div>
                     );
                   })}
@@ -254,7 +259,7 @@ export default function ReportDailyVisitsPerSegment({
         </div>
       </ReportCard>
     </ReportWrapper>
-  )
+  );
 }
 ReportDailyVisitsPerSegment.defaultProps = {
   cellColorThreshold: 0.45,
