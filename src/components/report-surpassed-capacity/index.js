@@ -221,6 +221,7 @@ export default function ReportSurpassedCapacity({
   endDate,
   spaces,
   timeSegment,
+  timeSegmentGroup,
   data,
   capacity,
   quietBusyThreshold,
@@ -239,9 +240,15 @@ export default function ReportSurpassedCapacity({
     ];
   }, []);
 
-  const highestCapacity = getMaximumsByKey(highestCapacityPerDay, d => d.count / capacity);
+  let highestCapacity = getMaximumsByKey(highestCapacityPerDay, d => d.count / capacity);
 
-  // THere's a distinct possibility that we found a region that has more over capacity regions
+  // If hte highest capacity wasn't actually high enough to be over capacity, then we have no cases
+  // where we went over capacity. So, reset `highestCapacity`.
+  if ((highestCapacity[0].count / capacity) < busyOverCapacityThreshold) {
+    highestCapacity = [];
+  }
+
+  // There's a distinct possibility that we found a region that has more over capacity regions
   // before it. In order to show an accurate "over capacity length", move balkwards through the list
   // of regions until we find one that is no longer "over capacity".
   const highCapacityRegionBounds = highestCapacity.map(highCapacityBucket => {
@@ -296,26 +303,34 @@ export default function ReportSurpassedCapacity({
       spaces={spaces}
     >
       <ReportSubHeader
-        title={highCapacityRegionBounds.map(highCapacityDay => (
-          <span className={styles.header} key={`${highCapacityDay.start},${highCapacityDay.end}`}>
-            <strong>{highCapacityDay.day.format('dddd')}</strong> was over
-            capacity for <strong>
-              {moment.duration(
-                moment.duration(highCapacityDay.endOfRegion).asMilliseconds() -
-                moment.duration(highCapacityDay.startOfRegion).asMilliseconds()
-              ).humanize()}
-            </strong>, peaking at{' '}
-            <strong>{highCapacityDay.count}</strong> visitors around <strong>
-              {
-                moment.utc()
-                  .startOf('day')
-                  .add(moment.duration(highCapacityDay.start))
-                  .format('H:mma')
-                  .slice(0, -1)
-              }
-            </strong>.
+        title={highCapacityRegionBounds.length > 0 ? (
+          // One or more places where the count goes over the capacity.
+          highCapacityRegionBounds.map(highCapacityDay => (
+            <span className={styles.header} key={`${highCapacityDay.start},${highCapacityDay.end}`}>
+              <strong>{highCapacityDay.day.format('dddd')}</strong> was over
+              capacity for <strong>
+                {moment.duration(
+                  moment.duration(highCapacityDay.endOfRegion).asMilliseconds() -
+                    moment.duration(highCapacityDay.startOfRegion).asMilliseconds()
+                ).humanize()}
+              </strong>, peaking at{' '}
+              <strong>{highCapacityDay.count}</strong> visitors around <strong>
+                {
+                  moment.utc()
+                    .startOf('day')
+                    .add(moment.duration(highCapacityDay.start))
+                    .format('H:mma')
+                    .slice(0, -1)
+                }
+              </strong>.
+            </span>
+          ))
+        ) : (
+          // No places where the count goes over the capacity.
+          <span className={styles.header}>
+            It was quiet this week during <strong>{timeSegmentGroup.name}</strong>.
           </span>
-        ))}
+        )}
       >
         <ReportOptionBar
           options={[
@@ -368,6 +383,10 @@ ReportSurpassedCapacity.propTypes = {
     end: propTypes.string.isRequired,
     days: propTypes.arrayOf(propTypes.string).isRequired,
     spaces: propTypes.arrayOf(propTypes.any).isRequired,
+  }).isRequired,
+  timeSegmentGroup: propTypes.shape({
+    id: propTypes.string.isRequired,
+    name: propTypes.string.isRequired,
   }).isRequired,
   capacity: propTypes.number.isRequired,
 
