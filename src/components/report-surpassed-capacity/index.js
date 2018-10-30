@@ -91,7 +91,7 @@ class SurpassedCapacityChart extends Component {
       endDate,
       timeSegment,
 
-      highestCapacity,
+      daysWithPeakCount,
       capacity,
 
       quietBusyThreshold,
@@ -179,8 +179,8 @@ class SurpassedCapacityChart extends Component {
                       {quietBusyThreshold, busyOverCapacityThreshold},
                     );
 
-                    const highestCapacityLabel = highestCapacity.find(h => (
-                      h.day.format('ddd') === day && h.start === start && h.end === end
+                    const highestCapacityLabel = color === OVER_CAPACITY_COLOR && daysWithPeakCount.find(h => (
+                      h.day.startsWith(day) && h.peak.timestamp === start
                     ));
 
                     const width = xScale(this.convertTimeToSeconds(end)) - xPos;
@@ -193,7 +193,7 @@ class SurpassedCapacityChart extends Component {
                             transform={`translate(${xPos+(width/2)},-4)`}
                             textAnchor="middle"
                             fill={OVER_CAPACITY_COLOR}
-                          >{highestCapacityLabel.count}</text>
+                          >{highestCapacityLabel.peak.count}</text>
                         ) : null}
                         <rect
                           x={xPos}
@@ -215,6 +215,10 @@ class SurpassedCapacityChart extends Component {
   }
 }
 
+const MODE_QUIET = 'MODE_QUIET',
+      MODE_BUSY = 'MODE_BUSY',
+      MODE_OVER = 'MODE_OVER';
+
 export default function ReportSurpassedCapacity({
   title,
   startDate,
@@ -227,73 +231,55 @@ export default function ReportSurpassedCapacity({
   quietBusyThreshold,
   busyOverCapacityThreshold,
 }) {
+  let overCapacityOnChart = false;
+  let busyOnChart = false;
+  const metricsPerDayInSeconds = data.map((day, index) => {
+    const analytics = day.reduce(({quiet, busy, over}, bucket) => {
+      const color = calculateColorForBucket(
+        bucket.count,
+        capacity,
+        {quietBusyThreshold, busyOverCapacityThreshold}
+      );
 
-  const highestCapacityPerDay = data.reduce((acc, day, dayIndex) => {
-    // Add indexes to days so that the buckets can be merged later on to figure out for how much
-    // time we were over capacity.
-    const daysWithIndexes = day.map((d, bucketIndex) => Object.assign({}, d, {dayIndex, bucketIndex}));
-    return [
-      ...acc,
-      ...getMaximumsByKey(daysWithIndexes, d => d.count / capacity).map(i => Object.assign({}, i, {
-        day: startDate.clone().add(dayIndex, 'days'),
-      })),
-    ];
-  }, []);
+      const bucketLengthInSeconds = (
+        moment.duration(bucket.end).asSeconds() -
+        moment.duration(bucket.start).asSeconds()
+      )
 
-  let highestCapacity = getMaximumsByKey(highestCapacityPerDay, d => d.count / capacity);
+      if (color == QUIET_COLOR) {
+        return {quiet: quiet + bucketLengthInSeconds, busy, over};
+      } else if (color === BUSY_COLOR) {
+        busyOnChart = true;
+        return {quiet, busy: busy + bucketLengthInSeconds, over};
+      } else {
+        overCapacityOnChart = true;
+        return {quiet, busy, over: over + bucketLengthInSeconds};
+      }
+    }, {quiet: 0, busy: 0, over: 0});
 
-  // If hte highest capacity wasn't actually high enough to be over capacity, then we have no cases
-  // where we went over capacity. So, reset `highestCapacity`.
-  if ((highestCapacity[0].count / capacity) < busyOverCapacityThreshold) {
-    highestCapacity = [];
+    const peak = day.reduce(({timestamp, count}, bucket) => {
+      if (bucket.count > count) {
+        return {timestamp: bucket.start, count: bucket.count};
+      } else {
+        return {timestamp, count};
+      }
+    }, {timestamp: null, count: 0});
+
+    return {
+      day: moment.utc().startOf('week').add(index, 'days').format('dddd'),
+      peak,
+      analytics,
+    };
+  });
+
+  let renderMode = MODE_QUIET;
+  if (overCapacityOnChart) {
+    renderMode = MODE_OVER;
+  } else if (busyOnChart) {
+    renderMode = MODE_BUSY;
   }
 
-  // There's a distinct possibility that we found a region that has more over capacity regions
-  // before it. In order to show an accurate "over capacity length", move balkwards through the list
-  // of regions until we find one that is no longer "over capacity".
-  const highCapacityRegionBounds = highestCapacity.map(highCapacityBucket => {
-    const originalBucketColor = calculateColorForBucket(
-      highCapacityBucket.count, capacity,
-      {quietBusyThreshold, busyOverCapacityThreshold},
-    );
-
-    const dayDataArray = data[highCapacityBucket.dayIndex];
-
-    // Find the start of this region
-    let bucketIndex = highCapacityBucket.bucketIndex;
-    let bucketColor = originalBucketColor;
-
-    // Keep going backwards until the bucket we've run into is no longer the same type as the original one.
-    while (bucketIndex > 0 && bucketColor === originalBucketColor) {
-      bucketIndex -= 1;
-      const bucketCount = dayDataArray[bucketIndex].count;
-      bucketColor = calculateColorForBucket(
-        bucketCount, capacity,
-        {quietBusyThreshold, busyOverCapacityThreshold},
-      );
-    }
-    const startOfRegion = dayDataArray[bucketIndex+1].start;
-
-    // Find the end of this region
-    bucketIndex = highCapacityBucket.bucketIndex;
-    bucketColor = originalBucketColor;
-
-    // Keep going forwards until the bucket we've run into is no longer the same type as the original one.
-    while (bucketIndex < dayDataArray.length && bucketColor === originalBucketColor) {
-      bucketIndex += 1;
-      const bucketCount = dayDataArray[bucketIndex].count;
-      bucketColor = calculateColorForBucket(
-        bucketCount, capacity,
-        {quietBusyThreshold, busyOverCapacityThreshold},
-      );
-    }
-    const endOfRegion = dayDataArray[bucketIndex-1].end;
-
-    return Object.assign({}, highCapacityBucket, {
-      startOfRegion,
-      endOfRegion,
-    });
-  });
+  const daysWithPeakCount = getMaximumsByKey(metricsPerDayInSeconds, d => d.peak.count);
 
   return (
     <ReportWrapper
@@ -303,54 +289,75 @@ export default function ReportSurpassedCapacity({
       spaces={spaces}
     >
       <ReportSubHeader
-        title={highCapacityRegionBounds.length > 0 ? (
-          // One or more places where the count goes over the capacity.
-          highCapacityRegionBounds.map(highCapacityDay => (
-            <span className={styles.header} key={`${highCapacityDay.start},${highCapacityDay.end}`}>
-              <strong>{highCapacityDay.day.format('dddd')}</strong> was over
-              capacity for <strong>
-                {moment.duration(
-                  moment.duration(highCapacityDay.endOfRegion).asMilliseconds() -
-                    moment.duration(highCapacityDay.startOfRegion).asMilliseconds()
-                ).humanize()}
-              </strong>, peaking at{' '}
-              <strong>{highCapacityDay.count}</strong> visitors around <strong>
-                {
-                  moment.utc()
-                    .startOf('day')
-                    .add(moment.duration(highCapacityDay.start))
-                    .format('H:mma')
-                    .slice(0, -1)
-                }
-              </strong>.
-            </span>
-          ))
-        ) : (
-          // No places where the count goes over the capacity.
-          <span className={styles.header}>
-            It was quiet this week during <strong>{timeSegmentGroup.name}</strong>.
-          </span>
-        )}
+        title={(() => {
+          switch (renderMode) {
+          case MODE_QUIET:
+            return (
+              // No places where the count goes over the capacity.
+              <span className={styles.header}>
+                It was quiet this week during <strong>{timeSegmentGroup.name}</strong>.
+              </span>
+            );
+          case MODE_BUSY:
+            return (
+              <span>
+                {daysWithPeakCount.map(metrics => {
+                  return (
+                    <span className={styles.header}>
+                      <strong>{metrics.day}</strong>{' '}
+                      was busy for{' '}
+                      <strong>{moment.duration(metrics.analytics.busy, 'seconds').humanize()}</strong>
+                      , peaking at{' '}
+                      <strong>{metrics.peak.count}</strong>
+                      {' '}visitors.
+                    </span>
+                  );
+                })}
+              </span>
+            );
+          case MODE_OVER:
+            return (
+              <span>
+                {daysWithPeakCount.map(metrics => {
+                  return (
+                    <span className={styles.header}>
+                      <strong>{metrics.day}</strong>{' '}
+                      was over capacity for{' '}
+                      <strong>{moment.duration(metrics.analytics.over, 'seconds').humanize()}</strong>
+                      , peaking at{' '}
+                      <strong>{metrics.peak.count}</strong>
+                      {' '}visitors.
+                    </span>
+                  );
+                })}
+              </span>
+            );
+          default:
+            return null;
+          }
+        })()}
       >
-        <ReportOptionBar
-          options={[
-            {
-              id: 0,
-              label: `Quiet (0-${Math.round(quietBusyThreshold*100)-1})`,
-              color: QUIET_COLOR,
-            },
-            {
-              id: 1,
-              label: `Busy (${Math.round(quietBusyThreshold*100)}-${Math.round(busyOverCapacityThreshold*100)-1})`,
-              color: BUSY_COLOR,
-            },
-            {
-              id: 2,
-              label: `Over Capacity (${Math.round(busyOverCapacityThreshold*100)}+)`,
-              color: OVER_CAPACITY_COLOR,
-            },
-          ]}
-        />
+        {renderMode !== MODE_QUIET ? (
+          <ReportOptionBar
+            options={[
+              {
+                id: 0,
+                label: `Quiet (0-${Math.round(quietBusyThreshold*100)-1})`,
+                color: QUIET_COLOR,
+              },
+              {
+                id: 1,
+                label: `Busy (${Math.round(quietBusyThreshold*100)}-${Math.round(busyOverCapacityThreshold*100)-1})`,
+                color: BUSY_COLOR,
+              },
+              {
+                id: 2,
+                label: `Over Capacity (${Math.round(busyOverCapacityThreshold*100)}+)`,
+                color: OVER_CAPACITY_COLOR,
+              },
+            ]}
+          />
+        ) : null}
       </ReportSubHeader>
       <ReportCard>
         <SurpassedCapacityChart
@@ -360,7 +367,7 @@ export default function ReportSurpassedCapacity({
           timeSegment={timeSegment}
 
           capacity={capacity}
-          highestCapacity={highestCapacity}
+          daysWithPeakCount={daysWithPeakCount}
 
           quietBusyThreshold={quietBusyThreshold}
           busyOverCapacityThreshold={busyOverCapacityThreshold}
