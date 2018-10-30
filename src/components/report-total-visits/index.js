@@ -42,7 +42,7 @@ function ReportCardOccupancyBar({totalWidth, segments, timeSegmentColors}) {
                 >
                   <span className={styles.occupancyBarSegmentLabelBefore}></span>
                   <span className={styles.occupancyBarSegmentLabelInner}>
-                    {segment}
+                    {commaNumber(segment)}
                   </span>
                 </span>
               ) : null}
