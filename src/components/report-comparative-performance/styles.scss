@@ -1,0 +1,53 @@
+// Import any global variables from "../../../variables/*.json"
+@import '../../../variables/colors.json';
+
+// Local variables to the component
+@import "variables.json";
+
+.table {
+  width: 100%;
+  border-spacing: 0px;
+}
+
+.table tr td, .table tr th {
+  font-size: 14px;
+  font-weight: normal;
+  height: 46px;
+  text-align: center;
+
+  border-top: 1px solid $gray;
+  border-left: 1px solid $gray;
+}
+.table tr td:first-of-type {
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-left: 0px;
+  line-height: 20px;
+}
+.table tr th {
+  border-top: 0px;
+  line-height: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.table tr th:first-of-type { border-left: 0px; }
+
+.tableHighlight {
+  background-color: $gray-lighter;
+}
+
+.subheading {
+  display: block;
+  font-size: 10px;
+}
+.subheadingDate { white-space: nowrap; }
+
+.percentage {
+  color: $gray-darker;
+  font-size: 11px;
+}
+.percentageNegative { color: $report-red; }
+.percentageNegative:before { content: '-'; }
+.percentagePositive { color: $report-green; }
+.percentagePositive:before { content: '+'; }
