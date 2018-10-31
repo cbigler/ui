@@ -23,5 +23,6 @@
   "reportBlueLight": "#97A6D4",
   "reportGreen": "#319256",
   "reportYellow": "#F7BA43",
-  "reportOrange": "#F26B40"
+  "reportOrange": "#F26B40",
+  "reportRed": "#CB4368"
 }
