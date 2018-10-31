@@ -16,6 +16,18 @@ export default function ReportAverageMeetingSize({
   sortOrder,
   data,
 }) {
+  const sortedData = data.sort((a, b) => {
+    const aEmptySeats = a.availableSeats - a.averageMeetingSeats;
+    const bEmptySeats = b.availableSeats - b.averageMeetingSeats;
+    if (sortOrder === AVERAGE_MEETING_SIZE_SORT_BEST) {
+      return aEmptySeats - bEmptySeats;
+    } else {
+      return bEmptySeats - aEmptySeats;
+    }
+  });
+  const topMeetingRoomEmptySeats = (
+    sortedData[0].availableSeats - sortedData[0].averageMeetingSeats
+  );
   return (
     <ReportWrapper
       title={title}
@@ -26,9 +38,12 @@ export default function ReportAverageMeetingSize({
       <ReportSubHeader
         title={(
           <span>
-            <strong>Confrence Room A</strong> is the {'worst'}{' '}
+            <strong>{sortedData[0].spaceName}</strong> is the{' '}
+            {sortOrder === AVERAGE_MEETING_SIZE_SORT_BEST ? 'best' : 'worst'}{' '}
             performing meeting room with an average of{' '}
-            <strong>2 empty seats</strong>.
+            <strong>
+              {topMeetingRoomEmptySeats} empty {topMeetingRoomEmptySeats === 1 ? 'seat' : 'seats'}
+            </strong>.
           </span>
         )}
       />
@@ -45,15 +60,7 @@ export default function ReportAverageMeetingSize({
             </tr>
           </thead>
           <tbody>
-            {data.sort((a, b) => {
-              const aEmptySeats = a.availableSeats - a.averageMeetingSeats;
-              const bEmptySeats = b.availableSeats - b.averageMeetingSeats;
-              if (sortOrder === AVERAGE_MEETING_SIZE_SORT_BEST) {
-                return aEmptySeats - bEmptySeats;
-              } else {
-                return bEmptySeats - aEmptySeats;
-              }
-            }).map(item => (
+            {sortedData.map(item => (
               <tr key={item.id}>
                 <td className={styles.spaceNameCell}>
                   <span className={styles.spaceNameText}>{item.spaceName}</span>
@@ -111,4 +118,8 @@ ReportAverageMeetingSize.propTypes = {
       availableSeats: propTypes.number.isRequired,
     }).isRequired,
   ).isRequired,
+  sortOrder: propTypes.oneOf([
+    AVERAGE_MEETING_SIZE_SORT_BEST,
+    AVERAGE_MEETING_SIZE_SORT_WORST,
+  ]).isRequired,
 };
