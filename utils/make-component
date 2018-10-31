@@ -36,4 +36,4 @@ echo "* src/components/$COMPONENTDASH/styles.scss contains your component styles
 echo "* src/components/$COMPONENTDASH/story.js contains your react-storyboard story. Use it to present different states of your component."
 echo
 echo "To build the storyboard and start a development server:"
-echo "=> npm run storyboard"
+echo "=> make start"

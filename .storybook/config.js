@@ -4,6 +4,7 @@ import infoAddon from '@storybook/addon-info';
 setAddon(infoAddon);
 
 import 'normalize.css';
+import 'moment-timezone';
 
 function loadStories() {
   // This is some stupid webpack magic. Basically, require in all files in '../src/components.'
