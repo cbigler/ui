@@ -22,13 +22,14 @@
     "babel-cli": "^6.26.0",
     "babel-loader": "^8.0.2",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "moment": "^2.22.2",
+    "moment-timezone": "^0.5.23",
     "node-sass": "^4.9.3",
     "pretty": "^2.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-scripts": "^1.1.5",
-    "sass-loader": "^7.1.0",
-    "moment": "^2.22.2"
+    "sass-loader": "^7.1.0"
   },
   "dependencies": {
     "classnames": "^2.2.5",

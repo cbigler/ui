@@ -167,6 +167,7 @@ class SurpassedCapacityChart extends Component {
                     width={width - this.barSpacingLeft}
                     height={8}
                     fill={QUIET_COLOR}
+                    shapeRendering="crispEdges"
                   />
 
                   {/* color each region of interest */}
@@ -201,6 +202,7 @@ class SurpassedCapacityChart extends Component {
                           width={width}
                           height={8}
                           fill={color}
+                          shapeRendering="crispEdges"
                         />
                       </g>
                     );
