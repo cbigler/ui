@@ -1,0 +1,133 @@
+// Import any global variables from "../../../variables/*.json"
+@import '../../../variables/colors.json';
+
+// Local variables to the component
+@import "variables.json";
+
+.table {
+  width: 100%;
+  border-spacing: 0px;
+}
+
+.table tr td {
+  font-size: 14px;
+  font-weight: normal;
+
+  height: 46px;
+  border-top: 1px solid $gray;
+  border-left: 1px solid $gray;
+}
+.table tr td:first-of-type { border-left: 0px; }
+
+.table tr th {
+  font-size: 12px;
+  font-weight: bold;
+  text-align: left;
+
+  height: 32px;
+  border-left: 1px solid $gray;
+
+  padding-top: 2px;
+  padding-left: 10px;
+  padding-right: 5px;
+  @media screen and (min-width: 568px) {
+    padding-left: 15px;
+  }
+}
+.table tr th:first-of-type {
+  border-left: 0px;
+  padding-left: 10px;
+  @media screen and (min-width: 360px) {
+    padding-left: 20px;
+  }
+}
+
+.tableHighlight { background-color: $gray-lighter; }
+
+
+.spaceNameCell {
+  padding-left: 10px;
+  padding-right: 10px;
+  line-height: 20px;
+
+  max-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media screen and (min-width: 360px) {
+    padding-left: 20px;
+  }
+}
+
+.averageMeetingCell {
+  width: 100px;
+  @media screen and (min-width: 568px) {
+    width: 200px;
+  }
+}
+.emptySeatsCell {
+  width: 100px;
+  text-align: center;
+}
+
+// Used for "Average Meetings" <=> "Avg. Meetings"
+.mobileHeader {
+  display: inline-block;
+  @media screen and (min-width: 568px) {
+    display: none;
+  }
+}
+.desktopHeader {
+  display: none;
+  @media screen and (min-width: 568px) {
+    display: inline-block;
+  }
+}
+
+
+.dotWrapper {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 90px;
+  @media screen and (min-width: 568px) {
+    width: 180px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 2px solid $gray-darker;
+  margin: 3px;
+}
+.dotFilled {
+  border-color: $report-blue;
+  background-color: $report-blue;
+}
+
+.dotLabel {
+  height: 8px;
+  border: 2px solid transparent;
+  margin-left: 1px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  margin-right: 3px;
+  transform: translate(0px, 2px);
+
+  font-size: 12px;
+  line-height: 8px;
+  color: $gray-darker;
+}
+.dotLabelPart {
+  color: $report-blue;
+  font-weight: bold;
+}
