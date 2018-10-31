@@ -47,7 +47,7 @@ function getRangeName(mode, start) {
   case COMPARATIVE_WEEK:
     return `Week of ${start.format('MMM D')}`
   case COMPARATIVE_MONTH:
-    return `${start.format('MMM')}`;
+    return `${start.format('MMMM')}`;
   case COMPARATIVE_QUARTER:
     return `Q${start.quarter()}`;
   default:
