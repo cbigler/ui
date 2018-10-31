@@ -78,14 +78,20 @@ ReportOptionBar.propTypes = {
 
 
 function ReportWrapperHeaderDateRange({startDate, endDate}) {
-  return (
-    <div className={styles.reportHeaderDateRange}>
-      <span><IconCalendar width={12} height={12} color={colorVariables.grayDarker} /></span>
-      <span className={styles.reportHeaderDateRangeTextStart}>{startDate.format('MMM DD')}</span>
-      <span><IconArrowRight width={12} height={12} color={colorVariables.grayDarker} /></span>
-      <span className={styles.reportHeaderDateRangeTextEnd}>{endDate.format('MMM DD')}</span>
-    </div>
-  );
+  if (!startDate || !endDate) {
+    return (
+      <div className={styles.reportHeaderDateRange} />
+    );
+  } else {
+    return (
+      <div className={styles.reportHeaderDateRange}>
+        <span><IconCalendar width={12} height={12} color={colorVariables.grayDarker} /></span>
+        <span className={styles.reportHeaderDateRangeTextStart}>{startDate.format('MMM DD')}</span>
+        <span><IconArrowRight width={12} height={12} color={colorVariables.grayDarker} /></span>
+        <span className={styles.reportHeaderDateRangeTextEnd}>{endDate.format('MMM DD')}</span>
+      </div>
+    );
+  }
 }
 
 function ReportWrapperHeader({
@@ -147,8 +153,8 @@ export default function ReportWrapper({
 }
 ReportWrapper.propTypes = {
   title: propTypes.string.isRequired,
-  startDate: propTypes.any.isRequired,
-  endDate: propTypes.any.isRequired,
+  startDate: propTypes.any,
+  endDate: propTypes.any,
   children: propTypes.node,
-  spaces: propTypes.arrayOf(propTypes.string),
+  spaces: propTypes.arrayOf(propTypes.string).isRequired,
 };
