@@ -125,7 +125,10 @@ class SurpassedCapacityChart extends Component {
       return days;
     })();
 
-    const height = days.length * this.columnHeight - (this.columnHeight/4) + 5;
+    const daysOfData = days.filter((_, index) => data[index] !== null);
+    const height = daysOfData.length * this.columnHeight - (this.columnHeight/4) + 5;
+
+    let dayPositionIndex = -1;
 
     return (
       <div ref={r => { this.container = r; }} className={styles.chartContainer}>
@@ -152,8 +155,15 @@ class SurpassedCapacityChart extends Component {
 
           {/* Render a bar for each row */}
           {days.map((day, index) => {
+            // If the day has data that is null, then don't render the day
+            if (data[index] === null) { return null; }
+
+            // Because of the case above, we have to keep track of the index used to draw the bar
+            // seperately as `index` will still increment even when a day has no data.
+            dayPositionIndex += 1;
+
             return (
-              <g key={day} transform={`translate(0,${(index * this.columnHeight)+(this.columnHeight/2)+5})`}>
+              <g key={day} transform={`translate(0,${(dayPositionIndex * this.columnHeight)+(this.columnHeight/2)+5})`}>
                 <text
                   transform="translate(0,3)"
                   fontSize={this.yAxisMarkFontSize}
@@ -239,7 +249,7 @@ export default function ReportSurpassedCapacity({
   // - name of the day.
   let overCapacityOnChart = false;
   let busyOnChart = false;
-  const metricsPerDayInSeconds = data.map((day, index) => {
+  const metricsPerDayInSeconds = data.filter(day => day !== null).map((day, index) => {
     const analytics = day.reduce(({quiet, busy, over}, bucket) => {
       const color = calculateColorForBucket(
         bucket.count,
@@ -407,12 +417,15 @@ ReportSurpassedCapacity.propTypes = {
   busyOverCapacityThreshold: propTypes.number.isRequired,
 
   data: propTypes.arrayOf(
-    propTypes.arrayOf(
-      propTypes.shape({
-        count: propTypes.number.isRequired,
-        start: propTypes.string.isRequired,
-        end: propTypes.string.isRequired,
-      }).isRequired,
-    ).isRequired,
+    propTypes.oneOfType([
+      propTypes.arrayOf(
+        propTypes.shape({
+          count: propTypes.number.isRequired,
+          start: propTypes.string.isRequired,
+          end: propTypes.string.isRequired,
+        }).isRequired,
+      ),
+      propTypes.oneOf([null]), /* if the day shouldn't be included */
+    ]).isRequired,
   ).isRequired,
 };

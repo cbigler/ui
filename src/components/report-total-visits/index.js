@@ -78,6 +78,10 @@ function getMaximumsByKey(data, keyFunction) {
   });
 }
 
+function segmentHasData(segment) {
+  return !segment.every(i => i === null);
+}
+
 export default function ReportTotalVisits({
   title,
   startDate,
@@ -165,8 +169,13 @@ export default function ReportTotalVisits({
         <ul className={styles.dayList}>
           {(() => {
             const days = [];
-            let index = 0;
+            let index = -1;
             for (let day = startDate.clone(); day.isSameOrBefore(endDate); day = day.clone().add(1, 'day')) {
+              index += 1;
+
+              // Skip days that are filled with nulls
+              if (!segmentHasData(segments[index])) { continue; }
+
               days.push(
                 <li key={day.format()} className={styles.dayListItem}>
                   {/* The day of the week */}
@@ -186,7 +195,6 @@ export default function ReportTotalVisits({
                   />
                 </li>
               );
-              index += 1;
             }
             return days;
           })()}

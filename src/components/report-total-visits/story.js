@@ -6,7 +6,7 @@ import moment from 'moment';
 import ReportTotalVisits, { DAYS } from './index';
 import colorVariables from '../../../variables/colors.json';
 
-storiesOf('Reports.TotalVisits', module)
+storiesOf('ReportTotalVisits', module)
   .addWithInfo('With one time segment', () => (
     <div style={{width: '100%', paddingTop: 100}}>
       <ReportTotalVisits
@@ -21,6 +21,47 @@ storiesOf('Reports.TotalVisits', module)
           [600],
           [300],
           [10],
+          [1000],
+          [350],
+        ]}
+      />
+    </div>
+  ))
+  .addWithInfo('With one time segment and custom color', () => (
+    <div style={{width: '100%', paddingTop: 100}}>
+      <ReportTotalVisits
+        title="Cafeteria meal visits"
+        startDate={moment('2018-03-14T00:00:00-04:00')}
+        endDate={moment('2018-03-20T00:00:00-04:00')}
+        spaces={["Space 1"]}
+
+        segments={[
+          [500],
+          [100],
+          [600],
+          [300],
+          [10],
+          [1000],
+          [350],
+        ]}
+        timeSegmentColors={[colorVariables.reportOrange]}
+      />
+    </div>
+  ))
+  .addWithInfo('With one time segment and saturday/sunday being null and therefore being hidden', () => (
+    <div style={{width: '100%', paddingTop: 100}}>
+      <ReportTotalVisits
+        title="Cafeteria meal visits"
+        startDate={moment('2018-03-14T00:00:00-04:00')}
+        endDate={moment('2018-03-20T00:00:00-04:00')}
+        spaces={["Space 1"]}
+
+        segments={[
+          [500],
+          [100],
+          [600],
+          [null],
+          [null],
           [1000],
           [350],
         ]}
@@ -98,7 +139,7 @@ storiesOf('Reports.TotalVisits', module)
         spaces={["Space 1"]}
 
         timeSegmentNames={["Ryan Test Group", "Working Hours"]}
-        timeSegmentColors={['red', 'chartreuse']}
+        timeSegmentColors={[colorVariables.reportGreen, colorVariables.reportOrange]}
         segments={[
           [0, 0],
           [20, 520],

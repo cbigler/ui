@@ -16,6 +16,7 @@ import ReportComparativePerformance, {
   COMPARATIVE_QUARTER,
 } from '../report-comparative-performance';
 import ReportSurpassedCapacity from '../report-surpassed-capacity'
+import ReportTimeSegmentBreakdown from '@density/ui-report-time-segment-breakdown';
 
 storiesOf('DashboardReportGrid', module)
   .addWithInfo('One', () => (
@@ -92,6 +93,10 @@ storiesOf('DashboardReportGrid', module)
                   'Friday',
                 ],
                 spaces: [ /* ... */ ],
+              }}
+              timeSegmentGroup={{
+                id: 'tsg_yyy',
+                name: 'Lunch',
               }}
               points={[
                 {timestamp: '11:00:00', value: 1},
