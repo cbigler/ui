@@ -8,4 +8,4 @@ const results = variables.map(name => {
   };`;
 }, {});
 
-console.log(results.join('\n'));
+console.log(`// Density UI variables, version ${require('./package').version}\n${results.join('\n')}`);
