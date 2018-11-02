@@ -1,13 +1,12 @@
 {
-  "name": "@density/ui-report-comparative-performance",
-  "version": "0.1.0",
-  "description": "Comparative Performance component",
+  "name": "@density/ui-report-wasted-space",
+  "version": "0.0.1",
+  "description": "Wasted Space component",
   "main": "dist/index.js",
   "author": "Density <engineering+javascript@density.io>",
   "license": "MIT",
   "dependencies": {
-    "classnames": "^2.2.6",
-    "comma-number": "^2.0.0"
+    "classnames": "^2.2.6"
   },
   "peerDependencies": {
     "react": "*",
