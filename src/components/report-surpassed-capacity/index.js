@@ -426,6 +426,6 @@ ReportSurpassedCapacity.propTypes = {
         }).isRequired,
       ),
       propTypes.oneOf([null]), /* if the day shouldn't be included */
-    ]).isRequired,
+    ]),
   ).isRequired,
 };
