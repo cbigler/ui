@@ -32,7 +32,7 @@ class ReportNextWeekForecastChart extends Component {
   }
 
   render() {
-    const { startDate, endDate, data, busiestDay } = this.props;
+    const { startDate, endDate, data, busiestDays } = this.props;
     const { width, height } = this.state;
 
     const maximumBarContainerWidthInPx = width ? width - 150 : 0;
@@ -62,6 +62,8 @@ class ReportNextWeekForecastChart extends Component {
       return days;
     })();
 
+    const highlightedDays = busiestDays.map(day => day.format('ddd'));
+
     return (
       <div ref={r => { this.container = r; }} className={styles.chartContainer}>
         <svg width={width} height={days.length * this.columnHeight - (this.columnHeight/4)}>
@@ -79,7 +81,7 @@ class ReportNextWeekForecastChart extends Component {
                 {/* The day of the week */}
                 <text
                   fontSize={12}
-                  fontWeight={busiestDay.format('dddd').slice(0, 3) === day ? 'bold' : 'normal'}
+                  fontWeight={highlightedDays.indexOf(day) >= 0 ? 'bold' : 'normal'}
                   transform="translate(0,3)"
                 >{day}</text>
 
@@ -129,7 +131,7 @@ export default function ReportNextWeekForecast({
   startDate,
   endDate,
   spaces,
-  busiestDay,
+  busiestDays,
   forecasts,
 }) {
 
@@ -142,13 +144,23 @@ export default function ReportNextWeekForecast({
     >
 
       <ReportSubHeader
-        title={<span><strong>{busiestDay.format('dddd')}</strong> will be your busiest day.</span>}
+        title={(
+          <span>
+            {busiestDays.reduce((acc, day, index) => [
+              ...acc,
+              <strong key={index}>{day.format('dddd')}</strong>,
+              ...(index < busiestDays.length-2 ? [', '] : []),
+              ...(index === busiestDays.length-2 ? [', and '] : []),
+            ], [])}
+            {' '} will be your busiest {busiestDays.length === 1 ? 'day' : 'days'}.
+          </span>
+        )}
       >
         <strong>Based on the past 3 months</strong>
       </ReportSubHeader>
       <ReportCard>
         <ReportNextWeekForecastChart
-          busiestDay={busiestDay}
+          busiestDays={busiestDays}
           startDate={startDate}
           endDate={endDate}
           data={forecasts}
@@ -164,7 +176,9 @@ ReportNextWeekForecast.propTypes = {
   endDate: propTypes.instanceOf(moment).isRequired,
   spaces: propTypes.arrayOf(propTypes.string).isRequired,
 
-  busiestDay: propTypes.instanceOf(moment).isRequired,
+  busiestDays: propTypes.oneOfType([
+    propTypes.instanceOf(moment).isRequired,
+  ]).isRequired,
   forecasts: propTypes.arrayOf(propTypes.shape({
     visits: propTypes.number,
     high: propTypes.number,
