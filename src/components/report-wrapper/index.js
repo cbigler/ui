@@ -99,6 +99,7 @@ function ReportWrapperHeader({
   startDate,
   endDate,
   spaces,
+  hideDetailsLink,
 }) {
   return (
     <div>
@@ -119,7 +120,10 @@ function ReportWrapperHeader({
 
         {/* Right side on desktop contains the date range and "more details" arrow. */}
         <div className={styles.reportHeaderRightDesktop}>
-          <span className={styles.reportHeaderDetailsLink}>
+          <span
+            className={styles.reportHeaderDetailsLink}
+            style={{opacity: hideDetailsLink ? 0 : 1}}
+          >
             <span className={styles.reportHeaderDetailsLinkText}>Details</span>
           </span>
           <ReportWrapperHeaderDateRange startDate={startDate} endDate={endDate} />
@@ -140,16 +144,20 @@ export default function ReportWrapper({
   endDate,
   spaces,
   children,
+  hideDetailsLink,
 }) {
-  return <div className={styles.reportWrapper}>
-    <ReportWrapperHeader
-      title={title}
-      startDate={startDate}
-      endDate={endDate}
-      spaces={spaces}
-    />
-    {children}
-  </div>;
+  return (
+    <div className={styles.reportWrapper}>
+      <ReportWrapperHeader
+        title={title}
+        startDate={startDate}
+        endDate={endDate}
+        spaces={spaces}
+        hideDetailsLink={hideDetailsLink}
+      />
+      {children}
+    </div>
+  );
 }
 ReportWrapper.propTypes = {
   title: propTypes.string.isRequired,
@@ -157,4 +165,8 @@ ReportWrapper.propTypes = {
   endDate: propTypes.any,
   children: propTypes.node,
   spaces: propTypes.arrayOf(propTypes.string).isRequired,
+  hideDetailsLink: propTypes.bool,
+};
+ReportWrapper.defaultProps = {
+  hideDetailsLink: true,
 };

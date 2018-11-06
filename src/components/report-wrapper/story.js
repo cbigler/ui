@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 
 import moment from 'moment';
 
-import ReportWrapper, { ReportCard, ReportPadding } from './';
+import ReportWrapper, { ReportCard, ReportPadding } from './index';
 
 storiesOf('ReportWrapper', module)
   .addWithInfo('ReportWrapper with ReportCard inside', () => (
@@ -28,6 +28,21 @@ storiesOf('ReportWrapper', module)
         startDate={moment.utc()}
         endDate={moment.utc().subtract(2, 'days')}
         spaces={["Space 1", "Space 2", "Space 3"]}
+      >
+        <ReportCard>
+          Hello world
+        </ReportCard>
+      </ReportWrapper>
+    </div>
+  ))
+  .addWithInfo('ReportWrapper with details link shown', () => (
+    <div style={{width: '100%', paddingTop: 100}}>
+      <ReportWrapper
+        title="Cafeteria meal visits abc def ghi jkl"
+        startDate={moment.utc()}
+        endDate={moment.utc().subtract(2, 'days')}
+        spaces={["Space 1"]}
+        hideDetailsLink={false}
       >
         <ReportCard>
           Hello world
