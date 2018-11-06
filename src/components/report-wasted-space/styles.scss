@@ -1,0 +1,52 @@
+// Import any global variables from "../../../variables/*.json"
+@import "../../../variables/colors.json";
+
+// Local variables to the component
+@import "variables.json";
+
+.utilizationBar {
+  width: 100%;
+  height: 25px;
+  color: #fff;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.region {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+.region.under { background-color: $report-blue; }
+.region.normal { background-color: $report-yellow; }
+.region.over { background-color: $report-red; }
+
+.utilizationLabels {
+  padding-left: 0px;
+  list-style-type: none;
+  line-height: 30px;
+
+  margin-top: 20px;
+  margin-bottom: 0px;
+
+  color: $gray-darkest;
+}
+
+.utilizationLabels li:before {
+  content: '';
+
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+
+  background-color: red;
+  transform: translate(0px, -2px);
+  margin-right: 10px;
+}
+.utilizationLabels li.under:before { background-color: $report-blue; }
+.utilizationLabels li.normal:before { background-color: $report-yellow; }
+.utilizationLabels li.over:before { background-color: $report-red; }
