@@ -115,7 +115,7 @@ class ReportNextWeekForecastChart extends Component {
                     fill={colorVariables.reportBlue}
                     fontWeight="normal"
                     opacity={0.45}
-                  > &plusmn; {data[index].stdDev}</tspan>
+                  > &plusmn; {Math.round(data[index].stdDev * 100) / 100}</tspan>
                 </text>
               </g>
             );
@@ -131,10 +131,11 @@ export default function ReportNextWeekForecast({
   startDate,
   endDate,
   spaces,
-  busiestDays,
-  forecasts,
-}) {
 
+  busiestDays,
+  forecast,
+  predictiveBasisDuration,
+}) {
   return (
     <ReportWrapper
       title={title}
@@ -142,7 +143,6 @@ export default function ReportNextWeekForecast({
       endDate={endDate}
       spaces={spaces}
     >
-
       <ReportSubHeader
         title={(
           <span>
@@ -152,18 +152,18 @@ export default function ReportNextWeekForecast({
               ...(index < busiestDays.length-2 ? [', '] : []),
               ...(index === busiestDays.length-2 ? [', and '] : []),
             ], [])}
-            {' '} will be your busiest {busiestDays.length === 1 ? 'day' : 'days'}.
+            {' '} will likely be your busiest {busiestDays.length === 1 ? 'day' : 'days'}.
           </span>
         )}
       >
-        <strong>Based on the past 3 months</strong>
+        <strong>Based on the past {predictiveBasisDuration.humanize()}</strong>
       </ReportSubHeader>
       <ReportCard>
         <ReportNextWeekForecastChart
           busiestDays={busiestDays}
           startDate={startDate}
           endDate={endDate}
-          data={forecasts}
+          data={forecast}
         />
       </ReportCard>
     </ReportWrapper>
@@ -176,13 +176,23 @@ ReportNextWeekForecast.propTypes = {
   endDate: propTypes.instanceOf(moment).isRequired,
   spaces: propTypes.arrayOf(propTypes.string).isRequired,
 
-  busiestDays: propTypes.oneOfType([
+  busiestDays: propTypes.arrayOf(
     propTypes.instanceOf(moment).isRequired,
-  ]).isRequired,
-  forecasts: propTypes.arrayOf(propTypes.shape({
-    visits: propTypes.number,
-    high: propTypes.number,
-    low: propTypes.number,
-    stdDev: propTypes.number,
-  })).isRequired,
+  ).isRequired,
+  forecast: propTypes.arrayOf(
+    propTypes.shape({
+      visits: propTypes.number,
+      high: propTypes.number,
+      low: propTypes.number,
+      stdDev: propTypes.number,
+    }).isRequired,
+  ).isRequired,
+  predictiveBasisDuration: (props, propName) => {
+    if (!moment.isDuration(props[propName])) {
+      return new Error(
+        'Invalid prop `' + propName + '` supplied to' +
+        ' `' + componentName + '`, expected a moment.duration.'
+      );
+    }
+  },
 };

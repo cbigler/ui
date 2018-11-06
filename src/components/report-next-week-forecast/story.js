@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 
 import moment from 'moment';
 
-import ReportNextWeekForecast from './';
+import ReportNextWeekForecast from './index';
 
 storiesOf('ReportNextWeekForecast', module)
   .addWithInfo('Default view', () => (
@@ -15,42 +15,56 @@ storiesOf('ReportNextWeekForecast', module)
         endDate={moment("2018-03-18T00:00:00-04:00")}
         spaces={["Cafe Bruno"]}
         busiestDays={[ moment("2018-03-18T00:00:00-04:00") ]}
-        forecasts={[
+        predictiveBasisDuration={moment.duration(3, 'months')}
+        forecast={[
           {
-            visits: 300,
-            high: 20,
-            low: 20,
-            stdDev: 20,
+            "timestamp": "2018-11-06T19:00:00Z",
+            "visits": 30,
+            "high": 8,
+            "low": 4,
+            "stdDev": 2.23,
           },
           {
-            visits: 622,
-            high: 40,
-            low: 40,
-            stdDev: 40,
+            "timestamp": "2018-11-07T19:00:00Z",
+            "visits": 50,
+            "high": 8,
+            "low": 4,
+            "stdDev": 2.23,
           },
           {
-            visits: 412,
-            high: 60,
-            low: 60,
-            stdDev: 60,
+            "timestamp": "2018-11-08T19:00:00Z",
+            "visits": 10,
+            "high": 8,
+            "low": 4,
+            "stdDev": 2.23,
           },
           {
-            visits: 614,
-            high: 10,
-            low: 10,
-            stdDev: 10,
+            "timestamp": "2018-11-09T19:00:00Z",
+            "visits": 35,
+            "high": 8,
+            "low": 4,
+            "stdDev": 2.23,
           },
           {
-            visits: 895,
-            high: 60,
-            low: 60,
-            stdDev: 60,
+            "timestamp": "2018-11-10T19:00:00Z",
+            "visits": 40,
+            "high": 8,
+            "low": 4,
+            "stdDev": 2.23,
           },
           {
-            visits: 622,
-            high: 40,
-            low: 40,
-            stdDev: 40,
+            "timestamp": "2018-11-11T19:00:00Z",
+            "visits": 10,
+            "high": 8,
+            "low": 4,
+            "stdDev": 2.23,
+          },
+          {
+            "timestamp": "2018-11-12T19:00:00Z",
+            "visits": 20,
+            "high": 8,
+            "low": 4,
+            "stdDev": 2.23,
           },
         ]}
       />
@@ -67,42 +81,122 @@ storiesOf('ReportNextWeekForecast', module)
           moment("2018-03-17T00:00:00-04:00"),
           moment("2018-03-18T00:00:00-04:00"),
         ]}
-        forecasts={[
+        predictiveBasisDuration={moment.duration(3, 'months')}
+        forecast={[
           {
-            visits: 300,
-            high: 20,
-            low: 20,
-            stdDev: 20,
+            "timestamp": "2018-11-06T19:00:00Z",
+            "visits": 30,
+            "high": 8,
+            "low": 4,
+            "stdDev": 2.23,
           },
           {
-            visits: 622,
-            high: 40,
-            low: 40,
-            stdDev: 40,
+            "timestamp": "2018-11-07T19:00:00Z",
+            "visits": 50,
+            "high": 8,
+            "low": 4,
+            "stdDev": 2.23,
           },
           {
-            visits: 412,
-            high: 60,
-            low: 60,
-            stdDev: 60,
+            "timestamp": "2018-11-08T19:00:00Z",
+            "visits": 100,
+            "high": 8,
+            "low": 4,
+            "stdDev": 2.23,
           },
           {
-            visits: 622,
-            high: 10,
-            low: 10,
-            stdDev: 10,
+            "timestamp": "2018-11-09T19:00:00Z",
+            "visits": 40,
+            "high": 8,
+            "low": 4,
+            "stdDev": 2.23,
           },
           {
-            visits: 622,
-            high: 60,
-            low: 60,
-            stdDev: 60,
+            "timestamp": "2018-11-10T19:00:00Z",
+            "visits": 40,
+            "high": 8,
+            "low": 4,
+            "stdDev": 2.23,
           },
           {
-            visits: 622,
-            high: 40,
-            low: 40,
-            stdDev: 40,
+            "timestamp": "2018-11-11T19:00:00Z",
+            "visits": 35,
+            "high": 8,
+            "low": 4,
+            "stdDev": 2.23,
+          },
+          {
+            "timestamp": "2018-11-12T19:00:00Z",
+            "visits": 20,
+            "high": 8,
+            "low": 4,
+            "stdDev": 2.23,
+          },
+        ]}
+      />
+    </div>
+  ))
+  .addWithInfo('With predictions happening on less than 3 months of data', () => (
+    <div style={{width: '100%', paddingTop: 100}}>
+      <ReportNextWeekForecast
+        title="Next week's visits"
+        startDate={moment("2018-03-14T00:00:00-04:00")}
+        endDate={moment("2018-03-18T00:00:00-04:00")}
+        spaces={["Cafe Bruno"]}
+        busiestDays={[
+          moment("2018-03-17T00:00:00-04:00"),
+          moment("2018-03-18T00:00:00-04:00"),
+        ]}
+        predictiveBasisDuration={moment.duration(2, 'weeks')}
+        forecast={[
+          {
+            "timestamp": "2018-11-06T19:00:00Z",
+            "visits": 30,
+            "high": 8,
+            "low": 4,
+            "stdDev": 2.23,
+          },
+          {
+            "timestamp": "2018-11-07T19:00:00Z",
+            "visits": 50,
+            "high": 8,
+            "low": 4,
+            "stdDev": 2.23,
+          },
+          {
+            "timestamp": "2018-11-08T19:00:00Z",
+            "visits": 100,
+            "high": 8,
+            "low": 4,
+            "stdDev": 2.23,
+          },
+          {
+            "timestamp": "2018-11-09T19:00:00Z",
+            "visits": 40,
+            "high": 8,
+            "low": 4,
+            "stdDev": 2.23,
+          },
+          {
+            "timestamp": "2018-11-10T19:00:00Z",
+            "visits": 40,
+            "high": 8,
+            "low": 4,
+            "stdDev": 2.23,
+          },
+          {
+            "timestamp": "2018-11-11T19:00:00Z",
+            "visits": 35,
+            "high": 8,
+            "low": 4,
+            "stdDev": 2.23,
+          },
+          {
+            "timestamp": "2018-11-12T19:00:00Z",
+            "visits": 20,
+            "high": 8,
+            "low": 4,
+            "stdDev": 2.23,
           },
         ]}
       />
