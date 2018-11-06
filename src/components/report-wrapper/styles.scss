@@ -235,3 +235,25 @@
   transform: translate(0px, 2px);
   white-space: nowrap;
 }
+
+
+.reportError {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 200px;
+}
+.reportErrorHeader {
+  color: $report-red;
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+.reportErrorBody {
+  line-height: 20px;
+  font-size: 14px;
+}
+.reportErrorBody a {
+  color: $report-blue;
+}

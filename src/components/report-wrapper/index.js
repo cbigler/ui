@@ -74,6 +74,21 @@ ReportOptionBar.propTypes = {
   })).isRequired,
 };
 
+export function ReportError() {
+  return (
+    <ReportCard>
+      <div className={styles.reportError}>
+        <h3 className={styles.reportErrorHeader}>Whoops!</h3>
+        <span className={styles.reportErrorBody}>There was an issue loading this report.</span>
+        <span className={styles.reportErrorBody}>
+          Contact <a href="mailto:support@density.io">support</a>{' '}
+          and we'll get you up and running.
+        </span>
+      </div>
+    </ReportCard>
+  );
+}
+
 
 
 
