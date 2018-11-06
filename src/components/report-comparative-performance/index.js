@@ -89,7 +89,7 @@ export default function ReportComparativePerformance({
           <span>
             <strong>{getRangeLastUnitValue(mode)}</strong> had{' '}
             <strong>{Math.round(Math.abs(visitPercentageDifference * 100))}%</strong>{' '}
-            {visitPercentageDifference >= 0 ? 'more' : 'less'} visits{' '}
+            {visitPercentageDifference >= 0 ? 'more' : 'fewer'} visits{' '}
             than {getRangePreviousUnitValue(mode)}.
           </span>
         )}
