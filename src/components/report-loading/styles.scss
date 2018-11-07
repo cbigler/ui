@@ -1,0 +1,36 @@
+// Import any global variables from "../../../variables/*.json"
+@import "../../../variables/colors.json";
+
+.reportLoading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  font-size: 14px;
+}
+
+.reportLoadingBarLabel {
+  transform: translate(0px, 1px);
+}
+
+.reportLoadingBar {
+  margin-left: 20px;
+  margin-right: 20px;
+
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background-color: $gray;
+}
+.reportLoadingBarInner {
+  height: 100%;
+  width: 100%; /* this is a default value, it's overridden as an inline style in component */
+  background-color: $report-blue;
+
+  transition: all 250ms ease-in-out;
+}
+
+.reportLoadingBarFraction {
+  transform: translate(0px, 1px);
+  font-weight: bold;
+}
