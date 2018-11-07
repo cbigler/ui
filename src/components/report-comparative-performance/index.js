@@ -124,7 +124,7 @@ export default function ReportComparativePerformance({
                 <span className={classnames(styles.percentage, {
                   [styles.percentagePositive]: visitPercentageDifference > 0,
                   [styles.percentageNegative]: visitPercentageDifference < 0,
-                })}>({Math.round(Math.abs(visitPercentageDifference * 100))}%)</span>
+                })}>{Math.round(Math.abs(visitPercentageDifference * 100))}%</span>
               </td>
             </tr>
             <tr>
@@ -135,7 +135,7 @@ export default function ReportComparativePerformance({
                 <span className={classnames(styles.percentage, {
                   [styles.percentagePositive]: peakCountPercentageDifference > 0,
                   [styles.percentageNegative]: peakCountPercentageDifference < 0,
-                })}>({Math.round(Math.abs(peakCountPercentageDifference * 100))}%)</span>
+                })}>{Math.round(Math.abs(peakCountPercentageDifference * 100))}%</span>
               </td>
             </tr>
             <tr>

@@ -48,7 +48,8 @@
   color: $gray-darker;
   font-size: 11px;
 }
+.percentage:after { content: ')'; }
 .percentageNegative { color: $report-red; }
-.percentageNegative:before { content: '-'; }
+.percentageNegative:before { content: '(-'; }
 .percentagePositive { color: $report-green; }
-.percentagePositive:before { content: '+'; }
+.percentagePositive:before { content: '(+'; }
