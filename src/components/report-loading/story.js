@@ -17,6 +17,6 @@ storiesOf('ReportLoading', module)
   ))
   .addWithInfo('Empty', () => (
     <div style={{width: '100%', marginTop: 100}}>
-      <ReportLoading part={0} whole={100} />
+      <ReportLoading part={0} whole={99} />
     </div>
   ))

@@ -33,4 +33,5 @@
 .reportLoadingBarFraction {
   transform: translate(0px, 1px);
   font-weight: bold;
+  width: 40px; /* supports 99/99 at maximum according to @ben */
 }
