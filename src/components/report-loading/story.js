@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import ReportLoading from './';
+import ReportLoading from './index';
 
 storiesOf('ReportLoading', module)
   .addWithInfo('Default', () => (

@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-report-loading",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Report loading component",
   "main": "dist/index.js",
   "author": "Density <engineering+javascript@density.io>",

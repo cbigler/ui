@@ -36,8 +36,7 @@
   @extend .reportPadding;
 }
 .reportHeaderLeft {
-  flex: 1;
-
+  margin-right: auto;
   display: flex;
   flex-direction: column;
 
@@ -256,4 +255,16 @@
 }
 .reportErrorBody a {
   color: $report-blue;
+}
+
+.unloadedTextBar {
+  color: $gray;
+  background-color: $gray;
+  height: 6px;
+  width: 100%;
+  border-radius: 2px;
+}
+.unloadedTextBarDetailsLink {
+  width: 50px;
+  margin-left: auto;
 }
