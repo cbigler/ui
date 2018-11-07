@@ -48,7 +48,7 @@ class ReportNextWeekForecastChart extends Component {
     //  = represents the "bar"
     //  '/_ represents the "standard deviation section"
     //
-    const maximumBarCombinedWidth = Math.max.apply(Math, data.map(v => v.visits + v.high));
+    const maximumBarCombinedWidth = Math.max.apply(Math, data.map(v => v.high));
 
     // Return a list of all distinct days of the week within the time period passed.
     const days = (function() {
@@ -74,8 +74,12 @@ class ReportNextWeekForecastChart extends Component {
             const barPercentage = data[index].visits / maximumBarCombinedWidth;
             const barWidthInPx = barPercentage * maximumBarContainerWidthInPx;
 
-            const barHighWidthInPx = (data[index].high / maximumBarCombinedWidth) * maximumBarContainerWidthInPx;
-            const barLowWidthInPx = (data[index].low / maximumBarCombinedWidth) * maximumBarContainerWidthInPx;
+            const barHighWidthInPx = (
+              (data[index].high - data[index].visits) / maximumBarCombinedWidth
+            ) * maximumBarContainerWidthInPx;
+            const barLowWidthInPx = (
+              (data[index].visits - data[index].low) / maximumBarCombinedWidth
+            ) * maximumBarContainerWidthInPx;
             return (
               <g key={day} transform={`translate(0,${(index * this.columnHeight)+(this.columnHeight/2)})`}>
                 {/* The day of the week */}
