@@ -115,7 +115,7 @@ class ReportNextWeekForecastChart extends Component {
                     fill={colorVariables.reportBlue}
                     fontWeight="normal"
                     opacity={0.45}
-                  > &plusmn; {Math.round(data[index].stdDev * 100) / 100}</tspan>
+                  > &plusmn; {Math.round(data[index].stdDev)}</tspan>
                 </text>
               </g>
             );
