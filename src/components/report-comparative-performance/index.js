@@ -73,10 +73,10 @@ export default function ReportComparativePerformance({
   const previousEndDate = previousStartDate.clone().endOf(unit);
 
   const visitPercentageDifference = (
-    previousData.totalVisits - lastData.totalVisits
+    lastData.totalVisits - previousData.totalVisits
   ) / previousData.totalVisits;
   const peakCountPercentageDifference = (
-    previousData.averagePeakCount - lastData.averagePeakCount
+    lastData.averagePeakCount - previousData.averagePeakCount
   ) / previousData.averagePeakCount;
 
   return (
@@ -100,17 +100,17 @@ export default function ReportComparativePerformance({
             <tr>
               <th></th>
               <th className={styles.tableHighlight}>
-                <strong>{getRangeName(mode, lastStartDate)}</strong>
-                <span className={styles.subheading}>
-                  <span className={styles.subheadingDate}>{lastStartDate.format('MMM D, YYYY')}</span> -{' '}
-                  <span className={styles.subheadingDate}>{lastEndDate.format('MMM D, YYYY')}</span>
-                </span>
-              </th>
-              <th>
                 <strong>{getRangeName(mode, previousStartDate)}</strong>
                 <span className={styles.subheading}>
                   <span className={styles.subheadingDate}>{previousStartDate.format('MMM D, YYYY')}</span> -{' '}
                   <span className={styles.subheadingDate}>{previousEndDate.format('MMM D, YYYY')}</span>
+                </span>
+              </th>
+              <th>
+                <strong>{getRangeName(mode, lastStartDate)}</strong>
+                <span className={styles.subheading}>
+                  <span className={styles.subheadingDate}>{lastStartDate.format('MMM D, YYYY')}</span> -{' '}
+                  <span className={styles.subheadingDate}>{lastEndDate.format('MMM D, YYYY')}</span>
                 </span>
               </th>
             </tr>
@@ -118,9 +118,9 @@ export default function ReportComparativePerformance({
           <tbody>
             <tr>
               <td>Total Visits</td>
-              <td className={styles.tableHighlight}>{commaNumber(lastData.totalVisits)}</td>
+              <td className={styles.tableHighlight}>{commaNumber(previousData.totalVisits)}</td>
               <td>
-                {commaNumber(previousData.totalVisits)}{' '}
+                {commaNumber(lastData.totalVisits)}{' '}
                 <span className={classnames(styles.percentage, {
                   [styles.percentagePositive]: visitPercentageDifference > 0,
                   [styles.percentageNegative]: visitPercentageDifference < 0,
@@ -129,9 +129,9 @@ export default function ReportComparativePerformance({
             </tr>
             <tr>
               <td>Average Peak Count</td>
-              <td className={styles.tableHighlight}>{commaNumber(lastData.averagePeakCount)}</td>
+              <td className={styles.tableHighlight}>{commaNumber(previousData.averagePeakCount)}</td>
               <td>
-                {commaNumber(previousData.averagePeakCount)}{' '}
+                {commaNumber(lastData.averagePeakCount)}{' '}
                 <span className={classnames(styles.percentage, {
                   [styles.percentagePositive]: peakCountPercentageDifference > 0,
                   [styles.percentageNegative]: peakCountPercentageDifference < 0,
@@ -144,7 +144,7 @@ export default function ReportComparativePerformance({
                 {
                   moment.utc()
                     .startOf('day')
-                    .add(lastData.averagePeakTime.asSeconds(), 'seconds')
+                    .add(previousData.averagePeakTime.asSeconds(), 'seconds')
                     .format('H:mma')
                     .slice(0, -1)
                 }
@@ -153,7 +153,7 @@ export default function ReportComparativePerformance({
                 {
                   moment.utc()
                     .startOf('day')
-                    .add(previousData.averagePeakTime.asSeconds(), 'seconds')
+                    .add(lastData.averagePeakTime.asSeconds(), 'seconds')
                     .format('H:mma')
                     .slice(0, -1)
                 }
