@@ -123,7 +123,9 @@ function ReportWrapperHeader({
         <div className={styles.reportHeaderLeft}>
           <h2 className={styles.reportHeaderTitle}>{title}</h2>
           <span className={styles.reportHeaderSpaces}>
-            {spaces.length === 1 ? spaces[0] : `${spaces.length} selected spaces`}
+            {spaces.length > 0 ? (
+              spaces.length === 1 ? spaces[0] : `${spaces.length} selected spaces`
+            ) : null}
           </span>
           <div className={styles.reportHeaderDateRangeMobile}>
             <ReportWrapperHeaderDateRange
