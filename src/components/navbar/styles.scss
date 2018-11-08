@@ -13,8 +13,8 @@
   position: relative;
   z-index: $navbar-zindex;
   box-sizing: border-box;
-  padding-left: 18px;
-  padding-right: 18px;
+  padding-left: 8px;
+  padding-right: 8px;
   height: $navbar-height;
   width: 100%;
   background-color: #FFF;
@@ -25,8 +25,17 @@
 
 // A navbar container makes a container-width navbar instead of a full width navbar.
 @mixin make-navbar-container($width: $navbar-width) {
+  display: flex;
+  justify-content: space-between;
   max-width: $width;
   margin: 0px auto;
+}
+
+// Anything to be displayed on the left side of the navbar
+@mixin make-navbar-left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 // A navbar brand contains the logo mark, left aligned on the status bar.
@@ -43,61 +52,44 @@
     float: left;
   }
 
-  img {
-    position: relative;
-    top: ($navbar-height - $navbar-brand-height) / 2;
-    height: $navbar-brand-height;
-  }
-}
-
-// A navbar brand contains a subtitle that's next to a navbar brand. The react component uses the
-// prop `subtitle` to represent the subtitle
-@mixin make-navbar-brand-subtitle {
-  position: relative;
-  z-index: $navbar-brand-zindex;
-  float: left;
-  height: 56px;
-  padding-left: 10px;
-  font-size: 16px;
-  line-height: 56px;
-  color: $gray;
+  .density-mark { display: flex;}
 }
 
 // Create a normal navbar item
-@mixin make-navbar-item($color: $gray-cinder, $underline-color: transparent, $font-weight: normal) {
+@mixin make-navbar-item($color: $gray-cinder, $underline-color: transparent, $font-weight: bold) {
+  display: inline-block;
+  opacity: 0.5;
   list-style-type: none;
-  border-bottom: 3px solid $underline-color;
-  height: $navbar-height - 3px;
-
-  &:first-child {
-    margin-left: 20px;
-  }
+  height: $navbar-height;
+  transition: opacity 125ms ease-in-out;
 
   // Style each link. Typically, the link would be an `a`, but, if the link isn't clickable, it's
   // replaced with a span (an example of this would be if the `locked` prop is set to true).
-  & > a, & > span {
-    line-height: $navbar-height;
+  & > a,
+  & > span {
+    display: inline-block;
+    padding: 0px 16px;
+    line-height: $navbar-height + 2px;
     color: $color;
     text-decoration: none;
     font-size: $font-size-base;
     font-weight: $font-weight;
-
-    // Fun hack: https://stackoverflow.com/a/27850452/4115328
-    // Adjust the letter spacing of such that the bold font is the same width as the non-bold one.
-    // This crazy formula is completely sailec specific.
-    @if $font-weight == bold {
-      letter-spacing: -1 * ($font-size-base / 100);
-    }
-
     text-align: center;
+    text-align: center;
+  }
 
-    padding: 0px 12px;
-    margin: 0px 2px;
-    display: inline-block;
+  // Center the icon vertically and give it some room
+  svg {
+    padding-right: 4px;
+    transform: translateY(3.5px);
   }
 
   // Don't show navbar items on small screens.
   display: none;
+
+  // Darken the nav-item on hover
+  &:hover { opacity: 1; }
+
   @media (min-width: $screen-xs-max) {
     display: inline-block;
   }
@@ -127,8 +119,12 @@
     opacity: 0;
     pointer-events: none;
   }
-  &:hover .navbar-item-tooltip {
-    opacity: 1;
+  &:hover {
+    opacity: 0.5;
+
+    .navbar-item-tooltip {
+      opacity: 1;
+    }
   }
 }
 @mixin make-navbar-item-tooltip($border-width: 1px, $caret-size: 6px) {
@@ -274,17 +270,13 @@
 :global {
   .navbar { @include make-navbar; }
   .navbar-brand { @include make-navbar-brand; }
-  .navbar-brand-subtitle { @include make-navbar-brand-subtitle; }
   .navbar-container { @include make-navbar-container; }
+  .navbar-left { @include make-navbar-left; }
 
   // Styles for items within main navbar section.
   .navbar-item { @include make-navbar-item; }
   .navbar-item-active {
-    @include make-navbar-item(
-      $color: $gray-cinder,
-      $underline-color: $brand-primary,
-      $font-weight: bold
-    );
+    opacity: 1;
   }
   .navbar-item-locked { @include make-navbar-item-locked; }
   .navbar-item-tooltip { @include make-navbar-item-tooltip; }
