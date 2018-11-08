@@ -110,3 +110,28 @@ storiesOf('ReportComparativePerformance', module)
       />
     </div>
   ))
+  .addWithInfo('Infinity percent', () => (
+    <div style={{width: '100%', paddingTop: 100}}>
+      <ReportComparativePerformance
+        title="Comparative Performance Example"
+        space={{
+          id: 'spc_XXX',
+          name: 'My space',
+          timeZone: 'America/New_York',
+        }}
+
+        mode={COMPARATIVE_QUARTER}
+
+        lastData={{
+          totalVisits: 8570,
+          averagePeakCount: 233,
+          averagePeakTime: moment.duration('12:03:00'),
+        }}
+        previousData={{
+          totalVisits: 0,
+          averagePeakCount: 0,
+          averagePeakTime: moment.duration('11:37:00'),
+        }}
+      />
+    </div>
+  ))
