@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-app-bar",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "App Bar component",
   "main": "dist/index.js",
   "style": "dist/styles.css",
