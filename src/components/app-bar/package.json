@@ -1,0 +1,15 @@
+{
+  "name": "@density/ui-app-bar",
+  "version": "0.0.1",
+  "description": "App Bar component",
+  "main": "dist/index.js",
+  "style": "dist/styles.css",
+  "scss": "dist/_styles.scss",
+  "author": "Density <engineering+javascript@density.io>",
+  "license": "MIT",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*",
+    "prop-types": "*"
+  }
+}
