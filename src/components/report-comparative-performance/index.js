@@ -88,7 +88,7 @@ export default function ReportComparativePerformance({
         title={(
           <span>
             <strong>{getRangeLastUnitValue(mode)}</strong> had{' '}
-            <strong>{Math.round(Math.abs(visitPercentageDifference * 100))}%</strong>{' '}
+            <strong>{visitPercentageDifference === Infinity ? <span>&infin;</span> : Math.round(Math.abs(visitPercentageDifference * 100))}%</strong>{' '}
             {visitPercentageDifference >= 0 ? 'more' : 'fewer'} visits{' '}
             than {getRangePreviousUnitValue(mode)}.
           </span>
@@ -122,9 +122,9 @@ export default function ReportComparativePerformance({
               <td>
                 {commaNumber(lastData.totalVisits)}{' '}
                 <span className={classnames(styles.percentage, {
-                  [styles.percentagePositive]: visitPercentageDifference > 0,
-                  [styles.percentageNegative]: visitPercentageDifference < 0,
-                })}>{Math.round(Math.abs(visitPercentageDifference * 100))}%</span>
+                  [styles.percentagePositive]: Math.round(visitPercentageDifference) > 0,
+                  [styles.percentageNegative]: Math.round(visitPercentageDifference) < 0,
+                })}>{peakCountPercentageDifference === Infinity ? <span>&infin;</span> : Math.round(Math.abs(visitPercentageDifference * 100))}%</span>
               </td>
             </tr>
             <tr>
@@ -135,7 +135,7 @@ export default function ReportComparativePerformance({
                 <span className={classnames(styles.percentage, {
                   [styles.percentagePositive]: peakCountPercentageDifference > 0,
                   [styles.percentageNegative]: peakCountPercentageDifference < 0,
-                })}>{Math.round(Math.abs(peakCountPercentageDifference * 100))}%</span>
+                })}>{peakCountPercentageDifference === Infinity ? <span>&infin;</span> : Math.round(Math.abs(peakCountPercentageDifference * 100))}%</span>
               </td>
             </tr>
             <tr>
