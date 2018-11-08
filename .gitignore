@@ -4,3 +4,5 @@ npm-debug.log
 components/*/dist
 src/components/*/dist
 .DS_Store
+helpers/dist
+src/helpers/dist

@@ -63,10 +63,24 @@ start:
 .PHONY: clean
 clean:
 	rm -rf components/*/dist/
+	rm -rf helpers/dist/
+
+.PHONY: build
+build: clean
+	cp webpack.config.js helpers/webpack.config.js
+	cd helpers && $(WEBPACK)
+	rm -rf helpers/webpack.config.js
 
 .PHONY: publish
-publish: clean
+publish: build
+	# Add a main key pointing to the helpers bundle
+	cat package.json | jq '.main = "helpers/dist/index.js"' > /tmp/package.json
+	mv /tmp/package.json package.json
+	# Publish
 	npm publish --access public
+	# Reset the main key to point to the non-bundled version
+	cat package.json | jq '.main = "helpers/index.js"' > /tmp/package.json
+	mv /tmp/package.json package.json
 
 dist/:
 	mkdir -p dist/

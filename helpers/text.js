@@ -1,7 +1,7 @@
 
 // This takes a list of strings, React elements, or anything, and intersperses in
 // correct (Oxford-comma'd) english separators, e.g. "First, Second, and Third"
-function toEnglishList(items) {
+export function toEnglishList(items) {
   if (items.length < 2) { 
     return items;
   } else if (items.length === 2) {
@@ -15,7 +15,3 @@ function toEnglishList(items) {
     }, []);
   }
 }
-
-module.exports = {
-  toEnglishList: toEnglishList
-};
