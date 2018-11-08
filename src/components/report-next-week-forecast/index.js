@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import moment from 'moment';
 
 import styles from './styles.scss';
-import { toEnglishList } from '@density/ui/helpers/text.js';
+import { text } from '@density/ui';
 import ReportWrapper, { ReportCard, ReportSubHeader } from '@density/ui-report-wrapper';
 import colorVariables from '@density/ui/variables/colors.json';
 import spacingVariables from '@density/ui/variables/spacing.json';
@@ -153,7 +153,7 @@ export default function ReportNextWeekForecast({
       <ReportSubHeader
         title={(
           <span>
-            {toEnglishList(busiestDays.map((d, i) => <strong key={i}>{d.format('dddd')}</strong>))}
+            {text.toEnglishList(busiestDays.map((d, i) => <strong key={i}>{d.format('dddd')}</strong>))}
             {' '} will likely be your busiest {busiestDays.length === 1 ? 'day' : 'days'}.
           </span>
         )}
