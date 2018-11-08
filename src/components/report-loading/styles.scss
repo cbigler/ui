@@ -25,7 +25,7 @@
 .reportLoadingBarInner {
   height: 100%;
   width: 100%; /* this is a default value, it's overridden as an inline style in component */
-  background-color: $report-blue;
+  background-color: $brand-primary;
 
   transition: all 250ms ease-in-out;
 }
