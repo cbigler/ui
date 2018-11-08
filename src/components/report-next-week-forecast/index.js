@@ -66,7 +66,7 @@ class ReportNextWeekForecastChart extends Component {
 
     return (
       <div ref={r => { this.container = r; }} className={styles.chartContainer}>
-        <svg width={width} height={days.length * this.columnHeight - (this.columnHeight/4)}>
+        <svg width={width} height={(days.length * this.columnHeight - (this.columnHeight/4)) + 3.75}>
           {days.map((day, index) => {
             if (!data[index]) {
               throw new Error(`No ${index} value found in forecast array prop - does your date range cover a longer period of time then you've passed in forecasts for?`);
@@ -86,7 +86,7 @@ class ReportNextWeekForecastChart extends Component {
                 <text
                   fontSize={14}
                   fontWeight={highlightedDays.indexOf(day) >= 0 ? 'bold' : 'normal'}
-                  transform="translate(0,3)"
+                  transform="translate(0,4)"
                 >{day}</text>
 
                 {/* The bar that contains the standard deviation info */}
@@ -110,7 +110,7 @@ class ReportNextWeekForecastChart extends Component {
 
                 <text
                   fontSize={14}
-                  transform={`translate(${this.barLeftOffset + barWidthInPx + barHighWidthInPx + 10},6)`}
+                  transform={`translate(${this.barLeftOffset + barWidthInPx + barHighWidthInPx + 10},5)`}
                 >
                   <tspan
                     fill={colorVariables.reportBlue}
