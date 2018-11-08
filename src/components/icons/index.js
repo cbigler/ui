@@ -82,16 +82,20 @@ const ICONS = {
       </g>
   </svg>,
   IconPerson: ({color, width, height}) => <svg width={width || "14"} height={height || "18"} viewBox="0 0 14 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconPerson" transform="translate(-3 -1)" fill={color} fillRule="nonzero">
-              <path d="M12.6785667,6 C12.6785667,4.18162825 11.4514724,2.75 10.0000111,2.75 C8.54854979,2.75 7.32145556,4.18162825 7.32145556,6 C7.32145556,7.81837175 8.54854979,9.25 10.0000111,9.25 C11.4514724,9.25 12.6785667,7.81837175 12.6785667,6 Z M14.1785667,6 C14.1785667,8.59988312 12.3356329,10.75 10.0000111,10.75 C7.66438931,10.75 5.82145556,8.59988312 5.82145556,6 C5.82145556,3.40011688 7.66438931,1.25 10.0000111,1.25 C12.3356329,1.25 14.1785667,3.40011688 14.1785667,6 Z"
-              id="Stroke-1" />
-              <path d="M16.75,18 C16.75,18.4142136 16.4142136,18.75 16,18.75 L4,18.75 C3.58578644,18.75 3.25,18.4142136 3.25,18 L3.25,13 C3.25,10.9253553 4.94381203,9.25 7.02388889,9.25 L12.9761111,9.25 C15.056188,9.25 16.75,10.9253553 16.75,13 L16.75,18 Z M15.25,17.25 L15.25,13 C15.25,11.7574836 14.2314174,10.75 12.9761111,10.75 L7.02388889,10.75 C5.76858261,10.75 4.75,11.7574836 4.75,13 L4.75,17.25 L15.25,17.25 Z"
-              id="Stroke-3" />
-              <polygon id="Stroke-5" points="6.25 14 6.25 18 7.75 18 7.75 14" />
-              <polygon id="Stroke-7" points="12.25 14 12.25 18 13.75 18 13.75 14" />
+    <g id='Icons' fill='none' fillRule='evenodd'>
+      <g id='icons' transform='translate(-127 -379)'>
+          <g id='IconPerson' transform='translate(124 378)'>
+              <rect id='bounds' fillOpacity='0' fill='#E3E3E6' width='20' height='20'
+              />
+              <path d='M13.4285667,6 C13.4285667,8.20911111 11.8935667,10 10.0000111,10 C8.10645556,10 6.57145556,8.20911111 6.57145556,6 C6.57145556,3.79088889 8.10645556,2 10.0000111,2 C11.8935667,2 13.4285667,3.79088889 13.4285667,6 L13.4285667,6 Z'
+              id='Stroke-1' stroke={color} strokeWidth='1.5' strokeLinejoin='round'
+              />
+              <path d='M16,18 L16,13 C16,11.3368889 14.6392222,10 12.9761111,10 L7.02388889,10 C5.36077778,10 4,11.3368889 4,13 L4,18 L16,18 L16,18 Z'
+              id='Stroke-3' stroke={color} strokeWidth='1.5' strokeLinejoin='round'
+              />
           </g>
       </g>
+  </g>
   </svg>,
   IconLightning: ({color, width, height}) => <svg width={width || "16"} height={height || "18"} viewBox="0 0 16 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
@@ -882,7 +886,40 @@ const ICONS = {
             strokeLinejoin='round' points='16 12 19 12 19 2 7 2 7 5' />
         </g>
     </g>
-</svg>,
+  </svg>,
+  IconDashboards: ({color, width, height}) => <svg width={width || 18} height={height || 18} viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'>
+    <g id='Icons' fill='none' fillRule='evenodd'>
+        <g id='icons' transform='translate(-348 -574)'>
+            <g id='iconDashboard' transform='translate(348 574)'>
+                <rect id='bounds' fillOpacity='0' fill='#E3E3E6' width='18' height='18'
+                />
+                <path d='M4,4.03369141 L4,2 C4,1.44771525 4.44771525,1 5,1 L16,1 C16.5522847,1 17,1.44771525 17,2 L17,13 C17,13.5522847 16.5522847,14 16,14 L14.0554199,14'
+                id='Path' stroke={color} strokeWidth='1.5' strokeLinejoin='round' />
+                <path d='M1,16.0014977 C1,16.5529553 1.44748943,17 1.99850233,17 L13.0014977,17 C13.5529553,17 14,16.5525106 14,16.0014977 L14,4.99850233 C14,4.44704472 13.5525106,4 13.0014977,4 L1.99850233,4 C1.44704472,4 1,4.44748943 1,4.99850233 L1,16.0014977 Z'
+                id='icon-square-copy-2' stroke={color} strokeWidth='1.5' strokeLinecap='round'
+                strokeLinejoin='round' />
+                <path d='M9,13.5 L4,13.5' id='---' stroke={color} strokeWidth='1.5'
+                strokeLinecap='square' strokeLinejoin='round' />
+                <path d='M7,10.5 L4,10.5' id='---' stroke={color} strokeWidth='1.5'
+                strokeLinecap='square' strokeLinejoin='round' />
+                <path d='M9,7.5 L4,7.5' id='---' stroke={color} strokeWidth='1.5' strokeLinecap='square'
+                strokeLinejoin='round' />
+            </g>
+        </g>
+    </g>
+ </svg>,
+ IconDensityMark: ({color, width, height}) => <svg width={width || 16} height={height || 14} viewBox='0 0 16 14' xmlns='http://www.w3.org/2000/svg'>
+   <g id='Icons' fill='none' fillRule='evenodd'>
+       <g id='icons' transform='translate(-71 -493)'>
+           <g id='IconDensityMark' transform='translate(69 490)'>
+               <rect id='bounds' fillOpacity='0' fill='#E3E3E6' width='20' height='20'
+               />
+               <path d='M5.76898293,12.6351831 C6.62950636,12.1144131 7.35090153,11.3857103 7.86367624,10.5183375 C8.40105377,9.60969552 8.70938043,8.54910822 8.70938043,7.41608352 L8.70938043,3.38455308 C8.70938043,3.17214703 8.88102471,3 9.09266657,3 L10.907233,3 C11.1190187,3 11.2905191,3.17214703 11.2905191,3.38455308 L11.2905191,7.41608352 C11.2905191,8.54896392 11.5989896,9.60969552 12.1362233,10.5183375 C12.6491419,11.3857103 13.3703932,12.1144131 14.2310605,12.6351831 L17.808254,14.7065751 C17.9916961,14.8127781 18.0544261,15.0478389 17.9485332,15.231674 L17.0413939,16.8076923 C16.935501,16.9916718 16.7011267,17.0545855 16.5176846,16.9483825 L13.0030773,14.9133535 C12.1173755,14.4070133 11.0924016,14.1176966 9.99994977,14.1176966 C8.9076418,14.1176966 7.88252402,14.4070133 6.99682225,14.9133535 L3.4823588,16.9483825 C3.29891667,17.0545855 3.06454237,16.9916718 2.9586495,16.8076923 L2.05136631,15.231674 C1.94561731,15.0478389 2.00834733,14.8127781 2.19178946,14.7065751 L5.76898293,12.6351831 Z'
+               id='Fill-1' fill={color} />
+           </g>
+       </g>
+   </g>
+  </svg>
 };
 
 // Wrap each icon in a component.
