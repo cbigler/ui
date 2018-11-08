@@ -29,7 +29,7 @@ import { IconImageUpload } from '@density/ui-icons';
 ## From sketch
 ![sketch-svg.png](sketch-svg.png)
 
-1. Find `densicons.sketch` within Density's Google Drive.
+1. Find [density-ui-icons](https://projects.plantapp.io/p/16938?r=1) on Plant.
 2. In the sketch sidebar, right click on each icon and select Copy SVG Code.
 3. Paste the resulting svg into the left pane of this tool: https://svg2jsx.herokuapp.com. Copy the output from the right pane.
 4. Add the icon to the `ICONS` object in components/icons/index.js, where the key is the component
