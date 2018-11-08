@@ -7,10 +7,12 @@ function toEnglishList(items) {
   } else if (items.length === 2) {
     return [items[0], ' and ', items[1]];
   } else {
-    return items.reduce((acc, item, index) => acc.concat([
-      index < (items.length - 1) ? (acc.length ? ', ' : '') : ', and ',
-      item
-    ]), []);
+    return items.reduce(function (acc, item, index) {
+      return acc.concat([
+        index < (items.length - 1) ? (acc.length ? ', ' : '') : ', and ',
+        item
+      ]);
+    }, []);
   }
 }
 
