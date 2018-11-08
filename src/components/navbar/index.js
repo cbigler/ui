@@ -28,26 +28,21 @@ export default class Navbar extends React.Component {
 
       {/* The normal navbar content area, shown on a computer */}
       <div className={fullWidth ? 'navbar-full-width' : 'navbar-container'}>
-        <div className="navbar-left">
-          <div className="navbar-brand">
-            {/* Show a button to open a sidebar */}
-            {mobileSidebar || onClickSidebarButton ? <button
-              className="navbar-sidebar-button"
-              onClick={() => this.setState(
-                {open: true},
-                () => onClickSidebarButton ? onClickSidebarButton(true) : null
-              )}
-            /> : null}
+        <div className="navbar-brand">
+          {/* Show a button to open a sidebar */}
+          {mobileSidebar || onClickSidebarButton ? <button
+            className="navbar-sidebar-button"
+            onClick={() => this.setState(
+              {open: true},
+              () => onClickSidebarButton ? onClickSidebarButton(true) : null
+            )}
+          /> : null}
 
-            {/* Render the logo */}
-            {/* <DensityLogo size={20} /> */}
-          </div>
-          <div className="navbar-items">{children}</div>
+          {/* Render the logo */}
+          <DensityLogo size={20} />
         </div>
-
-        <div className="navbar-right">
-          {/* <div className="navbar-items">{children}</div> */}
-        </div>
+        {subtitle ? <div className="navbar-brand-subtitle">{subtitle}</div> : null}
+        <div className="navbar-items">{children}</div>
       </div>
 
       {/* The mobile version of the navbar */}

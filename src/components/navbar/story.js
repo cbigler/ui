@@ -3,7 +3,6 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import Navbar, { NavbarItem, NavbarMobileItem } from './index';
-import { IconDashboards, IconGlobe, IconStopWatch, IconCopy, IconLightning } from '@density/ui-icons';
 
 import { grayLight } from '../../../variables/colors.json';
 
@@ -11,43 +10,50 @@ import { grayLight } from '../../../variables/colors.json';
 storiesOf('Navbar', module)
   .addWithInfo('Navigation Bar', () => (
     <div className="full-width">
+      <Navbar />
+
+      <div style={{
+        background: grayLight,
+        marginLeft: -10,
+        marginRight: -10,
+        boxSizing: 'border-box',
+        maxWidth: 1000,
+        height: 100,
+        margin: '20px auto',
+        paddingLeft: 10,
+        paddingRight: 10,
+      }} />
+    </div>
+  ))
+  .addWithInfo('With items', () => (
+    <div className="full-width">
       <Navbar>
         <NavbarItem
           activePage='active-page'
           pageName={['inactive-page']}
           href="https://example.com"
-        ><IconDashboards /> Dashboards</NavbarItem>
+        >Onboarding</NavbarItem>
         <NavbarItem
           activePage='active-page'
           pageName={['active-page']}
           href="https://example.com"
-        ><IconGlobe color="primary" /> Explore</NavbarItem>
-        <NavbarItem
-          activePage='active-page'
-          pageName={['inactive-page']}
-          locked={false}
-          href="https://example.com"
-        ><IconStopWatch /> Live</NavbarItem>
-        <NavbarItem
-          activePage='active-page'
-          pageName={['inactive-page']}
-          locked={false}
-          href="https://example.com"
-        ><IconCopy /> Developer</NavbarItem>
+        >Live</NavbarItem>
         <NavbarItem
           activePage='active-page'
           pageName={['locked-page']}
           locked={true}
           href="https://example.com"
-        ><IconLightning color="#CBCFD6"/> Onboarding</NavbarItem>
+        >Insights</NavbarItem>
       </Navbar>
 
       <div style={{
         background: grayLight,
+        marginLeft: -10,
+        marginRight: -10,
         boxSizing: 'border-box',
         maxWidth: 1000,
-        height: 500,
-        margin: '0',
+        height: 100,
+        margin: '20px auto',
         paddingLeft: 10,
         paddingRight: 10,
       }} />
@@ -94,10 +100,12 @@ storiesOf('Navbar', module)
 
           <div style={{
             background: grayLight,
+            marginLeft: -10,
+            marginRight: -10,
             boxSizing: 'border-box',
             maxWidth: 1000,
-            height: 500,
-            margin: '0',
+            height: 100,
+            margin: '20px auto',
             paddingLeft: 10,
             paddingRight: 10,
           }} />
@@ -170,10 +178,12 @@ storiesOf('Navbar', module)
       </Navbar>
       <div style={{
         background: grayLight,
+        marginLeft: -10,
+        marginRight: -10,
         boxSizing: 'border-box',
         maxWidth: 1000,
-        height: 500,
-        margin: '0',
+        height: 100,
+        margin: '20px auto',
         paddingLeft: 10,
         paddingRight: 10,
       }} />

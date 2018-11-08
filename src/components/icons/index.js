@@ -883,29 +883,6 @@ const ICONS = {
         </g>
     </g>
 </svg>,
-IconDashboards: ({color, width, height}) => <svg width={width || 18} height={height || 18} viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'>
-    <g id='Icons' fill='none' fillRule='evenodd'>
-        <g id='icons' transform='translate(-348 -574)'>
-            <g id='iconDashboard' transform='translate(348 574)'>
-                <rect id='bounds' fillOpacity='0' fill='#E3E3E6' width='18' height='18'
-                />
-                <path d='M4,4.03369141 L4,2 C4,1.44771525 4.44771525,1 5,1 L16,1 C16.5522847,1 17,1.44771525 17,2 L17,13 C17,13.5522847 16.5522847,14 16,14 L14.0554199,14'
-                id='Path' stroke={color} strokeWidth='1.5' strokeLinejoin='round' />
-                <path d='M1,16.0014977 C1,16.5529553 1.44748943,17 1.99850233,17 L13.0014977,17 C13.5529553,17 14,16.5525106 14,16.0014977 L14,4.99850233 C14,4.44704472 13.5525106,4 13.0014977,4 L1.99850233,4 C1.44704472,4 1,4.44748943 1,4.99850233 L1,16.0014977 Z'
-                id='icon-square-copy-2' stroke={color} strokeWidth='1.5' strokeLinecap='round'
-                strokeLinejoin='round' />
-                <path d='M9,13.5 L4,13.5' id='---' stroke={color} strokeWidth='1.5'
-                strokeLinecap='square' strokeLinejoin='round' />
-                <path d='M7,10.5 L4,10.5' id='---' stroke={color} strokeWidth='1.5'
-                strokeLinecap='square' strokeLinejoin='round' />
-                <path d='M9,7.5 L4,7.5' id='---' stroke={color} strokeWidth='1.5' strokeLinecap='square'
-                strokeLinejoin='round' />
-            </g>
-        </g>
-    </g>
-
-</svg>
-
 };
 
 // Wrap each icon in a component.
