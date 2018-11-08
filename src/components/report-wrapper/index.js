@@ -115,6 +115,7 @@ function ReportWrapperHeader({
   endDate,
   spaces,
   hideDetailsLink,
+  loading,
 }) {
   return (
     <div>
@@ -123,15 +124,23 @@ function ReportWrapperHeader({
         <div className={styles.reportHeaderLeft}>
           <h2 className={styles.reportHeaderTitle}>{title}</h2>
           <span className={styles.reportHeaderSpaces}>
-            {spaces.length > 0 ? (
-              spaces.length === 1 ? spaces[0] : `${spaces.length} selected spaces`
-            ) : null}
+            {loading ? (
+              <div className={styles.unloadedTextBar} style={{width: 120}} />
+            ) : (
+              spaces.length > 0 ? (
+                spaces.length === 1 ? spaces[0] : `${spaces.length} selected spaces`
+              ) : null
+            )}
           </span>
           <div className={styles.reportHeaderDateRangeMobile}>
-            <ReportWrapperHeaderDateRange
-              startDate={startDate}
-              endDate={endDate}
-            />
+            {loading ? (
+              <div className={styles.unloadedTextBar} />
+            ) : (
+              <ReportWrapperHeaderDateRange
+                startDate={startDate}
+                endDate={endDate}
+              />
+            )}
           </div>
         </div>
 
@@ -141,14 +150,22 @@ function ReportWrapperHeader({
             className={styles.reportHeaderDetailsLink}
             style={{opacity: hideDetailsLink ? 0 : 1}}
           >
-            <span className={styles.reportHeaderDetailsLinkText}>Details</span>
+            {loading ? (
+              <div className={classnames(styles.unloadedTextBar, styles.unloadedTextBarDetailsLink)} />
+            ) : (
+              <span className={styles.reportHeaderDetailsLinkText}>Details</span>
+            )}
           </span>
-          <ReportWrapperHeaderDateRange startDate={startDate} endDate={endDate} />
+            {loading ? (
+              <div className={styles.unloadedTextBar} style={{width: 120}} />
+            ) : (
+              <ReportWrapperHeaderDateRange startDate={startDate} endDate={endDate} />
+            )}
         </div>
 
         {/* Right side on mobile contains an arrow */}
         <div className={styles.reportHeaderRightMobile}>
-          <IconArrowRight width={14} height={14} color={colorVariables.brandPrimary} />
+          {!loading ? <IconArrowRight width={14} height={14} color={colorVariables.brandPrimary} /> : null}
         </div>
       </div>
     </div>
@@ -161,7 +178,9 @@ export default function ReportWrapper({
   endDate,
   spaces,
   children,
+
   hideDetailsLink,
+  loading,
 }) {
   return (
     <div className={styles.reportWrapper}>
@@ -171,6 +190,7 @@ export default function ReportWrapper({
         endDate={endDate}
         spaces={spaces}
         hideDetailsLink={hideDetailsLink}
+        loading={loading}
       />
       {children}
     </div>
@@ -183,6 +203,7 @@ ReportWrapper.propTypes = {
   children: propTypes.node,
   spaces: propTypes.arrayOf(propTypes.string).isRequired,
   hideDetailsLink: propTypes.bool,
+  loading: propTypes.bool,
 };
 ReportWrapper.defaultProps = {
   hideDetailsLink: true,
