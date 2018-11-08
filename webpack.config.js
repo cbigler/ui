@@ -8,7 +8,8 @@
 const path = require('path');
 const jsonImporter = require('@density/node-sass-json-importer');
 
-const componentName = __dirname.match(/\/components\/(.+)/)[1];
+const componentRegexMatch = __dirname.match(/\/components\/(.+)/),
+      componentName = componentRegexMatch ? componentRegexMatch[1] : '';
 
 module.exports = {
   entry: './index.js',
