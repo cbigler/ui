@@ -102,7 +102,7 @@ function ReportWrapperHeaderDateRange({startDate, endDate}) {
       <div className={styles.reportHeaderDateRange}>
         <span><IconCalendar width={12} height={12} color={colorVariables.grayDarker} /></span>
         <span className={styles.reportHeaderDateRangeTextStart}>{startDate.format('MMM DD')}</span>
-        <span><IconArrowRight width={12} height={12} color={colorVariables.grayDarker} /></span>
+        <span> - </span>
         <span className={styles.reportHeaderDateRangeTextEnd}>{endDate.format('MMM DD')}</span>
       </div>
     );
@@ -121,52 +121,30 @@ function ReportWrapperHeader({
     <div>
       <div className={styles.reportHeader}>
         {/* Left side contains title, space list, and when on mobile, the date range. */}
-        <div className={styles.reportHeaderLeft}>
-          <h2 className={styles.reportHeaderTitle}>{title}</h2>
-          <span className={styles.reportHeaderSpaces}>
-            {loading ? (
-              <div className={styles.unloadedTextBar} style={{width: 120}} />
-            ) : (
-              spaces.length > 0 ? (
-                spaces.length === 1 ? spaces[0] : `${spaces.length} selected spaces`
-              ) : null
-            )}
-          </span>
-          <div className={styles.reportHeaderDateRangeMobile}>
-            {loading ? (
-              <div className={styles.unloadedTextBar} />
-            ) : (
-              <ReportWrapperHeaderDateRange
-                startDate={startDate}
-                endDate={endDate}
-              />
-            )}
-          </div>
+        <h2 className={styles.reportHeaderTitle}>{title}</h2>
+        <div className={styles.reportHeaderDetailsLink} style={{opacity: hideDetailsLink ? 0 : 1}}>
+          {loading ? (
+            <div className={classnames(styles.unloadedTextBar, styles.unloadedTextBarDetailsLink)} />
+          ) : (
+            <div className={styles.reportHeaderDetailsLinkText}>Details</div>
+          )}
         </div>
 
-        {/* Right side on desktop contains the date range and "more details" arrow. */}
-        <div className={styles.reportHeaderRightDesktop}>
-          <span
-            className={styles.reportHeaderDetailsLink}
-            style={{opacity: hideDetailsLink ? 0 : 1}}
-          >
-            {loading ? (
-              <div className={classnames(styles.unloadedTextBar, styles.unloadedTextBarDetailsLink)} />
-            ) : (
-              <span className={styles.reportHeaderDetailsLinkText}>Details</span>
-            )}
-          </span>
-            {loading ? (
-              <div className={styles.unloadedTextBar} style={{width: 120}} />
-            ) : (
-              <ReportWrapperHeaderDateRange startDate={startDate} endDate={endDate} />
-            )}
+        <div className={styles.reportHeaderSpaces}>
+          {loading ? (
+            <div className={styles.unloadedTextBar} style={{width: 120}} />
+          ) : (
+            spaces.length > 0 ? (
+              spaces.length === 1 ? spaces[0] : `${spaces.length} selected spaces`
+            ) : null
+          )}
         </div>
 
-        {/* Right side on mobile contains an arrow */}
-        <div className={styles.reportHeaderRightMobile}>
-          {!loading ? <IconArrowRight width={14} height={14} color={colorVariables.brandPrimary} /> : null}
-        </div>
+        {loading ? (
+          <div className={styles.unloadedTextBar} style={{width: 120}} />
+        ) : (
+          <ReportWrapperHeaderDateRange startDate={startDate} endDate={endDate} />
+        )}
       </div>
     </div>
   );

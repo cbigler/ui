@@ -84,7 +84,7 @@ class ReportNextWeekForecastChart extends Component {
               <g key={day} transform={`translate(0,${(index * this.columnHeight)+(this.columnHeight/2)})`}>
                 {/* The day of the week */}
                 <text
-                  fontSize={12}
+                  fontSize={14}
                   fontWeight={highlightedDays.indexOf(day) >= 0 ? 'bold' : 'normal'}
                   transform="translate(0,3)"
                 >{day}</text>
@@ -109,6 +109,7 @@ class ReportNextWeekForecastChart extends Component {
                 />
 
                 <text
+                  fontSize={14}
                   transform={`translate(${this.barLeftOffset + barWidthInPx + barHighWidthInPx + 10},6)`}
                 >
                   <tspan

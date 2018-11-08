@@ -30,10 +30,10 @@ $report-daily-visits-per-segment-large-row-height: 50px;
 }
 .maximumMinimumStatementTitle {
   @extend .maximumMinimumStatementHighlight;
-  color: $report-blue;
+  color: $brand-primary;
 
   &.light {
-    color: $report-blue-light;
+    color: $brand-primary-light;
   }
 }
 .maximumMinimumStatementRowContainer {

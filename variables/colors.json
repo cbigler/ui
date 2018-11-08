@@ -9,7 +9,8 @@
   "grayLighter": "#F0F0F2",
   "grayLightest": "#FAFAFA",
 
-  "brandPrimary": "#4198FF",
+  "brandPrimary": "#3663E5",
+  "brandPrimaryLight": "#97A6D4",
   "brandSuccess": "#80CD80",
   "brandDanger": "#FF5454",
   "brandWarning": "#FFBA08",
@@ -19,10 +20,10 @@
   "inputFieldTextColor": "#CBCFD6",
   "inputFieldTextActiveColor": "#4E5457",
 
-  "reportBlue": "#3663E5",
+  "brandPrimaryDeprecated": "#4198FF",
   "reportBlueLight": "#97A6D4",
-  "reportGreen": "#319256",
-  "reportYellow": "#F7BA43",
+  "reportGreen": "#4E8475",
+  "reportYellow": "#F9B35B",
   "reportOrange": "#F26B40",
-  "reportRed": "#CB4368"
+  "reportRed": "#FF7B6C"
 }

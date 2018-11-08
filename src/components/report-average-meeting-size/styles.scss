@@ -110,8 +110,8 @@
   margin: 3px;
 }
 .dotFilled {
-  border-color: $report-blue;
-  background-color: $report-blue;
+  border-color: $brand-primary;
+  background-color: $brand-primary;
 }
 
 .dotLabel {
@@ -128,6 +128,6 @@
   color: $gray-darker;
 }
 .dotLabelPart {
-  color: $report-blue;
+  color: $brand-primary;
   font-weight: bold;
 }
