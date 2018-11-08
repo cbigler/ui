@@ -50,6 +50,7 @@ function hexRgb(hex, options = {}) {
 }
 
 function addAlphaToHex(hex, alpha) {
+  console.log(hex, alpha);
   const color = hexRgb(hex);
   return `rgba(${color.red}, ${color.green}, ${color.blue}, ${alpha})`;
 }
@@ -236,8 +237,8 @@ export default function ReportDailyVisitsPerSegment({
                         className={styles.segmentTableCell}
                         key={index /* I think this is what we want here, since the position of cells shouldn't change? */}
                         style={{
-                          backgroundColor: addAlphaToHex(colorVariables.reportBlue, alpha),
-                          color: textColorPrimary ? colorVariables.reportBlue : '#fff',
+                          backgroundColor: addAlphaToHex(colorVariables.brandPrimary, alpha),
+                          color: textColorPrimary ? colorVariables.brandPrimary : '#fff',
                         }}
                       >
                         <strong className={styles.segmentTableMaxMin}>

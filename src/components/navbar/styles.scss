@@ -31,22 +31,20 @@
 
 // A navbar brand contains the logo mark, left aligned on the status bar.
 @mixin make-navbar-brand {
-  display: inline-block;
+  display: flex;
+  align-items: center;
   position: relative;
   z-index: $navbar-brand-zindex;
   height: $navbar-height;
   font-size: $navbar-brand-font-size;
-  display: flex;
-  align-items: center;
 
   @media (min-width: $screen-xs-max) {
     float: left;
   }
 
-  img {
-    position: relative;
-    top: ($navbar-height - $navbar-brand-height) / 2;
-    height: $navbar-brand-height;
+  .density-mark {
+    display: flex;
+    align-items: center;
   }
 }
 
