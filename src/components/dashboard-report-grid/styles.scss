@@ -1,0 +1,30 @@
+// Import any global variables from "../../../variables/*.json"
+
+// Local variables to the component
+@import "variables.json";
+
+.dashboardReportGridWrapper {
+  max-width: 1440px;
+}
+
+.dashboardReportGrid {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.dashboardReportGridColumn {
+  flex: 1;
+  width: 320px;
+
+  display: flex;
+  flex-direction: column;
+
+  margin-left: 16px;
+  margin-right: 16px;
+  &:first-of-type { margin-left: 0px; }
+  &:last-of-type { margin-right: 0px; }
+}
+.dashboardReportGridCell {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}

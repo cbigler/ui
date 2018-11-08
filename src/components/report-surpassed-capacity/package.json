@@ -1,0 +1,15 @@
+{
+  "name": "@density/ui-report-surpassed-capacity",
+  "version": "0.3.1",
+  "description": "Surpassed Capacity component",
+  "main": "dist/index.js",
+  "author": "Density <engineering+javascript@density.io>",
+  "license": "MIT",
+  "dependencies": {
+    "d3-scale": "^2.1.2"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "prop-types": "*"
+  }
+}

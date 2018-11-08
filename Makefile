@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-WEBPACK = $(shell realpath ./node_modules/.bin/webpack 2> /dev/null)
+WEBPACK = $(shell echo `pwd`/node_modules/.bin/webpack 2> /dev/null)
 
 PORT ?= 9009
 
@@ -62,14 +62,10 @@ start:
 
 .PHONY: clean
 clean:
-	rm -rf dist/
 	rm -rf components/*/dist/
 
-.PHONY: build
-build: dist/styles.css
-
 .PHONY: publish
-publish: clean build
+publish: clean
 	npm publish --access public
 
 dist/:
@@ -85,8 +81,8 @@ version-%:
 
 .PHONY: major minor patch
 patch: version-patch
-major: version-patch
-minor: version-patch
+major: version-major
+minor: version-minor
 
 .PHONY: components-list
 components-list:
