@@ -50,7 +50,6 @@ function hexRgb(hex, options = {}) {
 }
 
 function addAlphaToHex(hex, alpha) {
-  console.log(hex, alpha);
   const color = hexRgb(hex);
   return `rgba(${color.red}, ${color.green}, ${color.blue}, ${alpha})`;
 }
