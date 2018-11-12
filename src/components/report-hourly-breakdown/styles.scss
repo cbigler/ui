@@ -3,6 +3,7 @@
 
 .reportHourlyBreakdown {
   width: 100%;
+  table-layout: fixed;
 }
 
 .reportHourlyBreakdown th {
@@ -20,14 +21,15 @@
 
   line-height: 15px;
   text-align: center;
-  font-size: 10px;
+  font-size: 11px;
   padding-top: 3px;
+  width: auto;
 }
 
+.reportHourlyBreakdown th:first-child { width: 32px; }
 .reportHourlyBreakdown td:first-child {
   color: $gray-cinder;
   font-size: 12px;
   background-color: transparent;
   text-align: left;
-  width: 32px;
 }
