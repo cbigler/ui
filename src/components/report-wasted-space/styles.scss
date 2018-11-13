@@ -35,6 +35,9 @@
   color: $gray-darkest;
 }
 
+.utilizationLabels li {
+  font-size: 14px;
+}
 .utilizationLabels li:before {
   content: '';
 
@@ -44,9 +47,17 @@
   border-radius: 50%;
 
   background-color: red;
-  transform: translate(0px, -2px);
+  transform: translate(0px, -1px);
   margin-right: 10px;
 }
 .utilizationLabels li.under:before { background-color: $brand-primary; }
 .utilizationLabels li.normal:before { background-color: $report-yellow; }
 .utilizationLabels li.over:before { background-color: $report-red; }
+
+.textAbove .label {
+  font-size: 10px;
+  transform: translate(0px, -22px);
+}
+.textAbove.under { color: $brand-primary; }
+.textAbove.normal { color: $report-yellow; }
+.textAbove.over { color: $report-red; }
