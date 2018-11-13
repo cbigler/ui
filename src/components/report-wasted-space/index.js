@@ -37,6 +37,11 @@ export default class ReportWastedSpace extends Component {
       overutilizedPercent,
     } = this.props;
     const { width } = this.state;
+
+    const underutilizedTextAbove = width * (underutilizedPercent / 100) < 30,
+          normalTextAbove = width * (normalPercent / 100) < 30,
+          overutilizedTextAbove = width * (overutilizedPercent / 100) < 30;
+
     return (
       <ReportWrapper
         title={title}
@@ -48,12 +53,17 @@ export default class ReportWastedSpace extends Component {
           title={<span><strong>{underutilizedPercent}%</strong> of your spaces are <strong>underutilized</strong>.</span>}
         />
         <ReportCard>
-          <div className={styles.utilizationBar} ref={r => { this.utilizationBar = r; }}>
+          <div
+            className={classnames(styles.utilizationBar, {
+              [styles.utilizationBarTextAbove]: underutilizedTextAbove || normalTextAbove || overutilizedTextAbove,
+            })}
+            ref={r => { this.utilizationBar = r; }}
+          >
             <div
               className={classnames(
                 styles.region,
                 styles.under,
-                {[styles.textAbove]: width * (underutilizedPercent / 100) < 30}
+                {[styles.textAbove]: underutilizedTextAbove},
               )}
               style={{width: `${underutilizedPercent}%`}}
             >
@@ -63,7 +73,7 @@ export default class ReportWastedSpace extends Component {
               className={classnames(
                 styles.region,
                 styles.normal,
-                {[styles.textAbove]: width * (normalPercent / 100) < 30}
+                {[styles.textAbove]: normalTextAbove},
               )}
               style={{width: `${normalPercent}%`}}
             >
@@ -73,7 +83,7 @@ export default class ReportWastedSpace extends Component {
               className={classnames(
                 styles.region,
                 styles.over,
-                {[styles.textAbove]: width * (overutilizedPercent / 100) < 30}
+                {[styles.textAbove]: overutilizedTextAbove},
               )}
               style={{width: `${overutilizedPercent}%`}}
             >

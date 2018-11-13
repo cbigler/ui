@@ -61,3 +61,8 @@
 .textAbove.under { color: $brand-primary; }
 .textAbove.normal { color: $report-yellow; }
 .textAbove.over { color: $report-red; }
+
+.utilizationBarTextAbove {
+  margin-top: 12px;
+  transition: all 100ms ease-in-out;
+}
