@@ -25,7 +25,7 @@ storiesOf('ReportComparativePerformance', module)
         lastData={{
           totalVisits: 8570,
           averagePeakCount: 233,
-          averagePeakTime: moment.duration('12:03:00'),
+          averagePeakTime: moment.duration('17:03:00'),
         }}
         previousData={{
           totalVisits: 10301,
@@ -50,7 +50,7 @@ storiesOf('ReportComparativePerformance', module)
         lastData={{
           totalVisits: 8570,
           averagePeakCount: 233,
-          averagePeakTime: moment.duration('12:03:00'),
+          averagePeakTime: moment.duration('17:03:00'),
         }}
         previousData={{
           totalVisits: 10301,
@@ -75,7 +75,7 @@ storiesOf('ReportComparativePerformance', module)
         lastData={{
           totalVisits: 8570,
           averagePeakCount: 233,
-          averagePeakTime: moment.duration('12:03:00'),
+          averagePeakTime: moment.duration('17:03:00'),
         }}
         previousData={{
           totalVisits: 10301,
@@ -100,7 +100,7 @@ storiesOf('ReportComparativePerformance', module)
         lastData={{
           totalVisits: 8570,
           averagePeakCount: 233,
-          averagePeakTime: moment.duration('12:03:00'),
+          averagePeakTime: moment.duration('17:03:00'),
         }}
         previousData={{
           totalVisits: 8570,
@@ -125,7 +125,7 @@ storiesOf('ReportComparativePerformance', module)
         lastData={{
           totalVisits: 8570,
           averagePeakCount: 233,
-          averagePeakTime: moment.duration('12:03:00'),
+          averagePeakTime: moment.duration('17:03:00'),
         }}
         previousData={{
           totalVisits: 0,
