@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-report-time-segment-breakdown",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Report time segment breakdown component",
   "main": "dist/index.js",
   "author": "Density <engineering+javascript@density.io>",

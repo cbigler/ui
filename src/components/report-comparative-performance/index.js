@@ -145,7 +145,7 @@ export default function ReportComparativePerformance({
                   moment.utc()
                     .startOf('day')
                     .add(previousData.averagePeakTime.asSeconds(), 'seconds')
-                    .format('H:mma')
+                    .format('h:mma')
                     .slice(0, -1)
                 }
               </td>
@@ -154,7 +154,7 @@ export default function ReportComparativePerformance({
                   moment.utc()
                     .startOf('day')
                     .add(lastData.averagePeakTime.asSeconds(), 'seconds')
-                    .format('H:mma')
+                    .format('h:mma')
                     .slice(0, -1)
                 }
               </td>
