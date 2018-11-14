@@ -15,8 +15,8 @@ storiesOf('ReportWastedSpace', module)
         endDate={moment("2018-10-28T06:59:59.999Z")}
         spaces={["Cafe Ole"]}
 
-        underutilizedNormalThreshold={0.2}
-        normalOverutilizedThreshold={0.8}
+        underutilizedNormalThreshold={20}
+        normalOverutilizedThreshold={80}
         underutilizedPercent={30}
         normalPercent={51}
         overutilizedPercent={19}
@@ -31,8 +31,8 @@ storiesOf('ReportWastedSpace', module)
         endDate={moment("2018-10-28T06:59:59.999Z")}
         spaces={["Cafe Ole"]}
 
-        underutilizedNormalThreshold={0.2}
-        normalOverutilizedThreshold={0.8}
+        underutilizedNormalThreshold={20}
+        normalOverutilizedThreshold={80}
         underutilizedPercent={30}
         normalPercent={68}
         overutilizedPercent={5}
@@ -47,8 +47,8 @@ storiesOf('ReportWastedSpace', module)
         endDate={moment("2018-10-28T06:59:59.999Z")}
         spaces={["Cafe Ole"]}
 
-        underutilizedNormalThreshold={0.2}
-        normalOverutilizedThreshold={0.8}
+        underutilizedNormalThreshold={20}
+        normalOverutilizedThreshold={80}
         underutilizedPercent={30}
         normalPercent={68}
         overutilizedPercent={2}

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
+
+import moment from 'moment';
 import classnames from 'classnames';
 import styles from './styles.scss';
 
@@ -50,7 +52,11 @@ export default class ReportWastedSpace extends Component {
         spaces={spaces}
       >
         <ReportSubHeader
-          title={<span><strong>{underutilizedPercent}%</strong> of your spaces are <strong>underutilized</strong>.</span>}
+          title={(
+            <span>
+              <strong>{underutilizedPercent}%</strong> of your spaces are <strong>underutilized</strong>.
+            </span>
+          )}
         />
         <ReportCard>
           <div
@@ -92,13 +98,13 @@ export default class ReportWastedSpace extends Component {
           </div>
           <ul className={styles.utilizationLabels}>
             <li className={styles.under}>
-              Underutilized (0%-{underutilizedNormalThreshold*100}% utilization)
+              Underutilized (0%-{underutilizedNormalThreshold}% utilization)
             </li>
             <li className={styles.normal}>
-              Normal ({underutilizedNormalThreshold*100}%-{normalOverutilizedThreshold*100}% utilization)
+              Normal ({underutilizedNormalThreshold}%-{normalOverutilizedThreshold}% utilization)
             </li>
             <li className={styles.over}>
-              Overutilized ({normalOverutilizedThreshold*100}%-100% utilization)
+              Overutilized ({normalOverutilizedThreshold}%-100% utilization)
             </li>
           </ul>
         </ReportCard>
@@ -106,3 +112,16 @@ export default class ReportWastedSpace extends Component {
     );
   }
 }
+ReportWastedSpace.propTypes = {
+  title: propTypes.string.isRequired,
+  startDate: propTypes.instanceOf(moment).isRequired,
+  endDate: propTypes.instanceOf(moment).isRequired,
+  spaces: propTypes.arrayOf(propTypes.string).isRequired,
+
+  underutilizedNormalThreshold: propTypes.number.isRequired,
+  normalOverutilizedThreshold: propTypes.number.isRequired,
+
+  underutilizedPercent: propTypes.number.isRequired,
+  normalPercent: propTypes.number.isRequired,
+  overutilizedPercent: propTypes.number.isRequired,
+};
