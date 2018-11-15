@@ -67,10 +67,10 @@ export default function ReportComparativePerformance({
   const unit = MODE_TO_UNIT[mode];
 
   const lastStartDate = nowAtSpace.clone().startOf(unit).subtract(1, unit);
-  const lastEndDate = lastStartDate.clone().add(1, unit);
+  const lastEndDate = lastStartDate.clone().endOf(unit);
 
   const previousStartDate = lastStartDate.clone().subtract(1, unit);
-  const previousEndDate = previousStartDate.clone().add(1, unit);
+  const previousEndDate = previousStartDate.clone().endOf(unit);
 
   const visitPercentageDifference = (
     lastData.totalVisits - previousData.totalVisits
