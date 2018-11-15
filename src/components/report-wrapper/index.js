@@ -104,7 +104,7 @@ function ReportWrapperHeaderDateRange({startDate, endDate}) {
         <span><IconCalendar width={12} height={12} color={colorVariables.grayDarker} /></span>
         <span className={styles.reportHeaderDateRangeTextStart}>{startDate.format('MMM DD')}</span>
         <span> - </span>
-        <span className={styles.reportHeaderDateRangeTextEnd}>{endDate.subtract(1, 'days').format('MMM DD')}</span>
+        <span className={styles.reportHeaderDateRangeTextEnd}>{endDate.subtract(1, 'milliseconds').format('MMM DD')}</span>
       </div>
     );
   }

@@ -31,19 +31,19 @@ const commonRanges = [
     id: 'LAST_WEEK',
     name: 'Last week',
     startDate: moment.utc().startOf('week').subtract(1, 'week'),
-    endDate: moment.utc().endOf('week').subtract(1, 'week')
+    endDate: moment.utc().startOf('week')
   },
   {
     id: 'LAST_MONTH',
     name: 'Last month',
     startDate: moment.utc().startOf('month').subtract(1, 'month'),
-    endDate: moment.utc().endOf('month').subtract(1, 'month')
+    endDate: moment.utc().startOf('month')
   },
   {
     id: 'LAST_QUARTER',
     name: 'Last Quarter',
     startDate: moment.utc().startOf('quarter').subtract(1, 'quarter'),
-    endDate: moment.utc().endOf('quarter').subtract(1, 'quarter')
+    endDate: moment.utc().startOf('quarter')
   },
   {
     id: 'LAST_7_DAYS',
