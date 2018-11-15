@@ -12,7 +12,7 @@ storiesOf('ReportDailyVisitsPerSegment', module)
       <ReportDailyVisitsPerSegment
         title="Daily Segment Visits"
         startDate={moment('2018-03-14T00:00:00-04:00')}
-        endDate={moment('2018-03-18T00:00:00-04:00')}
+        endDate={moment('2018-03-19T00:00:00-04:00')}
         spaces={["Space 1"]}
 
         timeSegmentNames={[
@@ -39,7 +39,7 @@ storiesOf('ReportDailyVisitsPerSegment', module)
       <ReportDailyVisitsPerSegment
         title="Daily Segment Visits"
         startDate={moment('2018-03-14T00:00:00-04:00')}
-        endDate={moment('2018-03-18T00:00:00-04:00')}
+        endDate={moment('2018-03-19T00:00:00-04:00')}
         spaces={["Space 1"]}
 
         timeSegmentNames={[
@@ -66,7 +66,7 @@ storiesOf('ReportDailyVisitsPerSegment', module)
       <ReportDailyVisitsPerSegment
         title="Daily Segment Visits"
         startDate={moment('2018-03-14T00:00:00-04:00')}
-        endDate={moment('2018-03-20T00:00:00-04:00')}
+        endDate={moment('2018-03-21T00:00:00-04:00')}
         spaces={["Space 1"]}
 
         timeSegmentNames={[
@@ -93,7 +93,7 @@ storiesOf('ReportDailyVisitsPerSegment', module)
       <ReportDailyVisitsPerSegment
         title="Daily Segment Visits"
         startDate={moment('2018-03-14T00:00:00-04:00')}
-        endDate={moment('2018-03-20T00:00:00-04:00')}
+        endDate={moment('2018-03-21T00:00:00-04:00')}
         spaces={["Space 1"]}
 
         timeSegmentNames={[
@@ -120,7 +120,7 @@ storiesOf('ReportDailyVisitsPerSegment', module)
       <ReportDailyVisitsPerSegment
         title="Daily Segment Visits"
         startDate={moment('2018-03-14T00:00:00-04:00')}
-        endDate={moment('2018-03-20T00:00:00-04:00')}
+        endDate={moment('2018-03-21T00:00:00-04:00')}
         spaces={["Space 1"]}
 
         timeSegmentNames={[
@@ -147,7 +147,7 @@ storiesOf('ReportDailyVisitsPerSegment', module)
       <ReportDailyVisitsPerSegment
         title="Daily Segment Visits"
         startDate={moment('2018-03-14T00:00:00-04:00')}
-        endDate={moment('2018-03-20T00:00:00-04:00')}
+        endDate={moment('2018-03-21T00:00:00-04:00')}
         spaces={["Space 1"]}
 
         timeSegmentNames={[
@@ -174,7 +174,7 @@ storiesOf('ReportDailyVisitsPerSegment', module)
       <ReportDailyVisitsPerSegment
         title="Daily Segment Visits"
         startDate={moment('2018-03-14T00:00:00-04:00')}
-        endDate={moment('2018-03-20T00:00:00-04:00')}
+        endDate={moment('2018-03-21T00:00:00-04:00')}
         spaces={["Space 1"]}
 
         timeSegmentNames={[
