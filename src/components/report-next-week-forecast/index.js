@@ -147,7 +147,7 @@ export default function ReportNextWeekForecast({
     <ReportWrapper
       title={title}
       startDate={startDate}
-      endDate={endDate}
+      endDate={endDate.add(1, 'days').startOf('day')}
       spaces={spaces}
     >
       <ReportSubHeader

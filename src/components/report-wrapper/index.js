@@ -92,7 +92,7 @@ export function ReportError() {
 
 
 // Render the date range for the report wrapper
-// IMPORTANT: The end date is exclusive, so we need to subtract 1 day from it for rendering
+// IMPORTANT: The end date is exclusive, so we need to subtract 1 millisecond from it for rendering
 function ReportWrapperHeaderDateRange({startDate, endDate}) {
   if (!startDate || !endDate) {
     return (
