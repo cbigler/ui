@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-report-daily-visits-per-segment",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Daily visits per segment report component",
   "main": "dist/index.js",
   "author": "Density <engineering+javascript@density.io>",

@@ -97,7 +97,7 @@ export default function ReportDailyVisitsPerSegment({
   // Return a list of all days between the start and end date.
   const days = (function() {
     const days = [];
-    for (let day = startDate.clone(); day.isSameOrBefore(endDate); day = day.clone().add(1, 'day')) {
+    for (let day = startDate.clone(); day.isBefore(endDate); day = day.clone().add(1, 'day')) {
       days.push([
         day.format('ddd'),  // Mon
         day.format('M/DD'), // 3/14
