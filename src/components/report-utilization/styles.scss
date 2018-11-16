@@ -1,0 +1,49 @@
+// Import any global variables from "../../../variables/*.json"
+@import "../../../variables/colors.json";
+
+.utilizationWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.utilizationRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  height: 35px;
+}
+
+.utilizationRowText {
+  flex: 1;
+  font-size: 12px;
+  transform: translate(0px, 1px);
+
+  margin-right: 10px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.utilizationRowBar {
+  flex: 1;
+  background-color: rgba($brand-primary-new, 0.3);
+  height: 4px;
+  width: 100%;
+}
+
+.utilizationRowBarInner {
+  width: 100%;
+  height: 4px;
+  background-color: $brand-primary-new;
+}
+
+.utilizationRowBarText {
+  color: $brand-primary-new;
+  font-weight: 600;
+  font-size: 12px;
+  margin-left: 10px;
+  width: 32px;
+  transform: translate(0px, 2px);
+}
