@@ -92,18 +92,14 @@ export default class ReportUtilization extends Component {
           title={mode === LEAST_UTILIZED ? (
             // Least utilized
             <span>
-              {text.toEnglishList(
-                headerUtilizations.map(u => <strong>{u.name}</strong>)
-              ).map((item, index) => <span key={index}>{item}</span>)}{' '}
+              {text.toEnglishJsxList(headerUtilizations.map(u => <strong>{u.name}</strong>))}{' '}
               {headerUtilizations.length === 1 ? 'was' : 'were'} only{' '}
               <strong>{Math.round(headerUtilizationValue * 100)}%</strong> utilized.
             </span>
           ) : (
             // Most utilized
             <span>
-              {text.toEnglishList(
-                headerUtilizations.map(u => <strong>{u.name}</strong>)
-              ).map((item, index) => <span key={index}>{item}</span>)}{' '}
+              {text.toEnglishJsxList(headerUtilizations.map(u => <strong>{u.name}</strong>))}{' '}
               {headerUtilizations.length === 1 ? 'was' : 'were'} generally{' '}
               <strong>{Math.round(headerUtilizationValue * 100)}%</strong> utilized.
             </span>
