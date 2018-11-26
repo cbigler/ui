@@ -89,19 +89,13 @@ export default class ReportUtilization extends Component {
         spaces={utilizations.map(i => i.name)}
       >
         <ReportSubHeader
-          title={mode === LEAST_UTILIZED ? (
-            // Least utilized
+          title={(
             <span>
               {text.toEnglishJsxList(headerUtilizations.map(u => <strong>{u.name}</strong>))}{' '}
-              {headerUtilizations.length === 1 ? 'was' : 'were'} only{' '}
-              <strong>{Math.round(headerUtilizationValue * 100)}%</strong> utilized.
-            </span>
-          ) : (
-            // Most utilized
-            <span>
-              {text.toEnglishJsxList(headerUtilizations.map(u => <strong>{u.name}</strong>))}{' '}
-              {headerUtilizations.length === 1 ? 'was' : 'were'} generally{' '}
-              <strong>{Math.round(headerUtilizationValue * 100)}%</strong> utilized.
+              {headerUtilizations.length === 1 ? 'was' : 'were'}{' '}
+              {mode === LEAST_UTILIZED ? 'only' : 'generally'}{' '}
+              <strong>{Math.round(headerUtilizationValue * 100)}%</strong>{''}
+              utilized.
             </span>
           )}
         />
