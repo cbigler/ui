@@ -39,7 +39,7 @@ storiesOf('ReportTotalVisitsRollup', module)
         {id: 3, name: "My street cafe", visits: 520},
         {id: 4, name: "4th floor cafeteria", visits: 440},
         {id: 5, name: "18. War St Fish", visits: 407},
-        {id: 6, name: "Hipster Cafe", visits: 386},
+        {id: 6, name: "Hipster Cafe", visits: 0},
         {id: 7, name: "123 S. Olive Cafeteria", visits: 316},
         {id: 8, name: "456 E. Rutherford Cafeteria", visits: 59},
       ]}

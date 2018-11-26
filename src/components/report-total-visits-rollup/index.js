@@ -108,7 +108,10 @@ export default class ReportTotalVisitsRollup extends Component {
                       className={styles.rollupRowBarInner}
                       style={{width: `${maxVisits ? item.visits / maxVisits * 100 : 0}%`}}
                     />
-                    <div className={styles.rollupRowBarText}>{item.visits}</div>
+                    <div 
+                      className={styles.rollupRowBarText}
+                      style={item.visits === 0 ? {marginLeft: 0} : undefined}
+                    >{item.visits}</div>
                   </div>
                 </div>
               );
