@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-report-comparative-performance",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "Comparative Performance component",
   "main": "dist/index.js",
   "author": "Density <engineering+javascript@density.io>",
