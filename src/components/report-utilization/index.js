@@ -94,7 +94,7 @@ export default class ReportUtilization extends Component {
               {text.toEnglishJsxList(headerUtilizations.map(u => <strong>{u.name}</strong>))}{' '}
               {headerUtilizations.length === 1 ? 'was' : 'were'}{' '}
               {mode === LEAST_UTILIZED ? 'only' : 'generally'}{' '}
-              <strong>{Math.round(headerUtilizationValue * 100)}%</strong>{''}
+              <strong>{Math.round(headerUtilizationValue * 100)}%</strong>{' '}
               utilized.
             </span>
           )}

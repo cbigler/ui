@@ -142,19 +142,31 @@ class ReportTimeSegmentBreakdownChart extends Component {
   // and ending at the end of the time segment.
   generateXAxisMarks() {
     const { timeSegment } = this.props;
+    const { width } = this.state;
 
     const start = moment.duration(timeSegment.start);
     const end = moment.duration(timeSegment.end);
 
+    const startHour = start.asHours();
+    const endHour = end.asHours();
+
+    const numberOfHours = (endHour - startHour);
+    const distanceBetweenHoursInPx = width / numberOfHours;
+
+    let hoursBetweenTicks = 1;
+    if (distanceBetweenHoursInPx < 30) {
+      hoursBetweenTicks = 3;
+    } else if (distanceBetweenHoursInPx < 50) {
+      hoursBetweenTicks = 2;
+    }
+
     const marks = [];
-    for (let i = start; i.hours() < end.hours(); i = i.clone().add(1, 'hour')) {
-      let label = i.hours();
+    for (let label = startHour; label <= endHour; label += hoursBetweenTicks) {
       marks.push({
         value: label * 3600, // convert label to seconds
         label: moment.utc().startOf('day').add(label, 'hours').format('ha').slice(0, -1),
       });
     }
-
     return marks;
   }
 

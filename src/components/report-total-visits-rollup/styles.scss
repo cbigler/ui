@@ -1,12 +1,12 @@
 // Import any global variables from "../../../variables/*.json"
 @import "../../../variables/colors.json";
 
-.utilizationWrapper {
+.rollupWrapper {
   display: flex;
   flex-direction: column;
 }
 
-.utilizationRow {
+.rollupRow {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -14,32 +14,31 @@
   height: 35px;
 }
 
-.utilizationRowText {
-  flex: 1;
-  font-size: 12px;
+.rollupRowText {
+  flex-basis: calc(50% - 42px);
+  margin-right: 10px;
   transform: translate(0px, 1px);
 
-  margin-right: 10px;
-
+  font-size: 12px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.utilizationRowBar {
-  flex: 1;
-  background-color: rgba($brand-primary-new, 0.3);
-  height: 4px;
-  width: 100%;
+.rollupRowBar {
+  flex-basis: calc(50% + 42px);
+
+  display: flex;
+  flex-direction: row;
 }
 
-.utilizationRowBarInner {
-  width: 100%;
+.rollupRowBarInner {
   height: 4px;
   background-color: $brand-primary-new;
+  transform: translate(0px, 5px);
 }
 
-.utilizationRowBarText {
+.rollupRowBarText {
   color: $brand-primary-new;
   font-weight: 600;
   font-size: 12px;
