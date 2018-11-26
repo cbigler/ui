@@ -38,7 +38,7 @@ export default class ReportTotalVisitsRollup extends Component {
       segmentName,
       startDate,
       endDate,
-      counts,
+      visits,
       mode,
     } = this.props;
     const { width } = this.state;
@@ -47,36 +47,36 @@ export default class ReportTotalVisitsRollup extends Component {
       throw new Error(`Total visits rollup report mode must either be MOST_VISITED or LEAST_VISITED (got ${mode})`);
     }
 
-    if (counts.length === 0) {
-      throw new Error('No space visit counts were specified when rendering the report, please define at least one.');
+    if (visits.length === 0) {
+      throw new Error('No space visits were specified when rendering the report, please define at least one.');
     }
 
-    if (counts.some(i => i.count < 0)) {
-      throw new Error('Count values cannot be negative (received a value outside of that range)');
+    if (visits.some(i => i.visits < 0)) {
+      throw new Error('Visits values cannot be negative (received a value outside of that range)');
     }
 
     // Calculate maximum number of rows to render
-    let maxNumberOfCounts = null; /* Infinity rows permitted when on detail page */
+    let maxNumberOfVisits = null; /* Infinity rows permitted when on detail page */
     if (width < 800) {
-      maxNumberOfCounts = 7; /* normally, only 7 rows shown */
+      maxNumberOfVisits = 7; /* normally, only 7 rows shown */
     }
 
-    let sortedCounts = counts.sort((a, b) => {
-      return mode === LEAST_VISITED ? a.count - b.count : b.count - a.count;
+    let sortedVisits = visits.sort((a, b) => {
+      return mode === LEAST_VISITED ? a.visits - b.visits : b.visits - a.visits;
     });
 
-    // Remove counts from list if a limit was defined
-    if (maxNumberOfCounts) {
-      sortedCounts = sortedCounts.slice(0, maxNumberOfCounts);
+    // Remove visits from list if a limit was defined
+    if (maxNumberOfVisits) {
+      sortedVisits = sortedVisits.slice(0, maxNumberOfVisits);
     }
 
     // Calculate all spaces to feature in the reportsubheader. This is done by finding the first
-    // count in the sorted count list (as this either has the max or the minimum
-    // count) and finding all other rows that also have that count value.
-    const minCount = Math.min.apply(Math, sortedCounts.map(i => i.count));
-    const maxCount = Math.max.apply(Math, sortedCounts.map(i => i.count));
-    const headerCounts = sortedCounts.filter(u => {
-      return u.count === (mode === LEAST_VISITED ? minCount : maxCount);
+    // visits value in the sorted visits list (as this either has the max or the minimum
+    // number of visits) and finding all other rows that also have that value.
+    const minVisits = Math.min.apply(Math, sortedVisits.map(i => i.visits));
+    const maxVisits = Math.max.apply(Math, sortedVisits.map(i => i.visits));
+    const headerVisits = sortedVisits.filter(u => {
+      return u.visits === (mode === LEAST_VISITED ? minVisits : maxVisits);
     });
 
     return (
@@ -84,31 +84,31 @@ export default class ReportTotalVisitsRollup extends Component {
         title={title}
         startDate={startDate}
         endDate={endDate}
-        spaces={counts.map(i => i.name)}
+        spaces={visits.map(i => i.name)}
       >
         <ReportSubHeader
           title={
             <span>
-              {text.toEnglishJsxList(headerCounts.map(u => <strong>{u.name}</strong>))}{' '}
-              {headerCounts.length === 1 ? 'was' : 'were'} the{' '}
+              {text.toEnglishJsxList(headerVisits.map(u => <strong>{u.name}</strong>))}{' '}
+              {headerVisits.length === 1 ? 'was' : 'were'} the{' '}
               <strong>{mode === LEAST_VISITED ? 'least' : 'most'}</strong>{' '}
-              used space{headerCounts.length > 1 ? 's' : ''} during <strong>{segmentName}</strong>{' '}
-              with <strong>{mode === LEAST_VISITED ? minCount : maxCount}</strong> visits.
+              used space{headerVisits.length > 1 ? 's' : ''} during <strong>{segmentName}</strong>{' '}
+              with <strong>{mode === LEAST_VISITED ? minVisits : maxVisits}</strong> visits.
             </span>
           }
         />
         <ReportCard>
           <div ref={r => { this.container = r; }} className={styles.rollupWrapper}>
-            {sortedCounts.map(item => {
+            {sortedVisits.map(item => {
               return (
                 <div key={item.id} className={styles.rollupRow}>
                   <div className={styles.rollupRowText}>{item.name}</div>
                   <div className={styles.rollupRowBar}>
                     <div
                       className={styles.rollupRowBarInner}
-                      style={{width: `${maxCount ? item.count / maxCount * 100 : 0}%`}}
+                      style={{width: `${maxVisits ? item.visits / maxVisits * 100 : 0}%`}}
                     />
-                    <div className={styles.rollupRowBarText}>{item.count}</div>
+                    <div className={styles.rollupRowBarText}>{item.visits}</div>
                   </div>
                 </div>
               );
@@ -121,15 +121,15 @@ export default class ReportTotalVisitsRollup extends Component {
 }
 ReportTotalVisitsRollup.propTypes = {
   title: propTypes.string.isRequired,
-  timeSegment: propTypes.string.isRequired,
+  segmentName: propTypes.string.isRequired,
   startDate: propTypes.instanceOf(moment).isRequired,
   endDate: propTypes.instanceOf(moment).isRequired,
   mode: propTypes.oneOf([MOST_VISITED, LEAST_VISITED]).isRequired,
-  counts: propTypes.arrayOf(
+  visits: propTypes.arrayOf(
     propTypes.shape({
       id: propTypes.any.isRequired,
       name: propTypes.node.isRequired,
-      count: propTypes.number.isRequired,
+      visits: propTypes.number.isRequired,
     }).isRequired,
   ).isRequired,
 };
