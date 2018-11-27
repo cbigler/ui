@@ -73,7 +73,9 @@ export default class ReportWastedSpace extends Component {
               )}
               style={{width: `${underutilizedPercent}%`}}
             >
-              <span className={styles.label}>{underutilizedPercent}%</span>
+              {underutilizedPercent > 0 ? (
+                <span className={styles.label}>{underutilizedPercent}%</span>
+              ) : null}
             </div>
             <div
               className={classnames(
@@ -83,7 +85,9 @@ export default class ReportWastedSpace extends Component {
               )}
               style={{width: `${normalPercent}%`}}
             >
-              <span className={styles.label}>{normalPercent}%</span>
+              {normalPercent > 0 ? (
+                <span className={styles.label}>{normalPercent}%</span>
+              ) : null}
             </div>
             <div
               className={classnames(
@@ -93,7 +97,9 @@ export default class ReportWastedSpace extends Component {
               )}
               style={{width: `${overutilizedPercent}%`}}
             >
-              <span className={styles.label}>{overutilizedPercent}%</span>
+              {overutilizedPercent > 0 ? (
+                <span className={styles.label}>{overutilizedPercent}%</span>
+              ) : null}
             </div>
           </div>
           <ul className={styles.utilizationLabels}>
