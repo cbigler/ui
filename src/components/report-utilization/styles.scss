@@ -15,7 +15,7 @@
 }
 
 .utilizationRowText {
-  flex: 1;
+  flex-basis: calc(50% - 21px);
   font-size: 12px;
   transform: translate(0px, 1px);
 
@@ -27,7 +27,8 @@
 }
 
 .utilizationRowBar {
-  flex: 1;
+  flex-basis: calc(50% + 21px);
+  transform: translate(-2px, .5px);
   background-color: rgba($brand-primary-new, 0.3);
   height: 4px;
   width: 100%;
