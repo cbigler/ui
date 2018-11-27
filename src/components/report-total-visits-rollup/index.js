@@ -35,7 +35,6 @@ export default class ReportTotalVisitsRollup extends Component {
   render() {
     const {
       title,
-      segmentName,
       startDate,
       endDate,
       visits,
@@ -92,7 +91,7 @@ export default class ReportTotalVisitsRollup extends Component {
               {text.toEnglishJsxList(headerVisits.map(u => <strong>{u.name}</strong>))}{' '}
               {headerVisits.length === 1 ? 'was' : 'were'} the{' '}
               <strong>{mode === LEAST_VISITED ? 'least' : 'most'}</strong>{' '}
-              used space{headerVisits.length > 1 ? 's' : ''} during <strong>{segmentName}</strong>{' '}
+              used space{headerVisits.length > 1 ? 's' : ''}{' '}
               with <strong>{mode === LEAST_VISITED ? minVisits : maxVisits}</strong> visits.
             </span>
           }
@@ -124,7 +123,6 @@ export default class ReportTotalVisitsRollup extends Component {
 }
 ReportTotalVisitsRollup.propTypes = {
   title: propTypes.string.isRequired,
-  segmentName: propTypes.string.isRequired,
   startDate: propTypes.instanceOf(moment).isRequired,
   endDate: propTypes.instanceOf(moment).isRequired,
   mode: propTypes.oneOf([MOST_VISITED, LEAST_VISITED]).isRequired,
