@@ -64,8 +64,8 @@ export default class InfoPopup extends Component {
 
     // Use `left` / `top` values offset from `.info-popup-container` instead of the root.
     this.setState({
-      top: top - containerBBox.y,
-      left: left - containerBBox.x,
+      top: isNaN(top - containerBBox.y) ? 0 : top - containerBBox.y,
+      left: isNaN(left - containerBBox.x) ? 0 : left - containerBBox.x ,
     });
   }
 
