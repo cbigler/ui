@@ -16,7 +16,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js',
-    library: `densityUi${componentName.replace('-', '')}`,
+    library: `@density/ui-${componentName}`,
     libraryTarget: 'umd',
   },
   externals: [
