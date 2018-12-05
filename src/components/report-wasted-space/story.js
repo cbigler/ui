@@ -55,3 +55,19 @@ storiesOf('ReportWastedSpace', module)
       />
     </div>
   ))
+  .addWithInfo('With a final bar of zero', () => (
+    <div style={{width: '100%', marginTop: 100}}>
+      <ReportWastedSpace
+        title="Surpassed capacity example"
+        startDate={moment("2018-10-21T07:00:00.000Z")}
+        endDate={moment("2018-10-28T06:59:59.999Z")}
+        spaces={["Cafe Ole"]}
+
+        underutilizedNormalThreshold={20}
+        normalOverutilizedThreshold={80}
+        underutilizedPercent={30}
+        normalPercent={70}
+        overutilizedPercent={0}
+      />
+    </div>
+  ))

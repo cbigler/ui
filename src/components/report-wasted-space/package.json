@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-report-wasted-space",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Wasted Space component",
   "main": "dist/index.js",
   "author": "Density <engineering+javascript@density.io>",
