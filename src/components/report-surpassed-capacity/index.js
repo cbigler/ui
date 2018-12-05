@@ -249,7 +249,9 @@ export default function ReportSurpassedCapacity({
   // - name of the day.
   let overCapacityOnChart = false;
   let busyOnChart = false;
-  const metricsPerDayInSeconds = data.filter(day => day !== null).map((day, index) => {
+  const metricsPerDayInSeconds = data.map((day, index) => {
+    if (day === null) { return null; }
+
     const analytics = day.reduce(({quiet, busy, over}, bucket) => {
       const color = calculateColorForBucket(
         bucket.count,
@@ -282,11 +284,11 @@ export default function ReportSurpassedCapacity({
     }, {timestamp: null, count: 0});
 
     return {
-      day: moment.utc().startOf('week').add(index, 'days').format('dddd'),
+      day: startDate.clone().startOf('day').add(index, 'days').format('dddd'),
       peak,
       analytics,
     };
-  });
+  }).filter(i => i !== null);
 
   let renderMode = MODE_QUIET;
   if (overCapacityOnChart) {
