@@ -39,6 +39,7 @@ export default class ReportUtilization extends Component {
       endDate,
       utilizations,
       mode,
+      showExpandControl,
       onReportExpand,
     } = this.props;
     const { width } = this.state;
@@ -120,7 +121,7 @@ export default class ReportUtilization extends Component {
             })}
           </div>
         </ReportCard>
-        <ReportExpandController onClick={onReportExpand} />
+        {showExpandControl ? <ReportExpandController onClick={onReportExpand} /> : null}
       </ReportWrapper>
     );
   }
@@ -137,4 +138,10 @@ ReportUtilization.propTypes = {
       utilization: propTypes.number.isRequired,
     }).isRequired,
   ).isRequired,
+
+  showExpandControl: propTypes.bool.isRequired,
+  onReportExpand: propTypes.func, /* not required if showExpandControl isn't specified */
+};
+ReportUtilization.defaultProps = {
+  showExpandControl: false,
 };

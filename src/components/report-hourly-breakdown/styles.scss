@@ -17,7 +17,7 @@
 
 .reportHourlyBreakdown td {
   color: #fff;
-  background-color: $gray; /* a default, this is overridden in the component */
+  background-color: transparent; /* a default, this is overridden in the component */
 
   line-height: 15px;
   text-align: center;

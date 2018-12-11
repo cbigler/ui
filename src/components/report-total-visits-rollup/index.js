@@ -43,6 +43,8 @@ export default class ReportTotalVisitsRollup extends Component {
       endDate,
       visits,
       mode,
+
+      showExpandControl,
       onReportExpand,
     } = this.props;
     const { width } = this.state;
@@ -122,7 +124,7 @@ export default class ReportTotalVisitsRollup extends Component {
             })}
           </div>
         </ReportCard>
-        <ReportExpandController onClick={onReportExpand} />
+        {showExpandControl ? <ReportExpandController onClick={onReportExpand} /> : null}
       </ReportWrapper>
     );
   }
@@ -139,4 +141,10 @@ ReportTotalVisitsRollup.propTypes = {
       visits: propTypes.number.isRequired,
     }).isRequired,
   ).isRequired,
+
+  showExpandControl: propTypes.bool.isRequired,
+  onReportExpand: propTypes.func, /* not required if showExpandControl isn't specified */
+};
+ReportTotalVisitsRollup.defaultProps = {
+  showExpandControl: false,
 };

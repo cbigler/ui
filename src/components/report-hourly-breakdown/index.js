@@ -62,6 +62,7 @@ export default function ReportHourlyBreakdown({
 
   cellColorThreshold,
 
+  showExpandControl,
   onReportExpand,
 }) {
   const maxValue = Math.max.apply(Math, data.map(i => i.values).reduce((a, b) => [...a, ...b], []));
@@ -117,7 +118,7 @@ export default function ReportHourlyBreakdown({
           </tbody>
         </table>
       </ReportCard>
-      <ReportExpandController onClick={onReportExpand} />
+      { showExpandControl ? <ReportExpandController onClick={onReportExpand} /> : null }
     </ReportWrapper>
   );
 }

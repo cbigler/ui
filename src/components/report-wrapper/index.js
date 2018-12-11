@@ -108,8 +108,7 @@ export function ReportExpandController({onClick}) {
   );
 }
 ReportExpandController.propTypes = {
-  children: propTypes.node.isRequired,
-  onClick: propTypes.func,
+  onClick: propTypes.func.isRequired,
 };
 
 
