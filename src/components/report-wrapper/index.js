@@ -66,6 +66,7 @@ ReportSubHeader.propTypes = {
   children: propTypes.node
 };
 
+
 // ------------------------------------------------------------------------------
 // Report Error
 // This is another thing that can be placed inside of a ReportWrapper, and it is
@@ -86,6 +87,30 @@ export function ReportError() {
     </ReportCard>
   );
 }
+
+
+// ------------------------------------------------------------------------------
+// Report Expand Controller
+// A component to render a control in the lower right corner of a report to show
+// an expanded view of the report.
+// ------------------------------------------------------------------------------
+export function ReportExpandController({onClick}) {
+  return (
+    <ReportCard noPadding>
+      <div className={styles.reportExpandController}>
+        <div onClick={onClick} className={styles.reportExpandControllerBox}>
+          <span className={styles.reportExpandControllerBoxContent}>
+            Expand
+          </span>
+        </div>
+      </div>
+    </ReportCard>
+  );
+}
+ReportExpandController.propTypes = {
+  children: propTypes.node.isRequired,
+  onClick: propTypes.func,
+};
 
 
 
