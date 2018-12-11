@@ -24,6 +24,7 @@ storiesOf('ReportUtilization', module)
           {id: 7, name: "SHOULD BE NOT INCLUDED WHEN NOT EXPANDED", utilization: 0.01},
           {id: 8, name: "SHOULD ALSO NOT BE INCLUDED WHEN NOT ON DETAILS PAGE", utilization: 0.01},
         ]}
+        maximumNumberOfRows={7}
         showExpandControl
         onReportExpand={action('Expand report')}
       />
@@ -47,6 +48,7 @@ storiesOf('ReportUtilization', module)
           {id: 7, name: "123 S. Olive Cafeteria", utilization: 0.18},
           {id: 8, name: "456 E. Rutherford Cafeteria", utilization: 0.02},
         ]}
+        maximumNumberOfRows={7}
         showExpandControl
         onReportExpand={action('Expand report')}
       />

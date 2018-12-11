@@ -25,6 +25,7 @@ storiesOf('ReportTotalVisitsRollup', module)
           {id: 7, name: "SHOULD BE NOT INCLUDED WHEN NOT EXPANDED", visits: 80},
           {id: 8, name: "SHOULD ALSO NOT BE INCLUDED WHEN NOT ON DETAILS PAGE", visits: 79},
         ]}
+        maximumNumberOfRows={7}
         showExpandControl
         onReportExpand={action('Expand report')}
       />
@@ -49,6 +50,7 @@ storiesOf('ReportTotalVisitsRollup', module)
           {id: 7, name: "123 S. Olive Cafeteria", visits: 316},
           {id: 8, name: "456 E. Rutherford Cafeteria", visits: 59},
         ]}
+        maximumNumberOfRows={7}
         showExpandControl
         onReportExpand={action('Expand report')}
       />
@@ -70,8 +72,8 @@ storiesOf('ReportTotalVisitsRollup', module)
           {id: 4, name: "Hipster Cafe", visits: 199},
           {id: 5, name: "123 S. Olive Cafeteria", visits: 96},
           {id: 6, name: "456 E. Rutherford Cafeteria", visits: 166},
-          {id: 7, name: "SHOULD BE NOT INCLUDED WHEN NOT EXPANDED", visits: 80},
-          {id: 8, name: "SHOULD ALSO NOT BE INCLUDED WHEN NOT ON DETAILS PAGE", visits: 79},
+          {id: 7, name: "SHOULD BE NOT INCLUDED WHEN EXPANDED", visits: 80},
+          {id: 8, name: "SHOULD ALSO ONLY BE INCLUDED WHEN EXPANDED", visits: 79},
         ]}
       />
     </div>

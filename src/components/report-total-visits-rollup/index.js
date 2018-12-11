@@ -43,6 +43,7 @@ export default class ReportTotalVisitsRollup extends Component {
       endDate,
       visits,
       mode,
+      maximumNumberOfRows, /* maximum number of rows to render */
 
       showExpandControl,
       onReportExpand,
@@ -61,19 +62,13 @@ export default class ReportTotalVisitsRollup extends Component {
       throw new Error('Visits values cannot be negative (received a value outside of that range)');
     }
 
-    // Calculate maximum number of rows to render
-    let maxNumberOfVisits = null; /* Infinity rows permitted when on detail page */
-    if (width < 800) {
-      maxNumberOfVisits = 7; /* normally, only 7 rows shown */
-    }
-
     let sortedVisits = visits.sort((a, b) => {
       return mode === LEAST_VISITED ? a.visits - b.visits : b.visits - a.visits;
     });
 
     // Remove visits from list if a limit was defined
-    if (maxNumberOfVisits) {
-      sortedVisits = sortedVisits.slice(0, maxNumberOfVisits);
+    if (maximumNumberOfRows) {
+      sortedVisits = sortedVisits.slice(0, maximumNumberOfRows);
     }
 
     // Calculate all spaces to feature in the reportsubheader. This is done by finding the first
@@ -141,10 +136,12 @@ ReportTotalVisitsRollup.propTypes = {
       visits: propTypes.number.isRequired,
     }).isRequired,
   ).isRequired,
+  maximumNumberOfRows: propTypes.number, /* defaults to null, meaning "show all rows" */
 
   showExpandControl: propTypes.bool.isRequired,
   onReportExpand: propTypes.func, /* not required if showExpandControl isn't specified */
 };
 ReportTotalVisitsRollup.defaultProps = {
   showExpandControl: false,
+  maximumNumberOfRows: null,
 };
