@@ -100,10 +100,10 @@ export default function ReportHourlyBreakdown({
                         key={d.date.format()}
                         style={{
                           backgroundColor: addAlphaToHex(
-                            colorVariables.brandPrimary,
+                            colorVariables.brandPrimaryNew,
                             0.1 + ((d.values[index] / maxValue) * 0.9)
                           ),
-                          color: (d.values[index] / maxValue) < cellColorThreshold ? colorVariables.brandPrimary : '#fff',
+                          color: (d.values[index] / maxValue) < cellColorThreshold ? colorVariables.brandPrimaryNew : '#fff',
                         }}
                       >
                         {d.values[index]}
