@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React from 'react';
-import ReportWrapper, { ReportCard } from '@density/ui-report-wrapper';
+import ReportWrapper, { ReportCard, ReportExpandController } from '@density/ui-report-wrapper';
 import styles from './styles.scss';
 import colorVariables from '@density/ui/variables/colors.json';
 import propTypes from 'prop-types';
@@ -61,6 +61,8 @@ export default function ReportHourlyBreakdown({
   dataStartTime,
 
   cellColorThreshold,
+
+  onReportExpand,
 }) {
   const maxValue = Math.max.apply(Math, data.map(i => i.values).reduce((a, b) => [...a, ...b], []));
   return (
@@ -115,6 +117,7 @@ export default function ReportHourlyBreakdown({
           </tbody>
         </table>
       </ReportCard>
+      <ReportExpandController onClick={onReportExpand} />
     </ReportWrapper>
   );
 }

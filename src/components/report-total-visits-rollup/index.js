@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import ReportWrapper, { ReportSubHeader, ReportCard } from '@density/ui-report-wrapper';
+import ReportWrapper, {
+  ReportSubHeader,
+  ReportCard,
+  ReportExpandController,
+} from '@density/ui-report-wrapper';
 import propTypes from 'prop-types';
 
 import { text } from '@density/ui';
@@ -39,6 +43,7 @@ export default class ReportTotalVisitsRollup extends Component {
       endDate,
       visits,
       mode,
+      onReportExpand,
     } = this.props;
     const { width } = this.state;
 
@@ -117,6 +122,7 @@ export default class ReportTotalVisitsRollup extends Component {
             })}
           </div>
         </ReportCard>
+        <ReportExpandController onClick={onReportExpand} />
       </ReportWrapper>
     );
   }
