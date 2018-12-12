@@ -9,6 +9,15 @@ import ReportComparativePerformance, {
   COMPARATIVE_QUARTER,
 } from './index';
 
+const nowAtSpace = moment.utc();
+const unit = moment.duration('1w');
+
+const lastStartDate = moment.utc().startOf(unit).subtract(1, 'week');
+const lastEndDate = lastStartDate.clone().endOf(unit);
+
+const previousStartDate = lastStartDate.clone().subtract(1, unit);
+const previousEndDate = previousStartDate.clone().endOf(unit);
+
 storiesOf('ReportComparativePerformance', module)
   .addWithInfo('Comparative week', () => (
     <div style={{width: '100%', paddingTop: 100}}>
@@ -21,6 +30,11 @@ storiesOf('ReportComparativePerformance', module)
         }}
 
         mode={COMPARATIVE_WEEK}
+        lastStartDate={moment.utc().startOf('week').subtract(1, 'week')}
+        lastEndDate={moment.utc().startOf('week').subtract(1, 'week').clone().endOf('week')}
+        previousStartDate={moment.utc().startOf('week').subtract(1, 'week').clone().subtract(1, 'week')}
+        previousEndDate={moment.utc().startOf('week').subtract(1, 'week').clone().subtract(1, 'week').clone().endOf('week')}
+
 
         lastData={{
           totalVisits: 8570,
@@ -46,6 +60,11 @@ storiesOf('ReportComparativePerformance', module)
         }}
 
         mode={COMPARATIVE_MONTH}
+        lastStartDate={moment.utc().startOf('month').subtract(1, 'month')}
+        lastEndDate={moment.utc().startOf('month').subtract(1, 'month').clone().endOf('month')}
+        previousStartDate={moment.utc().startOf('month').subtract(1, 'month').clone().subtract(1, 'month')}
+        previousEndDate={moment.utc().startOf('month').subtract(1, 'month').clone().subtract(1, 'month').clone().endOf('month')}
+
 
         lastData={{
           totalVisits: 8570,
@@ -71,6 +90,11 @@ storiesOf('ReportComparativePerformance', module)
         }}
 
         mode={COMPARATIVE_QUARTER}
+        lastStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter')}
+        lastEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().endOf('quarter')}
+        previousStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter')}
+        previousEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter').clone().endOf('quarter')}
+
 
         lastData={{
           totalVisits: 8570,
@@ -96,6 +120,11 @@ storiesOf('ReportComparativePerformance', module)
         }}
 
         mode={COMPARATIVE_QUARTER}
+        lastStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter')}
+        lastEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().endOf('quarter')}
+        previousStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter')}
+        previousEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter').clone().endOf('quarter')}
+
 
         lastData={{
           totalVisits: 8570,
@@ -121,6 +150,11 @@ storiesOf('ReportComparativePerformance', module)
         }}
 
         mode={COMPARATIVE_QUARTER}
+        lastStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter')}
+        lastEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().endOf('quarter')}
+        previousStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter')}
+        previousEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter').clone().endOf('quarter')}
+
 
         lastData={{
           totalVisits: 8570,
