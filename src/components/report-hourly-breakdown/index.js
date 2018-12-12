@@ -91,7 +91,9 @@ export default function ReportHourlyBreakdown({
             {(() => {
               const rows = [];
               for (let index = 0; index < Math.max.apply(Math, data.map(d => d.values.length)); index++) {
-                const rowTime = dataStartTime.clone().add(index, 'hours');
+                // Add the row number we are at to the start of the day to figure out the current
+                // "hour" for this row.
+                const rowTime = dataStartTime.clone().startOf('day').add(index, 'hours');
 
                 // If the given row isn't within the time range specified
                 // (ie, dateStartTime <= rowTime <= dateEndTime is not true), then don't render it
