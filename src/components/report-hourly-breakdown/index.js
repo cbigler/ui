@@ -59,6 +59,7 @@ export default function ReportHourlyBreakdown({
 
   data,
   dataStartTime,
+  dataEndTime,
 
   cellColorThreshold,
 
@@ -91,6 +92,14 @@ export default function ReportHourlyBreakdown({
               const rows = [];
               for (let index = 0; index < Math.max.apply(Math, data.map(d => d.values.length)); index++) {
                 const rowTime = dataStartTime.clone().add(index, 'hours');
+
+                // If the given row isn't within the time range specified
+                // (ie, dateStartTime <= rowTime <= dateEndTime is not true), then don't render it
+                // and move on to the next row.
+                if (rowTime.isBefore(dataStartTime) || rowTime.isAfter(dataEndTime)) {
+                  continue;
+                }
+
                 rows.push(
                   <tr key={index}>
                     <td>
@@ -130,6 +139,9 @@ ReportHourlyBreakdown.propTypes = {
     name: propTypes.string.isRequired,
   }).isRequired,
 
+  showExpandControl: propTypes.bool.isRequired,
+  onReportExpand: propTypes.func,
+
   data: propTypes.arrayOf(
     propTypes.shape({
       date: propTypes.instanceOf(moment).isRequired,
@@ -137,7 +149,9 @@ ReportHourlyBreakdown.propTypes = {
     }),
   ).isRequired,
   dataStartTime: propTypes.instanceOf(moment).isRequired,
+  dataEndTime: propTypes.instanceOf(moment).isRequired,
 };
 ReportHourlyBreakdown.defaultProps = {
   cellColorThreshold: 0.25,
+  showExpandControl: false,
 };
