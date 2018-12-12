@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReportWrapper, { ReportSubHeader, ReportCard } from '@density/ui-report-wrapper';
+import ReportWrapper, { ReportSubHeader, ReportCard, ReportExpandController } from '@density/ui-report-wrapper';
 import propTypes from 'prop-types';
 
 import { text } from '@density/ui';
@@ -39,6 +39,9 @@ export default class ReportUtilization extends Component {
       endDate,
       utilizations,
       mode,
+      maximumNumberOfRows,
+      showExpandControl,
+      onReportExpand,
     } = this.props;
     const { width } = this.state;
 
@@ -55,11 +58,6 @@ export default class ReportUtilization extends Component {
     }
 
     // Calculate maximum number of rows to render
-    let maxNumberOfUtilizations = null; /* Infinity rows permitted when on detail page */
-    if (width < 800) {
-      maxNumberOfUtilizations = 7; /* normally, only 7 rows shown */
-    }
-
     let sortedUtilizations = utilizations.sort((a, b) => {
       if (mode === LEAST_UTILIZED) {
         return a.utilization - b.utilization;
@@ -69,8 +67,8 @@ export default class ReportUtilization extends Component {
     });
 
     // Remove utilizations from list if a limit was defined
-    if (maxNumberOfUtilizations) {
-      sortedUtilizations = sortedUtilizations.slice(0, maxNumberOfUtilizations);
+    if (maximumNumberOfRows) {
+      sortedUtilizations = sortedUtilizations.slice(0, maximumNumberOfRows);
     }
 
     // Calculate all spaces to feature in the reportsubheader. This is done by finding the first
@@ -119,6 +117,7 @@ export default class ReportUtilization extends Component {
             })}
           </div>
         </ReportCard>
+        {showExpandControl ? <ReportExpandController onClick={onReportExpand} /> : null}
       </ReportWrapper>
     );
   }
@@ -135,4 +134,12 @@ ReportUtilization.propTypes = {
       utilization: propTypes.number.isRequired,
     }).isRequired,
   ).isRequired,
+  maximumNumberOfRows: propTypes.number, /* defaults to null, meaning "show all rows" */
+
+  showExpandControl: propTypes.bool.isRequired,
+  onReportExpand: propTypes.func, /* not required if showExpandControl isn't specified */
+};
+ReportUtilization.defaultProps = {
+  showExpandControl: false,
+  maximumNumberOfRows: null,
 };

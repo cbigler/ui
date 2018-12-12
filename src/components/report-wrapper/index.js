@@ -9,15 +9,10 @@ import colorVariables from '@density/ui/variables/colors.json';
 
 import styles from './styles.scss';
 
-export function ReportPadding({children}) {
-  return (
-    <div className={styles.reportPadding}>{children}</div>
-  );
-}
-ReportPadding.propTypes = {
-  children: propTypes.node.isRequired,
-};
-
+// ------------------------------------------------------------------------------
+// Report Card
+// The body of the card, which is contained inside of the ReportWrapper
+// ------------------------------------------------------------------------------
 export function ReportCard({children, noPadding}) {
   return (
     <div className={styles.reportCard}>
@@ -30,6 +25,26 @@ ReportCard.propTypes = {
   children: propTypes.node.isRequired,
 };
 
+
+// ------------------------------------------------------------------------------
+// Report Padding
+// Used to add spacing inside of a ReportCard
+// ------------------------------------------------------------------------------
+export function ReportPadding({children}) {
+  return (
+    <div className={styles.reportPadding}>{children}</div>
+  );
+}
+ReportPadding.propTypes = {
+  children: propTypes.node.isRequired,
+};
+
+
+// ------------------------------------------------------------------------------
+// Report Sub Header
+// Adds a section inside the ReportWrapper that contains summary information for
+// the report, such as a statistic. This goes at the same level as a ReportCard.
+// ------------------------------------------------------------------------------
 export function ReportSubHeader({
   title,
   children
@@ -51,6 +66,59 @@ ReportSubHeader.propTypes = {
   children: propTypes.node
 };
 
+
+// ------------------------------------------------------------------------------
+// Report Error
+// This is another thing that can be placed inside of a ReportWrapper, and it is
+// shown when a report throws an error during it's calculations or while fetching
+// data.
+// ------------------------------------------------------------------------------
+export function ReportError() {
+  return (
+    <ReportCard>
+      <div className={styles.reportError}>
+        <h3 className={styles.reportErrorHeader}>Whoops!</h3>
+        <span className={styles.reportErrorBody}>There was an issue loading this report.</span>
+        <span className={styles.reportErrorBody}>
+          Contact <a href="mailto:support@density.io">support</a>{' '}
+          and we'll get you up and running.
+        </span>
+      </div>
+    </ReportCard>
+  );
+}
+
+
+// ------------------------------------------------------------------------------
+// Report Expand Controller
+// A component to render a control in the lower right corner of a report to show
+// an expanded view of the report.
+// ------------------------------------------------------------------------------
+export function ReportExpandController({onClick}) {
+  return (
+    <ReportCard noPadding>
+      <div className={styles.reportExpandController}>
+        <div onClick={onClick} className={styles.reportExpandControllerBox}>
+          <span className={styles.reportExpandControllerBoxContent}>
+            Expand
+          </span>
+        </div>
+      </div>
+    </ReportCard>
+  );
+}
+ReportExpandController.propTypes = {
+  onClick: propTypes.func.isRequired,
+};
+
+
+
+// ------------------------------------------------------------------------------
+// Report Option Bar
+// Renders a list of concrete options next to each other horizontally. Each is
+// assigned a name and color. Place this inside of a ReportSubHeader or
+// ReportCard.
+// ------------------------------------------------------------------------------
 export function ReportOptionBar({options}) {
   return (
     <ul className={styles.reportOptionBarList}>
@@ -74,21 +142,6 @@ ReportOptionBar.propTypes = {
   })).isRequired,
 };
 
-export function ReportError() {
-  return (
-    <ReportCard>
-      <div className={styles.reportError}>
-        <h3 className={styles.reportErrorHeader}>Whoops!</h3>
-        <span className={styles.reportErrorBody}>There was an issue loading this report.</span>
-        <span className={styles.reportErrorBody}>
-          Contact <a href="mailto:support@density.io">support</a>{' '}
-          and we'll get you up and running.
-        </span>
-      </div>
-    </ReportCard>
-  );
-}
-
 
 
 // Render the date range for the report wrapper
@@ -110,6 +163,11 @@ function ReportWrapperHeaderDateRange({startDate, endDate}) {
   }
 }
 
+// ------------------------------------------------------------------------------
+// Report Wrapper
+// This is the root element of the report, which contains multiple children like
+// ReportCards, ReportSubHeaders, or ReportErrors.
+// ------------------------------------------------------------------------------
 function ReportWrapperHeader({
   title,
   startDate,
@@ -187,3 +245,6 @@ ReportWrapper.propTypes = {
 ReportWrapper.defaultProps = {
   hideDetailsLink: true,
 };
+
+
+
