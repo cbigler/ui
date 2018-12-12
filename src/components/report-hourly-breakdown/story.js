@@ -237,6 +237,8 @@ storiesOf('ReportHourlyBreakdown', module)
         startDate={moment('2018-03-12T00:00:00-04:00')}
         endDate={moment('2018-03-18T00:00:00-04:00')}
         space={{name: 'My Space'}}
+        showExpandControl
+        onReportExpand={action('Expand report')}
 
         data={DATA}
         dataStartTime={moment('2018-03-12T00:00:00-04:00').add(0, 'hours')}

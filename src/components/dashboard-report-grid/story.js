@@ -1285,6 +1285,10 @@ storiesOf('DashboardReportGrid', module)
               }}
 
               mode={COMPARATIVE_QUARTER}
+              lastStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter')}
+              lastEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().endOf('quarter')}
+              previousStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter')}
+              previousEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter').clone().endOf('quarter')}
 
               lastData={{
                 totalVisits: 8570,

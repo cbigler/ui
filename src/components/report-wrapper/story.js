@@ -4,7 +4,12 @@ import { action } from '@storybook/addon-actions';
 
 import moment from 'moment';
 
-import ReportWrapper, { ReportCard, ReportPadding, ReportError } from './index';
+import ReportWrapper, {
+  ReportCard,
+  ReportPadding,
+  ReportError,
+  ReportExpandController,
+} from './index';
 
 storiesOf('ReportWrapper', module)
   .addWithInfo('ReportWrapper with ReportCard inside', () => (
@@ -103,6 +108,21 @@ storiesOf('ReportWrapper', module)
         spaces={[]}
       >
         <ReportError />
+      </ReportWrapper>
+    </div>
+  ))
+  .addWithInfo('ReportWrapper with ReportCard and ReportExpandController inside', () => (
+    <div style={{width: '100%', paddingTop: 100}}>
+      <ReportWrapper
+        title="Cafeteria meal visits abc def ghi jkl"
+        startDate={null}
+        endDate={null}
+        spaces={[]}
+      >
+        <ReportCard>
+          foo bar baz
+        </ReportCard>
+        <ReportExpandController onClick={action('Click expand')} />
       </ReportWrapper>
     </div>
   ))
