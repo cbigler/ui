@@ -58,13 +58,15 @@ export default function ReportHourlyBreakdown({
   space,
 
   data,
-  dataStartTime,
-  dataEndTime,
-
   cellColorThreshold,
 
-  showExpandControl,
-  onReportExpand,
+  displayContext: {
+    showExpandControl,
+    onReportExpand,
+
+    dataStartTime,
+    dataEndTime,
+  },
 }) {
   const maxValue = Math.max.apply(Math, data.map(i => i.values).reduce((a, b) => [...a, ...b], []));
   return (
@@ -141,19 +143,24 @@ ReportHourlyBreakdown.propTypes = {
     name: propTypes.string.isRequired,
   }).isRequired,
 
-  showExpandControl: propTypes.bool.isRequired,
-  onReportExpand: propTypes.func,
-
   data: propTypes.arrayOf(
     propTypes.shape({
       date: propTypes.instanceOf(moment).isRequired,
       values: propTypes.arrayOf(propTypes.number.isRequired).isRequired,
     }),
   ).isRequired,
-  dataStartTime: propTypes.instanceOf(moment).isRequired,
-  dataEndTime: propTypes.instanceOf(moment).isRequired,
+
+  displayContext: propTypes.shape({
+    showExpandControl: propTypes.bool.isRequired,
+    onReportExpand: propTypes.func,
+
+    dataStartTime: propTypes.instanceOf(moment).isRequired,
+    dataEndTime: propTypes.instanceOf(moment).isRequired,
+  }).isRequired,
 };
 ReportHourlyBreakdown.defaultProps = {
   cellColorThreshold: 0.25,
-  showExpandControl: false,
+  displayContext: {
+    showExpandControl: false,
+  },
 };

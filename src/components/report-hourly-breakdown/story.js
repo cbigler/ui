@@ -221,12 +221,14 @@ storiesOf('ReportHourlyBreakdown', module)
         endDate={moment('2018-03-18T00:00:00-04:00')}
         space={{name: 'My Space'}}
 
-        showExpandControl
-        onReportExpand={action('Expand report')}
-
         data={DATA}
-        dataStartTime={moment('2018-03-12T00:00:00-04:00').add(6, 'hours')}
-        dataEndTime={moment('2018-03-12T00:00:00-04:00').add(12+8, 'hours')}
+        displayContext={{
+          showExpandControl: true,
+          onReportExpand: action('Expand report'),
+
+          dataStartTime: moment('2018-03-12T00:00:00-04:00').add(6, 'hours'),
+          dataEndTime: moment('2018-03-12T00:00:00-04:00').add(12+8, 'hours'),
+        }}
       />
     </div>
   ))
@@ -237,12 +239,15 @@ storiesOf('ReportHourlyBreakdown', module)
         startDate={moment('2018-03-12T00:00:00-04:00')}
         endDate={moment('2018-03-18T00:00:00-04:00')}
         space={{name: 'My Space'}}
-        showExpandControl
-        onReportExpand={action('Expand report')}
 
         data={DATA}
-        dataStartTime={moment('2018-03-12T00:00:00-04:00').add(0, 'hours')}
-        dataEndTime={moment('2018-03-12T00:00:00-04:00').add(24, 'hours')}
+
+        displayContext={{
+          showExpandControl: false,
+
+          dataStartTime: moment('2018-03-12T00:00:00-04:00').add(0, 'hours'),
+          dataEndTime: moment('2018-03-12T00:00:00-04:00').add(24, 'hours'),
+        }}
       />
     </div>
   ))

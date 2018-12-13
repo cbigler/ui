@@ -25,9 +25,11 @@ storiesOf('ReportTotalVisitsRollup', module)
           {id: 7, name: "SHOULD BE NOT INCLUDED WHEN NOT EXPANDED", visits: 80},
           {id: 8, name: "SHOULD ALSO NOT BE INCLUDED WHEN NOT ON DETAILS PAGE", visits: 79},
         ]}
-        maximumNumberOfRows={7}
-        showExpandControl
-        onReportExpand={action('Expand report')}
+        displayContext={{
+          showExpandControl: true,
+          onReportExpand: action('Expand report'),
+          maximumNumberOfRows: 7,
+        }}
       />
     </div>
   ))
@@ -50,9 +52,11 @@ storiesOf('ReportTotalVisitsRollup', module)
           {id: 7, name: "123 S. Olive Cafeteria", visits: 316},
           {id: 8, name: "456 E. Rutherford Cafeteria", visits: 59},
         ]}
-        maximumNumberOfRows={7}
-        showExpandControl
-        onReportExpand={action('Expand report')}
+        displayContext={{
+          showExpandControl: true,
+          onReportExpand: action('Expand report'),
+          maximumNumberOfRows: 7,
+        }}
       />
     </div>
   ))
@@ -75,6 +79,10 @@ storiesOf('ReportTotalVisitsRollup', module)
           {id: 7, name: "SHOULD BE NOT INCLUDED WHEN EXPANDED", visits: 80},
           {id: 8, name: "SHOULD ALSO ONLY BE INCLUDED WHEN EXPANDED", visits: 79},
         ]}
+        displayContext={{
+          showExpandControl: false,
+          maximumNumberOfRows: null,
+        }}
       />
     </div>
   ))

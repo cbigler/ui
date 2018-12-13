@@ -43,10 +43,13 @@ export default class ReportTotalVisitsRollup extends Component {
       endDate,
       visits,
       mode,
-      maximumNumberOfRows, /* maximum number of rows to render */
 
-      showExpandControl,
-      onReportExpand,
+      displayContext: {
+        showExpandControl,
+        onReportExpand,
+
+        maximumNumberOfRows, /* maximum number of rows to render */
+      },
     } = this.props;
     const { width } = this.state;
 
@@ -136,10 +139,13 @@ ReportTotalVisitsRollup.propTypes = {
       visits: propTypes.number.isRequired,
     }).isRequired,
   ).isRequired,
-  maximumNumberOfRows: propTypes.number, /* defaults to null, meaning "show all rows" */
 
-  showExpandControl: propTypes.bool.isRequired,
-  onReportExpand: propTypes.func, /* not required if showExpandControl isn't specified */
+  displayContext: propTypes.shape({
+    showExpandControl: propTypes.bool.isRequired,
+    onReportExpand: propTypes.func, /* not required if showExpandControl isn't specified */
+
+    maximumNumberOfRows: propTypes.number, /* defaults to null, meaning "show all rows" */
+  }).isRequired,
 };
 ReportTotalVisitsRollup.defaultProps = {
   showExpandControl: false,
