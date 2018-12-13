@@ -177,11 +177,12 @@
 
 .reportCard {
   position: relative;
-  font-family: $font-base;
 
+  font-family: $font-base;
   background-color: $gray-lightest;
   color: $gray-cinder;
 
+  overflow: hidden;
   border-left: 1px solid $gray;
   border-right: 1px solid $gray;
   border-top: 1px solid $gray; /* include a top border only on the first card in a series */
