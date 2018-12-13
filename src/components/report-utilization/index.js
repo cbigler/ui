@@ -39,9 +39,13 @@ export default class ReportUtilization extends Component {
       endDate,
       utilizations,
       mode,
-      maximumNumberOfRows,
-      showExpandControl,
-      onReportExpand,
+
+      displayContext: {
+        showExpandControl,
+        onReportExpand,
+
+        maximumNumberOfRows,
+      },
     } = this.props;
     const { width } = this.state;
 
@@ -134,12 +138,17 @@ ReportUtilization.propTypes = {
       utilization: propTypes.number.isRequired,
     }).isRequired,
   ).isRequired,
-  maximumNumberOfRows: propTypes.number, /* defaults to null, meaning "show all rows" */
 
-  showExpandControl: propTypes.bool.isRequired,
-  onReportExpand: propTypes.func, /* not required if showExpandControl isn't specified */
+  displayContext: propTypes.shape({
+    showExpandControl: propTypes.bool.isRequired,
+    onReportExpand: propTypes.func, /* not required if showExpandControl isn't specified */
+
+    maximumNumberOfRows: propTypes.number, /* defaults to null, meaning "show all rows" */
+  }).isRequired,
 };
 ReportUtilization.defaultProps = {
-  showExpandControl: false,
-  maximumNumberOfRows: null,
+  displayContext: {
+    showExpandControl: false,
+    maximumNumberOfRows: null,
+  },
 };
