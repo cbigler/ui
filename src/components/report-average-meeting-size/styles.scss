@@ -110,8 +110,8 @@
   margin: 3px;
 }
 .dotFilled {
-  border-color: $brand-primary;
-  background-color: $brand-primary;
+  border-color: $brand-primary-new;
+  background-color: $brand-primary-new;
 }
 
 .dotLabel {
@@ -124,10 +124,10 @@
   transform: translate(0px, 2px);
 
   font-size: 12px;
-  line-height: 8px;
+  line-height: 6px;
   color: $gray-darker;
 }
 .dotLabelPart {
-  color: $brand-primary;
+  color: $brand-primary-new;
   font-weight: bold;
 }

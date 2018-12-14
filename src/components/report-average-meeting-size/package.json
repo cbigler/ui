@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-report-average-meeting-size",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Average Meeting Size component",
   "main": "dist/index.js",
   "author": "Density <engineering+javascript@density.io>",
