@@ -5,54 +5,26 @@ import styles from './styles.scss';
 export default class DashboardReportGrid extends Component {
   constructor(props) {
     super(props);
-
     this.reportElements = {};
-    this.state = {
-      singleColumn: document.body.clientWidth <= props.mobileBreakpoint,
-      reportHeights: {},
-    };
-  }
-
-  componentDidMount() {
-    this.onResize = this.onResize.bind(this);
-    window.addEventListener('resize', this.onResize);
-  }
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.onResize);
-  }
-
-  onResize() {
-    const width = document.body.clientWidth;
-    this.setState({
-      singleColumn: (width <= this.props.mobileBreakpoint),
-
-      reportHeights: Object.keys(this.reportElements)
-        .map((key) => [key, this.reportElements[key].clientHeight])
-        .reduce((acc, item) => Object.assign({}, acc, {[item[0]]: item[1]}))
-    });
+    this.state = { reportHeights: {} };
   }
 
   render() {
     const { reports } = this.props;
-    const { singleColumn, reportHeights } = this.state;
+
+    const singleColumn = document.body.clientWidth <= this.props.mobileBreakpoint;
 
     const reportComponents = reports.map(({id, report}) => {
       return (
         <div
           className={styles.dashboardReportGridCell}
           key={id}
-          ref={r => {
-            this.reportElements[id] = r;
-
-            if (r) {
-              const height = r.clientHeight;
-              if (reportHeights[id] !== height) {
-                this.setState({
-                  reportHeights: Object.assign({}, reportHeights, {
-                    [id]: height,
-                  }),
-                });
-              }
+          ref={report => {
+            this.reportElements[id] = report;
+            if (report && this.state.reportHeights[id] !== report.clientHeight) {
+              this.setState({ 
+                reportHeights: Object.assign(this.state.reportHeights, {[id]: report.clientHeight})
+              });
             }
           }}
         >
@@ -64,12 +36,12 @@ export default class DashboardReportGrid extends Component {
     // Filter out all reports that don't have a height. Render them outside of the columns to a
     // height can be stored.
     const reportsWithoutHeights = reportComponents.filter((_, index) => {
-      return !reportHeights[reports[index].id];
+      return !this.state.reportHeights[reports[index].id];
     });
 
     if (singleColumn) {
       const reportsWithHeights = reportComponents.filter((_, index) => {
-        return reportHeights[reports[index].id];
+        return this.state.reportHeights[reports[index].id];
       });
       return (
         <div className={styles.dashboardReportGridWrapper}>
