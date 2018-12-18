@@ -378,7 +378,7 @@ export default function ReportSurpassedCapacity({
                       <strong>{moment.duration(metrics.analytics.over, 'seconds').humanize()}</strong>
                       , peaking at{' '}
                       <strong>{metrics.peak.count}</strong>
-                      {' '}visitors.
+                      {' '}visitors.{' '}
                     </span>
                   );
                 })}
