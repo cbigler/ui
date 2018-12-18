@@ -394,17 +394,17 @@ export default function ReportSurpassedCapacity({
             options={[
               {
                 id: 0,
-                label: `Quiet (0-${Math.round(quietBusyThreshold*100)-1})`,
+                label: `Quiet (0-${Math.round(quietBusyThreshold*100)-1}%)`,
                 color: QUIET_COLOR,
               },
               {
                 id: 1,
-                label: `Busy (${Math.round(quietBusyThreshold*100)}-${Math.round(busyOverCapacityThreshold*100)-1})`,
+                label: `Busy (${Math.round(quietBusyThreshold*100)}-${Math.round(busyOverCapacityThreshold*100)-1}%)`,
                 color: BUSY_COLOR,
               },
               {
                 id: 2,
-                label: `Over Capacity (${Math.round(busyOverCapacityThreshold*100)}+)`,
+                label: `Over Capacity (${Math.round(busyOverCapacityThreshold*100)}%+)`,
                 color: OVER_CAPACITY_COLOR,
               },
             ]}
