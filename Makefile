@@ -154,6 +154,9 @@ $1-major: $1-version-major
 $1-minor: $1-version-minor
 $1-patch: $1-version-patch
 
+$1-integrate:
+	./utils/integration.sh $$($(1)_COMPONENT_PATH)
+
 # To make each transpiled file, compile the source file with the same name via webpack:
 # - Webpack calls into babel via babel-loader
 # - Webpack compiles scss with sass-loader (and node-sass)

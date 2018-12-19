@@ -6,6 +6,7 @@
 // - https://webpack.js.org/guides/author-libraries/
 //
 const path = require('path');
+const { spawn } = require('child_process');
 const jsonImporter = require('@density/node-sass-json-importer');
 
 const componentRegexMatch = __dirname.match(/\/components\/(.+)/),
@@ -102,4 +103,30 @@ module.exports = {
       },
     ],
   },
+
+  // Look for a POST_BUILD_SCRIPT environment variable. If one exists, then run the script after the
+  // build has completed.
+  plugins: [
+		{
+      apply: (compiler) => {
+        compiler.plugin('after-emit', (compilation, callback) => {
+          console.log('Build complete.');
+
+          // No POST_BUILD_SCRIPT environment variable, do nothing special
+          if (!process.env.POST_BUILD_SCRIPT) {
+            callback();
+          }
+
+          console.log(`Found POST_BUILD_SCRIPT, running ${process.env.POST_BUILD_SCRIPT} ...`);
+          const child = spawn('sh', ['-c', process.env.POST_BUILD_SCRIPT]);
+          child.stdout.on('data', data => process.stdout.write(data));
+          child.stderr.on('data', data => process.stderr.write(data));
+          child.on('exit', code => {
+            console.log(`Process exited with code ${code}`);
+            callback();
+          });
+        });
+      },
+    },
+  ],
 };
