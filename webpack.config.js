@@ -115,6 +115,7 @@ module.exports = {
           // No POST_BUILD_SCRIPT environment variable, do nothing special
           if (!process.env.POST_BUILD_SCRIPT) {
             callback();
+            return;
           }
 
           console.log(`Found POST_BUILD_SCRIPT, running ${process.env.POST_BUILD_SCRIPT} ...`);

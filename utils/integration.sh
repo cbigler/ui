@@ -37,7 +37,7 @@ function complete {
   rm -rf "${COMPONENT_PATH}/dist"
 
   # 2. Remove the bundle written into the distribution directory
-  rm -rf "${PROJECT_DIST}/${COMPONENT_NAME}.js"
+  rm -rf "${PROJECT_DIST}/ui-${COMPONENT_NAME}.js"
 
   # 3. If the project distribution directory is empty, remove it
   if [ -z "$(find ${PROJECT_DIST} -name '*.js')" ]; then
@@ -51,7 +51,7 @@ function main {
 
   # Create the distribution directory. Compiled components will be copied into here.
   mkdir -p "${PROJECT_DIST}"
-  touch "${PROJECT_DIST}/README.md"
+  rm -rf "${PROJECT_DIST}/README.md"
   echo "What is this?" >> ${PROJECT_DIST}/README.md
   echo "This directory was created by running \`make <my component>-integrate\`" >> ${PROJECT_DIST}/README.md
   echo "in Density UI. If you want to use any components in here instead of" >> ${PROJECT_DIST}/README.md
@@ -64,11 +64,16 @@ function main {
   echo "import MyComponent from '../../density-ui-integration/ui-my-component';" >> ${PROJECT_DIST}/README.md
   echo "(update the relative path as required)" >> ${PROJECT_DIST}/README.md
   echo "" >> ${PROJECT_DIST}/README.md
-  echo "When the last running Density UI process terminates, this directory and" >> ${PROJECT_DIST}/README.md
+  echo "When the last running Density UI integration process terminates, this directory and" >> ${PROJECT_DIST}/README.md
   echo "all of its contents should be deleted." >> ${PROJECT_DIST}/README.md
 
   # Copy in the webpack configuration into the component
   cp "${DENSITY_UI_ROOT}/webpack.config.js" "${COMPONENT_PATH}/webpack.config.js"
+
+  echo
+  echo "Build is starting, placing compilation results into ${PROJECT_DIST}/ui-${COMPONENT_NAME}.js ..."
+  echo "For an explaination of what to do next, either run \`make help\` in this project or take a"
+  echo "look at ${PROJECT_DIST}/README.md"
 
   # Start building in watch mode - this will block and rebuild when the user saves the source files
   # When the user kills this, the trap above will run to clean up after webpack.
