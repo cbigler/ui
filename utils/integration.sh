@@ -1,6 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
+SEED="${RANDOM}"
+
 DENSITY_UI_ROOT="$(realpath "${PWD}/$(dirname $0)/../")"
 WEBPACK="${DENSITY_UI_ROOT}/node_modules/.bin/webpack"
 
@@ -20,10 +22,13 @@ function complete {
   # 1. Remove the webpack configuratino copied into the project
   rm -rf "${COMPONENT_PATH}/webpack.config.js"
 
+  # 2. Remove dist code from component to ensure further operations will always build new
+  rm -rf "${COMPONENT_PATH}/dist"
+
   # 2. Remove the bundle written into the distribution directory
   rm -rf "${PROJECT_DIST}/${COMPONENT_NAME}.js"
 
-  # 3. If the distribution directory is empty, remove it
+  # 3. If the project distribution directory is empty, remove it
   if [ -z "$(find ${PROJECT_DIST} -name '*.js')" ]; then
     rm -rf "${PROJECT_DIST}"
   fi
@@ -58,7 +63,12 @@ function main {
   # When the user kills this, the trap above will run to clean up after webpack.
   (
     cd "${COMPONENT_PATH}" &&
-    POST_BUILD_SCRIPT="cp ${COMPONENT_PATH}/dist/index.js ${PROJECT_DIST}/${COMPONENT_NAME}.js" \
+    POST_BUILD_SCRIPT="
+      echo '/* eslint-disable */' > /tmp/bundle${SEED} && \
+      cat ${COMPONENT_PATH}/dist/index.js >> /tmp/bundle${SEED} && \
+      cp /tmp/bundle${SEED} ${PROJECT_DIST}/ui-${COMPONENT_NAME}.js &&
+      rm -rf /tmp/bundle${SEED}
+    " \
       ${WEBPACK} --watch
   )
 }
