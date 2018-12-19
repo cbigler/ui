@@ -6,15 +6,26 @@ SEED="${RANDOM}"
 DENSITY_UI_ROOT="$(realpath "${PWD}/$(dirname $0)/../")"
 WEBPACK="${DENSITY_UI_ROOT}/node_modules/.bin/webpack"
 
-PROJECT_PATH="/Users/ryan/w/densityco/dashboard/src"
-PROJECT_DIST="${PROJECT_PATH}/density-ui-integration"
-
+set +u
 if [ -z "$1" ]; then
-  echo "./utils/integration.sh <path to component>"
+  echo "Error: please specify a path of the component to integrate."
+  echo "./utils/integration.sh <path to component> <path to destination project>"
   exit 1
 fi
+set -u
 COMPONENT_PATH="$(realpath $1)"
 COMPONENT_NAME="$(basename ${COMPONENT_PATH})"
+
+set +u
+if [ -z "$2" ]; then
+  echo "Error: please specify a path to the destination project to integrate Density UI into."
+  echo "./utils/integration.sh $1 <path to destination project>"
+  exit 1
+fi
+set -u
+PROJECT_PATH="$2"
+PROJECT_DIST="${PROJECT_PATH}/density-ui-integration"
+
 
 function complete {
   # When the process is complete:
