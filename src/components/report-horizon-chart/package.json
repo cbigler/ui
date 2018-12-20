@@ -1,0 +1,18 @@
+{
+  "name": "@density/ui-report-horizon-chart",
+  "version": "0.0.1",
+  "description": "Horizon Chart Report component",
+  "main": "dist/index.js",
+  "author": "Density <engineering+javascript@density.io>",
+  "license": "MIT",
+  "dependencies": {
+    "d3-color": "^1.2.3",
+    "d3-line": "0.0.1",
+    "d3-scale": "^2.1.2",
+    "d3-shape": "^1.2.2"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "prop-types": "*"
+  }
+}
