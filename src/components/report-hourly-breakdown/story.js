@@ -238,7 +238,7 @@ storiesOf('ReportHourlyBreakdown', module)
       date: moment.utc(date),
       values
     }));
-    data[1].values[13] = 212;
+    data[1].values[11] = 212;
     return <div style={{paddingTop: 100, width: 1000}}>
       <ReportHourlyBreakdown
         title="Hourly Breakdown"
