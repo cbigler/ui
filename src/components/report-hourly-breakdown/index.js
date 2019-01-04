@@ -58,9 +58,6 @@ export default function ReportHourlyBreakdown({
   space,
 
   data,
-  maxDay,
-  maxHour,
-  maxValue,
   metric = 'VISITS',
   aggregation = 'NONE',
 
@@ -75,17 +72,27 @@ export default function ReportHourlyBreakdown({
   },
 }) {
 
-  // Prepare labels for max start/end times
-  // Doesn't need to be in the space's tz because it's just for rendering a number of hours
-  let maxTimeStart = moment().startOf('day').add(maxHour, 'hour');
-  let maxTimeEnd = moment(maxTimeStart).add(1, 'hour');
-  maxTimeEnd = maxTimeEnd.format('Ha');
-  maxTimeStart = maxTimeStart.format('Ha');
-
-  // Remove 'am'/'pm' from start hour ONLY if both are the same
-  if (maxTimeStart.endsWith(maxTimeEnd.slice(-2))) {
-    maxTimeStart = maxTimeStart.slice(0, -2);
-  }
+  // calculate max values
+  let maxValue = 0;
+  let maxValues = [];
+  data.forEach(({date, values}) => {
+    values.forEach((value, index) => {
+      if (value > maxValue) {
+        maxValue = value;
+        maxValues = [{
+          day: date.format('dddd'),
+          hour: index,
+          value: value
+        }];
+      } else if (value === maxValue) {
+        maxValues.push({
+          day: date.format('dddd'),
+          hour: index,
+          value: value
+        })
+      }
+    })
+  });
 
   return (
     <ReportWrapper
@@ -96,14 +103,28 @@ export default function ReportHourlyBreakdown({
     >
       <ReportSubHeader
         title={(
-          <span>
-            <strong>{maxDay}</strong> between {' '}
-            <strong>{maxTimeStart}</strong> and <strong>{maxTimeEnd}</strong> had{' '}
-            {aggregation === 'AVERAGE' ? 
-              (metric === 'PEAKS' ? 'an average peak count of ': 'an average of ') :
-              (metric === 'PEAKS' ? 'a peak count of ' : '')}
-            <strong>{maxValue}</strong>{metric === 'VISITS' ? ' visits.' : '.'}
-          </span>
+          maxValues.length === 0 ?
+            <span><strong>No events</strong> for this time range.</span> : 
+            maxValues.map(({day, hour, value}) => {
+              // Prepare labels for max start/end times
+              // Doesn't need to be in the space's tz because it's just for rendering a number of hours
+              let maxTimeStart = moment().startOf('day').add(hour, 'hour');
+              let maxTimeEnd = moment(maxTimeStart).add(1, 'hour');
+              maxTimeEnd = maxTimeEnd.format('ha');
+              maxTimeStart = maxTimeStart.format('ha');
+
+              // Remove 'am'/'pm' from start hour ONLY if both are the same
+              if (maxTimeStart.endsWith(maxTimeEnd.slice(-2))) {
+                maxTimeStart = maxTimeStart.slice(0, -2);
+              }
+              return <span>
+              <strong>{day}</strong> between {' '}
+              <strong>{maxTimeStart}</strong> and <strong>{maxTimeEnd}</strong> had{' '}
+              {aggregation === 'AVERAGE' ? 
+                (metric === 'PEAKS' ? 'an average peak count of ': 'an average of ') :
+                (metric === 'PEAKS' ? 'a peak count of ' : '')}
+              <strong>{value}</strong>{metric === 'VISITS' ? ' visits. ' : '. '}
+            </span>})
         )}
       />
       <ReportCard>

@@ -13,10 +13,6 @@ export declare type ReportHourlyBreakdownProps = {
     date: Moment;
     values: [number];
   }];
-
-  maxDay: null | string;
-  maxHour: number;
-  maxValue: number;
   metric?: 'VISITS' | 'PEAKS';
   aggregation?: 'NONE' | 'AVERAGE';
 

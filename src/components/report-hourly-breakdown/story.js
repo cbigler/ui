@@ -222,9 +222,6 @@ storiesOf('ReportHourlyBreakdown', module)
         space={{name: 'My Space'}}
 
         data={DATA}
-        maxDay="Monday"
-        maxHour={9}
-        maxValue={999}
 
         displayContext={{
           showExpandControl: true,
@@ -236,7 +233,31 @@ storiesOf('ReportHourlyBreakdown', module)
       />
     </div>
   ))
-  .addWithInfo('In an expanded view', () => (
+  .addWithInfo('In an expanded view', () => {
+    const data = JSON.parse(JSON.stringify(DATA)).map(({date, values}) => ({
+      date: moment.utc(date),
+      values
+    }));
+    data[1].values[13] = 212;
+    return <div style={{paddingTop: 100, width: 1000}}>
+      <ReportHourlyBreakdown
+        title="Hourly Breakdown"
+        startDate={moment('2018-03-12T00:00:00-04:00')}
+        endDate={moment('2018-03-18T00:00:00-04:00')}
+        space={{name: 'My Space'}}
+
+        data={data}
+
+        displayContext={{
+          showExpandControl: false,
+
+          dataStartTime: moment('2018-03-12T00:00:00-04:00').add(0, 'hours'),
+          dataEndTime: moment('2018-03-12T00:00:00-04:00').add(24, 'hours'),
+        }}
+      />
+    </div>;
+  })
+  .addWithInfo('Showing average peaks', () => (
     <div style={{paddingTop: 100, width: 1000}}>
       <ReportHourlyBreakdown
         title="Hourly Breakdown"
@@ -245,9 +266,8 @@ storiesOf('ReportHourlyBreakdown', module)
         space={{name: 'My Space'}}
 
         data={DATA}
-        maxDay="Monday"
-        maxHour={11}
-        maxValue={999}
+        metric="PEAKS"
+        aggregation="AVERAGE"
 
         displayContext={{
           showExpandControl: false,
