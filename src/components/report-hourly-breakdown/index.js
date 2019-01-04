@@ -103,7 +103,7 @@ export default function ReportHourlyBreakdown({
     >
       <ReportSubHeader
         title={(
-          maxValues.length === 0 ?
+          maxValue > 0 ?
             <span><strong>No events</strong> for this time range.</span> : 
             maxValues.map(({day, hour, value}) => {
               // Prepare labels for max start/end times
