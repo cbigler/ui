@@ -9,10 +9,10 @@ export declare type ReportHourlyBreakdownProps = {
     name: string;
   };
 
-  data: [{
+  data: {
     date: Moment;
-    values: [number];
-  }];
+    values: number[];
+  }[];
   metric?: 'VISITS' | 'PEAKS';
   aggregation?: 'NONE' | 'AVERAGE';
 

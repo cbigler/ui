@@ -135,7 +135,9 @@ export default function ReportHourlyBreakdown({
               {data.map(i => (
                 <th key={i.date.format()}>
                   <span className={styles.headerLineOne}>{i.date.format('ddd')}</span>
-                  <span className={styles.headerLineTwo}>{i.date.format('M/DD')}</span>
+                  {aggregation === 'NONE' ? 
+                    <span className={styles.headerLineTwo}>{i.date.format('M/DD')}</span> : 
+                    null}
                 </th>
               ))}
             </tr>
