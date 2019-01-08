@@ -118,8 +118,8 @@ export default function ReportHourlyBreakdown({
                 maxTimeStart = maxTimeStart.slice(0, -2);
               }
               return <span>
-              <strong>{day}</strong> between {' '}
-              <strong>{maxTimeStart}</strong> and <strong>{maxTimeEnd}</strong> had{' '}
+              <strong>{day}</strong> from {' '}
+              <strong>{maxTimeStart}</strong>-<strong>{maxTimeEnd}</strong> had{' '}
               {aggregation === 'AVERAGE' ? 
                 (metric === 'PEAKS' ? 'an average peak count of ': 'an average of ') :
                 (metric === 'PEAKS' ? 'a peak count of ' : '')}
