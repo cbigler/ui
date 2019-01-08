@@ -54,10 +54,10 @@ function addAlphaToHex(hex, alpha) {
   return `rgba(${color.red}, ${color.green}, ${color.blue}, ${alpha})`;
 }
 
-function MaximumMinimumStatement({title, examples, value, titleLight}) {
+function MaximumMinimumStatement({title, examples, value}) {
   return (
     <div className={styles.maximumMinimumStatement}>
-      <span className={classnames(styles.maximumMinimumStatementTitle, {[styles.light]: titleLight})}>
+      <span className={classnames(styles.maximumMinimumStatementTitle)}>
         {title}:
       </span> {examples.map((m, index) => (
         [
@@ -185,7 +185,6 @@ export default function ReportDailyVisitsPerSegment({
             title="Min"
             value={minValue}
             examples={minima}
-            titleLight
           />
         )}
       </ReportSubHeader>
@@ -236,16 +235,16 @@ export default function ReportDailyVisitsPerSegment({
                         className={styles.segmentTableCell}
                         key={index /* I think this is what we want here, since the position of cells shouldn't change? */}
                         style={{
-                          backgroundColor: addAlphaToHex(colorVariables.brandPrimary, alpha),
-                          color: textColorPrimary ? colorVariables.brandPrimary : '#fff',
+                          backgroundColor: addAlphaToHex(colorVariables.brandPrimaryNew, alpha),
+                          color: textColorPrimary ? colorVariables.brandPrimaryNew : '#fff',
                         }}
                       >
-                        <strong className={styles.segmentTableMaxMin}>
-                          {minValue === value ? 'MIN' : ''}
-                          {minValue === value && maxValue === value ? ' & ' : ''}
-                          {maxValue === value ? 'MAX' : ''}
-                        </strong>
                         <span className={styles.segmentTableValue}>
+                          <strong className={styles.segmentTableMaxMin}>
+                            {minValue === value ? 'MIN' : ''}
+                            {minValue === value && maxValue === value ? ' & ' : ''}
+                            {maxValue === value ? 'MAX' : ''}
+                          </strong>
                           {maxValue === value || minValue === value ? ': ' : null}
                           {value}
                         </span>
