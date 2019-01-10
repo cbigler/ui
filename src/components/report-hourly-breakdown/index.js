@@ -117,7 +117,7 @@ export default function ReportHourlyBreakdown({
               if (maxTimeStart.endsWith(maxTimeEnd.slice(-2))) {
                 maxTimeStart = maxTimeStart.slice(0, -2);
               }
-              return <span>
+              return <span key={`${day}-${hour}`}>
               <strong>{day}</strong> from {' '}
               <strong>{maxTimeStart}</strong>-<strong>{maxTimeEnd}</strong> had{' '}
               {aggregation === 'AVERAGE' ? 
@@ -203,9 +203,6 @@ ReportHourlyBreakdown.propTypes = {
     }),
   ).isRequired,
 
-  maxDay: propTypes.string.isRequired,
-  maxHour: propTypes.number.isRequired,
-  maxValue: propTypes.number.isRequired,
   metric: propTypes.string,
   aggregation: propTypes.string,
 

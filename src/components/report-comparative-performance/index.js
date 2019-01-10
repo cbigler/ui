@@ -95,10 +95,10 @@ export default function ReportComparativePerformance({
           <thead>
             <tr>
               <th></th>
-              {data.map((p, index) => <th className={classnames({
+              {data.map((p, index) => <th key={p.startDate} className={classnames({
                 [styles.tableHighlight]: index % 2 === 0
               })}>
-                <strong>{getRangeName(mode, p.startDate, p.endDate)}</strong>
+                <strong key={p.startDate}>{getRangeName(mode, p.startDate, p.endDate)}</strong>
               </th>)}
             </tr>
           </thead>
@@ -106,7 +106,7 @@ export default function ReportComparativePerformance({
             <tr>
               <td><strong>Total Visits</strong></td>
               {data.map((p, index) => {
-                return <td className={classnames('totalVisitsDescriptor', {
+                return <td key={p.startDate} className={classnames('totalVisitsDescriptor', {
                   [styles.tableHighlight]: index % 2 === 0
                 })}>
                   <span>{commaNumber(p.totalVisits)}</span>
@@ -115,22 +115,22 @@ export default function ReportComparativePerformance({
             </tr>
             <tr>
               <td><strong>Busiest Day</strong></td>
-              {data.map((p, index) => <td className={classnames({
+              {data.map((p, index) => <td key={p.startDate} className={classnames({
                 [styles.tableHighlight]: index % 2 === 0
               })}>
                 {p.busiestDays.length === 0 ? '-' : 
-                  text.toEnglishList(p.busiestDays.map(i => <span>
+                  text.toEnglishList(p.busiestDays.map(i => <span key={i.day}>
                     {data.length > 3 ? i.day.slice(0, 3) : i.day}{mode === COMPARATIVE_WEEK ? '' : 's'}
                   </span>))}
               </td>)}
             </tr>
             <tr>
               <td><strong>Busiest Hour</strong></td>
-              {data.map((p, index) => <td className={classnames({
+              {data.map((p, index) => <td key={p.startDate} className={classnames({
                 [styles.tableHighlight]: index % 2 === 0
               })}>
                 {p.busiestHours.length === 0 ? '-' : text.toEnglishList(p.busiestHours.map(i => 
-                  <span>
+                  <span key={`${i.day}-${i.hour}`}>
                     {data.length > 3 ? i.day.slice(0, 3) : i.day}{mode === COMPARATIVE_WEEK ? '' : 's'}
                     <br />@{'\u00a0'}{i.hour}
                   </span>
