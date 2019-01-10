@@ -78,15 +78,19 @@ export default function ReportComparativePerformance({
         title={(
           <span>
             <strong>{getRangeLastUnitValue(mode)}</strong> had{' '}
-            <strong>{lastPercentageDifference === Infinity ?
-              <span>&infin;</span> :
-              commaNumber(lastPercentageDifference >= 1 ?
-                Math.round(Math.abs(lastPercentageDifference * 100)) :
-                Math.round(Math.abs(lastPercentageDifference * 100) * 10) / 10
-              )
-            }%</strong>{' '}
-            {lastPercentageDifference >= 0 ? 'more' : 'fewer'} visits{' '}
-            than {getRangePreviousUnitValue(mode)}.
+            {data[data.length - 1].totalVisits === 0 ? 
+              <span>no visits.</span> :
+              <span>
+                <strong>{lastPercentageDifference === Infinity ?
+                  <span>&infin;</span> :
+                  commaNumber(lastPercentageDifference >= 1 ?
+                    Math.round(Math.abs(lastPercentageDifference * 100)) :
+                    Math.round(Math.abs(lastPercentageDifference * 100) * 10) / 10
+                  )
+                }%</strong>{' '}
+                {lastPercentageDifference >= 0 ? 'more' : 'fewer'} visits{' '}
+                than {getRangePreviousUnitValue(mode)}.
+              </span>}
           </span>
         )}
       />

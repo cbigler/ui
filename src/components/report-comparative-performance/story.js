@@ -94,3 +94,18 @@ storiesOf('ReportComparativePerformance', module)
       />
     </div>
   ))
+  .addWithInfo('No visits', () => (
+    <div style={{width: '100%', paddingTop: 100}}>
+      <ReportComparativePerformance
+        title="Comparative Performance Example"
+        space={{
+          id: 'spc_XXX',
+          name: 'My space',
+          timeZone: 'America/New_York',
+        }}
+
+        mode={COMPARATIVE_WEEK}
+        data={[{"totalVisits":0,"busiestDays":[],"busiestHours":[],"startDate":moment("2018-12-09T08:00:00.000Z"),"endDate":moment("2018-12-16T07:59:59.999Z")},{"totalVisits":0,"busiestDays":[],"busiestHours":[],"startDate":moment("2018-12-16T08:00:00.000Z"),"endDate":moment("2018-12-23T07:59:59.999Z")},{"totalVisits":0,"busiestDays":[],"busiestHours":[],"startDate":moment("2018-12-23T08:00:00.000Z"),"endDate":moment("2018-12-30T07:59:59.999Z")},{"totalVisits":0,"busiestDays":[],"busiestHours":[],"startDate":moment("2018-12-30T08:00:00.000Z"),"endDate":moment("2019-01-06T07:59:59.999Z")}]}
+      />
+    </div>
+  ))
