@@ -132,7 +132,7 @@ export default function ReportComparativePerformance({
                 {p.busiestHours.length === 0 ? '-' : text.toEnglishList(p.busiestHours.map(i => 
                   <span>
                     {data.length > 3 ? i.day.slice(0, 3) : i.day}{mode === COMPARATIVE_WEEK ? '' : 's'}
-                    {' '}@{'\u00a0'}{i.hour}
+                    <br />@{'\u00a0'}{i.hour}
                   </span>
                 ))}
               </td>)}
