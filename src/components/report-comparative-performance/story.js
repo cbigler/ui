@@ -30,22 +30,7 @@ storiesOf('ReportComparativePerformance', module)
         }}
 
         mode={COMPARATIVE_WEEK}
-        lastStartDate={moment.utc().startOf('week').subtract(1, 'week')}
-        lastEndDate={moment.utc().startOf('week').subtract(1, 'week').clone().endOf('week')}
-        previousStartDate={moment.utc().startOf('week').subtract(1, 'week').clone().subtract(1, 'week')}
-        previousEndDate={moment.utc().startOf('week').subtract(1, 'week').clone().subtract(1, 'week').clone().endOf('week')}
-
-
-        lastData={{
-          totalVisits: 8570,
-          averagePeakCount: 233,
-          averagePeakTime: moment.duration('17:03:00'),
-        }}
-        previousData={{
-          totalVisits: 10301,
-          averagePeakCount: 258,
-          averagePeakTime: moment.duration('11:37:00'),
-        }}
+        data={[{"totalVisits":7814,"busiestDays":[{"day":"Tuesday","entrances":1886}],"busiestHours":[{"day":"Wednesday","hour":"12pm","entrances":520}],"startDate":moment("2018-12-09T08:00:00.000Z"),"endDate":moment("2018-12-16T07:59:59.999Z")},{"totalVisits":6423,"busiestDays":[{"day":"Thursday","entrances":1526}],"busiestHours":[{"day":"Thursday","hour":"12pm","entrances":515}],"startDate":moment("2018-12-16T08:00:00.000Z"),"endDate":moment("2018-12-23T07:59:59.999Z")},{"totalVisits":266,"busiestDays":[{"day":"Wednesday","entrances":74}],"busiestHours":[{"day":"Thursday","hour":"9am","entrances":32}],"startDate":moment("2018-12-23T08:00:00.000Z"),"endDate":moment("2018-12-30T07:59:59.999Z")},{"totalVisits":3605,"busiestDays":[{"day":"Thursday","entrances":1289}],"busiestHours":[{"day":"Thursday","hour":"12pm","entrances":452}],"startDate":moment("2018-12-30T08:00:00.000Z"),"endDate":moment("2019-01-06T07:59:59.999Z")}]}
       />
     </div>
   ))
@@ -60,22 +45,7 @@ storiesOf('ReportComparativePerformance', module)
         }}
 
         mode={COMPARATIVE_MONTH}
-        lastStartDate={moment.utc().startOf('month').subtract(1, 'month')}
-        lastEndDate={moment.utc().startOf('month').subtract(1, 'month').clone().endOf('month')}
-        previousStartDate={moment.utc().startOf('month').subtract(1, 'month').clone().subtract(1, 'month')}
-        previousEndDate={moment.utc().startOf('month').subtract(1, 'month').clone().subtract(1, 'month').clone().endOf('month')}
-
-
-        lastData={{
-          totalVisits: 8570,
-          averagePeakCount: 233,
-          averagePeakTime: moment.duration('17:03:00'),
-        }}
-        previousData={{
-          totalVisits: 10301,
-          averagePeakCount: 258,
-          averagePeakTime: moment.duration('11:37:00'),
-        }}
+        data={[{"totalVisits":30280,"busiestDays":[{"day":"Tuesday","entrances":7968}],"busiestHours":[{"day":"Tuesday","hour":"12pm","entrances":2589}],"startDate":moment("2018-10-01T07:00:00.000Z"),"endDate":moment("2018-11-01T06:59:59.999Z")},{"totalVisits":28230,"busiestDays":[{"day":"Tuesday","entrances":6875}],"busiestHours":[{"day":"Thursday","hour":"12pm","entrances":2001}],"startDate":moment("2018-11-01T07:00:00.000Z"),"endDate":moment("2018-12-01T07:59:59.999Z")},{"totalVisits":20432,"busiestDays":[{"day":"Wednesday","entrances":4682}],"busiestHours":[{"day":"Wednesday","hour":"12pm","entrances":1519}],"startDate":moment("2018-12-01T08:00:00.000Z"),"endDate":moment("2019-01-01T07:59:59.999Z")}]}
       />
     </div>
   ))
@@ -90,22 +60,7 @@ storiesOf('ReportComparativePerformance', module)
         }}
 
         mode={COMPARATIVE_QUARTER}
-        lastStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter')}
-        lastEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().endOf('quarter')}
-        previousStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter')}
-        previousEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter').clone().endOf('quarter')}
-
-
-        lastData={{
-          totalVisits: 8570,
-          averagePeakCount: 233,
-          averagePeakTime: moment.duration('17:03:00'),
-        }}
-        previousData={{
-          totalVisits: 10301,
-          averagePeakCount: 258,
-          averagePeakTime: moment.duration('11:37:00'),
-        }}
+        data={[{"totalVisits":205980,"busiestDays":[{"day":"Thursday","entrances":43988}],"busiestHours":[{"day":"Thursday","hour":"12pm","entrances":9672}],"startDate":moment("2018-04-01T07:00:00.000Z"),"endDate":moment("2018-07-01T06:59:59.999Z")},{"totalVisits":209891,"busiestDays":[{"day":"Thursday","entrances":44240}],"busiestHours":[{"day":"Thursday","hour":"12pm","entrances":10002}],"startDate":moment("2018-07-01T07:00:00.000Z"),"endDate":moment("2018-10-01T06:59:59.999Z")},{"totalVisits":200032,"busiestDays":[{"day":"Tuesday","entrances":42977}],"busiestHours":[{"day":"Monday","hour":"12pm","entrances":9112}],"startDate":moment("2018-10-01T07:00:00.000Z"),"endDate":moment("2019-01-01T07:59:59.999Z")}]}
       />
     </div>
   ))
@@ -120,22 +75,7 @@ storiesOf('ReportComparativePerformance', module)
         }}
 
         mode={COMPARATIVE_QUARTER}
-        lastStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter')}
-        lastEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().endOf('quarter')}
-        previousStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter')}
-        previousEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter').clone().endOf('quarter')}
-
-
-        lastData={{
-          totalVisits: 8570,
-          averagePeakCount: 233,
-          averagePeakTime: moment.duration('17:03:00'),
-        }}
-        previousData={{
-          totalVisits: 8570,
-          averagePeakCount: 233,
-          averagePeakTime: moment.duration('11:37:00'),
-        }}
+        data={[{"totalVisits":205980,"busiestDays":[{"day":"Thursday","entrances":43988}],"busiestHours":[{"day":"Thursday","hour":"12pm","entrances":9672}],"startDate":moment("2018-04-01T07:00:00.000Z"),"endDate":moment("2018-07-01T06:59:59.999Z")},{"totalVisits":209891,"busiestDays":[{"day":"Thursday","entrances":44240}],"busiestHours":[{"day":"Thursday","hour":"12pm","entrances":10002}],"startDate":moment("2018-07-01T07:00:00.000Z"),"endDate":moment("2018-10-01T06:59:59.999Z")},{"totalVisits":209891,"busiestDays":[{"day":"Tuesday","entrances":44231}],"busiestHours":[{"day":"Monday","hour":"12pm","entrances":10111}],"startDate":moment("2018-10-01T07:00:00.000Z"),"endDate":moment("2019-01-01T07:59:59.999Z")}]}
       />
     </div>
   ))
@@ -150,22 +90,7 @@ storiesOf('ReportComparativePerformance', module)
         }}
 
         mode={COMPARATIVE_QUARTER}
-        lastStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter')}
-        lastEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().endOf('quarter')}
-        previousStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter')}
-        previousEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter').clone().endOf('quarter')}
-
-
-        lastData={{
-          totalVisits: 8570,
-          averagePeakCount: 233,
-          averagePeakTime: moment.duration('17:03:00'),
-        }}
-        previousData={{
-          totalVisits: 0,
-          averagePeakCount: 0,
-          averagePeakTime: moment.duration('11:37:00'),
-        }}
+        data={[{"totalVisits":0,"busiestDays":[],"busiestHours":[],"startDate":moment("2018-04-01T07:00:00.000Z"),"endDate":moment("2018-07-01T06:59:59.999Z")},{"totalVisits":0,"busiestDays":[],"busiestHours":[],"startDate":moment("2018-07-01T07:00:00.000Z"),"endDate":moment("2018-10-01T06:59:59.999Z")},{"totalVisits":209891,"busiestDays":[{"day":"Tuesday","entrances":44231}],"busiestHours":[{"day":"Monday","hour":"12pm","entrances":10111}],"startDate":moment("2018-10-01T07:00:00.000Z"),"endDate":moment("2019-01-01T07:59:59.999Z")}]}
       />
     </div>
   ))

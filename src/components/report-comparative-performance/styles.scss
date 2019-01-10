@@ -43,14 +43,3 @@
   font-size: 10px;
 }
 .subheadingDate { white-space: nowrap; }
-
-.percentage {
-  color: $gray-darker;
-  font-size: 11px;
-}
-.percentage:before { content: '('; }
-.percentage:after { content: ')'; }
-.percentageNegative { color: $report-red; }
-.percentageNegative:before { content: '(-'; }
-.percentagePositive { color: $report-green; }
-.percentagePositive:before { content: '(+'; }
