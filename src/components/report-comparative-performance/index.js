@@ -125,7 +125,7 @@ export default function ReportComparativePerformance({
                 {p.busiestDays.length === 0 ? '-' : 
                   text.toEnglishList(p.busiestDays.map(i => <span key={i.day}>
                     {data.length > 3 ? i.day.slice(0, 3) : i.day}{mode === COMPARATIVE_WEEK ? '' : 's'}
-                  </span>))}
+                  </span>), '\u00a0')}
               </td>)}
             </tr>
             <tr>
