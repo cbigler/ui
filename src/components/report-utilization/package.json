@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-report-utilization",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Utilization report component",
   "main": "dist/index.js",
   "author": "Density <engineering+javascript@density.io>",
