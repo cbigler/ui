@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-app-bar",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "App bar component",
   "main": "dist/index.js",
   "author": "Density <engineering+javascript@density.io>",
