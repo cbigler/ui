@@ -79,6 +79,21 @@ storiesOf('ReportComparativePerformance', module)
       />
     </div>
   ))
+  .addWithInfo('With ties for busiest periods', () => (
+    <div style={{width: '100%', paddingTop: 100}}>
+      <ReportComparativePerformance
+        title="Comparative Performance Example"
+        space={{
+          id: 'spc_XXX',
+          name: 'My space',
+          timeZone: 'America/New_York',
+        }}
+
+        mode={COMPARATIVE_QUARTER}
+        data={[{"totalVisits":205980,"busiestDays":[{"day":"Thursday","entrances":43988}, {"day":"Friday","entrances":43988}],"busiestHours":[{"day":"Thursday","hour":"12pm","entrances":9672}],"startDate":moment("2018-04-01T07:00:00.000Z"),"endDate":moment("2018-07-01T06:59:59.999Z")},{"totalVisits":209891,"busiestDays":[{"day":"Thursday","entrances":44240}],"busiestHours":[{"day":"Thursday","hour":"12pm","entrances":10002}],"startDate":moment("2018-07-01T07:00:00.000Z"),"endDate":moment("2018-10-01T06:59:59.999Z")},{"totalVisits":209891,"busiestDays":[{"day":"Tuesday","entrances":44231}],"busiestHours":[{"day":"Monday","hour":"12pm","entrances":10111}, {"day":"Tuesday","hour":"12pm","entrances":10111}, {"day":"Wednesday","hour":"12pm","entrances":10111}],"startDate":moment("2018-10-01T07:00:00.000Z"),"endDate":moment("2019-01-01T07:59:59.999Z")}]}
+      />
+    </div>
+  ))
   .addWithInfo('Infinity percent', () => (
     <div style={{width: '100%', paddingTop: 100}}>
       <ReportComparativePerformance
