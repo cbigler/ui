@@ -2,9 +2,9 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import AppBar from './';
+import AppPane from './';
 
-storiesOf('AppBar', module)
+storiesOf('AppPane', module)
   .addWithInfo('With a text body', () => (
-    <AppBar title="Hello world!" />
+    <AppPane>Hello world!</AppPane>
   ))

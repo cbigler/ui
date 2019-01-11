@@ -2,9 +2,9 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import AppBar from './';
+import AppScrollView from './';
 
-storiesOf('AppBar', module)
+storiesOf('AppScrollView', module)
   .addWithInfo('With a text body', () => (
-    <AppBar title="Hello world!" />
+    <AppScrollView>Hello, world!</AppScrollView>
   ))

@@ -1,7 +1,7 @@
 {
-  "name": "@density/ui-app-bar",
-  "version": "1.0.0",
-  "description": "App bar component",
+  "name": "@density/ui-app-sidebar",
+  "version": "0.0.1",
+  "description": "App sidebar component",
   "main": "dist/index.js",
   "author": "Density <engineering+javascript@density.io>",
   "license": "MIT",
