@@ -72,8 +72,8 @@ storiesOf('ReportUtilization', module)
           {id: 3, name: "My street cafe", utilization: 0.93},
           {id: 4, name: "4th floor cafeteria", utilization: 0.55},
           {id: 5, name: "18. War St Fish", utilization: 0.32},
-          {id: 6, name: "Hipster Cafe", utilization: 0.21},
-          {id: 7, name: "123 S. Olive Cafeteria", utilization: 0.18},
+          {id: 6, name: "Hipster Cafe", utilization: 0.02},
+          {id: 7, name: "123 S. Olive Cafeteria", utilization: 0.02},
           {id: 8, name: "456 E. Rutherford Cafeteria", utilization: 0.02},
         ]}
         displayContext={{

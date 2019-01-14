@@ -30,11 +30,7 @@ $report-daily-visits-per-segment-large-row-height: 50px;
 }
 .maximumMinimumStatementTitle {
   @extend .maximumMinimumStatementHighlight;
-  color: $brand-primary;
-
-  &.light {
-    color: $brand-primary-light;
-  }
+  color: $brand-primary-new;
 }
 .maximumMinimumStatementRowContainer {
   margin-left: 10px;
@@ -118,10 +114,10 @@ $report-daily-visits-per-segment-large-row-height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 
   transition: all 250ms ease-in-out;
 
-  line-height: 36px;
   font-size: 10px;
   @media screen and (min-width: 768px) {
     font-size: 12px;

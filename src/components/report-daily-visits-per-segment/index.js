@@ -54,10 +54,10 @@ function addAlphaToHex(hex, alpha) {
   return `rgba(${color.red}, ${color.green}, ${color.blue}, ${alpha})`;
 }
 
-function MaximumMinimumStatement({title, examples, value, titleLight}) {
+function MaximumMinimumStatement({title, examples, value, valueAlpha}) {
   return (
     <div className={styles.maximumMinimumStatement}>
-      <span className={classnames(styles.maximumMinimumStatementTitle, {[styles.light]: titleLight})}>
+      <span className={classnames(styles.maximumMinimumStatementTitle)} style={{opacity: valueAlpha}}>
         {title}:
       </span> {examples.map((m, index) => (
         [
@@ -123,6 +123,12 @@ export default function ReportDailyVisitsPerSegment({
   const minValue = Math.min.apply(Math, data.map(v => Math.min.apply(Math, v.filter(isNumeric))));
   const maxValue = Math.max.apply(Math, data.map(v => Math.max.apply(Math, v.filter(isNumeric))));
 
+  // Calculate opacity for a given value
+  const shadeValue = value => {
+    const percentageShaded = (value - minValue) / (maxValue - minValue); /* 0...1 */
+    return cellMinimumOpacity + (percentageShaded * (cellMaximumOpacity - cellMinimumOpacity));
+  }
+
   const maxima = data.map((row, rowIndex) => {
     return row.map((col, colIndex) => {
       if (col === maxValue) {
@@ -169,8 +175,9 @@ export default function ReportDailyVisitsPerSegment({
         ) : (
           <MaximumMinimumStatement
             title="Max"
-            value={maxValue}
             examples={maxima}
+            value={maxValue}
+            valueAlpha={Math.max(shadeValue(maxValue), 0.5)}
           />
         )}
         {minValue === Infinity ? (
@@ -183,9 +190,9 @@ export default function ReportDailyVisitsPerSegment({
         ) : (
           <MaximumMinimumStatement
             title="Min"
-            value={minValue}
             examples={minima}
-            titleLight
+            value={minValue}
+            valueAlpha={Math.max(shadeValue(minValue), 0.5)}
           />
         )}
       </ReportSubHeader>
@@ -220,11 +227,10 @@ export default function ReportDailyVisitsPerSegment({
                   {row.map((value, index) => {
                     if (skipDayIndexes.indexOf(index) >= 0) { return null; }
 
-                    let percentageShaded, alpha;
+                    let alpha;
                     if (isNumeric(value)) {
-                      // The day has a daily visits number, so calculate it's opacity.
-                      percentageShaded = (value - minValue) / (maxValue - minValue); /* 0...1 */
-                      alpha = cellMinimumOpacity + (percentageShaded * (cellMaximumOpacity - cellMinimumOpacity));
+                      // The day has a daily visits number, so calculate its opacity.
+                      alpha = shadeValue(value);
                     } else {
                       // No daily visits were found for this day and time segment, so make it
                       // completely transparent.
@@ -236,16 +242,16 @@ export default function ReportDailyVisitsPerSegment({
                         className={styles.segmentTableCell}
                         key={index /* I think this is what we want here, since the position of cells shouldn't change? */}
                         style={{
-                          backgroundColor: addAlphaToHex(colorVariables.brandPrimary, alpha),
-                          color: textColorPrimary ? colorVariables.brandPrimary : '#fff',
+                          backgroundColor: addAlphaToHex(colorVariables.brandPrimaryNew, alpha),
+                          color: textColorPrimary ? colorVariables.brandPrimaryNew : '#fff',
                         }}
                       >
-                        <strong className={styles.segmentTableMaxMin}>
-                          {minValue === value ? 'MIN' : ''}
-                          {minValue === value && maxValue === value ? ' & ' : ''}
-                          {maxValue === value ? 'MAX' : ''}
-                        </strong>
                         <span className={styles.segmentTableValue}>
+                          <strong className={styles.segmentTableMaxMin}>
+                            {minValue === value ? 'MIN' : ''}
+                            {minValue === value && maxValue === value ? ' & ' : ''}
+                            {maxValue === value ? 'MAX' : ''}
+                          </strong>
                           {maxValue === value || minValue === value ? ': ' : null}
                           {value}
                         </span>

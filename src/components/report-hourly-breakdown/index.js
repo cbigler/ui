@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React from 'react';
-import ReportWrapper, { ReportCard, ReportExpandController } from '@density/ui-report-wrapper';
+import ReportWrapper, { ReportCard, ReportSubHeader, ReportExpandController } from '@density/ui-report-wrapper';
 import styles from './styles.scss';
 import colorVariables from '@density/ui/variables/colors.json';
 import propTypes from 'prop-types';
@@ -58,6 +58,9 @@ export default function ReportHourlyBreakdown({
   space,
 
   data,
+  metric = 'VISITS',
+  aggregation = 'NONE',
+
   cellColorThreshold,
 
   displayContext: {
@@ -68,7 +71,29 @@ export default function ReportHourlyBreakdown({
     dataEndTime,
   },
 }) {
-  const maxValue = Math.max.apply(Math, data.map(i => i.values).reduce((a, b) => [...a, ...b], []));
+
+  // calculate max values
+  let maxValue = 0;
+  let maxValues = [];
+  data.forEach(({date, values}) => {
+    values.forEach((value, index) => {
+      if (value > maxValue) {
+        maxValue = value;
+        maxValues = [{
+          day: date.format('dddd'),
+          hour: index,
+          value: value
+        }];
+      } else if (value === maxValue) {
+        maxValues.push({
+          day: date.format('dddd'),
+          hour: index,
+          value: value
+        })
+      }
+    })
+  });
+
   return (
     <ReportWrapper
       title={title}
@@ -76,6 +101,32 @@ export default function ReportHourlyBreakdown({
       endDate={endDate}
       spaces={[space.name]}
     >
+      <ReportSubHeader
+        title={(
+          maxValue === 0 ?
+            <span><strong>No events</strong> for this time range.</span> : 
+            maxValues.map(({day, hour, value}) => {
+              // Prepare labels for max start/end times
+              // Doesn't need to be in the space's tz because it's just for rendering a number of hours
+              let maxTimeStart = moment().startOf('day').add(hour, 'hour');
+              let maxTimeEnd = moment(maxTimeStart).add(1, 'hour');
+              maxTimeEnd = maxTimeEnd.format('ha');
+              maxTimeStart = maxTimeStart.format('ha');
+
+              // Remove 'am'/'pm' from start hour ONLY if both are the same
+              if (maxTimeStart.endsWith(maxTimeEnd.slice(-2))) {
+                maxTimeStart = maxTimeStart.slice(0, -2);
+              }
+              return <span key={`${day}-${hour}`}>
+              <strong>{day}</strong> from {' '}
+              <strong>{maxTimeStart}</strong>-<strong>{maxTimeEnd}</strong> had{' '}
+              {aggregation === 'AVERAGE' ? 
+                (metric === 'PEAKS' ? 'an average peak count of ': 'an average of ') :
+                (metric === 'PEAKS' ? 'a peak count of ' : '')}
+              <strong>{value}</strong>{metric === 'VISITS' ? ' visits. ' : '. '}
+            </span>})
+        )}
+      />
       <ReportCard>
         <table className={styles.reportHourlyBreakdown}>
           <thead>
@@ -84,7 +135,9 @@ export default function ReportHourlyBreakdown({
               {data.map(i => (
                 <th key={i.date.format()}>
                   <span className={styles.headerLineOne}>{i.date.format('ddd')}</span>
-                  <span className={styles.headerLineTwo}>{i.date.format('M/DD')}</span>
+                  {aggregation === 'NONE' ? 
+                    <span className={styles.headerLineTwo}>{i.date.format('M/DD')}</span> : 
+                    null}
                 </th>
               ))}
             </tr>
@@ -149,6 +202,9 @@ ReportHourlyBreakdown.propTypes = {
       values: propTypes.arrayOf(propTypes.number.isRequired).isRequired,
     }),
   ).isRequired,
+
+  metric: propTypes.string,
+  aggregation: propTypes.string,
 
   displayContext: propTypes.shape({
     showExpandControl: propTypes.bool.isRequired,

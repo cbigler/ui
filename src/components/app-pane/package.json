@@ -1,7 +1,7 @@
 {
-  "name": "@density/ui-report-daily-visits-per-segment",
-  "version": "1.0.1",
-  "description": "Daily visits per segment report component",
+  "name": "@density/ui-app-pane",
+  "version": "0.0.1",
+  "description": "App pane component",
   "main": "dist/index.js",
   "author": "Density <engineering+javascript@density.io>",
   "license": "MIT",
