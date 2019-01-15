@@ -8,10 +8,9 @@ import styles from './styles.scss';
 import colorVariables from '../../../variables/colors.json';
 
 import ReportWrapper, {
-  ReportPadding,
   ReportCard,
   ReportSubHeader,
-  ReportExpandController,
+  ReportOptionBar,
 } from '@density/ui-report-wrapper';
 
 export const CURVE_STEP = 'CURVE_STEP',
@@ -36,7 +35,6 @@ export class ReportHorizonChartVisualization extends Component {
 
   render() {
     const {
-      width,
       height,
       maxValue,
       colorBands,
@@ -45,6 +43,9 @@ export class ReportHorizonChartVisualization extends Component {
       endDate,
       data,
     } = this.props;
+
+    // Internal width for the SVG layout to use
+    const width = 1000;
 
     // Unclipped height
     const unclippedHeight = height * colorBands.length;
@@ -108,13 +109,14 @@ export class ReportHorizonChartVisualization extends Component {
     }
 
     return (
-      <div className={styles.reportHorizonChart}>
+      <div>
         {/* After the width has been set in `componentDidMount`, then render the svg */}
         {width !== null ? (
           <svg
-            width={width}
+            width="100%"
             height={height}
             viewBox={`0 0 ${width} ${height}`}
+            preserveAspectRatio="none"
           >
             <clipPath id={`horizon-chart-${this.state.unique}-clippath`}>
               <rect
@@ -156,10 +158,11 @@ export class ReportHorizonChartVisualization extends Component {
 }
 
 export function ReportHorizonChartAxis({
-  width,
   startDate,
   endDate
 }) {
+  const width = 600;
+
   const numberOfHours = endDate.diff(startDate, 'hours');
   const distanceBetweenHoursInPx = width / numberOfHours;
 
@@ -172,36 +175,38 @@ export function ReportHorizonChartAxis({
 
   const marks = [];
   for (let label = startDate.clone().startOf('hour'); label.valueOf() <= endDate.valueOf(); label = label.clone().add(hoursBetweenTicks, 'hours')) {
-    marks.push({
-      value: label.valueOf(),
-      label: label.tz('America/Los_Angeles').format('ha').slice(0, -1),
-    });
+    if (label.valueOf() >= startDate.valueOf()) {
+      marks.push({
+        value: label.valueOf(),
+        label: label.tz('America/Los_Angeles').format('ha').slice(0, -1),
+      });
+    }
   }
 
   const xScale = d3Scale.scaleLinear()
     .domain([ startDate.valueOf(), endDate.valueOf() ])
     .range([0, width]);
 
-  return <svg width={width} height={12}>
+  return <div style={{
+    width: "100%",
+    height: "24px",
+    position: "relative"
+  }}>
     {marks.map(({value, label}, index, xAxisMarks) => (
-      <text
+      <div
         key={value}
-        fill={colorVariables.grayDarker}
-        transform={`translate(${xScale(value)}, 10)`}
-        fontSize={12}
-        style={{userSelect: 'none'}}
-        textAnchor={(function() {
-          if (index === 0) {
-            return 'start';
-          } else if (index === xAxisMarks.length-1) {
-            return 'end';
-          } else {
-            return 'middle';
-          }
-        })()}
-      >{label}</text>
+        style={{
+          userSelect: 'none',
+          position: 'absolute',
+          left: `${xScale(value) * 100 / width}%`,
+          color: colorVariables.grayDarker,
+          fontSize: 12,
+          width: 24,
+          marginLeft: -12
+        }}
+      >{label}</div>
     ))}
-  </svg>;
+  </div>;
 }
 
 export default function ReportHorizonChart({
@@ -250,9 +255,10 @@ export default function ReportHorizonChart({
   })
 
   const maxValue = Math.max.apply(Math, processedPlots.map(i => i.maxBucket.value));
-  const colorBandValues = colorBands.map((band, index) => ({
+  const colorBandLabels = colorBands.map((band, index) => ({
+    id: index,
     color: band,
-    value: Math.ceil((index + 1) * maxValue / colorBands.length)
+    label: `\u2264 ${Math.ceil(((index + 1) * maxValue / colorBands.length) / 5)}/min`
   }));
 
   return (
@@ -262,65 +268,41 @@ export default function ReportHorizonChart({
       endDate={endDate}
       spaces={spaces.map(space => space.name)}
     >
+      <ReportSubHeader>
+        <div style={{display:'flex', justifyContent:'center'}}>
+          <ReportOptionBar options={colorBandLabels} />
+        </div>
+      </ReportSubHeader>
       <ReportCard>
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th style={{fontSize:14}}>
-                <div style={{
-                  width: '100%',
-                  display:'flex',
-                  flexDirection: 'row',
-                  marginBottom: '10px',
-                  fontSize: '12px',
-                  fontWeight: 'normal'
-              }}>
-                  {colorBandValues.map(band => <div style={{flex:1}}>
-                    <div style={{color: colorVariables.grayDarker}}>{` <= ${Math.ceil(band.value/5)}/min`}</div>
-                    <div style={{backgroundColor: band.color, color: band.color}}>{'x'}</div>
-                  </div>)}
-                </div>
-              </th>
-              <th style={{fontSize:14}}>Peak</th>
-            </tr>
-          </thead>
-          <tbody>
-            {processedPlots.map((plot, index) => (
-              <tr key={plot.id}>
-                <td className={styles.reportHorizonChartTableText}>{plot.name}</td>
-                <td>
-                  <ReportHorizonChartVisualization
-                    key={plot.id}
-                    width={trackWidth}
-                    height={trackHeight}
-                    maxValue={maxValue}
-                    colorBands={colorBands}
-                    curveType={curveType}
-                    startDate={plot.startDate}
-                    endDate={plot.endDate}
-                    data={plot.data}
-                  />
-                </td>
-                <td className={styles.reportHorizonChartTableText} style={{paddingLeft:16}}>
-                  {plot.maxBucket.value > 0 ? `${Math.ceil(plot.maxBucket.value/5)}/min` : ''}
-                  {plot.maxBucket.timestamp ? ' @ ' : '-'}
-                  {plot.maxBucket.timestamp ? plot.maxBucket.timestamp.tz('America/Los_Angeles').format('h:mma').slice(0, -1) : ''}
-                </td>
-              </tr>
-            ))}
-            <tr>
-                <td></td>
-                <td>
-                  <ReportHorizonChartAxis
-                    width={trackWidth}
-                    startDate={plots[0].startDate}
-                    endDate={plots[0].endDate} />
-                </td>
-                <td></td>
-            </tr>
-          </tbody>
-        </table>
+        <div style={{display:'flex', flexDirection: 'row'}}>
+          <div style={{display:'flex', flexDirection:'column'}}>
+            {processedPlots.map(plot => <div className={styles.reportHorizonChartTableText}>{plot.name}</div>)}
+          </div>
+          <div style={{display:'flex', flexDirection:'column', flexGrow: 1}}>
+            {processedPlots.map(plot => <ReportHorizonChartVisualization
+              key={plot.id}
+              height={48}
+              maxValue={maxValue}
+              colorBands={colorBands}
+              curveType={curveType}
+              startDate={plot.startDate}
+              endDate={plot.endDate}
+              data={plot.data}
+            />)}
+            <ReportHorizonChartAxis
+              width={trackWidth}
+              startDate={plots[0].startDate}
+              endDate={plots[0].endDate} />
+          </div>
+          <div>
+            {processedPlots.map(plot => <div className={styles.reportHorizonChartTableText}>
+              {plot.maxBucket.value > 0 ? `${Math.ceil(plot.maxBucket.value/5)}/min` : ''}
+              <br />
+              {plot.maxBucket.timestamp ? '@ ' : '-'}
+              {plot.maxBucket.timestamp ? plot.maxBucket.timestamp.tz('America/Los_Angeles').format('h:mma').slice(0, -1) : ''}
+            </div>)}
+          </div>
+        </div>
       </ReportCard>
     </ReportWrapper>
   );
