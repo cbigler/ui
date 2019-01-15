@@ -3,29 +3,16 @@
 // Local variables to the component
 @import "variables.json";
 
-.reportHorizonChart {
-  width: 100%;
-  margin-bottom: 8px;
-}
-
 .reportHorizonChartContainer {
   display: flex;
   flex-direction: row;
 }
 
-.reportHorizonChartSpaceNameList {
-  width: 80px;
-  flex-grow: 0;
-  flex-shrink: 0;
-  margin-right: 16px;
-}
-
-.reportHorizonChartSpaceNameListItem {
-  line-height: 36px;
-  margin-bottom: 12px;
-
-  transform: translate(0px, 6px);
-  font-size: 12px;
+.reportHorizonChartTableText {
+  line-height: 24px;
+  font-size: 14px;
+  padding-right:10px;
+  padding-top: 2px;
 
   white-space: nowrap;
   text-overflow: ellipsis;

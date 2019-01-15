@@ -39,15 +39,15 @@ export class ReportHorizonChartVisualization extends Component {
       width,
       height,
       maxValue,
-      numberOfBands,
-      trackCurveType,
+      colorBands,
+      curveType,
       startDate,
       endDate,
       data,
     } = this.props;
 
     // Unclipped height
-    const unclippedHeight = height * numberOfBands;
+    const unclippedHeight = height * colorBands.length;
 
     // Save start/end timestamp values
     const startValue = startDate.valueOf();
@@ -59,17 +59,8 @@ export class ReportHorizonChartVisualization extends Component {
       .domain([ startValue, endValue ])
       .range([0, width]);
 
-    // Filter and map the data to plot
-    const plotData = data.filter(bucket => (
-      bucket.timestamp.valueOf() >= startValue && 
-      bucket.timestamp.valueOf() <= endValue
-    )).map(bucket => ({
-      timestamp: bucket.timestamp.valueOf(),
-      value: bucket.interval.analytics.entrances
-    }));
-
     // Calculate max count in the plot
-    const maxScale = maxValue || Math.max.apply(Math, plotData.map(item => item.value));
+    const maxScale = maxValue || Math.max.apply(Math, data.map(item => item.value));
 
     // Y scale for the unclipped data
     const unclippedYScale = d3Scale.scaleLinear()
@@ -81,7 +72,7 @@ export class ReportHorizonChartVisualization extends Component {
     const linePath = d3Shape.line()
       .x(item => xScale(item.timestamp))
       .y(item => unclippedYScale(item.value))
-      .curve(CURVE_TYPE_TO_INTERPOLATION_FUNCTION[trackCurveType]);
+      .curve(CURVE_TYPE_TO_INTERPOLATION_FUNCTION[curveType]);
 
     // Start by creating the path - this effectively is one layer of the horizon chart. Note how
     // it's given a unique id, we need that below.
@@ -89,12 +80,12 @@ export class ReportHorizonChartVisualization extends Component {
       <path id={`horizon-chart-${this.state.unique}`}
         d={`
           M${xScale(startValue)}, ${unclippedYScale(0)}
-          L${xScale(startValue)}, ${unclippedYScale(plotData[0].value)}
-          H${xScale(plotData[0].timestamp)}
+          L${xScale(startValue)}, ${unclippedYScale(data[0].value)}
+          H${xScale(data[0].timestamp)}
 
-          ${linePath(plotData)}
+          ${linePath(data)}
 
-          H${xScale(plotData[plotData.length - 1].timestamp)}
+          H${xScale(data[data.length - 1].timestamp)}
           V${unclippedYScale(0)}
           H${xScale(startValue)}
         `}
@@ -104,14 +95,14 @@ export class ReportHorizonChartVisualization extends Component {
     // In order to overlap the paths, utilize the <use> svg element. It accepts an id of an
     // element, and in the below case, moves each successive element down one track height.
     const repeatedPaths = [];
-    for (let i = 1; i < numberOfBands; i++) {
+    for (let i = 1; i < colorBands.length; i++) {
       repeatedPaths.push(
         <use
           key={i}
           href={`#horizon-chart-${this.state.unique}`}
           x={0}
           y={i * height} /* translate each one vertically downward by one height */
-          fill={BLUES[Math.ceil((i + 1) * (BLUES.length / numberOfBands)) - 1]}
+          fill={colorBands[i]}
         />
       );
     }
@@ -148,7 +139,7 @@ export class ReportHorizonChartVisualization extends Component {
                   Next, render the shape of data. This is pretty much the same algorithm used in the foot
                   traffic chart - loop through all data and assemble a svg path. In a
                 */}
-                <g fill={BLUES[Math.ceil(BLUES.length / numberOfBands) - 1]}>{horizonChartPath}</g>
+                <g fill={colorBands[0]}>{horizonChartPath}</g>
 
                 {/*
                   Finally, add all those <use> elements down here. Those will effectively "repeat" the
@@ -164,24 +155,105 @@ export class ReportHorizonChartVisualization extends Component {
   }
 }
 
+export function ReportHorizonChartAxis({
+  width,
+  startDate,
+  endDate
+}) {
+  const numberOfHours = endDate.diff(startDate, 'hours');
+  const distanceBetweenHoursInPx = width / numberOfHours;
+
+  let hoursBetweenTicks = 1;
+  if (distanceBetweenHoursInPx < 30) {
+    hoursBetweenTicks = 3;
+  } else if (distanceBetweenHoursInPx < 50) {
+    hoursBetweenTicks = 2;
+  }
+
+  const marks = [];
+  for (let label = startDate.clone().startOf('hour'); label.valueOf() <= endDate.valueOf(); label = label.clone().add(hoursBetweenTicks, 'hours')) {
+    marks.push({
+      value: label.valueOf(),
+      label: label.tz('America/Los_Angeles').format('ha').slice(0, -1),
+    });
+  }
+
+  const xScale = d3Scale.scaleLinear()
+    .domain([ startDate.valueOf(), endDate.valueOf() ])
+    .range([0, width]);
+
+  return <svg width={width} height={12}>
+    {marks.map(({value, label}, index, xAxisMarks) => (
+      <text
+        key={value}
+        fill={colorVariables.grayDarker}
+        transform={`translate(${xScale(value)}, 10)`}
+        fontSize={12}
+        style={{userSelect: 'none'}}
+        textAnchor={(function() {
+          if (index === 0) {
+            return 'start';
+          } else if (index === xAxisMarks.length-1) {
+            return 'end';
+          } else {
+            return 'middle';
+          }
+        })()}
+      >{label}</text>
+    ))}
+  </svg>;
+}
+
 export default function ReportHorizonChart({
   title,
   startDate,
   endDate,
-  numberOfBands,
-  trackCurveType,
+  curveType,
   spaces,
   plots,
 }) {
-  var trackWidth = 600;
-  var trackHeight = 48;
-  var trackVerticalSpacing = 12;
-  var trackCurveType = trackCurveType;
 
-  var maxValueByPlot = plots.map(plot => Math.max.apply(Math, plot.data.map(bucket => bucket.interval.analytics.entrances)));
-  var maxValue = Math.max.apply(Math, maxValueByPlot);
+  // TODO: These should be props
+  const trackWidth = 600;
+  const trackHeight = 48;
 
-  console.log(maxValue);
+  // TODO: This should be a prop
+  const numberOfBands = 4;
+  const colorBands = [];
+  for (let i = 0; i < numberOfBands; i++) {
+    colorBands.push(BLUES[Math.ceil((i + 1) * (BLUES.length / numberOfBands)) - 1]);
+  }
+
+  // TODO: this should go in the dashboard preprocessing helper
+  const processedPlots = plots.map(plot => {
+    let maxBucket = { value: 0 };
+    const startDateValue = plot.startDate.valueOf();
+    const endDateValue = plot.endDate.valueOf();
+    const data = plot.data.filter(bucket => (
+      bucket.timestamp.valueOf() >= startDateValue && 
+      bucket.timestamp.valueOf() <= endDateValue
+    )).map(bucket => {
+      const bucketValue = bucket.interval.analytics.entrances;
+      if (bucketValue > maxBucket.value) { 
+        maxBucket = { timestamp: bucket.timestamp, value: bucketValue };
+      }
+      return { timestamp: bucket.timestamp, value: bucketValue };
+    });
+    return {
+      id: plot.id,
+      name: plot.name,
+      startDate: plot.startDate,
+      endDate: plot.endDate,
+      maxBucket,
+      data
+    };
+  })
+
+  const maxValue = Math.max.apply(Math, processedPlots.map(i => i.maxBucket.value));
+  const colorBandValues = colorBands.map((band, index) => ({
+    color: band,
+    value: Math.ceil((index + 1) * maxValue / colorBands.length)
+  }));
 
   return (
     <ReportWrapper
@@ -191,38 +263,64 @@ export default function ReportHorizonChart({
       spaces={spaces.map(space => space.name)}
     >
       <ReportCard>
-        <div className={styles.reportHorizonChartContainer}>
-          <div className={styles.reportHorizonChartSpaceNameList}>
-            {plots.map(plot => (
-              <div
-                key={plot.id}
-                className={styles.reportHorizonChartSpaceNameListItem}
-                style={{
-                  fontSize: '14px',
-                  lineHeight: `${trackHeight}px`,
-                  marginBottom: `${trackVerticalSpacing}px`,
-                }}
-              >
-                <span>{plot.name}</span>
-              </div>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th style={{fontSize:14}}>
+                <div style={{
+                  width: '100%',
+                  display:'flex',
+                  flexDirection: 'row',
+                  marginBottom: '10px',
+                  fontSize: '12px',
+                  fontWeight: 'normal'
+              }}>
+                  {colorBandValues.map(band => <div style={{flex:1}}>
+                    <div style={{color: colorVariables.grayDarker}}>{` <= ${Math.ceil(band.value/5)}/min`}</div>
+                    <div style={{backgroundColor: band.color, color: band.color}}>{'x'}</div>
+                  </div>)}
+                </div>
+              </th>
+              <th style={{fontSize:14}}>Peak</th>
+            </tr>
+          </thead>
+          <tbody>
+            {processedPlots.map((plot, index) => (
+              <tr key={plot.id}>
+                <td className={styles.reportHorizonChartTableText}>{plot.name}</td>
+                <td>
+                  <ReportHorizonChartVisualization
+                    key={plot.id}
+                    width={trackWidth}
+                    height={trackHeight}
+                    maxValue={maxValue}
+                    colorBands={colorBands}
+                    curveType={curveType}
+                    startDate={plot.startDate}
+                    endDate={plot.endDate}
+                    data={plot.data}
+                  />
+                </td>
+                <td className={styles.reportHorizonChartTableText} style={{paddingLeft:16}}>
+                  {plot.maxBucket.value > 0 ? `${Math.ceil(plot.maxBucket.value/5)}/min` : ''}
+                  {plot.maxBucket.timestamp ? ' @ ' : '-'}
+                  {plot.maxBucket.timestamp ? plot.maxBucket.timestamp.tz('America/Los_Angeles').format('h:mma').slice(0, -1) : ''}
+                </td>
+              </tr>
             ))}
-          </div>
-          <div className={styles.reportHorizonChartVisualization}>
-            {plots.map(plot => [
-              <ReportHorizonChartVisualization
-                key={plot.id}
-                width={trackWidth}
-                height={trackHeight}
-                maxValue={maxValue}
-                numberOfBands={numberOfBands}
-                trackCurveType={trackCurveType}
-                startDate={plot.startDate}
-                endDate={plot.endDate}
-                data={plot.data}
-              />,
-            ])}
-          </div>
-        </div>
+            <tr>
+                <td></td>
+                <td>
+                  <ReportHorizonChartAxis
+                    width={trackWidth}
+                    startDate={plots[0].startDate}
+                    endDate={plots[0].endDate} />
+                </td>
+                <td></td>
+            </tr>
+          </tbody>
+        </table>
       </ReportCard>
     </ReportWrapper>
   );
