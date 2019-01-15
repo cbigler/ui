@@ -15,130 +15,109 @@ import ReportWrapper, {
 } from '@density/ui-report-wrapper';
 
 export const CURVE_STEP = 'CURVE_STEP',
-             CURVE_BEZIER = 'CURVE_BEZIER';
+             CURVE_LINEAR = 'CURVE_LINEAR',
+             CURVE_BEZIER = 'CURVE_BEZIER',
+             CURVE_CARDINAL = 'CURVE_CARDINAL';
 
 const CURVE_TYPE_TO_INTERPOLATION_FUNCTION = {
   [CURVE_STEP]: d3Shape.curveStepBefore,
+  [CURVE_LINEAR]: d3Shape.curveLinear,
   [CURVE_BEZIER]: d3Shape.curveBasis,
+  [CURVE_CARDINAL]: d3Shape.curveCardinal,
 };
+
+const BLUES = ["#f7fbff","#f6faff","#f5fafe","#f5f9fe","#f4f9fe","#f3f8fe","#f2f8fd","#f2f7fd","#f1f7fd","#f0f6fd","#eff6fc","#eef5fc","#eef5fc","#edf4fc","#ecf4fb","#ebf3fb","#eaf3fb","#eaf2fb","#e9f2fa","#e8f1fa","#e7f1fa","#e7f0fa","#e6f0f9","#e5eff9","#e4eff9","#e3eef9","#e3eef8","#e2edf8","#e1edf8","#e0ecf8","#e0ecf7","#dfebf7","#deebf7","#ddeaf7","#ddeaf6","#dce9f6","#dbe9f6","#dae8f6","#d9e8f5","#d9e7f5","#d8e7f5","#d7e6f5","#d6e6f4","#d6e5f4","#d5e5f4","#d4e4f4","#d3e4f3","#d2e3f3","#d2e3f3","#d1e2f3","#d0e2f2","#cfe1f2","#cee1f2","#cde0f1","#cce0f1","#ccdff1","#cbdff1","#cadef0","#c9def0","#c8ddf0","#c7ddef","#c6dcef","#c5dcef","#c4dbee","#c3dbee","#c2daee","#c1daed","#c0d9ed","#bfd9ec","#bed8ec","#bdd8ec","#bcd7eb","#bbd7eb","#b9d6eb","#b8d5ea","#b7d5ea","#b6d4e9","#b5d4e9","#b4d3e9","#b2d3e8","#b1d2e8","#b0d1e7","#afd1e7","#add0e7","#acd0e6","#abcfe6","#a9cfe5","#a8cee5","#a7cde5","#a5cde4","#a4cce4","#a3cbe3","#a1cbe3","#a0cae3","#9ec9e2","#9dc9e2","#9cc8e1","#9ac7e1","#99c6e1","#97c6e0","#96c5e0","#94c4df","#93c3df","#91c3df","#90c2de","#8ec1de","#8dc0de","#8bc0dd","#8abfdd","#88bedc","#87bddc","#85bcdc","#84bbdb","#82bbdb","#81badb","#7fb9da","#7eb8da","#7cb7d9","#7bb6d9","#79b5d9","#78b5d8","#76b4d8","#75b3d7","#73b2d7","#72b1d7","#70b0d6","#6fafd6","#6daed5","#6caed5","#6badd5","#69acd4","#68abd4","#66aad3","#65a9d3","#63a8d2","#62a7d2","#61a7d1","#5fa6d1","#5ea5d0","#5da4d0","#5ba3d0","#5aa2cf","#59a1cf","#57a0ce","#569fce","#559ecd","#549ecd","#529dcc","#519ccc","#509bcb","#4f9acb","#4d99ca","#4c98ca","#4b97c9","#4a96c9","#4895c8","#4794c8","#4693c7","#4592c7","#4492c6","#4391c6","#4190c5","#408fc4","#3f8ec4","#3e8dc3","#3d8cc3","#3c8bc2","#3b8ac2","#3a89c1","#3988c1","#3787c0","#3686c0","#3585bf","#3484bf","#3383be","#3282bd","#3181bd","#3080bc","#2f7fbc","#2e7ebb","#2d7dbb","#2c7cba","#2b7bb9","#2a7ab9","#2979b8","#2878b8","#2777b7","#2676b6","#2574b6","#2473b5","#2372b4","#2371b4","#2270b3","#216fb3","#206eb2","#1f6db1","#1e6cb0","#1d6bb0","#1c6aaf","#1c69ae","#1b68ae","#1a67ad","#1966ac","#1865ab","#1864aa","#1763aa","#1662a9","#1561a8","#1560a7","#145fa6","#135ea5","#135da4","#125ca4","#115ba3","#115aa2","#1059a1","#1058a0","#0f579f","#0e569e","#0e559d","#0e549c","#0d539a","#0d5299","#0c5198","#0c5097","#0b4f96","#0b4e95","#0b4d93","#0b4c92","#0a4b91","#0a4a90","#0a498e","#0a488d","#09478c","#09468a","#094589","#094487","#094386","#094285","#094183","#084082","#083e80","#083d7f","#083c7d","#083b7c","#083a7a","#083979","#083877","#083776","#083674","#083573","#083471","#083370","#08326e","#08316d","#08306b"];
 
 export class ReportHorizonChartVisualization extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      width: null,
-      unique: Math.random().toString(),
-    };
-    this.onResize = this.onResize.bind(this);
-  }
-
-  componentDidMount() {
-    window.addEventListener('resize', this.onResize);
-    this.onResize();
-  }
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.onResize);
-  }
-
-  onResize() {
-    const width = this.container.clientWidth;
-    this.setState({ width });
+    this.state = { unique: Math.random().toString() };
   }
 
   render() {
     const {
-      trackHeight,
-      trackVerticalSpacing,
+      width,
+      height,
+      maxValue,
+      numberOfBands,
       trackCurveType,
       startDate,
       endDate,
       data,
     } = this.props;
-    const { width, unique } = this.state;
 
-    // Calculate the svgs height given the amount of data to show.
-    const height = data.length * (trackHeight+trackVerticalSpacing);
-    const graphHeight = 140;
+    // Unclipped height
+    const unclippedHeight = height * numberOfBands;
 
-    // The number of times that the graph "overflows" for each space.
-    const trackCount = Math.ceil(graphHeight / trackHeight);
+    // Save start/end timestamp values
+    const startValue = startDate.valueOf();
+    const endValue = endDate.valueOf();
 
     // Using the start and end time passed, create a scale that maps from the time range to a scale
     // from 0 to the svg width. This is used to plot timestamps for each horizon chart.
     const xScale = d3Scale.scaleLinear()
-      .domain([ startDate.valueOf(), endDate.valueOf() ])
+      .domain([ startValue, endValue ])
       .range([0, width]);
 
-    // Calculate the max count in the whole chart. This is used to determine the shading scale such
-    // that the thing with the highest count in the whole chart will be the darkest shade of the
-    // color specified. In addition, this value is used in the y axis scale below.
-    const maxCountPerTrack = data.map(d => Math.max.apply(Math, d.map(bucket => bucket.interval.analytics.max)));
-    const maxCount = Math.max.apply(Math, maxCountPerTrack);
+    // Filter and map the data to plot
+    const plotData = data.filter(bucket => (
+      bucket.timestamp.valueOf() >= startValue && 
+      bucket.timestamp.valueOf() <= endValue
+    )).map(bucket => ({
+      timestamp: bucket.timestamp.valueOf(),
+      value: bucket.interval.analytics.entrances
+    }));
 
-    // Create a y scale for each horizon chart. NOTE: this scale is used for each horizon chart
-    // specifically (each one is in a translated <g>), and not global to the svg. (That's why I
-    // called it `localYScale`.)
-    const localYScale = d3Scale.scaleLinear()
-      .domain([maxCount, 0])
-      .range([0, graphHeight]);
+    // Calculate max count in the plot
+    const maxScale = maxValue || Math.max.apply(Math, plotData.map(item => item.value));
+
+    // Y scale for the unclipped data
+    const unclippedYScale = d3Scale.scaleLinear()
+      .domain([maxScale, 0])
+      .range([0, unclippedHeight]);
 
     // Give d3.line() an array of points, and use it's interpolation to produce a path with the
     // specified interpolation method.
     const linePath = d3Shape.line()
-      .x(bucket => xScale(bucket.timestamp.valueOf()))
-      .y(bucket => localYScale(bucket.interval.analytics.max))
+      .x(item => xScale(item.timestamp))
+      .y(item => unclippedYScale(item.value))
       .curve(CURVE_TYPE_TO_INTERPOLATION_FUNCTION[trackCurveType]);
 
-    // Create the path and path repeats for each space's chart.
-    const charts = data.map((d, index) => {
-      // Start by creating the path - this effectively is one layer of the horizon chart. Note how
-      // it's given a unique id, we need that below.
-      const horizonChartPath = (
-        <g id={`report-${unique}-track-${index}`}>
-          <path
-            d={`
-              M${xScale(startDate.valueOf())}, ${localYScale(0)}
-              L${xScale(startDate.valueOf())}, ${localYScale(d[0].interval.analytics.max)}
-              H${xScale(d[0].timestamp.valueOf())}
+    // Start by creating the path - this effectively is one layer of the horizon chart. Note how
+    // it's given a unique id, we need that below.
+    const horizonChartPath = (
+      <path id={`horizon-chart-${this.state.unique}`}
+        d={`
+          M${xScale(startValue)}, ${unclippedYScale(0)}
+          L${xScale(startValue)}, ${unclippedYScale(plotData[0].value)}
+          H${xScale(plotData[0].timestamp)}
 
-              ${linePath(d)}
+          ${linePath(plotData)}
 
-              H${xScale(d[d.length - 1].timestamp.valueOf())}
-              V${localYScale(0)}
-              H${xScale(startDate.valueOf())}
-            `}
+          H${xScale(plotData[plotData.length - 1].timestamp)}
+          V${unclippedYScale(0)}
+          H${xScale(startValue)}
+        `}
+      />
+    );
 
-            /* fill each "layer" so that when stacked the highest layer will completely `brandPrimaryNew` */
-            fill={colorVariables.brandPrimaryNew}
-            opacity={1 / trackCount}
-          />
-        </g>
+    // In order to overlap the paths, utilize the <use> svg element. It accepts an id of an
+    // element, and in the below case, moves each successive element down one track height.
+    const repeatedPaths = [];
+    for (let i = 1; i < numberOfBands; i++) {
+      repeatedPaths.push(
+        <use
+          key={i}
+          href={`#horizon-chart-${this.state.unique}`}
+          x={0}
+          y={i * height} /* translate each one vertically downward by one height */
+          fill={BLUES[Math.ceil((i + 1) * (BLUES.length / numberOfBands)) - 1]}
+        />
       );
-
-      // In order to repeat the paths, utilize the <use> svg element. It accepts an id of an
-      // element, and in the below case, moves each successive element down one track height.
-      const repeatedTracks = [];
-      for (let i = 0; i < trackCount; i++) {
-        repeatedTracks.push(
-          <use
-            key={`track-${index},${i}`}
-            href={`#report-${unique}-track-${index}`}
-            x={0}
-            y={i * trackHeight} /* translate each one virtically downward by one track height */
-          />
-        );
-      }
-
-      return {
-        id: index,
-        path: horizonChartPath,
-        repeatedTracks,
-        linePath: linePath(d),
-      };
-    });
+    }
 
     return (
-      <div className={styles.reportHorizonChart} ref={r => { this.container = r; }}>
+      <div className={styles.reportHorizonChart}>
         {/* After the width has been set in `componentDidMount`, then render the svg */}
         {width !== null ? (
           <svg
@@ -146,41 +125,38 @@ export class ReportHorizonChartVisualization extends Component {
             height={height}
             viewBox={`0 0 ${width} ${height}`}
           >
-            <clipPath id={`report-${unique}-track-clippath`}>
+            <clipPath id={`horizon-chart-${this.state.unique}-clippath`}>
               <rect
-                x={xScale(startDate.valueOf())}
-                y={localYScale(0) - trackHeight}
-                width={xScale(endDate.valueOf()) - xScale(startDate.valueOf())}
-                height={trackHeight}
+                x={xScale(startValue)}
+                y={unclippedYScale(0) - height}
+                width={xScale(endValue) - xScale(startValue)}
+                height={height}
               />
             </clipPath>
-
-            {charts.map(({id, path, repeatedTracks}, index) => (
-              <g key={id} transform={`translate(0,${index * (trackHeight + trackVerticalSpacing)})`}>
+            <g>
+              {/*
+                Apply the above clip path to what's being drawn in order to only show the part of
+                all the paths that intersect (remove it and it may make more sense how it works if
+                you're confused). We only want to show the part of the graph where all of the
+                paths intersect.
+              */}
+              <g
+                transform={`translate(0,${-1 * (unclippedHeight - height)})`}
+                clipPath={`url(#horizon-chart-${this.state.unique}-clippath)`}
+              >
                 {/*
-                  Apply the above clip path to what's being drawn in order to only show the part of
-                  all the paths that intersect (remove it and it may make more sense how it works if
-                  you're confused). We only want to show the part of the graph where all of the
-                  paths intersect.
+                  Next, render the shape of data. This is pretty much the same algorithm used in the foot
+                  traffic chart - loop through all data and assemble a svg path. In a
                 */}
-                <g
-                  transform={`translate(0,${-1 * (graphHeight - trackHeight)})`}
-                  clipPath={`url(#report-${unique}-track-clippath)`}
-                >
-                  {/*
-                    Next, render the shape of data. This is pretty much the same algorithm used in the foot
-                    traffic chart - loop through all data and assemble a svg path. In a
-                  */}
-                  {path}
+                <g fill={BLUES[Math.ceil(BLUES.length / numberOfBands) - 1]}>{horizonChartPath}</g>
 
-                  {/*
-                    Finally, add all those <use> elements down here. Those will effectively "repeat" the
-                    path over and over with a different vertical translation, causing the shape that you see.
-                  */}
-                  {repeatedTracks}
-                </g>
+                {/*
+                  Finally, add all those <use> elements down here. Those will effectively "repeat" the
+                  path over and over with a different vertical translation, causing the shape that you see.
+                */}
+                {repeatedPaths}
               </g>
-            ))}
+            </g>
           </svg>
         ) : null}
       </div>
@@ -192,18 +168,20 @@ export default function ReportHorizonChart({
   title,
   startDate,
   endDate,
-  spaces,
+  numberOfBands,
   trackCurveType,
-
-  displayContext: {
-    showExpandControl,
-    onReportExpand,
-    trackHeight,
-    trackVerticalSpacing,
-  }
+  spaces,
+  plots,
 }) {
-  trackHeight = trackHeight || 24;
-  trackVerticalSpacing = trackVerticalSpacing || 12;
+  var trackWidth = 600;
+  var trackHeight = 48;
+  var trackVerticalSpacing = 12;
+  var trackCurveType = trackCurveType;
+
+  var maxValueByPlot = plots.map(plot => Math.max.apply(Math, plot.data.map(bucket => bucket.interval.analytics.entrances)));
+  var maxValue = Math.max.apply(Math, maxValueByPlot);
+
+  console.log(maxValue);
 
   return (
     <ReportWrapper
@@ -215,32 +193,38 @@ export default function ReportHorizonChart({
       <ReportCard>
         <div className={styles.reportHorizonChartContainer}>
           <div className={styles.reportHorizonChartSpaceNameList}>
-            {spaces.map(space => (
+            {plots.map(plot => (
               <div
-                key={space.id}
+                key={plot.id}
                 className={styles.reportHorizonChartSpaceNameListItem}
                 style={{
+                  fontSize: '14px',
                   lineHeight: `${trackHeight}px`,
                   marginBottom: `${trackVerticalSpacing}px`,
                 }}
               >
-                <span>{space.name}</span>
+                <span>{plot.name}</span>
               </div>
             ))}
           </div>
           <div className={styles.reportHorizonChartVisualization}>
-            <ReportHorizonChartVisualization
-              trackHeight={trackHeight}
-              trackVerticalSpacing={trackVerticalSpacing}
-              trackCurveType={trackCurveType}
-              startDate={startDate}
-              endDate={endDate}
-              data={spaces.map(space => space.data)}
-            />
+            {plots.map(plot => [
+              <ReportHorizonChartVisualization
+                key={plot.id}
+                width={trackWidth}
+                height={trackHeight}
+                maxValue={maxValue}
+                numberOfBands={numberOfBands}
+                trackCurveType={trackCurveType}
+                startDate={plot.startDate}
+                endDate={plot.endDate}
+                data={plot.data}
+              />,
+            ])}
           </div>
         </div>
       </ReportCard>
-      {showExpandControl ? <ReportExpandController onClick={onReportExpand} /> : null}
     </ReportWrapper>
   );
 }
+//{showExpandControl ? <ReportExpandController onClick={onReportExpand} /> : null}
