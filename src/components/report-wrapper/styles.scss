@@ -213,7 +213,7 @@
   padding-left: 0px;
   list-style: none;
   margin-top: 0px;
-  margin-bottom: 0px;
+  margin-bottom: -4px;
 
   display: flex;
   flex-direction: row;
@@ -222,8 +222,8 @@
 .reportOptionBarItem {
   white-space: nowrap;
   font-size: 12px;
-  margin-right: 20px;
-  margin-bottom: 0px;
+  margin-right: 16px;
+  margin-bottom: 4px;
 
   display: flex;
   flex-direction: row;
@@ -233,10 +233,10 @@
   height: 12px;
   border-radius: 50%;
   background-color: $gray-dark;
-  margin-right: 10px;
+  margin-right: 6px;
 }
 .reportOptionBarLabel {
-  transform: translate(0px, 2px);
+  transform: translate(0px, 1px);
   white-space: nowrap;
 }
 
