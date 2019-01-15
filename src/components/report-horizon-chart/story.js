@@ -21,10 +21,15 @@ storiesOf('ReportHorizonChart', module)
         // trackCurveType={CURVE_STEP}
 				title="Horizon Chart"
 				width={360}
-				height={24}
+				height={48}
+				maxValue={142}
+				colorBands={['#DDD', '#AAA', '#999', '#777']}
         startDate={moment('2019-01-07T00:00:00.000-08:00')}
         endDate={moment('2019-01-08T00:00:00.000-08:00')}
-        data={DATA}
+        data={DATA.filter(bucket => (
+					bucket.timestamp.valueOf() >= moment('2019-01-07T00:00:00.000-08:00') && 
+					bucket.timestamp.valueOf() <= moment('2019-01-08T00:00:00.000-08:00')
+				)).map(bucket => ({timestamp: bucket.timestamp, value: bucket.interval.analytics.entrances}))}
       />
     </div>
   ))
