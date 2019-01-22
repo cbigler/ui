@@ -208,7 +208,7 @@ export default function ReportHorizonChart({
   endDate,
   space,
   plots,
-  curveType,
+  curveType = CURVE_CARDINAL,
   numberOfBands = 4,
   metric = 'VISITS'
 }) {
@@ -225,21 +225,21 @@ export default function ReportHorizonChart({
   // Name of metric
   const metricNames = {
     'VISITS': 'visits',
-    'PEAKS': 'occupancy'
+    'OCCUPANCY': 'occupancy'
   }
 
   // Labels for key depending on metric
   const keyLabels = {
     'VISITS': 'People/min',
-    'PEAKS': 'People'
+    'OCCUPANCY': 'People'
   }
 
   // Function to extract value from a bucket
   let valueExtractor;
-  if (metric === 'PEAKS') {
+  if (metric === 'OCCUPANCY') {
     valueExtractor = bucket => bucket.interval.analytics.max;
   } else {
-    valueExtractor = bucket => bucket.interval.analytics.entrances;
+    valueExtractor = bucket => bucket.interval.analytics.entrances / 5;
   }
 
   // TODO: this should go in the dashboard preprocessing helper
@@ -264,7 +264,9 @@ export default function ReportHorizonChart({
       maxBucket,
       data
     };
-  })
+  });
+
+  console.log(processedPlots);
 
   const earliestPeak = Math.min.apply(Math, processedPlots.map(plot => plot.maxBucket.timestamp));
   const latestPeak = Math.max.apply(Math, processedPlots.map(plot => plot.maxBucket.timestamp));
@@ -317,7 +319,8 @@ export default function ReportHorizonChart({
                 {plot.maxBucket.timestamp ? plot.maxBucket.timestamp.tz(space.timeZone).format('h:mma').slice(0, -1) : ''}
               </strong>
               <span style={{ fontSize:12 }}>
-                {plot.maxBucket.value > 0 ? `${Math.ceil(plot.maxBucket.value/5)}/min` : ''}
+                {plot.maxBucket.value > 0 ? plot.maxBucket.value : ''}
+                {metric === 'VISITS' ? '/min' : ' people'}
               </span>
             </div>)}
           </div>
