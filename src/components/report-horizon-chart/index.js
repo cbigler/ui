@@ -78,38 +78,24 @@ export class ReportHorizonChartVisualization extends Component {
       .y(item => unclippedYScale(item.value))
       .curve(CURVE_TYPE_TO_INTERPOLATION_FUNCTION[curveType]);
 
-    // Start by creating the path - this effectively is one layer of the horizon chart. Note how
-    // it's given a unique id, we need that below.
-    const horizonChartPath = (
-      <path id={`horizon-chart-${this.state.unique}`}
-        d={`
-          M${xScale(startValue)}, ${unclippedYScale(0)}
-          L${xScale(startValue)}, ${unclippedYScale(data[0].value)}
-          H${xScale(data[0].timestamp)}
+    // In order to overlap the paths, repeat the same path once for each color.
+    // Each successive path is shifted down by one track height.
+    const repeatedPaths = colorBands.map((color, index) => <path
+      id={`horizon-chart-${this.state.unique}`}
+      transform={`translate(0, ${index * height})`}
+      fill={color}
+      d={`
+        M${xScale(startValue)}, ${unclippedYScale(0)}
+        L${xScale(startValue)}, ${unclippedYScale(data[0].value)}
+        H${xScale(data[0].timestamp)}
 
-          ${linePath(data)}
+        ${linePath(data)}
 
-          H${xScale(data[data.length - 1].timestamp)}
-          V${unclippedYScale(0)}
-          H${xScale(startValue)}
-        `}
-      />
-    );
-
-    // In order to overlap the paths, utilize the <use> svg element. It accepts an id of an
-    // element, and in the below case, moves each successive element down one track height.
-    const repeatedPaths = [];
-    for (let i = 1; i < colorBands.length; i++) {
-      repeatedPaths.push(
-        <use
-          key={i}
-          href={`#horizon-chart-${this.state.unique}`}
-          x={0}
-          y={i * height} /* translate each one vertically downward by one height */
-          fill={colorBands[i]}
-        />
-      );
-    }
+        H${xScale(data[data.length - 1].timestamp)}
+        V${unclippedYScale(0)}
+        H${xScale(startValue)}
+      `}
+    />);
 
     return (
       <div style={{position: 'relative'}}>
@@ -141,14 +127,7 @@ export class ReportHorizonChartVisualization extends Component {
                 clipPath={`url(#horizon-chart-${this.state.unique}-clippath)`}
               >
                 {/*
-                  Next, render the shape of data. This is pretty much the same algorithm used in the foot
-                  traffic chart - loop through all data and assemble a svg path. In a
-                */}
-                <g fill={colorBands[0]}>{horizonChartPath}</g>
-
-                {/*
-                  Finally, add all those <use> elements down here. Those will effectively "repeat" the
-                  path over and over with a different vertical translation, causing the shape that you see.
+                  Finally, render all the <path> elements with different Y offsets
                 */}
                 {repeatedPaths}
               </g>
@@ -239,7 +218,7 @@ export default function ReportHorizonChart({
     const rgb = hexRgb('#8D8D8E');
     const alpha = (i + 1) / numberOfBands;
     const blended = normal(whiteBackground, { r: rgb.red, g: rgb.green, b: rgb.blue, a: alpha });
-    colorBands.push(`rgb(${blended.r}, ${blended.g}, ${blended.b}, ${blended.a}`);
+    colorBands.push(`rgba(${blended.r}, ${blended.g}, ${blended.b}, ${blended.a}`);
   }
 
   // TODO: this should go in the dashboard preprocessing helper
