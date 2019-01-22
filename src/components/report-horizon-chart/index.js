@@ -149,6 +149,7 @@ export class ReportHorizonChartVisualization extends Component {
 }
 
 export function ReportHorizonChartAxis({
+  space,
   startDate,
   endDate
 }) {
@@ -169,7 +170,7 @@ export function ReportHorizonChartAxis({
     if (label.valueOf() >= startDate.valueOf()) {
       marks.push({
         value: label.valueOf(),
-        label: label.tz('America/Los_Angeles').format('ha').slice(0, -1),
+        label: label.tz(space.timeZone).format('ha').slice(0, -1),
       });
     }
   }
@@ -205,7 +206,7 @@ export default function ReportHorizonChart({
   title,
   startDate,
   endDate,
-  spaces,
+  space,
   plots,
   curveType,
   numberOfBands = 4,
@@ -265,13 +266,13 @@ export default function ReportHorizonChart({
       title={title}
       startDate={startDate}
       endDate={endDate}
-      spaces={spaces.map(space => space.name)}
+      spaces={[space.name]}
     >
       <ReportSubHeader 
         title={<span>Peak traffic occurred between{' '}
-          <strong>{moment(earliestPeak).tz('America/Los_Angeles').format('h:mma').slice(0, -1)}</strong>
+          <strong>{moment(earliestPeak).tz(space.timeZone).format('h:mma').slice(0, -1)}</strong>
           {' '}and{' '}
-          <strong>{moment(latestPeak).tz('America/Los_Angeles').format('h:mma').slice(0, -1)}</strong>
+          <strong>{moment(latestPeak).tz(space.timeZone).format('h:mma').slice(0, -1)}</strong>
           {' '}this week.
         </span>}
       >
@@ -295,7 +296,7 @@ export default function ReportHorizonChart({
             {processedPlots.map(plot => <div className={styles.reportHorizonChartTableText}>
               <strong style={{ color: colorVariables.brandPrimaryNew }}>
                 {plot.maxBucket.timestamp ? '' : '-'}
-                {plot.maxBucket.timestamp ? plot.maxBucket.timestamp.tz('America/Los_Angeles').format('h:mma').slice(0, -1) : ''}
+                {plot.maxBucket.timestamp ? plot.maxBucket.timestamp.tz(space.timeZone).format('h:mma').slice(0, -1) : ''}
               </strong>
               <span style={{ fontSize:12 }}>
                 {plot.maxBucket.value > 0 ? `${Math.ceil(plot.maxBucket.value/5)}/min` : ''}
@@ -318,6 +319,7 @@ export default function ReportHorizonChart({
               />
             </div>)}
             <ReportHorizonChartAxis
+              space={space}
               startDate={plots[0].startDate}
               endDate={plots[0].endDate} />
           </div>
