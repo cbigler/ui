@@ -43,35 +43,30 @@ storiesOf('ReportHorizonChart', module)
         plots={[
           {
             id: '2019-01-07T00:00:00.000-08:00',
-						name: 'Mon',
 						startDate: moment('2019-01-07T10:45:00.000-05:00'),
         		endDate: moment('2019-01-07T14:00:00.000-05:00'),
             data: DATA,
           },
           {
             id: '2019-01-08T00:00:00.000-08:00',
-						name: 'Tue',
 						startDate: moment('2019-01-08T10:45:00.000-05:00'),
         		endDate: moment('2019-01-08T14:00:00.000-05:00'),
             data: DATA,
 					},
 					{
             id: '2019-01-09T00:00:00.000-08:00',
-						name: 'Wed',
 						startDate: moment('2019-01-09T10:45:00.000-05:00'),
         		endDate: moment('2019-01-09T14:00:00.000-05:00'),
             data: DATA,
 					},
 					{
             id: '2019-01-10T00:00:00.000-08:00',
-						name: 'Thu',
 						startDate: moment('2019-01-10T10:45:00.000-05:00'),
         		endDate: moment('2019-01-10T14:00:00.000-05:00'),
             data: DATA,
 					},
 					{
             id: '2019-01-11T00:00:00.000-08:00',
-						name: 'Fri',
 						startDate: moment('2019-01-11T10:45:00.000-05:00'),
         		endDate: moment('2019-01-11T14:00:00.000-05:00'),
             data: DATA,

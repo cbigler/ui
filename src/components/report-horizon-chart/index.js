@@ -239,7 +239,6 @@ export default function ReportHorizonChart({
     });
     return {
       id: plot.id,
-      name: plot.name,
       startDate: plot.startDate,
       endDate: plot.endDate,
       maxBucket,
@@ -286,8 +285,7 @@ export default function ReportHorizonChart({
           <div className={styles.reportHorizonChartTableColumn}>
             <div className={styles.reportHorizonChartTableHeader}>Day</div>
             {processedPlots.map(plot => <div className={styles.reportHorizonChartTableText}>
-              {plot.name}
-              <br />
+              <span>{plot.startDate.format('ddd')}</span>
               <span style={{fontSize:12}}>{plot.startDate.format('MMM\u00a0D')}</span>
             </div>)}
           </div>
