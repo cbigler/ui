@@ -138,9 +138,7 @@ export class ReportHorizonChartVisualization extends Component {
           <div style={{
             position: 'absolute',
             left: `calc(${xScale(maxBucket.timestamp) / 10}% - 1px)`,
-            width: '.5%',
-            minWidth: 2,
-            maxWidth: 3,
+            width: 2,
             top: 0,
             height: height,
             backgroundColor: colorVariables.brandPrimaryNew
