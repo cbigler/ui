@@ -210,7 +210,7 @@ export default function ReportHorizonChart({
   plots,
   curveType,
   numberOfBands = 4,
-
+  metric = 'VISITS'
 }) {
   // Mix opaque colors for each band
   const whiteBackground  = { r: 255, g: 255, b: 255, a: 1 };
@@ -222,6 +222,26 @@ export default function ReportHorizonChart({
     colorBands.push(`rgba(${blended.r}, ${blended.g}, ${blended.b}, ${blended.a}`);
   }
 
+  // Name of metric
+  const metricNames = {
+    'VISITS': 'visits',
+    'PEAKS': 'occupancy'
+  }
+
+  // Labels for key depending on metric
+  const keyLabels = {
+    'VISITS': 'People/min',
+    'PEAKS': 'People'
+  }
+
+  // Function to extract value from a bucket
+  let valueExtractor;
+  if (metric === 'PEAKS') {
+    valueExtractor = bucket => bucket.interval.analytics.max;
+  } else {
+    valueExtractor = bucket => bucket.interval.analytics.entrances;
+  }
+
   // TODO: this should go in the dashboard preprocessing helper
   const processedPlots = plots.map(plot => {
     let maxBucket = { value: 0 };
@@ -231,7 +251,7 @@ export default function ReportHorizonChart({
       bucket.timestamp.valueOf() >= startDateValue && 
       bucket.timestamp.valueOf() <= endDateValue
     )).map(bucket => {
-      const bucketValue = bucket.interval.analytics.entrances;
+      const bucketValue = valueExtractor(bucket);
       if (bucketValue > maxBucket.value) { 
         maxBucket = { timestamp: bucket.timestamp, value: bucketValue };
       }
@@ -267,16 +287,16 @@ export default function ReportHorizonChart({
       endDate={endDate}
       spaces={[space.name]}
     >
-      <ReportSubHeader 
-        title={<span>Peak traffic occurred between{' '}
+      <ReportSubHeader
+        title={<span>Peak {metricNames[metric]} occurred from{' '}
           <strong>{moment(earliestPeak).tz(space.timeZone).format('h:mma').slice(0, -1)}</strong>
-          {' '}and{' '}
+          {' '}to{' '}
           <strong>{moment(latestPeak).tz(space.timeZone).format('h:mma').slice(0, -1)}</strong>
-          {' '}this week.
+          {' '}on these days.
         </span>}
       >
         <div className={styles.reportHorizonChartKey}>
-          <strong style={{ transform: 'translate(0, 1px)', marginRight: 10 }}>People/min:</strong>
+          <strong style={{ transform: 'translate(0, 1px)', marginRight: 10 }}>{keyLabels[metric]}: </strong>
           <ReportOptionBar options={colorBandLabels} />
         </div>
       </ReportSubHeader>
