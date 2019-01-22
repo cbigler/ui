@@ -288,9 +288,9 @@ export default function ReportHorizonChart({
       spaces={[space.name]}
     >
       <ReportSubHeader
-        title={<span>Peak {metricNames[metric]} occurred from{' '}
+        title={<span>Peak {metricNames[metric]} occurred between{' '}
           <strong>{moment(earliestPeak).tz(space.timeZone).format('h:mma').slice(0, -1)}</strong>
-          {' '}to{' '}
+          {' '}and{' '}
           <strong>{moment(latestPeak).tz(space.timeZone).format('h:mma').slice(0, -1)}</strong>
           {' '}on these days.
         </span>}
