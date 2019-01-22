@@ -137,9 +137,11 @@ export class ReportHorizonChartVisualization extends Component {
         {maxBucket && maxBucket.timestamp ?
           <div style={{
             position: 'absolute',
-            left: `calc(${xScale(maxBucket.timestamp) / 10}% - 2px)`,
+            left: `calc(${xScale(maxBucket.timestamp) / 10}% - 1px)`,
+            width: '.5%',
+            minWidth: 2,
+            maxWidth: 3,
             top: 0,
-            width: 3,
             height: height,
             backgroundColor: colorVariables.brandPrimaryNew
           }}></div> : null}
@@ -215,7 +217,7 @@ export default function ReportHorizonChart({
   const whiteBackground  = { r: 255, g: 255, b: 255, a: 1 };
   const colorBands = [];
   for (let i = 0; i < numberOfBands; i++) {
-    const rgb = hexRgb('#8D8D8E');
+    const rgb = hexRgb('#8D8D8F');
     const alpha = (i + 1) / numberOfBands;
     const blended = normal(whiteBackground, { r: rgb.red, g: rgb.green, b: rgb.blue, a: alpha });
     colorBands.push(`rgba(${blended.r}, ${blended.g}, ${blended.b}, ${blended.a}`);
