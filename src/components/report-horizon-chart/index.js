@@ -216,7 +216,7 @@ export default function ReportHorizonChart({
   const whiteBackground  = { r: 255, g: 255, b: 255, a: 1 };
   const colorBands = [];
   for (let i = 0; i < numberOfBands; i++) {
-    const rgb = hexRgb('#8D8D8F');
+    const rgb = hexRgb(colorVariables.grayDarker);
     const alpha = (i + 1) / numberOfBands;
     const blended = normal(whiteBackground, { r: rgb.red, g: rgb.green, b: rgb.blue, a: alpha });
     colorBands.push(`rgba(${blended.r}, ${blended.g}, ${blended.b}, ${blended.a}`);
