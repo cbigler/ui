@@ -36,7 +36,7 @@ storiesOf('ReportHorizonChart', module)
   .addWithInfo('Horizon chart report', () => (
     <div style={{width: 'auto', paddingTop: 100}}>
       <ReportHorizonChart
-				title="Lunch Visitors"
+				title="Peak Lunch Visits"
 				space={{id: 'spc_123', name: 'Main Office Cafe', timeZone: 'America/New_York'}}
         startDate={moment('2019-01-07T00:00:00.000-08:00')}
         endDate={moment('2019-01-11T00:00:00.000-08:00')}

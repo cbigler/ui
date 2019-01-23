@@ -97,7 +97,7 @@ export class ReportHorizonChartVisualization extends Component {
 
     // In order to overlap the paths, repeat the same path once for each color.
     // Each successive path is shifted down by one track height.
-    const repeatedPaths = colorBands.map((color, index) => <path
+    const repeatedPaths = data.length > 0 ? colorBands.map((color, index) => <path
       id={`horizon-chart-${this.state.unique}`}
       transform={`translate(0, ${index * height})`}
       fill={color}
@@ -112,7 +112,7 @@ export class ReportHorizonChartVisualization extends Component {
         V${unclippedYScale(0)}
         H${xScale(startValue)}
       `}
-    />);
+    />) : null;
 
     return (
       <div style={{position: 'relative'}}>
@@ -151,6 +151,15 @@ export class ReportHorizonChartVisualization extends Component {
             </g>
           </svg>
         ) : null}
+        {data.length === 0 ?
+          <div style={{
+            position: 'absolute',
+            fontSize: '12px',
+            color: colorVariables.grayDarker,
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)'
+          }}>No data</div> : null}
         {maxBucket && maxBucket.timestamp ?
           <div style={{
             position: 'absolute',
@@ -266,13 +275,19 @@ export default function ReportHorizonChart({
     };
   });
 
+  // Find the min/max timestamp for a peak on any day
   const earliestPeak = Math.min.apply(Math, processedPlots.map(
-    plot => moment(plot.maxBucket.timestamp.format('HH:mm'), 'HH:mm')
+    plot => plot.maxBucket.timestamp ? 
+      moment(plot.maxBucket.timestamp.format('HH:mm'), 'HH:mm') :
+      moment.max()
   ));
   const latestPeak = moment.utc(Math.max.apply(Math, processedPlots.map(
-    plot => moment(plot.maxBucket.timestamp.format('HH:mm'), 'HH:mm')
+    plot => plot.maxBucket.timestamp ?
+      moment(plot.maxBucket.timestamp.format('HH:mm'), 'HH:mm') :
+      moment.min()
   )));
 
+  // Find the overall max value and define the color band labels for the key
   const maxValue = Math.max.apply(Math, processedPlots.map(i => i.maxBucket.value));
   const colorBandLabels = colorBands.map((band, index) => {
     const bandMin = index > 0 ? Math.floor(index * maxValue / colorBands.length) + 1 : 0;
@@ -284,6 +299,7 @@ export default function ReportHorizonChart({
     };
   });
 
+  // Render the report!
   return (
     <ReportWrapper
       title={title}
@@ -292,17 +308,19 @@ export default function ReportHorizonChart({
       spaces={[space.name]}
     >
       <ReportSubHeader
-        title={<span>Peak {metricSettings.name.toLowerCase()} occurred between{' '}
-          <strong>{moment(earliestPeak).tz(space.timeZone).format('h:mma').slice(0, -1)}</strong>
-          {' '}and{' '}
-          <strong>{moment(latestPeak).tz(space.timeZone).format('h:mma').slice(0, -1)}</strong>
-          {' '}on these days.
-        </span>}
+        title={maxValue > 0 ? 
+          <span>Peak {metricSettings.name.toLowerCase()} occurred between{' '}
+            <strong>{moment(earliestPeak).tz(space.timeZone).format('h:mma').slice(0, -1)}</strong>
+            {' '}and{' '}
+            <strong>{moment(latestPeak).tz(space.timeZone).format('h:mma').slice(0, -1)}</strong>
+            {' '}on these days.
+          </span> : 
+          <span><strong>No data</strong> for these days.</span>}
       >
-        <div className={styles.reportHorizonChartKey}>
+        {maxValue > 0 ? <div className={styles.reportHorizonChartKey}>
           <strong style={{ transform: 'translate(0, 1px)', marginRight: 10 }}>{metricSettings.keyLabel}: </strong>
           <ReportOptionBar options={colorBandLabels} />
-        </div>
+        </div> : null}
       </ReportSubHeader>
       <ReportCard>
         <div className={styles.reportHorizonChartTable}>
@@ -343,10 +361,10 @@ export default function ReportHorizonChart({
                 data={plot.data}
               />
             </div>)}
-            <ReportHorizonChartAxis
+            {maxValue > 0 ? <ReportHorizonChartAxis
               space={space}
               startDate={plots[0].startDate}
-              endDate={plots[0].endDate} />
+              endDate={plots[0].endDate} /> : null}
           </div>
         </div>
       </ReportCard>
