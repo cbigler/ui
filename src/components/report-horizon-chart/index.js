@@ -28,6 +28,23 @@ const CURVE_TYPE_TO_INTERPOLATION_FUNCTION = {
   [CURVE_CARDINAL]: d3Shape.curveCardinal,
 };
 
+export const VISITS = 'VISITS',
+             OCCUPANCY = 'OCCUPANCY';
+
+const METRIC_SETTINGS = {
+  [VISITS]: {
+    name: 'Visits',
+    keyLabel: 'People/min',
+    valueSuffix: '/min',
+    valueExtractor: bucket => Math.ceil(bucket.interval.analytics.entrances / 5),
+  },
+  [OCCUPANCY]: {
+    name: 'Occupancy',
+    keyLabel: 'People',
+    valueSuffix: ' people',
+    valueExtractor: bucket => bucket.interval.analytics.max,
+  },
+};
 
 export class ReportHorizonChartVisualization extends Component {
   constructor(props) {
@@ -210,7 +227,7 @@ export default function ReportHorizonChart({
   plots,
   curveType = CURVE_CARDINAL,
   numberOfBands = 4,
-  metric = 'VISITS'
+  metric = VISITS
 }) {
   // Mix opaque colors for each band
   const whiteBackground  = { r: 255, g: 255, b: 255, a: 1 };
@@ -222,25 +239,8 @@ export default function ReportHorizonChart({
     colorBands.push(`rgba(${blended.r}, ${blended.g}, ${blended.b}, ${blended.a}`);
   }
 
-  // Name of metric
-  const metricNames = {
-    'VISITS': 'visits',
-    'OCCUPANCY': 'occupancy'
-  }
-
-  // Labels for key depending on metric
-  const keyLabels = {
-    'VISITS': 'People/min',
-    'OCCUPANCY': 'People'
-  }
-
-  // Function to extract value from a bucket
-  let valueExtractor;
-  if (metric === 'OCCUPANCY') {
-    valueExtractor = bucket => bucket.interval.analytics.max;
-  } else {
-    valueExtractor = bucket => bucket.interval.analytics.entrances / 5;
-  }
+  // Get reference to "metric settings" object for this metric
+  const metricSettings = METRIC_SETTINGS[metric];
 
   // TODO: this should go in the dashboard preprocessing helper
   const processedPlots = plots.map(plot => {
@@ -251,7 +251,7 @@ export default function ReportHorizonChart({
       bucket.timestamp.valueOf() >= startDateValue && 
       bucket.timestamp.valueOf() <= endDateValue
     )).map(bucket => {
-      const bucketValue = valueExtractor(bucket);
+      const bucketValue = metricSettings.valueExtractor(bucket);
       if (bucketValue > maxBucket.value) { 
         maxBucket = { timestamp: bucket.timestamp, value: bucketValue };
       }
@@ -266,10 +266,12 @@ export default function ReportHorizonChart({
     };
   });
 
-  console.log(processedPlots);
-
-  const earliestPeak = Math.min.apply(Math, processedPlots.map(plot => plot.maxBucket.timestamp));
-  const latestPeak = Math.max.apply(Math, processedPlots.map(plot => plot.maxBucket.timestamp));
+  const earliestPeak = Math.min.apply(Math, processedPlots.map(
+    plot => moment(plot.maxBucket.timestamp.format('HH:mm'), 'HH:mm')
+  ));
+  const latestPeak = moment.utc(Math.max.apply(Math, processedPlots.map(
+    plot => moment(plot.maxBucket.timestamp.format('HH:mm'), 'HH:mm')
+  )));
 
   const maxValue = Math.max.apply(Math, processedPlots.map(i => i.maxBucket.value));
   const colorBandLabels = colorBands.map((band, index) => {
@@ -290,7 +292,7 @@ export default function ReportHorizonChart({
       spaces={[space.name]}
     >
       <ReportSubHeader
-        title={<span>Peak {metricNames[metric]} occurred between{' '}
+        title={<span>Peak {metricSettings.name.toLowerCase()} occurred between{' '}
           <strong>{moment(earliestPeak).tz(space.timeZone).format('h:mma').slice(0, -1)}</strong>
           {' '}and{' '}
           <strong>{moment(latestPeak).tz(space.timeZone).format('h:mma').slice(0, -1)}</strong>
@@ -298,7 +300,7 @@ export default function ReportHorizonChart({
         </span>}
       >
         <div className={styles.reportHorizonChartKey}>
-          <strong style={{ transform: 'translate(0, 1px)', marginRight: 10 }}>{keyLabels[metric]}: </strong>
+          <strong style={{ transform: 'translate(0, 1px)', marginRight: 10 }}>{metricSettings.keyLabel}: </strong>
           <ReportOptionBar options={colorBandLabels} />
         </div>
       </ReportSubHeader>
@@ -320,12 +322,14 @@ export default function ReportHorizonChart({
               </strong>
               <span style={{ fontSize:12 }}>
                 {plot.maxBucket.value > 0 ? plot.maxBucket.value : ''}
-                {metric === 'VISITS' ? '/min' : ' people'}
+                {metricSettings.valueSuffix}
               </span>
             </div>)}
           </div>
           <div className={styles.reportHorizonChartTableColumn} style={{ flexGrow: 1 }}>
-            <div className={styles.reportHorizonChartTableHeader}>Entrances</div>
+            <div className={styles.reportHorizonChartTableHeader}>
+              {metricSettings.name}
+            </div>
             {processedPlots.map(plot => <div className={styles.reportHorizonChartVisualizationContainer}>
               <ReportHorizonChartVisualization
                 key={plot.id}

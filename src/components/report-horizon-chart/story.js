@@ -71,8 +71,7 @@ storiesOf('ReportHorizonChart', module)
         		endDate: moment('2019-01-11T14:00:00.000-05:00'),
             data: DATA,
           }
-				]}
-        curveType={CURVE_CARDINAL}
+        ]}
       />
     </div>
   ))
