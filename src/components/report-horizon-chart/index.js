@@ -275,8 +275,8 @@ export default function ReportHorizonChart({
 
   const maxValue = Math.max.apply(Math, processedPlots.map(i => i.maxBucket.value));
   const colorBandLabels = colorBands.map((band, index) => {
-    const bandMin = index > 0 ? Math.floor(.2 * index * maxValue / colorBands.length) + 1 : 0;
-    const bandMax = Math.floor(.2 * (index + 1) * maxValue / colorBands.length);
+    const bandMin = index > 0 ? Math.floor(index * maxValue / colorBands.length) + 1 : 0;
+    const bandMax = Math.floor((index + 1) * maxValue / colorBands.length);
     return {
       id: index,
       color: band,
