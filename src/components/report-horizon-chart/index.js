@@ -36,13 +36,11 @@ const METRIC_SETTINGS = {
     name: 'Visits',
     keyLabel: 'People/min',
     valueSuffix: '/min',
-    valueExtractor: bucket => Math.ceil(bucket.interval.analytics.entrances / 5),
   },
   [OCCUPANCY]: {
     name: 'Occupancy',
     keyLabel: 'People',
     valueSuffix: ' people',
-    valueExtractor: bucket => bucket.interval.analytics.max,
   },
 };
 
@@ -59,8 +57,8 @@ export class ReportHorizonChartVisualization extends Component {
       maxBucket,
       colorBands,
       curveType,
-      startDate,
-      endDate,
+      start,
+      end,
       data,
     } = this.props;
 
@@ -71,8 +69,8 @@ export class ReportHorizonChartVisualization extends Component {
     const unclippedHeight = height * colorBands.length;
 
     // Save start/end timestamp values
-    const startValue = startDate.valueOf();
-    const endValue = endDate.valueOf();
+    const startValue = start.valueOf();
+    const endValue = end.valueOf();
 
     // Using the start and end time passed, create a scale that maps from the time range to a scale
     // from 0 to the svg width. This is used to plot timestamps for each horizon chart.
@@ -175,13 +173,12 @@ export class ReportHorizonChartVisualization extends Component {
 }
 
 export function ReportHorizonChartAxis({
-  space,
-  startDate,
-  endDate
+  start,
+  end
 }) {
   const width = 1000;
 
-  const numberOfHours = endDate.diff(startDate, 'hours');
+  const numberOfHours = end.diff(start, 'hours');
   const distanceBetweenHoursInPx = width / numberOfHours;
 
   let hoursBetweenTicks = 1;
@@ -192,17 +189,17 @@ export function ReportHorizonChartAxis({
   }
 
   const marks = [];
-  for (let label = startDate.clone().startOf('hour'); label.valueOf() <= endDate.valueOf(); label = label.clone().add(hoursBetweenTicks, 'hours')) {
-    if (label.valueOf() >= startDate.valueOf()) {
+  for (let label = start.clone().startOf('hour'); label.valueOf() <= end.valueOf(); label = label.clone().add(hoursBetweenTicks, 'hours')) {
+    if (label.valueOf() >= start.valueOf()) {
       marks.push({
         value: label.valueOf(),
-        label: label.tz(space.timeZone).format('ha').slice(0, -1),
+        label: label.format('ha').slice(0, -1),
       });
     }
   }
 
   const xScale = d3Scale.scaleLinear()
-    .domain([ startDate.valueOf(), endDate.valueOf() ])
+    .domain([ start.valueOf(), end.valueOf() ])
     .range([0, width]);
 
   return <div style={{
@@ -217,7 +214,7 @@ export function ReportHorizonChartAxis({
           userSelect: 'none',
           position: 'absolute',
           left: `${xScale(value) * 100 / width}%`,
-          transform: index === marks.length - 1 && value === endDate.valueOf() ? 
+          transform: index === marks.length - 1 && value === end.valueOf() ? 
             'translate(-100%)' :
             'translate(-50%)',
           color: colorVariables.grayDarker,
@@ -232,8 +229,8 @@ export default function ReportHorizonChart({
   title,
   startDate,
   endDate,
-  space,
-  plots,
+  spaces,
+  data,
   curveType = CURVE_CARDINAL,
   numberOfBands = 4,
   metric = VISITS
@@ -251,43 +248,20 @@ export default function ReportHorizonChart({
   // Get reference to "metric settings" object for this metric
   const metricSettings = METRIC_SETTINGS[metric];
 
-  // TODO: this should go in the dashboard preprocessing helper
-  const processedPlots = plots.map(plot => {
-    let maxBucket = { value: 0 };
-    const startDateValue = plot.startDate.valueOf();
-    const endDateValue = plot.endDate.valueOf();
-    const data = plot.data.filter(bucket => (
-      bucket.timestamp.valueOf() >= startDateValue && 
-      bucket.timestamp.valueOf() <= endDateValue
-    )).map(bucket => {
-      const bucketValue = metricSettings.valueExtractor(bucket);
-      if (bucketValue > maxBucket.value) { 
-        maxBucket = { timestamp: bucket.timestamp, value: bucketValue };
-      }
-      return { timestamp: bucket.timestamp, value: bucketValue };
-    });
-    return {
-      startDate: plot.startDate,
-      endDate: plot.endDate,
-      maxBucket,
-      data
-    };
-  });
-
-  // Find the min/max timestamp for a peak on any day
-  const earliestPeak = Math.min.apply(Math, processedPlots.map(
-    plot => plot.maxBucket.timestamp ? 
-      moment(plot.maxBucket.timestamp.format('HH:mm'), 'HH:mm') :
+  // Find the min/max time that we see peaks for a day
+  const earliestPeak = moment.utc(Math.min.apply(Math, data.map(
+    day => day.maxBucket.timestamp ? 
+      moment.utc(day.maxBucket.timestamp.format('HH:mm'), 'HH:mm') :
       moment.max()
-  ));
-  const latestPeak = moment.utc(Math.max.apply(Math, processedPlots.map(
-    plot => plot.maxBucket.timestamp ?
-      moment(plot.maxBucket.timestamp.format('HH:mm'), 'HH:mm') :
+  )));
+  const latestPeak = moment.utc(Math.max.apply(Math, data.map(
+    day => day.maxBucket.timestamp ?
+      moment.utc(day.maxBucket.timestamp.format('HH:mm'), 'HH:mm') :
       moment.min()
   )));
 
   // Find the overall max value and define the color band labels for the key
-  const maxValue = Math.max.apply(Math, processedPlots.map(i => i.maxBucket.value));
+  const maxValue = Math.max.apply(Math, data.map(i => i.maxBucket.value));
   const colorBandLabels = colorBands.map((band, index) => {
     const bandMin = index > 0 ? Math.floor(index * maxValue / colorBands.length) + 1 : 0;
     const bandMax = Math.floor((index + 1) * maxValue / colorBands.length);
@@ -304,14 +278,14 @@ export default function ReportHorizonChart({
       title={title}
       startDate={startDate}
       endDate={endDate}
-      spaces={[space.name]}
+      spaces={spaces}
     >
       <ReportSubHeader
         title={maxValue > 0 ? 
           <span>Peak {metricSettings.name.toLowerCase()} occurred between{' '}
-            <strong>{moment(earliestPeak).tz(space.timeZone).format('h:mma').slice(0, -1)}</strong>
+            <strong>{earliestPeak.format('h:mma').slice(0, -1)}</strong>
             {' '}and{' '}
-            <strong>{moment(latestPeak).tz(space.timeZone).format('h:mma').slice(0, -1)}</strong>
+            <strong>{latestPeak.format('h:mma').slice(0, -1)}</strong>
             {' '}on these days.
           </span> : 
           <span><strong>No data</strong> for these days.</span>}
@@ -325,26 +299,26 @@ export default function ReportHorizonChart({
         <div className={styles.reportHorizonChartTable}>
           <div className={styles.reportHorizonChartTableColumn}>
             <div className={styles.reportHorizonChartTableHeader}>Day</div>
-            {processedPlots.map(plot => <div
-              key={plot.startDate}
+            {data.map(day => <div
+              key={day.start}
               className={styles.reportHorizonChartTableText}
             >
-              <span>{plot.startDate.format('ddd')}</span>
-              <span style={{fontSize:12}}>{plot.startDate.format('MMM\u00a0D')}</span>
+              <span>{day.start.format('ddd')}</span>
+              <span style={{fontSize:12}}>{day.start.format('MMM\u00a0D')}</span>
             </div>)}
           </div>
           <div className={styles.reportHorizonChartTableColumn}>
             <div className={styles.reportHorizonChartTableHeader}>Peak</div>
-            {processedPlots.map(plot => <div
-              key={plot.startDate}
+            {data.map(day => <div
+              key={day.start}
               className={styles.reportHorizonChartTableText}
             >
               <strong style={{ color: colorVariables.brandPrimaryNew }}>
-                {plot.maxBucket.timestamp ? '' : '-'}
-                {plot.maxBucket.timestamp ? plot.maxBucket.timestamp.tz(space.timeZone).format('h:mma').slice(0, -1) : ''}
+                {day.maxBucket.timestamp ? '' : '-'}
+                {day.maxBucket.timestamp ? day.maxBucket.timestamp.format('h:mma').slice(0, -1) : ''}
               </strong>
               <span style={{ fontSize:12 }}>
-                {plot.maxBucket.value > 0 ? plot.maxBucket.value : ''}
+                {day.maxBucket.value > 0 ? day.maxBucket.value : ''}
                 {metricSettings.valueSuffix}
               </span>
             </div>)}
@@ -353,26 +327,25 @@ export default function ReportHorizonChart({
             <div className={styles.reportHorizonChartTableHeader}>
               {metricSettings.name}
             </div>
-            {processedPlots.map(plot => <div
-              key={plot.startDate}
+            {data.map(day => <div
+              key={day.start}
               className={styles.reportHorizonChartVisualizationContainer}
             >
               <ReportHorizonChartVisualization
-                key={plot.startDate}
+                key={day.start}
                 height={42}
                 maxValue={maxValue}
-                maxBucket={plot.maxBucket.timestamp ? plot.maxBucket : undefined}
+                maxBucket={day.maxBucket.timestamp ? day.maxBucket : undefined}
                 colorBands={colorBands}
                 curveType={curveType}
-                startDate={plot.startDate}
-                endDate={plot.endDate}
-                data={plot.data}
+                start={day.start}
+                end={day.end}
+                data={day.data}
               />
             </div>)}
-            {maxValue > 0 ? <ReportHorizonChartAxis
-              space={space}
-              startDate={plots[0].startDate}
-              endDate={plots[0].endDate} /> : null}
+            {maxValue > 0 ? <div className={styles.reportHorizonChartAxisContainer}>
+              <ReportHorizonChartAxis start={data[0].start} end={data[0].end} />
+            </div> : null}
           </div>
         </div>
       </ReportCard>
