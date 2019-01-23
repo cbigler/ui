@@ -98,9 +98,9 @@ export class ReportHorizonChartVisualization extends Component {
     // In order to overlap the paths, repeat the same path once for each color.
     // Each successive path is shifted down by one track height.
     const repeatedPaths = data.length > 0 ? colorBands.map((color, index) => <path
-      id={`horizon-chart-${this.state.unique}`}
-      transform={`translate(0, ${index * height})`}
+      key={color}
       fill={color}
+      transform={`translate(0, ${index * height})`}
       d={`
         M${xScale(startValue)}, ${unclippedYScale(0)}
         L${xScale(startValue)}, ${unclippedYScale(data[0].value)}
@@ -267,7 +267,6 @@ export default function ReportHorizonChart({
       return { timestamp: bucket.timestamp, value: bucketValue };
     });
     return {
-      id: plot.id,
       startDate: plot.startDate,
       endDate: plot.endDate,
       maxBucket,
@@ -326,14 +325,20 @@ export default function ReportHorizonChart({
         <div className={styles.reportHorizonChartTable}>
           <div className={styles.reportHorizonChartTableColumn}>
             <div className={styles.reportHorizonChartTableHeader}>Day</div>
-            {processedPlots.map(plot => <div className={styles.reportHorizonChartTableText}>
+            {processedPlots.map(plot => <div
+              key={plot.startDate}
+              className={styles.reportHorizonChartTableText}
+            >
               <span>{plot.startDate.format('ddd')}</span>
               <span style={{fontSize:12}}>{plot.startDate.format('MMM\u00a0D')}</span>
             </div>)}
           </div>
           <div className={styles.reportHorizonChartTableColumn}>
             <div className={styles.reportHorizonChartTableHeader}>Peak</div>
-            {processedPlots.map(plot => <div className={styles.reportHorizonChartTableText}>
+            {processedPlots.map(plot => <div
+              key={plot.startDate}
+              className={styles.reportHorizonChartTableText}
+            >
               <strong style={{ color: colorVariables.brandPrimaryNew }}>
                 {plot.maxBucket.timestamp ? '' : '-'}
                 {plot.maxBucket.timestamp ? plot.maxBucket.timestamp.tz(space.timeZone).format('h:mma').slice(0, -1) : ''}
@@ -348,9 +353,12 @@ export default function ReportHorizonChart({
             <div className={styles.reportHorizonChartTableHeader}>
               {metricSettings.name}
             </div>
-            {processedPlots.map(plot => <div className={styles.reportHorizonChartVisualizationContainer}>
+            {processedPlots.map(plot => <div
+              key={plot.startDate}
+              className={styles.reportHorizonChartVisualizationContainer}
+            >
               <ReportHorizonChartVisualization
-                key={plot.id}
+                key={plot.startDate}
                 height={42}
                 maxValue={maxValue}
                 maxBucket={plot.maxBucket.timestamp ? plot.maxBucket : undefined}
