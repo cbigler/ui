@@ -270,7 +270,7 @@ export default function ReportDailyPeaks({
     return {
       id: index,
       color: band,
-      label: `${bandMin}-${bandMax}`
+      label: bandMax > bandMin ? `${bandMin}-${bandMax}` : bandMax
     };
   });
 
