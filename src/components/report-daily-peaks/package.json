@@ -1,15 +1,14 @@
 {
-  "name": "@density/ui-report-horizon-chart",
+  "name": "@density/ui-report-daily-peaks",
   "version": "0.0.1",
-  "description": "Horizon Chart Report component",
+  "description": "Daily Peaks Report component",
   "main": "dist/index.js",
   "author": "Density <engineering+javascript@density.io>",
   "license": "MIT",
   "dependencies": {
     "color-blend": "^2.0.3",
-    "d3-line": "0.0.1",
     "d3-scale": "^2.1.2",
-    "d3-shape": "^1.2.2"
+    "d3-shape": "^1.3.3"
   },
   "peerDependencies": {
     "react": "*",

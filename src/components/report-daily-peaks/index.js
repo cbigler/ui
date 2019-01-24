@@ -44,7 +44,7 @@ const METRIC_SETTINGS = {
   },
 };
 
-export class ReportHorizonChartVisualization extends Component {
+export class HorizonChartVisualization extends Component {
   constructor(props) {
     super(props);
     this.state = { unique: Math.random().toString() };
@@ -172,7 +172,7 @@ export class ReportHorizonChartVisualization extends Component {
   }
 }
 
-export function ReportHorizonChartAxis({
+export function HorizonChartAxis({
   start,
   end
 }) {
@@ -225,7 +225,7 @@ export function ReportHorizonChartAxis({
   </div>;
 }
 
-export default function ReportHorizonChart({
+export default function ReportDailyPeaks({
   title,
   startDate,
   endDate,
@@ -290,28 +290,28 @@ export default function ReportHorizonChart({
           </span> : 
           <span><strong>No data</strong> for these days.</span>}
       >
-        {maxValue > 0 ? <div className={styles.reportHorizonChartKey}>
+        {maxValue > 0 ? <div className={styles.reportDailyPeaksKey}>
           <strong style={{ transform: 'translate(0, 1px)', marginRight: 10 }}>{metricSettings.keyLabel}: </strong>
           <ReportOptionBar options={colorBandLabels} />
         </div> : null}
       </ReportSubHeader>
       <ReportCard>
-        <div className={styles.reportHorizonChartTable}>
-          <div className={styles.reportHorizonChartTableColumn}>
-            <div className={styles.reportHorizonChartTableHeader}>Day</div>
+        <div className={styles.reportDailyPeaksTable}>
+          <div className={styles.reportDailyPeaksTableColumn}>
+            <div className={styles.reportDailyPeaksTableHeader}>Day</div>
             {data.map(day => <div
               key={day.start}
-              className={styles.reportHorizonChartTableText}
+              className={styles.reportDailyPeaksTableText}
             >
               <span>{day.start.format('ddd')}</span>
               <span style={{fontSize:12}}>{day.start.format('MMM\u00a0D')}</span>
             </div>)}
           </div>
-          <div className={styles.reportHorizonChartTableColumn}>
-            <div className={styles.reportHorizonChartTableHeader}>Peak</div>
+          <div className={styles.reportDailyPeaksTableColumn}>
+            <div className={styles.reportDailyPeaksTableHeader}>Peak</div>
             {data.map(day => <div
               key={day.start}
-              className={styles.reportHorizonChartTableText}
+              className={styles.reportDailyPeaksTableText}
             >
               <strong style={{ color: colorVariables.brandPrimaryNew }}>
                 {day.maxBucket.timestamp ? '' : '-'}
@@ -323,15 +323,15 @@ export default function ReportHorizonChart({
               </span>
             </div>)}
           </div>
-          <div className={styles.reportHorizonChartTableColumn} style={{ flexGrow: 1 }}>
-            <div className={styles.reportHorizonChartTableHeader}>
+          <div className={styles.reportDailyPeaksTableColumn} style={{ flexGrow: 1 }}>
+            <div className={styles.reportDailyPeaksTableHeader}>
               {metricSettings.name}
             </div>
             {data.map(day => <div
               key={day.start}
-              className={styles.reportHorizonChartVisualizationContainer}
+              className={styles.reportDailyPeaksVisualizationContainer}
             >
-              <ReportHorizonChartVisualization
+              <HorizonChartVisualization
                 key={day.start}
                 height={42}
                 maxValue={maxValue}
@@ -343,8 +343,8 @@ export default function ReportHorizonChart({
                 data={day.data}
               />
             </div>)}
-            {maxValue > 0 ? <div className={styles.reportHorizonChartAxisContainer}>
-              <ReportHorizonChartAxis start={data[0].start} end={data[0].end} />
+            {maxValue > 0 ? <div className={styles.reportDailyPeaksAxisContainer}>
+              <HorizonChartAxis start={data[0].start} end={data[0].end} />
             </div> : null}
           </div>
         </div>

@@ -4,18 +4,18 @@ import moment from 'moment';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import ReportHorizonChart, {
-  ReportHorizonChartVisualization,
+import ReportDailyPeaks, {
+  HorizonChartVisualization,
 	CURVE_STEP,
 	CURVE_LINEAR,
 	CURVE_BEZIER,
 	CURVE_CARDINAL
 } from './index';
 
-storiesOf('ReportHorizonChart', module)
+storiesOf('ReportDailyPeaks', module)
   .addWithInfo('Horizon chart on its own', () => (
     <div style={{width: 'auto', paddingTop: 100}}>
-      <ReportHorizonChartVisualization
+      <HorizonChartVisualization
         id="layer1"
         curveType={CURVE_CARDINAL}
         // trackCurveType={CURVE_STEP}
@@ -30,9 +30,9 @@ storiesOf('ReportHorizonChart', module)
       />
     </div>
   ))
-  .addWithInfo('Horizon chart report', () => (
+  .addWithInfo('Daily peaks report', () => (
     <div style={{width: 'auto', paddingTop: 100}}>
-      <ReportHorizonChart
+      <ReportDailyPeaks
 				title="Peak Lunch Visits"
 				spaces={['Main Office Cafe']}
         startDate={moment('2019-01-07T00:00:00.000-05:00')}
