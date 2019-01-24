@@ -214,9 +214,11 @@ export function HorizonChartAxis({
           userSelect: 'none',
           position: 'absolute',
           left: `${xScale(value) * 100 / width}%`,
-          transform: index === marks.length - 1 && value === end.valueOf() ? 
-            'translate(-100%)' :
-            'translate(-50%)',
+          transform: index === 0 && value === start.valueOf() ?
+            'translate(0%)' :
+            (index === marks.length - 1 && value === end.valueOf() ? 
+              'translate(-100%)' :
+              'translate(-50%)'),
           color: colorVariables.grayDarker,
           fontSize: 12
         }}
