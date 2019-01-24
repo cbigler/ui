@@ -30,10 +30,25 @@ help:
 	@printf "\t- make card-clean\tremoves built artifacts within the components/card/dist/ directory.\n"
 	@printf "\t- make card-build\tbuilds the component's javascript and styles, putting them into the components/card/dist/ directory.\n"
 	@printf "\t- make card-publish\tpublishes the @density/ui-card component to the npm registry\n"
+	@printf "\t- make card-integrate DEST=\"path/to/project\"\trun a webpack dev server, and after every build, copy the component into the defined project. See below for more detail.\n"
 	@printf "\t- make card-version\tprints the component's version (found in package.json)\n"
 	@printf "\t- make card-patch\tbumps the component's patch version\n"
 	@printf "\t- make card-minor\tbumps the component's minor version\n"
 	@printf "\t- make card-major\tbumps the component's major version\n"
+	@echo
+	@echo
+	@echo "# 'Integration' mode"
+	@echo "Often, development of a Density UI component can occur within the Density UI project"
+	@echo "itself. However, that isn't always the case, and sometimes when fixing bugs or doing other"
+	@echo "things where seeing the component in context is important, this is helpful."
+	@echo
+	@echo "As documented above, run make my-component-integrate DEST='path/to/project'. This will"
+	@echo "start up a webpack process that on save, will copy the resulting bundle from your component"
+	@echo "into a subfolder called 'density-ui-integration' within the DEST value passed. Within this"
+	@echo "other project, you can then update your imports to point to this new source instead of the"
+	@echo "relevant node_module. In addition, because this folder is gitignored, ci builds will fail"
+	@echo "if they depend on something in this directory, which forced you to actually make a release"
+	@echo "when something is ready to be shared."
 
 .PHONY: component
 component:
@@ -153,6 +168,11 @@ $1-version-%:
 $1-major: $1-version-major
 $1-minor: $1-version-minor
 $1-patch: $1-version-patch
+
+$1-integrate:
+	$$(if $(DEST), ,\
+		$$(error please define the DEST variable - make my-component-integrate DEST=path/to/output/project))
+	./utils/integration.sh $$($(1)_COMPONENT_PATH) $(DEST)
 
 # To make each transpiled file, compile the source file with the same name via webpack:
 # - Webpack calls into babel via babel-loader
