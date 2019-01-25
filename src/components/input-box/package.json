@@ -9,6 +9,7 @@
   "peerDependencies": {
     "react": "*",
     "prop-types": "*",
-    "@density/ui": "*"
+    "@density/ui": "*",
+    "@density/ui-icons": "*"
   }
 }
