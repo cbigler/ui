@@ -191,7 +191,7 @@ export function HorizonChartAxis({
 
   let tickInterval = 1800;
   let labelInterval = 3600;
-  let hours = start.diff(end, 'hours');
+  let hours = end.diff(start, 'hours');
   while (hours > 4) {
     tickInterval = tickInterval * 2;
     labelInterval = labelInterval * 2;
@@ -235,23 +235,25 @@ export function HorizonChartAxis({
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          transform: index === 0 && value === start.valueOf() ?
-            'translate(0%)' :
-            (index === marks.length - 1 && value === end.valueOf() ? 
-              'translate(-100%)' :
-              'translate(-50%)'),
+          transform: 'translate(-50%)',
           color: colorVariables.grayDarker,
           fontSize: 12
         }}
       >
         <div style={{
           marginBottom: 3,
-          marginLeft: -.5,
           width: 1,
           height: label ? 5 : 4,
+          transform: 'translate(-.5px)',
           backgroundColor: colorVariables.grayDarker,
         }}></div>
-        {label}
+        <div style={{
+          transform: index === 0 && value === start.valueOf() ?
+            'translate(50%)' :
+            (index === marks.length - 1 && value === end.valueOf() ? 
+              'translate(-50%)' : 
+              'translate(0%)')
+        }}>{label}</div>
       </div>
     ))}
   </div>;
