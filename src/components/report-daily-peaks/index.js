@@ -168,10 +168,11 @@ export class HorizonChartVisualization extends Component {
         {maxBucket && maxBucket.timestamp ?
           <div style={{
             position: 'absolute',
-            left: `calc(${xScale(maxBucket.timestamp) / 10}% - 1px)`,
+            left: `${xScale(maxBucket.timestamp) / 10}%`,
             width: 2,
             top: 0,
             height: height,
+            transform: 'translate(-50%)',
             backgroundColor: colorVariables.brandPrimaryNew
           }}></div> : null}
       </div>
