@@ -230,6 +230,10 @@ const DATA = [
       {
         "timestamp": moment("2019-01-07T19:25:00.000Z"),
         "value": 4
+      },
+      {
+        "timestamp": moment("2019-01-07T19:30:00.000Z"),
+        "value": 2
       }
     ]
   },
@@ -420,6 +424,10 @@ const DATA = [
       {
         "timestamp": moment("2019-01-08T19:25:00.000Z"),
         "value": 3
+      },
+      {
+        "timestamp": moment("2019-01-08T19:30:00.000Z"),
+        "value": 1
       }
     ]
   },
@@ -610,6 +618,10 @@ const DATA = [
       {
         "timestamp": moment("2019-01-09T19:25:00.000Z"),
         "value": 4
+      },
+      {
+        "timestamp": moment("2019-01-09T19:30:00.000Z"),
+        "value": 1
       }
     ]
   },
@@ -800,6 +812,10 @@ const DATA = [
       {
         "timestamp": moment("2019-01-10T19:25:00.000Z"),
         "value": 4
+      },
+      {
+        "timestamp": moment("2019-01-10T19:30:00.000Z"),
+        "value": 2
       }
     ]
   },
@@ -990,6 +1006,10 @@ const DATA = [
       {
         "timestamp": moment("2019-01-11T19:25:00.000Z"),
         "value": 4
+      },
+      {
+        "timestamp": moment("2019-01-11T19:30:00.000Z"),
+        "value": 3
       }
     ]
   }

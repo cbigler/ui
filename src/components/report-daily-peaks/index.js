@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classnames from 'classnames';
 import moment from 'moment';
 
 import * as d3Scale from 'd3-scale';
@@ -178,24 +179,35 @@ export function HorizonChartAxis({
 }) {
   const width = 1000;
 
-  const numberOfHours = end.diff(start, 'hours');
-  const distanceBetweenHoursInPx = width / numberOfHours;
+  if (labelInterval % tickInterval > 0) {
+    throw new Error('Label interval must be an even multiple of tick interval');
+  }
 
-  let hoursBetweenTicks = 1;
-  if (distanceBetweenHoursInPx < 30) {
-    hoursBetweenTicks = 3;
-  } else if (distanceBetweenHoursInPx < 50) {
-    hoursBetweenTicks = 2;
+  let tickInterval = 1800;
+  let labelInterval = 3600;
+  let hours = start.diff(end, 'hours');
+  while (hours > 4) {
+    tickInterval = tickInterval * 2;
+    labelInterval = labelInterval * 2;
+    hours = hours * .5;
   }
 
   const marks = [];
-  for (let label = start.clone().startOf('hour'); label.valueOf() <= end.valueOf(); label = label.clone().add(hoursBetweenTicks, 'hours')) {
-    if (label.valueOf() >= start.valueOf()) {
-      marks.push({
-        value: label.valueOf(),
-        label: label.format('ha').slice(0, -1),
-      });
-    }
+  let currentInterval = start.clone().startOf('hour');
+  let currentSeconds = 0;
+  while (currentInterval.valueOf() < start.valueOf()) {
+    currentSeconds += tickInterval;
+    currentInterval.add(tickInterval, 'seconds');
+  }
+  while (currentInterval.valueOf() <= end.valueOf()) {
+    marks.push({
+      value: currentInterval.valueOf(),
+      label: currentSeconds % labelInterval === 0 ? 
+        currentInterval.format('ha').slice(0, -1) :
+        null
+    });
+    currentSeconds += tickInterval;
+    currentInterval.add(tickInterval, 'seconds');
   }
 
   const xScale = d3Scale.scaleLinear()
@@ -205,7 +217,7 @@ export function HorizonChartAxis({
   return <div style={{
     width: "100%",
     height: "24px",
-    position: "relative"
+    position: "relative",
   }}>
     {marks.map(({value, label}, index) => (
       <div
@@ -214,6 +226,9 @@ export function HorizonChartAxis({
           userSelect: 'none',
           position: 'absolute',
           left: `${xScale(value) * 100 / width}%`,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
           transform: index === 0 && value === start.valueOf() ?
             'translate(0%)' :
             (index === marks.length - 1 && value === end.valueOf() ? 
@@ -222,7 +237,16 @@ export function HorizonChartAxis({
           color: colorVariables.grayDarker,
           fontSize: 12
         }}
-      >{label}</div>
+      >
+        <div style={{
+          marginBottom: 3,
+          marginLeft: -.5,
+          width: 1,
+          height: label ? 5 : 4,
+          backgroundColor: colorVariables.grayDarker,
+        }}></div>
+        {label}
+      </div>
     ))}
   </div>;
 }
@@ -325,7 +349,13 @@ export default function ReportDailyPeaks({
               </span>
             </div>)}
           </div>
-          <div className={styles.reportDailyPeaksTableColumn} style={{ flexGrow: 1 }}>
+          <div 
+            className={classnames(
+              styles.reportDailyPeaksTableColumn,
+              styles.reportDailyPeaksVisualizationColumn
+            )}
+            style={{ flexGrow: 1 }}
+          >
             <div className={styles.reportDailyPeaksTableHeader}>
               {metricSettings.name}
             </div>
