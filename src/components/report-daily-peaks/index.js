@@ -29,14 +29,20 @@ const CURVE_TYPE_TO_INTERPOLATION_FUNCTION = {
   [CURVE_CARDINAL]: d3Shape.curveCardinal,
 };
 
-export const VISITS = 'VISITS',
+export const VISITS_PER_MINUTE = 'VISITS_PER_MINUTE',
+             VISITS_PER_HOUR = 'VISITS_PER_HOUR',
              OCCUPANCY = 'OCCUPANCY';
 
 const METRIC_SETTINGS = {
-  [VISITS]: {
+  [VISITS_PER_MINUTE]: {
     name: 'Visits',
     keyLabel: 'People/min',
     valueSuffix: '/min',
+  },
+  [VISITS_PER_HOUR]: {
+    name: 'Visits',
+    keyLabel: 'People/hour',
+    valueSuffix: '/hour',
   },
   [OCCUPANCY]: {
     name: 'Occupancy',
@@ -259,7 +265,7 @@ export default function ReportDailyPeaks({
   data,
   curveType = CURVE_CARDINAL,
   numberOfBands = 4,
-  metric = VISITS
+  metric = VISITS_PER_MINUTE
 }) {
   // Mix opaque colors for each band
   const whiteBackground  = { r: 255, g: 255, b: 255, a: 1 };

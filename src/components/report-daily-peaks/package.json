@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-report-daily-peaks",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Daily Peaks Report component",
   "main": "dist/index.js",
   "author": "Density <engineering+javascript@density.io>",
