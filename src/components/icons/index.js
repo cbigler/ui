@@ -22,6 +22,18 @@ const ICONS = {
         </g>
     </g>
   </svg>,
+  IconImage: ({color, width, height}) => <svg width='6' height='8' viewBox='0 0 6 8' xmlns='http://www.w3.org/2000/svg'>
+    <g id='1' fill='none' fillRule='evenodd'>
+        <g id='icons' transform='translate(-389 -576)'>
+            <g id='IconL' transform='translate(382 570)'>
+                <rect id='bounds' fillOpacity='0' fill='#E3E3E6' width='20' height='20'
+                />
+                <polyline id='Path-10' stroke='#222A2E' strokeWidth='1.5' points='8 6 8 13 13 13'
+                />
+            </g>
+          </g>
+      </g>
+  </svg>,
   IconImage: ({color, width, height}) => <svg width={width || '18'} height={height || '18'} viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'>
       <g id='Page-1' fill='none' fillRule='evenodd'>
           <g id='IconImage' transform='translate(-1 -1)'>
@@ -33,6 +45,21 @@ const ICONS = {
               />
               <circle id='Oval' stroke={color} strokeWidth='1.5' cx='6' cy='6' r='2'
               />
+          </g>
+      </g>
+  </svg>,
+  IconFolder: ({color, width, height}) => <svg width='18' height='17' viewBox='0 0 18 17' xmlns='http://www.w3.org/2000/svg'>
+      <g id='1' fill='none' fillRule='evenodd'>
+          <g id='icons' transform='translate(-331 -571)'>
+              <g id='IconFolder' transform='translate(330 570)'>
+                  <rect id='bounds' fillOpacity='0' fill='#E3E3E6' width='20' height='20'
+                  />
+                  <polygon id='Stroke-3' stroke='#000' strokeWidth='1.5' strokeLinecap='round'
+                  strokeLinejoin='round' points='2 17 18 17 18 3.875 10 3.875 8 2 2 2 2 3.875'
+                  />
+                  <rect id='Rectangle' stroke='#000' strokeWidth='1.5' strokeLinecap='round'
+                  strokeLinejoin='round' x='2' y='7' width='16' height='10' />
+              </g>
           </g>
       </g>
   </svg>,
@@ -817,29 +844,27 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  IconBuilding: ({color, width, height}) => <svg width={width || '14'} height={height || '18'} viewBox='0 0 14 18' xmlns='http://www.w3.org/2000/svg'>
-      <g id='Page-1' fill='none' fillRule='evenodd'>
-          <g id='IconBuilding' transform='translate(-3 -1)'>
-              <rect id='bounds' fillOpacity='0' fill={color} width='20' height='20'
-              />
-              <path d='M4,18.75 C3.58578644,18.75 3.25,18.4142136 3.25,18 L3.25,2 C3.25,1.58578644 3.58578644,1.25 4,1.25 L16,1.25 C16.4142136,1.25 16.75,1.58578644 16.75,2 L16.75,18 C16.75,18.4142136 16.4142136,18.75 16,18.75 L4,18.75 Z M4.75,17.25 L15.25,17.25 L15.25,2.75 L4.75,2.75 L4.75,17.25 Z'
-              id='Stroke-1' fill={color} fillRule='nonzero' />
-              <polygon id='Stroke-3' fill={color} fillRule='nonzero' points='6.25 4.25 7.75 4.25 7.75 6.75 6.25 6.75'
-              />
-              <polygon id='Stroke-4' fill={color} fillRule='nonzero' points='9.25 4.25 10.75 4.25 10.75 6.75 9.25 6.75'
-              />
-              <polygon id='Stroke-5' fill={color} fillRule='nonzero' points='12.25 4.25 13.75 4.25 13.75 6.75 12.25 6.75'
-              />
-              <polygon id='Stroke-6' fill={color} fillRule='nonzero' points='6.25 8.25 7.75 8.25 7.75 10.75 6.25 10.75'
-              />
-              <polygon id='Stroke-7' fill={color} fillRule='nonzero' points='9.25 8.25 10.75 8.25 10.75 10.75 9.25 10.75'
-              />
-              <polygon id='Stroke-8' fill={color} fillRule='nonzero' points='12.25 8.25 13.75 8.25 13.75 10.75 12.25 10.75'
-              />
-              <polygon id='Stroke-9' fill={color} fillRule='nonzero' points='6.25 12.25 7.75 12.25 7.75 14.75 6.25 14.75'
-              />
-              <path d='M10,18.75 C9.58578644,18.75 9.25,18.4142136 9.25,18 L9.25,13 C9.25,12.5857864 9.58578644,12.25 10,12.25 L13,12.25 C13.4142136,12.25 13.75,12.5857864 13.75,13 L13.75,18 C13.75,18.4142136 13.4142136,18.75 13,18.75 L10,18.75 Z M10.75,17.25 L12.25,17.25 L12.25,13.75 L10.75,13.75 L10.75,17.25 Z'
-              id='Stroke-10' fill={color} fillRule='nonzero' />
+  IconBuilding: ({color, width, height}) => <svg width='18' height='17' viewBox='0 0 18 17' xmlns='http://www.w3.org/2000/svg'>
+      <g id='1' fill='none' fillRule='evenodd'>
+          <g id='icons' transform='translate(-70 -520)'>
+              <g id='IconBuilding' transform='translate(69 518)'>
+                  <rect id='bounds' fillOpacity='0' fill='#E3E3E6' width='20' height='20'
+                  />
+                  <polygon id='Path' stroke='#222A2E' strokeWidth='1.5' strokeLinecap='round'
+                  strokeLinejoin='round' points='9 9 2 9 2 18 18 18 18 3 9 3' />
+                  <path d='M12,6 L15,6' id='---' stroke='#222A2E' strokeWidth='1.5' strokeLinecap='square'
+                  />
+                  <path d='M12,9 L15,9' id='----copy' stroke='#222A2E' strokeWidth='1.5'
+                  strokeLinecap='square' />
+                  <path d='M12,12 L15,12' id='----copy-2' stroke='#222A2E' strokeWidth='1.5'
+                  strokeLinecap='square' />
+                  <path d='M12,15 L15,15' id='----copy-3' stroke='#222A2E' strokeWidth='1.5'
+                  strokeLinecap='square' />
+                  <path d='M5,12 L8,12' id='----copy-2' stroke='#222A2E' strokeWidth='1.5'
+                  strokeLinecap='square' />
+                  <path d='M5,15 L8,15' id='----copy-3' stroke='#222A2E' strokeWidth='1.5'
+                  strokeLinecap='square' />
+              </g>
           </g>
       </g>
   </svg>,
