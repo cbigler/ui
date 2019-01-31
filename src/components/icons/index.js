@@ -22,7 +22,7 @@ const ICONS = {
         </g>
     </g>
   </svg>,
-  IconImage: ({color, width, height}) => <svg width='6' height='8' viewBox='0 0 6 8' xmlns='http://www.w3.org/2000/svg'>
+  IconL: ({color, width, height}) => <svg width='6' height='8' viewBox='0 0 6 8' xmlns='http://www.w3.org/2000/svg'>
     <g id='1' fill='none' fillRule='evenodd'>
         <g id='icons' transform='translate(-389 -576)'>
             <g id='IconL' transform='translate(382 570)'>
