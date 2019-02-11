@@ -908,8 +908,8 @@ const ICONS = {
         </g>
     </g>
  </svg>,
- IconDensityMark: ({color, width, height}) => <svg width={width || 16} height={height || 14} viewBox='0 0 16 14' xmlns='http://www.w3.org/2000/svg'>
-   <g id='Icons' fill='none' fillRule='evenodd'>
+  IconDensityMark: ({color, width, height}) => <svg width={width || 16} height={height || 14} viewBox='0 0 16 14' xmlns='http://www.w3.org/2000/svg'>
+    <g id='Icons' fill='none' fillRule='evenodd'>
        <g id='icons' transform='translate(-71 -493)'>
            <g id='IconDensityMark' transform='translate(69 490)'>
                <rect id='bounds' fillOpacity='0' fill='#E3E3E6' width='20' height='20'
@@ -918,8 +918,262 @@ const ICONS = {
                id='Fill-1' fill={color} />
            </g>
        </g>
-   </g>
-  </svg>
+    </g>
+  </svg>,
+
+  IconMail: ({color, width, height}) => <svg width={width || 18} height={height || 18} viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
+    <g id="IconMail" transform="translate(0, -4)">
+      <rect id="Rectangle" fillOpacity="0" fill="#D8D8D8" width="20" height="20"
+      />
+      <rect id="Rectangle" fill="transparent" stroke={color} strokeWidth="1.5" x="2.5" y="5" width="15" height="10" />
+      <polyline id="Path-28" fill="transparent" stroke={color} strokeWidth="1.5" points="2.5 5.83333333 10 10 17.5 5.83333333" />
+    </g>
+  </svg>,
+  IconNotification: ({color, width, height}) => <svg width={width || 18} height={height || 18} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+    <g id="1" fill="none" fillRule="evenodd">
+      <g id="icons" transform="translate(-278 -519)">
+        <g id="Group" transform="translate(277 518)">
+          <rect id="Rectangle" fillOpacity="0" fill="#D8D8D8" width="20" height="20"
+          />
+          <path d="M1.66666667,16.6666667 L18.3333333,16.6666667 L18.3333333,18.3333333 L1.66666667,18.3333333 L1.66666667,16.6666667 Z M16.6666667,17.5 L15,17.5 L15,11.6666667 C15,8.90524292 12.7614237,6.66666667 10,6.66666667 C7.23857625,6.66666667 5,8.90524292 5,11.6666667 L5,17.5 L3.33333333,17.5 L3.33333333,11.6666667 C3.33333333,7.98476833 6.31810167,5 10,5 C13.6818983,5 16.6666667,7.98476833 16.6666667,11.6666667 L16.6666667,17.5 Z M14.4716878,5.5881428 L13.0283122,4.75480947 L14.2783122,2.58974596 L15.7216878,3.4230793 L14.4716878,5.5881428 Z M6.97168784,4.75480947 L5.52831216,5.5881428 L4.27831216,3.4230793 L5.72168784,2.58974596 L6.97168784,4.75480947 Z M10.8333333,4.16666667 L9.16666667,4.16666667 L9.16666667,1.66666667 L10.8333333,1.66666667 L10.8333333,4.16666667 Z"
+            id="Combined-Shape" fill={color} fillRule="nonzero" />
+        </g>
+      </g>
+    </g>
+  </svg>,
+  IconStar: ({color, width, height}) => <svg width={width || 20} height={height || 18} viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg">
+    <g id="1" fill="none" fillRule="evenodd">
+      <g id="icons" transform="translate(-225 -518)">
+        <g id="IconStar" transform="translate(225 518)">
+          <rect id="bounds" fillOpacity="0" fill="#E3E3E6" width="20" height="20"
+          />
+          <polygon id="Star" stroke={color} strokeWidth="1.5" strokeLinecap="square"
+            strokeLinejoin="round" points="10 14.5 4.70993273 17.2811529 5.72024568 11.3905765 1.44049135 7.21884705 7.35496636 6.35942353 10 1 12.6450336 6.35942353 18.5595086 7.21884705 14.2797543 11.3905765 15.2900673 17.2811529"
+          />
+        </g>
+      </g>
+    </g>
+  </svg>,
+  IconFilters: ({color, width, height}) => <svg width={width || 18} height={height || 14} viewBox="0 0 18 14" xmlns="http://www.w3.org/2000/svg">
+    <g id="1" fill="none" fillRule="evenodd">
+      <g id="icons" transform="translate(-330 -521)">
+        <g id="IconFilters" transform="translate(329 518)">
+          <rect id="bounds" fillOpacity="0" fill="#E3E3E6" width="20" height="20"
+          />
+          <path d="M18,10 L2,10" id="Stroke-3" stroke={color} strokeWidth="1.5"
+            strokeLinecap="square" strokeLinejoin="round" />
+          <path d="M18,5 L2,5" id="Stroke-3-Copy" stroke={color} strokeWidth="1.5"
+            strokeLinecap="square" strokeLinejoin="round" />
+          <path d="M5,6 L5,4" id="Stroke-3-Copy" stroke={color} strokeWidth="1.5"
+            strokeLinecap="square" strokeLinejoin="round" />
+          <path d="M15,11 L15,9" id="Stroke-3-Copy" stroke={color} strokeWidth="1.5"
+            strokeLinecap="square" strokeLinejoin="round" />
+          <path d="M8,16 L8,14" id="Stroke-3-Copy" stroke={color} strokeWidth="1.5"
+            strokeLinecap="square" strokeLinejoin="round" />
+          <path d="M18,15 L2,15" id="Stroke-3-Copy-2" stroke={color} strokeWidth="1.5"
+            strokeLinecap="square" strokeLinejoin="round" />
+        </g>
+      </g>
+    </g>
+  </svg>,
+  IconApps: ({color, width, height}) => <svg width={width || 18} height={height || 18} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+    <g id="1" fill="none" fillRule="evenodd">
+      <g id="icons" transform="translate(-382 -467)">
+        <g id="iconApps" transform="translate(381 466)">
+          <rect id="bounds" fillOpacity="0" fill="#E3E3E6" width="20" height="20"
+          />
+          <path d="M2,8 L8,8 L8,16.9991283 C8,17.5553691 7.55641359,18 7.00922203,18 L2.99077797,18 C2.45097518,18 2,17.5518945 2,16.9991283 L2,8 Z M2.99077797,2 L7.00922203,2 L2.99077797,2 Z"
+            id="Combined-Shape" stroke={color} strokeWidth="1.5" fill="#FAFAFA" strokeLinecap="round"
+            strokeLinejoin="round" />
+          <path d="M2,8 L16.9991283,8 C17.5518945,8 18,7.54902482 18,7.00922203 L18,2.99077797 C18,2.44358641 17.5553691,2 16.9991283,2 L3.00087166,2 C2.4481055,2 2,2.45097518 2,2.99077797 L2,8 Z"
+            id="icon-square-copy-2" stroke={color} strokeWidth="1.5" fill="#FAFAFA"
+            strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M18,14.5 L12,14.5" id="---" stroke={color} strokeWidth="1.5"
+            strokeLinecap="square" strokeLinejoin="round" />
+          <path d="M15,11.5 L15,17.5" id="---" stroke={color} strokeWidth="1.5"
+            strokeLinecap="square" strokeLinejoin="round" />
+        </g>
+      </g>
+    </g>
+  </svg>,
+  IconPin: ({color, width, height}) => <svg width={width || 12} height={height || 18} viewBox="0 0 12 18" xmlns="http://www.w3.org/2000/svg">
+    <g id="1" fill="none" fillRule="evenodd">
+      <g id="icons" transform="translate(-541 -467)">
+        <g id="iconPin" transform="translate(537 466)">
+          <rect id="bounds" fillOpacity="0" fill="#E3E3E6" width="20" height="20"
+          />
+          <path d="M5,12 C5,10.1336294 6.15051465,8.37707426 6.42033106,7 C7.45162157,1.73655581 7.22581078,2 10,2 C12.7110391,2 12.4220782,2.20017432 13.5065529,7 C13.8221545,8.39683515 15,10.1966608 15,12 C11,13 8,12.5 5,12 Z"
+            id="Path-13" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+          />
+          <path d="M10,13 L10,18" id="Path-3" stroke={color} strokeWidth="1.5"
+            fill="#FAFAFA" strokeLinecap="round" strokeLinejoin="round" />
+        </g>
+      </g>
+    </g>
+  </svg>,
+  IconExpand: ({color, width, height}) => <svg width={width || 18} height={height || 18} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+    <g id="1" fill="none" fillRule="evenodd">
+      <g id="icons" transform="translate(-122 -519)">
+        <g id="IconExpand" transform="translate(121 518)">
+          <rect id="bounds" fillOpacity="0" fill="#E3E3E6" width="20" height="20"
+          />
+          <polyline id="Stroke-3" stroke={color} strokeWidth="1.5" strokeLinecap="square"
+            strokeLinejoin="round" points="13 2 18 2 18 7" />
+          <path d="M18,2 L11,9" id="Stroke-5" stroke={color} strokeWidth="1.5"
+            strokeLinejoin="round" />
+          <polyline id="Stroke-3-Copy-3" stroke={color} strokeWidth="1.5" strokeLinecap="square"
+            strokeLinejoin="round" points="2 13 2 18 7 18" />
+          <path d="M9,11 L2,18" id="Stroke-5-Copy" stroke={color} strokeWidth="1.5"
+            strokeLinejoin="round" />
+        </g>
+      </g>
+    </g>
+  </svg>,
+  IconTeam: ({color, width, height}) => <svg width={width || 20} height={height || 18} viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg">
+    <g id="1" fill="none" fillRule="evenodd">
+      <g id="icons" transform="translate(-433 -519)">
+        <g id="IconTeam" transform="translate(433 518)">
+          <rect id="bounds" fillOpacity="0" fill="#E3E3E6" width="20" height="20"
+          />
+          <path d="M7.00001111,10 C5.10645556,10 3.57145556,8.20911111 3.57145556,6 C3.57145556,3.79088889 5.10645556,2 7.00001111,2 C8.89356667,2 10.4285667,3.79088889 10.4285667,6 C10.4285667,8.20911111 8.89356667,10 7.00001111,10 Z"
+            id="Stroke-1" stroke={color} strokeWidth="1.5" fill="#FFF" strokeLinejoin="round"
+          />
+          <path d="M13,18 L13,13 C13,11.3368889 11.6392222,10 9.97611111,10 L4.02388889,10 C2.36077778,10 1,11.3368889 1,13 L1,18 L13,18 L13,18 Z"
+            id="Stroke-3" stroke={color} strokeWidth="1.5" fill="#FFF" strokeLinejoin="round"
+          />
+          <path d="M10.0000111,10 C8.10645556,10 6.57145556,8.20911111 6.57145556,6 C6.57145556,3.79088889 8.10645556,2 10.0000111,2 C11.8935667,2 13.4285667,3.79088889 13.4285667,6 C13.4285667,8.20911111 11.8935667,10 10.0000111,10 Z"
+            id="Stroke-1" stroke={color} strokeWidth="1.5" fill="#FFF" strokeLinejoin="round"
+          />
+          <path d="M16,18 L16,13 C16,11.3368889 14.6392222,10 12.9761111,10 L7.02388889,10 C5.36077778,10 4,11.3368889 4,13 L4,18 L16,18 L16,18 Z"
+            id="Stroke-3" stroke={color} strokeWidth="1.5" fill="#FFF" strokeLinejoin="round"
+          />
+          <path d="M13.0000111,10 C11.1064556,10 9.57145556,8.20911111 9.57145556,6 C9.57145556,3.79088889 11.1064556,2 13.0000111,2 C14.8935667,2 16.4285667,3.79088889 16.4285667,6 C16.4285667,8.20911111 14.8935667,10 13.0000111,10 Z"
+            id="Stroke-1" stroke={color} strokeWidth="1.5" fill="#FFF" strokeLinejoin="round"
+          />
+          <path d="M19,18 L19,13 C19,11.3368889 17.6392222,10 15.9761111,10 L10.0238889,10 C8.36077778,10 7,11.3368889 7,13 L7,18 L19,18 L19,18 Z"
+            id="Stroke-3" stroke={color} strokeWidth="1.5" fill="#FFF" strokeLinejoin="round"
+          />
+        </g>
+      </g>
+    </g>
+  </svg>,
+  IconApps: ({color, width, height}) => <svg width={width || 18} height={height || 18} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+    <g id="1" fill="none" fillRule="evenodd">
+      <g id="icons" transform="translate(-486 -519)">
+        <g id="iconApps" transform="translate(485 518)">
+          <rect id="bounds" fillOpacity="0" fill="#E3E3E6" width="20" height="20"
+          />
+          <path d="M2,8 L8,8 L8,16.9991283 C8,17.5553691 7.55641359,18 7.00922203,18 L2.99077797,18 C2.45097518,18 2,17.5518945 2,16.9991283 L2,8 Z M2.99077797,2 L7.00922203,2 L2.99077797,2 Z"
+            id="Combined-Shape" stroke={color} strokeWidth="1.5" fill="#FAFAFA" strokeLinecap="round"
+            strokeLinejoin="round" />
+          <path d="M2,8 L16.9991283,8 C17.5518945,8 18,7.54902482 18,7.00922203 L18,2.99077797 C18,2.44358641 17.5553691,2 16.9991283,2 L3.00087166,2 C2.4481055,2 2,2.45097518 2,2.99077797 L2,8 Z"
+            id="icon-square-copy-2" stroke={color} strokeWidth="1.5" fill="#FAFAFA"
+            strokeLinecap="round" strokeLinejoin="round" />
+        </g>
+      </g>
+    </g>
+  </svg>,
+  IconAddReport: ({color, width, height}) => <svg width={width || 18} height={height || 18} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+    <g id="1" fill="none" fillRule="evenodd">
+      <g id="icons" transform="translate(-539 -519)">
+        <g id="iconDashboard" transform="translate(537 518)">
+          <rect id="bounds" fillOpacity="0" fill="#E3E3E6" width="20" height="20"
+          />
+          <path d="M12.5,10.5 L12.5,14.5" id="---" stroke={color} strokeWidth="1.5"
+            strokeLinecap="square" strokeLinejoin="round" />
+          <path d="M10,5 L4,5 C3.44771525,5 3,5.44771525 3,6 L3,17 C3,17.5522847 3.44771525,18 4,18 L15,18 C15.5522847,18 16,17.5522847 16,17 L16,11"
+            id="Path-4" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+          />
+          <g id="plus" transform="translate(13.25 2.25)" stroke={color} strokeLinecap="square"
+            strokeLinejoin="round" strokeWidth="1.5">
+            <path d="M2.80892073,5.61784146 L2.80892073,3.73034936e-14" id="Stroke-1"
+            />
+            <path d="M5.61784146,2.80892073 L3.73034936e-14,2.80892073" id="Stroke-2"
+            />
+          </g>
+          <path d="M9.5,11.5 L9.5,14.5" id="---" stroke={color} strokeWidth="1.5"
+            strokeLinecap="square" strokeLinejoin="round" />
+          <path d="M6.5,9.5 L6.5,14.5" id="---" stroke={color} strokeWidth="1.5"
+            strokeLinecap="square" strokeLinejoin="round" />
+        </g>
+      </g>
+    </g>
+  </svg>,
+  IconAlgo: ({color, width, height}) => <svg width={width || 20} height={height || 18} viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg">
+    <g id="1" fill="none" fillRule="evenodd">
+      <g id="icons" transform="translate(-174 -571)">
+        <g id="IconAlgo" transform="translate(174 570)">
+          <rect id="bounds" fillOpacity="0" fill="#E3E3E6" width="20" height="20"
+          />
+          <path d="M15.114355,3.8480373 C13.7277936,2.69406988 11.9449512,2 10,2 C6.42497389,2 3.39765363,4.34500749 2.37231626,7.58074541"
+            id="Oval" stroke={color} strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="round"
+          />
+          <path d="M17.6731057,14.155095 C16.3053075,13.0627961 14.5712963,12.4097981 12.6847693,12.4097981 C9.10626145,12.4097981 6.07652677,14.7593754 5.05409551,18"
+            id="Oval" stroke={color} strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="round"
+            transform="rotate(180 11.364 15.205)" />
+          <circle id="Oval" stroke={color} strokeWidth="1.5" strokeLinecap="square"
+            strokeLinejoin="round" cx="17" cy="6" r="2" />
+          <circle id="Oval" stroke={color} strokeWidth="1.5" strokeLinecap="square"
+            strokeLinejoin="round" cx="3" cy="15" r="2" />
+          <rect id="Rectangle" fill={color} x="7" y="7" width="6" height="6" rx="3"
+          />
+        </g>
+      </g>
+    </g>
+  </svg>,
+  IconSecurity: ({color, width, height}) => <svg width={width || 20} height={height || 20} viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    <g id="1" fill="none" fillRule="evenodd">
+      <g id="icons" transform="translate(-434 -570)">
+        <g id="IconSecurity" transform="translate(434 570)">
+          <rect id="bounds" fillOpacity="0" fill="#E3E3E6" width="20" height="20"
+          />
+          <polygon id="Path" stroke={color} strokeWidth="1.5" points="10 1 1 4 4 15 10 19 16 15 19 4"
+          />
+          <circle id="Oval" stroke={color} strokeWidth="1.5" cx="10" cy="6.5"
+            r="2.75" />
+          <path d="M5,15.5 C5,15.3338815 5.01620211,14.1715473 5.04711229,14.0144913 C5.27311546,12.866159 6.28540659,12 7.5,12 L12.5,12 C13.7163773,12 14.7298576,12.8687051 14.9538784,14.0195528 C14.984144,14.1750342 15,15.3356654 15,15.5"
+            id="Path" stroke={color} strokeWidth="1.5" />
+        </g>
+      </g>
+    </g>
+  </svg>,
+  IconSave: ({color, width, height}) => <svg width={width || 18} height={height || 17} viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
+    <g id="1" fill="none" fillRule="evenodd">
+      <g id="icons" transform="translate(-486 -571)">
+        <g id="IconSave" transform="translate(485 570)">
+          <rect id="bounds" fillOpacity="0" fill="#E3E3E6" width="20" height="20"
+          />
+          <polygon id="Stroke-3" stroke={color} strokeWidth="1.5" strokeLinecap="round"
+            strokeLinejoin="round" points="2 17 18 17 18 3.875 10 3.875 8 2 2 2 2 3.875"
+          />
+          <polygon id="Star" stroke={color} strokeWidth="1.5" strokeLinecap="square"
+            strokeLinejoin="round" points="9.5 12.75 6.85496636 14.1405765 7.36012284 11.1952882 5.22024568 9.10942353 8.17748318 8.67971176 9.5 6 10.8225168 8.67971176 13.7797543 9.10942353 11.6398772 11.1952882 12.1450336 14.1405765"
+          />
+        </g>
+      </g>
+    </g>
+  </svg>,
+  IconProgress: ({color, width, height}) => <svg width={width || 18} height={height || 18} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+    <g id="1" fill="none" fillRule="evenodd">
+      <g id="icons" transform="translate(-538 -571)">
+        <g id="IconProgress" transform="translate(537 570)">
+          <rect id="bounds" fillOpacity="0" fill="#E3E3E6" width="20" height="20"
+          />
+          <g id="Page-1" transform="translate(2 2)" stroke={color} strokeLinejoin="round"
+            strokeWidth="1.5">
+            <path d="M0.106911111,7.05244444 C0.331133333,5.24011111 1.16157778,3.61555556 2.38902222,2.38811111 C3.6148,1.16233333 5.23657778,0.332444444 7.04591111,0.106888889"
+              id="Stroke-1" />
+            <path d="M7.04592222,15.9830444 C5.23658889,15.7573778 3.61492222,14.9276 2.38914444,13.7018222 C1.16158889,12.4743778 0.331144444,10.8498222 0.106922222,9.03748889"
+              id="Stroke-3" />
+            <path d="M15.9840444,9.04496667 C15.7583778,10.8543 14.9286,12.4759667 13.7028222,13.7017444 C12.4753778,14.9293 10.8508222,15.7597444 9.03837778,15.9839667"
+              id="Stroke-5" />
+            <path d="M9.04597778,0.106833333 C10.8553111,0.3325 12.4769778,1.16227778 13.7027556,2.38805556 C14.9285333,3.61383333 15.7584222,5.23561111 15.9840889,7.04494444"
+              id="Stroke-7" />
+          </g>
+        </g>
+      </g>
+    </g>
+  </svg>,
 };
 
 // Wrap each icon in a component.

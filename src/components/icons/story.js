@@ -29,6 +29,8 @@ storiesOf('Icons', module)
       gridTemplateColumns: 'repeat(3, 275px)',
       gridTemplateRows: 'repeat(100, 30px)',
       gridGap: 10,
+      marginLeft: 10,
+      marginTop: 10,
     }}>
       {Object.keys(Icons).map(iconName => {
         const IconComponent = Icons[iconName];
