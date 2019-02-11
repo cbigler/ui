@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-floorplan",
-  "version": "0.3.25",
+  "version": "0.3.26",
   "description": "Floorplan interface component",
   "main": "dist/index.js",
   "author": "Density <engineering+javascript@density.io>",

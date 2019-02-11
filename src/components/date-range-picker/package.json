@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-date-range-picker",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Date Range Picker component",
   "main": "dist/index.js",
   "author": "Density <engineering+javascript@density.io>",
