@@ -9,8 +9,9 @@
   "grayLighter": "#F0F0F2",
   "grayLightest": "#FAFAFA",
 
-  "brandPrimary": "#4198FF",
-  "brandPrimaryLight": "#97A6D4",
+  "brandPrimary": "#3663E5",
+  "brandPrimaryNew": "#3663E5",
+  "brandPrimaryLight": "#B6C6F6",
   "brandSuccess": "#80CD80",
   "brandDanger": "#FF5454",
   "brandWarning": "#FFBA08",
@@ -20,7 +21,6 @@
   "inputFieldTextColor": "#CBCFD6",
   "inputFieldTextActiveColor": "#4E5457",
 
-  "brandPrimaryNew": "#3663E5",
   "reportBlueLight": "#97A6D4",
   "reportGreen": "#4E8475",
   "reportYellow": "#F9B35B",

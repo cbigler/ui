@@ -1,6 +1,6 @@
 {
   "name": "@density/ui",
-  "version": "5.6.0",
+  "version": "6.0.0",
   "description": "A UI framework for density projects",
   "scripts": {
     "start": "make start",
