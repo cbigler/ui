@@ -1,22 +1,32 @@
-import { configure, setAddon } from '@storybook/react';
-
-import infoAddon from '@storybook/addon-info';
-setAddon(infoAddon);
-
 import 'normalize.css';
 import 'moment-timezone';
 
+import { configure, addDecorator } from '@storybook/react';
+
+import { withInfo } from '@storybook/addon-info';
+addDecorator(withInfo({
+	inline: true,
+	styles: styles => {
+		return {
+			...styles,
+			infoStory: {
+				paddingLeft: 40,
+				paddingRight: 40,
+			},
+		};
+	},
+}));
+
+// First story, serves as a "home page"
+// import '../src/Welcome.js';
+
+// import '../src/Tutorial.js';
+
 function loadStories() {
-  // This is some stupid webpack magic. Basically, require in all files in '../src/components.'
+  // This is some stupid webpack magic. Basically, require in all files in '../src/reports.'
   // http://stackoverflow.com/questions/29891458/webpack-require-every-file-in-directory
-  let contextualRequire = require.context(
-    '../src/components',
-    true,
-    // https://stackoverflow.com/a/30372240/4115328
-    /^((?![\\/]node_modules|dist|template[\\/]).)*\/story.js$/,
-  );
-  contextualRequire.keys()
-    .forEach(storybook => contextualRequire(storybook));
+  let contextualRequire = require.context('../src/components', true, /story.js$/);
+  contextualRequire.keys().forEach(storybook => contextualRequire(storybook));
 }
 
 configure(loadStories, module);

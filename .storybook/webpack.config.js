@@ -2,19 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const jsonImporter = require('@density/node-sass-json-importer');
 
-// Create aliases when importing each component to reference the current component state in this
-// project. For example,
-// @density/ui-button => /Users/ryan/w/densityco/ui/src/components/button/index.js
-const alias = { '@density/ui': path.normalize(path.join(__dirname, '..')) };
-const COMPONENTS_BASE_PATH = path.join(__dirname, '..', 'src', 'components');
-fs.readdirSync(COMPONENTS_BASE_PATH).forEach(component => {
-  alias[`@density/ui-${component}`] = path.normalize(
-    path.join(COMPONENTS_BASE_PATH, component, 'index.js')
-  );
-});
-
 module.exports = {
-  resolve: { alias },
   module: {
     rules: [
       // *.scss files are processed through three steps:
@@ -33,15 +21,19 @@ module.exports = {
             options: {
               importLoaders: 1,
               modules: true,
-              /* for example, dui-styles-button-1SZwRzu8 */
-              localIdentName: 'dui-[name]-[local]-[hash:base64:8]',
+              /* for example, drp-styles-button-1SZwRzu8 */
+              localIdentName: 'drp-[name]-[local]-[hash:base64:8]',
             },
           },
           {
             loader: 'sass-loader',
-            // Apply the JSON importer via sass-loader's options.
             options: {
+							// Apply the JSON importer via sass-loader's options.
               importer: jsonImporter,
+							// Tell node-sass to search in the node modules directory for things to import
+							includePaths: [
+								path.join(path.resolve(__dirname, '../'), 'node_modules'),
+							],
             },
           },
         ],
@@ -55,6 +47,33 @@ module.exports = {
           'css-loader',
         ],
         include: path.resolve(__dirname, '../'),
+      },
+
+      {
+        test: /\.jsx?$/,
+        // skip all of node_modules EXCEPT for modules > ES5
+        exclude: /node_modules\/(?![camelcase])/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              // compile jsx => React.createElement
+              '@babel/preset-react',
+              // use "modern" javascript, whatever that means
+              ['@babel/preset-env', {
+                // provide polyfills as necessary
+                'useBuiltIns': 'entry',
+                'targets': '>0.2%, not dead, not ie <= 10, not op_mini all'
+              }]
+            ],
+            plugins: [
+              // convert async / await => generators (then generators => regenerator-runtime)
+              '@babel/plugin-transform-async-to-generator',
+              // support for class properties for class components etc
+              '@babel/plugin-proposal-class-properties'
+            ],
+          },
+        },
       },
     ],
   },
