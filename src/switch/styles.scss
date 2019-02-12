@@ -1,0 +1,59 @@
+@import "../../variables/colors.json";
+@import "variables.json";
+
+@mixin make-switch($background: $brand-primary, $foreground: #fff) {
+  label {
+    outline: 0;
+    display: inline-block;
+    width: $switch-base-width;
+    height: $switch-base-height;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    background-color: $gray;
+    border-radius: $switch-base-height;
+    transition: all 200ms ease;
+
+    &:after {
+      position: relative;
+      display: block;
+      content: "";
+      width: $switch-handle-size + $switch-handle-border-size;
+      height: $switch-handle-size + $switch-handle-border-size;
+
+      box-sizing: border-box;
+      left: -1 * $switch-handle-border-size;
+      top: -1 * $switch-handle-border-size;
+      border-radius: 50%;
+      background: $foreground;
+      border: $switch-handle-border-size solid $gray;
+      transition: all 200ms ease;
+    }
+  }
+
+  input[type=checkbox] {
+    display: none;
+  }
+
+  input[type=checkbox]:checked + label {
+    background-color: $background;
+
+    &:after {
+      left: calc(50% + #{$switch-handle-border-size});
+      border-color: $background;
+    }
+  }
+
+  &.disabled input[type=checkbox] + label,
+  &.disabled input[type=checkbox]:checked + label {
+    pointer-events: none;
+    background-color: $gray-light;
+  }
+  &.disabled input[type=checkbox]:checked + label:after {
+    border-color: $gray-light;
+  }
+}
+
+.switch {
+  @include make-switch;
+}
