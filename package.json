@@ -3,14 +3,21 @@
   "version": "6.0.0",
   "description": "A UI framework for density projects",
   "scripts": {
-    "start": "make start",
-    "build-storybook": "build-storybook -s public",
-    "installall": "for i in $(find components/* -type d ! -path '*node_modules*' ! -name 'template' ); do cd $i && npm install && cd -; done",
-    "make-component": "./make-component"
+    "prepublishOnly": "./prepublish.sh",
+    "start": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "keywords": [],
   "author": "Density <team+javascript@density.io>",
   "license": "MIT",
+  "peerDependencies": {
+    "react": "16.x.x",
+    "react-dom": "16.x.x",
+    "prop-types": "*",
+    "moment": "*",
+    "moment-timezone": "*",
+    "regenerator-runtime": "*"
+  },
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/plugin-transform-async-to-generator": "^7.2.0",
@@ -18,14 +25,18 @@
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "@density/node-sass-json-importer": "^5.0.0",
-    "@storybook/addon-info": "^4.1.11",
-    "@storybook/addons": "^4.1.11",
     "@storybook/react": "^4.1.11",
+    "@storybook/addon-actions": "^4.1.11",
+    "@storybook/addon-info": "^4.1.11",
+    "@storybook/addon-links": "^4.1.11",
+    "@storybook/addons": "^4.1.11",
     "babel-loader": "^8.0.5",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.23",
     "node-sass": "^4.11.0",
     "pretty": "^2.0.0",
+    "prop-types": "^15.7.1",
+    "react-live": "^1.12.0",
     "regenerator-runtime": "^0.13.1",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
@@ -35,8 +46,7 @@
     "classnames": "^2.2.6",
     "d3-array": "^2.0.3",
     "normalize.css": "^8.0.1",
-    "prop-types": "^15.7.1",
     "uuid": "^3.3.2"
   },
-  "main": "helpers/index.js"
+  "main": "dist/index.js"
 }

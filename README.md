@@ -8,8 +8,8 @@ Density UI is a collection of Density-branded controls and styles for use in web
 ## Quick-start development (using react-storybook)
 
 ```sh
-make bootstrap
-make start
+npm i
+npm start
 ```
 
 ## How it works
@@ -83,15 +83,9 @@ In general, try to follow these guidelines:
   smaller, more composable components.
 
 
-# How the build script works
-*NOTE: this whole process used to use babel and node-sass, and now uses webpack.*
-
-Each Density UI sub-component is a seperate package within `./src/components`. Each package can be
-built in two ways: either for development or for deployment to npm.
-
 ## Development build process
 Density UI components are built to be developed within React Storybook. This environment can be
-started with `make start`, and manifests itself as a live reloading dev server that runs on port
+started with `npm start`, and manifests itself as a live reloading dev server that runs on port
 `9009`. The webpack configuration for this can be found at `./.storybook/webpack.config.js`, and
 this webpack configuration is used by react storybook.
 
@@ -109,15 +103,7 @@ A few particulars of this build environment:
   bundle, which is quite convenient.
 
 ## Deployment build process
-This Density UI deployment build process is run when a user wants to publish a new package change to
-npm. It's a bit more complicated than the local development build process, as it brings in a few
-more dependencies and sets some settings to more aggressive values. It's still webpack based, and
-the configuration file can be found in the root of this repository in `./webpack.config.js`.
-
-When executed via `make mycomponent-build`, the webpack configuration file is copied into the
-requisite component directory, the directory is traversed into, and the webpack cli is run, passing
-in an entrypoint of `./index.js` (from within the component's directory). Once invoked, webpack does
-a number of things:
+The build webpack configuration file can be found in the root of this repository in `./webpack.config.js`. Once invoked, webpack does a number of things:
 
 - New javascript features are transpiled down to es5 via `babel` and `@babel/preset-env`. Jsx is
   transpiled via `@babel/preset-jsx`. Async and await are transpiled into generators, which are then
@@ -148,33 +134,22 @@ If using webpack, add `import 'normalize.css/normalize.css';`.
 Otherwise, include `node_modules/normalize.css/normalize.css` in your css / sass
 
 
-(optional) If you want the Density font (Sailec), install it too:
+2. Install @density/ui
 ```
-npm i -S @density/ui-fonts
-```
-and add it into your javascript bundle with:
-```
-import '@density/ui-fonts';
+npm i -S @density/ui
 ```
 
-
-
-2. Install the density ui components you'd like:
+If you want the Density font (Sailec), import into them into your main bundle:
 ```
-npm i -S @density/ui-button
+import { fonts } from '@density/ui';
 ```
 
-If the component requires dependencies, npm will warn you as to what they are (via
-peerdependencies). Some components require the main `@density/ui` package for colors, font sizes,
-etc. Others (for example) require moment.
+Before the the package can be used, you'll need to satisfy all of its peerdependencies by installing them.
 
-Before the component can be used, you'll need to satisfy all of the component's peerdependencies by
-installing them.
-
-3. Use the component:
+3. Use a component:
 ```
 // foo.js
-import Button from '@density/ui-button';
+import { Button } from '@density/ui';
 
 // Use `Button`!
 ```
