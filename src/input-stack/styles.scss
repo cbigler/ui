@@ -1,0 +1,117 @@
+// Import any global variables from "../../variables/*.json"
+@import "../../variables/colors.json";
+@import "../../variables/spacing.json";
+@import "../../variables/fonts.json";
+
+// Local variables to the component
+@import "variables.json";
+
+// A stack item is one of the inputs in an input-stack, ie, a text box or a password box.
+// NOTE: this mixin requires that if an item is focused, the parent div should contain the class
+// `focus`. For example:
+//
+// <div className="input-stack-item focus">
+//   <input type="text" /> {/* <- This input is focused! */}
+// </div>
+// <div className="input-stack-item">
+//   <input type="text" />
+// </div>
+//
+@mixin make-input-stack-item(
+  $height: $input-stack-height,
+  $border-width: $input-stack-border-width,
+  $valid-color: $brand-primary
+) {
+  position: relative;
+
+  // Round corners of each item so that the top and bottom borders of the whole section are rounded.
+  &:first-child input {
+    border-top-left-radius: $border-radius-base;
+    border-top-right-radius: $border-radius-base;
+  }
+  &:last-child input {
+    border-bottom-left-radius: $border-radius-base;
+    border-bottom-right-radius: $border-radius-base;
+    border-bottom-color: $gray;
+  }
+
+
+  // The input itself. The input here is the main "building block", the surrounding div doesn't
+  // really do anything in regards to the display of each input. The input has borders on all sides,
+  // though the bottom border is transparent. When the user focuses the input, all borders turn
+  // $valid-color, and the item below's top border color is turned transparent. This is required
+  // because two neighboring items share a border.
+  input {
+    display: block;
+    font-family: $font-base;
+    font-size: 16px;
+    background-color: #fff;
+
+    width: calc(100% - 40px);
+    height: $height - (2 * $border-width) - (2 * 20px); // 20px = vertical padding around each input
+    padding: 20px;
+    margin-bottom: 0px;
+
+    border-radius: 0px;
+    -webkit-appearance: none;
+
+    // On active, remove outline and add a border color.
+    outline: none;
+    border: $border-width solid #CBCFD6;
+    border-bottom-color: transparent;
+  }
+  input:focus {
+    border-color: $valid-color;
+  }
+  input::placeholder { color: $gray; }
+  &Focus + & input {
+    border-top-color: transparent;
+  }
+
+  // The "bubble" on the right of the input. This is why each is surrounded in a div - since an
+  // :after cannot be applied to a self closing element such as an input, a container is required.
+  // The bubble indicates the state of the input when the input isn't focused. When the input is
+  // focused, then the bubble turns gray and he border of the input box indicates status.
+  &:after {
+    content: " ";
+    display: block;
+    background-color: $valid-color;
+
+    position: absolute;
+    top: 0px;
+    right: 20px;
+
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: ($input-stack-height - 8px) / 2;
+    margin-bottom: $input-stack-height - 8px;
+  }
+  &.focus:after {
+    background-color: $gray;
+  }
+}
+
+// Add this mixin to a input-stack item to show an invalid (or other) state.
+@mixin make-input-stack-item-invalid($color: $brand-danger) {
+  input:focus {
+    border-color: $color;
+  }
+
+  // Make an item share the border with the item below it, and when a user focuses one item, make
+  // the top border of the next item primary colored (since that border is shared with the previous
+  // item).
+  &.focus + & input {
+    border-top-color: $color !important;
+  }
+  &:after {
+    background-color: $color;
+  }
+}
+
+.inputStackItem {
+  @include make-input-stack-item;
+}
+.inputStackItemInvalid {
+  @include make-input-stack-item-invalid;
+}
