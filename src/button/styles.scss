@@ -1,0 +1,88 @@
+// Import any global ../variables from "../../../variables/*.json"
+@import "../../variables/colors.json";
+@import "../../variables/fonts.json";
+@import "../../variables/spacing.json";
+
+// Create a normal button.
+@mixin make-button(
+  $color: $brand-primary,
+  $button-height: 48px,
+  $font-size: $font-size-base,
+  $font-weight: $font-weight-base,
+  $text-color: #fff,
+  $block: true
+) {
+  // Block buttons are 100% in width and act like divs.
+  @if $block {
+    display: block;
+    width: 100%;
+  } @else {
+    // Non-block buttons act like text and are not full width.
+    display: inline;
+    width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  line-height: $button-height - 5px;
+  height: $button-height;
+  color: $text-color;
+  background-color: $color;
+  outline: none;
+  border-width: 0px;
+  border-radius: $border-radius-base;
+
+  font-family: $font-base;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  text-align: center;
+
+  cursor: pointer;
+  user-select: none;
+  transition: all 100ms ease-in-out;
+
+  /* Add some padding to the top of the button to adust the vertical text position to fix the salec
+   * baseline problem FIXME: fix baseline problem
+   */
+  padding-top: 5px;
+
+  &:hover {
+    opacity: 0.9;
+  }
+  &:active {
+    opacity: 1;
+  }
+  &:disabled {
+    background-color: $gray;
+    cursor: default;
+    &:hover { opacity: 1; }
+  }
+}
+
+.button {
+  @include make-button(
+    $brand-primary,
+    $button-height: 43px,
+    $font-size: $font-size-4,
+    $font-weight: $font-weight-4,
+    $block: true
+  );
+}
+.buttonSmall {
+  @include make-button(
+    $brand-primary,
+    $button-height: 23px,
+    $font-size: $font-size-6,
+    $font-weight: $font-weight-6,
+    $block: false
+  );
+}
+.buttonLarge {
+  @include make-button(
+    $brand-primary,
+    $button-height: 50px,
+    $font-size: $font-size-3,
+    $font-weight: $font-weight-3,
+    $block: true
+  );
+}
