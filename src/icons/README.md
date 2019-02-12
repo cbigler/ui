@@ -4,24 +4,24 @@
 
 ## Usage
 
-Install the icons package into whatever project you'd like:
+Install the ui package into whatever project you'd like:
 ```
-npm install @density/ui-icons
+npm install @density/ui
 ```
 
 Use the icon:
 ```
-import { IconImageUpload } from '@density/ui-icons';
+import { Icons } from '@density/ui';
 
 // In a react component:
-<IconImageUpload />
+<Icons.IconImageUpload />
 
 // With a special color
-<IconImageUpload color="primary" />
-<IconImageUpload color="#e59da1" />
+<Icons.IconImageUpload color="primary" />
+<Icons.IconImageUpload color="#e59da1" />
 
 // With a special size (in pixels)
-<IconImageUpload width={14} height={14} />
+<Icons.IconImageUpload width={14} height={14} />
 ```
 
 ## Adding icons

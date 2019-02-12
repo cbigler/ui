@@ -90,11 +90,6 @@ started with `npm start`, and manifests itself as a live reloading dev server th
 this webpack configuration is used by react storybook.
 
 A few particulars of this build environment:
-- If any package that starts with `@density/ui` (ie, `@density/ui/variables/colors.json`,
-  `@density/ui-icons`, etc) is imported, the local version of that package is used. This allows easy
-  development across multiple packages - for example, if yur component requires a new icon be added
-  to the density icons in `@density/ui-icons`, you can add that icon and not have to publish that
-  change to npm to use it.
 - Css modules are set to use slightly more verbose class names to make debugging easier. For
   example, class names in this mode will look like `dui-styles-button-1SZwRzu8`.
 - Babel is not explicitly used, since react storybook includes it separately to transpile jsx.

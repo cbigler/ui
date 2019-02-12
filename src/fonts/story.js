@@ -12,7 +12,7 @@ storiesOf('Fonts', module)
     </p>
     <pre style={{background: '#ddd', padding: 20, lineHeight: 2}}>
       // Include in your javascript bundle<br/>
-      import '@density/ui-fonts';
+      import '@density/ui';
     </pre>
     </span>
   ))
