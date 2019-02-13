@@ -20,7 +20,7 @@ jobs:
           name: "Install dependencies"
           command: |
             echo "# Top level package"
-            make bootstrap
+            npm i
       - save_cache:
           key: node_modules-{{checksum "./package.json"}}-v2
           paths:
@@ -60,29 +60,14 @@ jobs:
           name: "Install dependencies"
           command: |
             echo "# Top level package"
-            make bootstrap
+            npm i
       - run:
           name: "Add npm token to npmrc"
           command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
       - run:
           name: "Publish to npm registry"
           command: |
-            for component in $(make components-list); do
-              echo "****************"
-              echo "* Publishing $component"
-              echo "****************"
-              set +e
-              make $component-publish
-              set -e
-              echo
-            done
-
-            echo "****************"
-            echo "* Publishing main package"
-            echo "****************"
-            set +e
-            make publish
-            set -e
+            npm publish
 
 workflows:
   version: 2
