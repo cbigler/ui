@@ -3,9 +3,10 @@
   "version": "7.0.7",
   "description": "A UI framework for density projects",
   "scripts": {
-    "prepublishOnly": "./prepublish.sh",
+    "build-storybook": "build-storybook",
     "start": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "prepublishOnly": "rm -rf dist/ && ./node_modules/.bin/webpack --mode production",
+    "watch": "npm link && rm -rf dist/ && ./node_modules/.bin/webpack --watch"
   },
   "keywords": [],
   "author": "Density <team+javascript@density.io>",
