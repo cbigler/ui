@@ -9,3 +9,5 @@ export default function AppSidebar({ visible, children }) {
     <div className={styles.appSidebar}>{children}</div>
   </div>;
 }
+
+AppSidebar.displayName = 'AppSidebar';

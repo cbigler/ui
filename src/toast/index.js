@@ -43,6 +43,8 @@ export default function Toast({
     </div>
   </div>;
 }
+
+Toast.displayName = 'Toast';
 Toast.propTypes = {
   icon: propTypes.node,
   type: propTypes.oneOf(['primary', 'success', 'warning', 'danger']).isRequired,

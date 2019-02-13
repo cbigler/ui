@@ -144,6 +144,8 @@ export default class InfoPopup extends Component {
     </span>;
   }
 }
+
+InfoPopup.displayName = 'InfoPopup';
 InfoPopup.propTypes = {
   infoIconColor: propTypes.string,
   singleLine: propTypes.bool,
@@ -165,6 +167,8 @@ export function InfoPopupCardWellHighlight(p) {
     </InfoPopup>
   );
 }
+
+InfoPopupCardWellHighlight.displayName = 'InfoPopupCardWellHighlight';
 InfoPopupCardWellHighlight.propTypes = {
   target: propTypes.node.isRequired,
   children: propTypes.node.isRequired,

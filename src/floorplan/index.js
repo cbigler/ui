@@ -806,6 +806,8 @@ export default class Floorplan extends Component {
     );
   }
 }
+
+Floorplan.displayName = 'Floorplan';
 Floorplan.propTypes = {
   deviceSupportsTouch: propTypes.bool,
 

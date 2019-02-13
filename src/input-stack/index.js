@@ -10,6 +10,8 @@ export function InputStackGroup({children}) {
     <div>{children}</div>
   </div>;
 }
+
+InputStackGroup.displayName = 'InputStackGroup';
 InputStackGroup.propTypes = {
   children: propTypes.node,
 };
@@ -44,6 +46,8 @@ export class InputStackItem extends React.Component {
     </div>;
   }
 }
+
+InputStackItem.displayName = 'InputStackItem';
 InputStackItem.propTypes = {
   invalid: propTypes.bool,
   focused: propTypes.bool,

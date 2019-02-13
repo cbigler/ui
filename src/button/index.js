@@ -5,7 +5,7 @@ import propTypes from 'prop-types';
 import styles from './styles.scss';
 
 export default function Button(props) {
-  const { className, size, children } = props;
+  const { size, children } = props;
   const restProps = Object.assign({}, props, {
     className: undefined,
     size: undefined,
@@ -28,3 +28,5 @@ Button.propTypes = {
   size: propTypes.oneOf(['small', 'large']),
   disabled: propTypes.bool,
 };
+
+Button.displayName = 'Button';

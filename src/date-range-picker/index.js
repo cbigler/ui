@@ -71,6 +71,8 @@ export default function DateRangePicker(props) {
     {commonRangeList}
   </div>;
 }
+
+DateRangePicker.displayName = 'DateRangePicker';
 DateRangePicker.propTypes = {
   onChange: propTypes.func,
   onFocusChange: propTypes.func,

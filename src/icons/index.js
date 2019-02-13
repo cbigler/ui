@@ -1218,6 +1218,7 @@ for (let iconName in ICONS) {
 
     }));
   }
+  ICON_COMPONENTS[iconName].displayName = iconName;
   ICON_COMPONENTS[iconName].propTypes = {
     color: propTypes.string,
     width: propTypes.number,

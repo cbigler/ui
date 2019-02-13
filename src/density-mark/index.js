@@ -11,6 +11,8 @@ export default function DensityMark({size, color}) {
     </svg>
   );
 }
+
+DensityMark.displayName = 'DensityMark';
 DensityMark.propTypes = {
   size: propTypes.number,
   color: propTypes.string,
@@ -43,6 +45,8 @@ export function DensityLogo({size, color}) {
     </svg>
   </div>;
 }
+
+DensityLogo.displayName = 'DensityLogo';
 DensityLogo.propTypes = {
   size: propTypes.number,
   color: propTypes.string,

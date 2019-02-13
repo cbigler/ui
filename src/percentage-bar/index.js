@@ -61,6 +61,8 @@ export default class PercentageBar extends React.Component {
     </div>;
   }
 }
+
+PercentageBar.displayName = 'PercentageBar';
 PercentageBar.propTypes = {
   percentage: propTypes.number.isRequired,
   percentageFormatter: propTypes.func,

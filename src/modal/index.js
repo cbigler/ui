@@ -20,3 +20,5 @@ export default function Modal({
     </div>
   </div>;
 }
+
+Modal.displayName = 'Modal';

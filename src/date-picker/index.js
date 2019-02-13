@@ -62,6 +62,8 @@ export default function DatePicker(props) {
     </div>
   </div>;
 }
+
+DatePicker.displayName = 'DatePicker';
 DatePicker.propTypes = {
   date: propTypes.any.isRequired,
   onChange: propTypes.func,

@@ -94,6 +94,8 @@ export default class DashboardReportGrid extends Component {
     }
   }
 }
+
+DashboardReportGrid.displayName = 'DashboardReportGrid';
 DashboardReportGrid.defaultProps = {
   mobileBreakpoint: 768,
 };

@@ -14,3 +14,5 @@ export default function Switch({value, disabled, onChange}) {
     <label htmlFor={`switch-${uniqueId}`}></label>
   </div>
 }
+
+Switch.displayName = 'Switch';

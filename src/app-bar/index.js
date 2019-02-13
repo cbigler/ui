@@ -12,3 +12,5 @@ export default function AppBar({
     {rightSpan}
   </div>;
 }
+
+AppBar.displayName = 'AppBar';

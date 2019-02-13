@@ -20,6 +20,8 @@ export default function RadioButton({checked, onChange, text}) {
     >{text}</label>
   </div>;
 }
+
+RadioButton.displayName = 'RadioButton';
 RadioButton.propTypes = {
   checked: propTypes.bool,
   onChange: propTypes.func,

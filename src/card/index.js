@@ -101,3 +101,11 @@ export class CardTable extends Component {
     );
   }
 }
+
+Card.displayName = 'Card';
+CardBody.displayName = 'CardBody';
+CardHeader.displayName = 'CardHeader';
+CardLoading.displayName = 'CardLoading';
+CardTable.displayName = 'CardTable';
+CardWell.displayName = 'CardWell';
+CardWellHighlight.displayName = 'CardWellHighlight';

@@ -6,3 +6,5 @@ export default function AppScrollView({ children, backgroundColor='#FFFFFF' }) {
     className={styles.appScrollView}
     style={{ backgroundColor }}>{children}</div>;
 }
+
+AppScrollView.displayName = 'AppScrollView';

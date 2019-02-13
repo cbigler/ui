@@ -24,6 +24,8 @@ export default function InputBox(props) {
     />;
   }
 }
+
+InputBox.displayName = 'InputBox';
 InputBox.propTypes = {
   type: propTypes.string,
   value: propTypes.any,
@@ -167,6 +169,8 @@ export class SelectBox extends React.Component {
     </div>;
   }
 }
+
+SelectBox.displayName = 'SelectBox';
 SelectBox.propTypes = {
   value: propTypes.any,
   choices: propTypes.arrayOf(propTypes.shape({

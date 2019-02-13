@@ -55,6 +55,7 @@ export default function PagerButtonGroup({
   </div>;
 }
 
+PagerButtonGroup.displayName = 'PagerButtonGroup';
 PagerButtonGroup.propTypes = {
   onClickNext: propTypes.func.isRequired,
   onClickPrevious: propTypes.func.isRequired,
