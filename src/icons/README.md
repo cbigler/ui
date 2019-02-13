@@ -14,14 +14,14 @@ Use the icon:
 import { Icons } from '@density/ui';
 
 // In a react component:
-<Icons.IconImageUpload />
+<Icons.ImageUpload />
 
 // With a special color
-<Icons.IconImageUpload color="primary" />
-<Icons.IconImageUpload color="#e59da1" />
+<Icons.ImageUpload color="primary" />
+<Icons.ImageUpload color="#e59da1" />
 
 // With a special size (in pixels)
-<Icons.IconImageUpload width={14} height={14} />
+<Icons.ImageUpload width={14} height={14} />
 ```
 
 ## Adding icons

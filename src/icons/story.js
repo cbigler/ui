@@ -1,27 +1,25 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 
 import colorVariables from '../../variables/colors.json';
 
 import Icons from './index';
-const { IconImageUpload } = Icons;
 
 storiesOf('Icons', module)
   .add('A sample icon', () => (
-    <IconImageUpload />
+    <Icons.ImageUpload />
   ))
   .add('A sample icon in brand-primary color', () => (
-    <IconImageUpload color="primary" />
+    <Icons.ImageUpload color="primary" />
   ))
   .add('A sample icon in gray-darker color', () => (
-    <IconImageUpload color="darker" />
+    <Icons.ImageUpload color="darker" />
   ))
   .add('A sample icon in a random hex color', () => (
-    <IconImageUpload color="#FFBA08" />
+    <Icons.ImageUpload color="#FFBA08" />
   ))
   .add(`A sample icon that's sized smaller`, () => (
-    <IconImageUpload width={10} height={10} />
+    <Icons.ImageUpload width={10} height={10} />
   ))
   .add('All Icons', () => (
     <div style={{

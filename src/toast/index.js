@@ -30,7 +30,7 @@ export default function Toast({
     </div>
     <div className={styles.toastBody}>
       {onDismiss ? <div className={styles.toastDismiss} onClick={onDismiss}>
-        <Icons.IconClose
+        <Icons.Close
           width={10}
           height={10}
           color={colorVariables.grayCinder}

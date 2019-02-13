@@ -50,7 +50,7 @@ export default function DateRangePicker(props) {
         listBoxWidth={200 /* px */}
         value={{
           id: 'icon',
-          label: <Icons.IconCalendar width={14} height={14} color="dark" />,
+          label: <Icons.Calendar width={14} height={14} color="dark" />,
         }}
         choices={props.commonRanges.map(range => Object.assign({}, range, {
           label: <span>{range.name || range.label}</span>,

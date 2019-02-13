@@ -35,7 +35,7 @@ storiesOf('Card', module)
             foo bar baz
           </InfoPopup>
           <span style={{marginLeft: 'auto'}}>
-            <Icons.IconRefresh color="primary" />
+            <Icons.Refresh color="primary" />
           </span>
         </CardHeader>
         <CardWell>

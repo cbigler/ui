@@ -9,20 +9,20 @@ import Icons from '../icons';
 
 storiesOf('Toast', module)
   .add('With multiline content', () => (
-    <Toast icon={<Icons.IconInfo color="#fff" />}>
+    <Toast icon={<Icons.Info color="#fff" />}>
       To link a doorway with a space, drag the doorway from below to a space on the left.
     </Toast>
   ))
   .add(`With title`, () => (
     <Toast
       title="Hello World?"
-      icon={<Icons.IconCheck color="#fff" />}
+      icon={<Icons.Check color="#fff" />}
     >
       Your password has been updated.
     </Toast>
   ))
   .add('Success', () => (
-    <Toast type="success" icon={<Icons.IconCheck color="#fff" />}>
+    <Toast type="success" icon={<Icons.Check color="#fff" />}>
       To link a doorway with a space, drag the doorway from below to a space on the left.
     </Toast>
   ))
@@ -30,7 +30,7 @@ storiesOf('Toast', module)
     <Toast
       type="success"
       title="Password Updated"
-      icon={<Icons.IconCheck color="#fff" />}
+      icon={<Icons.Check color="#fff" />}
     >
       Your password has been updated.
     </Toast>
@@ -40,7 +40,7 @@ storiesOf('Toast', module)
       <Toast
         type="success"
         title="Password Updated"
-        icon={<Icons.IconCheck color="#fff" />}
+        icon={<Icons.Check color="#fff" />}
       >
         Your password has been updated.
       </Toast>
@@ -51,7 +51,7 @@ storiesOf('Toast', module)
       <Toast
         type="success"
         title="Password Updated"
-        icon={<Icons.IconCheck color="#fff" />}
+        icon={<Icons.Check color="#fff" />}
         onDismiss={action('Dismissing toast')}
       >
         Your password has been updated.
@@ -63,19 +63,19 @@ storiesOf('Toast', module)
       <Toast
         type="success"
         title="Password Updated"
-        icon={<Icons.IconCheck color="#fff" />}
+        icon={<Icons.Check color="#fff" />}
       >
         Your password has been successfully updated. foo bar baz
       </Toast>
     </div>
   ))
   .add('Warning', () => (
-    <Toast type="warning" icon={<Icons.IconInfo color="#fff" />}>
+    <Toast type="warning" icon={<Icons.Info color="#fff" />}>
       To link a doorway with a space, drag the doorway from below to a space on the left.
     </Toast>
   ))
   .add('Danger', () => (
-    <Toast type="danger" icon={<Icons.IconLinkBroken color="#fff" />}>
+    <Toast type="danger" icon={<Icons.LinkBroken color="#fff" />}>
       Danger danger, Mr. Ranger!
     </Toast>
   ))

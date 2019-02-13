@@ -122,7 +122,7 @@ export default class InfoPopup extends Component {
         })}
         ref={r => { this.icon = r; }}
       >
-        {target || <Icons.IconInfo
+        {target || <Icons.Info
           width={20}
           height={20}
           color={infoIconColor || 'primary'}

@@ -491,7 +491,7 @@ export default class Floorplan extends Component {
             left: (this.state.lastMouseX / scaleFactor),
             top: (this.state.lastMouseY / scaleFactor),
           }}>
-            <Icons.IconPlus color="primary" />
+            <Icons.Plus color="primary" />
             <span className={styles.floorplanCursorTag}>
               {cursorTagText || 'Click to add a doorway'}
             </span>

@@ -36,7 +36,7 @@ export default function DatePicker(props) {
           }
         }}
       >
-        <Icons.IconArrowLeft color={props.arrowLeftDisabled ? 'gray' : 'primary'} width={20} height={20} />
+        <Icons.ArrowLeft color={props.arrowLeftDisabled ? 'gray' : 'primary'} width={20} height={20} />
       </div>
       <SingleDatePicker
         numberOfMonths={1}
@@ -57,7 +57,7 @@ export default function DatePicker(props) {
           }
         }}
       >
-        <Icons.IconArrowRight color={props.arrowRightDisabled ? 'gray' : 'primary'} width={20} height={20} />
+        <Icons.ArrowRight color={props.arrowRightDisabled ? 'gray' : 'primary'} width={20} height={20} />
       </div>
     </div>
   </div>;
