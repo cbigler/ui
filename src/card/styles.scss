@@ -25,7 +25,7 @@
   font-weight: $font-weight;
 
   padding: $padding-vertical $padding-horizontal;
-  transform: translate(0px, 2px); /* font baseline hack for sailec */
+  transform: translate(0px, 2px); // font baseline hack for sailec
 
   display: flex;
   flex-direction: row;
@@ -88,7 +88,7 @@
 
 @mixin make-card-well-highlight($color: $brand-primary, $font-weight: $font-weight-3) {
   color: $color;
-  white-space: nowrap; /* don't wrap in the middle of a highlighted item */
+  white-space: nowrap; // don't wrap in the middle of a highlighted item
   font-weight: $font-weight;
 }
 

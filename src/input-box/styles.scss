@@ -79,7 +79,7 @@
   // Select box value - this is the always visible region that shows the currently selected item.
   &BoxValue {
     @extend %inputBoxSelectCommon;
-    height: (43px - 1px - 1px); /* (for borders) */
+    height: (43px - 1px - 1px); // (for borders)
 
     font-size: $font-size-base;
     color: $gray-cinder;

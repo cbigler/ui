@@ -5,9 +5,9 @@
 
 $percentage-bar-sailec-baseline-hack: 2px;
 
-$percentage-bar-container-height: 43px; /* The "row height" of the container */
-$percentage-bar-height: 4px; /* THe height of the shaded bar itself within the container */
-$percentage-bar-percentage-text-spacing: 8px; /* Spacing to the left of the formatted percentage*/
+$percentage-bar-container-height: 43px; // The "row height" of the container
+$percentage-bar-height: 4px; // The height of the shaded bar itself within the container
+$percentage-bar-percentage-text-spacing: 8px; // Spacing to the left of the formatted percentage
 
 .percentageBarContainer {
   font-family: $font-base;
@@ -21,7 +21,8 @@ $percentage-bar-percentage-text-spacing: 8px; /* Spacing to the left of the form
 
 // The utilization bar that visually represents space utilization in a horizontal fashion
 .percentageBar {
-  display: none; /* overridden in media query below */
+  // overridden in media query below
+  display: none;
   background-color: $gray-light;
 
   width: 100%;
@@ -38,7 +39,7 @@ $percentage-bar-percentage-text-spacing: 8px; /* Spacing to the left of the form
   }
 }
 .percentageBarColoredSection {
-  /* a width is set as an inline style in the component, which overrides the style set below */
+  // a width is set as an inline style in the component, which overrides the style set below
   width: 0%;
 
   background-color: $brand-primary;

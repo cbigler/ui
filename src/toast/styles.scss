@@ -11,7 +11,8 @@
 
   width: 100%;
 
-  border: 1px solid transparent; /* color overridden below based on toast type */
+  // color overridden below based on toast type
+  border: 1px solid transparent;
   border-radius: $border-radius-base;
 
   min-height: 72px;
