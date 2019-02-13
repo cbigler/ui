@@ -33,7 +33,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         // skip all of node_modules EXCEPT for modules > ES5
-        exclude: /node_modules\/(?![camelcase])/,
+        //exclude: /node_modules\/(?![camelcase])/,
         use: {
           loader: 'babel-loader',
           options: {
