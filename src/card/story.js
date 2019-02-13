@@ -447,40 +447,40 @@ storiesOf('Card', module)
       </CardBody>
     </Card>
   ))
-  .add('Indeterminate loader - toggled render', () => {
-    class IndeterminateLoaderToggleable extends React.Component {
-      constructor(props) {
-        super(props);
-        this.state = {loading: false};
-      }
-      render() {
-        const loader = this.state.loading ? <CardLoading indeterminate /> : null;
+  // .add('Indeterminate loader - toggled render', () => {
+  //   class IndeterminateLoaderToggleable extends React.Component {
+  //     constructor(props) {
+  //       super(props);
+  //       this.state = {loading: false};
+  //     }
+  //     render() {
+  //       const loader = this.state.loading ? <CardLoading indeterminate /> : null;
 
-        return <div>
-          <Button
-            onClick={()=> this.setState({loading: !this.state.loading})}
-            style={{"margin-bottom": "15px"}}
-          >Toggle loading</Button>
+  //       return <div>
+  //         <Button
+  //           onClick={()=> this.setState({loading: !this.state.loading})}
+  //           style={{"margin-bottom": "15px"}}
+  //         >Toggle loading</Button>
 
-          <Card>
-            {loader}
-            <CardHeader>
-              <div style={{display: 'flex'}}>
-                <span style={{flex: 1}}>Greeter</span>
-                <IndicatorDot style={{marginTop: 4}} type="success" label="Looks peachy" />
-              </div>
-              <div style={{display: 'flex', marginTop: 12, fontSize: 12, color: '#B4B8BF'}}>
-                <span style={{flex: 1}}>Subtitle</span>
-                <span>Type</span>
-              </div>
-            </CardHeader>
-            <CardBody>
-              <p>Hello World!</p>
-            </CardBody>
-          </Card>
-        </div>
-      }
-    }
+  //         <Card>
+  //           {loader}
+  //           <CardHeader>
+  //             <div style={{display: 'flex'}}>
+  //               <span style={{flex: 1}}>Greeter</span>
+  //               <IndicatorDot style={{marginTop: 4}} type="success" label="Looks peachy" />
+  //             </div>
+  //             <div style={{display: 'flex', marginTop: 12, fontSize: 12, color: '#B4B8BF'}}>
+  //               <span style={{flex: 1}}>Subtitle</span>
+  //               <span>Type</span>
+  //             </div>
+  //           </CardHeader>
+  //           <CardBody>
+  //             <p>Hello World!</p>
+  //           </CardBody>
+  //         </Card>
+  //       </div>
+  //     }
+  //   }
 
-    return <IndeterminateLoaderToggleable />;
-  })
+  //   return <IndeterminateLoaderToggleable />;
+  // })
