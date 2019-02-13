@@ -29,6 +29,7 @@ export {
 export {
   default as Card,
   CardBody,
+  CardHeader,
   CardLoading,
   CardTable,
   CardWell,
