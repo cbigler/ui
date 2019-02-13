@@ -1,6 +1,6 @@
 {
   "name": "@density/ui",
-  "version": "7.0.1",
+  "version": "7.0.2",
   "description": "A UI framework for density projects",
   "scripts": {
     "prepublishOnly": "./prepublish.sh",
