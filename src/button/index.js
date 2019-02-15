@@ -4,29 +4,36 @@ import propTypes from 'prop-types';
 
 import styles from './styles.scss';
 
-export default function Button(props) {
-  const { size, children } = props;
-  const restProps = Object.assign({}, props, {
-    className: undefined,
-    size: undefined,
-    children: undefined,
-  });
-
-  const buttonSize = ({
-    small: 'buttonSmall',
-    large: 'buttonLarge',
-  })[size];
-
-  return <button {...restProps} className={classnames(
-    styles.button,
-    size ? styles[buttonSize] : null,
-  )}>{children}</button>;
-}
-Button.propTypes = {
-  onClick: propTypes.func,
-  children: propTypes.node.isRequired,
-  size: propTypes.oneOf(['small', 'large']),
-  disabled: propTypes.bool,
+const BUTTON_SIZE_STYLES = {
+  small: styles.small,
+  large: styles.large,
 };
 
+const BUTTON_TYPE_STYLES = {
+  default: undefined,
+  primary: styles.primary,
+};
+
+export default function Button({
+  type,
+  size,
+  children,
+  disabled,
+
+  width,
+  height,
+
+  ...props
+}) {
+  return (
+    <button
+      {...props}
+      disabled={disabled}
+      className={classnames(styles.button, BUTTON_SIZE_STYLES[size], BUTTON_TYPE_STYLES[type])}
+      style={{width, height}}
+    >
+      {children}
+    </button>
+  );
+}
 Button.displayName = 'Button';

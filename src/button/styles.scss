@@ -3,49 +3,30 @@
 @import "../../variables/fonts.json";
 @import "../../variables/spacing.json";
 
-// Create a normal button.
-@mixin make-button(
-  $color: $brand-primary,
-  $button-height: 48px,
-  $font-size: $font-size-base,
-  $font-weight: $font-weight-base,
-  $text-color: #fff,
-  $block: true
-) {
-  // Block buttons are 100% in width and act like divs.
-  @if $block {
-    display: block;
-    width: 100%;
-  } @else {
-    // Non-block buttons act like text and are not full width.
-    display: inline;
-    width: auto;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
+.button {
+  box-sizing: border-box;
 
-  height: $button-height;
-  color: $text-color;
-  background-color: $color;
+  height: 40px;
+  color: $gray-darkest;
+  background-color: #fff;
   outline: none;
-  border-width: 0px;
+  border: 1px solid $gray-darker;
   border-radius: $border-radius-base;
 
   font-family: $font-base;
-  font-size: $font-size;
-  font-weight: $font-weight;
+  font-size: 14px;
+  font-weight: bold;
   text-align: center;
 
   cursor: pointer;
   user-select: none;
   transition: all 100ms ease-in-out;
 
-  &:hover {
-    opacity: 0.9;
-  }
-  &:active {
-    opacity: 1;
-  }
+  padding-left: 16px;
+  padding-right: 16px;
+
+  &:hover { opacity: 0.9; }
+  &:active { opacity: 1; }
   &:disabled {
     background-color: $gray;
     cursor: default;
@@ -53,30 +34,20 @@
   }
 }
 
-.button {
-  @include make-button(
-    $brand-primary,
-    $button-height: 43px,
-    $font-size: $font-size-4,
-    $font-weight: $font-weight-4,
-    $block: true
-  );
+.small {
+  font-weight: normal;
+  height: 24px;
+  font-size: 13px;
+  padding-left: 4px;
+  padding-right: 4px;
 }
-.buttonSmall {
-  @include make-button(
-    $brand-primary,
-    $button-height: 23px,
-    $font-size: $font-size-6,
-    $font-weight: $font-weight-6,
-    $block: false
-  );
+.large {
+  height: 50px;
+  font-size: 18px;
 }
-.buttonLarge {
-  @include make-button(
-    $brand-primary,
-    $button-height: 50px,
-    $font-size: $font-size-3,
-    $font-weight: $font-weight-3,
-    $block: true
-  );
+
+.primary {
+  color: #fff;
+  background-color: $brand-primary;
+  border-color: $brand-primary;
 }
