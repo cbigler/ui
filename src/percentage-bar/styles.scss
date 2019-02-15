@@ -3,8 +3,6 @@
 @import "../../variables/fonts.json";
 @import "../../variables/grid.json";
 
-$percentage-bar-sailec-baseline-hack: 2px;
-
 $percentage-bar-container-height: 43px; // The "row height" of the container
 $percentage-bar-height: 4px; // The height of the shaded bar itself within the container
 $percentage-bar-percentage-text-spacing: 8px; // Spacing to the left of the formatted percentage
@@ -29,10 +27,7 @@ $percentage-bar-percentage-text-spacing: 8px; // Spacing to the left of the form
   height: $percentage-bar-height;
   flex: 1;
 
-  margin-top: (
-    (($percentage-bar-container-height - $percentage-bar-height) / 2) -
-    $percentage-bar-sailec-baseline-hack
-  );
+  margin-top: ($percentage-bar-container-height - $percentage-bar-height) / 2;
 
   @media (min-width: $screen-xs-max) {
     display: inline-block;

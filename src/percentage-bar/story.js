@@ -2,7 +2,8 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import './styles.scss';
-import PercentageBar from './';
+import PercentageBar from './index';
+import fontVariables from '../../variables/fonts.json';
 
 const INFINITELY_LARGE_BREAK_WIDTH = 9999999999999999999;
 
@@ -32,9 +33,13 @@ storiesOf('PercentageBar', module)
   ))
   .add('When percentage=null', () => (
     <div>
-      <span style={{fontFamily: 'Sailec'}}>A null percentage:</span>
+      <span style={{fontFamily: fontVariables.fontBase}}>
+        A null percentage:
+      </span>
       <PercentageBar percentage={null} />
-      <span style={{fontFamily: 'Sailec'}}>A null percentage + percentageFormatter that returns null:</span>
+      <span style={{fontFamily: fontVariables.fontBase}}>
+        A null percentage + percentageFormatter that returns null:
+      </span>
       <PercentageBar percentage={null} percentageFormatter={n => null} />
     </div>
   ))

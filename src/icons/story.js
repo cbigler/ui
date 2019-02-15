@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import colorVariables from '../../variables/colors.json';
+import fontVariables from '../../variables/fonts.json';
 
 import Icons from './index';
 
@@ -32,7 +33,7 @@ storiesOf('Icons', module)
     }}>
       {Object.keys(Icons).map(iconName => {
         const IconComponent = Icons[iconName];
-        return <div key={iconName} style={{fontFamily: 'Sailec'}}>
+        return <div key={iconName} style={{fontFamily: fontVariables.fontBase}}>
           <IconComponent />
           <span style={{marginLeft: 10, fontSize: 14, verticalAlign: 4, color: colorVariables.grayDarker}}>{iconName}</span>
         </div>;

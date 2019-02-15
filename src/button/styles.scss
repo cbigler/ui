@@ -24,7 +24,6 @@
     padding-right: 10px;
   }
 
-  line-height: $button-height - 5px;
   height: $button-height;
   color: $text-color;
   background-color: $color;
@@ -40,10 +39,6 @@
   cursor: pointer;
   user-select: none;
   transition: all 100ms ease-in-out;
-
-  // Add some padding to the top of the button to fix Sailec baseline
-  // baseline problem FIXME: fix baseline problem
-  padding-top: 5px;
 
   &:hover {
     opacity: 0.9;
