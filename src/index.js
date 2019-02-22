@@ -1,6 +1,6 @@
 import './fonts';
 
-export { default as AppBar } from './app-bar';
+export { default as AppBar, AppBarContext, AppBarSection, AppBarTitle } from './app-bar';
 export { default as AppFrame } from './app-frame';
 export { default as AppPane } from './app-pane';
 export { default as AppScrollView } from './app-scroll-view';

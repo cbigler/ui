@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import AppBar, {AppBarSection, AppBarTitle} from './';
+import AppBar, {AppBarContext, AppBarSection, AppBarTitle} from './';
 
 storiesOf('AppBar', module)
   .add('With text', () => (
@@ -16,4 +16,12 @@ storiesOf('AppBar', module)
       </AppBarSection>
       <AppBarSection>ASDF</AppBarSection>
     </AppBar>
+  ))
+  .add('With TRANSPARENT context', () => (
+    <AppBarContext.Provider value="TRANSPARENT">
+      <AppBar>
+        <AppBarTitle>Title</AppBarTitle>
+        <AppBarSection>ASDF</AppBarSection>
+      </AppBar>
+    </AppBarContext.Provider>
   ))
