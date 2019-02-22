@@ -14,7 +14,9 @@ export function AppBarTitle({ children }) {
 
 export function AppBarSection({ children }) {
   return (
-    <span>{children}</span>
+    <span classNae={styles.appBarSection}>
+      {children}
+    </span>
   );
 }
 

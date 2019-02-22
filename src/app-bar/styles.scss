@@ -12,6 +12,11 @@
   border-bottom: 1px solid $gray-light;
 }
 
+.appBarSection {
+  display: flex;
+  align-items: center;
+}
+
 .appBarTitle {
   font-size: 24px;
   font-weight: bold;
