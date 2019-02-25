@@ -183,4 +183,6 @@ SelectBox.propTypes = {
     label: propTypes.node,
     disabled: propTypes.bool,
   })),
+  menuMaxHeight: propTypes.number,
+  placeholder: propTypes.string,
 };
