@@ -13,7 +13,7 @@ export { default as DensityMark, DensityLogo } from './density-mark';
 //export { default as Floorplan } from './floorplan';
 export { default as Icons } from './icons';
 export { default as InfoPopup, InfoPopupCardWellHighlight } from './info-popup';
-export { default as InputBox, SelectBox } from './input-box';
+export { default as InputBox, InputBoxContext, SelectBox } from './input-box';
 export { default as Modal } from './modal';
 export { default as PagerButtonGroup } from './pager-button-group';
 export { default as PercentageBar } from './percentage-bar';
