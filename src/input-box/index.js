@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import classnames from 'classnames';
 import propTypes from 'prop-types';
 
 import Icons from '../icons';
 
 import styles from './styles.scss';
+
+
+export const InputBoxContext = React.createContext(null);
 
 export default function InputBox(props) {
   switch (props.type) {
@@ -81,97 +84,100 @@ export class SelectBox extends React.Component {
       selectedValue = null;
     }
 
-    return <div className={classnames(styles.inputBoxSelectBox)} style={{width}}>
-      <div
-        id={id}
-        ref={r => { this.selectBoxValueRef = r; }}
-        className={classnames(styles.inputBoxSelectBoxValue, {
-          [styles.inputBoxSelectBoxValueDisabled]: disabled,
-          [styles.inputBoxSelectBoxValueOpened]: opened,
-        })}
-        tabIndex={disabled ? -1 : 0}
-        aria-expanded={opened}
-        aria-autocomplete="list"
+    return <InputBoxContext.Consumer>{context => (
+      <div className={classnames(styles.inputBoxSelectBox)} style={{width}}>
+        <div
+          id={id}
+          ref={r => { this.selectBoxValueRef = r; }}
+          className={classnames(styles.inputBoxSelectBoxValue, {
+            [styles.inputBoxSelectBoxValueDisabled]: disabled,
+            [styles.inputBoxSelectBoxValueOpened]: opened,
+            [styles.contextListView]: context === 'LIST_VIEW',
+          })}
+          tabIndex={disabled ? -1 : 0}
+          aria-expanded={opened}
+          aria-autocomplete="list"
 
-        onFocus={this.onMenuFocus}
-        onBlur={this.onMenuBlur}
-        onKeyDown={e => {
-          if (e.keyCode === 27 /* escape */) {
-            /* Blur the select value box, which closes the dropdown */
-            e.target.blur();
+          onFocus={this.onMenuFocus}
+          onBlur={this.onMenuBlur}
+          onKeyDown={e => {
+            if (e.keyCode === 27 /* escape */) {
+              /* Blur the select value box, which closes the dropdown */
+              e.target.blur();
+            }
+          }}
+          onMouseDown={e => {
+            if (this.state.opened) {
+              /* Prevent the default "focus" handler from re-opening the dropdown */
+              e.preventDefault();
+              /* Blur the select value box, which closes the dropdown */
+              this.selectBoxValueRef.blur();
+            }
+          }}
+        >
+          {selectedValue ?
+            <span>{selectedValue.label}</span> :
+            <span className={styles.inputBoxSelectPlaceholder}>
+              {placeholder || 'No selection'}
+            </span>
           }
-        }}
-        onMouseDown={e => {
-          if (this.state.opened) {
-            /* Prevent the default "focus" handler from re-opening the dropdown */
-            e.preventDefault();
-            /* Blur the select value box, which closes the dropdown */
-            this.selectBoxValueRef.blur();
-          }
-        }}
-      >
-        {selectedValue ?
-          <span>{selectedValue.label}</span> :
-          <span className={styles.inputBoxSelectPlaceholder}>
-            {placeholder || 'No selection'}
-          </span>
-        }
-        <div className={classnames(styles.inputBoxSelectBoxValueCaret, {
-          [styles.inputBoxSelectBoxValueCaretOpened]: opened,
-        })}>
-          <Icons.ChevronDown color="primary" width={12} height={12} />
+          <div className={classnames(styles.inputBoxSelectBoxValueCaret, {
+            [styles.inputBoxSelectBoxValueCaretOpened]: opened,
+          })}>
+            <Icons.ChevronDown color="primary" width={12} height={12} />
+          </div>
+        </div>
+
+        <div
+          role="listbox"
+          className={classnames(styles.inputBoxSelectBoxMenu, {
+            [styles.inputBoxSelectBoxMenuOpened]: opened,
+          })}
+          style={{
+            width: listBoxWidth || width,
+            maxHeight: menuMaxHeight,
+          }}
+        >
+          <ul className={styles.inputBoxSelectBoxMenuUl}>
+            {(choices || []).map(choice => {
+              const { id, label, disabled } = choice;
+              return <li
+                key={id}
+                id={`input-box-select-${String(id).replace(' ', '-')}`}
+                role="option"
+                className={classnames(styles.inputBoxSelectBoxMenuLi, {
+                  [styles.inputBoxSelectBoxMenuLiDisabled]: disabled,
+                })}
+                tabIndex={!choice.disabled && opened ? 0 : -1}
+                aria-selected={selectedValue && selectedValue.id === choice.id}
+
+                onFocus={this.onMenuFocus}
+                onBlur={this.onMenuBlur}
+                onKeyDown={e => {
+                  if (e.keyCode === 13 /* enter */) {
+                    /* Select this item in the menu */
+                    this.onMenuItemSelected(choice);
+                  } else if (e.keyCode === 27 /* escape */) {
+                    /* Blur this item, which closes the dropdown */
+                    e.target.blur();
+                  }
+                }}
+                onMouseDown={e => {
+                  /* Prevent click from focusing disabled elements */
+                  if (choice.disabled) { e.preventDefault(); }
+                }}
+                onClick={() => {
+                  /* Allow click to select elements that aren't disabled */
+                  if (!choice.disabled) { this.onMenuItemSelected(choice); }
+                }}
+              >
+                {label}
+              </li>;
+            })}
+          </ul>
         </div>
       </div>
-
-      <div
-        role="listbox"
-        className={classnames(styles.inputBoxSelectBoxMenu, {
-          [styles.inputBoxSelectBoxMenuOpened]: opened,
-        })}
-        style={{
-          width: listBoxWidth || width,
-          maxHeight: menuMaxHeight,
-        }}
-      >
-        <ul className={styles.inputBoxSelectBoxMenuUl}>
-          {(choices || []).map(choice => {
-            const { id, label, disabled } = choice;
-            return <li
-              key={id}
-              id={`input-box-select-${String(id).replace(' ', '-')}`}
-              role="option"
-              className={classnames(styles.inputBoxSelectBoxMenuLi, {
-                [styles.inputBoxSelectBoxMenuLiDisabled]: disabled,
-              })}
-              tabIndex={!choice.disabled && opened ? 0 : -1}
-              aria-selected={selectedValue && selectedValue.id === choice.id}
-
-              onFocus={this.onMenuFocus}
-              onBlur={this.onMenuBlur}
-              onKeyDown={e => {
-                if (e.keyCode === 13 /* enter */) {
-                  /* Select this item in the menu */
-                  this.onMenuItemSelected(choice);
-                } else if (e.keyCode === 27 /* escape */) {
-                  /* Blur this item, which closes the dropdown */
-                  e.target.blur();
-                }
-              }}
-              onMouseDown={e => {
-                /* Prevent click from focusing disabled elements */
-                if (choice.disabled) { e.preventDefault(); }
-              }}
-              onClick={() => {
-                /* Allow click to select elements that aren't disabled */
-                if (!choice.disabled) { this.onMenuItemSelected(choice); }
-              }}
-            >
-              {label}
-            </li>;
-          })}
-        </ul>
-      </div>
-    </div>;
+    )}</InputBoxContext.Consumer>;
   }
 }
 

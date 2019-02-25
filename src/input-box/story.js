@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import './styles.scss';
-import InputBox from './index';
+import InputBox, { InputBoxContext } from './index';
 
 storiesOf('InputBox', module)
   .add('Empty', () => (
@@ -128,4 +128,9 @@ storiesOf('InputBox', module)
   ))
   .add('select box with custom width', () => (
     <InputBox type="select" width={300} />
+  ))
+  .add('select box with "LIST_VIEW" context', () => (
+    <InputBoxContext.Provider value="LIST_VIEW">
+      <InputBox type="select" width={300} />
+    </InputBoxContext.Provider>
   ))

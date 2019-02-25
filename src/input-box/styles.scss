@@ -185,3 +185,10 @@
     color: $gray;
   }
 }
+
+
+// CONTEXT-SPECIFIC RULES
+.inputBoxSelectBoxValue.contextListView {
+  border: none;
+  background: none;
+}
