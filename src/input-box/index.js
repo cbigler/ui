@@ -66,7 +66,7 @@ export class SelectBox extends React.Component {
   }
 
   render() {
-    const { width, listBoxWidth, value, choices, id, disabled } = this.props;
+    const { width, listBoxWidth, value, choices, id, disabled, placeholder, menuMaxHeight } = this.props;
     const { opened } = this.state;
 
     // Allow `value` to either be:
@@ -112,7 +112,9 @@ export class SelectBox extends React.Component {
       >
         {selectedValue ?
           <span>{selectedValue.label}</span> :
-          <span className={styles.inputBoxSelectPlaceholder}>No selection</span>
+          <span className={styles.inputBoxSelectPlaceholder}>
+            {placeholder || 'No selection'}
+          </span>
         }
         <div className={classnames(styles.inputBoxSelectBoxValueCaret, {
           [styles.inputBoxSelectBoxValueCaretOpened]: opened,
@@ -126,7 +128,10 @@ export class SelectBox extends React.Component {
         className={classnames(styles.inputBoxSelectBoxMenu, {
           [styles.inputBoxSelectBoxMenuOpened]: opened,
         })}
-        style={{width: listBoxWidth || width}}
+        style={{
+          width: listBoxWidth || width,
+          maxHeight: menuMaxHeight,
+        }}
       >
         <ul className={styles.inputBoxSelectBoxMenuUl}>
           {(choices || []).map(choice => {

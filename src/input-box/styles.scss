@@ -133,6 +133,8 @@
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 100ms ease-in-out;
     user-select: none;
+    max-height: 500px;
+    overflow-y: auto;
 
     // When opened, fade in the select box and enable pointer events.
     // NOTE: when the select box is closed, it isn't given `display: none`, because giving it that
