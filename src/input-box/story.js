@@ -70,6 +70,53 @@ storiesOf('InputBox', module)
       onChange={action("selected")}
     />
   ))
+  .add('type=select with placeholder', () => (
+    <InputBox
+      type="select"
+      choices={[]}
+      placeholder="Custom placeholder"
+      onChange={action("selected")}
+    />
+  ))
+  .add('type=select with a ton of items that scrolls inside the select area and a max height', () => (
+    <InputBox
+      type="select"
+      choices={[
+        {id: 1, label: 'foo'},
+        {id: 2, label: 'foo'},
+        {id: 3, label: 'foo'},
+        {id: 4, label: 'foo'},
+        {id: 5, label: 'foo'},
+        {id: 6, label: 'foo'},
+        {id: 7, label: 'foo'},
+        {id: 8, label: 'foo'},
+        {id: 9, label: 'foo'},
+        {id: 10, label: 'foo'},
+        {id: 11, label: 'foo'},
+        {id: 12, label: 'foo'},
+        {id: 13, label: 'foo'},
+        {id: 14, label: 'foo'},
+        {id: 15, label: 'foo'},
+        {id: 16, label: 'foo'},
+        {id: 17, label: 'foo'},
+        {id: 18, label: 'foo'},
+        {id: 19, label: 'foo'},
+        {id: 20, label: 'foo'},
+        {id: 21, label: 'foo'},
+        {id: 22, label: 'foo'},
+        {id: 23, label: 'foo'},
+        {id: 24, label: 'foo'},
+        {id: 25, label: 'foo'},
+        {id: 26, label: 'foo'},
+        {id: 27, label: 'foo'},
+        {id: 28, label: 'foo'},
+        {id: 29, label: 'foo'},
+        {id: 30, label: 'foo'},
+      ]}
+      onChange={action("selected")}
+      menuMaxHeight={500}
+    />
+  ))
   .add('disabled box', () => (
     <InputBox disabled placeholder="I am disabled" />
   ))
