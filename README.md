@@ -134,12 +134,7 @@ Otherwise, include `node_modules/normalize.css/normalize.css` in your css / sass
 npm i -S @density/ui
 ```
 
-If you want the Density font (Sailec), import into them into your main bundle:
-```
-import { fonts } from '@density/ui';
-```
-
-Before the the package can be used, you'll need to satisfy all of its peerdependencies by installing them.
+Before the package can be used, you'll need to satisfy all of its peerdependencies by installing them.
 
 3. Use a component:
 ```

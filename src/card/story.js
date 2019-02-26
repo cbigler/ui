@@ -5,6 +5,7 @@ import Card, {CardBody, CardHeader, CardLoading, CardWell, CardWellHighlight, Ca
 import Button from '../button/index';
 import InfoPopup from '../info-popup';
 import Icons from '../icons';
+import fontVariables from '../../variables/fonts.json';
 
 storiesOf('Card', module)
   .add('Card', () => (
@@ -201,7 +202,7 @@ storiesOf('Card', module)
   ))
   .add('Responsive Card Well', () => (
     <div style={{resize: 'both', overflow: 'auto'}}>
-      <span style={{fontFamily: 'Sailec'}}>Resize the card horizontally to see its responsive behavior!</span>
+      <span style={{fontFamily: fontVariables.fontBase}}>Resize the card horizontally to see its responsive behavior!</span>
       <br/>
       <Card style={{resize: 'horizontal', overflow: 'auto'}}>
         <CardWell>
