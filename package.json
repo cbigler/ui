@@ -1,6 +1,6 @@
 {
   "name": "@density/ui",
-  "version": "7.1.8",
+  "version": "7.1.9",
   "description": "A UI framework for density projects",
   "scripts": {
     "build-storybook": "build-storybook",
