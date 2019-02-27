@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import classnames from 'classnames';
 import propTypes from 'prop-types';
 
@@ -6,25 +6,54 @@ import Icons from '../icons';
 
 import styles from './styles.scss';
 
+// Classes to merge in, depending on context
+const CONTEXT_CLASSES = {
+  'LIST_VIEW': styles.contextListView
+};
 
 export const InputBoxContext = React.createContext(null);
 
-export default function InputBox(props) {
+export default function InputBox({leftIcon, ...props}) {
+  const [focused, setFocus] = useState(false);
+  const input = useRef();
+
   switch (props.type) {
+
   case 'select':
     return <SelectBox {...props} />;
+
   case 'textarea':
     return <textarea
       {...props}
       style={{width: props.width}}
-      className={classnames(styles.inputBox, styles.inputBoxTextarea)}
+      className={styles.inputBoxTextarea}
     />;
+
   default:
-    return <input
-      {...props}
-      style={{width: props.width}}
-      className={classnames(styles.inputBox, props.disabled ? styles.inputBoxDisabled : null)}
-    />;
+    return (
+      <div
+        className={classnames(styles.inputBox, {
+          [styles.inputBoxDisabled]: props.disabled,
+          [styles.inputBoxFocused]: focused,
+          [styles.inputBoxContainsIcon]: Boolean(leftIcon),
+        })}
+        style={{width: props.width}}
+        onClick={() => {
+          if (input && input.current) {
+            input.current.focus();
+          }
+        }}
+      >
+        {leftIcon ? <div className={styles.leftIcon}>{leftIcon}</div> : null}
+        <input
+          {...props}
+          type="text"
+          ref={input}
+          onFocus={() => setFocus(true)}
+          onBlur={() => setFocus(false)}
+        />
+      </div>
+    );
   }
 }
 
@@ -89,10 +118,9 @@ export class SelectBox extends React.Component {
         <div
           id={id}
           ref={r => { this.selectBoxValueRef = r; }}
-          className={classnames(styles.inputBoxSelectBoxValue, {
+          className={classnames(CONTEXT_CLASSES[context], styles.inputBoxSelectBoxValue, {
             [styles.inputBoxSelectBoxValueDisabled]: disabled,
             [styles.inputBoxSelectBoxValueOpened]: opened,
-            [styles.contextListView]: context === 'LIST_VIEW',
           })}
           tabIndex={disabled ? -1 : 0}
           aria-expanded={opened}
@@ -130,7 +158,7 @@ export class SelectBox extends React.Component {
 
         <div
           role="listbox"
-          className={classnames(styles.inputBoxSelectBoxMenu, {
+          className={classnames(CONTEXT_CLASSES[context], styles.inputBoxSelectBoxMenu, {
             [styles.inputBoxSelectBoxMenuOpened]: opened,
           })}
           style={{
@@ -145,7 +173,7 @@ export class SelectBox extends React.Component {
                 key={id}
                 id={`input-box-select-${String(id).replace(' ', '-')}`}
                 role="option"
-                className={classnames(styles.inputBoxSelectBoxMenuLi, {
+                className={classnames(CONTEXT_CLASSES[context], styles.inputBoxSelectBoxMenuLi, {
                   [styles.inputBoxSelectBoxMenuLiDisabled]: disabled,
                 })}
                 tabIndex={!choice.disabled && opened ? 0 : -1}
