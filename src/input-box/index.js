@@ -132,6 +132,7 @@ export class SelectBox extends React.Component {
           role="listbox"
           className={classnames(styles.inputBoxSelectBoxMenu, {
             [styles.inputBoxSelectBoxMenuOpened]: opened,
+            [styles.contextListView]: context === 'LIST_VIEW',
           })}
           style={{
             width: listBoxWidth || width,

@@ -187,7 +187,14 @@
 
 
 // CONTEXT-SPECIFIC RULES
-.inputBoxSelectBoxValue.contextListView {
-  border: none;
+.contextListView.inputBoxSelectBoxValue {
+  border: 1px solid transparent;
   background: none;
+  height: 34px;
+}
+.contextListView.inputBoxSelectBoxValue.inputBoxSelectBoxValueOpened {
+  border: 1px solid $brand-primary;
+}
+.contextListView.inputBoxSelectBoxMenu {
+  top: 39px;
 }
