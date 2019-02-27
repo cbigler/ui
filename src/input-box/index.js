@@ -44,7 +44,7 @@ export default function InputBox({leftIcon, ...props}) {
           }
         }}
       >
-        {leftIcon}
+        {leftIcon ? <div className={styles.leftIcon}>{leftIcon}</div> : null}
         <input
           {...props}
           type="text"
