@@ -6,6 +6,10 @@ import Icons from '../icons';
 
 import styles from './styles.scss';
 
+// Classes to merge in, depending on context
+const CONTEXT_CLASSES = {
+  'LIST_VIEW': styles.contextListView
+};
 
 export const InputBoxContext = React.createContext(null);
 
@@ -114,10 +118,9 @@ export class SelectBox extends React.Component {
         <div
           id={id}
           ref={r => { this.selectBoxValueRef = r; }}
-          className={classnames(styles.inputBoxSelectBoxValue, {
+          className={classnames(CONTEXT_CLASSES[context], styles.inputBoxSelectBoxValue, {
             [styles.inputBoxSelectBoxValueDisabled]: disabled,
             [styles.inputBoxSelectBoxValueOpened]: opened,
-            [styles.contextListView]: context === 'LIST_VIEW',
           })}
           tabIndex={disabled ? -1 : 0}
           aria-expanded={opened}
@@ -155,7 +158,7 @@ export class SelectBox extends React.Component {
 
         <div
           role="listbox"
-          className={classnames(styles.inputBoxSelectBoxMenu, {
+          className={classnames(CONTEXT_CLASSES[context], styles.inputBoxSelectBoxMenu, {
             [styles.inputBoxSelectBoxMenuOpened]: opened,
           })}
           style={{
@@ -170,7 +173,7 @@ export class SelectBox extends React.Component {
                 key={id}
                 id={`input-box-select-${String(id).replace(' ', '-')}`}
                 role="option"
-                className={classnames(styles.inputBoxSelectBoxMenuLi, {
+                className={classnames(CONTEXT_CLASSES[context], styles.inputBoxSelectBoxMenuLi, {
                   [styles.inputBoxSelectBoxMenuLiDisabled]: disabled,
                 })}
                 tabIndex={!choice.disabled && opened ? 0 : -1}
