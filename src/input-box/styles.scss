@@ -8,7 +8,7 @@
   align-items: center;
 
   width: 200px;
-  height: (40px - 1px - 1px); /* 1px on each side for borders */
+  height: (43px - 1px - 1px); /* 1px on each side for borders */
   border: 1px solid $gray-dark;
   border-radius: $border-radius-base;
   background-color: #fff;
@@ -21,7 +21,7 @@
 .inputBox input {
   border: 0px;
   background-color: transparent;
-  height: 40px;
+  height: 43px;
   margin-left: 16px;
   outline: none;
   flex-grow: 1;
@@ -92,7 +92,7 @@
 // Select box value - this is the always visible region that shows the currently selected item.
 .inputBoxSelectBoxValue {
   @extend %inputBoxSelectCommon;
-  height: (40px - 1px - 1px); // (for borders)
+  height: (43px - 1px - 1px); // (for borders)
 
   font-size: 16px;
   color: $gray-cinder;
