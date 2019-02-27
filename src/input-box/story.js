@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions';
 
 import './styles.scss';
 import InputBox, { InputBoxContext } from './index';
+import Icon from '../icons/index';
 
 storiesOf('InputBox', module)
   .add('Empty', () => (
@@ -14,6 +15,9 @@ storiesOf('InputBox', module)
   ))
   .add('type=password', () => (
     <InputBox type="password" placeholder="Type your password" />
+  ))
+  .add('type=text with icon on the left', () => (
+    <InputBox type="text" leftIcon={<Icon.Search />} placeholder="Search" />
   ))
   .add('type=select', () => (
     <InputBox

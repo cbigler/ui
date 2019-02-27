@@ -9,7 +9,7 @@ import styles from './styles.scss';
 
 export const InputBoxContext = React.createContext(null);
 
-export default function InputBox(props) {
+export default function InputBox({leftIcon, ...props}) {
 	const [focused, setFocus] = useState(false);
   const input = useRef();
 
@@ -31,7 +31,7 @@ export default function InputBox(props) {
         className={classnames(styles.inputBox, {
           [styles.inputBoxDisabled]: props.disabled,
           [styles.inputBoxFocused]: focused,
-          [styles.inputBoxContainsIcon]: Boolean(props.leftIcon),
+          [styles.inputBoxContainsIcon]: Boolean(leftIcon),
         })}
         style={{width: props.width}}
         onClick={() => {
@@ -40,7 +40,7 @@ export default function InputBox(props) {
           }
         }}
       >
-        {props.leftIcon}
+        {leftIcon}
         <input
           {...props}
           type="text"
