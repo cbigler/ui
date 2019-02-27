@@ -67,126 +67,119 @@
   user-select: none;
 }
 
-.inputBoxSelect {
-  &Box {
-    position: relative;
-    width: 200px;
+.inputBoxSelectBox {
+  position: relative;
+  width: 200px;
 
-    font-weight: normal;
-  }
+  font-weight: normal;
+}
 
-  // Select box value - this is the always visible region that shows the currently selected item.
-  &BoxValue {
-    @extend %inputBoxSelectCommon;
-    height: (43px - 1px - 1px); // (for borders)
+// Select box value - this is the always visible region that shows the currently selected item.
+.inputBoxSelectBoxValue {
+  @extend %inputBoxSelectCommon;
+  height: (43px - 1px - 1px); // (for borders)
 
-    font-size: $font-size-base;
-    color: $gray-cinder;
+  font-size: $font-size-base;
+  color: $gray-cinder;
 
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-    cursor: pointer;
-    outline: none;
+  cursor: pointer;
+  outline: none;
 
-    & > span {
-      margin-right: auto;
+  & > span {
+    margin-right: auto;
 
-      &:active {
-        opacity: 0.9;
-      }
-    }
-
-    &Caret {
-      height: 100%;
-      display: flex;
-      align-items: middle;
-    }
-    // When focused, flip the caret.
-    &CaretOpened  { transform: rotate(180deg); }
-
-    &Opened {
-      border-color: $brand-primary;
-    }
-
-    // When disabled, a selectbox is grayed out and can't be clicked.
-    &Disabled {
-      background-color: $gray-lighter;
-      pointer-events: none;
+    &:active {
+      opacity: 0.9;
     }
   }
+}
+.inputBoxSelectBoxValueCaret {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+// When focused, flip the caret.
+.inputBoxSelectBoxValueCaretOpened  { transform: rotate(180deg); }
+.inputBoxSelectBoxValueOpened { border-color: $brand-primary; }
 
-  // Select box menu - this is the menu that is hidden and shown when the user clicks on the select
-  // box value.
-  &BoxMenu {
-    @extend %inputBoxSelectCommon;
+// When disabled, a selectbox is grayed out and can't be clicked.
+.inputBoxSelectBoxValueDisabled {
+  background-color: $gray-lighter;
+  pointer-events: none;
+}
 
-    position: absolute;
-    top: 50px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 0px;
-    padding-right: 0px;
+// Select box menu - this is the menu that is hidden and shown when the user clicks on the select
+// box value.
+.inputBoxSelectBoxMenu {
+  @extend %inputBoxSelectCommon;
 
-    width: 100%;
+  position: absolute;
+  top: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
 
-    z-index: 100;
-    color: $gray-cinder;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    transition: all 100ms ease-in-out;
-    user-select: none;
-    overflow-y: auto;
+  width: 100%;
 
-    // When opened, fade in the select box and enable pointer events.
-    // NOTE: when the select box is closed, it isn't given `display: none`, because giving it that
-    // would make the animation difficult. Instead, it's given `pointer-events: none`, which causes
-    // any clicks to not occur on that element and instead be handled by the element underneath it.
-    opacity: 0;
-    pointer-events: none;
-    &Opened {
-      opacity: 1;
-      pointer-events: all;
-    }
+  z-index: 100;
+  color: $gray-cinder;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 100ms ease-in-out;
+  user-select: none;
+  overflow-y: auto;
+
+  // When opened, fade in the select box and enable pointer events.
+  // NOTE: when the select box is closed, it isn't given `display: none`, because giving it that
+  // would make the animation difficult. Instead, it's given `pointer-events: none`, which causes
+  // any clicks to not occur on that element and instead be handled by the element underneath it.
+  opacity: 0;
+  pointer-events: none;
+}
+.inputBoxSelectBoxMenuOpened {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.inputBoxSelectBoxMenuUl {
+  list-style-type: none;
+  padding-left: 0px;
+  margin: 0px;
+}
+
+.inputBoxSelectBoxMenuLi {
+  line-height: 36px;
+  font-size: $font-size-base;
+  cursor: pointer;
+
+  padding-left: 15px;
+  padding-right: 15px;
+  outline: none;
+
+  &:focus {
+    color: $brand-primary;
   }
 
-  &BoxMenuUl {
-    list-style-type: none;
-    padding-left: 0px;
-    margin: 0px;
+  &:hover {
+    background-color: $gray-lightest;
   }
+}
+.inputBoxSelectBoxMenuLiDisabled {
+  color: $gray-dark;
+}
 
-  &BoxMenuLi {
-    line-height: 36px;
-    font-size: $font-size-base;
-    cursor: pointer;
+.inputBoxSelectBoxItemHighlight {
+  margin-left: 10px;
+  color: $gray-dark;
+  font-style: italic;
+}
 
-    padding-left: 15px;
-    padding-right: 15px;
-    outline: none;
-
-    &:focus {
-      color: $brand-primary;
-    }
-
-    &:hover {
-      background-color: $gray-lightest;
-    }
-
-    &Disabled {
-      color: $gray-dark;
-    }
-  }
-
-  &BoxItemHighlight {
-    margin-left: 10px;
-    color: $gray-dark;
-    font-style: italic;
-  }
-
-  &Placeholder {
-    color: $gray;
-  }
+.inputBoxSelectPlaceholder {
+  color: $gray;
 }
 
 
