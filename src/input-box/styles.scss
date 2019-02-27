@@ -27,6 +27,7 @@
   flex-grow: 1;
   flex-shrink: 1;
 }
+.inputBox input::placeholder { color: $gray; }
 .inputBoxContainsIcon {
   padding-left: 16px;
 }
