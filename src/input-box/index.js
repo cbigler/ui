@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import classnames from 'classnames';
 import propTypes from 'prop-types';
 
@@ -13,22 +13,47 @@ const CONTEXT_CLASSES = {
 
 export const InputBoxContext = React.createContext(null);
 
-export default function InputBox(props) {
+export default function InputBox({leftIcon, ...props}) {
+  const [focused, setFocus] = useState(false);
+  const input = useRef();
+
   switch (props.type) {
+
   case 'select':
     return <SelectBox {...props} />;
+
   case 'textarea':
     return <textarea
       {...props}
       style={{width: props.width}}
-      className={classnames(styles.inputBox, styles.inputBoxTextarea)}
+      className={styles.inputBoxTextarea}
     />;
+
   default:
-    return <input
-      {...props}
-      style={{width: props.width}}
-      className={classnames(styles.inputBox, props.disabled ? styles.inputBoxDisabled : null)}
-    />;
+    return (
+      <div
+        className={classnames(styles.inputBox, {
+          [styles.inputBoxDisabled]: props.disabled,
+          [styles.inputBoxFocused]: focused,
+          [styles.inputBoxContainsIcon]: Boolean(leftIcon),
+        })}
+        style={{width: props.width}}
+        onClick={() => {
+          if (input && input.current) {
+            input.current.focus();
+          }
+        }}
+      >
+        {leftIcon ? <div className={styles.leftIcon}>{leftIcon}</div> : null}
+        <input
+          {...props}
+          type="text"
+          ref={input}
+          onFocus={() => setFocus(true)}
+          onBlur={() => setFocus(false)}
+        />
+      </div>
+    );
   }
 }
 
