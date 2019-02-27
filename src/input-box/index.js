@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import classnames from 'classnames';
 import propTypes from 'prop-types';
 
@@ -10,21 +10,46 @@ import styles from './styles.scss';
 export const InputBoxContext = React.createContext(null);
 
 export default function InputBox(props) {
+	const [focused, setFocus] = useState(false);
+  const input = useRef();
+
   switch (props.type) {
+
   case 'select':
     return <SelectBox {...props} />;
+
   case 'textarea':
     return <textarea
       {...props}
       style={{width: props.width}}
       className={classnames(styles.inputBox, styles.inputBoxTextarea)}
     />;
+
   default:
-    return <input
-      {...props}
-      style={{width: props.width}}
-      className={classnames(styles.inputBox, props.disabled ? styles.inputBoxDisabled : null)}
-    />;
+    return (
+      <div
+        className={classnames(styles.inputBox, {
+          [styles.inputBoxDisabled]: props.disabled,
+          [styles.inputBoxFocused]: focused,
+          [styles.inputBoxContainsIcon]: Boolean(props.leftIcon),
+        })}
+        style={{width: props.width}}
+        onClick={() => {
+          if (input && input.current) {
+            input.current.focus();
+          }
+        }}
+      >
+        {props.leftIcon}
+        <input
+          {...props}
+          type="text"
+          ref={input}
+          onFocus={() => setFocus(true)}
+          onBlur={() => setFocus(false)}
+        />
+      </div>
+    );
   }
 }
 

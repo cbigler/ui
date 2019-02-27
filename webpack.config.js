@@ -74,8 +74,8 @@ module.exports = {
             options: {
               importLoaders: 1,
               modules: true,
-              /* for example, drp-styles-button-1SZwRzu8 */
-              localIdentName: 'drp-[name]-[local]-[hash:base64:8]',
+              /* for example, dui-styles-button-1SZwRzu8 */
+              localIdentName: 'dui-[name]-[local]-[hash:base64:8]',
             },
           },
           {
