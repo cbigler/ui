@@ -36,13 +36,23 @@
 
 
 .inputBoxTextarea {
-  line-height: $line-height-base;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  display: flex;
+  align-items: center;
+
+  border: 1px solid $gray-dark;
+  border-radius: $border-radius-base;
+  background-color: #fff;
+  font-family: $font-base;
+  font-size: 16px;
+
+  padding: 16px;
+  resize: none;
+  outline: none;
 }
-.inputboxDisabled {
+.inputBoxTextarea:focus { border-color: $brand-primary; }
+.inputBoxDisabled {
   border-color: transparent;
-  background-color: $gray-lightest;
+  background-color: $gray-light;
   color: $gray;
 
   &::placeholder,
@@ -50,7 +60,7 @@
   &::-moz-placeholder,
   &:-ms-input-placeholder,
   &:-moz-placeholder {
-    color: $gray;
+    color: $gray-darker;
     opacity: 1; // Placeholders in firefox have opacity by default. Undo that.
   }
 }

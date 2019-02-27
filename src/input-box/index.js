@@ -26,7 +26,7 @@ export default function InputBox({leftIcon, ...props}) {
     return <textarea
       {...props}
       style={{width: props.width}}
-      className={classnames(styles.inputBox, styles.inputBoxTextarea)}
+      className={styles.inputBoxTextarea}
     />;
 
   default:

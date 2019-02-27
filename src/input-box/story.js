@@ -17,7 +17,7 @@ storiesOf('InputBox', module)
     <InputBox type="password" placeholder="Type your password" />
   ))
   .add('type=text with icon on the left', () => (
-    <InputBox type="text" leftIcon={<Icon.Search />} placeholder="Search" />
+    <InputBox type="text" leftIcon={<Icon.Search width={16} height={16} />} placeholder="Search" />
   ))
   .add('type=select', () => (
     <InputBox
