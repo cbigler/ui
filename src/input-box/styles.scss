@@ -16,7 +16,7 @@
   padding-right: 16px;
   cursor: text;
   font-family: $font-base;
-  font-size: 16px;
+  font-size: 14px;
 }
 .inputBoxFocused { border-color: $brand-primary; }
 .inputBox input {
@@ -44,7 +44,7 @@
   border-radius: $border-radius-base;
   background-color: #fff;
   font-family: $font-base;
-  font-size: 16px;
+  font-size: 14px;
 
   padding: 16px;
   resize: none;
@@ -96,7 +96,7 @@
   @extend %inputBoxSelectCommon;
   height: (43px - 1px - 1px); // (for borders)
 
-  font-size: 16px;
+  font-size: 14px;
   color: $gray-cinder;
 
   display: flex;
@@ -170,7 +170,7 @@
 
 .inputBoxSelectBoxMenuLi {
   line-height: 36px;
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
 
   padding-left: 15px;
