@@ -2,6 +2,12 @@ import React, { useContext } from 'react';
 import classnames from 'classnames';
 import styles from './styles.scss';
 
+// Classes to merge in, depending on context
+const CONTEXT_CLASSES = {
+  'TRANSPARENT': styles.contextTransparent,
+  'BOTTOM_ACTIONS': styles.contextBottomActions,
+};
+
 export const AppBarContext = React.createContext(null);
 
 export function AppBarTitle({ children }) {
@@ -22,9 +28,7 @@ export function AppBarSection({ children }) {
 
 export default function AppBar({ children }) {
   const context = useContext(AppBarContext);
-  const containerClasses = classnames(styles.appBar, {
-    [styles.appBarTransparent]: context === 'TRANSPARENT'
-  });
+  const containerClasses = classnames(CONTEXT_CLASSES[context], styles.appBar);
   return (
     <div className={containerClasses}>
       {children}

@@ -25,3 +25,11 @@ storiesOf('AppBar', module)
       </AppBar>
     </AppBarContext.Provider>
   ))
+  .add('With BOTTOM_ACTIONS context', () => (
+    <AppBarContext.Provider value="BOTTOM_ACTIONS">
+      <AppBar>
+        <AppBarTitle>Title</AppBarTitle>
+        <AppBarSection>ASDF</AppBarSection>
+      </AppBar>
+    </AppBarContext.Provider>
+  ))

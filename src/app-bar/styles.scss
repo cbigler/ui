@@ -23,7 +23,14 @@
 }
 
 // Rules for "TRANSPARENT" context
-.appBarTransparent {
+.contextTransparent.appBar {
   border-bottom: none;
   padding: 0;
+}
+
+// Rules for "BOTTOM_ACTIONS" context
+.contextBottomActions.appBar {
+  border-top: 1px solid $gray-light;
+  border-bottom: none;
+  background: $gray-lightest;
 }

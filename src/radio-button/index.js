@@ -4,19 +4,19 @@ import propTypes from 'prop-types';
 
 import styles from './styles.scss';
 
-export default function RadioButton({checked, onChange, text}) {
+export default function RadioButton({id, text, checked, onChange}) {
   const unique = v4();
   return <div className={styles.radioButton}>
     <input
       type="radio"
       className={styles.radioButtonInput}
-      id={`radio-button-${unique}`}
+      id={id || `radio-button-${unique}`}
       onChange={onChange}
       checked={checked}
     />
     <label
       className={styles.radioButtonLabel}
-      htmlFor={`radio-button-${unique}`}
+      htmlFor={id || `radio-button-${unique}`}
     >{text}</label>
   </div>;
 }
