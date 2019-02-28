@@ -23,3 +23,6 @@ storiesOf('Button', module)
   .add('Primary button', () => (
     <Button type="primary">Hello world!</Button>
   ))
+  .add('Primary + disabled button', () => (
+    <Button disabled type="primary">Hello world!</Button>
+  ))

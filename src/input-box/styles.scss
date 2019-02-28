@@ -6,6 +6,7 @@
 .inputBox {
   display: flex;
   align-items: center;
+  box-sizing: border-box;
 
   width: 200px;
   height: (43px - 1px - 1px); /* 1px on each side for borders */
@@ -85,6 +86,7 @@
 .inputBoxSelectBox {
   position: relative;
   width: 200px;
+  box-sizing: border-box;
 
   font-weight: normal;
 }

@@ -28,9 +28,9 @@
   &:hover { opacity: 0.9; }
   &:active { opacity: 1; }
   &:disabled {
-    background-color: $gray;
+    opacity: 0.5;
     cursor: default;
-    &:hover { opacity: 1; }
+    &:hover { opacity: 0.5; }
   }
 }
 
