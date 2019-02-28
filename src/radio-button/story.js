@@ -8,14 +8,14 @@ import RadioButton from './index';
 
 storiesOf('RadioButton', module)
   .add('Two radio buttons', () => (
-    <div>
-      <RadioButton text="Foo" onChange={action('Foo changed!')} />
-      <RadioButton text="Bar" onChange={action('Bar changed!')} />
+    <div onChange={action('Changed!')}>
+      <RadioButton text="Foo" name="story" value="foo" />
+      <RadioButton text="Bar" name="story" value="bar" />
     </div>
   ))
   .add('Two radio buttons, one locked on, one locked off', () => (
     <div>
-      <RadioButton text="Foo" checked={true} readOnly />
-      <RadioButton text="Bar" checked={false} readOnly />
+      <RadioButton text="Foo" name="story" value="foo" checked={true} disabled />
+      <RadioButton text="Bar" name="story" value="bar" checked={false} disabled />
     </div>
   ))

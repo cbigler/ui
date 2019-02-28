@@ -41,7 +41,7 @@ $radio-pressed-data-uri: "data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD
 }
 
 // Darken the radio button on hover.
-.radioButtonInput:not(:checked) + .radioButtonLabel:hover:before {
+.radioButtonInput:not(:checked):not(:disabled) + .radioButtonLabel:hover:before {
   background-image: url($radio-pressed-data-uri);
   opacity: 0.8;
 }
