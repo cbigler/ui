@@ -45,3 +45,13 @@ $radio-pressed-data-uri: "data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD
   background-image: url($radio-pressed-data-uri);
   opacity: 0.8;
 }
+
+
+// RULES FOR USER_FORM CONTEXT
+.contextUserForm.radioButton {
+  font-size: 16px;
+}
+.radioButtonInput + .contextUserForm.radioButtonLabel:before {
+  margin-right: 16px;
+  bottom: -3px;
+}

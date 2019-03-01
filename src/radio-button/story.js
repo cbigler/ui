@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import './styles.scss';
-import RadioButton from './index';
+import RadioButton, { RadioButtonContext } from './index';
 
 
 storiesOf('RadioButton', module)
@@ -23,5 +23,13 @@ storiesOf('RadioButton', module)
     <div>
       <RadioButton text="Foo" name="story" value="foo" checked={true} onClick={action('Clicked')} />
       <RadioButton text="Bar" name="story" value="bar" checked={false} onClick={action('Clicked')} />
+    </div>
+  ))
+  .add('With USER_FORM context', () => (
+    <div>
+      <RadioButtonContext.Provider value="USER_FORM">
+        <RadioButton text="Foo" name="story" value="foo" checked={true} onClick={action('Clicked')} />
+        <RadioButton text="Bar" name="story" value="bar" checked={false} onClick={action('Clicked')} />
+      </RadioButtonContext.Provider>
     </div>
   ))
