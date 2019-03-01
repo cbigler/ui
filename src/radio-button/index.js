@@ -4,9 +4,12 @@ import propTypes from 'prop-types';
 
 import styles from './styles.scss';
 
-export default function RadioButton({text, name, value, checked, disabled}) {
+export default function RadioButton({text, name, value, checked, disabled, onClick}) {
   const unique = v4();
-  return <div className={styles.radioButton}>
+  return <div
+    className={styles.radioButton}
+    onClick={() => onClick(value)}
+  >
     <input
       type="radio"
       className={styles.radioButtonInput}

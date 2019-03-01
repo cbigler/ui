@@ -8,7 +8,7 @@ import RadioButton from './index';
 
 storiesOf('RadioButton', module)
   .add('Two radio buttons', () => (
-    <div onChange={action('Changed!')}>
+    <div onChange={action('Changed')}>
       <RadioButton text="Foo" name="story" value="foo" />
       <RadioButton text="Bar" name="story" value="bar" />
     </div>
@@ -17,5 +17,11 @@ storiesOf('RadioButton', module)
     <div>
       <RadioButton text="Foo" name="story" value="foo" checked={true} disabled />
       <RadioButton text="Bar" name="story" value="bar" checked={false} disabled />
+    </div>
+  ))
+  .add('Two radio buttons controlled with click action', () => (
+    <div>
+      <RadioButton text="Foo" name="story" value="foo" checked={true} onClick={action('Clicked')} />
+      <RadioButton text="Bar" name="story" value="bar" checked={false} onClick={action('Clicked')} />
     </div>
   ))
