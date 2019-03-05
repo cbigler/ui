@@ -27,7 +27,7 @@ $cdn-path: "https://densityco.github.io/assets";
   src: url('#{$cdn-path}/fonts/aeonik-bold.06523ced.eot?#iefix') format('embedded-opentype'),
     url('#{$cdn-path}/fonts/aeonik-bold.07255666.woff2') format('woff2'),
     url('#{$cdn-path}/fonts/aeonik-bold.ccac5264.woff') format('woff');
-  font-weight: 500;
+  font-weight: 700;
   font-style: normal;
 }
 @font-face { /* BOLD */
@@ -46,7 +46,7 @@ $cdn-path: "https://densityco.github.io/assets";
   src: url('#{$cdn-path}/fonts/aeonik-bolditalic.79c87750.eot?#iefix') format('embedded-opentype'),
     url('#{$cdn-path}/fonts/aeonik-bolditalic.3c206f24.woff2') format('woff2'),
     url('#{$cdn-path}/fonts/aeonik-bolditalic.f3fecfb8.woff') format('woff');
-  font-weight: 500;
+  font-weight: 700;
   font-style: italic;
 }
 @font-face { /* BOLD ITALICS */
@@ -56,6 +56,25 @@ $cdn-path: "https://densityco.github.io/assets";
     url('#{$cdn-path}/fonts/aeonik-bolditalic.3c206f24.woff2') format('woff2'),
     url('#{$cdn-path}/fonts/aeonik-bolditalic.f3fecfb8.woff') format('woff');
   font-weight: bold;
+  font-style: italic;
+}
+
+@font-face { /* MEDIUM */
+  font-family: 'Aeonik';
+  src: url('#{$cdn-path}/fonts/aeonik-medium.7a81f68d.eot');
+  src: url('#{$cdn-path}/fonts/aeonik-medium.7a81f68d.eot?#iefix') format('embedded-opentype'),
+    url('#{$cdn-path}/fonts/aeonik-medium.0b69a6eb.woff2') format('woff2'),
+    url('#{$cdn-path}/fonts/aeonik-medium.87075dd8.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face { /* MEDIUM ITALICS */
+  font-family: 'Aeonik';
+  src: url('#{$cdn-path}/fonts/aeonik-mediumitalic.40ee839f.eot');
+  src: url('#{$cdn-path}/fonts/aeonik-mediumitalic.40ee839f.eot?#iefix') format('embedded-opentype'),
+    url('#{$cdn-path}/fonts/aeonik-mediumitalic.68adccc3.woff2') format('woff2'),
+    url('#{$cdn-path}/fonts/aeonik-mediumitalic.f6483939.woff') format('woff');
+  font-weight: 500;
   font-style: italic;
 }
 
