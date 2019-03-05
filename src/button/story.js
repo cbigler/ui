@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import './styles.scss';
-import Button from './index';
+import Button, { ButtonContext } from './index';
 import colorVariables from '../../variables/colors.json';
 
 
@@ -26,8 +26,10 @@ storiesOf('Button', module)
   .add('Primary + disabled button', () => (
     <Button disabled type="primary">Hello world!</Button>
   ))
-  .add('"Danger Muted" button', () => (
-    <Button type="dangerMuted">Hello world!</Button>
+  .add('With "DIGEST_DELETE_BUTTON" context', () => (
+    <ButtonContext.Provider value="DIGEST_DELETE_BUTTON">
+      <Button>Hello world!</Button>
+    </ButtonContext.Provider>
   ))
   .add('Button with width=100%', () => (
     <Button width="100%">Hello world!</Button>
