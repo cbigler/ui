@@ -12,7 +12,7 @@ const BUTTON_SIZE_STYLES = {
 const BUTTON_TYPE_STYLES = {
   default: undefined,
   primary: styles.primary,
-  dangerMuted: styles.dangerMuted,
+  danger: styles.danger,
 };
 
 export default function Button({
