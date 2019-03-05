@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import classnames from 'classnames';
 import propTypes from 'prop-types';
 
 import styles from './styles.scss';
+
+export const ButtonContext = React.createContext(null);
 
 const BUTTON_SIZE_STYLES = {
   small: styles.small,
@@ -12,6 +14,7 @@ const BUTTON_SIZE_STYLES = {
 const BUTTON_TYPE_STYLES = {
   default: undefined,
   primary: styles.primary,
+  danger: styles.danger,
 };
 
 export default function Button({
@@ -25,15 +28,24 @@ export default function Button({
 
   ...props
 }) {
-  return (
-    <button
-      {...props}
-      disabled={disabled}
-      className={classnames(styles.button, BUTTON_SIZE_STYLES[size], BUTTON_TYPE_STYLES[type])}
-      style={{width, height}}
-    >
-      {children}
-    </button>
-  );
+  const context = useContext(ButtonContext);
+  if (context === 'DIGEST_DELETE_BUTTON') {
+    return (
+      <button {...props} className={classnames(styles.button, styles.contextDigestDeleteButton)}>
+        {children}
+      </button>
+    );
+  } else {
+    return (
+      <button
+        {...props}
+        disabled={disabled}
+        className={classnames(styles.button, BUTTON_SIZE_STYLES[size], BUTTON_TYPE_STYLES[type])}
+        style={{width, height}}
+      >
+        {children}
+      </button>
+    );
+  }
 }
 Button.displayName = 'Button';
