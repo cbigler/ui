@@ -844,25 +844,25 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  Building: ({color, width, height}) => <svg width='18' height='17' viewBox='0 0 18 17' xmlns='http://www.w3.org/2000/svg'>
+  Building: ({color, width, height}) => <svg width={width || "18"} height={height || "17"} viewBox='0 0 18 17' xmlns='http://www.w3.org/2000/svg'>
       <g id='1' fill='none' fillRule='evenodd'>
           <g id='icons' transform='translate(-70 -520)'>
               <g id='IconBuilding' transform='translate(69 518)'>
-                  <rect id='bounds' fillOpacity='0' fill='#E3E3E6' width='20' height='20'
+                  <rect id='bounds' fillOpacity='0' fill={color} width='20' height='20'
                   />
-                  <polygon id='Path' stroke='#222A2E' strokeWidth='1.5' strokeLinecap='round'
+                  <polygon id='Path' stroke={color} strokeWidth='1.5' strokeLinecap='round'
                   strokeLinejoin='round' points='9 9 2 9 2 18 18 18 18 3 9 3' />
-                  <path d='M12,6 L15,6' id='---' stroke='#222A2E' strokeWidth='1.5' strokeLinecap='square'
+                  <path d='M12,6 L15,6' id='---' stroke={color} strokeWidth='1.5' strokeLinecap='square'
                   />
-                  <path d='M12,9 L15,9' id='----copy' stroke='#222A2E' strokeWidth='1.5'
+                  <path d='M12,9 L15,9' id='----copy' stroke={color} strokeWidth='1.5'
                   strokeLinecap='square' />
-                  <path d='M12,12 L15,12' id='----copy-2' stroke='#222A2E' strokeWidth='1.5'
+                  <path d='M12,12 L15,12' id='----copy-2' stroke={color} strokeWidth='1.5'
                   strokeLinecap='square' />
-                  <path d='M12,15 L15,15' id='----copy-3' stroke='#222A2E' strokeWidth='1.5'
+                  <path d='M12,15 L15,15' id='----copy-3' stroke={color} strokeWidth='1.5'
                   strokeLinecap='square' />
-                  <path d='M5,12 L8,12' id='----copy-2' stroke='#222A2E' strokeWidth='1.5'
+                  <path d='M5,12 L8,12' id='----copy-2' stroke={color} strokeWidth='1.5'
                   strokeLinecap='square' />
-                  <path d='M5,15 L8,15' id='----copy-3' stroke='#222A2E' strokeWidth='1.5'
+                  <path d='M5,15 L8,15' id='----copy-3' stroke={color} strokeWidth='1.5'
                   strokeLinecap='square' />
               </g>
           </g>
