@@ -17,7 +17,7 @@ export { default as InputBox, InputBoxContext, SelectBox } from './input-box';
 export { default as Modal } from './modal';
 export { default as PagerButtonGroup } from './pager-button-group';
 export { default as PercentageBar } from './percentage-bar';
-export { default as RadioButton } from './radio-button';
+export { default as RadioButton, RadioButtonContext } from './radio-button';
 export { default as Switch } from './switch';
 export { default as Toast } from './toast';
 

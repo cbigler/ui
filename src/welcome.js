@@ -10,4 +10,4 @@ const Welcome = () => (
   </div>
 );
 
-storiesOf('Welcome', module).add('Welcome', () => <Welcome />);
+storiesOf('Welcome', module).add('Welcome', () => <Welcome />, {info: {inline: false}});
