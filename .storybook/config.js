@@ -1,4 +1,4 @@
-import 'normalize.css';
+import '!css-loader!normalize.css';
 import 'moment-timezone';
 
 import { configure, addDecorator } from '@storybook/react';
