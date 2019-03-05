@@ -1,5 +1,6 @@
 @import "../../variables/colors.json";
 @import "../../variables/spacing.json";
+@import "../../variables/fonts.json";
 
 .appBar {
   display: flex;
@@ -11,6 +12,7 @@
   height: 64px;
   padding: 0 24px;
   border-bottom: 1px solid $gray-light;
+  font-family: $font-base;
 }
 
 .appBarSection {
