@@ -5,7 +5,7 @@ export { default as AppFrame } from './app-frame';
 export { default as AppPane } from './app-pane';
 export { default as AppScrollView } from './app-scroll-view';
 export { default as AppSidebar } from './app-sidebar';
-export { default as Button } from './button';
+export { default as Button, ButtonContext } from './button';
 export { default as DashboardReportGrid } from './dashboard-report-grid';
 export { default as DatePicker } from './date-picker';
 export { default as DateRangePicker } from './date-range-picker';
