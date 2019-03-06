@@ -33,3 +33,12 @@ storiesOf('AppBar', module)
       </AppBar>
     </AppBarContext.Provider>
   ))
+  .add('With a title that overflows the width of the app bar', () => (
+    <div style={{width: 500}}>
+      <AppBar>
+        <AppBarTitle>
+          Really really long title that overflows the width that it is allotted
+        </AppBarTitle>
+      </AppBar>
+    </div>
+  ))
