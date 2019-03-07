@@ -47,7 +47,6 @@ export default function InputBox({leftIcon, ...props}) {
         {leftIcon ? <div className={styles.leftIcon}>{leftIcon}</div> : null}
         <input
           {...props}
-          type="text"
           ref={input}
           onFocus={() => setFocus(true)}
           onBlur={() => setFocus(false)}
