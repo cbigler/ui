@@ -8,7 +8,8 @@ import styles from './styles.scss';
 
 // Classes to merge in, depending on context
 const CONTEXT_CLASSES = {
-  'LIST_VIEW': styles.contextListView
+  'LIST_VIEW': styles.contextListView,
+  'NAVBAR_INLINE': styles.contextNavbarInline,
 };
 
 export const InputBoxContext = React.createContext(null);
