@@ -12,13 +12,10 @@ const CONTEXT_CLASSES = {
 
 export const RadioButtonContext = React.createContext(null);
 
-export default function RadioButton({text, name, value, checked, disabled, onClick}) {
+export default function RadioButton({text, name, value, checked, disabled, onChange}) {
   const unique = v4();
   return <RadioButtonContext.Consumer>{context => (
-    <div
-      className={classnames(CONTEXT_CLASSES[context], styles.radioButton)}
-      onClick={() => onClick(value)}
-    >
+    <div className={classnames(CONTEXT_CLASSES[context], styles.radioButton)}>
       <input
         type="radio"
         className={styles.radioButtonInput}
@@ -27,6 +24,7 @@ export default function RadioButton({text, name, value, checked, disabled, onCli
         value={value}
         checked={checked}
         disabled={disabled}
+        onChange={onChange}
       />
       <label
         className={classnames(CONTEXT_CLASSES[context], styles.radioButtonLabel)}
