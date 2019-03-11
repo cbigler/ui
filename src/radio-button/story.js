@@ -20,16 +20,16 @@ storiesOf('RadioButton', module)
     </div>
   ))
   .add('Two radio buttons controlled with click action', () => (
-    <div>
-      <RadioButton text="Foo" name="story" value="foo" checked={true} onClick={action('Clicked')} />
-      <RadioButton text="Bar" name="story" value="bar" checked={false} onClick={action('Clicked')} />
+    <div onChange={action('Clicked')}>
+      <RadioButton text="Foo" name="story" value="foo" checked={true} />
+      <RadioButton text="Bar" name="story" value="bar" checked={false} />
     </div>
   ))
   .add('With USER_FORM context', () => (
     <div>
       <RadioButtonContext.Provider value="USER_FORM">
-        <RadioButton text="Foo" name="story" value="foo" checked={true} onClick={action('Clicked')} />
-        <RadioButton text="Bar" name="story" value="bar" checked={false} onClick={action('Clicked')} />
+        <RadioButton text="Foo" name="story" value="foo" checked={true} onChange={action('Clicked')} />
+        <RadioButton text="Bar" name="story" value="bar" checked={false} onChange={action('Clicked')} />
       </RadioButtonContext.Provider>
     </div>
   ))
