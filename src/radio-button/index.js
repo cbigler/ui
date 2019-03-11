@@ -39,6 +39,6 @@ RadioButton.propTypes = {
   text: propTypes.node,
   name: propTypes.string,
   value: propTypes.string,
-  checked: propTypes.boolean,
-  disabled: propTypes.boolean,
+  checked: propTypes.bool,
+  disabled: propTypes.bool,
 };

@@ -22,10 +22,10 @@
       height: $switch-handle-size + $switch-handle-border-size;
 
       box-sizing: border-box;
-      left: -1 * $switch-handle-border-size;
-      top: -1 * $switch-handle-border-size;
+      left: 0px;
+      top: ($switch-base-height - $switch-handle-size - $switch-handle-border-size) / 2;
       border-radius: 50%;
-      background: $foreground;
+      background-color: $foreground;
       border: $switch-handle-border-size solid $gray;
       transition: all 200ms ease;
     }
@@ -39,7 +39,7 @@
     background-color: $background;
 
     &:after {
-      left: calc(50% + #{$switch-handle-border-size});
+      left: $switch-base-width - $switch-handle-size - $switch-handle-border-size;
       border-color: $background;
     }
   }
