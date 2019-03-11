@@ -200,7 +200,7 @@
 }
 
 
-// RULES FOR LISTVIEW CONTEXT
+// RULES FOR LIST_VIEW CONTEXT
 .contextListView.inputBoxSelectBoxValue {
   font-size: 16px;
   height: 36px;
@@ -214,5 +214,17 @@
   top: 41px;
 }
 .contextListView.inputBoxSelectBoxMenuLi {
+  font-size: 16px;
+}
+
+// RULES FOR NAVBAR_INLINE CONTEXT
+.contextNavbarInline.inputBoxSelectBoxValue {
+  height: 30px;
+  font-size: 16px;
+}
+.contextNavbarInline.inputBoxSelectBoxMenu {
+  top: 36px;
+}
+.contextNavbarInline.inputBoxSelectBoxMenuLi {
   font-size: 16px;
 }

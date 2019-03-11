@@ -141,3 +141,8 @@ storiesOf('InputBox', module)
       <InputBox type="select" width={300} />
     </InputBoxContext.Provider>
   ))
+  .add('select box with "NAVBAR_INLINE" context', () => (
+    <InputBoxContext.Provider value="NAVBAR_INLINE">
+      <InputBox type="select" width={160} />
+    </InputBoxContext.Provider>
+  ))
