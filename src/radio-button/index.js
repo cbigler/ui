@@ -7,7 +7,7 @@ import styles from './styles.scss';
 
 // Classes to merge in, depending on context
 const CONTEXT_CLASSES = {
-  'USER_FORM': styles.contextUserForm
+  'LEGACY': styles.contextLegacy
 };
 
 export const RadioButtonContext = React.createContext(null);
