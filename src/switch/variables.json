@@ -1,6 +1,6 @@
 {
   "switchBaseWidth": "40px",
-  "switchBaseHeight": "18px",
+  "switchBaseHeight": "24px;",
   "switchHandleSize": "20px",
   "switchHandleBorderSize": "2px"
 }
