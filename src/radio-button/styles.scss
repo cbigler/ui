@@ -10,7 +10,7 @@ $radio-pressed-data-uri: "data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD
 
 .radioButton {
   font-family: $font-base;
-  font-size: $font-size-base;
+  font-size: 16px;
 }
 
 // An active radio button should have a darker label than an inactive radio button.
@@ -30,10 +30,10 @@ $radio-pressed-data-uri: "data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD
 
   width: 18px;
   height: 18px;
-  margin-right: 10px;
+  margin-right: 16px;
 
   position: relative;
-  bottom: -4px;
+  bottom: -3px;
 }
 
 .radioButtonInput:checked + .radioButtonLabel:before {
@@ -47,11 +47,11 @@ $radio-pressed-data-uri: "data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD
 }
 
 
-// RULES FOR USER_FORM CONTEXT
-.contextUserForm.radioButton {
-  font-size: 16px;
+// RULES FOR LEGACY CONTEXT
+.contextLegacy.radioButton {
+  font-size: $font-size-base;
 }
-.radioButtonInput + .contextUserForm.radioButtonLabel:before {
-  margin-right: 16px;
-  bottom: -3px;
+.radioButtonInput + .contextLegacy.radioButtonLabel:before {
+  margin-right: 10px;
+  bottom: -4px;
 }

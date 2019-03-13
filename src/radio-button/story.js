@@ -25,9 +25,9 @@ storiesOf('RadioButton', module)
       <RadioButton text="Bar" name="story" value="bar" checked={false} />
     </div>
   ))
-  .add('With USER_FORM context', () => (
+  .add('With LEGACY context', () => (
     <div>
-      <RadioButtonContext.Provider value="USER_FORM">
+      <RadioButtonContext.Provider value="LEGACY">
         <RadioButton text="Foo" name="story" value="foo" checked={true} onChange={action('Clicked')} />
         <RadioButton text="Bar" name="story" value="bar" checked={false} onChange={action('Clicked')} />
       </RadioButtonContext.Provider>
