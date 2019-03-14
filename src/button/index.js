@@ -29,7 +29,7 @@ export default function Button({
   ...props
 }) {
   const context = useContext(ButtonContext);
-  if (context === 'DIGEST_DELETE_BUTTON') {
+  if (context === 'DIGEST_DELETE_BUTTON' || context === 'USER_MANAGEMENT_DETAIL_DELETE_BUTTON') {
     return (
       <button {...props} className={classnames(styles.button, styles.contextDigestDeleteButton)}>
         {children}

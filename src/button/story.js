@@ -31,6 +31,11 @@ storiesOf('Button', module)
       <Button>Hello world!</Button>
     </ButtonContext.Provider>
   ))
+  .add('With "USER_MANAGEMENT_DETAIL_DELETE_BUTTON" context', () => (
+    <ButtonContext.Provider value="USER_MANAGEMENT_DETAIL_DELETE_BUTTON">
+      <Button>Hello world!</Button>
+    </ButtonContext.Provider>
+  ))
   .add('Button with width=100%', () => (
     <Button width="100%">Hello world!</Button>
   ))
