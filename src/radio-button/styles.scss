@@ -50,6 +50,17 @@ $radio-pressed-data-uri: "data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD
   background-image: url($radio-active-data-uri);
 }
 
+// But not if it is disabled
+.radioButtonInput:disabled + .radioButtonLabel:hover {
+  cursor: default;
+}
+.radioButtonInput:disabled:not(:checked) + .radioButtonLabel:hover {
+  color: $gray-darkest;
+}
+.radioButtonInput:disabled:not(:checked) + .radioButtonLabel:hover:before {
+  background-image: url($radio-inactive-data-uri);
+}
+
 
 // RULES FOR LEGACY CONTEXT
 .contextLegacy.radioButton {
