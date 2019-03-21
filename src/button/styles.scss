@@ -1,19 +1,19 @@
-// Import any global ../variables from "../../../variables/*.json"
-@import "../../variables/colors.json";
-@import "../../variables/fonts.json";
-@import "../../variables/spacing.json";
+// Import any global ../variables from "../../../variables/*.scss"
+@import "../../variables/colors.scss";
+@import "../../variables/fonts.scss";
+@import "../../variables/spacing.scss";
 
 .button {
   box-sizing: border-box;
 
   height: 40px;
-  color: $gray-darkest;
+  color: $grayDarkest;
   background-color: #fff;
   outline: none;
-  border: 1px solid $gray-darker;
-  border-radius: $border-radius-base;
+  border: 1px solid $grayDarker;
+  border-radius: $borderRadiusBase;
 
-  font-family: $font-base;
+  font-family: $fontBase;
   font-size: 14px;
   font-weight: bold;
   text-align: center;
@@ -48,18 +48,18 @@
 
 .primary {
   color: #fff;
-  background-color: $brand-primary;
-  border-color: $brand-primary;
+  background-color: $brandPrimary;
+  border-color: $brandPrimary;
 }
 
 .contextDigestDeleteButton {
-  color: $brand-danger;
-  background-color: $gray-light;
-  border-color: $gray-light;
+  color: $brandDanger;
+  background-color: $grayLight;
+  border-color: $grayLight;
 }
 
 .contextUserManagementDetailDeleteButton {
-  color: $brand-danger;
-  background-color: $gray-lightest;
-  border-color: $gray-lightest;
+  color: $brandDanger;
+  background-color: $grayLightest;
+  border-color: $grayLightest;
 }

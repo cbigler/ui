@@ -1,7 +1,7 @@
-// Import any global variables from "../../../variables/*.json"
-@import "../../variables/colors.json";
-@import "../../variables/spacing.json";
-@import "../../variables/fonts.json";
+// Import any global variables from "../../../variables/*.scss"
+@import "../../variables/colors.scss";
+@import "../../variables/spacing.scss";
+@import "../../variables/fonts.scss";
 
 .toast {
   box-sizing: border-box;
@@ -13,38 +13,38 @@
 
   // color overridden below based on toast type
   border: 1px solid transparent;
-  border-radius: $border-radius-base;
+  border-radius: $borderRadiusBase;
 
   min-height: 72px;
   display: flex;
   flex-direction: row;
 
-  font-family: $font-base;
-  font-size: $font-size-base;
+  font-family: $fontBase;
+  font-size: $fontSizeBase;
 
   &:hover .toast-dismiss { display: block; }
 }
-.toastPrimary { border-color: $brand-primary; }
-.toastSuccess { border-color: $brand-success; }
-.toastWarning { border-color: $brand-warning; }
-.toastDanger { border-color: $brand-danger; }
+.toastPrimary { border-color: $brandPrimary; }
+.toastSuccess { border-color: $brandSuccess; }
+.toastWarning { border-color: $brandWarning; }
+.toastDanger { border-color: $brandDanger; }
 
 
 // The toast icon is on the left side of the toast and contains a centered toast icon.
 .toastIcon {
   width: 72px;
 
-  font-size: $font-size-x-large;
+  font-size: $fontSizeXLarge;
   color: #fff;
 
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.toastIconPrimary { background-color: $brand-primary; }
-.toastIconSuccess { background-color: $brand-success; }
-.toastIconWarning { background-color: $brand-warning; }
-.toastIconDanger { background-color: $brand-danger; }
+.toastIconPrimary { background-color: $brandPrimary; }
+.toastIconSuccess { background-color: $brandSuccess; }
+.toastIconWarning { background-color: $brandWarning; }
+.toastIconDanger { background-color: $brandDanger; }
 
 .toastIconGlyph {
   width: 72px;
@@ -56,9 +56,9 @@
 .toastBody {
   height: auto;
 
-  font-size: $font-size-base;
-  font-weight: $font-weight-base;
-  line-height: $line-height-base;
+  font-size: $fontSizeBase;
+  font-weight: $fontWeightBase;
+  line-height: $lineHeightBase;
 
   cursor: default;
   user-select: none;
@@ -73,20 +73,20 @@
 
 // The header of the toast. THis is within a toast body.
 .toastHeader {
-  font-size: $font-size-base;
+  font-size: $fontSizeBase;
   font-weight: bold;
 
   margin-top: 15px;
   margin-bottom: 5px;
 }
-.toastHeaderPrimary { color: $brand-primary; }
-.toastHeaderSuccess { color: $brand-success; }
-.toastHeaderWarning { color: $brand-warning; }
-.toastHeaderDanger { color: $brand-danger; }
+.toastHeaderPrimary { color: $brandPrimary; }
+.toastHeaderSuccess { color: $brandSuccess; }
+.toastHeaderWarning { color: $brandWarning; }
+.toastHeaderDanger { color: $brandDanger; }
 
 // The main content of the toast. This is within a toast body.
 .toastText {
-  color: $gray-cinder;
+  color: $grayCinder;
   margin-bottom: 12px;
   text-align: left;
 
@@ -101,7 +101,7 @@
   top: 15px;
   right: 15px;
 
-  color: $gray-dark;
+  color: $grayDark;
   cursor: pointer;
   transition: all 200ms ease-in-out;
 

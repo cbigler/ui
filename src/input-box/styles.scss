@@ -1,7 +1,7 @@
-// Import any global variables from "../../../variables/*.json"
-@import "../../variables/colors.json";
-@import "../../variables/spacing.json";
-@import "../../variables/fonts.json";
+// Import any global variables from "../../../variables/*.scss"
+@import "../../variables/colors.scss";
+@import "../../variables/spacing.scss";
+@import "../../variables/fonts.scss";
 
 .inputBox {
   display: flex;
@@ -10,15 +10,15 @@
 
   width: 200px;
   height: (43px - 1px - 1px); /* 1px on each side for borders */
-  border: 1px solid $gray-dark;
-  border-radius: $border-radius-base;
+  border: 1px solid $grayDark;
+  border-radius: $borderRadiusBase;
   background-color: #fff;
   padding-right: 16px;
   cursor: text;
-  font-family: $font-base;
+  font-family: $fontBase;
   font-size: 14px;
 }
-.inputBoxFocused { border-color: $brand-primary; }
+.inputBoxFocused { border-color: $brandPrimary; }
 .inputBox input {
   border: 0px;
   background-color: transparent;
@@ -40,20 +40,20 @@
   display: flex;
   align-items: center;
 
-  border: 1px solid $gray-dark;
-  border-radius: $border-radius-base;
+  border: 1px solid $grayDark;
+  border-radius: $borderRadiusBase;
   background-color: #fff;
-  font-family: $font-base;
+  font-family: $fontBase;
   font-size: 14px;
 
   padding: 16px;
   resize: none;
   outline: none;
 }
-.inputBoxTextarea:focus { border-color: $brand-primary; }
+.inputBoxTextarea:focus { border-color: $brandPrimary; }
 .inputBoxDisabled {
   border-color: transparent;
-  background-color: $gray-light;
+  background-color: $grayLight;
   color: $gray;
 
   &::placeholder,
@@ -61,7 +61,7 @@
   &::-moz-placeholder,
   &:-ms-input-placeholder,
   &:-moz-placeholder {
-    color: $gray-darker;
+    color: $grayDarker;
     opacity: 1; // Placeholders in firefox have opacity by default. Undo that.
   }
 }
@@ -69,7 +69,7 @@
 
 // Extract common styles into a placeholder selector for selectbox menu list and value
 %inputBoxSelectCommon {
-  font-family: $font-base;
+  font-family: $fontBase;
 
   width: calc(100% - 15px - 15px);
 
@@ -97,7 +97,7 @@
   height: (43px - 1px - 1px); // (for borders)
 
   font-size: 14px;
-  color: $gray-cinder;
+  color: $grayCinder;
 
   display: flex;
   flex-direction: row;
@@ -121,11 +121,11 @@
 }
 // When focused, flip the caret.
 .inputBoxSelectBoxValueCaretOpened  { transform: rotate(180deg); }
-.inputBoxSelectBoxValueOpened { border-color: $brand-primary; }
+.inputBoxSelectBoxValueOpened { border-color: $brandPrimary; }
 
 // When disabled, a selectbox is grayed out and can't be clicked.
 .inputBoxSelectBoxValueDisabled {
-  background-color: $gray-lighter;
+  background-color: $grayLighter;
   pointer-events: none;
 }
 
@@ -144,7 +144,7 @@
   width: 100%;
 
   z-index: 100;
-  color: $gray-cinder;
+  color: $grayCinder;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   transition: all 100ms ease-in-out;
   user-select: none;
@@ -178,20 +178,20 @@
   outline: none;
 
   &:focus {
-    color: $brand-primary;
+    color: $brandPrimary;
   }
 
   &:hover {
-    background-color: $gray-lightest;
+    background-color: $grayLightest;
   }
 }
 .inputBoxSelectBoxMenuLiDisabled {
-  color: $gray-dark;
+  color: $grayDark;
 }
 
 .inputBoxSelectBoxItemHighlight {
   margin-left: 10px;
-  color: $gray-dark;
+  color: $grayDark;
   font-style: italic;
 }
 
@@ -208,7 +208,7 @@
   background: none;
 }
 .contextListView.inputBoxSelectBoxValue.inputBoxSelectBoxValueOpened {
-  border: 1px solid $brand-primary;
+  border: 1px solid $brandPrimary;
 }
 .contextListView.inputBoxSelectBoxMenu {
   top: 41px;

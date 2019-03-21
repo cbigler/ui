@@ -1,10 +1,10 @@
-// Import any global variables from "../../variables/*.json"
-@import "../../variables/colors.json";
-@import "../../variables/spacing.json";
-@import "../../variables/fonts.json";
+// Import any global variables from "../../variables/*.scss"
+@import "../../variables/colors.scss";
+@import "../../variables/spacing.scss";
+@import "../../variables/fonts.scss";
 
-// Local variables to the component
-@import "variables.json";
+$inputStackHeight: 60px;
+$inputStackBorderWidth: 1;
 
 // A stack item is one of the inputs in an input-stack, ie, a text box or a password box.
 // NOTE: this mixin requires that if an item is focused, the parent div should contain the class
@@ -18,20 +18,20 @@
 // </div>
 //
 @mixin make-input-stack-item(
-  $height: $input-stack-height,
-  $border-width: $input-stack-border-width,
-  $valid-color: $brand-primary
+  $height: $inputStackHeight,
+  $borderWidth: $inputStackBorderWidth,
+  $validColor: $brandPrimary
 ) {
   position: relative;
 
   // Round corners of each item so that the top and bottom borders of the whole section are rounded.
   &:first-child input {
-    border-top-left-radius: $border-radius-base;
-    border-top-right-radius: $border-radius-base;
+    border-top-left-radius: $borderRadiusBase;
+    border-top-right-radius: $borderRadiusBase;
   }
   &:last-child input {
-    border-bottom-left-radius: $border-radius-base;
-    border-bottom-right-radius: $border-radius-base;
+    border-bottom-left-radius: $borderRadiusBase;
+    border-bottom-right-radius: $borderRadiusBase;
     border-bottom-color: $gray;
   }
 
@@ -43,12 +43,12 @@
   // because two neighboring items share a border.
   input {
     display: block;
-    font-family: $font-base;
+    font-family: $fontBase;
     font-size: 16px;
     background-color: #fff;
 
     width: calc(100% - 40px);
-    height: $height - (2 * $border-width) - (2 * 20px); // 20px = vertical padding around each input
+    height: $height - (2 * $borderWidth) - (2 * 20px); // 20px = vertical padding around each input
     padding: 20px;
     margin-bottom: 0px;
 
@@ -57,11 +57,11 @@
 
     // On active, remove outline and add a border color.
     outline: none;
-    border: $border-width solid #CBCFD6;
+    border: $borderWidth solid #CBCFD6;
     border-bottom-color: transparent;
   }
   input:focus {
-    border-color: $valid-color;
+    border-color: $validColor;
   }
   input::placeholder { color: $gray; }
   &Focus + & input {
@@ -75,7 +75,7 @@
   &:after {
     content: " ";
     display: block;
-    background-color: $valid-color;
+    background-color: $validColor;
 
     position: absolute;
     top: 0px;
@@ -84,8 +84,8 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    margin-top: ($input-stack-height - 8px) / 2;
-    margin-bottom: $input-stack-height - 8px;
+    margin-top: ($inputStackHeight - 8px) / 2;
+    margin-bottom: $inputStackHeight - 8px;
   }
   &.focus:after {
     background-color: $gray;
@@ -93,7 +93,7 @@
 }
 
 // Add this mixin to a input-stack item to show an invalid (or other) state.
-@mixin make-input-stack-item-invalid($color: $brand-danger) {
+@mixin make-input-stack-item-invalid($color: $brandDanger) {
   input:focus {
     border-color: $color;
   }

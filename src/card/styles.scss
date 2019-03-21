@@ -1,36 +1,36 @@
-@import "../../variables/colors.json";
-@import "../../variables/spacing.json";
-@import "../../variables/fonts.json";
+@import "../../variables/colors.scss";
+@import "../../variables/spacing.scss";
+@import "../../variables/fonts.scss";
 
-@mixin make-card($background: #fff, $foreground: $gray-darker, $padding-horizontal: 20px, $padding-vertical: 20px) {
+@mixin make-card($background: #fff, $foreground: $grayDarker, $paddingHorizontal: 20px, $paddingVertical: 20px) {
   box-sizing: border-box;
   background-color: $background;
-  border-radius: $border-radius-base;
+  border-radius: $borderRadiusBase;
   border: none;
   color: $foreground;
-  border: 1px solid $gray-light;
+  border: 1px solid $grayLight;
   position: relative;
 }
 
 @mixin make-card-header(
-  $color: $gray-darkest,
-  $padding-horizontal: 20px,
-  $padding-vertical: 30px,
-  $font-size: $font-size-3,
-  $font-weight: $font-weight-3
+  $color: $grayDarkest,
+  $paddingHorizontal: 20px,
+  $paddingVertical: 30px,
+  $fontSize: $fontSize3,
+  $fontWeight: $fontWeight3
 ) {
-  font-family: $font-base;
+  font-family: $fontBase;
   color: $color;
-  font-size: $font-size;
-  font-weight: $font-weight;
+  font-size: $fontSize;
+  font-weight: $fontWeight;
 
-  padding: $padding-vertical $padding-horizontal;
+  padding: $paddingVertical $paddingHorizontal;
   transform: translate(0px, 2px); // font baseline hack for sailec
 
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: $font-size;
+  height: $fontSize;
 }
 
 @mixin make-card-title {
@@ -43,29 +43,29 @@
 }
 
 @mixin make-card-body(
-  $font-size: $font-size-base,
-  $font-weight: $font-weight-base,
-  $padding-vertical: 20px,
-  $padding-horizontal: 20px
+  $fontSize: $fontSizeBase,
+  $fontWeight: $fontWeightBase,
+  $paddingVertical: 20px,
+  $paddingHorizontal: 20px
 ) {
-  font-family: $font-base;
-  font-size: $font-size;
+  font-family: $fontBase;
+  font-size: $fontSize;
 
-  padding-top: $padding-vertical;
-  padding-left: $padding-horizontal;
-  padding-right: $padding-horizontal;
+  padding-top: $paddingVertical;
+  padding-left: $paddingHorizontal;
+  padding-right: $paddingHorizontal;
   padding-bottom: 20px;
 }
 
 @mixin make-card-well(
-  $font-size: $font-size-3,
-  $font-weight: $font-weight-3,
-  $color: $gray-cinder,
-  $background: $gray-lightest
+  $fontSize: $fontSize3,
+  $fontWeight: $fontWeight3,
+  $color: $grayCinder,
+  $background: $grayLightest
 ) {
-  font-family: $font-base;
-  font-size: $font-size;
-  font-weight: $font-weight;
+  font-family: $fontBase;
+  font-size: $fontSize;
+  font-weight: $fontWeight;
   text-align: center;
   line-height: 28px;
   color: $color;
@@ -77,19 +77,19 @@
   padding-right: 20px;
 
   &:first-child, .card-loading-wrapper:first-child + & {
-    border-top-left-radius: $border-radius-base;
-    border-top-right-radius: $border-radius-base;
+    border-top-left-radius: $borderRadiusBase;
+    border-top-right-radius: $borderRadiusBase;
   }
   &:last-child {
-    border-bottom-left-radius: $border-radius-base;
-    border-bottom-right-radius: $border-radius-base;
+    border-bottom-left-radius: $borderRadiusBase;
+    border-bottom-right-radius: $borderRadiusBase;
   }
 }
 
-@mixin make-card-well-highlight($color: $brand-primary, $font-weight: $font-weight-3) {
+@mixin make-card-well-highlight($color: $brandPrimary, $fontWeight: $fontWeight3) {
   color: $color;
   white-space: nowrap; // don't wrap in the middle of a highlighted item
-  font-weight: $font-weight;
+  font-weight: $fontWeight;
 }
 
 
@@ -120,7 +120,7 @@
   border-top-right-radius: 4px;
 }
 
-@mixin make-card-loading($color: $brand-primary, $percent: 100%, $height: 2px, $indeterminate: false) {
+@mixin make-card-loading($color: $brandPrimary, $percent: 100%, $height: 2px, $indeterminate: false) {
   width: $percent;
   height: $height;
   background-color: $color;
@@ -140,12 +140,12 @@
 
 @mixin make-card-table(
   $background: #fff,
-  $foreground: $gray-cinder,
-  $padding-vertical: 20px,
+  $foreground: $grayCinder,
+  $paddingVertical: 20px,
 ) {
   background-color: $background;
   color: $foreground;
-  font-family: $font-base;
+  font-family: $fontBase;
   font-size: 14px;
 
   // When the user scrolls to the edge of the card table, show a shadow to indicate that they can
@@ -169,8 +169,8 @@
     padding-right: 20px;
     padding-top: 5px;
     line-height: 38px;
-    border-top: 1px solid $gray-lighter;
-    border-bottom: 1px solid $gray-lighter;
+    border-top: 1px solid $grayLighter;
+    border-bottom: 1px solid $grayLighter;
     text-align: left;
   }
   table > tbody > tr > td {
@@ -180,7 +180,7 @@
     padding-top: 5px;
     line-height: 38px;
 
-    border-bottom: 1px solid $gray-lighter;
+    border-bottom: 1px solid $grayLighter;
     text-align: left;
 
     white-space: nowrap;
@@ -196,25 +196,25 @@
 // A normal card.
 :global(.card) {
   @include make-card;
-  :global(.card-header) { @include make-card-header($font-size: $font-size-3, $font-weight: $font-weight-3); }
+  :global(.card-header) { @include make-card-header($fontSize: $fontSize3, $fontWeight: $fontWeight3); }
   :global(.card-title) { @include make-card-title; }
   :global(.card-body) { @include make-card-body; }
 }
 
 // A modal card.
 :global(.card-modal) {
-  @include make-card($padding-vertical: 40px, $padding-horizontal: 20px);
+  @include make-card($paddingVertical: 40px, $paddingHorizontal: 20px);
 
   :global(.card-header) {
     @include make-card-header(
-      $font-size: $font-size-2,
-      $font-weight: $font-weight-2,
-      $padding-vertical: 40px
+      $fontSize: $fontSize2,
+      $fontWeight: $fontWeight2,
+      $paddingVertical: 40px
     );
   }
   :global(.card-body) {
     @include make-card-body(
-      $padding-vertical: 40px
+      $paddingVertical: 40px
     );
   }
 }
@@ -224,13 +224,13 @@
 
 :global(.card-well-dark) {
   @include make-card-well(
-    $color: $gray-dark,
-    $font-weight: 400,
-    $background: $gray-cinder
+    $color: $grayDark,
+    $fontWeight: 400,
+    $background: $grayCinder
   );
 }
 :global(.card-well-dark .card-well-highlight) {
-  @include make-card-well-highlight($color: #fff, $font-weight: bold);
+  @include make-card-well-highlight($color: #fff, $fontWeight: bold);
 }
 
 
@@ -238,8 +238,8 @@
 :global(.card-loading) { @include make-card-loading; }
 :global(.card-loading-indeterminate) { @include make-card-loading($indeterminate: true); }
 :global(.card-dark) {
-  @include make-card($gray-cinder, #fff);
+  @include make-card($grayCinder, #fff);
 }
 
-:global(.card-table) { @include make-card-table(#fff, $gray-cinder); }
+:global(.card-table) { @include make-card-table(#fff, $grayCinder); }
 :global(.card-table-scroll) { @include make-card-table-scroll; }

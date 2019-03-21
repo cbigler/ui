@@ -1,10 +1,9 @@
-// Import any global variables from "../../variables/*.json"
-@import "../../variables/colors.json";
-@import "../../variables/spacing.json";
-@import "../../variables/fonts.json";
+// Import any global variables from "../../variables/*.scss"
+@import "../../variables/colors.scss";
+@import "../../variables/spacing.scss";
+@import "../../variables/fonts.scss";
 
-// Local variables to the component
-@import "variables.json";
+$modalZIndex: 1000;
 
 @mixin make-modal($width: 460px) {
   position: relative;
@@ -23,10 +22,10 @@
   }
 }
 
-@mixin make-modal-backdrop($background: $gray-darker) {
+@mixin make-modal-backdrop($background: $grayDarker) {
   background-color: rgba(0, 0, 0, 0.5);
 
-  z-index: $modal-z-index;
+  z-index: $modalZIndex;
 
   position: fixed;
   top: 0px;
@@ -42,8 +41,8 @@
   top: $spacing;
   right: $spacing;
 
-  font-family: $font-base;
-  font-size: $font-size-base;
+  font-family: $fontBase;
+  font-size: $fontSizeBase;
   font-weight: bold;
 
   color: $color;

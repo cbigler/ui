@@ -1,6 +1,6 @@
-@import "../../variables/colors.json";
-@import "../../variables/spacing.json";
-@import "../../variables/fonts.json";
+@import "../../variables/colors.scss";
+@import "../../variables/spacing.scss";
+@import "../../variables/fonts.scss";
 
 .appBar {
   display: flex;
@@ -11,8 +11,8 @@
   box-sizing: border-box;
   height: 64px;
   padding: 0 24px;
-  border-bottom: 1px solid $gray-light;
-  font-family: $font-base;
+  border-bottom: 1px solid $grayLight;
+  font-family: $fontBase;
 }
 
 .appBarSection {
@@ -36,9 +36,9 @@
 
 // Rules for "BOTTOM_ACTIONS" context
 .contextBottomActions.appBar {
-  border-top: 1px solid $gray-light;
+  border-top: 1px solid $grayLight;
   border-bottom: none;
-  background: $gray-lightest;
-  border-bottom-left-radius: $border-radius-base;
-  border-bottom-right-radius: $border-radius-base;
+  background: $grayLightest;
+  border-bottom-left-radius: $borderRadiusBase;
+  border-bottom-right-radius: $borderRadiusBase;
 }
