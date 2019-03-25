@@ -1,12 +1,12 @@
-// Import any global ../variables from "../../../variables/*.json"
-@import "../../variables/colors.json";
-@import "../../variables/spacing.json";
-@import "../../variables/fonts.json";
+// Import any global ../variables from "../../../variables/*.scss"
+@import "../../variables/colors.scss";
+@import "../../variables/spacing.scss";
+@import "../../variables/fonts.scss";
 
 // equates rgba($brand-primary, 30%).
 // needed a solid color due to using for borders + background
 // (opacity was stacking)
-$brand-primary-light: #B6C6F6;
+$brandPrimaryLight: #B6C6F6;
 
 .dateRangePicker {
   // Styles from `react-dates`.
@@ -63,35 +63,35 @@ $brand-primary-light: #B6C6F6;
         background: #fff; }
 
     .CalendarDay--selected-span {
-      background: $brand-primary-light;
-      border: 1px double $brand-primary-light;
+      background: $brandPrimaryLight;
+      border: 1px double $brandPrimaryLight;
       color: #fff; }
 
       .CalendarDay--selected-span.CalendarDay--hovered, .CalendarDay--selected-span:active {
-        background: $brand-primary;
-        border: 1px double $brand-primary; }
+        background: $brandPrimary;
+        border: 1px double $brandPrimary; }
       .CalendarDay--selected-span.CalendarDay--last-in-range {
-        border-right: $brand-primary; }
+        border-right: $brandPrimary; }
 
     .CalendarDay--hovered-span,
     .CalendarDay--after-hovered-start {
-      background: $brand-primary-light;
-      border: 1px double $brand-primary-light;
+      background: $brandPrimaryLight;
+      border: 1px double $brandPrimaryLight;
       color: #fff; }
       .CalendarDay--hovered-span:active,
       .CalendarDay--after-hovered-start:active {
-        background: darken($brand-primary, 5%); }
+        background: darken($brandPrimary, 5%); }
 
     .CalendarDay--selected-start,
     .CalendarDay--selected-end,
     .CalendarDay--selected {
-      background: $brand-primary;
-      border: 1px double $brand-primary;
+      background: $brandPrimary;
+      border: 1px double $brandPrimary;
       color: #fff; }
       .CalendarDay--selected-start:active,
       .CalendarDay--selected-end:active,
       .CalendarDay--selected:active {
-        background: $brand-primary; }
+        background: $brandPrimary; }
 
     .CalendarDay--blocked-calendar {
       background: #cacccd;
@@ -223,7 +223,7 @@ $brand-primary-light: #B6C6F6;
       .DayPicker--vertical-scrollable .DayPicker__week-header {
         top: 0;
         display: table-row;
-        border-bottom: 1px solid $brand-primary;
+        border-bottom: 1px solid $brandPrimary;
         background: white; }
       .DayPicker--vertical-scrollable .transition-container--vertical {
         padding-top: 20px;
@@ -355,7 +355,7 @@ $brand-primary-light: #B6C6F6;
 
     .DayPickerKeyboardShortcuts__show--bottom-right {
       border-top: 26px solid transparent;
-      border-right: 33px solid $brand-primary;
+      border-right: 33px solid $brandPrimary;
       bottom: 0;
       right: 0; }
       .DayPickerKeyboardShortcuts__show--bottom-right:hover {
@@ -366,7 +366,7 @@ $brand-primary-light: #B6C6F6;
 
     .DayPickerKeyboardShortcuts__show--top-right {
       border-bottom: 26px solid transparent;
-      border-right: 33px solid $brand-primary;
+      border-right: 33px solid $brandPrimary;
       top: 0;
       right: 0; }
       .DayPickerKeyboardShortcuts__show--top-right:hover {
@@ -377,7 +377,7 @@ $brand-primary-light: #B6C6F6;
 
     .DayPickerKeyboardShortcuts__show--top-left {
       border-bottom: 26px solid transparent;
-      border-left: 33px solid $brand-primary;
+      border-left: 33px solid $brandPrimary;
       top: 0;
       left: 0; }
       .DayPickerKeyboardShortcuts__show--top-left:hover {
@@ -393,7 +393,7 @@ $brand-primary-light: #B6C6F6;
     .DayPickerKeyboardShortcuts__panel {
       overflow: auto;
       background: #fff;
-      border: 1px solid $brand-primary;
+      border: 1px solid $brandPrimary;
       border-radius: 2px;
       position: absolute;
       top: 0;
@@ -533,7 +533,7 @@ $brand-primary-light: #B6C6F6;
       color: #484848; }
 
     .DateInput__display-text--focused {
-      border-color: $brand-primary;
+      border-color: $brandPrimary;
       border-radius: 3px;
       color: #007a87; }
 
@@ -646,7 +646,7 @@ $brand-primary-light: #B6C6F6;
 
     .DateRangePickerInput__clear-dates:focus,
     .DateRangePickerInput__clear-dates--hover {
-      background: $brand-primary;
+      background: $brandPrimary;
       border-radius: 50%; }
 
     .DateRangePickerInput__calendar-icon {
@@ -681,19 +681,19 @@ $brand-primary-light: #B6C6F6;
   padding-top: 4px;
   resize: none;
 
-  font-family: $font-base;
-  font-size: $font-size-base;
+  font-family: $fontBase;
+  font-size: $fontSizeBase;
   font-weight: normal;
 
-  color: $gray-darker;
+  color: $grayDarker;
   background-color: #fff;
 
   border: 1px solid $gray;
-  border-radius: $border-radius-base;
+  border-radius: $borderRadiusBase;
 
   // On active, remove outline and add a border color.
   &:focus {
-    border-color: $brand-primary;
+    border-color: $brandPrimary;
   }
 
   :global {
@@ -708,8 +708,8 @@ $brand-primary-light: #B6C6F6;
     }
     .DateInput {
       width: 86px;
-      font-weight: $font-weight-base;
-      font-size: $font-size-base;
+      font-weight: $fontWeightBase;
+      font-size: $fontSizeBase;
       line-height: 28px;
       margin: 0px;
       padding: 0px;
@@ -726,15 +726,15 @@ $brand-primary-light: #B6C6F6;
     }
     input[type=text] {
       cursor: pointer;
-      color: $gray-cinder;
+      color: $grayCinder;
     }
     .DateRangePicker__picker { top: 48px; }
     .DateInput__display-text {
-      color: $gray-cinder;
+      color: $grayCinder;
       height: 24px;
     }
     .DateInput__display-text--focused {
-      background-color: $brand-primary;
+      background-color: $brandPrimary;
       color: white;
     }
     .DayPickerKeyboardShortcuts__show { display: none; }
@@ -760,22 +760,22 @@ $brand-primary-light: #B6C6F6;
   :global(.DateRangePicker__picker) { left: -415px !important; }
 }
 .dateRangePickerFocused {
-  border-color: $brand-primary;
+  border-color: $brandPrimary;
 }
 .dateRangePickerCommonRangeList {
-  $value-width: 41px;
-  $menu-width: 200px;
+  $valueWidth: 41px;
+  $menuWidth: 200px;
 
   padding-left: 15px;
-  font-family: $font-base;
-  font-size: $font-size-base;
+  font-family: $fontBase;
+  font-size: $fontSizeBase;
   font-weight: normal;
   user-select: none;
 
   // Right align the select box menu with the select box value if the date
   // picker is right aligned.
   &.right .input-box-select-box-menu {
-    $select-box-value-width-including-padding: ($value-width + 15px + 15px);
-    margin-left: -1 * ($menu-width - $select-box-value-width-including-padding);
+    $selectBoxValueWidthIncludingPadding: ($valueWidth + 15px + 15px);
+    margin-left: -1 * ($menuWidth - $selectBoxValueWidthIncludingPadding);
   }
 }

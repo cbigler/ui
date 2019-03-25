@@ -1,6 +1,6 @@
-// Import any global variables from "../../variables/*.json"
-@import "../../variables/colors.json";
-@import "../../variables/fonts.json";
+// Import any global variables from "../../variables/*.scss"
+@import "../../variables/colors.scss";
+@import "../../variables/fonts.scss";
 
 .infoPopupContainer {
   outline: none;
@@ -33,10 +33,10 @@
   border: 1px solid $gray;
   border-radius: 4px;
 
-  font-family: $font-base;
+  font-family: $fontBase;
   font-size: 14px;
   font-weight: normal;
-  color: $gray-cinder;
+  color: $grayCinder;
 
   position: absolute;
   top: 0px;
@@ -67,5 +67,5 @@
 }
 
 
-.infoPopupCardWellHighlight { border-bottom: 1px dotted $gray-cinder; }
+.infoPopupCardWellHighlight { border-bottom: 1px dotted $grayCinder; }
 .card-well-dark .info-popup-card-well-highlight { border-bottom: 1px dotted $gray; }

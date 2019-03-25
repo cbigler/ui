@@ -1,79 +1,79 @@
-$cdn-path: "https://densityco.github.io/assets";
+$cdnPath: "https://densityco.github.io/assets";
 
 // The 'Aeonik' Web Font
 @font-face { /* REGULAR */
   font-family: 'Aeonik';
-  src: url('#{$cdn-path}/fonts/aeonik-regular.f841f92e.eot');
-  src: url('#{$cdn-path}/fonts/aeonik-regular.f841f92e.eot?#iefix') format('embedded-opentype'),
-    url('#{$cdn-path}/fonts/aeonik-regular.a0dd3136.woff2') format('woff2'),
-    url('#{$cdn-path}/fonts/aeonik-regular.62e26876.woff') format('woff');
+  src: url('#{$cdnPath}/fonts/aeonik-regular.f841f92e.eot');
+  src: url('#{$cdnPath}/fonts/aeonik-regular.f841f92e.eot?#iefix') format('embedded-opentype'),
+    url('#{$cdnPath}/fonts/aeonik-regular.a0dd3136.woff2') format('woff2'),
+    url('#{$cdnPath}/fonts/aeonik-regular.62e26876.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face { /* REGULAR ITALICS */
   font-family: 'Aeonik';
-  src: url('#{$cdn-path}/fonts/aeonik-regularitalic.17284a7f.eot');
-  src: url('#{$cdn-path}/fonts/aeonik-regularitalic.17284a7f.eot?#iefix') format('embedded-opentype'),
-    url('#{$cdn-path}/fonts/aeonik-regularitalic.4fd7708a.woff2') format('woff2'),
-    url('#{$cdn-path}/fonts/aeonik-regularitalic.1f65deec.woff') format('woff');
+  src: url('#{$cdnPath}/fonts/aeonik-regularitalic.17284a7f.eot');
+  src: url('#{$cdnPath}/fonts/aeonik-regularitalic.17284a7f.eot?#iefix') format('embedded-opentype'),
+    url('#{$cdnPath}/fonts/aeonik-regularitalic.4fd7708a.woff2') format('woff2'),
+    url('#{$cdnPath}/fonts/aeonik-regularitalic.1f65deec.woff') format('woff');
   font-weight: normal;
   font-style: italic;
 }
 
 @font-face { /* BOLD */
   font-family: 'Aeonik';
-  src: url('#{$cdn-path}/fonts/aeonik-bold.06523ced.eot');
-  src: url('#{$cdn-path}/fonts/aeonik-bold.06523ced.eot?#iefix') format('embedded-opentype'),
-    url('#{$cdn-path}/fonts/aeonik-bold.07255666.woff2') format('woff2'),
-    url('#{$cdn-path}/fonts/aeonik-bold.ccac5264.woff') format('woff');
+  src: url('#{$cdnPath}/fonts/aeonik-bold.06523ced.eot');
+  src: url('#{$cdnPath}/fonts/aeonik-bold.06523ced.eot?#iefix') format('embedded-opentype'),
+    url('#{$cdnPath}/fonts/aeonik-bold.07255666.woff2') format('woff2'),
+    url('#{$cdnPath}/fonts/aeonik-bold.ccac5264.woff') format('woff');
   font-weight: 700;
   font-style: normal;
 }
 @font-face { /* BOLD */
   font-family: 'Aeonik';
-  src: url('#{$cdn-path}/fonts/aeonik-bold.06523ced.eot');
-  src: url('#{$cdn-path}/fonts/aeonik-bold.06523ced.eot?#iefix') format('embedded-opentype'),
-    url('#{$cdn-path}/fonts/aeonik-bold.07255666.woff2') format('woff2'),
-    url('#{$cdn-path}/fonts/aeonik-bold.ccac5264.woff') format('woff');
+  src: url('#{$cdnPath}/fonts/aeonik-bold.06523ced.eot');
+  src: url('#{$cdnPath}/fonts/aeonik-bold.06523ced.eot?#iefix') format('embedded-opentype'),
+    url('#{$cdnPath}/fonts/aeonik-bold.07255666.woff2') format('woff2'),
+    url('#{$cdnPath}/fonts/aeonik-bold.ccac5264.woff') format('woff');
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face { /* BOLD ITALICS */
   font-family: 'Aeonik';
-  src: url('#{$cdn-path}/fonts/aeonik-bolditalic.79c87750.eot');
-  src: url('#{$cdn-path}/fonts/aeonik-bolditalic.79c87750.eot?#iefix') format('embedded-opentype'),
-    url('#{$cdn-path}/fonts/aeonik-bolditalic.3c206f24.woff2') format('woff2'),
-    url('#{$cdn-path}/fonts/aeonik-bolditalic.f3fecfb8.woff') format('woff');
+  src: url('#{$cdnPath}/fonts/aeonik-bolditalic.79c87750.eot');
+  src: url('#{$cdnPath}/fonts/aeonik-bolditalic.79c87750.eot?#iefix') format('embedded-opentype'),
+    url('#{$cdnPath}/fonts/aeonik-bolditalic.3c206f24.woff2') format('woff2'),
+    url('#{$cdnPath}/fonts/aeonik-bolditalic.f3fecfb8.woff') format('woff');
   font-weight: 700;
   font-style: italic;
 }
 @font-face { /* BOLD ITALICS */
   font-family: 'Aeonik';
-  src: url('#{$cdn-path}/fonts/aeonik-bolditalic.79c87750.eot');
-  src: url('#{$cdn-path}/fonts/aeonik-bolditalic.79c87750.eot?#iefix') format('embedded-opentype'),
-    url('#{$cdn-path}/fonts/aeonik-bolditalic.3c206f24.woff2') format('woff2'),
-    url('#{$cdn-path}/fonts/aeonik-bolditalic.f3fecfb8.woff') format('woff');
+  src: url('#{$cdnPath}/fonts/aeonik-bolditalic.79c87750.eot');
+  src: url('#{$cdnPath}/fonts/aeonik-bolditalic.79c87750.eot?#iefix') format('embedded-opentype'),
+    url('#{$cdnPath}/fonts/aeonik-bolditalic.3c206f24.woff2') format('woff2'),
+    url('#{$cdnPath}/fonts/aeonik-bolditalic.f3fecfb8.woff') format('woff');
   font-weight: bold;
   font-style: italic;
 }
 
 @font-face { /* MEDIUM */
   font-family: 'Aeonik';
-  src: url('#{$cdn-path}/fonts/aeonik-medium.7a81f68d.eot');
-  src: url('#{$cdn-path}/fonts/aeonik-medium.7a81f68d.eot?#iefix') format('embedded-opentype'),
-    url('#{$cdn-path}/fonts/aeonik-medium.0b69a6eb.woff2') format('woff2'),
-    url('#{$cdn-path}/fonts/aeonik-medium.87075dd8.woff') format('woff');
+  src: url('#{$cdnPath}/fonts/aeonik-medium.7a81f68d.eot');
+  src: url('#{$cdnPath}/fonts/aeonik-medium.7a81f68d.eot?#iefix') format('embedded-opentype'),
+    url('#{$cdnPath}/fonts/aeonik-medium.0b69a6eb.woff2') format('woff2'),
+    url('#{$cdnPath}/fonts/aeonik-medium.87075dd8.woff') format('woff');
   font-weight: 500;
   font-style: normal;
 }
 @font-face { /* MEDIUM ITALICS */
   font-family: 'Aeonik';
-  src: url('#{$cdn-path}/fonts/aeonik-mediumitalic.40ee839f.eot');
-  src: url('#{$cdn-path}/fonts/aeonik-mediumitalic.40ee839f.eot?#iefix') format('embedded-opentype'),
-    url('#{$cdn-path}/fonts/aeonik-mediumitalic.68adccc3.woff2') format('woff2'),
-    url('#{$cdn-path}/fonts/aeonik-mediumitalic.f6483939.woff') format('woff');
+  src: url('#{$cdnPath}/fonts/aeonik-mediumitalic.40ee839f.eot');
+  src: url('#{$cdnPath}/fonts/aeonik-mediumitalic.40ee839f.eot?#iefix') format('embedded-opentype'),
+    url('#{$cdnPath}/fonts/aeonik-mediumitalic.68adccc3.woff2') format('woff2'),
+    url('#{$cdnPath}/fonts/aeonik-mediumitalic.f6483939.woff') format('woff');
   font-weight: 500;
   font-style: italic;
 }
@@ -83,10 +83,10 @@ $cdn-path: "https://densityco.github.io/assets";
 // included since existing projects still depend on it.
 @font-face {
   font-family: 'Densicons';
-  src: url("#{$cdn-path}/fonts/densicons.3128b3ea.ttf") format("truetype"),
-    url("#{$cdn-path}/fonts/densicons.2574e5bf.eot") format("opentype"),
-    url("#{$cdn-path}/fonts/densicons.98a2334f.woff") format("woff"),
-    url("#{$cdn-path}/fonts/densicons.f269c043.svg") format("svg");
+  src: url("#{$cdnPath}/fonts/densicons.3128b3ea.ttf") format("truetype"),
+    url("#{$cdnPath}/fonts/densicons.2574e5bf.eot") format("opentype"),
+    url("#{$cdnPath}/fonts/densicons.98a2334f.woff") format("woff"),
+    url("#{$cdnPath}/fonts/densicons.f269c043.svg") format("svg");
   font-weight: normal;
   font-style: normal;
 }

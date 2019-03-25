@@ -1,7 +1,7 @@
-// Import any global ../variables from "../../../variables/*.json"
-@import "../../variables/colors.json";
-@import "../../variables/spacing.json";
-@import "../../variables/fonts.json";
+// Import any global ../variables from "../../../variables/*.scss"
+@import "../../variables/colors.scss";
+@import "../../variables/spacing.scss";
+@import "../../variables/fonts.scss";
 
 .datePickerContainer {
   // Styles from `react-dates`. This was stolen from the react dates package
@@ -34,19 +34,19 @@
   padding-top: 4px;
   resize: none;
 
-  font-family: $font-base;
-  font-size: $font-size-base;
+  font-family: $fontBase;
+  font-size: $fontSizeBase;
   font-weight: normal;
 
-  color: $gray-darker;
+  color: $grayDarker;
   background-color: #fff;
 
   border: 1px solid $gray;
-  border-radius: $border-radius-base;
+  border-radius: $borderRadiusBase;
 
   // On active, remove outline and add a border color.
   &:focus {
-    border-color: $brand-primary;
+    border-color: $brandPrimary;
   }
 
   // These are applied in order to modify the styling of the react dates package.
@@ -56,8 +56,8 @@
     transform: translate(0px, -2.5px);
   }
   :global(.DateInput) {
-    font-weight: $font-weight-base;
-    font-size: $font-size-base;
+    font-weight: $fontWeightBase;
+    font-size: $fontSizeBase;
     line-height: 28px;
     margin: 0px;
     padding: 0px;
@@ -69,11 +69,11 @@
   }
   :global(input[type=text]) {
     cursor: pointer;
-    color: $gray-cinder;
+    color: $grayCinder;
   }
   :global(.SingleDatePicker) { width: 86px; }
   :global(.SingleDatePicker__picker) { top: 48px; }
-  :global(.DateInput__display-text) { color: $gray-cinder; }
+  :global(.DateInput__display-text) { color: $grayCinder; }
   :global(.DayPickerKeyboardShortcuts__show) { display: none; }
 
   :global(.DateInput--open-down.DateInput--with-caret::before) { opacity: 0; }
@@ -82,8 +82,8 @@
   :global(.CalendarDay--selected-start),
   :global(.CalendarDay--selected-end),
   :global(.CalendarDay--selected) {
-    background: $brand-primary;
-    border: 1px double $brand-primary;
+    background: $brandPrimary;
+    border: 1px double $brandPrimary;
     color: #fff;
   }
 }

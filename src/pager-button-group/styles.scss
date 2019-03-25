@@ -1,7 +1,7 @@
-// Import any global variables from "../../variables/*.json"
-@import "../../variables/spacing.json";
-@import "../../variables/colors.json";
-@import "../../variables/fonts.json";
+// Import any global variables from "../../variables/*.scss"
+@import "../../variables/spacing.scss";
+@import "../../variables/colors.scss";
+@import "../../variables/fonts.scss";
 
 .pagerButton {
   display: inline-block;
@@ -10,7 +10,7 @@
   height: 22px;
   color: $gray;
 
-  font-family: $font-base;
+  font-family: $fontBase;
   font-size: 18px;
 
   cursor: pointer;
@@ -21,20 +21,20 @@
 
   // The first and last buttons have a radius on them, this gives the whole assembly a "pill" shape.
   &:first-child {
-    border-top-left-radius: $border-radius-base;
-    border-bottom-left-radius: $border-radius-base;
+    border-top-left-radius: $borderRadiusBase;
+    border-bottom-left-radius: $borderRadiusBase;
   }
   &:last-child {
-    border-top-right-radius: $border-radius-base;
-    border-bottom-right-radius: $border-radius-base;
+    border-top-right-radius: $borderRadiusBase;
+    border-bottom-right-radius: $borderRadiusBase;
   }
 
   &:active {
-    color: $gray-darker;
+    color: $grayDarker;
   }
 
   // Make sure neighboring buttons share only a single border.
-  border: 1px solid $gray-lighter;
+  border: 1px solid $grayLighter;
   & + & {
     border-left-width: 0px;
   }

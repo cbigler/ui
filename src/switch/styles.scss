@@ -1,32 +1,36 @@
-@import "../../variables/colors.json";
-@import "variables.json";
+@import "../../variables/colors.scss";
 
-@mixin make-switch($background: $brand-primary, $foreground: #fff) {
+$switchBaseWidth: 40px;
+$switchBaseHeight: 24px;
+$switchHandleSize: 20px;
+$switchHandleBorderSize: 2px;
+
+@mixin make-switch($background: $brandPrimary, $foreground: #fff) {
   label {
     outline: 0;
     display: inline-block;
-    width: $switch-base-width;
-    height: $switch-base-height;
+    width: $switchBaseWidth;
+    height: $switchBaseHeight;
     position: relative;
     cursor: pointer;
     user-select: none;
     background-color: $gray;
-    border-radius: $switch-base-height;
+    border-radius: $switchBaseHeight;
     transition: all 200ms ease;
 
     &:after {
       position: relative;
       display: block;
       content: "";
-      width: $switch-handle-size + $switch-handle-border-size;
-      height: $switch-handle-size + $switch-handle-border-size;
+      width: $switchHandleSize + $switchHandleBorderSize;
+      height: $switchHandleSize + $switchHandleBorderSize;
 
       box-sizing: border-box;
       left: 0px;
-      top: ($switch-base-height - $switch-handle-size - $switch-handle-border-size) / 2;
+      top: ($switchBaseHeight - $switchHandleSize - $switchHandleBorderSize) / 2;
       border-radius: 50%;
       background-color: $foreground;
-      border: $switch-handle-border-size solid $gray;
+      border: $switchHandleBorderSize solid $gray;
       transition: all 200ms ease;
     }
   }
@@ -39,7 +43,7 @@
     background-color: $background;
 
     &:after {
-      left: $switch-base-width - $switch-handle-size - $switch-handle-border-size;
+      left: $switchBaseWidth - $switchHandleSize - $switchHandleBorderSize;
       border-color: $background;
     }
   }
@@ -47,10 +51,10 @@
   &.disabled input[type=checkbox] + label,
   &.disabled input[type=checkbox]:checked + label {
     pointer-events: none;
-    background-color: $gray-light;
+    background-color: $grayLight;
   }
   &.disabled input[type=checkbox]:checked + label:after {
-    border-color: $gray-light;
+    border-color: $grayLight;
   }
 }
 
