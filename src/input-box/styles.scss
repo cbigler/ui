@@ -16,7 +16,6 @@
   padding-right: 16px;
   cursor: text;
   font-family: $fontBase;
-  font-size: 14px;
 }
 .inputBoxFocused { border-color: $brandPrimary; }
 .inputBox input {
@@ -25,6 +24,7 @@
   height: 43px;
   margin-left: 16px;
   outline: none;
+  font-size: 14px;
   flex-grow: 1;
   flex-shrink: 1;
 }

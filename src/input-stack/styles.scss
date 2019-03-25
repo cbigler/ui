@@ -4,7 +4,7 @@
 @import "../../variables/fonts.scss";
 
 $inputStackHeight: 60px;
-$inputStackBorderWidth: 1;
+$inputStackBorderWidth: 1px;
 
 // A stack item is one of the inputs in an input-stack, ie, a text box or a password box.
 // NOTE: this mixin requires that if an item is focused, the parent div should contain the class
