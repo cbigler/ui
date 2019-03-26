@@ -31,11 +31,12 @@ storiesOf('Button', module)
       <Button>Hello world!</Button>
     </ButtonContext.Provider>
   ))
-  .add('With "CANCEL_BUTTON" context on gray background', () => (
+  .add('With "CANCEL_BUTTON" context in an app bar', () => (
     <div style={{backgroundColor: colorVariables.grayLight, padding: 12}}>
       <ButtonContext.Provider value="CANCEL_BUTTON">
-        <Button>Hello world!</Button>
+        <Button>Cancel</Button>
       </ButtonContext.Provider>
+      <Button type="primary">Save</Button>
     </div>
   ))
   .add('With "DELETE_BUTTON" context', () => (
