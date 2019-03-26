@@ -15,14 +15,14 @@ jobs:
             echo "yarn --version = $(yarn --version)"
 
       - restore_cache:
-          key: node_modules-{{checksum "./package.json"}}-v2
+          key: node_modules-{{checksum "./package.json"}}-v3
       - run:
           name: "Install dependencies"
           command: |
             echo "# Top level package"
             npm i
       - save_cache:
-          key: node_modules-{{checksum "./package.json"}}-v2
+          key: node_modules-{{checksum "./package.json"}}-v3
           paths:
             - "./node_modules"
 
