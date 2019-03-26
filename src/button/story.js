@@ -26,6 +26,23 @@ storiesOf('Button', module)
   .add('Primary + disabled button', () => (
     <Button disabled type="primary">Hello world!</Button>
   ))
+  .add('With "CANCEL_BUTTON" context', () => (
+    <ButtonContext.Provider value="CANCEL_BUTTON">
+      <Button>Hello world!</Button>
+    </ButtonContext.Provider>
+  ))
+  .add('With "CANCEL_BUTTON" context on gray background', () => (
+    <div style={{backgroundColor: colorVariables.grayLight, padding: 12}}>
+      <ButtonContext.Provider value="CANCEL_BUTTON">
+        <Button>Hello world!</Button>
+      </ButtonContext.Provider>
+    </div>
+  ))
+  .add('With "DELETE_BUTTON" context', () => (
+    <ButtonContext.Provider value="DELETE_BUTTON">
+      <Button>Hello world!</Button>
+    </ButtonContext.Provider>
+  ))
   .add('With "DIGEST_DELETE_BUTTON" context', () => (
     <ButtonContext.Provider value="DIGEST_DELETE_BUTTON">
       <Button>Hello world!</Button>
