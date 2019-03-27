@@ -33,8 +33,7 @@ jobs:
           name: "Push preview to the cloud"
           command: |
             echo "* Installing amazon's cli..."
-            sudo apt-get update
-            sudo apt-get install -y python-pip python-dev
+            sudo apt install -y python-pip python-dev
             sudo pip install -U 'awscli>=1.15'
 
             echo "* Copying to S3..."
