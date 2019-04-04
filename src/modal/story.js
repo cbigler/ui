@@ -98,3 +98,11 @@ storiesOf('Modal', module)
       </Modal>
     )} />
   ))
+  .add('Modal that overflows the vertical height', () => (
+    <ModalTriggerer children={(visibility, hide) => (
+      <Modal width={500} height={'150vh'} visible={visibility}>
+        <p style={{fontFamily: fontVariables.fontBase}}>Really tall modal</p>
+        <Button type="primary" onClick={hide}>Close</Button>
+      </Modal>
+    )} />
+  ))

@@ -48,9 +48,10 @@ export default function Modal({
 Modal.propTypes = {
   visible: propTypes.bool.isRequired,
   children: propTypes.node.isRequired,
-  width: propTypes.oneOfType(propTypes.string, propTypes.number),
-  height: propTypes.oneOfType(propTypes.string, propTypes.number),
+  width: propTypes.oneOfType([propTypes.string, propTypes.number]),
+  height: propTypes.oneOfType([propTypes.string, propTypes.number]),
   onBlur: propTypes.func,
   onEscape: propTypes.func,
   onEscape: propTypes.func,
 };
+Modal.displayName = 'Modal';

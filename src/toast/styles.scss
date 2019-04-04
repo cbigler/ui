@@ -1,111 +1,57 @@
-// Import any global variables from "../../../variables/*.scss"
 @import "../../variables/colors.scss";
 @import "../../variables/spacing.scss";
-@import "../../variables/fonts.scss";
+
+@keyframes dashboardToastAnimateIn {
+  from { transform: translate(0, 20px) scale(0.98); }
+  to { transform: translate(0, 0) scale(1.0); }
+}
+@keyframes dashboardToastAnimateOut {
+  from { transform: translate(0, 0) scale(1.0); }
+  to { transform: translate(0, 20px) scale(0.98); }
+}
 
 .toast {
-  box-sizing: border-box;
-  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 
-  position: relative;
-
-  width: 100%;
-
-  // color overridden below based on toast type
-  border: 1px solid transparent;
+  height: 40px;
+  padding-left: 16px;
+  padding-right: 16px;
   border-radius: $borderRadiusBase;
 
-  min-height: 72px;
-  display: flex;
-  flex-direction: row;
-
-  font-family: $fontBase;
-  font-size: $fontSizeBase;
-
-  &:hover .toast-dismiss { display: block; }
-}
-.toastPrimary { border-color: $brandPrimary; }
-.toastSuccess { border-color: $brandSuccess; }
-.toastWarning { border-color: $brandWarning; }
-.toastDanger { border-color: $brandDanger; }
-
-
-// The toast icon is on the left side of the toast and contains a centered toast icon.
-.toastIcon {
-  width: 72px;
-
-  font-size: $fontSizeXLarge;
-  color: #fff;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-.toastIconPrimary { background-color: $brandPrimary; }
-.toastIconSuccess { background-color: $brandSuccess; }
-.toastIconWarning { background-color: $brandWarning; }
-.toastIconDanger { background-color: $brandDanger; }
-
-.toastIconGlyph {
-  width: 72px;
-  text-align: center;
-}
-
-// The toast body is the right side of the toast; it contains an optional toast header and toast
-// text.
-.toastBody {
-  height: auto;
-
-  font-size: $fontSizeBase;
-  font-weight: $fontWeightBase;
-  line-height: $lineHeightBase;
-
-  cursor: default;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
   user-select: none;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  margin-left: 16px;
-  margin-right: 16px;
+  opacity: 0;
+  pointer-events: none;
+  animation: dashboardModalBackdropAnimateOut 0.1s ease-out;
+}
+.toast.visible {
+  pointer-events: auto;
+  opacity: 1;
+  animation: dashboardModalBackdropAnimateIn 0.1s ease-in;
 }
 
-// The header of the toast. THis is within a toast body.
-.toastHeader {
-  font-size: $fontSizeBase;
-  font-weight: bold;
-
-  margin-top: 15px;
-  margin-bottom: 5px;
-}
-.toastHeaderPrimary { color: $brandPrimary; }
-.toastHeaderSuccess { color: $brandSuccess; }
-.toastHeaderWarning { color: $brandWarning; }
-.toastHeaderDanger { color: $brandDanger; }
-
-// The main content of the toast. This is within a toast body.
 .toastText {
-  color: $grayCinder;
-  margin-bottom: 12px;
-  text-align: left;
-
-  // If the toast doesn't have a title above it, add a similar amount of margin to its top such
-  // that its content remains centered in the flex parent.
-  &.noTitle { margin-top: 12px; }
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
-// The "dismissal" x button in the upper left corner of the toast.
 .toastDismiss {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-
-  color: $grayDark;
+  color: #fff;
+  text-decoration: underline;
+  font-weight: 400;
   cursor: pointer;
-  transition: all 200ms ease-in-out;
-
-  // display: none;
-  &:hover { opacity: 0.8; }
+  margin-left: 24px;
+  &:hover { opacity: 0.95; }
   &:active { opacity: 1; }
 }
+
+
+.default { background-color: $grayCinder; }
+.default .toastText { color: #B7D7CF; }
+
+.error { background-color: $brandDanger; }
+.error .toastText { color: #FFF; }
