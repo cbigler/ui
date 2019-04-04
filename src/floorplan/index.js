@@ -34,7 +34,7 @@ export const DPU = ({selected, shape}) => <g className="DPU" transform="scale(0.
     rx={8}
     ry={8}
     fill="#CBCFD6"
-    stroke={selected ? '#3663E5' : '#8E9299'}
+    stroke={selected ? '#2C4EB9' : '#8E9299'}
     strokeWidth={2}
   />
   <path
