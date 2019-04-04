@@ -1,55 +1,67 @@
-// Import any global variables from "../../variables/*.scss"
 @import "../../variables/colors.scss";
 @import "../../variables/spacing.scss";
-@import "../../variables/fonts.scss";
 
-$modalZIndex: 1000;
-
-@mixin make-modal($width: 460px) {
-  position: relative;
-  margin: 20px auto;
-
-  // Ensure that the width of the modal is either $width or 100%.
-  width: $width;
-  @media (max-width: $width) {
-    width: 100%;
-    height: 100vh;
-  }
-
-  & > :last-child {
-    width: 100%;
-    height: 100%;
-  }
+@keyframes dashboardModalBackdropAnimateIn {
+  from { opacity: 0; }
+  to { opacity: 1 }
+}
+@keyframes dashboardModalBackdropAnimateOut {
+  from { opacity: 1; }
+  to { opacity: 0 }
+}
+@keyframes dashboardModalDialogAnimateIn {
+  from { transform: translate(0, 20px) scale(0.98); }
+  to { transform: translate(0, 0) scale(1.0); }
+}
+@keyframes dashboardModalDialogAnimateOut {
+  from { transform: translate(0, 0) scale(1.0); }
+  to { transform: translate(0, 20px) scale(0.98); }
 }
 
-@mixin make-modal-backdrop($background: $grayDarker) {
-  background-color: rgba(0, 0, 0, 0.5);
-
-  z-index: $modalZIndex;
-
+.dashboardModalBackdrop {
   position: fixed;
   top: 0px;
-  bottom: 0px;
   left: 0px;
+  bottom: 0px;
   right: 0px;
 
+  display: flex;
+  align-items: center;
+  padding: 64px 0;
+
+  opacity: 0;
+  pointer-events: none;
+
+  animation: dashboardModalBackdropAnimateOut 0.1s ease-out;
+  background-color: rgba(255, 255, 255, 0.95);
   overflow-y: auto;
+
+  // Should never be below anything on the page
+  z-index: 999;
+}
+.dashboardModalBackdrop.visible {
+  pointer-events: auto;
+  opacity: 1;
+  animation: dashboardModalBackdropAnimateIn 0.1s ease-in;
+}
+.dashboardModalBackdrop > .dashboardModalDialog {
+  animation: dashboardModalDialogAnimateOut 0.1s ease-out;
+}
+.dashboardModalBackdrop.visible > .dashboardModalDialog {
+  animation: dashboardModalDialogAnimateIn 0.1s ease-in;
 }
 
-@mixin make-modal-close($color: $gray, $spacing: 15px) {
-  position: absolute;
-  top: $spacing;
-  right: $spacing;
+.dashboardModalDialog {
+  background-color: #fff;
+  border: 1px solid $gray;
 
-  font-family: $fontBase;
-  font-size: $fontSizeBase;
-  font-weight: bold;
+  // https://stackoverflow.com/questions/33454533/cant-scroll-to-top-of-flex-item-that-is-overflowing-container
+  margin: auto;
 
-  color: $color;
-  cursor: pointer;
-  user-select: none;
+  width: auto;
+  height: auto;
+
+  border-radius: $borderRadiusBase;
+  box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.05);
 }
-
-.modal { @include make-modal; }
-.modal-backdrop { @include make-modal-backdrop; }
-.modal-close { @include make-modal-close; }
+.dashboardModalDialog:focus { outline: none; }
