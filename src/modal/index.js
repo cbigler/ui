@@ -1,24 +1,57 @@
-import * as React from 'react';
+import React, { useRef, useEffect } from 'react';
+import propTypes from 'prop-types';
+import ReactDOM from 'react-dom';
 import classnames from 'classnames';
+import styles from './styles.scss';
 
 export default function Modal({
+  visible,
+  width, 
+  height,
   children,
-
-  onClickBackdrop,
-  onClose,
+  onBlur,
+  onEscape,
 }) {
-  return <div
-    className={classnames('modal-backdrop', {})}
-    onClick={onClickBackdrop}
-  >
+  const dialog = useRef(null);
+  useEffect(() => dialog.current.focus(), [visible]);
+
+  const inlineStyle = {};
+  if (width) {
+    inlineStyle.width = '100%';
+    inlineStyle.maxWidth = width;
+  }
+  if (height) {
+    inlineStyle.height = height;
+  }
+
+  return ReactDOM.createPortal(
     <div
-      className="modal"
-      onClick={e => e.stopPropagation()}
+      tabIndex={0}
+      className={classnames(styles.dashboardModalBackdrop, {[styles.visible]: visible})}
+      onKeyDown={e => e.keyCode === 27 && onEscape && onEscape()}
+      onMouseDown={onBlur}
     >
-      {onClose ? <div className="modal-close" onClick={onClose}>&#10005;</div> : null}
-      {children}
-    </div>
-  </div>;
+      <div
+        ref={dialog}
+        tabIndex={0}
+        className={styles.dashboardModalDialog}
+        style={inlineStyle}
+        onMouseDown={e => e.stopPropagation()}
+      >
+        {children}
+      </div>
+    </div>,
+    document.body,
+  );
 }
 
+Modal.propTypes = {
+  visible: propTypes.bool.isRequired,
+  children: propTypes.node.isRequired,
+  width: propTypes.oneOfType([propTypes.string, propTypes.number]),
+  height: propTypes.oneOfType([propTypes.string, propTypes.number]),
+  onBlur: propTypes.func,
+  onEscape: propTypes.func,
+  onEscape: propTypes.func,
+};
 Modal.displayName = 'Modal';
