@@ -14,7 +14,7 @@ const CONTEXT_CLASSES = {
 
 export const InputBoxContext = React.createContext(null);
 
-const InputBoxRaw = function InputBox({leftIcon, forwardedRef, ...props}) {
+function InputBoxRaw({leftIcon, forwardedRef, ...props}) {
   const [focused, setFocus] = useState(false);
   const defaultInputRef = useRef();
   const input = forwardedRef || defaultInputRef;
