@@ -116,6 +116,12 @@ Finally, this output bundle is placed in `dist/index.js` and the package is publ
 `main` field in the `package.json` pointing to it.
 
 
+# Publishing to NPM
+To publish your changes to npm you need to bump the version number using `npm version`
+
+```npm version (major|minor|patch)```
+
+
 # Adding Density UI to a project
 This is pretty easy.
 
