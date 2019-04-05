@@ -22,6 +22,21 @@ storiesOf('InputBox', module)
   .add('type=text with text on the left', () => (
     <InputBox type="text" leftIcon={<span>Text</span>} placeholder="Textbox here" />
   ))
+  .add('type=text with a forwarded ref to the underlying input used to autofocus', () => {
+    const inputRef = React.createRef();
+    setTimeout(() => {
+      action('Input element Ref')(inputRef);
+      inputRef.current.focus();
+    }, 250);
+    return (
+      <InputBox
+        type="text"
+        width={500}
+        ref={inputRef}
+        placeholder="Take a look at 'actions' panel to see ref"
+      />
+    );
+  })
   .add('type=select', () => (
     <InputBox
       type="select"
