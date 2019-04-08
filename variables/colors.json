@@ -20,6 +20,7 @@
   "headerColor": "#4E5457",
   "inputFieldTextColor": "#CBCFD6",
   "inputFieldTextActiveColor": "#4E5457",
+  "inputFieldBorderColor": "#B4B8BF",
 
   "reportBlueLight": "#97A6D4",
   "reportGreen": "#4E8475",

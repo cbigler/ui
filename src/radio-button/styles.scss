@@ -68,7 +68,7 @@ $radioDisabledActiveDataUri: "data:image/svg+xml,%3C%3Fxml version='1.0' encodin
 
 // RULES FOR LEGACY CONTEXT
 .contextLegacy.radioButton {
-  font-size: $fontSizeBase;
+  font-size: 14px;
 }
 .radioButtonInput + .contextLegacy.radioButtonLabel:before {
   margin-right: 10px;

@@ -9,50 +9,56 @@
   box-sizing: border-box;
 
   width: 200px;
-  height: (43px - 1px - 1px); /* 1px on each side for borders */
-  border: 1px solid $grayDark;
+  height: (40px); /* 1px on each side for borders */
+  padding-right: 16px;
+  padding-bottom: 3px;
+  border: 1px solid $inputFieldBorderColor;
   border-radius: $borderRadiusBase;
   background-color: #fff;
-  padding-right: 16px;
   cursor: text;
   font-family: $fontBase;
 }
+
 .inputBoxFocused { border-color: $brandPrimary; }
+
 .inputBox input {
-  border: 0px;
-  background-color: transparent;
-  height: 43px;
-  margin-left: 16px;
-  outline: none;
-  font-size: 14px;
   flex-grow: 1;
   flex-shrink: 1;
+  height: 43px;
+  margin-left: 16px;
+  background-color: transparent;
+  border: 0px;
+  outline: none;
+  font-size: $fontSizeBase;
+  font-family: $fontBase;
 }
 .inputBox input::placeholder { color: $gray; }
+
 .inputBoxContainsIcon { padding-left: 16px; }
 .leftIcon {
   flex-grow: 0;
   flex-shrink: 0;
 }
-
+.leftIcon svg { padding-top: 4px; }
 
 .inputBoxTextarea {
   display: flex;
   align-items: center;
-
-  border: 1px solid $grayDark;
+  padding-top: 8px;
+  padding-bottom: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border: 1px solid $inputFieldBorderColor;
   border-radius: $borderRadiusBase;
   background-color: #fff;
   font-family: $fontBase;
-  font-size: 14px;
-
-  padding: 16px;
+  font-size: $fontSizeBase;
   resize: none;
   outline: none;
 }
 .inputBoxTextarea:focus { border-color: $brandPrimary; }
 .inputBoxDisabled {
-  border-color: transparent;
+  border-color: $grayLight;
   background-color: $grayLight;
   color: $gray;
 
@@ -74,7 +80,7 @@
   width: calc(100% - 15px - 15px);
 
   background-color: #fff;
-  border: 1px solid $gray;
+  border: 1px solid $inputFieldBorderColor;
   border-radius: 4px;
 
   padding-left: 15px;
@@ -94,9 +100,9 @@
 // Select box value - this is the always visible region that shows the currently selected item.
 .inputBoxSelectBoxValue {
   @extend %inputBoxSelectCommon;
-  height: (43px - 1px - 1px); // (for borders)
+  height: (40px - 1px - 1px); // (for borders)
 
-  font-size: 14px;
+  font-size: $fontSizeBase;
   color: $grayCinder;
 
   display: flex;
@@ -107,7 +113,9 @@
   outline: none;
 
   & > span {
+    margin-top: -2px;
     margin-right: auto;
+    line-height: 1;
 
     &:active {
       opacity: 0.9;
@@ -125,7 +133,8 @@
 
 // When disabled, a selectbox is grayed out and can't be clicked.
 .inputBoxSelectBoxValueDisabled {
-  background-color: $grayLighter;
+  background-color: $grayLight;
+  border-color: $grayLight;
   pointer-events: none;
 }
 
@@ -170,7 +179,7 @@
 
 .inputBoxSelectBoxMenuLi {
   line-height: 36px;
-  font-size: 14px;
+  font-size: $fontSizeBase;
   cursor: pointer;
 
   padding-left: 15px;
@@ -202,10 +211,10 @@
 
 // RULES FOR LIST_VIEW CONTEXT
 .contextListView.inputBoxSelectBoxValue {
-  font-size: 16px;
   height: 36px;
-  border: 1px solid transparent;
   background: none;
+  border: 1px solid transparent;
+  font-size: 16px;
 }
 .contextListView.inputBoxSelectBoxValue.inputBoxSelectBoxValueOpened {
   border: 1px solid $brandPrimary;
