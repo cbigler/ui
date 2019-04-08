@@ -19,6 +19,7 @@
   "textColor": "#8E9299",
   "headerColor": "#4E5457",
   "inputFieldTextColor": "#CBCFD6",
+  "inputFieldPlaceholderColor": "#9B9B9B",
   "inputFieldTextActiveColor": "#4E5457",
   "inputFieldBorderColor": "#B4B8BF",
 

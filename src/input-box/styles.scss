@@ -32,14 +32,17 @@
   font-size: $fontSizeBase;
   font-family: $fontBase;
 }
-.inputBox input::placeholder { color: $gray; }
+.inputBox input::placeholder { color: $inputFieldPlaceholderColor; }
 
 .inputBoxContainsIcon { padding-left: 16px; }
 .leftIcon {
   flex-grow: 0;
   flex-shrink: 0;
 }
-.leftIcon svg { padding-top: 4px; }
+.leftIcon svg {
+  padding-top: 4px;
+  opacity: 0.5;
+}
 
 .inputBoxTextarea {
   display: flex;
@@ -67,7 +70,7 @@
   &::-moz-placeholder,
   &:-ms-input-placeholder,
   &:-moz-placeholder {
-    color: $grayDarker;
+    color: $inputFieldPlaceholderColor;
     opacity: 1; // Placeholders in firefox have opacity by default. Undo that.
   }
 }
@@ -205,7 +208,7 @@
 }
 
 .inputBoxSelectPlaceholder {
-  color: $gray;
+  color: $inputFieldPlaceholderColor;
 }
 
 
