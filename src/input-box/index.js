@@ -14,9 +14,10 @@ const CONTEXT_CLASSES = {
 
 export const InputBoxContext = React.createContext(null);
 
-export default function InputBox({leftIcon, ...props}) {
+function InputBoxRaw({leftIcon, forwardedRef, ...props}) {
   const [focused, setFocus] = useState(false);
-  const input = useRef();
+  const defaultInputRef = useRef();
+  const input = forwardedRef || defaultInputRef;
 
   switch (props.type) {
 
@@ -28,6 +29,7 @@ export default function InputBox({leftIcon, ...props}) {
       {...props}
       style={{width: props.width}}
       className={styles.inputBoxTextarea}
+      ref={input}
     />;
 
   default:
@@ -55,8 +57,11 @@ export default function InputBox({leftIcon, ...props}) {
       </div>
     );
   }
-}
+};
 
+const InputBox = React.forwardRef((props, ref) => (
+  <InputBoxRaw {...props} forwardedRef={ref} />
+));
 InputBox.displayName = 'InputBox';
 InputBox.propTypes = {
   type: propTypes.string,
@@ -67,6 +72,7 @@ InputBox.propTypes = {
     disabled: propTypes.bool,
   })),
 };
+export default InputBox;
 
 export class SelectBox extends React.Component {
   constructor(props) {
