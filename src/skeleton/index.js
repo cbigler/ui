@@ -21,6 +21,6 @@ Skeleton.propTypes = {
 Skeleton.defaultProps = {
   width: '100%',
   height: 8,
-  color: colorVariables.grayDarker,
+  color: colorVariables.gray,
 };
 Skeleton.displayName = 'Skeleton';

@@ -20,8 +20,10 @@
   padding-left: 16px;
   padding-right: 16px;
   border-radius: $borderRadiusBase;
-
   box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+
+  line-height: 1;
+
   user-select: none;
   opacity: 0;
   pointer-events: none;
@@ -34,6 +36,9 @@
 }
 
 .toastText {
+  display: inline-block;
+  height: 18px;
+
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
