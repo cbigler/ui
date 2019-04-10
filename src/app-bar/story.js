@@ -33,6 +33,14 @@ storiesOf('AppBar', module)
       </AppBar>
     </AppBarContext.Provider>
   ))
+  .add('With ADMIN_LOCATIONS_EDIT_MODULE_HEADER context', () => (
+    <AppBarContext.Provider value="ADMIN_LOCATIONS_EDIT_MODULE_HEADER">
+      <AppBar>
+        <AppBarTitle>Title</AppBarTitle>
+        <AppBarSection>ASDF</AppBarSection>
+      </AppBar>
+    </AppBarContext.Provider>
+  ))
   .add('With a title that overflows the width of the app bar', () => (
     <div style={{width: 500}}>
       <AppBar>

@@ -6,6 +6,7 @@ import styles from './styles.scss';
 const CONTEXT_CLASSES = {
   'TRANSPARENT': styles.contextTransparent,
   'BOTTOM_ACTIONS': styles.contextBottomActions,
+  'ADMIN_LOCATIONS_EDIT_MODULE_HEADER': styles.contextAdminLocationsEditModuleHeader,
 };
 
 export const AppBarContext = React.createContext(null);
