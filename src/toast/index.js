@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import propTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 
 import styles from './styles.scss';
 
+export const ToastContext = React.createContext(null);
+
+const CONTEXT_CLASSES = {
+  multiline: styles.multiline,
+};
+
 export default function Toast({ type, visible, onDismiss, children }) {
+  const context = useContext(ToastContext);
   return (
-    <div className={classnames(styles.toast, styles[type], {[styles.visible]: visible})}>
+    <div className={classnames(
+      styles.toast,
+      styles[type],
+      CONTEXT_CLASSES[context],
+      {[styles.visible]: visible},
+    )}>
       <span className={styles.toastText}>{children}</span>
       <span role="button" className={styles.toastDismiss} onClick={onDismiss}>Dismiss</span>
     </div>

@@ -60,3 +60,16 @@
 
 .error { background-color: $brandDanger; }
 .error .toastText { color: #FFF; }
+
+
+
+.multiline {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  height: auto;
+}
+.multiline .toastText {
+  height: auto;
+  line-height: 20px;
+  white-space: normal;
+}
