@@ -63,6 +63,7 @@
   border-color: $grayLight;
   background-color: $grayLight;
   color: $gray;
+  cursor: not-allowed;
 
   &::placeholder,
   &::-webkit-input-placeholder,
@@ -138,6 +139,7 @@
   background-color: $grayLight;
   border-color: $grayLight;
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 // Select box menu - this is the menu that is hidden and shown when the user clicks on the select
@@ -198,6 +200,7 @@
 }
 .inputBoxSelectBoxMenuLiDisabled {
   color: $grayDark;
+  cursor: not-allowed;
 }
 
 .inputBoxSelectBoxItemHighlight {
