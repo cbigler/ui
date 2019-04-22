@@ -14,7 +14,6 @@ $cdnPath: "https://densityco.github.io/assets";
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-variant-numeric: tabular-nums;
 }
 
 @font-face { /* REGULAR ITALICS */
@@ -27,7 +26,6 @@ $cdnPath: "https://densityco.github.io/assets";
   font-style: italic;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-variant-numeric: tabular-nums;
 }
 
 @font-face { /* BOLD */
@@ -40,7 +38,6 @@ $cdnPath: "https://densityco.github.io/assets";
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-variant-numeric: tabular-nums;
 }
 @font-face { /* BOLD */
   font-family: 'Aeonik';
@@ -52,7 +49,6 @@ $cdnPath: "https://densityco.github.io/assets";
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-variant-numeric: tabular-nums;
 }
 
 @font-face { /* BOLD ITALICS */
@@ -65,7 +61,6 @@ $cdnPath: "https://densityco.github.io/assets";
   font-style: italic;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-variant-numeric: tabular-nums;
 }
 @font-face { /* BOLD ITALICS */
   font-family: 'Aeonik';
@@ -77,7 +72,6 @@ $cdnPath: "https://densityco.github.io/assets";
   font-style: italic;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-variant-numeric: tabular-nums;
 }
 
 @font-face { /* MEDIUM */
@@ -90,7 +84,6 @@ $cdnPath: "https://densityco.github.io/assets";
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-variant-numeric: tabular-nums;
 }
 @font-face { /* MEDIUM ITALICS */
   font-family: 'Aeonik';
@@ -102,7 +95,6 @@ $cdnPath: "https://densityco.github.io/assets";
   font-style: italic;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-variant-numeric: tabular-nums;
 }
 
 
@@ -119,4 +111,7 @@ $cdnPath: "https://densityco.github.io/assets";
 }
 
 
-body { color: $textColorBase; }
+body {
+  font-variant-numeric: tabular-nums;
+  color: $textColorBase;
+}
