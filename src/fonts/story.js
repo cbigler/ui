@@ -17,7 +17,6 @@ storiesOf('Fonts', module)
         background: '#eee',
         padding: 20,
         lineHeight: 2,
-        maxWidth: '50%',
         borderRadius: 4
         }}>
         // Include in your javascript bundle<br/>
