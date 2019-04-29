@@ -46,4 +46,8 @@
   border-bottom-right-radius: $borderRadiusBase;
 }
 
-.contextAdminLocationsEditModuleHeader .appBarTitle { font-size: 20px; }
+// Rules for "CARD_HEADER" context
+.cardHeader .appBarTitle {
+  font-size: 20px;
+  color: $grayDarkest;
+}

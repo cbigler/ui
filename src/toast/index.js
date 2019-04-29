@@ -8,7 +8,7 @@ import styles from './styles.scss';
 export const ToastContext = React.createContext(null);
 
 const CONTEXT_CLASSES = {
-  multiline: styles.multiline,
+  MULTILINE: styles.multiline,
 };
 
 export default function Toast({ type, visible, onDismiss, children }) {
