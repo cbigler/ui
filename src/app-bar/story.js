@@ -33,8 +33,8 @@ storiesOf('AppBar', module)
       </AppBar>
     </AppBarContext.Provider>
   ))
-  .add('With ADMIN_LOCATIONS_EDIT_MODULE_HEADER context', () => (
-    <AppBarContext.Provider value="ADMIN_LOCATIONS_EDIT_MODULE_HEADER">
+  .add('With CARD_HEADER context', () => (
+    <AppBarContext.Provider value="CARD_HEADER">
       <AppBar>
         <AppBarTitle>Title</AppBarTitle>
         <AppBarSection>ASDF</AppBarSection>

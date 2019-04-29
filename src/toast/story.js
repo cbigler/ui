@@ -18,9 +18,9 @@ storiesOf('Toast', module)
       Error performing action
     </Toast>
   ))
-  .add('Default Toast with multiline context', () => (
+  .add('Default Toast with MULTILINE context', () => (
     <div style={{maxWidth: 400, width: '100%'}}>
-      <ToastContext.Provider value="multiline">
+      <ToastContext.Provider value="MULTILINE">
         <Toast visible onDismiss={action('onDismiss')}>
           To link a doorway with a space, drag the doorway from below to a space on the left.
         </Toast>
