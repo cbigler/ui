@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
@@ -27,3 +27,21 @@ storiesOf('Toast', module)
       </ToastContext.Provider>
     </div>
   ))
+  .add('Default Toast fading in and out', () => {
+    function ToastCycle() {
+      const [visible, set] = useState(false);
+      useEffect(() => {
+        const interval = window.setInterval(() => set(!visible), 2000);
+        return () => window.clearInterval(interval);
+      }, [visible]);
+
+      return (
+        <Toast visible={visible} onDismiss={action('onDismiss')}>
+          To link a doorway with a space, drag the doorway from below to a space on the left.
+        </Toast>
+      );
+    }
+    return (
+      <ToastCycle />
+    );
+  })
