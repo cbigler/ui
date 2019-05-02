@@ -10,6 +10,7 @@ $radioDisabledActiveDataUri: "data:image/svg+xml,%3C%3Fxml version='1.0' encodin
 .radioButton {
   font-family: $fontBase;
   font-size: 16px;
+  height: 24px;
 }
 
 // Hide the actual radio button
@@ -29,6 +30,7 @@ $radioDisabledActiveDataUri: "data:image/svg+xml,%3C%3Fxml version='1.0' encodin
   position: relative;
   bottom: -3px;
 }
+.noText .radioButtonLabel:before { margin-right: 0px; }
 
 .radioButtonInput + .radioButtonLabel {
   color: $grayDarkest;
