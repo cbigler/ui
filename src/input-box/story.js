@@ -6,6 +6,8 @@ import './styles.scss';
 import InputBox, { InputBoxContext } from './index';
 import Icon from '../icons/index';
 
+import colorVariables from '../../variables/colors.json';
+
 storiesOf('InputBox', module)
   .add('Empty', () => (
     <InputBox type="text" />
@@ -37,6 +39,13 @@ storiesOf('InputBox', module)
       />
     );
   })
+  .add('type=text that is invalid', () => (
+    <InputBox
+      type="text"
+      placeholder="Hello world"
+      invalid
+    />
+  ))
   .add('type=select', () => (
     <InputBox
       type="select"
@@ -137,6 +146,20 @@ storiesOf('InputBox', module)
       ]}
       onChange={action("selected")}
       menuMaxHeight={500}
+    />
+  ))
+  .add('type=select that is invalid', () => (
+    <InputBox
+      type="select"
+      choices={[
+        {id: 0, label: "Foo"},
+        {id: 1, label: "Bar"},
+        {id: 2, label: "Disabled", disabled: true},
+        {id: 3, label: "Baz"},
+      ]}
+      placeholder="Select a label"
+      onChange={action("selected")}
+      invalid
     />
   ))
   .add('disabled box', () => (
