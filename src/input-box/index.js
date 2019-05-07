@@ -39,6 +39,7 @@ function InputBoxRaw({leftIcon, forwardedRef, ...props}) {
           [styles.inputBoxDisabled]: props.disabled,
           [styles.inputBoxFocused]: focused,
           [styles.inputBoxContainsIcon]: Boolean(leftIcon),
+          [styles.invalid]: props.invalid,
         })}
         style={{width: props.width}}
         onClick={() => {
@@ -104,7 +105,17 @@ export class SelectBox extends React.Component {
   }
 
   render() {
-    const { width, listBoxWidth, value, choices, id, disabled, placeholder, menuMaxHeight } = this.props;
+    const {
+      width,
+      listBoxWidth,
+      value,
+      choices,
+      id,
+      disabled,
+      placeholder,
+      menuMaxHeight,
+      invalid,
+    } = this.props;
     const { opened } = this.state;
 
     // Allow `value` to either be:
@@ -127,6 +138,7 @@ export class SelectBox extends React.Component {
           className={classnames(CONTEXT_CLASSES[context], styles.inputBoxSelectBoxValue, {
             [styles.inputBoxSelectBoxValueDisabled]: disabled,
             [styles.inputBoxSelectBoxValueOpened]: opened,
+            [styles.invalid]: invalid,
           })}
           tabIndex={disabled ? -1 : 0}
           aria-expanded={opened}
