@@ -81,3 +81,21 @@
     &:active { background-color: transparent; }
   }
 }
+
+.contextDeleteSegmentButton {
+  color: $grayDarker;
+  background-color: transparent;
+  border-color: transparent;
+  text-decoration: underline;
+  margin-right: 8px;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: $grayDarkest;
+  }
+  &:active { background-color: rgba(0, 0, 0, 0.03); }
+  &:disabled {
+    cursor: default;
+    &:hover { background-color: transparent; }
+    &:active { background-color: transparent; }
+  }
+}

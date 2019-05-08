@@ -45,6 +45,12 @@ export default function Button({
         {children}
       </button>
     );
+  } else if (['DELETE_SEGMENT_BUTTON'].includes(context)) {
+    return (
+      <button {...props} className={classnames(styles.button, styles.contextDeleteSegmentButton)}>
+        {children}
+      </button>
+    );
   } else {
     return (
       <button

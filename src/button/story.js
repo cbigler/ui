@@ -54,6 +54,11 @@ storiesOf('Button', module)
       <Button>Hello world!</Button>
     </ButtonContext.Provider>
   ))
+  .add('With "DELETE_SEGMENT_BUTTON" context', () => (
+    <ButtonContext.Provider value="DELETE_SEGMENT_BUTTON">
+      <Button>Delete Segment</Button>
+    </ButtonContext.Provider>
+  ))
   .add('Button with width=100%', () => (
     <Button width="100%">Hello world!</Button>
   ))
