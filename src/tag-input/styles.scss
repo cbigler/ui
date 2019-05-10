@@ -1,0 +1,77 @@
+// Import any global variables from "../../../variables/*.scss"
+@import "../../variables/colors.scss";
+@import "../../variables/spacing.scss";
+@import "../../variables/fonts.scss";
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+
+  height: 40px;
+  border: 1px solid $inputFieldBorderColor;
+  background-color: #fff;
+  border-radius: $borderRadiusBase;
+}
+.focused { border-color: $brandPrimary; }
+
+.tag {
+  display: flex;
+  align-items: center;
+  flex-grow: 0;
+  flex-shrink: 0;
+
+  font-size: 14px;
+  height: 28px;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-left: 8px;
+  cursor: default;
+  user-select: none;
+  border-radius: $borderRadiusBase;
+  background-color: $grayLight;
+  border: 1px solid $grayLight;
+  transition: all 100ms ease-in-out;
+}
+.tag.focus {
+  border-color: $brandPrimary;
+  // background-color: $brandPrimary;
+  // color: #fff;
+}
+
+.input {
+  flex-grow: 1;
+  flex-shrink: 1;
+
+  margin-left: 16px;
+  height: 36px;
+  border: 0px;
+  outline: none;
+  font-size: $fontSizeBase;
+  border-top-right-radius: $borderRadiusBase;
+  border-bottom-right-radius: $borderRadiusBase;
+}
+
+.closeIcon {
+  margin-left: 4px;
+  cursor: pointer;
+  &:hover { opacity: 0.8; }
+  &:active { opacity: 1; }
+}
+
+.dropdown {
+  position: absolute;
+  list-style-type: none;
+  padding-left: 0px;
+  left: 0px;
+  right: 0px;
+  top: 30px;
+  padding: 8px;
+  border: 1px solid $gray;
+  border-radius: $borderRadiusBase;
+  background-color: #fff;
+}
+.dropdownItem.focused {
+  color: red;
+}
