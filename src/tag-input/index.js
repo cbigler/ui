@@ -13,6 +13,8 @@ export default class TagInput extends Component {
   static defaultProps = {
     choices: [],
     tags: [],
+    placeholder: 'Select a tag',
+    emptyTagsPlaceholder: 'No tags',
   };
 
   constructor(props) {
@@ -35,7 +37,7 @@ export default class TagInput extends Component {
 
   clearInput = e => {
     e.preventDefault(); // Stop tab jumping to next form control
-    this.setState({text: ''});
+    this.setState({text: '', focusedDropdownItemIndex: 0});
   }
 
   clearSelectedTag = () => {
@@ -52,6 +54,7 @@ export default class TagInput extends Component {
       tags,
       choices,
       placeholder,
+      emptyTagsPlaceholder,
       onRemoveTag,
       onAddTag,
       onCreateNewTag,
@@ -130,7 +133,7 @@ export default class TagInput extends Component {
             } else if (e.key === 'ArrowDown' && focusedDropdownItemIndex <= matches.length-1) {
               this.setState({focusedDropdownItemIndex: focusedDropdownItemIndex + 1});
 
-            } else if (e.key === 'ArrowUp' && focusedDropdownItemIndex >= 0) {
+            } else if (e.key === 'ArrowUp' && focusedDropdownItemIndex > 0) {
               this.setState({focusedDropdownItemIndex: focusedDropdownItemIndex - 1});
 
             }
@@ -155,7 +158,7 @@ export default class TagInput extends Component {
               </div>
             </div>
           ))}
-          {tags.length === 0 ? <span className={styles.noTags}>No tags</span> : null}
+          {tags.length === 0 ? <span className={styles.noTags}>{emptyTagsPlaceholder}</span> : null}
         </div>
 
         {text.length > 0 ? (

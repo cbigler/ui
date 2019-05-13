@@ -24,6 +24,7 @@ storiesOf('TagInput', module)
         { id: 456, label: 'bar' },
       ]}
       placeholder="Start typing to add a tag"
+      emptyTagsPlaceholder="There are no tags added to this space yet"
       onCreateNewTag={text => setTags([...tags, {id: Math.random().toString(), label: text}])}
       onAddTag={tag => setTags([...tags, tag])}
       onRemoveTag={tag => setTags(tags.filter(i => i.id !== tag.id))}
@@ -49,6 +50,7 @@ storiesOf('TagInput', module)
           ]}
           tags={tags}
           placeholder="Start typing to add a tag"
+          emptyTagsPlaceholder="There are no tags added to this space yet"
           onCreateNewTag={text => setTags([...tags, {id: Math.random().toString(), label: text}])}
           onAddTag={tag => setTags([...tags, tag])}
           onRemoveTag={tag => setTags(tags.filter(i => i.id !== tag.id))}
