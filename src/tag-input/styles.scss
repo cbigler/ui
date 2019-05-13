@@ -5,16 +5,15 @@
 
 .wrapper {
   display: flex;
-  align-items: center;
-  box-sizing: border-box;
+  flex-direction: column;
   position: relative;
-
-  height: 40px;
-  border: 1px solid $inputFieldBorderColor;
-  background-color: #fff;
-  border-radius: $borderRadiusBase;
 }
-.focused { border-color: $brandPrimary; }
+
+.tagWrapper {
+  display: flex;
+  margin-top: 16px;
+  height: 30px;
+}
 
 .tag {
   display: flex;
@@ -26,35 +25,21 @@
   height: 28px;
   padding-left: 8px;
   padding-right: 8px;
-  margin-left: 8px;
+  margin-right: 8px;
   cursor: default;
   user-select: none;
   border-radius: $borderRadiusBase;
-  background-color: $grayLight;
-  border: 1px solid $grayLight;
-  transition: all 100ms ease-in-out;
+  color: #fff;
+  background-color: $grayCinder;
+  border: 1px solid $grayCinder;
+  transition: all 150ms ease-in-out;
 }
-.tag.focus {
-  border-color: $brandPrimary;
-  // background-color: $brandPrimary;
-  // color: #fff;
-}
+.tag.focus { background-color: $brandPrimary; }
 
-.input {
-  flex-grow: 1;
-  flex-shrink: 1;
-
-  margin-left: 16px;
-  height: 36px;
-  border: 0px;
-  outline: none;
-  font-size: $fontSizeBase;
-  border-top-right-radius: $borderRadiusBase;
-  border-bottom-right-radius: $borderRadiusBase;
-}
+.tagLabel { transform: translate(0px, -1px); }
 
 .closeIcon {
-  margin-left: 4px;
+  margin-left: 12px;
   cursor: pointer;
   &:hover { opacity: 0.8; }
   &:active { opacity: 1; }
@@ -72,6 +57,10 @@
   border-radius: $borderRadiusBase;
   background-color: #fff;
 }
-.dropdownItem.focused {
-  color: red;
+.dropdownItem.focused { background-color: $grayLightest; }
+
+.noTags {
+  font-style: italic;
+  color: $grayDark;
+  font-size: $fontSizeBase;
 }

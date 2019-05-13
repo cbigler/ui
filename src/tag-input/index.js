@@ -3,11 +3,12 @@ import classnames from 'classnames';
 import styles from './styles.scss';
 import fuzzy from 'fuzzy';
 import Icons from '../icons';
+import InputBox from '../input-box';
 
 const NULL_CHARACTER = String.fromCharCode(0);
 
 export default class TagInput extends Component {
-  input = React.createRef();
+  tagWrapper = React.createRef();
 
   static defaultProps = {
     choices: [],
@@ -37,12 +38,20 @@ export default class TagInput extends Component {
     this.setState({text: ''});
   }
 
+  clearSelectedTag = () => {
+    this.setState({focusedTagId: null});
+    window.removeEventListener('click', this.clearSelectedTag);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('click', this.clearSelectedTag);
+  }
+
   render() {
     const {
       tags,
       choices,
       placeholder,
-      canCreateNewTags,
       onRemoveTag,
       onAddTag,
       onCreateNewTag,
@@ -58,29 +67,11 @@ export default class TagInput extends Component {
     });
 
     return (
-      <div
-        className={classnames(styles.wrapper, {[styles.focused]: focused})}
-        onClick={() => {
-          this.input.current.focus();
-          this.setState({focused: true});
-        }}
-      >
-        {tags.map(tag => (
-          <div
-            key={tag.id}
-            className={classnames(styles.tag, {[styles.focus]: focusedTagId === tag.id})}
-            onClick={e => e.stopPropagation()}
-          >
-            {tag.label}
-            <div className={styles.closeIcon} onClick={() => onRemoveTag(tag)}>
-              <Icons.Close width={8} height={8} />
-            </div>
-          </div>
-        ))}
-        <input
+      <div className={styles.wrapper}>
+        <InputBox
           type="text"
           placeholder={placeholder}
-          className={styles.input}
+          width="100%"
 
           value={text}
           onChange={e => this.setState({text: e.target.value})}
@@ -89,35 +80,40 @@ export default class TagInput extends Component {
               // Empty tags are not allowed
               if (text.length === 0) { return; }
 
-              const existingTagWithSameName = tags.find(tag => tag.label.trim() === text.trim());
+              const focusedTagMatch = matches[this.state.focusedDropdownItemIndex];
+              const focusedTag = focusedTagMatch ? focusedTagMatch.original : null;
+              const focusedTagAlreadyInList = tags.find(
+                tag => tag.label.trim() === (focusedTag ? focusedTag.label : text).trim()
+              );
 
               // If the tag already exists, then don't call onCreateNewTag since it's
               // already in the array once
-              if (existingTagWithSameName) {
-                this.blinkTag(existingTagWithSameName.id);
+              if (focusedTagAlreadyInList) {
                 this.clearInput(e);
+                setTimeout(() => {
+                  this.blinkTag(focusedTagAlreadyInList.id);
+                }, 150);
+                return;
+              }
+
+              // As a last resort, create a brand new tag
+              if (focusedDropdownItemIndex > matches.length-1) {
+                this.clearInput(e);
+                onCreateNewTag(text.trim());
                 return;
               }
 
               // If the tag is already a choice, then add it rather than creating it from a text
               // slug.
-              const matchingTagInChoices = choices.find(choice => choice.label.trim() === text.trim());
-              if (matchingTagInChoices) {
-                onAddTag(matchingTagInChoices);
-                this.clearInput(e);
-                return;
-              }
-
-              // As a last resort, create a brand new tag
-              if (!canCreateNewTags) {
-                return;
-              }
-              onCreateNewTag(text.trim());
               this.clearInput(e);
+              onAddTag(focusedTag);
+
             } else if (e.key === 'Backspace' && text.length === 0 && tags.length > 0) {
+              window.addEventListener('click', this.clearSelectedTag);
+
               // Initially focus a tag
-              if (!this.state.focusedTagId) {
-                this.setState({focusedTagId: tags[tags.length-1].id});
+              if (!focusedTagId) {
+                this.setState({ focusedTagId: tags[tags.length-1].id });
                 return;
               }
 
@@ -130,13 +126,37 @@ export default class TagInput extends Component {
 
             } else if (e.key === 'Escape' || this.state.focusedTagId) {
               this.setState({focusedTagId: null});
+
+            } else if (e.key === 'ArrowDown' && focusedDropdownItemIndex <= matches.length-1) {
+              this.setState({focusedDropdownItemIndex: focusedDropdownItemIndex + 1});
+
+            } else if (e.key === 'ArrowUp' && focusedDropdownItemIndex >= 0) {
+              this.setState({focusedDropdownItemIndex: focusedDropdownItemIndex - 1});
+
             }
           }}
 
-          ref={this.input}
           onFocus={() => this.setState({focused: true})}
           onBlur={() => this.setState({focused: false})}
         />
+
+        <div className={styles.tagWrapper} ref={this.tagWrapper}>
+          {tags.map(tag => (
+            <div
+              key={tag.id}
+              className={classnames(styles.tag, {[styles.focus]: focusedTagId === tag.id})}
+              onClick={e => e.stopPropagation()}
+            >
+              <div className={styles.tagLabel}>
+                {tag.label}
+              </div>
+              <div className={styles.closeIcon} onClick={() => onRemoveTag(tag)}>
+                <Icons.Close width={12} height={12} color="#fff" />
+              </div>
+            </div>
+          ))}
+          {tags.length === 0 ? <span className={styles.noTags}>No tags</span> : null}
+        </div>
 
         {text.length > 0 ? (
           <ul className={styles.dropdown}>
@@ -172,20 +192,19 @@ export default class TagInput extends Component {
                 }
               </li>
             ))}
-            <li
-              className={classnames(styles.dropdownItem, {
-                [styles.focused]: focusedDropdownItemIndex === -1,
-              })}
-              onMouseEnter={() => this.setState({focusedDropdownItemIndex: -1})}
-              onMouseLeave={e => e.stopPropagation()}
-              onClick={e => {
-                if (!canCreateNewTags) {
-                  return;
-                }
-                onCreateNewTag(text);
-                this.clearInput(e);
-              }}
-            >Add "{text}"</li>
+            {!matches.find(m => m.original.label.trim() === text.trim()) ? (
+              <li
+                className={classnames(styles.dropdownItem, {
+                  [styles.focused]: focusedDropdownItemIndex === matches.length,
+                })}
+                onMouseEnter={() => this.setState({focusedDropdownItemIndex: matches.length})}
+                onMouseLeave={e => e.stopPropagation()}
+                onClick={e => {
+                  onCreateNewTag(text);
+                  this.clearInput(e);
+                }}
+              >Add "{text}"</li>
+            ) : null}
           </ul>
         ) : null}
       </div>
