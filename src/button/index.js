@@ -35,19 +35,31 @@ export default function Button({
     'USER_MANAGEMENT_DETAIL_DELETE_BUTTON'
   ].includes(context)) {
     return (
-      <button {...props} className={classnames(styles.button, styles.contextDeleteButton)}>
+      <button
+        {...props}
+        disabled={disabled}
+        className={classnames(styles.button, styles.contextDeleteButton)}
+      >
         {children}
       </button>
     );
   } else if (['CANCEL_BUTTON'].includes(context)) {
     return (
-      <button {...props} className={classnames(styles.button, styles.contextCancelButton)}>
+      <button
+        {...props}
+        disabled={disabled}
+        className={classnames(styles.button, styles.contextCancelButton)}
+      >
         {children}
       </button>
     );
   } else if (['DELETE_SEGMENT_BUTTON'].includes(context)) {
     return (
-      <button {...props} className={classnames(styles.button, styles.contextDeleteSegmentButton)}>
+      <button
+        {...props}
+        disabled={disabled}
+        className={classnames(styles.button, styles.contextDeleteSegmentButton)}
+      >
         {children}
       </button>
     );
