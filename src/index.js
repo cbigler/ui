@@ -21,6 +21,7 @@ export { default as RadioButton, RadioButtonContext } from './radio-button';
 export { default as Switch } from './switch';
 export { default as Toast, ToastContext } from './toast';
 export { default as Skeleton } from './skeleton';
+export { default as TagInput } from './tag-input'
 
 export {
   InputStackGroup,
