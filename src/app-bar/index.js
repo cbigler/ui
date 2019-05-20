@@ -27,11 +27,11 @@ export function AppBarSection({ children }) {
   );
 }
 
-export default function AppBar({ children }) {
+export default function AppBar({ padding, children }) {
   const context = useContext(AppBarContext);
   const containerClasses = classnames(CONTEXT_CLASSES[context], styles.appBar);
   return (
-    <div className={containerClasses}>
+    <div className={containerClasses} style={{ padding }}>
       {children}
     </div>
   );
