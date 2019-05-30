@@ -15,7 +15,8 @@
   height: 30px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 16px;
+  padding-bottom: 22px;
+  margin-bottom: -12px;
 }
 
 .tag {
@@ -72,9 +73,11 @@
 .dropdownItem.focused { background-color: $grayLightest; }
 
 .noTags {
+  display: flex;
+  align-items: center;
+  font-size: $fontSizeBase;
   font-style: italic;
   color: $grayDark;
-  font-size: $fontSizeBase;
   user-select: none;
   cursor: default;
 }
