@@ -13,7 +13,11 @@ export default function Modal({
   onEscape,
 }) {
   const dialog = useRef(null);
-  useEffect(() => dialog.current.focus(), [visible]);
+  const container = useRef(null);
+  useEffect(() => {
+    dialog.current.focus();
+    container.current.scrollTop = 0;
+  }, [visible]);
 
   const inlineStyle = {};
   if (width) {
@@ -30,6 +34,7 @@ export default function Modal({
       className={classnames(styles.dashboardModalBackdrop, {[styles.visible]: visible})}
       onKeyDown={e => e.keyCode === 27 && onEscape && onEscape()}
       onMouseDown={onBlur}
+      ref={container}
     >
       <div
         ref={dialog}
