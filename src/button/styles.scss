@@ -3,15 +3,16 @@
 @import "../../variables/fonts.scss";
 @import "../../variables/spacing.scss";
 
+$buttonBorderColor: $gray;
+
 .button {
   box-sizing: border-box;
+  white-space: nowrap;
 
   height: 40px;
-  color: $brandPrimary;
-  background-color: #fff;
   outline: none;
-  border: 1px solid $grayDarker;
   border-radius: $borderRadiusBase;
+  border: 1px solid transparent;
 
   font-family: $fontBase;
   font-size: 14px;
@@ -25,12 +26,18 @@
   padding-left: 16px;
   padding-right: 16px;
 
-  &:hover { opacity: 0.9; }
-  &:active { opacity: 1; }
+  &:hover, &:focus { box-shadow: 0 2px 4px 0 rgba(34,42,46,0.09); }
+  &:active {
+		border-color: $brandPrimary;
+    box-shadow: 0 2px 4px 0 rgba(34,42,46,0.09);
+	}
+
   &:disabled {
-    opacity: 0.5;
+    color: $grayDarker;
+    border-color: $grayLight;
     cursor: default;
-    &:hover { opacity: 0.5; }
+    &:hover, &:focus { box-shadow: none; }
+    &:active { border-color: $buttonBorderColor; }
   }
 }
 
@@ -46,55 +53,68 @@
   font-size: 18px;
 }
 
-.primary {
-  color: #fff;
-  background-color: $brandPrimary;
-  border-color: $brandPrimary;
+$themes: primary $brandPrimary,
+         danger $brandDanger,
+         warning $brandWarning,
+         success $brandSuccess,
+         muted $brandMuted;
+
+@each $entry in $themes {
+  $name: nth($entry, 1);
+  $color: nth($entry, 2);
+  .#{$name} {
+    &.default {
+      color: $color;
+      background-color: #fff;
+      border-color: $gray;
+    }
+    &.default:hover, &.default:focus { box-shadow: 0 2px 6px 0 rgba(34,42,46,0.09); }
+    &.default:disabled {
+      color: $grayDarker;
+      background-color: $grayLight;
+      border-color: $grayLight;
+    }
+    &.default:active { border-color: $color; }
+    &.default:hover:disabled, &.default:active:disabled { box-shadow: none; }
+
+    &.filled {
+      color: #fff;
+      background-color: $color;
+      border-color: $color;
+    }
+    &.filled:hover, &.filled:focus { box-shadow: 0 2px 6px 0 rgba(34,42,46,0.09); }
+    &.filled:disabled {
+      color: $grayDarker;
+      background-color: $grayLight;
+      border-color: $grayLight;
+    }
+    &.filled:hover:disabled, &.filled:active:disabled { box-shadow: none; }
+
+    &.underline {
+      color: $color;
+      background-color: transparent;
+      border-color: transparent;
+      text-decoration: underline;
+    }
+    &.underline:hover, &.underline:focus {
+      border-color: $gray;
+      box-shadow: none;
+    }
+    &.underline:active { border-color: $color; }
+    &.underline:disabled {
+      color: $grayDarker;
+      background-color: $grayLight;
+    }
+    &.underline:hover:disabled, &.underline:active:disabled { border-color: transparent; }
+  }
 }
 
-.contextCancelButton {
-  color: $brandPrimary;
-  background-color: transparent;
-  border-color: transparent;
-  text-decoration: underline;
-  margin-right: 8px;
-  &:hover { background-color: rgba(0, 0, 0, 0.05); }
-  &:active { background-color: rgba(0, 0, 0, 0.03); }
-  &:disabled {
-    cursor: default;
-    &:hover { background-color: transparent; }
-    &:active { background-color: transparent; }
-  }
-}
 
-.contextDeleteButton {
-  color: $brandDanger;
-  background-color: transparent;
-  border-color: transparent;
-  text-decoration: underline;
-  margin-right: 8px;
-  &:hover { background-color: rgba(0, 0, 0, 0.05); }
-  &:active { background-color: rgba(0, 0, 0, 0.03); }
-  &:disabled {
-    cursor: default;
-    &:hover { background-color: transparent; }
-    &:active { background-color: transparent; }
-  }
-}
 
-.contextDeleteSegmentButton {
-  color: $grayDarker;
-  background-color: transparent;
-  border-color: transparent;
-  text-decoration: underline;
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-    color: $grayDarkest;
-  }
-  &:active { background-color: rgba(0, 0, 0, 0.03); }
-  &:disabled {
-    cursor: default;
-    &:hover { background-color: transparent; }
-    &:active { background-color: transparent; }
-  }
+
+.buttonGroup .button {
+  margin-left: 4px;
+  margin-right: 4px;
 }
+.buttonGroup > .button:first-child { margin-left: 0px; }
+.buttonGroup > .button:last-child { margin-right: 0px; }
