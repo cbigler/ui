@@ -35,24 +35,44 @@ export default function Button({
   width,
   height,
 
+  href,
   ...props
 }) {
   const context = useContext(ButtonContext);
-  return (
-    <button
-      {...props}
-      disabled={disabled}
-      className={classnames(
-        styles.button,
-        BUTTON_TYPE_STYLES[type],
-        BUTTON_VARIETY_STYLES[variety],
-        BUTTON_SIZE_STYLES[size],
-      )}
-      style={{ width, height }}
-    >
-      {children}
-    </button>
-  );
+  if (href) {
+    return (
+      <a
+        {...props}
+        disabled={disabled}
+        className={classnames(
+          styles.button,
+          BUTTON_TYPE_STYLES[type],
+          BUTTON_VARIETY_STYLES[variety],
+          BUTTON_SIZE_STYLES[size],
+        )}
+        style={{ width, height }}
+        href={href}
+      >
+        {children}
+      </a>
+    );
+  } else {
+    return (
+      <button
+        {...props}
+        disabled={disabled}
+        className={classnames(
+          styles.button,
+          BUTTON_TYPE_STYLES[type],
+          BUTTON_VARIETY_STYLES[variety],
+          BUTTON_SIZE_STYLES[size],
+        )}
+        style={{ width, height }}
+      >
+        {children}
+      </button>
+    );
+  }
 }
 Button.displayName = 'Button';
 Button.defaultProps = {

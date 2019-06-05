@@ -6,10 +6,12 @@
 $buttonBorderColor: $gray;
 
 .button {
+  display: inline-block;
   box-sizing: border-box;
   white-space: nowrap;
 
   height: 40px;
+  line-height: 36px;
   outline: none;
   border-radius: $borderRadiusBase;
   border: 1px solid transparent;

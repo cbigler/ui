@@ -23,7 +23,7 @@ storiesOf('Button', module)
       marginTop: 10,
     }}>
       {Object.keys(BUTTON_TYPE_STYLES).map(type => (
-        <Fragment>
+        <Fragment key={type}>
           {Object.keys(BUTTON_VARIETY_STYLES).map(variety => (
             <Button key={`${variety},${type}`} variety={variety} type={type}>
               {type} and {variety}
@@ -69,6 +69,9 @@ storiesOf('Button', module)
         </AppBarSection>
       </AppBar>
     </AppBarContext.Provider>
+  ))
+  .add('Link Button', () => (
+    <Button target="_blank" href="http://example.com">Go to example.com</Button>
   ))
   .add('Button with width=100%', () => (
     <Button width="100%">Hello world!</Button>
