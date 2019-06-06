@@ -11,7 +11,7 @@ const BUTTON_SIZE_STYLES = {
   large: styles.large,
 };
 
-export const BUTTON_VARIETY_STYLES = {
+export const BUTTON_VARIANT_STYLES = {
   default: styles.default,
   filled: styles.filled,
   underline: styles.underline,
@@ -29,7 +29,7 @@ export default function Button({
   size,
   children,
   disabled,
-  variety,
+  variant,
   type,
 
   width,
@@ -47,7 +47,7 @@ export default function Button({
         className={classnames(
           styles.button,
           BUTTON_TYPE_STYLES[type],
-          BUTTON_VARIETY_STYLES[variety],
+          BUTTON_VARIANT_STYLES[variant],
           BUTTON_SIZE_STYLES[size],
         )}
         style={{ width, height }}
@@ -64,7 +64,7 @@ export default function Button({
         className={classnames(
           styles.button,
           BUTTON_TYPE_STYLES[type],
-          BUTTON_VARIETY_STYLES[variety],
+          BUTTON_VARIANT_STYLES[variant],
           BUTTON_SIZE_STYLES[size],
         )}
         style={{ width, height }}
@@ -76,14 +76,13 @@ export default function Button({
 }
 Button.displayName = 'Button';
 Button.defaultProps = {
-  variety: 'default',
+  variant: 'default',
   type: 'primary',
 };
 Button.propTypes = {
-  variety: propTypes.oneOf(['default', 'filled', 'underline']),
+  variant: propTypes.oneOf(['default', 'filled', 'underline']),
   type: propTypes.oneOf([
     'primary',
-    'secondary',
     'danger',
     'warning',
     'success',

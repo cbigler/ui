@@ -7,7 +7,7 @@ import Button, {
   ButtonContext,
   ButtonGroup,
   BUTTON_TYPE_STYLES,
-  BUTTON_VARIETY_STYLES,
+  BUTTON_VARIANT_STYLES,
 } from './index';
 import AppBar, { AppBarContext, AppBarSection, AppBarTitle } from '../app-bar';
 import colorVariables from '../../variables/colors.json';
@@ -16,7 +16,7 @@ storiesOf('Button', module)
   .add('Overview', () => (
     <div style={{
       display: 'grid',
-      gridTemplateColumns: `repeat(${Object.keys(BUTTON_VARIETY_STYLES).length}, 180px)`,
+      gridTemplateColumns: `repeat(${Object.keys(BUTTON_VARIANT_STYLES).length}, 180px)`,
       gridTemplateRows: `repeat(${Object.keys(BUTTON_TYPE_STYLES).length}, 40px)`,
       gridGap: 10,
       marginLeft: 10,
@@ -24,9 +24,9 @@ storiesOf('Button', module)
     }}>
       {Object.keys(BUTTON_TYPE_STYLES).map(type => (
         <Fragment key={type}>
-          {Object.keys(BUTTON_VARIETY_STYLES).map(variety => (
-            <Button key={`${variety},${type}`} variety={variety} type={type}>
-              {type} and {variety}
+          {Object.keys(BUTTON_VARIANT_STYLES).map(variant => (
+            <Button key={`${variant},${type}`} variant={variant} type={type}>
+              {type} and {variant}
             </Button>
           ))}
         </Fragment>
@@ -40,21 +40,21 @@ storiesOf('Button', module)
     <Button disabled>Hello world!</Button>
   ))
   .add('Filled button', () => (
-    <Button variety="filled">Hello world!</Button>
+    <Button variant="filled">Hello world!</Button>
   ))
   .add('Filled danger button', () => (
-    <Button variety="filled" type="danger">Hello world!</Button>
+    <Button variant="filled" type="danger">Hello world!</Button>
   ))
   .add('Underline button', () => (
-    <Button variety="underline">Hello world!</Button>
+    <Button variant="underline">Hello world!</Button>
   ))
   .add('Underline danger button', () => (
-    <Button variety="underline" type="danger">Hello world!</Button>
+    <Button variant="underline" type="danger">Hello world!</Button>
   ))
   .add('Two buttons in a button group', () => (
     <ButtonGroup>
-      <Button variety="underline">Cancel</Button>
-      <Button variety="filled">Save</Button>
+      <Button variant="underline">Cancel</Button>
+      <Button variant="filled">Save</Button>
     </ButtonGroup>
   ))
   .add('Two buttons in a button group in a bottom actions app bar', () => (
@@ -63,8 +63,8 @@ storiesOf('Button', module)
         <AppBarSection />
         <AppBarSection>
           <ButtonGroup>
-            <Button variety="underline">Cancel</Button>
-            <Button variety="filled">Save</Button>
+            <Button variant="underline">Cancel</Button>
+            <Button variant="filled">Save</Button>
           </ButtonGroup>
         </AppBarSection>
       </AppBar>
