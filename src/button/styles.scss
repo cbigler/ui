@@ -11,7 +11,7 @@ $buttonBorderColor: $gray;
   white-space: nowrap;
 
   height: 40px;
-  line-height: 36px;
+  line-height: 40px;
   outline: none;
   border-radius: $borderRadiusBase;
   border: 1px solid transparent;
@@ -25,6 +25,8 @@ $buttonBorderColor: $gray;
   user-select: none;
   transition: all 100ms ease-in-out;
 
+  padding-top: 0px;
+  padding-bottom: 0px;
   padding-left: 16px;
   padding-right: 16px;
 
@@ -46,13 +48,14 @@ $buttonBorderColor: $gray;
 .small {
   font-weight: normal;
   height: 24px;
-  line-height: 20px;
+  line-height: 2px;
   font-size: 13px;
   padding-left: 4px;
   padding-right: 4px;
 }
 .large {
   height: 50px;
+  line-height: 50px;
   font-size: 18px;
 }
 

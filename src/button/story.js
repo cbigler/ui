@@ -11,6 +11,7 @@ import Button, {
 } from './index';
 import AppBar, { AppBarContext, AppBarSection, AppBarTitle } from '../app-bar';
 import colorVariables from '../../variables/colors.json';
+import Icons from '../icons';
 
 storiesOf('Button', module)
   .add('Overview', () => (
@@ -50,6 +51,11 @@ storiesOf('Button', module)
   ))
   .add('Underline danger button', () => (
     <Button variant="underline" type="danger">Hello world!</Button>
+  ))
+  .add('Button with icon', () => (
+    <Button size="small" width={40} height={40}>
+      <Icons.Soup />
+    </Button>
   ))
   .add('Two buttons in a button group', () => (
     <ButtonGroup>
