@@ -11,65 +11,63 @@ const BUTTON_SIZE_STYLES = {
   large: styles.large,
 };
 
-const BUTTON_TYPE_STYLES = {
-  default: undefined,
+export const BUTTON_VARIANT_STYLES = {
+  default: styles.default,
+  filled: styles.filled,
+  underline: styles.underline,
+};
+
+export const BUTTON_TYPE_STYLES = {
   primary: styles.primary,
   danger: styles.danger,
+  warning: styles.warning,
+  success: styles.success,
+  muted: styles.muted,
 };
 
 export default function Button({
-  type,
   size,
   children,
   disabled,
+  variant,
+  type,
 
   width,
   height,
 
+  href,
   ...props
 }) {
   const context = useContext(ButtonContext);
-  if ([
-    'DELETE_BUTTON',
-    'DIGEST_DELETE_BUTTON',
-    'USER_MANAGEMENT_DETAIL_DELETE_BUTTON'
-  ].includes(context)) {
+  if (href) {
     return (
-      <button
+      <a
         {...props}
         disabled={disabled}
-        className={classnames(styles.button, styles.contextDeleteButton)}
+        className={classnames(
+          styles.button,
+          BUTTON_TYPE_STYLES[type],
+          BUTTON_VARIANT_STYLES[variant],
+          BUTTON_SIZE_STYLES[size],
+        )}
+        style={{ width, height }}
+        href={href}
       >
         {children}
-      </button>
-    );
-  } else if (['CANCEL_BUTTON'].includes(context)) {
-    return (
-      <button
-        {...props}
-        disabled={disabled}
-        className={classnames(styles.button, styles.contextCancelButton)}
-      >
-        {children}
-      </button>
-    );
-  } else if (['DELETE_SEGMENT_BUTTON'].includes(context)) {
-    return (
-      <button
-        {...props}
-        disabled={disabled}
-        className={classnames(styles.button, styles.contextDeleteSegmentButton)}
-      >
-        {children}
-      </button>
+      </a>
     );
   } else {
     return (
       <button
         {...props}
         disabled={disabled}
-        className={classnames(styles.button, BUTTON_SIZE_STYLES[size], BUTTON_TYPE_STYLES[type])}
-        style={{width, height}}
+        className={classnames(
+          styles.button,
+          BUTTON_TYPE_STYLES[type],
+          BUTTON_VARIANT_STYLES[variant],
+          BUTTON_SIZE_STYLES[size],
+        )}
+        style={{ width, height }}
       >
         {children}
       </button>
@@ -77,3 +75,26 @@ export default function Button({
   }
 }
 Button.displayName = 'Button';
+Button.defaultProps = {
+  variant: 'default',
+  type: 'primary',
+};
+Button.propTypes = {
+  variant: propTypes.oneOf(['default', 'filled', 'underline']),
+  type: propTypes.oneOf([
+    'primary',
+    'danger',
+    'warning',
+    'success',
+    'muted',
+  ]),
+};
+
+export function ButtonGroup({ children }) {
+  return (
+    <div className={styles.buttonGroup}>
+      {children}
+    </div>
+  );
+}
+ButtonGroup.displayName = 'ButtonGroup';

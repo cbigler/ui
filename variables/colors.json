@@ -12,9 +12,10 @@
   "brandPrimary": "#2C4EB9",
   "brandPrimaryNew": "#2C4EB9",
   "brandPrimaryLight": "#3663E5",
-  "brandSuccess": "#80CD80",
-  "brandDanger": "#FF7A68",
-  "brandWarning": "#FFBA08",
+  "brandSuccess": "#4C8475",
+  "brandDanger": "#FF624D",
+  "brandWarning": "#FBB452",
+  "brandMuted": "#445158",
 
   "textColor": "#8E9299",
   "headerColor": "#4E5457",
