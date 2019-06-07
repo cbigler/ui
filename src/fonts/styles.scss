@@ -1,3 +1,7 @@
+@import "../../variables/colors.scss";
+@import "../../variables/fonts.scss";
+
+
 $cdnPath: "https://densityco.github.io/assets";
 
 // The 'Aeonik' Web Font
@@ -106,3 +110,53 @@ $cdnPath: "https://densityco.github.io/assets";
   font-weight: normal;
   font-style: normal;
 }
+
+
+body {
+  font-variant-numeric: tabular-nums;
+  color: $textColorBase;
+}
+
+p { line-height: 1.4; }
+
+h1 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+h3 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+h4 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  line-height: 1.2;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+h5 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: $fontSizeBase;
+  line-height: 1.2;
+  font-weight: 500;
+  color: $grayDarker;
+}
+
+a,
+a:visited { color: $brandPrimary; }
+a:hover { text-decoration: none; }

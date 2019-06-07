@@ -23,12 +23,13 @@
 .appBarTitle {
   display: flex;
   align-items: center;
+  height: 32px;
   font-size: 24px;
   font-weight: 500;
+  color: $grayCinder;
+  overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  overflow: hidden;
-  height: 32px;
 }
 
 // Rules for "TRANSPARENT" context
