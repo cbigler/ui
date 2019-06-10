@@ -24,7 +24,8 @@
 .inputBox input {
   flex-grow: 1;
   flex-shrink: 1;
-  height: 43px;
+  height: 40px;
+  padding-top: 2px;
   margin-left: 16px;
   background-color: transparent;
   border: 0px;
@@ -81,14 +82,14 @@
 %inputBoxSelectCommon {
   font-family: $fontBase;
 
-  width: calc(100% - 15px - 15px);
+  width: calc(100% - 17px - 17px);
 
   background-color: #fff;
   border: 1px solid $inputFieldBorderColor;
   border-radius: 4px;
 
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 17px;
+  padding-right: 17px;
 
   user-select: none;
 }
@@ -119,7 +120,6 @@
   & > span {
     margin-top: -2px;
     margin-right: auto;
-    line-height: 1;
 
     &:active {
       opacity: 0.9;

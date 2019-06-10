@@ -754,11 +754,11 @@ $brandPrimaryLight: #B6C6F6;
 }
 .dateRangePickerAnchorLeft {
   // Again, a modification of react-dates
-  :global(.DateRangePicker__picker) { left: -4px !important; }
+  :global(.DateRangePicker__picker) { left: -3px !important; }
 }
 .dateRangePickerAnchorRight {
   // Again, a modification of react-dates
-  :global(.DateRangePicker__picker) { left: -415px !important; }
+  :global(.DateRangePicker__picker) { left: -384px !important; }
 }
 .dateRangePickerFocused {
   border-color: $brandPrimary;

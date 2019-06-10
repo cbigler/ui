@@ -91,11 +91,11 @@
 }
 .datePickerAnchorLeft {
   // Adjust the position of the picker popup
-  :global(.SingleDatePicker__picker) { left: -45px !important; }
+  :global(.SingleDatePicker__picker) { left: -46px !important; }
 }
 .datePickerAnchorRight {
   // Adjust the position of the picker popup
-  :global(.SingleDatePicker__picker) { left: -185px !important; }
+  :global(.SingleDatePicker__picker) { left: -176px !important; }
 }
 .datePickerFocused {
   border-color: #2C4EB9;
