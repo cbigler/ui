@@ -9,12 +9,10 @@ $buttonBorderColor: $gray;
   display: inline-block;
   box-sizing: border-box;
   white-space: nowrap;
-
-  display: table-cell;
   text-align: center;
-  vertical-align: middle;
 
   height: 40px;
+  line-height: 38px;
   outline: none;
   border-radius: $borderRadiusBase;
   border: 1px solid transparent;
@@ -50,12 +48,14 @@ $buttonBorderColor: $gray;
 .small {
   font-weight: normal;
   height: 24px;
+  line-height: 22px;
   font-size: 13px;
   padding-left: 4px;
   padding-right: 4px;
 }
 .large {
   height: 50px;
+  line-height: 48px;
   font-size: 18px;
 }
 
