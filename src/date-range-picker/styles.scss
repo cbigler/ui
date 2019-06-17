@@ -179,8 +179,8 @@ $brandPrimaryLight: #B6C6F6;
 
     .DayPicker--horizontal {
       background: #fff;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.07);
-      border-radius: 3px; }
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 1px $inputFieldBorderColor;
+      border-radius: $borderRadiusBase; }
       .DayPicker--horizontal.DayPicker--portal {
         box-shadow: none;
         position: absolute;
@@ -243,7 +243,7 @@ $brandPrimaryLight: #B6C6F6;
     .transition-container {
       position: relative;
       overflow: hidden;
-      border-radius: 3px; }
+      border-radius: $borderRadiusBase; }
 
     .transition-container--horizontal {
       transition: height 0.2s ease-in-out; }
@@ -265,22 +265,22 @@ $brandPrimaryLight: #B6C6F6;
 
     .DayPickerNavigation__prev--default,
     .DayPickerNavigation__next--default {
-      border: 1px solid #dce0e0;
+      border: 1px solid $inputFieldBorderColor;
       background-color: #fff;
       color: #757575; }
-      .DayPickerNavigation__prev--default:focus, .DayPickerNavigation__prev--default:hover,
-      .DayPickerNavigation__next--default:focus,
-      .DayPickerNavigation__next--default:hover {
-        border: 1px solid #c4c4c4; }
+      // .DayPickerNavigation__prev--default:focus, .DayPickerNavigation__prev--default:hover,
+      // .DayPickerNavigation__next--default:focus,
+      // .DayPickerNavigation__next--default:hover {
+      //   border: 1px solid #c4c4c4; }
       .DayPickerNavigation__prev--default:active,
       .DayPickerNavigation__next--default:active {
-        background: #f2f2f2; }
+        border: 1px solid $brandPrimary; }
 
     .DayPickerNavigation--horizontal {
       position: relative; }
       .DayPickerNavigation--horizontal .DayPickerNavigation__prev,
       .DayPickerNavigation--horizontal .DayPickerNavigation__next {
-        border-radius: 3px;
+        border-radius: $borderRadiusBase;
         padding: 6px 9px;
         top: 18px;
         z-index: 2;
@@ -534,7 +534,7 @@ $brandPrimaryLight: #B6C6F6;
 
     .DateInput__display-text--focused {
       border-color: $brandPrimary;
-      border-radius: 3px;
+      border-radius: $borderRadiusBase;
       color: #007a87; }
 
     .DateInput__display-text--disabled {
@@ -729,7 +729,7 @@ $brandPrimaryLight: #B6C6F6;
       cursor: pointer;
       color: $grayCinder;
     }
-    .DateRangePicker__picker { top: 48px; }
+    .DateRangePicker__picker { top: 47px; }
     .DateInput__display-text {
       color: $grayCinder;
       height: 24px;
@@ -767,16 +767,9 @@ $brandPrimaryLight: #B6C6F6;
   $valueWidth: 41px;
   $menuWidth: 200px;
 
-  padding-left: 15px;
+  margin-left: 8px;
   font-family: $fontBase;
   font-size: $fontSizeBase;
   font-weight: normal;
   user-select: none;
-
-  // Right align the select box menu with the select box value if the date
-  // picker is right aligned.
-  &.right .input-box-select-box-menu {
-    $selectBoxValueWidthIncludingPadding: ($valueWidth + 15px + 15px);
-    margin-left: -1 * ($menuWidth - $selectBoxValueWidthIncludingPadding);
-  }
 }
