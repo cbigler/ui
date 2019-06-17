@@ -6,8 +6,6 @@ import './styles.scss';
 import InputBox, { InputBoxContext } from './index';
 import Icon from '../icons/index';
 
-import colorVariables from '../../variables/colors.json';
-
 storiesOf('InputBox', module)
   .add('Empty', () => (
     <InputBox type="text" />
@@ -173,6 +171,20 @@ storiesOf('InputBox', module)
   ))
   .add('select box with custom width', () => (
     <InputBox type="select" width={300} />
+  ))
+  .add('select box with right anchor', () => (
+    <InputBox
+      type="select"
+      choices={[
+        {id: 0, label: "Foo"},
+        {id: 1, label: "Bar"},
+        {id: 2, label: "Disabled", disabled: true},
+        {id: 3, label: "Baz"},
+      ]}
+      anchor="ANCHOR_RIGHT"
+      width={160}
+      listBoxWidth={180}
+    />
   ))
   .add('select box with "LIST_VIEW" context', () => (
     <InputBoxContext.Provider value="LIST_VIEW">

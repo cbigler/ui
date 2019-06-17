@@ -38,16 +38,12 @@ function ReactDateRangePicker(props) {
 // common range list, and binds them together
 export default function DateRangePicker(props) {
   const commonRangeList = Array.isArray(props.commonRanges) ? (
-    <div
-      className={classnames(
-        styles.dateRangePickerCommonRangeList,
-        {[styles.right]: props.anchor === ANCHOR_RIGHT}
-      )}
-    >
+    <div className={styles.dateRangePickerCommonRangeList}>
       <InputBox
         type="select"
         width={70 /* px */}
         listBoxWidth={200 /* px */}
+        anchor={props.anchor}
         value={{
           id: 'icon',
           label: <Icons.Calendar width={14} height={14} color="dark" />,

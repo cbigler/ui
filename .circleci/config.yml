@@ -72,7 +72,7 @@ jobs:
               tag="latest"
             fi
 
-            echo "Publishing ${jq -r .version ./package.json} to tag ${tag}"
+            echo "Publishing $(jq -r .version ./package.json) to tag ${tag}"
 
             set +e # This permits the publish to fail if the version is the same as the previous commit
             npm publish --tag ${tag}

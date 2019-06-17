@@ -161,6 +161,7 @@
 .inputBoxSelectBoxMenu {
   @extend %inputBoxSelectCommon;
 
+  box-sizing: border-box;
   position: absolute;
   top: 50px;
   padding-top: 10px;
@@ -188,6 +189,12 @@
 .inputBoxSelectBoxMenuOpened {
   opacity: 1;
   pointer-events: all;
+}
+.inputBoxSelectBoxMenuAnchorLeft {
+  left: 0;
+}
+.inputBoxSelectBoxMenuAnchorRight {
+  right: 0;
 }
 
 .inputBoxSelectBoxMenuUl {
