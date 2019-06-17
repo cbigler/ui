@@ -63,6 +63,12 @@ storiesOf('Button', module)
       <Button variant="filled">Save</Button>
     </ButtonGroup>
   ))
+  .add('Two link buttons in a button group', () => (
+    <ButtonGroup>
+      <Button href="#" variant="filled">One</Button>
+      <Button href="#" variant="filled">Two</Button>
+    </ButtonGroup>
+  ))
   .add('Two buttons in a button group in a bottom actions app bar', () => (
     <AppBarContext.Provider value="BOTTOM_ACTIONS">
       <AppBar>
