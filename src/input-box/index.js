@@ -12,6 +12,9 @@ const CONTEXT_CLASSES = {
   'NAVBAR_INLINE': styles.contextNavbarInline,
 };
 
+export const ANCHOR_RIGHT = 'ANCHOR_RIGHT',
+  ANCHOR_LEFT = 'ANCHOR_LEFT';
+
 export const InputBoxContext = React.createContext(null);
 
 function InputBoxRaw({leftIcon, forwardedRef, ...props}) {
@@ -108,13 +111,14 @@ export class SelectBox extends React.Component {
     const {
       width,
       listBoxWidth,
+      anchor,
       value,
       choices,
       id,
       disabled,
       placeholder,
       menuMaxHeight,
-      invalid,
+      invalid
     } = this.props;
     const { opened } = this.state;
 
@@ -178,6 +182,8 @@ export class SelectBox extends React.Component {
           role="listbox"
           className={classnames(CONTEXT_CLASSES[context], styles.inputBoxSelectBoxMenu, {
             [styles.inputBoxSelectBoxMenuOpened]: opened,
+            [styles.inputBoxSelectBoxMenuAnchorLeft]: (anchor || ANCHOR_LEFT) === ANCHOR_LEFT,
+            [styles.inputBoxSelectBoxMenuAnchorRight]: anchor === ANCHOR_RIGHT,
           })}
           style={{
             width: listBoxWidth || width,
