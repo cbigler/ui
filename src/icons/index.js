@@ -1244,28 +1244,47 @@ const ICONS = {
           </g>
       </g>
   </svg>,
+  Alert: ({color, accentColor, width, height}) => <svg width={width || 18} height={height || 20} viewBox="0 0 18 20" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <g id="Spaces:-Alerts-(release)" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+          <g id="spaces.alerts.success" transform="translate(-1298.000000, -62.000000)">
+              <g id="app-bar" transform="translate(328.000000, 40.000000)">
+                  <g id="button-share" transform="translate(957.000000, 12.000000)">
+                      <g id="icon-/-alerts" transform="translate(10.000000, 8.000000)">
+                          <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+                          <path d="M19,18 L21,18 L21,20 L13,20 L13,22 L11,22 L11,20 L3,20 L3,18 L5,18 L5,14 C5,10.1340068 8.13400675,7 12,7 C15.8659932,7 19,10.1340068 19,14 L19,18 Z M17,18 L17,14 C17,11.2385763 14.7614237,9 12,9 C9.23857625,9 7,11.2385763 7,14 L7,18 L17,18 Z" id="Combined-Shape" fill={color} fillRule="nonzero"></path>
+                          <polygon id="Path-44" fill={accentColor || color} fillRule="nonzero" transform="translate(17.250000, 4.906733) rotate(-330.000000) translate(-17.250000, -4.906733) " points="18.25 6.40673326 18.25 3.40673326 16.25 3.40673326 16.25 6.40673326"></polygon>
+                          <polygon id="Path-44" fill={accentColor || color} fillRule="nonzero" transform="translate(6.750000, 4.906733) rotate(-30.000000) translate(-6.750000, -4.906733) " points="7.75 6.40673326 7.75 3.40673326 5.75 3.40673326 5.75 6.40673326"></polygon>
+                          <polygon id="Path-44" fill={accentColor || color} fillRule="nonzero" points="13 5 13 2 11 2 11 5"></polygon>
+                      </g>
+                  </g>
+              </g>
+          </g>
+      </g>
+  </svg>
 };
+
+// colors can either be `primary`, `darker`, or a hex/rgb color.
+function parseColor(color) {
+    return color && typeof color === 'string' ? (
+        colorVariables[`brand${color[0].toUpperCase()}${color.slice(1)}`] || /* ie, brandPrimary */
+        colorVariables[`gray${color[0].toUpperCase()}${color.slice(1)}`] || /* ie, grayDarker */
+        color /* ie, #555 */
+    ) : colorVariables.grayCinder; /* defaults to gray-cinder */
+}
 
 // Wrap each icon in a component.
 let ICON_COMPONENTS = {};
 for (let iconName in ICONS) {
   ICON_COMPONENTS[iconName] = function IconComponent(props) {
-    const color = props.color;
-    const iconFactory = ICONS[iconName];
-    return iconFactory(Object.assign({}, props, {
-
-      // `color` can either be `primary`, `darker`, or a hex/rgb color.
-      color: color && typeof color === 'string' ? (
-        colorVariables[`brand${color[0].toUpperCase()}${color.slice(1)}`] || /* ie, brandPrimary */
-        colorVariables[`gray${color[0].toUpperCase()}${color.slice(1)}`] || /* ie, grayDarker */
-        color /* ie, #555 */
-      ) : colorVariables.grayCinder, /* defaults to gray-cinder */
-
+    return ICONS[iconName](Object.assign({}, props, {
+        color: parseColor(props.color),
+        accentColor: props.accentColor && parseColor(props.accentColor)
     }));
   }
   ICON_COMPONENTS[iconName].displayName = iconName;
   ICON_COMPONENTS[iconName].propTypes = {
     color: propTypes.string,
+    accentColor: propTypes.string,
     width: propTypes.number,
     height: propTypes.number,
   };
