@@ -16,3 +16,6 @@ storiesOf('PhoneInputBox', module)
   .add('With value', () => (
     <PhoneInputBox placeholder="Phone number" value="123123123" />
   ))
+  .add('Disabled', () => (
+    <PhoneInputBox placeholder="Phone number" value="123123123" disabled />
+  ))

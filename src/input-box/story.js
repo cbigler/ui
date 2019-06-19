@@ -163,6 +163,9 @@ storiesOf('InputBox', module)
   .add('disabled box', () => (
     <InputBox disabled placeholder="I am disabled" />
   ))
+  .add('disabled box with value', () => (
+    <InputBox disabled value="I am disabled w/ value" />
+  ))
   .add('textarea', () => (
     <InputBox type="textarea" placeholder="I am a textarea." style={{height: 300}} />
   ))
