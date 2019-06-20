@@ -16,6 +16,9 @@ storiesOf('Icons', module)
   .add('A sample icon in gray-darker color', () => (
     <Icons.ImageUpload color="darker" />
   ))
+  .add('A sample icon with color accent', () => (
+    <Icons.Notification color="primary" accentColor="danger" />
+  ))
   .add('A sample icon in a random hex color', () => (
     <Icons.ImageUpload color="#FFBA08" />
   ))

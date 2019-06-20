@@ -1,0 +1,212 @@
+@import "../../variables/colors.scss";
+@import "../../variables/spacing.scss";
+@import "../../variables/fonts.scss";
+
+
+:global(.react-phone-number-input__row)
+{
+  /* This is done to stretch the contents of this component */
+  height          : 40px;
+	display         : flex;
+  align-items     : center;
+  border          : 1px solid $inputFieldBorderColor;
+  border-radius   : $borderRadiusBase;
+  box-sizing      : border-box;
+  padding-bottom  : 2px;
+}
+:global(.react-phone-number-input--focus > .react-phone-number-input__row)
+{
+  border: 1px solid $brandPrimary;
+}
+:global(.react-phone-number-input--disabled > .react-phone-number-input__row)
+{
+	background-color: $grayLight;
+	border-color: $grayLight;
+	cursor: default;
+}
+
+:global(.react-phone-number-input__phone)
+{
+	/* The phone number input stretches to fill all empty space */
+	flex : 1;
+
+	/* The phone number input should shrink
+	   to make room for the extension input */
+	min-width : 0;
+}
+
+:global(.react-phone-number-input__icon)
+{
+	/* The flag icon size is 4x3 hence the exact `width` and `height` values */
+	width      : 1.24em;
+	height     : 0.93em;
+
+	/* `1px` is still too much for a "retina" screen but there's no way in CSS to specify "hairline" border width. */
+	//border     : 1px solid rgba(0, 0, 0, 0.5);
+
+	/* Makes sure `width`x`height` is exactly `4x3` and `border` width is not included in it */
+  box-sizing : content-box;
+  margin-left: 12px;
+  margin-top: -2px;
+}
+
+:global(.react-phone-number-input__icon--international)
+{
+	/* The international icon size is square */
+	/* and also has no border hence the `2 * 1px` `width` and `height` compensation */
+  width  : 0.93em;
+  height : 0.93em;
+
+	/* The international icon size is square hence the exact `padding` value */
+	/* for precise alignment with `4x3` sized country flags. */
+	padding-left  : 0.155em;
+  padding-right : 0.155em;
+
+  margin-top: 1px;
+}
+
+:global(.react-phone-number-input__error)
+{
+	margin-left : calc(1.24em + 2px + 0.3em + 0.35em + 0.5em);
+	margin-top  : calc(0.3rem);
+	color       : #D30F00;
+}
+
+:global(.react-phone-number-input__icon-image)
+{
+	max-width  : 100%;
+	max-height : 100%;
+}
+
+/* Removes `<input type="number"/>` up/down arrows in Webkit browsers. */
+:global(.react-phone-number-input__ext-input::-webkit-inner-spin-button),
+:global(.react-phone-number-input__ext-input::-webkit-outer-spin-button)
+{
+	margin             : 0 !important;
+	-webkit-appearance : none !important;
+	-moz-appearance    : textfield !important;
+}
+
+:global(.react-phone-number-input__ext-input)
+{
+	width : 3em;
+}
+
+:global(.react-phone-number-input__ext)
+{
+	white-space: nowrap;
+}
+
+:global(.react-phone-number-input__ext),
+:global(.react-phone-number-input__ext-input)
+{
+	margin-left : 0.5em;
+}
+
+/* Styling native country `<select/>`. */
+
+:global(.react-phone-number-input__country--native)
+{
+	position     : relative;
+	align-self   : stretch;
+	display      : flex;
+	align-items  : center;
+	margin-right : 0.5em;
+}
+
+:global(.react-phone-number-input--disabled .react-phone-number-input__country-select)
+{
+	cursor: default;
+}
+
+:global(.react-phone-number-input__country-select)
+{
+	position : absolute;
+	top      : 0;
+	left     : 0;
+	height   : 100%;
+	width    : 100%;
+	z-index  : 1;
+	border   : 0;
+	opacity  : 0;
+	cursor   : pointer;
+}
+
+:global(.react-phone-number-input__country-select-arrow)
+{
+	display            : none;
+	content            : '';
+	width              : 0;
+	height             : 0;
+	margin-bottom      : 0.1em;
+	margin-top         : 0.3em;
+	margin-left        : 0.3em;
+	border-width       : 0.35em 0.2em 0 0.2em;
+	border-style       : solid;
+	border-left-color  : transparent;
+	border-right-color : transparent;
+	color              : #B8BDC4;
+	opacity            : 0.7;
+	transition         : color 0.1s;
+}
+
+/* Something from stackoverflow. */
+:global(.react-phone-number-input__country-select-divider)
+{
+	font-size  : 1px;
+	background : black;
+}
+
+:global(.react-phone-number-input__country-select:focus + .react-phone-number-input__country-select-arrow),
+:global(.react-phone-number-input__country.rrui__select--focus .rrui__select__arrow)
+{
+	//color : #03B2CB;
+}
+
+/* Styling phone number input */
+
+:global(.react-phone-number-input__input)
+{
+	height        : 35px;
+	outline       : none;
+	appearance    : none;
+	border        : none;
+  padding       : 0;
+  margin-right  : 16px;
+  color         : $grayCinder;
+	border-radius : $borderRadiusBase;
+	font-size     : $fontSizeBase;
+  font-family   : $fontBase;
+
+  &::placeholder {
+    color: $inputFieldPlaceholderColor;
+    opacity: 1; // Placeholders in firefox have opacity by default. Undo that.
+  }
+  &::-ms-input-placeholder { color: $inputFieldPlaceholderColor; }
+  &:-ms-input-placeholder { color: $inputFieldPlaceholderColor; }
+}
+
+:global(.react-phone-number-input__input--disabled)
+{
+	background-color: $grayLight;
+	border-color: $grayLight;
+	cursor : default;
+}
+
+:global(.react-phone-number-input__input--invalid),
+:global(.react-phone-number-input__input--invalid:focus)
+{
+	border-color : #EB2010;
+}
+
+/* Overrides Chrome autofill yellow background color */
+:global(.react-phone-number-input__input:-webkit-autofill)
+{
+	box-shadow : 0 0 0 1000px white inset;
+}
+
+/* A small fix for `react-responsive-ui` */
+:global(.react-phone-number-input__country .rrui__select__button)
+{
+	border-bottom : none;
+}
