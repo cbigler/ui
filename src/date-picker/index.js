@@ -4,6 +4,7 @@ import { SingleDatePicker } from '@density/react-dates';
 import Icons from '../icons';
 import propTypes from 'prop-types';
 
+import colorVariables from '../../variables/colors.json';
 import styles from './styles.scss';
 
 export const ANCHOR_RIGHT = 'ANCHOR_RIGHT', ANCHOR_LEFT = 'ANCHOR_LEFT';
@@ -36,7 +37,11 @@ export default function DatePicker(props) {
           }
         }}
       >
-        <Icons.ArrowLeft color={props.arrowLeftDisabled ? 'gray' : 'primary'} width={20} height={20} />
+        <Icons.ArrowLeft
+          color={props.arrowLeftDisabled ? colorVariables.grayDark : colorVariables.brandPrimary}
+          width={20}
+          height={20}
+        />
       </div>
       <SingleDatePicker
         numberOfMonths={1}
@@ -47,7 +52,7 @@ export default function DatePicker(props) {
         className={classnames(
           styles.datePickerIcon,
           styles.datePickerIconRight,
-          {[styles.datePickerIconDisabled]: props.arrowLeftDisabled},
+          {[styles.datePickerIconDisabled]: props.arrowRightDisabled},
         )}
         role="button"
         onClick={() => {
@@ -57,7 +62,11 @@ export default function DatePicker(props) {
           }
         }}
       >
-        <Icons.ArrowRight color={props.arrowRightDisabled ? 'gray' : 'primary'} width={20} height={20} />
+        <Icons.ArrowRight
+          color={props.arrowRightDisabled ? colorVariables.grayDark : colorVariables.brandPrimary}
+          width={20}
+          height={20}
+        />
       </div>
     </div>
   </div>;
