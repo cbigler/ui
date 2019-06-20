@@ -71,6 +71,10 @@
   user-select: none;
 }
 .dropdownItem.focused { background-color: $grayLightest; }
+.dropdownItem.disabled {
+  color: $grayDarker;
+  cursor: default;
+}
 
 .noTags {
   display: flex;

@@ -58,6 +58,7 @@ export default class TagInput extends Component {
       onRemoveTag,
       onAddTag,
       onCreateNewTag,
+      canCreateTags,
     } = this.props;
     const { text, focused, focusedTagId, focusedDropdownItemIndex } = this.state;
 
@@ -101,8 +102,11 @@ export default class TagInput extends Component {
 
               // As a last resort, create a brand new tag
               if (focusedDropdownItemIndex > matches.length-1) {
-                this.clearInput(e);
-                onCreateNewTag(text.trim());
+                if (canCreateTags) {
+                  this.clearInput(e);
+                  onCreateNewTag(text.trim());
+                }
+                // If no tags can be created, then just do nothing in this case
                 return;
               }
 
@@ -196,17 +200,25 @@ export default class TagInput extends Component {
               </li>
             ))}
             {!matches.find(m => m.original.label.trim() === text.trim()) ? (
-              <li
-                className={classnames(styles.dropdownItem, {
-                  [styles.focused]: focusedDropdownItemIndex === matches.length,
-                })}
-                onMouseEnter={() => this.setState({focusedDropdownItemIndex: matches.length})}
-                onMouseLeave={e => e.stopPropagation()}
-                onClick={e => {
-                  onCreateNewTag(text);
-                  this.clearInput(e);
-                }}
-              >Add "{text}"</li>
+              canCreateTags ? (
+                <li
+                  className={classnames(styles.dropdownItem, {
+                    [styles.focused]: focusedDropdownItemIndex === matches.length,
+                  })}
+                  onMouseEnter={() => this.setState({focusedDropdownItemIndex: matches.length})}
+                  onMouseLeave={e => e.stopPropagation()}
+                  onClick={e => {
+                    onCreateNewTag(text);
+                    this.clearInput(e);
+                  }}
+                >Add "{text}"</li>
+              ) : (
+                matches.length === 0 ? (
+                  <li className={classnames(styles.dropdownItem, styles.disabled)}>
+                    Nothing found
+                  </li>
+                ) : null
+              )
             ) : null}
           </ul>
         ) : null}
@@ -214,3 +226,8 @@ export default class TagInput extends Component {
     );
   }
 }
+
+TagInput.defaultProps = {
+  canCreateTags: true,
+  onCreateNewTag: () => {},
+};
