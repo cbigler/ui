@@ -616,6 +616,22 @@ const ICONS = {
           </g>
       </g>
   </svg>,
+  Danger: ({color, width, height}) => <svg width={width || "14"} height={height || "18"} viewBox="0 0 14 18" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <g id="⌞-Spaces:-Alerts-(in-design)" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+          <g id="spaces.alerts.full" transform="translate(-1174.000000, -284.000000)">
+              <g id="overlay.dashboard.digest" transform="translate(973.000000, 96.000000)">
+                  <g id="Group" transform="translate(24.000000, 152.000000)">
+                      <g id="escalation" transform="translate(175.000000, 36.000000)">
+                          <g id="icon-/-danger">
+                              <rect id="Rectangle" x="0" y="0" width="18" height="18"></rect>
+                              <path d="M9,2.53359886 L3.71864428,5.76679943 L3.71864428,12.2332006 L9,15.4664011 L14.2813557,12.2332006 L14.2813557,5.76679943 L9,2.53359886 Z M15.660254,4.92264973 L15.660254,13.0773503 L9,17.1547005 L2.33974596,13.0773503 L2.33974596,4.92264973 L9,0.845299462 L15.660254,4.92264973 Z M8.31055084,4.6136695 L9.68944916,4.6136695 L9.68944916,9.73105508 L8.31055084,9.73105508 L8.31055084,4.6136695 Z M9,13.3863305 C8.42884161,13.3863305 7.96582626,12.8953737 7.96582626,12.2897479 C7.96582626,11.684122 8.42884161,11.1931653 9,11.1931653 C9.57115839,11.1931653 10.0341737,11.684122 10.0341737,12.2897479 C10.0341737,12.8953737 9.57115839,13.3863305 9,13.3863305 Z" id="Combined-Shape" fill={color} fillRule="nonzero"></path>
+                          </g>
+                      </g>
+                  </g>
+              </g>
+          </g>
+      </g>
+  </svg>,
   Error: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconError" transform="translate(-1 -1)">
@@ -939,17 +955,22 @@ const ICONS = {
       <polyline id="Path-28" fill="transparent" stroke={color} strokeWidth="1.5" points="2.5 5.83333333 10 10 17.5 5.83333333" />
     </g>
   </svg>,
-  Notification: ({color, width, height}) => <svg width={width || 18} height={height || 18} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-    <g id="1" fill="none" fillRule="evenodd">
-      <g id="icons" transform="translate(-278 -519)">
-        <g id="Group" transform="translate(277 518)">
-          <rect id="Rectangle" fillOpacity="0" fill="#D8D8D8" width="20" height="20"
-          />
-          <path d="M1.66666667,16.6666667 L18.3333333,16.6666667 L18.3333333,18.3333333 L1.66666667,18.3333333 L1.66666667,16.6666667 Z M16.6666667,17.5 L15,17.5 L15,11.6666667 C15,8.90524292 12.7614237,6.66666667 10,6.66666667 C7.23857625,6.66666667 5,8.90524292 5,11.6666667 L5,17.5 L3.33333333,17.5 L3.33333333,11.6666667 C3.33333333,7.98476833 6.31810167,5 10,5 C13.6818983,5 16.6666667,7.98476833 16.6666667,11.6666667 L16.6666667,17.5 Z M14.4716878,5.5881428 L13.0283122,4.75480947 L14.2783122,2.58974596 L15.7216878,3.4230793 L14.4716878,5.5881428 Z M6.97168784,4.75480947 L5.52831216,5.5881428 L4.27831216,3.4230793 L5.72168784,2.58974596 L6.97168784,4.75480947 Z M10.8333333,4.16666667 L9.16666667,4.16666667 L9.16666667,1.66666667 L10.8333333,1.66666667 L10.8333333,4.16666667 Z"
-            id="Combined-Shape" fill={color} fillRule="nonzero" />
-        </g>
+  Notification: ({color, accentColor, width, height}) => <svg width={width || 18} height={height || 20} viewBox="0 0 18 20" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <g id="Spaces:-Alerts-(release)" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+          <g id="spaces.alerts.success" transform="translate(-1298.000000, -62.000000)">
+              <g id="app-bar" transform="translate(328.000000, 40.000000)">
+                  <g id="button-share" transform="translate(957.000000, 12.000000)">
+                      <g id="icon-/-alerts" transform="translate(10.000000, 8.000000)">
+                          <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+                          <path d="M19,18 L21,18 L21,20 L13,20 L13,22 L11,22 L11,20 L3,20 L3,18 L5,18 L5,14 C5,10.1340068 8.13400675,7 12,7 C15.8659932,7 19,10.1340068 19,14 L19,18 Z M17,18 L17,14 C17,11.2385763 14.7614237,9 12,9 C9.23857625,9 7,11.2385763 7,14 L7,18 L17,18 Z" id="Combined-Shape" fill={color} fillRule="nonzero"></path>
+                          <polygon id="Path-44" fill={accentColor || color} fillRule="nonzero" transform="translate(17.250000, 4.906733) rotate(-330.000000) translate(-17.250000, -4.906733) " points="18.25 6.40673326 18.25 3.40673326 16.25 3.40673326 16.25 6.40673326"></polygon>
+                          <polygon id="Path-44" fill={accentColor || color} fillRule="nonzero" transform="translate(6.750000, 4.906733) rotate(-30.000000) translate(-6.750000, -4.906733) " points="7.75 6.40673326 7.75 3.40673326 5.75 3.40673326 5.75 6.40673326"></polygon>
+                          <polygon id="Path-44" fill={accentColor || color} fillRule="nonzero" points="13 5 13 2 11 2 11 5"></polygon>
+                      </g>
+                  </g>
+              </g>
+          </g>
       </g>
-    </g>
   </svg>,
   Star: ({color, width, height}) => <svg width={width || 20} height={height || 18} viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg">
     <g id="1" fill="none" fillRule="evenodd">
@@ -1238,23 +1259,6 @@ const ICONS = {
                                   id="Combined-Shape" fill={color} fillRule="nonzero" />
                               </g>
                           </g>
-                      </g>
-                  </g>
-              </g>
-          </g>
-      </g>
-  </svg>,
-  Alert: ({color, accentColor, width, height}) => <svg width={width || 18} height={height || 20} viewBox="0 0 18 20" version="1.1" xmlns="http://www.w3.org/2000/svg">
-      <g id="Spaces:-Alerts-(release)" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-          <g id="spaces.alerts.success" transform="translate(-1298.000000, -62.000000)">
-              <g id="app-bar" transform="translate(328.000000, 40.000000)">
-                  <g id="button-share" transform="translate(957.000000, 12.000000)">
-                      <g id="icon-/-alerts" transform="translate(10.000000, 8.000000)">
-                          <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
-                          <path d="M19,18 L21,18 L21,20 L13,20 L13,22 L11,22 L11,20 L3,20 L3,18 L5,18 L5,14 C5,10.1340068 8.13400675,7 12,7 C15.8659932,7 19,10.1340068 19,14 L19,18 Z M17,18 L17,14 C17,11.2385763 14.7614237,9 12,9 C9.23857625,9 7,11.2385763 7,14 L7,18 L17,18 Z" id="Combined-Shape" fill={color} fillRule="nonzero"></path>
-                          <polygon id="Path-44" fill={accentColor || color} fillRule="nonzero" transform="translate(17.250000, 4.906733) rotate(-330.000000) translate(-17.250000, -4.906733) " points="18.25 6.40673326 18.25 3.40673326 16.25 3.40673326 16.25 6.40673326"></polygon>
-                          <polygon id="Path-44" fill={accentColor || color} fillRule="nonzero" transform="translate(6.750000, 4.906733) rotate(-30.000000) translate(-6.750000, -4.906733) " points="7.75 6.40673326 7.75 3.40673326 5.75 3.40673326 5.75 6.40673326"></polygon>
-                          <polygon id="Path-44" fill={accentColor || color} fillRule="nonzero" points="13 5 13 2 11 2 11 5"></polygon>
                       </g>
                   </g>
               </g>
