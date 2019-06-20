@@ -66,6 +66,7 @@ storiesOf('DatePicker', module)
             this.setState({date});
           }}
           focused={this.state.focus}
+          arrowRightDisabled={moment(this.state.date).date() >= moment.utc().date()}
           onFocusChange={e => this.setState({focus: e.focused})}
         />;
       }
