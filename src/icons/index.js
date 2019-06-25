@@ -1264,7 +1264,23 @@ const ICONS = {
               </g>
           </g>
       </g>
-  </svg>
+  </svg>,
+  Report: ({color, width, height}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+    <g id="Dashboards-(release)" fill="none" fillRule="evenodd">
+      <g id="dashboard.edit" transform="translate(-337 -598)">
+        <rect fill="#FAFAFA" width="1440" height="1058" />
+        <g id="icon-/-reports-/-single" transform="translate(334 595)">
+          <rect id="bounds" width="24" height="24" />
+          <path
+            d="M3,3 L21,3 L21,21 L3,21 L3,3 Z M5,5 L5,19 L19,19 L19,5 L5,5 Z M7,8 L15,8 L15,10 L7,10 L7,8 Z M7,11 L17,11 L17,13 L7,13 L7,11 Z M7,14 L14,14 L14,16 L7,16 L7,14 Z"
+            id="Shape"
+            fill={color}
+            fillRule="nonzero"
+          />
+        </g>
+      </g>
+    </g>
+  </svg>,
 };
 
 // colors can either be `primary`, `darker`, or a hex/rgb color.
