@@ -22,6 +22,7 @@ export default class TagInput extends Component {
     this.state = {
       text: props.defaultValue || '',
       focused: false,
+      dropdownOpen: false,
       focusedTagId: null,
       focusedDropdownItemIndex: 0,
     };
@@ -37,7 +38,7 @@ export default class TagInput extends Component {
 
   clearInput = e => {
     e.preventDefault(); // Stop tab jumping to next form control
-    this.setState({text: '', focusedDropdownItemIndex: 0});
+    this.setState({text: '', focusedDropdownItemIndex: 0, dropdownOpen: false});
   }
 
   clearSelectedTag = () => {
@@ -59,8 +60,9 @@ export default class TagInput extends Component {
       onAddTag,
       onCreateNewTag,
       canCreateTags,
+      openDropdownOnFocus,
     } = this.props;
-    const { text, focused, focusedTagId, focusedDropdownItemIndex } = this.state;
+    const { text, focused, dropdownOpen, focusedTagId, focusedDropdownItemIndex } = this.state;
 
     const selectedTagIds = tags.map(t => t.id);
     const choicesNotAlreadySelected = choices.filter(c => !selectedTagIds.includes(c.id))
@@ -78,7 +80,10 @@ export default class TagInput extends Component {
           width="100%"
 
           value={text}
-          onChange={e => this.setState({text: e.target.value})}
+          onChange={e => this.setState({
+            text: e.target.value,
+            dropdownOpen: e.target.value.length > 0,
+          })}
           onKeyDown={e => {
             if (e.key === 'Enter' || e.key === 'Tab') {
               // Empty tags are not allowed
@@ -115,7 +120,7 @@ export default class TagInput extends Component {
               this.clearInput(e);
               onAddTag(focusedTag);
 
-            } else if (e.key === 'Backspace' && text.length === 0 && tags.length > 0) {
+            } else if (e.key === 'Backspace' && text.length === 0 && tags.length > 0 && !dropdownOpen) {
               window.addEventListener('click', this.clearSelectedTag);
 
               // Initially focus a tag
@@ -132,7 +137,7 @@ export default class TagInput extends Component {
               });
 
             } else if (e.key === 'Escape' || this.state.focusedTagId) {
-              this.setState({focusedTagId: null});
+              this.setState({focusedTagId: null, dropdownOpen: false});
 
             } else if (e.key === 'ArrowDown' && focusedDropdownItemIndex <= matches.length-1) {
               this.setState({focusedDropdownItemIndex: focusedDropdownItemIndex + 1});
@@ -143,8 +148,18 @@ export default class TagInput extends Component {
             }
           }}
 
-          onFocus={() => this.setState({focused: true})}
-          onBlur={() => this.setState({focused: false})}
+          onFocus={() => {
+            this.setState({
+              focused: true,
+              dropdownOpen: openDropdownOnFocus ? true : dropdownOpen,
+            });
+          }}
+          onBlur={() => {
+            this.setState({
+              focused: false,
+              dropdownOpen: text.length === 0 ? false : dropdownOpen,
+            });
+          }}
         />
 
         <div className={styles.tagWrapper} ref={this.tagWrapper}>
@@ -165,7 +180,7 @@ export default class TagInput extends Component {
           {tags.length === 0 ? <span className={styles.noTags}>{emptyTagsPlaceholder}</span> : null}
         </div>
 
-        {text.length > 0 ? (
+        {dropdownOpen ? (
           <ul className={styles.dropdown}>
             {matches.map((match, index) => (
               <li
