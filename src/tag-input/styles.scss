@@ -61,7 +61,7 @@
   border: 1px solid $gray;
   border-radius: $borderRadiusBase;
   background-color: #fff;
-  z-index: 9999;
+  z-index: 99999;
 }
 .dropdownItem {
   line-height: 32px;
@@ -72,6 +72,10 @@
   user-select: none;
 }
 .dropdownItem.focused { background-color: $grayLightest; }
+.dropdownItem.disabled {
+  color: $grayDarker;
+  cursor: default;
+}
 
 .noTags {
   display: flex;

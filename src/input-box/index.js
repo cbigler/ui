@@ -55,8 +55,14 @@ function InputBoxRaw({leftIcon, forwardedRef, ...props}) {
         <input
           {...props}
           ref={input}
-          onFocus={() => setFocus(true)}
-          onBlur={() => setFocus(false)}
+          onFocus={(...args) => {
+            setFocus(true);
+            if (props.onFocus) { props.onFocus(...args); }
+          }}
+          onBlur={(...args) => {
+            setFocus(false);
+            if (props.onBlur) { props.onBlur(...args); }
+          }}
         />
       </div>
     );
