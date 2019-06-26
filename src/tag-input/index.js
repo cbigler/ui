@@ -73,171 +73,173 @@ export default class TagInput extends Component {
     });
 
     return (
-      <div className={styles.wrapper}>
-        <InputBox
-          type="text"
-          placeholder={placeholder}
-          width="100%"
-
-          value={text}
-          onChange={e => this.setState({
-            text: e.target.value,
-            dropdownOpen: e.target.value.length > 0,
-          })}
-          onKeyDown={e => {
-            if (e.key === 'Enter' || e.key === 'Tab') {
-              // Empty tags are not allowed
-              if (text.length === 0) { return; }
-
-              const focusedTagMatch = matches[this.state.focusedDropdownItemIndex];
-              const focusedTag = focusedTagMatch ? focusedTagMatch.original : null;
-              const focusedTagAlreadyInList = tags.find(
-                tag => tag.label.trim() === (focusedTag ? focusedTag.label : text).trim()
-              );
-
-              // If the tag already exists, then don't call onCreateNewTag since it's
-              // already in the array once
-              if (focusedTagAlreadyInList) {
-                this.clearInput(e);
-                setTimeout(() => {
-                  this.blinkTag(focusedTagAlreadyInList.id);
-                }, 150);
-                return;
-              }
-
-              // As a last resort, create a brand new tag
-              if (focusedDropdownItemIndex > matches.length-1) {
-                if (canCreateTags) {
-                  this.clearInput(e);
-                  onCreateNewTag(text.trim());
-                }
-                // If no tags can be created, then just do nothing in this case
-                return;
-              }
-
-              // If the tag is already a choice, then add it rather than creating it from a text
-              // slug.
-              this.clearInput(e);
-              onAddTag(focusedTag);
-
-            } else if (e.key === 'Backspace' && text.length === 0 && tags.length > 0 && !dropdownOpen) {
-              window.addEventListener('click', this.clearSelectedTag);
-
-              // Initially focus a tag
-              if (!focusedTagId) {
-                this.setState({ focusedTagId: tags[tags.length-1].id });
-                return;
-              }
-
-              // Delete the last tag
-              const secondToLastTag = tags[tags.length - 2];
-              onRemoveTag(tags.find(t => t.id === this.state.focusedTagId));
-              this.setState({
-                focusedTagId: secondToLastTag ? secondToLastTag.id : null,
-              });
-
-            } else if (e.key === 'Escape' || this.state.focusedTagId) {
-              this.setState({focusedTagId: null, dropdownOpen: false});
-
-            } else if (e.key === 'ArrowDown' && focusedDropdownItemIndex <= matches.length-1) {
-              this.setState({focusedDropdownItemIndex: focusedDropdownItemIndex + 1});
-
-            } else if (e.key === 'ArrowUp' && focusedDropdownItemIndex > 0) {
-              this.setState({focusedDropdownItemIndex: focusedDropdownItemIndex - 1});
-
-            }
-          }}
-
-          onFocus={() => {
-            this.setState({
-              focused: true,
-              dropdownOpen: openDropdownOnFocus ? true : dropdownOpen,
-            });
-          }}
-          onBlur={() => {
-            this.setState({
-              focused: false,
-              dropdownOpen: text.length === 0 ? false : dropdownOpen,
-            });
-          }}
+      <Fragment>
+        <div
+          className={styles.backdrop}
+          style={{display: dropdownOpen ? 'block' : 'none'}}
+          onClick={e => this.setState({dropdownOpen: false})}
         />
+        <div className={styles.wrapper}>
+          <InputBox
+            type="text"
+            placeholder={placeholder}
+            width="100%"
 
-        <div className={styles.tagWrapper} ref={this.tagWrapper}>
-          {tags.map(tag => (
-            <div
-              key={tag.id}
-              className={classnames(styles.tag, {[styles.focus]: focusedTagId === tag.id})}
-              onClick={e => e.stopPropagation()}
-            >
-              <div className={styles.tagLabel}>
-                {tag.label}
-              </div>
-              <div className={styles.closeIcon} onClick={() => onRemoveTag(tag)}>
-                <Icons.Close width={12} height={12} color="#fff" />
-              </div>
-            </div>
-          ))}
-          {tags.length === 0 ? <span className={styles.noTags}>{emptyTagsPlaceholder}</span> : null}
-        </div>
+            value={text}
+            onChange={e => this.setState({
+              text: e.target.value,
+              dropdownOpen: e.target.value.length > 0,
+            })}
+            onKeyDown={e => {
+              if (e.key === 'Enter' || e.key === 'Tab') {
+                // Empty tags are not allowed
+                if (text.length === 0) { return; }
 
-        {dropdownOpen ? (
-          <ul className={styles.dropdown}>
-            {matches.map((match, index) => (
-              <li
-                key={match.original.id}
-                className={classnames(styles.dropdownItem, {
-                  [styles.focused]: focusedDropdownItemIndex === index,
-                })}
-                onMouseEnter={() => this.setState({focusedDropdownItemIndex: index})}
-                onMouseLeave={e => e.stopPropagation()}
-                onClick={e => {
-                  onAddTag(match.original)
+                const focusedTagMatch = matches[this.state.focusedDropdownItemIndex];
+                const focusedTag = focusedTagMatch ? focusedTagMatch.original : null;
+                const focusedTagAlreadyInList = tags.find(
+                  tag => tag.label.trim() === (focusedTag ? focusedTag.label : text).trim()
+                );
+
+                // If the tag already exists, then don't call onCreateNewTag since it's
+                // already in the array once
+                if (focusedTagAlreadyInList) {
                   this.clearInput(e);
-                }}
-              >
-                {
-                  match.string.split(NULL_CHARACTER)
-                  .map((section, index) => {
-                    if (index % 2 === 0) {
-                      // Even indexes = keep normal
-                      return (
-                        <Fragment>{section}</Fragment>
-                      );
-                    } else {
-                      // Odd indexes = highlight
-                      return (
-                        <strong>{section}</strong>
-                      );
-                    }
-                  })
-                  .reduce((acc, next) => <Fragment>{acc}{next}</Fragment>, null)
+                  setTimeout(() => {
+                    this.blinkTag(focusedTagAlreadyInList.id);
+                  }, 150);
+                  return;
                 }
-              </li>
+
+                // As a last resort, create a brand new tag
+                if (focusedDropdownItemIndex > matches.length-1) {
+                  if (canCreateTags) {
+                    this.clearInput(e);
+                    onCreateNewTag(text.trim());
+                  }
+                  // If no tags can be created, then just do nothing in this case
+                  return;
+                }
+
+                // If the tag is already a choice, then add it rather than creating it from a text
+                // slug.
+                this.clearInput(e);
+                onAddTag(focusedTag);
+
+              } else if (e.key === 'Backspace' && text.length === 0 && tags.length > 0 && !dropdownOpen) {
+                window.addEventListener('click', this.clearSelectedTag);
+
+                // Initially focus a tag
+                if (!focusedTagId) {
+                  this.setState({ focusedTagId: tags[tags.length-1].id });
+                  return;
+                }
+
+                // Delete the last tag
+                const secondToLastTag = tags[tags.length - 2];
+                onRemoveTag(tags.find(t => t.id === this.state.focusedTagId));
+                this.setState({
+                  focusedTagId: secondToLastTag ? secondToLastTag.id : null,
+                });
+
+              } else if (e.key === 'Escape' || this.state.focusedTagId) {
+                this.setState({focusedTagId: null, dropdownOpen: false});
+
+              } else if (e.key === 'ArrowDown' && focusedDropdownItemIndex <= matches.length-1) {
+                this.setState({focusedDropdownItemIndex: focusedDropdownItemIndex + 1});
+
+              } else if (e.key === 'ArrowUp' && focusedDropdownItemIndex > 0) {
+                this.setState({focusedDropdownItemIndex: focusedDropdownItemIndex - 1});
+
+              }
+            }}
+
+            onFocus={() => {
+              this.setState({
+                focused: true,
+                dropdownOpen: openDropdownOnFocus ? true : dropdownOpen,
+              });
+            }}
+            onBlur={() => this.setState({focused: false})}
+          />
+
+          <div className={styles.tagWrapper} ref={this.tagWrapper}>
+            {tags.map(tag => (
+              <div
+                key={tag.id}
+                className={classnames(styles.tag, {[styles.focus]: focusedTagId === tag.id})}
+                onClick={e => e.stopPropagation()}
+              >
+                <div className={styles.tagLabel}>
+                  {tag.label}
+                </div>
+                <div className={styles.closeIcon} onClick={() => onRemoveTag(tag)}>
+                  <Icons.Close width={12} height={12} color="#fff" />
+                </div>
+              </div>
             ))}
-            {!matches.find(m => m.original.label.trim() === text.trim()) ? (
-              canCreateTags ? (
+            {tags.length === 0 ? <span className={styles.noTags}>{emptyTagsPlaceholder}</span> : null}
+          </div>
+
+          {dropdownOpen ? (
+            <ul className={styles.dropdown}>
+              {matches.map((match, index) => (
                 <li
+                  key={match.original.id}
                   className={classnames(styles.dropdownItem, {
-                    [styles.focused]: focusedDropdownItemIndex === matches.length,
+                    [styles.focused]: focusedDropdownItemIndex === index,
                   })}
-                  onMouseEnter={() => this.setState({focusedDropdownItemIndex: matches.length})}
+                  onMouseEnter={() => this.setState({focusedDropdownItemIndex: index})}
                   onMouseLeave={e => e.stopPropagation()}
                   onClick={e => {
-                    onCreateNewTag(text);
+                    onAddTag(match.original)
                     this.clearInput(e);
                   }}
-                >Add "{text}"</li>
-              ) : (
-                matches.length === 0 ? (
-                  <li className={classnames(styles.dropdownItem, styles.disabled)}>
-                    Nothing found
-                  </li>
-                ) : null
-              )
-            ) : null}
-          </ul>
-        ) : null}
-      </div>
+                >
+                  {
+                    match.string.split(NULL_CHARACTER)
+                    .map((section, index) => {
+                      if (index % 2 === 0) {
+                        // Even indexes = keep normal
+                        return (
+                          <Fragment>{section}</Fragment>
+                        );
+                      } else {
+                        // Odd indexes = highlight
+                        return (
+                          <strong>{section}</strong>
+                        );
+                      }
+                    })
+                    .reduce((acc, next) => <Fragment>{acc}{next}</Fragment>, null)
+                  }
+                </li>
+              ))}
+              {!matches.find(m => m.original.label.trim() === text.trim()) ? (
+                canCreateTags ? (
+                  <li
+                    className={classnames(styles.dropdownItem, {
+                      [styles.focused]: focusedDropdownItemIndex === matches.length,
+                    })}
+                    onMouseEnter={() => this.setState({focusedDropdownItemIndex: matches.length})}
+                    onMouseLeave={e => e.stopPropagation()}
+                    onClick={e => {
+                      onCreateNewTag(text);
+                      this.clearInput(e);
+                    }}
+                  >Add "{text}"</li>
+                ) : (
+                  matches.length === 0 ? (
+                    <li className={classnames(styles.dropdownItem, styles.disabled)}>
+                      Nothing found
+                    </li>
+                  ) : null
+                )
+              ) : null}
+            </ul>
+          ) : null}
+        </div>
+      </Fragment>
     );
   }
 }
