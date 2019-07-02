@@ -35,7 +35,7 @@ export default function ListView({
       {showHeaders ? (
         <thead>
           <tr>
-            <ListViewContext.Provider value={{ mode: TABLE_HEADER, keyTemplate }}>
+            <ListViewContext.Provider value={{ mode: TABLE_HEADER }}>
               {children}
             </ListViewContext.Provider>
           </tr>
@@ -44,7 +44,7 @@ export default function ListView({
       <tbody>
         {data.map(item => (
           <tr key={keyTemplate(item)}>
-            <ListViewContext.Provider value={{ mode: TABLE_ROW, keyTemplate, item }}>
+            <ListViewContext.Provider value={{ mode: TABLE_ROW, item }}>
               {children}
             </ListViewContext.Provider>
           </tr>
@@ -76,15 +76,15 @@ export function ListViewColumn({
   width = 'auto',
   minWidth = 'auto'
 }) {
-  const { mode, keyTemplate, item } = useContext(ListViewContext);
+  const { mode, item } = useContext(ListViewContext);
   const clickable = item && !disabled(item) && Boolean(onClick);
 
   return mode === TABLE_HEADER ? (
-    <th key={title || id || v4()} style={{width, minWidth}}>
+    <th key={id || title || v4()} style={{width, minWidth}}>
       <div className={styles.listViewHeader}>{title}</div>
     </th>
   ) : (
-    <td key={keyTemplate(item) || v4()} style={{width}}>
+    <td key={id || title || v4()} style={{width}}>
       <div
         className={classnames(styles.listViewCell, { [styles.clickable]: clickable })}
         onClick={() => clickable && onClick(item)}
