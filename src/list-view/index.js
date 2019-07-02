@@ -10,20 +10,6 @@ const TABLE_HEADER = 'TABLE_HEADER',
 const ListViewContext = React.createContext({});
 
 
-// type ListViewClickableLinkProps = {
-//   onClick?: () => any,
-//   children: ReactNode
-// }
-
-export function ListViewClickableLink({ onClick, children }) {
-  return (
-    <span role="button" className={styles.listViewClickableLink} onClick={onClick}>
-      {children}
-    </span>
-  );
-}
-
-
 export default function ListView({
   data = [],
   keyTemplate = item => item.id,
@@ -56,14 +42,13 @@ export default function ListView({
 
 
 // type ListViewColumnProps = {
+//   id?: any,
 //   title?: any,
 //   template?: any,
 //   onClick?: (any) => any,
-//   href?: (any) => string,
 //   disabled?: (any) => boolean,
-//   flexGrow?: number,
-//   flexShrink?: number,
 //   width?: string | number,
+//   minWidth?: string | number,
 // }
 
 export function ListViewColumn({
@@ -92,5 +77,19 @@ export function ListViewColumn({
         {template(item)}
       </div>
     </td>
+  );
+}
+
+
+// type ListViewClickableLinkProps = {
+//   onClick?: () => any,
+//   children: ReactNode
+// }
+
+export function ListViewClickableLink({ onClick, children }) {
+  return (
+    <span role="button" className={styles.listViewClickableLink} onClick={onClick}>
+      {children}
+    </span>
   );
 }
