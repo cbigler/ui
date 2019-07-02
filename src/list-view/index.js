@@ -63,13 +63,14 @@ export function ListViewColumn({
 }) {
   const { mode, item } = useContext(ListViewContext);
   const clickable = item && !disabled(item) && Boolean(onClick);
+  const key = id || title || v4();
 
   return mode === TABLE_HEADER ? (
-    <th key={id || title || v4()} style={{width, minWidth}}>
+    <th key={key} style={{width, minWidth}}>
       <div className={styles.listViewHeader}>{title}</div>
     </th>
   ) : (
-    <td key={id || title || v4()} style={{width}}>
+    <td key={key} style={{width, minWidth}}>
       <div
         className={classnames(styles.listViewCell, { [styles.clickable]: clickable })}
         onClick={() => clickable && onClick(item)}
