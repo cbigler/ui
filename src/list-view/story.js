@@ -47,12 +47,10 @@ storiesOf('ListView', module)
       <ListViewColumn
         title="Name"
         template={item => item.name}
-        width="50%"
       />
       <ListViewColumn
         title="Visits"
         template={item => item.visits}
-        width="50%"
       />
     </ListView>
   ), {info: {inline: false}})

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import classnames from 'classnames';
+import { v4 } from 'uuid';
 
 import styles from './styles.module.scss';
 
@@ -30,7 +31,7 @@ export default function ListView({
   children = null,
 }) {
   return (
-    <table className={styles.listViewNew}>
+    <table className={styles.listView}>
       {showHeaders ? (
         <thead>
           <tr>
@@ -66,6 +67,7 @@ export default function ListView({
 // }
 
 export function ListViewColumn({
+  id = null,
   title = null,
   template = null,
   onClick = null,
@@ -75,19 +77,20 @@ export function ListViewColumn({
   minWidth = 'auto'
 }) {
   const { mode, keyTemplate, item } = useContext(ListViewContext);
-  const key = keyTemplate(item);
-  const clickable = !disabled(item) && Boolean(onClick);
-  
-  return mode === TABLE_HEADER ?
-    <th
-      style={{width, minWidth}}>{title}</th> :
-    <td style={{width}}>
+  const clickable = item && !disabled(item) && Boolean(onClick);
+
+  return mode === TABLE_HEADER ? (
+    <th key={title || id || v4()} style={{width, minWidth}}>
+      <div className={styles.listViewHeader}>{title}</div>
+    </th>
+  ) : (
+    <td key={keyTemplate(item) || v4()} style={{width}}>
       <div
-        key={key}
         className={classnames(styles.listViewCell, { [styles.clickable]: clickable })}
         onClick={() => clickable && onClick(item)}
       >
         {template(item)}
       </div>
-    </td>;
+    </td>
+  );
 }
