@@ -71,7 +71,6 @@ storiesOf('ListView', module)
   ), {info: {inline: false}})
   .add('With split left/right column groups', () => (
     <ListView
-      showHeaders={true}
       data={[
         {id: 0, name: "Main campus eatery", function: "Eat", capacity: 80, visits: 521},
         {id: 1, name: "My street cafe", function: "Eat", capacity: 80, visits: 590},
@@ -99,11 +98,13 @@ storiesOf('ListView', module)
         title="Capacity"
         template={item => item.capacity}
         width={120}
+        justifyContent="flex-end"
       />
       <ListViewColumn
         title="Visits"
         template={item => item.visits}
         width={120}
+        justifyContent="flex-end"
       />
     </ListView>
   ), {info: {inline: false}})

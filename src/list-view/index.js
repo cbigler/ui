@@ -59,7 +59,8 @@ export function ListViewColumn({
   disabled = item => false,
 
   width = 'auto',
-  minWidth = 'auto'
+  minWidth = 'auto',
+  justifyContent = undefined
 }) {
   const { mode, item } = useContext(ListViewContext);
   const clickable = item && !disabled(item) && Boolean(onClick);
@@ -67,13 +68,19 @@ export function ListViewColumn({
 
   return mode === TABLE_HEADER ? (
     <th key={key} style={{width, minWidth}}>
-      <div className={styles.listViewHeader}>{title}</div>
+      <div
+        className={styles.listViewHeader}
+        style={{justifyContent}}
+      >
+        {title}
+      </div>
     </th>
   ) : (
     <td key={key} style={{width, minWidth}}>
       <div
-        className={classnames(styles.listViewCell, { [styles.clickable]: clickable })}
         onClick={() => clickable && onClick(item)}
+        className={classnames(styles.listViewCell, { [styles.clickable]: clickable })}
+        style={{justifyContent}}
       >
         {Boolean(template) && template(item)}
       </div>
