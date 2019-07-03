@@ -75,7 +75,7 @@ export function ListViewColumn({
         className={classnames(styles.listViewCell, { [styles.clickable]: clickable })}
         onClick={() => clickable && onClick(item)}
       >
-        {template(item)}
+        {Boolean(template) && template(item)}
       </div>
     </td>
   );
