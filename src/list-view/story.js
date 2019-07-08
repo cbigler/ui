@@ -3,7 +3,12 @@ import moment from 'moment';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import ListView, { SORT_CYCLE, ListViewColumn, ListViewColumnSpacer } from './index';
+import ListView, {
+  ListViewColumn,
+  ListViewColumnSpacer,
+  getDefaultSort,
+  getNextSortDirection
+} from './index';
 
 const TEST_DATA = [
   {id: 0, name: "Main campus eatery", function: "Eat", capacity: 80, visits: 521},
@@ -74,38 +79,14 @@ storiesOf('ListView', module)
         data={state.sortedData}
         sortColumn={state.sortColumn}
         sortDirection={state.sortDirection}
-        onChangeSort={(id, sortTemplate) => {
-          const nullsLast = true;
-          const sortDirection = SORT_CYCLE[id === state.sortColumn ? state.sortDirection : 'none'];
-          const sorted = state.data.slice().sort((a, b) => {
+        onChangeSort={(sortColumn, sortTemplate) => {
+          const lastSortDirection = sortColumn === state.sortColumn ? state.sortDirection : 'none';
+          const sortDirection = getNextSortDirection(lastSortDirection);
 
-            // Short circuit and return initial order if sorting is toggled off
-            if (sortDirection !== 'asc' && sortDirection !== 'desc') { return 1; }
-
-            // Pass each data item through the sortTemplate function
-            const aValue = sortTemplate(a),
-                  bValue = sortTemplate(b);
-
-            // Invert sorting if mode is descending
-            const sortMultiplier = sortDirection === 'desc' ? -1 : 1;
-
-            // Use coercion trick to check for either null or undefined
-            if (aValue == null && bValue == null) {
-              return 0;
-            } else if (aValue == null) {
-              return nullsLast ? -1 : 1;
-            } else if (bValue == null) {
-              return nullsLast ? 1 : -1;
-            } else if (typeof aValue === 'number' && typeof bValue === 'number') {
-              return (aValue > bValue ? 1 : aValue < bValue ? -1 : 0) * sortMultiplier;
-            } else {
-              return String(aValue).localeCompare(String(bValue)) * sortMultiplier;
-            }
-          });
           setState({
-            data: state.data,
-            sortedData: sorted,
-            sortColumn: id,
+            ...state,
+            sortedData: state.data.slice().sort(getDefaultSort(sortTemplate, sortDirection)),
+            sortColumn,
             sortDirection
           });
         }}

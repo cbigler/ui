@@ -11,18 +11,11 @@ const TABLE_HEADER = 'TABLE_HEADER',
     'left': 'flex-start',
     'center': 'center',
     'right': 'flex-end'
+  },
+  SORT_ICONS = {
+    'asc': <Icons.ArrowUp height={10} />,
+    'desc': <Icons.ArrowDown height={10} />
   };
-
-export const SORT_CYCLE = {
-  'asc': 'desc',
-  'desc': 'none',
-  'none': 'asc'
-};
-
-export const SORT_ICONS = {
-  'asc': <Icons.ArrowUp height={10} />,
-  'desc': <Icons.ArrowDown height={10} />
-}
 
 const ListViewContext = React.createContext({});
 
@@ -144,3 +137,40 @@ export function ListViewClickableLink({ onClick, children }) {
     </span>
   );
 }
+
+
+// Helper functions
+export function getDefaultSort(sortTemplate, sortDirection, nullsLast = true) {
+  return function(a, b) {
+    // Short circuit and return initial order if sorting is toggled off
+    if (sortDirection !== 'asc' && sortDirection !== 'desc') { return 1; }
+
+    // Pass each item through the sortTemplate function
+    const aValue = sortTemplate(a),
+          bValue = sortTemplate(b);
+
+    // Invert sorting if mode is descending
+    const sortMultiplier = sortDirection === 'desc' ? -1 : 1;
+
+    // Use coercion trick to check for either null or undefined
+    if (aValue == null && bValue == null) {
+      return 0;
+    } else if (aValue == null) {
+      return nullsLast ? -1 : 1;
+    } else if (bValue == null) {
+      return nullsLast ? 1 : -1;
+    } else if (typeof aValue === 'number' && typeof bValue === 'number') {
+      return (aValue > bValue ? 1 : aValue < bValue ? -1 : 0) * sortMultiplier;
+    } else {
+      return String(aValue).localeCompare(String(bValue)) * sortMultiplier;
+    }
+  }
+}
+
+export function getNextSortDirection(sortDirection) {
+  return {
+    'asc': 'desc',
+    'desc': 'none',
+    'none': 'asc'
+  }[sortDirection]
+};
