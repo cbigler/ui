@@ -12,20 +12,19 @@ const TABLE_HEADER = 'TABLE_HEADER',
     'center': 'center',
     'right': 'flex-end'
   },
-  SORT_ICONS = {
-    'asc': <Icons.ArrowUp height={10} />,
-    'desc': <Icons.ArrowDown height={10} />
+  SORT_INDICATORS = {
+    'asc': <div style={{marginLeft: 8}}><Icons.ArrowUp height={10} /></div>,
+    'desc': <div style={{marginLeft: 8}}><Icons.ArrowDown height={10} /></div>
   };
 
 const ListViewContext = React.createContext({});
 
 export default function ListView({
   data = [],
-  keyTemplate = item => item.id,
-  showHeaders = true,
-  sortColumn = null,
-  sortDirection = null,
+  sort = [],
   onChangeSort = () => null,
+  keyTemplate = item => item.id || v4(),
+  showHeaders = true,
   children = null,
 }) {
   return (
@@ -33,12 +32,7 @@ export default function ListView({
       {showHeaders ? (
         <thead>
           <tr>
-            <ListViewContext.Provider value={{
-              mode: TABLE_HEADER,
-              sortColumn,
-              sortDirection,
-              onChangeSort
-            }}>
+            <ListViewContext.Provider value={{ mode: TABLE_HEADER, sort, onChangeSort }}>
               {children}
             </ListViewContext.Provider>
           </tr>
@@ -85,38 +79,42 @@ export function ListViewColumn(props) {
   const {
     mode,
     item,
-    sortColumn,
-    sortDirection,
+    sort,
     onChangeSort
   } = useContext(ListViewContext);
   
   const headerClickable = Boolean(onChangeSort);
   const cellClickable = item && !disabled(item) && Boolean(onClick);
-
-  return mode === TABLE_HEADER ? (
-    <th key={id} style={{width, minWidth}}>
-      <div
-        onClick={headerClickable ? () => onChangeSort(id, template) : null}
-        className={classnames(styles.listViewHeader, { [styles.clickable]: headerClickable })}
-        style={{justifyContent: ALIGN_TO_JUSTIFY[align]}}
-      >
-        {title || id}
-        {(sortColumn === id && sortDirection !== 'none') ? <div style={{marginLeft: 8}}>
-          {SORT_ICONS[sortDirection]}
-        </div> : null}
-      </div>
-    </th>
-  ) : (
-    <td key={id} style={{width, minWidth}}>
-      <div
-        onClick={cellClickable ? () => onClick(item) : null}
-        className={classnames(styles.listViewCell, { [styles.clickable]: cellClickable })}
-        style={{justifyContent: ALIGN_TO_JUSTIFY[align]}}
-      >
-        {Boolean(template) && template(item)}
-      </div>
-    </td>
-  );
+  if (mode === TABLE_HEADER) {
+    const sortRuleIndex = sort.findIndex(x => x.column === id);
+    const sortRule = sortRuleIndex > -1 ? sort[sortRuleIndex] : null;
+    const sortIndicator = sortRule && ['asc', 'desc'].indexOf(sortRule.direction) > -1 ?
+      SORT_INDICATORS[sortRule.direction] : null;
+    return (
+      <th key={id} style={{width, minWidth}}>
+        <div
+          onClick={headerClickable ? () => onChangeSort(id, template) : null}
+          className={classnames(styles.listViewHeader, { [styles.clickable]: headerClickable })}
+          style={{justifyContent: ALIGN_TO_JUSTIFY[align]}}
+        >
+          {title || id}
+          {sortIndicator}
+        </div>
+      </th>
+    );
+  } else {
+    return (
+      <td key={id} style={{width, minWidth}}>
+        <div
+          onClick={cellClickable ? () => onClick(item) : null}
+          className={classnames(styles.listViewCell, { [styles.clickable]: cellClickable })}
+          style={{justifyContent: ALIGN_TO_JUSTIFY[align]}}
+        >
+          {Boolean(template) && template(item)}
+        </div>
+      </td>
+    );
+  }
 }
 
 

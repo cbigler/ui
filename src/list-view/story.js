@@ -77,8 +77,10 @@ storiesOf('ListView', module)
 
       return <ListView
         data={state.sortedData}
-        sortColumn={state.sortColumn}
-        sortDirection={state.sortDirection}
+        sort={[{
+          column: state.sortColumn,
+          direction: state.sortDirection
+        }]}
         onChangeSort={(sortColumn, sortTemplate) => {
           const lastSortDirection = sortColumn === state.sortColumn ? state.sortDirection : 'none';
           const sortDirection = getNextSortDirection(lastSortDirection);
