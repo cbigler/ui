@@ -95,7 +95,8 @@ storiesOf('ListView', module)
       >
         <ListViewColumn
           id="Name"
-          template={item => item.name}
+          template={item => <span style={{fontWeight: 500}}>{item.name}</span>}
+          valueTemplate={item => item.name}
           width={240}
         />
         <ListViewColumn

@@ -67,7 +67,8 @@ export function ListViewColumn(props) {
   const {
     id,
     title = null,
-    template = null,
+    template,
+    valueTemplate = null,
     onClick = null,
     disabled = item => false,
   
@@ -93,7 +94,7 @@ export function ListViewColumn(props) {
     return (
       <th key={id} style={{width, minWidth}}>
         <div
-          onClick={headerClickable ? () => onChangeSort(id, template) : null}
+          onClick={headerClickable ? () => onChangeSort(id, valueTemplate || template) : null}
           className={classnames(styles.listViewHeader, { [styles.clickable]: headerClickable })}
           style={{justifyContent: ALIGN_TO_JUSTIFY[align]}}
         >
