@@ -121,3 +121,62 @@ storiesOf('ListView', module)
     }
     return <ListViewTester />;
   }, {info: {inline: false}})
+  .add('With multiple sorting', () => {
+    function ListViewTester() {
+      const [state, setState] = useState({
+        data: TEST_DATA,
+        sortedData: TEST_DATA,
+        sort: []
+      });
+
+      return <ListView
+        data={state.sortedData}
+        sort={state.sort}
+        onChangeSort={(sortColumn, sortTemplate) => {
+
+          // Mutate some state
+          const currentSortIndex = state.sort.findIndex(x => x.column === sortColumn);
+          const currentSort = currentSortIndex > -1 ? state.sort.splice(currentSortIndex, 1)[0] : {
+            column: sortColumn,
+            template: sortTemplate,
+            direction: 'none'
+          };
+          currentSort.direction = getNextSortDirection(currentSort.direction);
+          state.sort.unshift(currentSort);
+
+          setState({
+            ...state,
+            sortedData: state.sort.reverse().reduce((curr, next) => (
+              curr.sort(getDefaultSort(next.template, next.direction))
+            ), state.data.slice())
+          });
+        }}
+      >
+        <ListViewColumn
+          id="Name"
+          template={item => <span style={{fontWeight: 500}}>{item.name}</span>}
+          valueTemplate={item => item.name}
+          width={240}
+        />
+        <ListViewColumn
+          id="Function"
+          template={item => item.function}
+          width={160}
+        />
+        <ListViewColumnSpacer />
+        <ListViewColumn
+          id="Capacity"
+          template={item => item.capacity}
+          width={120}
+          align="right"
+        />
+        <ListViewColumn
+          id="Visits"
+          template={item => item.visits}
+          width={120}
+          align="right"
+        />
+      </ListView>
+    }
+    return <ListViewTester />;
+  }, {info: {inline: false}})
