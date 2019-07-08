@@ -16,9 +16,16 @@
   font-size: 14px;
   font-weight: bold;
   white-space: nowrap;
+
+  -webkit-user-select: none;     
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 :first-of-type > .listViewHeader { padding-left: 0px; }
 :last-of-type > .listViewHeader { padding-right: 0px; }
+
+.listViewHeader.clickable { cursor: pointer; }
 
 .listViewCell {
   display: flex;

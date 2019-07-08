@@ -3,17 +3,36 @@ import classnames from 'classnames';
 import { v4 } from 'uuid';
 
 import styles from './styles.module.scss';
+import { Icons } from '..';
 
 const TABLE_HEADER = 'TABLE_HEADER',
-  TABLE_ROW = 'TABLE_ROW';
+  TABLE_ROW = 'TABLE_ROW',
+  ALIGN_TO_JUSTIFY = {
+    'left': 'flex-start',
+    'center': 'center',
+    'right': 'flex-end'
+  };
+
+export const SORT_CYCLE = {
+  'asc': 'desc',
+  'desc': 'none',
+  'none': 'asc'
+};
+
+export const SORT_ICONS = {
+  'asc': <Icons.ArrowUp height={10} />,
+  'desc': <Icons.ArrowDown height={10} />
+}
 
 const ListViewContext = React.createContext({});
-
 
 export default function ListView({
   data = [],
   keyTemplate = item => item.id,
   showHeaders = true,
+  sortColumn = null,
+  sortDirection = null,
+  onChangeSort = () => null,
   children = null,
 }) {
   return (
@@ -21,7 +40,12 @@ export default function ListView({
       {showHeaders ? (
         <thead>
           <tr>
-            <ListViewContext.Provider value={{ mode: TABLE_HEADER }}>
+            <ListViewContext.Provider value={{
+              mode: TABLE_HEADER,
+              sortColumn,
+              sortDirection,
+              onChangeSort
+            }}>
               {children}
             </ListViewContext.Provider>
           </tr>
@@ -51,41 +75,60 @@ export default function ListView({
 //   minWidth?: string | number,
 // }
 
-export function ListViewColumn({
-  id = null,
-  title = null,
-  template = null,
-  onClick = null,
-  disabled = item => false,
+export function ListViewColumn(props) {
 
-  width = 'auto',
-  minWidth = 'auto',
-  justifyContent = undefined
-}) {
-  const { mode, item } = useContext(ListViewContext);
-  const clickable = item && !disabled(item) && Boolean(onClick);
-  const key = id || title || v4();
+  const {
+    id,
+    title = null,
+    template = null,
+    onClick = null,
+    disabled = item => false,
+  
+    width = 'auto',
+    minWidth = 'auto',
+    align = 'left'
+  } = props;
+
+  const {
+    mode,
+    item,
+    sortColumn,
+    sortDirection,
+    onChangeSort
+  } = useContext(ListViewContext);
+  
+  const headerClickable = Boolean(onChangeSort);
+  const cellClickable = item && !disabled(item) && Boolean(onClick);
 
   return mode === TABLE_HEADER ? (
-    <th key={key} style={{width, minWidth}}>
+    <th key={id} style={{width, minWidth}}>
       <div
-        className={styles.listViewHeader}
-        style={{justifyContent}}
+        onClick={headerClickable ? () => onChangeSort(id, template) : null}
+        className={classnames(styles.listViewHeader, { [styles.clickable]: headerClickable })}
+        style={{justifyContent: ALIGN_TO_JUSTIFY[align]}}
       >
-        {title}
+        {title || id}
+        {(sortColumn === id && sortDirection !== 'none') ? <div style={{marginLeft: 8}}>
+          {SORT_ICONS[sortDirection]}
+        </div> : null}
       </div>
     </th>
   ) : (
-    <td key={key} style={{width, minWidth}}>
+    <td key={id} style={{width, minWidth}}>
       <div
-        onClick={() => clickable && onClick(item)}
-        className={classnames(styles.listViewCell, { [styles.clickable]: clickable })}
-        style={{justifyContent}}
+        onClick={cellClickable ? () => onClick(item) : null}
+        className={classnames(styles.listViewCell, { [styles.clickable]: cellClickable })}
+        style={{justifyContent: ALIGN_TO_JUSTIFY[align]}}
       >
         {Boolean(template) && template(item)}
       </div>
     </td>
   );
+}
+
+
+export function ListViewColumnSpacer() {
+  return <ListViewColumn id={v4()} title=" " width="auto" />;
 }
 
 
