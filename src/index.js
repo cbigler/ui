@@ -14,7 +14,6 @@ export { default as DensityMark, DensityLogo } from './density-mark';
 export { default as Icons } from './icons';
 export { default as InfoPopup, InfoPopupCardWellHighlight } from './info-popup';
 export { default as InputBox, InputBoxContext, SelectBox } from './input-box';
-export { default as ListView, ListViewColumn, ListViewClickableLink } from './list-view';
 export { default as Modal } from './modal';
 export { default as PagerButtonGroup } from './pager-button-group';
 export { default as PercentageBar } from './percentage-bar';
@@ -29,6 +28,16 @@ export {
   InputStackGroup,
   InputStackItem
 } from './input-stack';
+
+
+export {
+  default as ListView,
+  ListViewColumn,
+  ListViewColumnSpacer,
+  ListViewClickableLink,
+  getDefaultSort,
+  getNextSortDirection
+} from './list-view';
 
 export {
   default as Card,
