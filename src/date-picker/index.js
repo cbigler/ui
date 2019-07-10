@@ -57,7 +57,7 @@ export default function DatePicker(props) {
           onDateChange={props.onChange}
           {...restProps}
         />
-        {context === 'ANALYTICS_CONTROL_BAR' ? <div style={{marginTop: 4, marginLeft: 24, marginRight: 18}}>
+        {context === 'ANALYTICS_CONTROL_BAR' ? <div style={{marginTop: 3, marginLeft: 24, marginRight: 18}}>
           {props.focused ?
             <Icons.ChevronUp width={12} height={12} color={colorVariables.brandPrimary} /> :
             <Icons.ChevronDown width={12} height={12} color={colorVariables.brandPrimary} />}    
