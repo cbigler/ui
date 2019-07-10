@@ -76,6 +76,9 @@ storiesOf('ListView', module)
       });
 
       return <ListView
+        rowHeight={40}
+        fontSize={14}
+        headerFontSize={12}
         data={state.sortedData}
         sort={[{
           column: state.sortColumn,

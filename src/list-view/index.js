@@ -22,9 +22,13 @@ const ListViewContext = React.createContext({});
 export default function ListView({
   data = [],
   sort = [],
-  onChangeSort = () => null,
+  onChangeSort = null,
   keyTemplate = item => item.id || v4(),
   showHeaders = true,
+  rowHeight = undefined,
+  headerHeight = undefined,
+  fontSize = undefined,
+  headerFontSize = undefined,
   children = null,
 }) {
   return (
@@ -32,7 +36,13 @@ export default function ListView({
       {showHeaders ? (
         <thead>
           <tr>
-            <ListViewContext.Provider value={{ mode: TABLE_HEADER, sort, onChangeSort }}>
+            <ListViewContext.Provider value={{
+              mode: TABLE_HEADER,
+              height: headerHeight,
+              fontSize: headerFontSize,
+              sort,
+              onChangeSort,
+            }}>
               {children}
             </ListViewContext.Provider>
           </tr>
@@ -41,7 +51,12 @@ export default function ListView({
       <tbody>
         {data.map(item => (
           <tr key={keyTemplate(item)}>
-            <ListViewContext.Provider value={{ mode: TABLE_ROW, item }}>
+            <ListViewContext.Provider value={{
+              mode: TABLE_ROW,
+              height: rowHeight,
+              fontSize: fontSize,
+              item,
+            }}>
               {children}
             </ListViewContext.Provider>
           </tr>
@@ -79,6 +94,8 @@ export function ListViewColumn(props) {
 
   const {
     mode,
+    height,
+    fontSize,
     item,
     sort,
     onChangeSort
@@ -96,7 +113,7 @@ export function ListViewColumn(props) {
         <div
           onClick={headerClickable ? () => onChangeSort(id, valueTemplate || template) : null}
           className={classnames(styles.listViewHeader, { [styles.clickable]: headerClickable })}
-          style={{justifyContent: ALIGN_TO_JUSTIFY[align]}}
+          style={{height, fontSize, justifyContent: ALIGN_TO_JUSTIFY[align]}}
         >
           {title || id}
           {sortIndicator}
@@ -109,7 +126,7 @@ export function ListViewColumn(props) {
         <div
           onClick={cellClickable ? () => onClick(item) : null}
           className={classnames(styles.listViewCell, { [styles.clickable]: cellClickable })}
-          style={{justifyContent: ALIGN_TO_JUSTIFY[align]}}
+          style={{height, fontSize, justifyContent: ALIGN_TO_JUSTIFY[align]}}
         >
           {Boolean(template) && template(item)}
         </div>
