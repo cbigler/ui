@@ -7,7 +7,15 @@ import propTypes from 'prop-types';
 import colorVariables from '../../variables/colors.json';
 import styles from './styles.scss';
 
-export const ANCHOR_RIGHT = 'ANCHOR_RIGHT', ANCHOR_LEFT = 'ANCHOR_LEFT';
+// Classes to merge in, depending on context
+const CONTEXT_CLASSES = {
+  'ANALYTICS_CONTROL_BAR': styles.contextAnalyticsControlBar,
+};
+
+export const ANCHOR_RIGHT = 'ANCHOR_RIGHT',
+  ANCHOR_LEFT = 'ANCHOR_LEFT';
+
+export const DatePickerContext = React.createContext(null);
 
 export default function DatePicker(props) {
   const restProps = Object.assign({}, props);
@@ -17,59 +25,66 @@ export default function DatePicker(props) {
   delete restProps.arrowRightDisabled;
   delete restProps.arrowLeftDisabled;
 
-  return <div className={classnames(styles.datePicker, {
-    [styles.datePickerAnchorLeft]: !props.anchor || props.anchor === ANCHOR_LEFT,
-    [styles.datePickerAnchorRight]: props.anchor === ANCHOR_RIGHT,
-    [styles.datePickerFocused]: props.focused,
-  })}>
-    <div className={styles.datePickerContainer}>
-      <div
-        className={classnames(
-          styles.datePickerIcon,
-          styles.datePickerIconLeft,
-          {[styles.datePickerIconDisabled]: props.arrowLeftDisabled},
-        )}
-        role="button"
-        onClick={() => {
-          if (!props.arrowLeftDisabled) {
-            const yesterday = props.date.clone().subtract(1, 'day');
-            return props.onChange(yesterday);
-          }
-        }}
-      >
-        <Icons.ArrowLeft
-          color={props.arrowLeftDisabled ? colorVariables.grayDark : colorVariables.brandPrimary}
-          width={20}
-          height={20}
+  return <DatePickerContext.Consumer>{context => (
+    <div className={classnames(CONTEXT_CLASSES[context], styles.datePicker, {
+      [styles.datePickerAnchorLeft]: !props.anchor || props.anchor === ANCHOR_LEFT,
+      [styles.datePickerAnchorRight]: props.anchor === ANCHOR_RIGHT,
+      [styles.datePickerFocused]: props.focused,
+    })}>
+      <div className={styles.datePickerContainer}>
+        <div
+          className={classnames(
+            styles.datePickerIcon,
+            styles.datePickerIconLeft,
+            {[styles.datePickerIconDisabled]: props.arrowLeftDisabled},
+          )}
+          role="button"
+          onClick={() => {
+            if (!props.arrowLeftDisabled) {
+              const yesterday = props.date.clone().subtract(1, 'day');
+              return props.onChange(yesterday);
+            }
+          }}
+        >
+          <Icons.ArrowLeft
+            color={props.arrowLeftDisabled ? colorVariables.grayDark : colorVariables.brandPrimary}
+            width={20}
+            height={20}
+          />
+        </div>
+        <SingleDatePicker
+          numberOfMonths={1}
+          onDateChange={props.onChange}
+          {...restProps}
         />
-      </div>
-      <SingleDatePicker
-        numberOfMonths={1}
-        onDateChange={props.onChange}
-        {...restProps}
-      />
-      <div
-        className={classnames(
-          styles.datePickerIcon,
-          styles.datePickerIconRight,
-          {[styles.datePickerIconDisabled]: props.arrowRightDisabled},
-        )}
-        role="button"
-        onClick={() => {
-          if (!props.arrowRightDisabled) {
-            const tomorrow = props.date.clone().add(1, 'day');
-            return props.onChange(tomorrow);
-          }
-        }}
-      >
-        <Icons.ArrowRight
-          color={props.arrowRightDisabled ? colorVariables.grayDark : colorVariables.brandPrimary}
-          width={20}
-          height={20}
-        />
+        {context === 'ANALYTICS_CONTROL_BAR' ? <div style={{marginTop: 4, marginLeft: 24, marginRight: 18}}>
+          {props.focused ?
+            <Icons.ChevronUp width={12} height={12} color={colorVariables.brandPrimary} /> :
+            <Icons.ChevronDown width={12} height={12} color={colorVariables.brandPrimary} />}    
+        </div> : null}
+        <div
+          className={classnames(
+            styles.datePickerIcon,
+            styles.datePickerIconRight,
+            {[styles.datePickerIconDisabled]: props.arrowRightDisabled},
+          )}
+          role="button"
+          onClick={() => {
+            if (!props.arrowRightDisabled) {
+              const tomorrow = props.date.clone().add(1, 'day');
+              return props.onChange(tomorrow);
+            }
+          }}
+        >
+          <Icons.ArrowRight
+            color={props.arrowRightDisabled ? colorVariables.grayDark : colorVariables.brandPrimary}
+            width={20}
+            height={20}
+          />
+        </div>
       </div>
     </div>
-  </div>;
+  )}</DatePickerContext.Consumer>;
 }
 
 DatePicker.displayName = 'DatePicker';
