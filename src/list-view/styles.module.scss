@@ -1,12 +1,27 @@
 @import "../../variables/colors.scss";
 @import "../../variables/fonts.scss";
 
+.listViewContainer {
+  overflow-x: auto;
+
+  // When the user scrolls to the edge of the card table, show a shadow to indicate that they can
+  // scroll either to the left, right, or in both directions.
+  &.leftShadow { box-shadow: inset 30px 0 20px -30px rgba(0, 0, 0, 0.25); }
+  &.rightShadow { box-shadow: inset -30px 0 20px -30px rgba(0, 0, 0, 0.25); }
+  &.leftShadow.rightShadow {
+    box-shadow: inset 30px 0 20px -30px rgba(0, 0, 0, 0.25),
+                inset -30px 0 20px -30px rgba(0, 0, 0, 0.25);
+  }
+}
+
 .listView {
   width: 100%;
   border-collapse: collapse;
 }
 
-.listView tr { border-bottom: 1px solid $grayLight; }
+.listView th, .listView td {
+  padding: 0;
+}
 
 .listViewHeader {
   display: flex;
@@ -16,16 +31,23 @@
   font-size: 14px;
   font-weight: bold;
   white-space: nowrap;
+  border-bottom: 1px solid $grayLight;
 
-  -webkit-user-select: none;     
+  -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
-:first-of-type > .listViewHeader { padding-left: 0px; }
-:last-of-type > .listViewHeader { padding-right: 0px; }
+.listView :first-child > .listViewHeader { padding-left: 0px; }
+.listView :last-child > .listViewHeader { padding-right: 0px; }
 
 .listViewHeader.clickable { cursor: pointer; }
+
+.listViewRowHeader {
+  position: absolute;
+  z-index: 1;
+  background: #FFF;
+}
 
 .listViewCell {
   display: flex;
@@ -34,9 +56,10 @@
   padding: 0 24px;
   font-size: $fontSizeBase;
   color: $grayDarkest;
+  border-bottom: 1px solid $grayLight;
 }
-:first-of-type > .listViewCell { padding-left: 0px; }
-:last-of-type > .listViewCell { padding-right: 0px; }
+.listView :first-child > .listViewCell { padding-left: 0px; }
+.listView :last-child > .listViewCell { padding-right: 0px; }
 
 .listViewCell.clickable { cursor: pointer; }
 

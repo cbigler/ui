@@ -6,7 +6,7 @@ import { action } from '@storybook/addon-actions';
 import ListView, {
   ListViewColumn,
   ListViewColumnSpacer,
-  getDefaultSort,
+  getDefaultSortFunction,
   getNextSortDirection
 } from './index';
 
@@ -66,6 +66,63 @@ storiesOf('ListView', module)
       />
     </ListView>
   ), {info: {inline: false}})
+  .add('With row headers', () => (
+    <div style={{width: '100%', overflowX: 'scroll'}}>
+      <ListView
+        showHeaders={true}
+        data={TEST_DATA}
+      >
+        <ListViewColumn
+          id="Name"
+          template={item => item.name}
+          isRowHeader={true}
+          width={240}
+        />
+        <ListViewColumn
+          id="Function"
+          template={item => item.function}
+          width={160}
+        />
+        <ListViewColumnSpacer />
+        <ListViewColumn
+          id="Capacity1"
+          template={item => item.capacity}
+          width={120}
+          align="right"
+        />
+        <ListViewColumn
+          id="Capacity2"
+          template={item => item.capacity}
+          width={120}
+          align="right"
+        />
+        <ListViewColumn
+          id="Capacity3"
+          template={item => item.capacity}
+          width={120}
+          align="right"
+        />
+        <ListViewColumn
+          id="Capacity4"
+          template={item => item.capacity}
+          width={120}
+          align="right"
+        />
+        <ListViewColumn
+          id="Capacity5"
+          template={item => item.capacity}
+          width={120}
+          align="right"
+        />
+        <ListViewColumn
+          id="Visits"
+          template={item => item.visits}
+          width={120}
+          align="right"
+        />
+      </ListView>
+    </div>
+  ), {info: {inline: false}})
   .add('With sorting', () => {
     function ListViewTester() {
       const [state, setState] = useState({
@@ -90,7 +147,7 @@ storiesOf('ListView', module)
 
           setState({
             ...state,
-            sortedData: state.data.slice().sort(getDefaultSort(sortTemplate, sortDirection)),
+            sortedData: state.data.slice().sort(getDefaultSortFunction(sortTemplate, sortDirection)),
             sortColumn,
             sortDirection
           });
@@ -150,7 +207,7 @@ storiesOf('ListView', module)
           setState({
             ...state,
             sortedData: state.sort.reverse().reduce((curr, next) => (
-              curr.sort(getDefaultSort(next.template, next.direction))
+              curr.sort(getDefaultSortFunction(next.template, next.direction))
             ), state.data.slice())
           });
         }}

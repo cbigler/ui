@@ -35,7 +35,7 @@ export {
   ListViewColumn,
   ListViewColumnSpacer,
   ListViewClickableLink,
-  getDefaultSort,
+  getDefaultSortFunction,
   getNextSortDirection
 } from './list-view';
 

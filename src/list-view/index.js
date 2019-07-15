@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import classnames from 'classnames';
 import { v4 } from 'uuid';
 
@@ -31,38 +31,81 @@ export default function ListView({
   headerFontSize = undefined,
   children = null,
 }) {
+
+  // Handle scrolling with state, refs, and a listener
+  const containerRef = useRef();
+  const tableRef = useRef();
+  const [tableShadows, setTableShadows] = useState({left: false, right: false});
+
+  useEffect(() => {
+    function onScroll() {
+      const container = containerRef.current.getBoundingClientRect();
+      const table = tableRef.current.getBoundingClientRect();
+  
+      const showLeftShadow = table.width > container.width && table.left < container.left;
+      const showRightShadow = table.width > container.width && table.right > container.right;
+  
+      if (tableShadows.left !== showLeftShadow || tableShadows.right !== showRightShadow) {
+        setTableShadows({left: showLeftShadow, right: showRightShadow});
+      }
+    }
+    function cleanup() {
+      containerRef.current.removeEventListener('scroll', onScroll);
+    }
+    containerRef.current.addEventListener('scroll', onScroll);
+    onScroll();
+    return cleanup;
+  });
+
+  // Compute total width of "row headers"
+  const rowHeaderWidth = React.Children.toArray(children).reduce((a, n) => {
+    a += n.props.isRowHeader ? n.props.width : 0;
+    return a;
+  }, 0);
+
   return (
-    <table className={styles.listView}>
-      {showHeaders ? (
-        <thead>
-          <tr>
-            <ListViewContext.Provider value={{
-              mode: TABLE_HEADER,
-              height: headerHeight,
-              fontSize: headerFontSize,
-              sort,
-              onChangeSort,
-            }}>
-              {children}
-            </ListViewContext.Provider>
-          </tr>
-        </thead>
-      ) : null}
-      <tbody>
-        {data.map(item => (
-          <tr key={keyTemplate(item)}>
-            <ListViewContext.Provider value={{
-              mode: TABLE_ROW,
-              height: rowHeight,
-              fontSize: fontSize,
-              item,
-            }}>
-              {children}
-            </ListViewContext.Provider>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div
+      ref={containerRef}
+      className={classnames(styles.listViewContainer, {
+        [styles.leftShadow]: tableShadows.left,
+        [styles.rightShadow]: tableShadows.right 
+      })}
+      style={{marginLeft: rowHeaderWidth}}
+    >
+      <table ref={tableRef} className={styles.listView}>
+        {showHeaders ? (
+          <thead>
+            <tr>
+              <ListViewContext.Provider value={{
+                mode: TABLE_HEADER,
+                height: headerHeight,
+                fontSize: headerFontSize,
+                rowHeaderWidth,
+                sort,
+                onChangeSort,
+              }}>
+                {children}
+              </ListViewContext.Provider>
+            </tr>
+          </thead>
+        ) : null}
+        <tbody>
+          {data.map(item => (
+            <tr key={keyTemplate(item)}>
+              <ListViewContext.Provider value={{
+                mode: TABLE_ROW,
+                height: rowHeight,
+                fontSize: fontSize,
+                rowHeaderWidth,
+                item,
+              }}>
+                {children}
+              </ListViewContext.Provider>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
@@ -86,6 +129,7 @@ export function ListViewColumn(props) {
     valueTemplate = null,
     onClick = null,
     disabled = item => false,
+    isRowHeader = false,
   
     width = 'auto',
     minWidth = 'auto',
@@ -96,9 +140,10 @@ export function ListViewColumn(props) {
     mode,
     height,
     fontSize,
+    rowHeaderWidth,
     item,
     sort,
-    onChangeSort
+    onChangeSort,
   } = useContext(ListViewContext);
   
   const headerClickable = Boolean(onChangeSort);
@@ -109,7 +154,11 @@ export function ListViewColumn(props) {
     const sortIndicator = sortRule && ['asc', 'desc'].indexOf(sortRule.direction) > -1 ?
       SORT_INDICATORS[sortRule.direction] : null;
     return (
-      <th key={id} style={{width, minWidth}}>
+      <th
+        key={id}
+        className={classnames({ [styles.listViewRowHeader]: isRowHeader })}
+        style={{width, minWidth, marginLeft: isRowHeader ? (-1 * rowHeaderWidth) : undefined}}
+      >
         <div
           onClick={headerClickable ? () => onChangeSort(id, valueTemplate || template) : null}
           className={classnames(styles.listViewHeader, { [styles.clickable]: headerClickable })}
@@ -121,15 +170,27 @@ export function ListViewColumn(props) {
       </th>
     );
   } else {
-    return (
+    const contents = (
+      <div
+        onClick={cellClickable ? () => onClick(item) : null}
+        className={classnames(styles.listViewCell, { [styles.clickable]: cellClickable })}
+        style={{height, fontSize, justifyContent: ALIGN_TO_JUSTIFY[align]}}
+      >
+        {Boolean(template) && template(item)}
+      </div>
+    );
+    return isRowHeader ? (
+      <th
+        scope="row"
+        key={id}
+        className={styles.listViewRowHeader}
+        style={{width, minWidth, marginLeft: -1 * rowHeaderWidth}}
+      >
+        {contents}
+      </th>
+    ) : (
       <td key={id} style={{width, minWidth}}>
-        <div
-          onClick={cellClickable ? () => onClick(item) : null}
-          className={classnames(styles.listViewCell, { [styles.clickable]: cellClickable })}
-          style={{height, fontSize, justifyContent: ALIGN_TO_JUSTIFY[align]}}
-        >
-          {Boolean(template) && template(item)}
-        </div>
+        {contents}
       </td>
     );
   }
@@ -156,7 +217,7 @@ export function ListViewClickableLink({ onClick, children }) {
 
 
 // Helper functions
-export function getDefaultSort(sortTemplate, sortDirection, nullsLast = true) {
+export function getDefaultSortFunction(sortTemplate, sortDirection, nullsLast = true) {
   return function(a, b) {
     // Short circuit and return initial order if sorting is toggled off
     if (sortDirection !== 'asc' && sortDirection !== 'desc') { return 1; }
@@ -185,8 +246,8 @@ export function getDefaultSort(sortTemplate, sortDirection, nullsLast = true) {
 
 export function getNextSortDirection(sortDirection) {
   return {
-    'asc': 'desc',
-    'desc': 'none',
-    'none': 'asc'
+    'desc': 'asc',
+    'asc': 'none',
+    'none': 'desc'
   }[sortDirection]
 };
