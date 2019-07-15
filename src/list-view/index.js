@@ -38,22 +38,22 @@ export default function ListView({
   const [tableShadows, setTableShadows] = useState({left: false, right: false});
 
   useEffect(() => {
-    function onScroll() {
+    function shadowHandler() {
       const container = containerRef.current.getBoundingClientRect();
       const table = tableRef.current.getBoundingClientRect();
-  
-      const showLeftShadow = table.width > container.width && table.left < container.left;
-      const showRightShadow = table.width > container.width && table.right > container.right;
-  
-      if (tableShadows.left !== showLeftShadow || tableShadows.right !== showRightShadow) {
-        setTableShadows({left: showLeftShadow, right: showRightShadow});
+      const leftShadow = table.left < container.left;
+      const rightShadow = table.right > container.right;
+      if (tableShadows.left !== leftShadow || tableShadows.right !== rightShadow) {
+        setTableShadows({left: leftShadow, right: rightShadow});
       }
     }
     function cleanup() {
-      containerRef.current.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', shadowHandler);
+      containerRef.current.removeEventListener('scroll', shadowHandler);
     }
-    containerRef.current.addEventListener('scroll', onScroll);
-    onScroll();
+    window.addEventListener('resize', shadowHandler);
+    containerRef.current.addEventListener('scroll', shadowHandler);
+    shadowHandler();
     return cleanup;
   });
 

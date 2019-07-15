@@ -157,6 +157,7 @@ storiesOf('ListView', module)
           id="Name"
           template={item => <span style={{fontWeight: 500}}>{item.name}</span>}
           valueTemplate={item => item.name}
+          isRowHeader={true}
           width={240}
         />
         <ListViewColumn
@@ -167,6 +168,36 @@ storiesOf('ListView', module)
         <ListViewColumnSpacer />
         <ListViewColumn
           id="Capacity"
+          template={item => item.capacity}
+          width={120}
+          align="right"
+        />
+        <ListViewColumn
+          id="Capacity2"
+          template={item => item.capacity}
+          width={120}
+          align="right"
+        />
+        <ListViewColumn
+          id="Capacity3"
+          template={item => item.capacity}
+          width={120}
+          align="right"
+        />
+        <ListViewColumn
+          id="Capacity4"
+          template={item => item.capacity}
+          width={120}
+          align="right"
+        />
+        <ListViewColumn
+          id="Capacity5"
+          template={item => item.capacity}
+          width={120}
+          align="right"
+        />
+        <ListViewColumn
+          id="Capacity6"
           template={item => item.capacity}
           width={120}
           align="right"
