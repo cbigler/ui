@@ -79,7 +79,7 @@ export default class TagInput extends Component {
           style={{display: dropdownOpen ? 'block' : 'none'}}
           onClick={e => this.setState({dropdownOpen: false})}
         />
-        <div className={styles.wrapper}>
+        <div className={classnames(styles.wrapper, {[styles.aboveBackdrop]: dropdownOpen})}>
           <InputBox
             type="text"
             placeholder={placeholder}

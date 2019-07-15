@@ -7,8 +7,8 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  z-index: 99999;
 }
+.wrapper.aboveBackdrop { z-index: 99999; }
 
 .tagWrapper {
   display: flex;
