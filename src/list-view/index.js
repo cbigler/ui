@@ -64,47 +64,49 @@ export default function ListView({
   }, 0);
 
   return (
-    <div
-      ref={containerRef}
-      className={classnames(styles.listViewContainer, {
-        [styles.leftShadow]: tableShadows.left,
-        [styles.rightShadow]: tableShadows.right 
-      })}
-      style={{marginLeft: rowHeaderWidth}}
-    >
-      <table ref={tableRef} className={styles.listView}>
-        {showHeaders ? (
-          <thead>
-            <tr>
-              <ListViewContext.Provider value={{
-                mode: TABLE_HEADER,
-                height: headerHeight,
-                fontSize: headerFontSize,
-                rowHeaderWidth,
-                sort,
-                onChangeSort,
-              }}>
-                {children}
-              </ListViewContext.Provider>
-            </tr>
-          </thead>
-        ) : null}
-        <tbody>
-          {data.map(item => (
-            <tr key={keyTemplate(item)}>
-              <ListViewContext.Provider value={{
-                mode: TABLE_ROW,
-                height: rowHeight,
-                fontSize: fontSize,
-                rowHeaderWidth,
-                item,
-              }}>
-                {children}
-              </ListViewContext.Provider>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className={styles.listView}>
+      <div
+        ref={containerRef}
+        className={classnames(styles.listViewContainer, {
+          [styles.leftShadow]: tableShadows.left,
+          [styles.rightShadow]: tableShadows.right 
+        })}
+        style={{marginLeft: rowHeaderWidth}}
+      >
+        <table ref={tableRef} className={styles.listViewTable}>
+          {showHeaders ? (
+            <thead>
+              <tr>
+                <ListViewContext.Provider value={{
+                  mode: TABLE_HEADER,
+                  height: headerHeight,
+                  fontSize: headerFontSize,
+                  rowHeaderWidth,
+                  sort,
+                  onChangeSort,
+                }}>
+                  {children}
+                </ListViewContext.Provider>
+              </tr>
+            </thead>
+          ) : null}
+          <tbody>
+            {data.map(item => (
+              <tr key={keyTemplate(item)}>
+                <ListViewContext.Provider value={{
+                  mode: TABLE_ROW,
+                  height: rowHeight,
+                  fontSize: fontSize,
+                  rowHeaderWidth,
+                  item,
+                }}>
+                  {children}
+                </ListViewContext.Provider>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
