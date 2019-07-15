@@ -100,3 +100,32 @@
 .datePickerFocused {
   border-color: #2C4EB9;
 }
+
+
+// Custom contexts
+.contextAnalyticsControlBar.datePicker {
+  padding: 0;
+  border-color: transparent;
+  &:focus, &.datePickerFocused {
+    border-color: $brandPrimary;
+  }
+}
+.contextAnalyticsControlBar.datePicker .datePickerIconLeft,
+.contextAnalyticsControlBar.datePicker .datePickerIconRight {
+  display: none;
+}
+.contextAnalyticsControlBar.datePicker :global(.SingleDatePickerInput) {
+  border-radius: $borderRadiusBase;
+}
+.contextAnalyticsControlBar.datePicker :global(.DateInput) {
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #0D183A;
+  padding-left: 12px;
+  padding-right: 32px;
+  margin-right: -32px;
+}
+.contextAnalyticsControlBar.datePicker :global(.SingleDatePicker__picker) {
+  left: 0 !important;
+}
