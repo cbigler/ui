@@ -247,6 +247,8 @@
   color: $inputFieldPlaceholderColor;
 }
 
+.invalid { border-color: $brandDanger; }
+
 
 // RULES FOR LIST_VIEW CONTEXT
 .contextListView.inputBoxSelectBoxValue {
@@ -277,4 +279,15 @@
   font-size: 16px;
 }
 
-.invalid { border-color: $brandDanger; }
+// RULES FOR ANALYTICS_CONTROL_BAR CONTEXT
+.contextAnalyticsControlBar.inputBoxSelectBoxValue {
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #0D183A;
+  background: none;
+  border: 1px solid transparent;
+}
+.contextAnalyticsControlBar.inputBoxSelectBoxValue.inputBoxSelectBoxValueOpened {
+  border: 1px solid $brandPrimary;
+}
