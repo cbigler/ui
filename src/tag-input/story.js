@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import moment from 'moment';
 
 import './styles.scss';
 import TagInput from './index';
+import DateRangePicker, { START_DATE_ACTIVE } from '../date-range-picker/index';
 import colorVariables from '../../variables/colors.json';
 
 
@@ -141,3 +143,36 @@ storiesOf('TagInput', module)
 
     return <Wrapper />;
   })
+  .add('Should not be on top of date picker when date picker is opened', () => (
+    <Fragment>
+      <p>
+        The date picker, when opened, should show over top of the tag input.
+      </p>
+      <DateRangePicker
+        focusedInput={START_DATE_ACTIVE}
+        startDate={moment.utc()}
+        endDate={moment.utc().subtract(1, 'day')}
+      />
+      <br/>
+      <TagInput
+        choices={[
+          // These are the choices that show up in the menu when the user types
+          { id: 123, label: 'foo' },
+          { id: 456, label: 'bar' },
+          { id: 789, label: 'baz' },
+          { id: 1, label: 'study: boston' },
+          { id: 2, label: 'study: nyc' },
+          { id: 3, label: 'study: grand forks' },
+        ]}
+        tags={[
+          { id: 123, label: 'foo' },
+          { id: 456, label: 'bar' },
+        ]}
+        placeholder="Start typing to add a tag"
+        emptyTagsPlaceholder="There are no tags added to this space yet"
+        onCreateNewTag={action('onCreateNewTag')}
+        onAddTag={tag => action('onAddTag')}
+        onRemoveTag={tag => action('onRemoveTag')}
+      />
+    </Fragment>
+  ))
