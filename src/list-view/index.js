@@ -25,6 +25,7 @@ export default function ListView({
   onClickHeader = null,
   onClickRow = null,
   keyTemplate = item => item.id || v4(),
+  scrollX = false,
   showHeaders = true,
   rowHeight = undefined,
   headerHeight = undefined,
@@ -40,12 +41,14 @@ export default function ListView({
 
   useEffect(() => {
     function shadowHandler() {
-      const container = containerRef.current.getBoundingClientRect();
-      const table = tableRef.current.getBoundingClientRect();
-      const leftShadow = table.left < container.left;
-      const rightShadow = table.right > container.right;
-      if (tableShadows.left !== leftShadow || tableShadows.right !== rightShadow) {
-        setTableShadows({left: leftShadow, right: rightShadow});
+      if (scrollX) {
+        const container = containerRef.current.getBoundingClientRect();
+        const table = tableRef.current.getBoundingClientRect();
+        const leftShadow = table.left < container.left;
+        const rightShadow = table.right > container.right;
+        if (tableShadows.left !== leftShadow || tableShadows.right !== rightShadow) {
+          setTableShadows({left: leftShadow, right: rightShadow});
+        }
       }
     }
     function cleanup() {
@@ -69,6 +72,7 @@ export default function ListView({
       <div
         ref={containerRef}
         className={classnames(styles.listViewContainer, {
+          [styles.scrollX]: scrollX,
           [styles.leftShadow]: tableShadows.left,
           [styles.rightShadow]: tableShadows.right 
         })}
@@ -118,16 +122,6 @@ export default function ListView({
   );
 }
 
-
-// type ListViewColumnProps = {
-//   id?: any,
-//   title?: any,
-//   template?: any,
-//   onClick?: (any) => any,
-//   disabled?: (any) => boolean,
-//   width?: string | number,
-//   minWidth?: string | number,
-// }
 
 export function ListViewColumn(props) {
 

@@ -7,7 +7,7 @@
   width: 100%;
 }
 
-.listViewContainer {
+.listViewContainer.scrollX {
   overflow-x: auto;
 
   // When the user scrolls to the edge of the card table, show a shadow to indicate that they can

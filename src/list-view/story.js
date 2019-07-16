@@ -21,7 +21,7 @@ const TEST_DATA = [
 ];
 
 storiesOf('ListView', module)
-  .add('With some data', () => (
+  .add('With some data and onClickRow handler', () => (
     <ListView
       showHeaders={true}
       onClickRow={item => alert(item.name)}
@@ -44,6 +44,7 @@ storiesOf('ListView', module)
     >
       <ListViewColumn
         id="Name"
+        isRowHeader={true}
         template={item => item.name}
         width={240}
       />
@@ -67,64 +68,7 @@ storiesOf('ListView', module)
       />
     </ListView>
   ), {info: {inline: false}})
-  .add('With row headers', () => (
-    <div style={{width: '100%', overflowX: 'scroll'}}>
-      <ListView
-        showHeaders={true}
-        data={TEST_DATA}
-      >
-        <ListViewColumn
-          id="Name"
-          template={item => item.name}
-          isRowHeader={true}
-          width={240}
-        />
-        <ListViewColumn
-          id="Function"
-          template={item => item.function}
-          width={160}
-        />
-        <ListViewColumnSpacer />
-        <ListViewColumn
-          id="Capacity1"
-          template={item => item.capacity}
-          width={120}
-          align="right"
-        />
-        <ListViewColumn
-          id="Capacity2"
-          template={item => item.capacity}
-          width={120}
-          align="right"
-        />
-        <ListViewColumn
-          id="Capacity3"
-          template={item => item.capacity}
-          width={120}
-          align="right"
-        />
-        <ListViewColumn
-          id="Capacity4"
-          template={item => item.capacity}
-          width={120}
-          align="right"
-        />
-        <ListViewColumn
-          id="Capacity5"
-          template={item => item.capacity}
-          width={120}
-          align="right"
-        />
-        <ListViewColumn
-          id="Visits"
-          template={item => item.visits}
-          width={120}
-          align="right"
-        />
-      </ListView>
-    </div>
-  ), {info: {inline: false}})
-  .add('With sorting', () => {
+  .add('With row headers, scrolling and sorting', () => {
     function ListViewTester() {
       const [state, setState] = useState({
         data: TEST_DATA,
@@ -137,19 +81,20 @@ storiesOf('ListView', module)
         rowHeight={40}
         fontSize={14}
         headerFontSize={12}
+        scrollX={true}
         data={state.sortedData}
         sort={[{
           column: state.sortColumn,
           direction: state.sortDirection
         }]}
-        onChangeSort={(sortColumn, sortTemplate) => {
-          const lastSortDirection = sortColumn === state.sortColumn ? state.sortDirection : 'none';
+        onClickHeader={(column, template) => {
+          const lastSortDirection = column === state.sortColumn ? state.sortDirection : 'none';
           const sortDirection = getNextSortDirection(lastSortDirection);
 
           setState({
             ...state,
-            sortedData: state.data.slice().sort(getDefaultSortFunction(sortTemplate, sortDirection)),
-            sortColumn,
+            sortedData: state.data.slice().sort(getDefaultSortFunction(template, sortDirection)),
+            sortColumn: column,
             sortDirection
           });
         }}
@@ -224,13 +169,13 @@ storiesOf('ListView', module)
       return <ListView
         data={state.sortedData}
         sort={state.sort}
-        onChangeSort={(sortColumn, sortTemplate) => {
+        onClickHeader={(column, template) => {
 
           // Mutate some state
-          const currentSortIndex = state.sort.findIndex(x => x.column === sortColumn);
+          const currentSortIndex = state.sort.findIndex(x => x.column === column);
           const currentSort = currentSortIndex > -1 ? state.sort.splice(currentSortIndex, 1)[0] : {
-            column: sortColumn,
-            template: sortTemplate,
+            column,
+            template,
             direction: 'none'
           };
           currentSort.direction = getNextSortDirection(currentSort.direction);
