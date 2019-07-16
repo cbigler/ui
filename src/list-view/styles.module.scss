@@ -67,6 +67,7 @@
 }
 .listViewTable :first-child > .listViewCell { padding-left: 0px; }
 .listViewTable :last-child > .listViewCell { padding-right: 0px; }
+.listViewTable > tbody > :last-child .listViewCell { border-bottom: none; }
 
 .listViewCell.clickable { cursor: pointer; }
 
