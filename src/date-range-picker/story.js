@@ -3,7 +3,12 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import './styles.scss';
-import DateRangePicker, { START_DATE_ACTIVE, END_DATE_ACTIVE, ANCHOR_RIGHT } from './index';
+import DateRangePicker, {
+  DateRangePickerContext,
+  START_DATE_ACTIVE,
+  END_DATE_ACTIVE,
+  ANCHOR_RIGHT,
+} from './index';
 
 import moment from 'moment';
 
@@ -199,3 +204,16 @@ storiesOf('DateRangePicker', module)
 
     return <Wrapper />;
   })
+  .add('With SMALL_WIDTH context', () => (
+    <DateRangePickerContext.Provider value="SMALL_WIDTH">
+      <DateRangePicker
+        onChange={action('dates change')}
+        onFocusChange={action('focus')}
+        focusedInput={START_DATE_ACTIVE}
+        startDate={moment.utc()}
+        endDate={moment.utc().subtract(1, 'day')}
+        commonRanges={commonRanges}
+        onSelectCommonRange={action('common range selected')}
+      />
+    </DateRangePickerContext.Provider>
+  ))
