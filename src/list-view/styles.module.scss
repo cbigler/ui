@@ -24,28 +24,34 @@
   width: 100%;
   border-collapse: collapse;
 }
+.listViewTable.fixedWidth { table-layout: fixed; }
+.listViewTable th, .listViewTable td { padding: 0; }
+.listViewTable th { font-weight: 500; }
 
-.listViewTable th, .listViewTable td {
-  padding: 0;
+.listViewTable tr,
+.listViewRowHeader > .listViewHeader,
+.listViewRowHeader > .listViewCell {
+  border-bottom: 1px solid $grayLight;
 }
+
 
 .listViewHeader {
   display: flex;
   align-items: center;
   height: 32px;
-  padding: 0 24px;
+  padding-right: 24px;
   font-size: 14px;
   font-weight: bold;
   white-space: nowrap;
-  border-bottom: 1px solid $grayLight;
 
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
-.listViewTable :first-child > .listViewHeader { padding-left: 0px; }
 .listViewTable :last-child > .listViewHeader { padding-right: 0px; }
+.listViewTable.padOuterColumns :first-child > .listViewHeader { padding-left: 24px; }
+.listViewTable.padOuterColumns :last-child > .listViewHeader { padding-right: 24px; }
 
 .listViewHeader.clickable { cursor: pointer; }
 
@@ -60,16 +66,22 @@
   display: flex;
   align-items: center;
   height: 56px;
-  padding: 0 24px;
+  padding-right: 24px;
   font-size: $fontSizeBase;
   color: $grayDarkest;
-  border-bottom: 1px solid $grayLight;
 }
-.listViewTable :first-child > .listViewCell { padding-left: 0px; }
+
 .listViewTable :last-child > .listViewCell { padding-right: 0px; }
-.listViewTable > tbody > :last-child .listViewCell { border-bottom: none; }
+.listViewTable.padOuterColumns :first-child > .listViewCell { padding-left: 24px; }
+.listViewTable.padOuterColumns :last-child > .listViewCell { padding-right: 24px; }
+
+.listViewTable > tbody > tr:last-child,
+.listViewTable > tbody > tr:last-child > .listViewRowHeader > .listViewCell {
+  border-bottom: none;
+}
 
 .listViewCell.clickable { cursor: pointer; }
+
 
 .listViewClickableLink {
   width: 100%;

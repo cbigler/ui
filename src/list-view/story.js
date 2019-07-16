@@ -44,8 +44,7 @@ storiesOf('ListView', module)
     >
       <ListViewColumn
         id="Name"
-        isRowHeader={true}
-        template={item => item.name}
+        template={item => <span style={{fontWeight: 500}}>{item.name}</span>}
         width={240}
       />
       <ListViewColumn
@@ -101,7 +100,7 @@ storiesOf('ListView', module)
       >
         <ListViewColumn
           id="Name"
-          template={item => <span style={{fontWeight: 500}}>{item.name}</span>}
+          template={item => item.name}
           valueTemplate={item => item.name}
           isRowHeader={true}
           width={240}
@@ -111,7 +110,6 @@ storiesOf('ListView', module)
           template={item => item.function}
           width={160}
         />
-        <ListViewColumnSpacer />
         <ListViewColumn
           id="Capacity"
           template={item => item.capacity}
@@ -158,7 +156,7 @@ storiesOf('ListView', module)
     }
     return <ListViewTester />;
   }, {info: {inline: false}})
-  .add('With multiple sorting', () => {
+  .add('With multiple sorting and padded outer columns', () => {
     function ListViewTester() {
       const [state, setState] = useState({
         data: TEST_DATA,
@@ -169,6 +167,7 @@ storiesOf('ListView', module)
       return <ListView
         data={state.sortedData}
         sort={state.sort}
+        padOuterColumns={true}
         onClickHeader={(column, template) => {
 
           // Mutate some state

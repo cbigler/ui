@@ -25,8 +25,12 @@ export default function ListView({
   onClickHeader = null,
   onClickRow = null,
   keyTemplate = item => item.id || v4(),
-  scrollX = false,
+
   showHeaders = true,
+  fixedWidth = true,
+  padOuterColumns = false,
+  scrollX = false,
+
   rowHeight = undefined,
   headerHeight = undefined,
   fontSize = undefined,
@@ -78,10 +82,16 @@ export default function ListView({
         })}
         style={{marginLeft: rowHeaderWidth}}
       >
-        <table ref={tableRef} className={styles.listViewTable}>
+        <table
+          ref={tableRef}
+          className={classnames(styles.listViewTable, {
+            [styles.fixedWidth]: fixedWidth,
+            [styles.padOuterColumns]: padOuterColumns
+          })}
+        >
           {showHeaders ? (
             <thead>
-              <tr>
+              <tr className={styles.listViewRow}>
                 <ListViewContext.Provider value={{
                   mode: TABLE_HEADER,
                   height: headerHeight,
