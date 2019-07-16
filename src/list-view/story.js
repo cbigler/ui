@@ -24,6 +24,7 @@ storiesOf('ListView', module)
   .add('With some data', () => (
     <ListView
       showHeaders={true}
+      onClickRow={item => alert(item.name)}
       data={TEST_DATA}
     >
       <ListViewColumn

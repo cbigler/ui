@@ -22,7 +22,8 @@ const ListViewContext = React.createContext({});
 export default function ListView({
   data = [],
   sort = [],
-  onChangeSort = null,
+  onClickHeader = null,
+  onClickRow = null,
   keyTemplate = item => item.id || v4(),
   showHeaders = true,
   rowHeight = undefined,
@@ -83,7 +84,7 @@ export default function ListView({
                   fontSize: headerFontSize,
                   rowHeaderWidth,
                   sort,
-                  onChangeSort,
+                  onClickHeader,
                 }}>
                   {children}
                 </ListViewContext.Provider>
@@ -92,7 +93,13 @@ export default function ListView({
           ) : null}
           <tbody>
             {data.map(item => (
-              <tr key={keyTemplate(item)}>
+              <tr
+                key={keyTemplate(item)}
+                className={classnames(styles.listViewRow, {
+                  [styles.clickable]: Boolean(onClickRow)
+                })}
+                onClick={onClickRow ? () => onClickRow(item) : null}
+              >
                 <ListViewContext.Provider value={{
                   mode: TABLE_ROW,
                   height: rowHeight,
@@ -145,10 +152,10 @@ export function ListViewColumn(props) {
     rowHeaderWidth,
     item,
     sort,
-    onChangeSort,
+    onClickHeader,
   } = useContext(ListViewContext);
   
-  const headerClickable = Boolean(onChangeSort);
+  const headerClickable = Boolean(onClickHeader);
   const cellClickable = item && !disabled(item) && Boolean(onClick);
   if (mode === TABLE_HEADER) {
     const sortRuleIndex = sort.findIndex(x => x.column === id);
@@ -162,7 +169,7 @@ export function ListViewColumn(props) {
         style={{width, minWidth, marginLeft: isRowHeader ? (-1 * rowHeaderWidth) : undefined}}
       >
         <div
-          onClick={headerClickable ? () => onChangeSort(id, valueTemplate || template) : null}
+          onClick={headerClickable ? () => onClickHeader(id, valueTemplate || template) : null}
           className={classnames(styles.listViewHeader, { [styles.clickable]: headerClickable })}
           style={{height, fontSize, justifyContent: ALIGN_TO_JUSTIFY[align]}}
         >
