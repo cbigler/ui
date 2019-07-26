@@ -31,7 +31,7 @@ function InputBoxRaw({leftIcon, forwardedRef, ...props}) {
   case 'textarea':
     return <textarea
       {...props}
-      style={{width: props.width. height: props.height}}
+      style={{width: props.width, height: props.height}}
       className={styles.inputBoxTextarea}
       ref={input}
     />;
