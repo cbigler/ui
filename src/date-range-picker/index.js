@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import classnames from 'classnames';
 import { DateRangePicker as ReactDatesDateRangePicker } from '@density/react-dates';
 import propTypes from 'prop-types';
@@ -14,12 +14,20 @@ export const ANCHOR_RIGHT = 'ANCHOR_RIGHT',
   START_DATE_ACTIVE = 'startDate',
   END_DATE_ACTIVE = 'endDate';
 
+export const DateRangePickerContext = React.createContext(null);
+
 // internal date range picker (via ReactDates)
 function ReactDateRangePicker(props) {
+  const context = useContext(DateRangePickerContext);
+
   const restProps = Object.assign({}, props);
   delete restProps.onChange;
   delete restProps.anchor;
   delete restProps.className;
+
+  if (context === 'SMALL_WIDTH') {
+    restProps.numberOfMonths = 1;
+  }
 
   return <div className={classnames(styles.dateRangePicker, {
     [styles.dateRangePickerAnchorLeft]: !props.anchor || props.anchor === ANCHOR_LEFT,
@@ -37,13 +45,15 @@ function ReactDateRangePicker(props) {
 // exposed component that renders both the date range picker and
 // common range list, and binds them together
 export default function DateRangePicker(props) {
+  const context = useContext(DateRangePickerContext);
+
   const commonRangeList = Array.isArray(props.commonRanges) ? (
     <div className={styles.dateRangePickerCommonRangeList}>
       <InputBox
         type="select"
         width={70 /* px */}
         listBoxWidth={200 /* px */}
-        anchor={props.anchor}
+        anchor={context === 'SMALL_WIDTH' ? ANCHOR_RIGHT : props.anchor}
         value={{
           id: 'icon',
           label: <Icons.Calendar width={14} height={14} color="dark" />,

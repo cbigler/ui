@@ -199,3 +199,35 @@ storiesOf('InputBox', module)
       <InputBox type="select" width={160} />
     </InputBoxContext.Provider>
   ))
+  .add('select box with ANALYTICS_CONTROL_BAR context', () => {
+    class Wrapper extends React.Component {
+      constructor(props) {
+        super(props);
+
+        const choices = [
+          {id: 0, label: "Foo"},
+          {id: 1, label: "Bar"},
+          {id: 2, label: "Disabled", disabled: true},
+          {id: 3, label: "Baz"},
+        ];
+
+        this.state = {
+          value: null,
+          choices,
+        };
+      }
+
+      render() {
+        return <InputBoxContext.Provider value="ANALYTICS_CONTROL_BAR">
+          <InputBox
+            type="select"
+            value={this.state.value}
+            choices={this.state.choices}
+            onChange={value => this.setState({value})}
+          />
+        </InputBoxContext.Provider>;
+      }
+    }
+
+    return <Wrapper />;
+  })

@@ -10,6 +10,7 @@ import styles from './styles.scss';
 const CONTEXT_CLASSES = {
   'LIST_VIEW': styles.contextListView,
   'NAVBAR_INLINE': styles.contextNavbarInline,
+  'ANALYTICS_CONTROL_BAR': styles.contextAnalyticsControlBar,
 };
 
 export const ANCHOR_RIGHT = 'ANCHOR_RIGHT',

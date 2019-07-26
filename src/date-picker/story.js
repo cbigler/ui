@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import './styles.scss';
-import DatePicker, { ANCHOR_LEFT, ANCHOR_RIGHT } from './index';
+import DatePicker, { DatePickerContext, ANCHOR_LEFT, ANCHOR_RIGHT } from './index';
 import { isInclusivelyBeforeDay } from '@density/react-dates';
 
 import moment from 'moment';
@@ -69,6 +69,30 @@ storiesOf('DatePicker', module)
           arrowRightDisabled={moment(this.state.date).date() >= moment.utc().date()}
           onFocusChange={e => this.setState({focus: e.focused})}
         />;
+      }
+    }
+
+    return <Wrapper />;
+  })
+  .add('With ANALYTICS_CONTROL_BAR context', () => {
+    class Wrapper extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { focus: false, date: moment.utc() };
+      }
+      render() {
+        return <DatePickerContext.Provider value="ANALYTICS_CONTROL_BAR">
+          <DatePicker
+            date={this.state.date}
+            onChange={date => {
+              action('date')(date);
+              this.setState({date});
+            }}
+            focused={this.state.focus}
+            arrowRightDisabled={moment(this.state.date).date() >= moment.utc().date()}
+            onFocusChange={e => this.setState({focus: e.focused})}
+          />
+        </DatePickerContext.Provider>;
       }
     }
 
