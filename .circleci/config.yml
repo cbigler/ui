@@ -130,4 +130,7 @@ workflows:
               only: trunk
 
       # Trunk is also built and deployed to https://ui-preview.density.rodeo
-      - build
+      - build:
+          filters:
+            branches:
+              only: trunk
