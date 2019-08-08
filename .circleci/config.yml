@@ -47,6 +47,44 @@ jobs:
             -H "Authorization: Bearer $GITHUB_MACHINE_USER_TOKEN" \
             https://api.github.com/repos/densityco/ui/statuses/${CIRCLE_SHA1}
 
+  build:
+    docker:
+      - image: circleci/node:10.7.0
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: "Print out versions"
+          command: |
+            echo "node -v = $(node -v)"
+            echo "npm -v = $(npm -v)"
+            echo "yarn --version = $(yarn --version)"
+
+      - restore_cache:
+          key: node_modules-{{checksum "./package.json"}}-v3
+      - run:
+          name: "Install dependencies"
+          command: |
+            echo "# Top level package"
+            npm i
+      - save_cache:
+          key: node_modules-{{checksum "./package.json"}}-v3
+          paths:
+            - "./node_modules"
+
+      - run:
+          name: "Build density ui storybook"
+          command: npm run build-storybook
+      - run:
+          name: "Push preview to the cloud"
+          command: |
+            echo "* Installing amazon's cli..."
+            sudo apt install -y python-pip python-dev
+            sudo pip install -U 'awscli>=1.15'
+
+            echo "* Copying to S3..."
+            aws s3 sync storybook-static/ s3://ui-preview.density.rodeo --region us-east-1
+
   publish:
     docker:
       - image: circleci/node:10.7.0
@@ -87,8 +125,9 @@ workflows:
 
       # Trunk is published to npm
       - publish:
-          requires:
-            - preview
           filters:
             branches:
               only: trunk
+
+      # Trunk is also built and deployed to https://ui-preview.density.rodeo
+      - build
