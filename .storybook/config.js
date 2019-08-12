@@ -2,21 +2,12 @@ import '!css-loader!normalize.css';
 import './styles.scss';
 import 'moment-timezone';
 
-import { configure, addDecorator } from '@storybook/react';
-
-import { withInfo } from '@storybook/addon-info';
-addDecorator(withInfo({
-	inline: true,
-	styles: styles => {
-		return {
-			...styles,
-			infoStory: {
-				paddingLeft: 40,
-				paddingRight: 40,
-			},
-		};
-	},
-}));
+import { configure, addParameters } from '@storybook/react';
+addParameters({
+  options: {
+    panelPosition: 'bottom',
+  },
+});
 
 // First story, serves as a "home page"
 import '../src/welcome.js';

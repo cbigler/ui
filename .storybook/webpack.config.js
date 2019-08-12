@@ -75,6 +75,17 @@ module.exports = {
           },
         },
       },
+
+      {
+        test: /story\.jsx?$/,
+        loaders: [
+          {
+            loader: require.resolve('@storybook/addon-storysource/loader'),
+            options: { parser: 'javascript' },
+          },
+        ],
+        enforce: 'pre',
+      },
     ],
   },
 };
