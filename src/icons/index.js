@@ -26,6 +26,14 @@ import Chat from './symbols/chat.js';
 import Check from './symbols/check.js';
 import CheckBox from './symbols/check-box.js';
 import CheckCircle from './symbols/check-circle.js';
+import ChevronDown from './symbols/chevron-down.js';
+import ChevronDownCircle from './symbols/chevron-down-circle.js';
+import ChevronLeft from './symbols/chevron-left.js';
+import ChevronLeftCircle from './symbols/chevron-left-circle.js';
+import ChevronRight from './symbols/chevron-right.js';
+import ChevronRightCircle from './symbols/chevron-right-circle.js';
+import ChevronUp from './symbols/chevron-up.js';
+import ChevronUpCircle from './symbols/chevron-up-circle.js';
 
 // A list of all density icons.
 const ICONS = {
@@ -58,9 +66,18 @@ const ICONS = {
   Chat: Chat,
 
   Check: Check,
-  CheckBox: CheckBox,
   CheckCircle: CheckCircle,
+  CheckBox: CheckBox,
+  CheckSquare: CheckBox,
 
+  ChevronDown: ChevronDown,
+  ChevronDownCircle: ChevronDownCircle,
+  ChevronLeft: ChevronLeft,
+  ChevronLeftCircle: ChevronLeftCircle,
+  ChevronRight: ChevronRight,
+  ChevronRightCircle: ChevronRightCircle,
+  ChevronUp: ChevronUp,
+  ChevronUpCircle: ChevronUpCircle,
 
   ImageUpload: ({color, width, height}) => <svg width={width || '18'} height={height || '18'} viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'>
     <g id='Page-1' fill='none' fillRule='evenodd'>
@@ -510,101 +527,6 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  ChevronDownCircle: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconChevronDownCircle" transform="rotate(90 10 9)">
-              <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
-              />
-              <path d="M18,10 C18,14.4182222 14.4183333,18 10,18 C5.58177778,18 2,14.4182222 2,10 C2,5.58166667 5.58177778,2 10,2 C14.4183333,2 18,5.58166667 18,10 L18,10 Z"
-              id="Stroke-1" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
-              />
-              <polyline id="Stroke-3" stroke={color} strokeWidth="1.5" strokeLinecap="square"
-              strokeLinejoin="round" points="9 7 12 10 9 13" />
-          </g>
-      </g>
-  </svg>,
-  ChevronDown: ({color, width, height}) => <svg width={width || "18"} height={height || "10"} viewBox="0 0 18 10" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconChevronDown" transform="translate(-1 -5)">
-              <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
-              />
-              <polyline id="icon-down" stroke={color} strokeWidth="1.5" strokeLinecap="square"
-              strokeLinejoin="round" transform="rotate(-180 10 10)" points="2 14 10 6 18 14"
-              />
-          </g>
-      </g>
-  </svg>,
-  ChevronUpCircle: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconChevronUpCircle" transform="rotate(-90 9 10)">
-              <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
-              />
-              <path d="M18,10 C18,14.4182222 14.4183333,18 10,18 C5.58177778,18 2,14.4182222 2,10 C2,5.58166667 5.58177778,2 10,2 C14.4183333,2 18,5.58166667 18,10 L18,10 Z"
-              id="Stroke-1" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
-              />
-              <polyline id="Stroke-3" stroke={color} strokeWidth="1.5" strokeLinecap="square"
-              strokeLinejoin="round" points="9 7 12 10 9 13" />
-          </g>
-      </g>
-  </svg>,
-  ChevronUp: ({color, width, height}) => <svg width={width || "18"} height={height || "10"} viewBox="0 0 18 10" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconChevronUp" transform="translate(-1 -5)">
-              <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
-              />
-              <polyline id="icon-up" stroke={color} strokeWidth="1.5" strokeLinecap="square"
-              strokeLinejoin="round" points="2 14 10 6 18 14" />
-          </g>
-      </g>
-  </svg>,
-  ChevronLeftCircle: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconChevronLeftCircle" transform="rotate(-180 9.5 9.5)">
-              <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
-              />
-              <path d="M18,10 C18,14.4182222 14.4183333,18 10,18 C5.58177778,18 2,14.4182222 2,10 C2,5.58166667 5.58177778,2 10,2 C14.4183333,2 18,5.58166667 18,10 L18,10 Z"
-              id="Stroke-1" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
-              />
-              <polyline id="Stroke-3" stroke={color} strokeWidth="1.5" strokeLinecap="square"
-              strokeLinejoin="round" points="9 7 12 10 9 13" />
-          </g>
-      </g>
-  </svg>,
-  ChevronLeft: ({color, width, height}) => <svg width={width || "10"} height={height || "18"} viewBox="0 0 10 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconChevronLeft" transform="translate(-5 -1)">
-              <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
-              />
-              <polyline id="icon-next-left-copy" stroke={color} strokeWidth="1.5" strokeLinecap="square"
-              strokeLinejoin="round" transform="rotate(-90 10 10)" points="2 14 10 6 18 14"
-              />
-          </g>
-      </g>
-  </svg>,
-  ChevronRightCircle: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconChevronRightCircle" transform="translate(-1 -1)">
-              <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
-              />
-              <path d="M18,10 C18,14.4182222 14.4183333,18 10,18 C5.58177778,18 2,14.4182222 2,10 C2,5.58166667 5.58177778,2 10,2 C14.4183333,2 18,5.58166667 18,10 L18,10 Z"
-              id="Stroke-1" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
-              />
-              <polyline id="Stroke-3" stroke={color} strokeWidth="1.5" strokeLinecap="square"
-              strokeLinejoin="round" points="9 7 12 10 9 13" />
-          </g>
-      </g>
-  </svg>,
-  ChevronRight: ({color, width, height}) => <svg width={width || "10"} height={height || "18"} viewBox="0 0 10 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconChevronRight" transform="translate(-5 -1)">
-              <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
-              />
-              <polyline id="icon-next-right" stroke={color} strokeWidth="1.5" strokeLinecap="square"
-              strokeLinejoin="round" transform="rotate(90 10 10)" points="2 14 10 6 18 14"
-              />
-          </g>
-      </g>
-  </svg>,
   No: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconNo" transform="translate(-1 -1)">
@@ -827,34 +749,6 @@ const ICONS = {
               />
               <polygon id="Stroke-4" points="14.0675567 13.0068966 7.04827586 5.98761569 5.98761569 7.04827586 13.0068966 14.0675567"
               />
-          </g>
-      </g>
-  </svg>,
-  Check: ({color, width, height}) => <svg width={width || "18"} height={height || "15"} viewBox="0 0 18 15" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconCheck" transform="translate(-1 -3)" fill={color} fillRule="nonzero">
-              <path d="M2,9.90864889 L0.939339828,10.9693091 L7.08957687,17.1195461 C7.40333178,17.433301 7.91939692,17.4075619 8.20037493,17.0641444 L18.7911358,4.11988108 L17.6301999,3.1700244 L7.5642289,15.4728778 L2,9.90864889 Z"
-              id="icon-check" />
-          </g>
-      </g>
-  </svg>,
-  CheckCircle: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconCheckCircle" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
-              <path d="M7.04827586,9.96002948 L5.98761569,11.0206897 L8.50415267,13.5372266 C8.8202354,13.8533094 9.34089039,13.8244728 9.62013437,13.4754178 L14.0610694,7.92424899 L12.8897662,6.98720642 L8.97229359,11.8840472 L7.04827586,9.96002948 Z"
-              id="Stroke-1" />
-              <path d="M17.3327586,10.0827586 C17.3327586,6.07863885 14.0868784,2.83275862 10.0827586,2.83275862 C6.07870998,2.83275862 2.83275862,6.07867883 2.83275862,10.0827586 C2.83275862,14.0867673 6.07874996,17.3327586 10.0827586,17.3327586 C14.0868384,17.3327586 17.3327586,14.0868073 17.3327586,10.0827586 Z M18.8327586,10.0827586 C18.8327586,14.9152312 14.9152688,18.8327586 10.0827586,18.8327586 C5.25032284,18.8327586 1.33275862,14.9151944 1.33275862,10.0827586 C1.33275862,5.25024849 5.25028607,1.33275862 10.0827586,1.33275862 C14.9153055,1.33275862 18.8327586,5.25021172 18.8327586,10.0827586 Z"
-              id="Stroke-2" />
-          </g>
-      </g>
-  </svg>,
-  CheckSquare: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconCheckSquare" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
-              <path d="M2,18.75 C1.58578644,18.75 1.25,18.4142136 1.25,18 L1.25,2 C1.25,1.58578644 1.58578644,1.25 2,1.25 L18,1.25 C18.4142136,1.25 18.75,1.58578644 18.75,2 L18.75,18 C18.75,18.4142136 18.4142136,18.75 18,18.75 L2,18.75 Z M2.75,17.25 L17.25,17.25 L17.25,2.75 L2.75,2.75 L2.75,17.25 Z"
-              id="Stroke-1" />
-              <path d="M6,8.93933983 L4.93933983,10 L8.46966991,13.5303301 C8.78152063,13.8421808 9.29382959,13.8189419 9.57616596,13.4801383 L15.0563043,6.90397234 L13.9039723,5.94369574 L8.94960124,11.8889411 L6,8.93933983 Z"
-              id="Stroke-3" />
           </g>
       </g>
   </svg>,
