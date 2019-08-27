@@ -34,6 +34,9 @@ import ChevronRight from './symbols/chevron-right.js';
 import ChevronRightCircle from './symbols/chevron-right-circle.js';
 import ChevronUp from './symbols/chevron-up.js';
 import ChevronUpCircle from './symbols/chevron-up-circle.js';
+import Clock from './symbols/clock.js';
+import ClockReset from './symbols/clock-reset.js';
+import ClockTimer from './symbols/clock-timer.js';
 
 // A list of all density icons.
 const ICONS = {
@@ -66,9 +69,9 @@ const ICONS = {
   Chat: Chat,
 
   Check: Check,
-  CheckCircle: CheckCircle,
   CheckBox: CheckBox,
   CheckSquare: CheckBox,
+  CheckCircle: CheckCircle,
 
   ChevronDown: ChevronDown,
   ChevronDownCircle: ChevronDownCircle,
@@ -78,6 +81,12 @@ const ICONS = {
   ChevronRightCircle: ChevronRightCircle,
   ChevronUp: ChevronUp,
   ChevronUpCircle: ChevronUpCircle,
+
+  Clock: Clock,
+  ClockReset: ClockReset,
+  Reset: ClockReset,
+  ClockTimer: ClockTimer,
+  StopWatch: ClockTimer,
 
   ImageUpload: ({color, width, height}) => <svg width={width || '18'} height={height || '18'} viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'>
     <g id='Page-1' fill='none' fillRule='evenodd'>
@@ -150,20 +159,6 @@ const ICONS = {
               strokeLinecap='square' strokeLinejoin='round' />
           </g>
       </g>
-  </svg>,
-  StopWatch: ({color, width, height}) => <svg width={width || '16'} height={height || '18'} viewBox="0 0 16 18" version="1.1" xmlns="http://www.w3.org/2000/svg">
-    <g id="1.0" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-        <g id="icons" transform="translate(-435.000000, -363.000000)">
-            <g id="IconStopWatch" transform="translate(433.000000, 362.000000)">
-                <rect id="bounds" fillOpacity="0" fill="#E3E3E6" x="0" y="0" width="20" height="20"></rect>
-                <path d="M17,11 C17,14.866 13.866,18 10,18 C6.134,18 3,14.866 3,11 C3,7.134 6.134,4 10,4 C13.866,4 17,7.134 17,11 L17,11 Z" id="Stroke-1" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-                <path d="M10,2 L10,4" id="Stroke-3" stroke={color} strokeWidth="1.5" strokeLinejoin="round"></path>
-                <path d="M16.3639667,4.63603333 L14.9497444,6.05025556" id="Stroke-5" stroke={color} strokeWidth="1.5" strokeLinejoin="round"></path>
-                <path d="M12,2 L8,2" id="Stroke-7" stroke={color} strokeWidth="1.5" strokeLinejoin="round"></path>
-                <polyline id="Stroke-9" stroke={color} strokeWidth="1.5" strokeLinejoin="round" points="6 11 10 11 10 7"></polyline>
-            </g>
-        </g>
-    </g>
   </svg>,
   Gym: ({color, width, height}) => <svg width={width || "18"} height={height || "12"} viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
@@ -369,19 +364,6 @@ const ICONS = {
                   <path d="M9.04597778,0.106833333 C10.8553111,0.3325 12.4769778,1.16227778 13.7027556,2.38805556 C14.9285333,3.61383333 15.7584222,5.23561111 15.9840889,7.04494444"
                   id="Stroke-7" />
               </g>
-          </g>
-      </g>
-  </svg>,
-  Clock: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconClock" transform="translate(-1 -1)">
-              <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
-              />
-              <path d="M18,10 C18,14.4182222 14.4183333,18 10,18 C5.58177778,18 2,14.4182222 2,10 C2,5.58166667 5.58177778,2 10,2 C14.4183333,2 18,5.58166667 18,10 Z"
-              id="Stroke-1" stroke={color} strokeWidth="1.5" strokeLinejoin="round"
-              />
-              <polyline id="Stroke-3" stroke={color} strokeWidth="1.5" strokeLinejoin="round"
-              points="10 6 10 10 14 10" />
           </g>
       </g>
   </svg>,
