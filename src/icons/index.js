@@ -37,6 +37,9 @@ import ChevronUpCircle from './symbols/chevron-up-circle.js';
 import Clock from './symbols/clock.js';
 import ClockReset from './symbols/clock-reset.js';
 import ClockTimer from './symbols/clock-timer.js';
+import Close from './symbols/close.js';
+import CloseBox from './symbols/close-box.js';
+import CloseCircle from './symbols/close-circle.js';
 
 // A list of all density icons.
 const ICONS = {
@@ -87,6 +90,11 @@ const ICONS = {
   Reset: ClockReset,
   ClockTimer: ClockTimer,
   StopWatch: ClockTimer,
+
+  Close: Close,
+  CloseBox: CloseBox,
+  CloseSquare: CloseBox,
+  CloseCircle: CloseCircle,
 
   ImageUpload: ({color, width, height}) => <svg width={width || '18'} height={height || '18'} viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'>
     <g id='Page-1' fill='none' fillRule='evenodd'>
@@ -697,40 +705,6 @@ const ICONS = {
               />
               <path d="M17.2224138,10.0275862 C17.2224138,6.0539377 14.0012347,2.83275862 10.0275862,2.83275862 C6.05400832,2.83275862 2.83275862,6.05397742 2.83275862,10.0275862 C2.83275862,14.0011244 6.05404805,17.2224138 10.0275862,17.2224138 C14.001195,17.2224138 17.2224138,14.0011641 17.2224138,10.0275862 Z M18.7224138,10.0275862 C18.7224138,14.829588 14.8296253,18.7224138 10.0275862,18.7224138 C5.22562092,18.7224138 1.33275862,14.8295515 1.33275862,10.0275862 C1.33275862,5.22554707 5.22558442,1.33275862 10.0275862,1.33275862 C14.8296618,1.33275862 18.7224138,5.22551058 18.7224138,10.0275862 Z"
               id="Stroke-3" />
-          </g>
-      </g>
-  </svg>,
-  Close: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconClose" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
-              <polygon id="Stroke-1" points="2.58884595 18.4785453 18.4785011 2.58889009 17.4178409 1.52822991 1.52818578 17.4178851"
-              />
-              <polygon id="Stroke-3" points="18.4785011 17.4178851 2.58884595 1.52822991 1.52818578 2.58889009 17.4178409 18.4785453"
-              />
-          </g>
-      </g>
-  </svg>,
-  CloseCircle: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconCloseCircle" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
-              <polygon id="Stroke-1" points="8.04137931 13.0744533 13.0744533 8.04137931 12.0137931 6.98071914 6.98071914 12.0137931"
-              />
-              <polygon id="Stroke-2" points="13.0744533 12.0137931 8.04137931 6.98071914 6.98071914 8.04137931 12.0137931 13.0744533"
-              />
-              <path d="M17.2224138,10.0275862 C17.2224138,6.0539377 14.0012347,2.83275862 10.0275862,2.83275862 C6.05400832,2.83275862 2.83275862,6.05397742 2.83275862,10.0275862 C2.83275862,14.0011244 6.05404805,17.2224138 10.0275862,17.2224138 C14.001195,17.2224138 17.2224138,14.0011641 17.2224138,10.0275862 Z M18.7224138,10.0275862 C18.7224138,14.829588 14.8296253,18.7224138 10.0275862,18.7224138 C5.22562092,18.7224138 1.33275862,14.8295515 1.33275862,10.0275862 C1.33275862,5.22554707 5.22558442,1.33275862 10.0275862,1.33275862 C14.8296618,1.33275862 18.7224138,5.22551058 18.7224138,10.0275862 Z"
-              id="Stroke-3" />
-          </g>
-      </g>
-  </svg>,
-  CloseSquare: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconCloseSquare" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
-              <path d="M2.08275862,18.7224138 C1.66854506,18.7224138 1.33275862,18.3866274 1.33275862,17.9724138 L1.33275862,2.08275862 C1.33275862,1.66854506 1.66854506,1.33275862 2.08275862,1.33275862 L17.9724138,1.33275862 C18.3866274,1.33275862 18.7224138,1.66854506 18.7224138,2.08275862 L18.7224138,17.9724138 C18.7224138,18.3866274 18.3866274,18.7224138 17.9724138,18.7224138 L2.08275862,18.7224138 Z M2.83275862,17.2224138 L17.2224138,17.2224138 L17.2224138,2.83275862 L2.83275862,2.83275862 L2.83275862,17.2224138 Z"
-              id="Stroke-1" />
-              <polygon id="Stroke-3" points="7.04827586 14.0675567 14.0675567 7.04827586 13.0068966 5.98761569 5.98761569 13.0068966"
-              />
-              <polygon id="Stroke-4" points="14.0675567 13.0068966 7.04827586 5.98761569 5.98761569 7.04827586 13.0068966 14.0675567"
-              />
           </g>
       </g>
   </svg>,
