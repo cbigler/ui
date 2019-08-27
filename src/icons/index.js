@@ -79,11 +79,18 @@ import LinkLinked from './symbols/link-linked.js';
 import List from './symbols/list.js';
 import Listening from './symbols/listening.js';
 import Message from './symbols/message.js';
+import Minus from './symbols/minus.js';
+import MinusCircle from './symbols/minus-circle.js';
+import Money from './symbols/money.js';
+import More from './symbols/more.js';
+import Move from './symbols/move.js';
+import Notification from './symbols/notification.js';
+import Paintbrush from './symbols/paintbrush.js';
+import Parking from './symbols/parking.js';
 
 // A list of all density icons.
 const ICONS = {
   Alert: Alert,
-  Notification: Alert,
 
   ArrowDown: ArrowDown,
   ArrowDownLeft: ArrowDownLeft,
@@ -187,6 +194,14 @@ const ICONS = {
   Listening: Listening,
 
   Message: Message,
+  Minus: Minus,
+  MinusCircle: MinusCircle,
+  Money: Money,
+  More: More,
+  Move: Move,
+  Notification: Notification,
+  Paintbrush: Paintbrush,
+  Parking: Parking,
 
   L: ({color, width, height}) => <svg width={width || '6'} height={height || '8'} viewBox='0 0 6 8' xmlns='http://www.w3.org/2000/svg'>
     <g id='1' fill='none' fillRule='evenodd'>
@@ -285,19 +300,6 @@ const ICONS = {
               id="Stroke-1" />
               <path d="M8.75,4 C8.75,3.30965801 9.30965801,2.75 10,2.75 C10.690342,2.75 11.25,3.30965801 11.25,4 L12.75,4 C12.75,2.48123088 11.5187691,1.25 10,1.25 C8.48123088,1.25 7.25,2.48123088 7.25,4 L8.75,4 Z"
               id="Stroke-3" />
-          </g>
-      </g>
-  </svg>,
-  Money: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconMoney" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
-              <path d="M2.75,10 C2.75,14.0040087 5.99599134,17.25 10,17.25 C14.0040798,17.25 17.25,14.0040486 17.25,10 C17.25,5.99588023 14.0041198,2.75 10,2.75 C5.99595135,2.75 2.75,5.99592021 2.75,10 Z M1.25,10 C1.25,5.16748987 5.16752745,1.25 10,1.25 C14.8325469,1.25 18.75,5.1674531 18.75,10 C18.75,14.8324725 14.8325101,18.75 10,18.75 C5.16756422,18.75 1.25,14.8324358 1.25,10 Z"
-              id="Stroke-1" />
-              <path d="M13.1500111,8 C13.1500111,6.44790798 11.7125123,5.25 10.0000111,5.25 C8.28750988,5.25 6.85001111,6.44790798 6.85001111,8 C6.85001111,9.55209202 8.28750988,10.75 10.0000111,10.75 L10.0000111,9.25 C9.06160811,9.25 8.35001111,8.6570063 8.35001111,8 C8.35001111,7.3429937 9.06160811,6.75 10.0000111,6.75 C10.9384141,6.75 11.6500111,7.3429937 11.6500111,8 L13.1500111,8 Z"
-              id="Stroke-3" />
-              <path d="M6.84998889,12 C6.84998889,13.552092 8.28748765,14.75 9.99998889,14.75 C11.7124901,14.75 13.1499889,13.552092 13.1499889,12 C13.1499889,10.447908 11.7124901,9.25 9.99998889,9.25 L9.99998889,10.75 C10.9383919,10.75 11.6499889,11.3429937 11.6499889,12 C11.6499889,12.6570063 10.9383919,13.25 9.99998889,13.25 C9.06158589,13.25 8.34998889,12.6570063 8.34998889,12 L6.84998889,12 Z"
-              id="Stroke-5" />
-              <polygon id="Stroke-7" points="9.25 4 9.25 16 10.75 16 10.75 4" />
           </g>
       </g>
   </svg>,
@@ -578,14 +580,6 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  Minus: ({color, width, height}) => <svg width={width || "18"} height={height || "2"} viewBox="0 0 18 2" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconMinus" transform="translate(-1 -9)" fill={color} fillRule="nonzero">
-              <polygon id="Stroke-3" points="18.75 9.25 1.25 9.25 1.25 10.75 18.75 10.75"
-              />
-          </g>
-      </g>
-  </svg>,
   Switch: ({color, width, height}) => <svg width={width || "16"} height={height || "16"} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconSwitch" transform="translate(-2 -2)" fill={color}>
@@ -608,16 +602,6 @@ const ICONS = {
               <polygon id="Stroke-3" points="18.75 9.25 1.25 9.25 1.25 10.75 18.75 10.75"
               />
               <polygon id="Stroke-3" points="9.25 1.25 9.25 18.75 10.75 18.75 10.75 1.25"
-              />
-          </g>
-      </g>
-  </svg>,
-  MinusCircle: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconMinusCircle" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
-              <path d="M17.25,10 C17.25,5.99588023 14.0041198,2.75 10,2.75 C5.99595135,2.75 2.75,5.99592021 2.75,10 C2.75,14.0040087 5.99599134,17.25 10,17.25 C14.0040798,17.25 17.25,14.0040486 17.25,10 Z M18.75,10 C18.75,14.8324725 14.8325101,18.75 10,18.75 C5.16756422,18.75 1.25,14.8324358 1.25,10 C1.25,5.16748987 5.16752745,1.25 10,1.25 C14.8325469,1.25 18.75,5.1674531 18.75,10 Z"
-              id="Stroke-1" />
-              <polygon id="Stroke-3" points="13.75 9.25 6.25 9.25 6.25 10.75 13.75 10.75"
               />
           </g>
       </g>
