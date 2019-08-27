@@ -17,6 +17,7 @@ import BookmarkFill from './symbols/bookmark-fill.js';
 import BookmarkOutline from './symbols/bookmark-outline.js';
 import CalendarDetail from './symbols/calendar-detail.js';
 import CalendarSimple from './symbols/calendar-simple.js';
+import Camera from './symbols/camera.js';
 
 // A list of all density icons.
 const ICONS = {
@@ -38,6 +39,8 @@ const ICONS = {
   CalendarDetail: CalendarDetail,
   CalendarSimple: CalendarSimple,
   Calendar: CalendarDetail,
+
+  Camera: Camera,
 
   ImageUpload: ({color, width, height}) => <svg width={width || '18'} height={height || '18'} viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'>
     <g id='Page-1' fill='none' fillRule='evenodd'>

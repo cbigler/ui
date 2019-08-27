@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const ArrowDownLeft = ({ width, height, color }) => (
   <svg width={width || 24} height={height || 24} viewBox="0 0 24 24">
