@@ -48,6 +48,20 @@ import Control1 from './symbols/control-1.js';
 import Control2 from './symbols/control-2.js';
 import Copy from './symbols/copy.js';
 import Danger from './symbols/danger.js';
+import Dashboard from './symbols/dashboard.js';
+import DashboardAdd from './symbols/dashboard-add.js';
+import DoNotEnter from './symbols/do-not-enter.js';
+import Door from './symbols/door.js';
+import Dot from './symbols/dot.js';
+import Download from './symbols/download.js';
+import Ebook from './symbols/ebook.js';
+import EgressDown from './symbols/egress-down.js';
+import EgressLeft from './symbols/egress-left.js';
+import Filter from './symbols/filter.js';
+
+
+import IngressRight from './symbols/ingress-right.js';
+import IngressUp from './symbols/ingress-up.js';
 
 // A list of all density icons.
 const ICONS = {
@@ -112,6 +126,23 @@ const ICONS = {
   Control2: Control2,
   Copy: Copy,
   Danger: Danger,
+
+  Dashboard: Dashboard,
+  DashboardAdd: DashboardAdd,
+  DoNotEnter: DoNotEnter,
+  Door: Door,
+  Doorway: Door,
+  Dot: Dot,
+  Download: Download,
+  Ebook: Ebook,
+
+  EgressDown: EgressDown,
+  EgressLeft: EgressLeft,
+  Filter: Filter,
+
+
+  IngressRight: IngressRight,
+  IngressUp: IngressUp,
 
   ImageUpload: ({color, width, height}) => <svg width={width || '18'} height={height || '18'} viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'>
     <g id='Page-1' fill='none' fillRule='evenodd'>
@@ -341,18 +372,6 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  Download: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconDownload" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
-              <path d="M17.25,4.75 L17.25,17.25 L2.75,17.25 L2.75,4.75 L7.75011111,4.75 L7.75011111,3.25 L2,3.25 C1.58578644,3.25 1.25,3.58578644 1.25,4 L1.25,18 C1.25,18.4142136 1.58578644,18.75 2,18.75 L18,18.75 C18.4142136,18.75 18.75,18.4142136 18.75,18 L18.75,4 C18.75,3.58578644 18.4142136,3.25 18,3.25 L12.25,3.25 L12.25,4.75 L17.25,4.75 Z"
-              id="Stroke-1" />
-              <path d="M7,9.93933983 L5.93933983,11 L9.46966991,14.5303301 C9.76256313,14.8232233 10.2374369,14.8232233 10.5303301,14.5303301 L14.0606602,11 L13,9.93933983 L10,12.9393398 L7,9.93933983 Z"
-              id="Stroke-3" />
-              <polygon id="Stroke-4" points="10.75 13.75 10.75 1.25 9.25 1.25 9.25 13.75"
-              />
-          </g>
-      </g>
-  </svg>,
   Export: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconExport" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
@@ -577,15 +596,6 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  Doorway: ({color, width, height}) => <svg width={width || "16"} height={height || "16"} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-    <g id="Page-1" fill="none" fillRule="evenodd">
-        <g id="IconDoorway" transform="translate(-2 -2)" fill={color}>
-            <rect id="Rectangle-6" x="2" y="17" width="16" height="1" />
-            <path d="M5,2 L15,2 L15,18 L5,18 L5,2 Z M8,11 C8.55228475,11 9,10.5522847 9,10 C9,9.44771525 8.55228475,9 8,9 C7.44771525,9 7,9.44771525 7,10 C7,10.5522847 7.44771525,11 8,11 Z"
-            id="Combined-Shape" />
-        </g>
-    </g>
-  </svg>,
   Link: ({color, width, height}) => <svg width={width || "18"} height={height || "8"} viewBox="0 0 18 8" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconLink" transform="translate(-1 -6)" fill={color} fillRule="nonzero">
@@ -626,19 +636,6 @@ const ICONS = {
                   id="Stroke-5" />
                   <polygon id="Path-7" points="4.25 6 4.25 13 5.75 13 5.75 6" />
                   <polygon id="Path-7-Copy" points="8.25 6 8.25 13 9.75 13 9.75 6" />
-              </g>
-          </g>
-      </g>
-  </svg>,
-  Download: ({color, width, height}) => <svg width={width || "14"} height={height || "17"} viewBox="0 0 14 17" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconDownload" transform="rotate(-180 8.5 9)" fill={color} fillRule="nonzero">
-              <g id="Group-5" transform="translate(3 1)">
-                  <polygon id="Stroke-1" points="7.75 17 7.75 5 6.25 5 6.25 17" />
-                  <polygon id="Stroke-1" points="14 0.25 4.75809868e-17 0.25 -4.75809868e-17 1.75 14 1.75"
-                  />
-                  <path d="M12,11.0606602 L13.0606602,10 L7.53033009,4.46966991 C7.23743687,4.1767767 6.76256313,4.1767767 6.46966991,4.46966991 L0.939339828,10 L2,11.0606602 L7,6.06066017 L12,11.0606602 Z"
-                  id="Stroke-3" />
               </g>
           </g>
       </g>
@@ -1037,25 +1034,6 @@ const ICONS = {
             </g>
         </g>
     </g>
-  </svg>,
-  Reset: ({color, width, height}) => <svg width={width || 18} height={height || 18} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Admin:-Locations-(release)" fill="none" fillRule="evenodd">
-          <g id="org.locations.level.edit" transform="translate(-322 -1697)">
-              <g id="operating-hours" transform="translate(297 1484)">
-                  <g id="segment" transform="translate(1 130)">
-                      <g id="time-slider" transform="translate(23 82)">
-                          <g id="time">
-                              <g id="icon-/-reset-time">
-                                  <rect id="bounds" width="20" height="20" />
-                                  <path d="M4.41662486,6.35416667 L7.1875,6.35416667 L7.1875,8.02083333 L1.66666667,8.02083333 L1.66666667,2.5 L3.33333333,2.5 L3.33333333,4.99753639 C4.87471765,2.9448891 7.31865052,1.66664583 10.0000104,1.66664583 C14.602331,1.66664583 18.3333437,5.39765854 18.3333437,9.99997917 L16.6666771,9.99997917 C16.6666771,6.31813312 13.6818565,3.3333125 10.0000104,3.3333125 C7.70362663,3.3333125 5.62498766,4.50504625 4.41662486,6.35416667 Z M16.6666667,10 L18.3333333,10 C18.3333333,11.5096931 17.9305537,12.9624562 17.1784472,14.2348686 C15.6893531,16.754115 12.9812401,18.3333333 10,18.3333333 C6.28459175,18.3333333 3.04888305,15.8804893 2.00902252,12.3709699 C1.78278145,11.6074084 1.66666667,10.811017 1.66666667,10 L3.33333333,10 C3.33333333,10.6502837 3.42620039,11.287227 3.60701901,11.8974881 C4.43857584,14.7039845 7.02767963,16.6666667 10,16.6666667 C12.3858002,16.6666667 14.5514769,15.4037665 15.7436815,13.3867971 C16.3449966,12.3694934 16.6666667,11.2092797 16.6666667,10 Z M13.75,10.8333333 L10.8333333,10.8333333 L10.8333333,14.6875 L9.16666667,14.6875 L9.16666667,9.16666667 L13.75,9.16666667 L13.75,10.8333333 Z"
-                                  id="Combined-Shape" fill={color} fillRule="nonzero" />
-                              </g>
-                          </g>
-                      </g>
-                  </g>
-              </g>
-          </g>
-      </g>
   </svg>,
   Report: ({color, width, height}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
     <g id="Dashboards-(release)" fill="none" fillRule="evenodd">
