@@ -116,6 +116,14 @@ import Share from './symbols/share.js';
 import SoundOff from './symbols/sound-off.js';
 import SoundOn from './symbols/sound-on.js';
 import SpaceAdd from './symbols/space-add.js';
+import StairsDown from './symbols/stairs-down.js';
+import StairsUp from './symbols/stairs-up.js';
+import SwapHorizontal from './symbols/swap-horizontal.js';
+import SwapVertical from './symbols/swap-vertical.js';
+import Trash from './symbols/trash.js';
+import Tray from './symbols/tray.js';
+import Upload from './symbols/upload.js';
+import Video from './symbols/video.js';
 
 // A list of all density icons.
 const ICONS = {
@@ -274,8 +282,17 @@ const ICONS = {
   Share: Share,
   SoundOff: SoundOff,
   SoundOn: SoundOn,
-
   SpaceAdd: SpaceAdd,
+
+  StairsDown: StairsDown,
+  StairsUp: StairsUp,
+  SwapHorizontal: SwapHorizontal,
+  SwapVertical: SwapVertical,
+
+  Trash: Trash,
+  Tray: Tray,
+  Upload: Upload,
+  Video: Video,
 
   L: ({color, width, height}) => <svg width={width || '6'} height={height || '8'} viewBox='0 0 6 8' xmlns='http://www.w3.org/2000/svg'>
     <g id='1' fill='none' fillRule='evenodd'>
@@ -581,20 +598,6 @@ const ICONS = {
               <path d="M10,14 L10,13.9219" id="Stroke-5" stroke={color} strokeWidth="1.5"
               strokeLinecap="square" strokeLinejoin="round" transform="rotate(-180 10 13.96)"
               />
-          </g>
-      </g>
-  </svg>,
-  Trash: ({color, width, height}) => <svg width={width || "16"} height={height || "18"} viewBox="0 0 16 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconTrash" transform="translate(-2 -1)" fill={color} fillRule="nonzero">
-              <g id="Group-2" transform="translate(3 2)">
-                  <path d="M-0.737560885,3.53491602 C-0.822569826,3.07399092 -0.468698699,2.64888683 0,2.64888683 L13.7142857,2.64888683 C14.1829844,2.64888683 14.5368555,3.07399092 14.4518466,3.53491602 L12.1661323,15.928237 C12.100521,16.2839869 11.7903211,16.5422078 11.4285714,16.5422078 L2.28571429,16.5422078 C1.92396459,16.5422078 1.61376476,16.2839869 1.5481534,15.928237 L-0.737560885,3.53491602 Z M0.900972257,4.14888683 L2.91003984,15.0422078 L10.8042459,15.0422078 L12.8133135,4.14888683 L0.900972257,4.14888683 Z"
-                  id="Stroke-1" />
-                  <path d="M9.89285714,3.39888683 C9.89285714,3.81310039 9.55707071,4.14888683 9.14285714,4.14888683 L4.57142857,4.14888683 C4.15721501,4.14888683 3.82142857,3.81310039 3.82142857,3.39888683 L3.82142857,-1.11022302e-16 C3.82142857,-0.414213562 4.15721501,-0.75 4.57142857,-0.75 L9.14285714,-0.75 C9.55707071,-0.75 9.89285714,-0.414213562 9.89285714,7.77156117e-16 L9.89285714,3.39888683 Z M8.39285714,2.64888683 L8.39285714,0.75 L5.32142857,0.75 L5.32142857,2.64888683 L8.39285714,2.64888683 Z"
-                  id="Stroke-5" />
-                  <polygon id="Path-7" points="4.25 6 4.25 13 5.75 13 5.75 6" />
-                  <polygon id="Path-7-Copy" points="8.25 6 8.25 13 9.75 13 9.75 6" />
-              </g>
           </g>
       </g>
   </svg>,
