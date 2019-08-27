@@ -58,10 +58,17 @@ import Ebook from './symbols/ebook.js';
 import EgressDown from './symbols/egress-down.js';
 import EgressLeft from './symbols/egress-left.js';
 import Filter from './symbols/filter.js';
+import FoodUtensils from './symbols/food-utensils.js';
+import Globe from './symbols/globe.js';
+import Health from './symbols/health.js';
+import Heart from './symbols/heart.js';
+import Help from './symbols/help.js';
 
 
 import IngressRight from './symbols/ingress-right.js';
 import IngressUp from './symbols/ingress-up.js';
+import ImageUpload from './symbols/image-upload.js';
+import Info from './symbols/info.js';
 
 // A list of all density icons.
 const ICONS = {
@@ -138,28 +145,20 @@ const ICONS = {
 
   EgressDown: EgressDown,
   EgressLeft: EgressLeft,
-  Filter: Filter,
 
+  Filter: Filter,
+  FoodUtensils: FoodUtensils,
+  Globe: Globe,
+  Health: Health,
+  Heartbeat: Health,
+  Heart: Heart,
+  Help: Help,
+  ImageUpload: ImageUpload,
+  Info: Info,
 
   IngressRight: IngressRight,
   IngressUp: IngressUp,
 
-  ImageUpload: ({color, width, height}) => <svg width={width || '18'} height={height || '18'} viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'>
-    <g id='Page-1' fill='none' fillRule='evenodd'>
-        <g id='IconImageUpload' transform='translate(-1 -1)'>
-            <rect id='bounds' fillOpacity='0' fill={color} width='20' height='20'
-            />
-            <polyline id='icon-square-copy' stroke={color} strokeWidth='1.5' strokeLinecap='square'
-            strokeLinejoin='round' points='5 8 2 8 2 18 18 18 18 8 15 8' />
-            <polyline id='Stroke-3' stroke={color} strokeWidth='1.5' strokeLinecap='square'
-            strokeLinejoin='round' points='13 5 10 2 7 5' />
-            <path d='M10,8 L10,3' id='Stroke-4' stroke={color} strokeWidth='1.5'
-            strokeLinecap='square' strokeLinejoin='round' />
-            <polyline id='Path-2' stroke={color} strokeWidth='1.5' points='1.99926758 18.0160522 6.0098877 13.0065918 9 15.0160522 13.0057373 10.972168 18 18.0160522'
-            />
-        </g>
-    </g>
-  </svg>,
   L: ({color, width, height}) => <svg width={width || '6'} height={height || '8'} viewBox='0 0 6 8' xmlns='http://www.w3.org/2000/svg'>
     <g id='1' fill='none' fillRule='evenodd'>
         <g id='icons' transform='translate(-389 -576)'>
@@ -198,21 +197,6 @@ const ICONS = {
                   <rect id='Rectangle' stroke={color} strokeWidth='1.5' strokeLinecap='round'
                   strokeLinejoin='round' x='2' y='7' width='16' height='10' />
               </g>
-          </g>
-      </g>
-  </svg>,
-  Info: ({color, width, height}) => <svg width={width || '18'} height={height || '18'} viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'>
-      <g id='Page-1' fill='none' fillRule='evenodd'>
-          <g id='IconInfo' transform='translate(-1 -1)'>
-              <rect id='bounds' fillOpacity='0' fill={color} width='20' height='20'
-              />
-              <path d='M18,10 C18,14.4182222 14.4183333,18 10,18 C5.58177778,18 2,14.4182222 2,10 C2,5.58166667 5.58177778,2 10,2 C14.4183333,2 18,5.58166667 18,10 L18,10 Z'
-              id='Stroke-1' stroke={color} strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round'
-              />
-              <path d='M10,14 L10,9' id='Stroke-3' stroke={color} strokeWidth='1.5' strokeLinecap='square'
-              strokeLinejoin='round' />
-              <path d='M10,6 L10,5.9219' id='Stroke-5' stroke={color} strokeWidth='1.5'
-              strokeLinecap='square' strokeLinejoin='round' />
           </g>
       </g>
   </svg>,
@@ -408,23 +392,6 @@ const ICONS = {
                   <path d="M9.04597778,0.106833333 C10.8553111,0.3325 12.4769778,1.16227778 13.7027556,2.38805556 C14.9285333,3.61383333 15.7584222,5.23561111 15.9840889,7.04494444"
                   id="Stroke-7" />
               </g>
-          </g>
-      </g>
-  </svg>,
-  Globe: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconGlobe" transform="translate(-1 -1)">
-              <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
-              />
-              <path d="M18,10 C18,14.4182222 14.4183333,18 10,18 C5.58177778,18 2,14.4182222 2,10 C2,5.58166667 5.58177778,2 10,2 C14.4183333,2 18,5.58166667 18,10 Z"
-              id="Stroke-1" stroke={color} strokeWidth="1.5" strokeLinejoin="round"
-              />
-              <path d="M18,10 C18,11.6568889 14.4183333,13 10,13 C5.58177778,13 2,11.6568889 2,10 C2,8.34311111 5.58177778,7 10,7 C14.4183333,7 18,8.34311111 18,10 Z"
-              id="Stroke-3" stroke={color} strokeWidth="1.5" strokeLinejoin="round"
-              />
-              <path d="M10,2 C11.6568889,2 13,5.58166667 13,10 C13,14.4182222 11.6568889,18 10,18 C8.34311111,18 7,14.4182222 7,10 C7,5.58166667 8.34311111,2 10,2 Z"
-              id="Stroke-5" stroke={color} strokeWidth="1.5" strokeLinejoin="round"
-              />
           </g>
       </g>
   </svg>,
@@ -1022,17 +989,6 @@ const ICONS = {
           </g>
         </g>
       </g>
-    </g>
-  </svg>,
-  Heartbeat: ({color, width, height}) => <svg width={width || 18} height={height || 17} viewBox="0 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg">
-    <g id="1.0" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-        <g id="icons" transform="translate(-486.000000, -624.000000)">
-            <g id="IconHeartbeat" transform="translate(485.000000, 622.000000)">
-                <rect id="bounds" fillOpacity="0" fill="#E3E3E6" x="0" y="0" width="20" height="20"></rect>
-                <path d="M17.0700935,10.4228531 C17.6715698,9.43034848 18,8.44801726 18,7.4 C18,4.928 16.064,3 13.6,3 L13.6,3 C12.208,3 10.872,3.648 10,4.664 C9.128,3.648 7.792,3 6.4,3 C3.936,3 2,4.928 2,7.4 C2,10.416 4.72,12.888 8.84,16.624 L10,17.68 L11.16,16.624 C12.3144613,15.577139 13.3589987,14.6295235 14.2645705,13.7413756" id="Path" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-                <polyline id="Path-16" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" points="8 9 9 12 11.2857143 8 13 10.5 17 10.5"></polyline>
-            </g>
-        </g>
     </g>
   </svg>,
   Report: ({color, width, height}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
