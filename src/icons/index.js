@@ -87,6 +87,13 @@ import Move from './symbols/move.js';
 import Notification from './symbols/notification.js';
 import Paintbrush from './symbols/paintbrush.js';
 import Parking from './symbols/parking.js';
+import PencilFill from './symbols/pencil-fill.js';
+import PencilOutline from './symbols/pencil-outline.js';
+import Person from './symbols/person.js';
+import PersonHuddle from './symbols/person-huddle.js';
+import PersonMinus from './symbols/person-minus.js';
+import PersonPlus from './symbols/person-plus.js';
+import PersonRemove from './symbols/person-remove.js';
 
 // A list of all density icons.
 const ICONS = {
@@ -103,6 +110,7 @@ const ICONS = {
 
   BookmarkFill: BookmarkFill,
   BookmarkOutline: BookmarkOutline,
+  Bookmark: BookmarkOutline,
 
   CalendarDetail: CalendarDetail,
   CalendarSimple: CalendarSimple,
@@ -203,6 +211,16 @@ const ICONS = {
   Paintbrush: Paintbrush,
   Parking: Parking,
 
+  PencilFill: PencilFill,
+  PencilOutline: PencilOutline,
+  Pencil: PencilOutline,
+
+  Person: Person,
+  PersonHuddle: PersonHuddle,
+  PersonMinus: PersonMinus,
+  PersonPlus: PersonPlus,
+  PersonRemove: PersonRemove,
+
   L: ({color, width, height}) => <svg width={width || '6'} height={height || '8'} viewBox='0 0 6 8' xmlns='http://www.w3.org/2000/svg'>
     <g id='1' fill='none' fillRule='evenodd'>
         <g id='icons' transform='translate(-389 -576)'>
@@ -259,22 +277,6 @@ const ICONS = {
               />
           </g>
       </g>
-  </svg>,
-  Person: ({color, width, height}) => <svg width={width || "14"} height={height || "18"} viewBox="0 0 14 18" xmlns="http://www.w3.org/2000/svg">
-    <g id='Icons' fill='none' fillRule='evenodd'>
-      <g id='icons' transform='translate(-127 -379)'>
-          <g id='IconPerson' transform='translate(124 378)'>
-              <rect id='bounds' fillOpacity='0' fill='#E3E3E6' width='20' height='20'
-              />
-              <path d='M13.4285667,6 C13.4285667,8.20911111 11.8935667,10 10.0000111,10 C8.10645556,10 6.57145556,8.20911111 6.57145556,6 C6.57145556,3.79088889 8.10645556,2 10.0000111,2 C11.8935667,2 13.4285667,3.79088889 13.4285667,6 L13.4285667,6 Z'
-              id='Stroke-1' stroke={color} strokeWidth='1.5' strokeLinejoin='round'
-              />
-              <path d='M16,18 L16,13 C16,11.3368889 14.6392222,10 12.9761111,10 L7.02388889,10 C5.36077778,10 4,11.3368889 4,13 L4,18 L16,18 L16,18 Z'
-              id='Stroke-3' stroke={color} strokeWidth='1.5' strokeLinejoin='round'
-              />
-          </g>
-      </g>
-  </g>
   </svg>,
   Bucket: ({color, width, height}) => <svg width={width || "16"} height={height || "14"} viewBox="0 0 16 14" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
