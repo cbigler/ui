@@ -320,6 +320,7 @@ const ICONS = {
   Star: StarOutline,
 
   SwapHorizontal: SwapHorizontal,
+  Switch: SwapHorizontal,
   SwapVertical: SwapVertical,
 
   Trash: Trash,
@@ -633,22 +634,6 @@ const ICONS = {
               <path d="M10,14 L10,13.9219" id="Stroke-5" stroke={color} strokeWidth="1.5"
               strokeLinecap="square" strokeLinejoin="round" transform="rotate(-180 10 13.96)"
               />
-          </g>
-      </g>
-  </svg>,
-  Switch: ({color, width, height}) => <svg width={width || "16"} height={height || "16"} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconSwitch" transform="translate(-2 -2)" fill={color}>
-              <g id="Group-3" transform="translate(2 2)">
-                  <polygon id="Stroke-3" fillRule="nonzero" points="14.0833333 11.2303922 2.80555556 11.2303922 2.80555556 12.7303922 14.0833333 12.7303922"
-                  />
-                  <polygon id="Stroke-3-Copy-8" fillRule="nonzero" points="12.3055556 3.20294118 1.02777778 3.20294118 1.02777778 4.70294118 12.3055556 4.70294118"
-                  />
-                  <polygon id="Stroke-3-Copy-6" transform="rotate(-90 2.667 11.98)" points="-0.888888889 14.1764706 2.66666667 9.78431373 6.22222222 14.1764706"
-                  />
-                  <polygon id="Stroke-3-Copy-9" transform="rotate(90 13.333 3.953)" points="9.77777778 6.14901961 13.3333333 1.75686275 16.8888889 6.14901961"
-                  />
-              </g>
           </g>
       </g>
   </svg>,
