@@ -63,12 +63,22 @@ import Globe from './symbols/globe.js';
 import Health from './symbols/health.js';
 import Heart from './symbols/heart.js';
 import Help from './symbols/help.js';
-
-
-import IngressRight from './symbols/ingress-right.js';
-import IngressUp from './symbols/ingress-up.js';
 import ImageUpload from './symbols/image-upload.js';
 import Info from './symbols/info.js';
+import IngressRight from './symbols/ingress-right.js';
+import IngressUp from './symbols/ingress-up.js';
+import Integrations1 from './symbols/integrations-1.js';
+import Integrations2 from './symbols/integrations-2.js';
+import Interview from './symbols/interview.js';
+import Keyhole from './symbols/keyhole.js';
+import Lightbulb from './symbols/lightbulb.js';
+import LightningFill from './symbols/lightning-fill.js';
+import LightningOutline from './symbols/lightning-outline.js';
+import LinkBroken from './symbols/link-broken.js';
+import LinkLinked from './symbols/link-linked.js';
+import List from './symbols/list.js';
+import Listening from './symbols/listening.js';
+import Message from './symbols/message.js';
 
 // A list of all density icons.
 const ICONS = {
@@ -159,6 +169,25 @@ const ICONS = {
   IngressRight: IngressRight,
   IngressUp: IngressUp,
 
+  Integrations1: Integrations1,
+  Integrations2: Integrations2,
+  Interview: Interview,
+  Keyhole: Keyhole,
+  Lightbulb: Lightbulb,
+
+  LightningFill: LightningFill,
+  LightningOutline: LightningOutline,
+  Lightning: LightningOutline,
+
+  LinkBroken: LinkBroken,
+  LinkLinked: LinkLinked,
+  Link: LinkLinked,
+
+  List: List,
+  Listening: Listening,
+
+  Message: Message,
+
   L: ({color, width, height}) => <svg width={width || '6'} height={height || '8'} viewBox='0 0 6 8' xmlns='http://www.w3.org/2000/svg'>
     <g id='1' fill='none' fillRule='evenodd'>
         <g id='icons' transform='translate(-389 -576)'>
@@ -231,14 +260,6 @@ const ICONS = {
           </g>
       </g>
   </g>
-  </svg>,
-  Lightning: ({color, width, height}) => <svg width={width || "16"} height={height || "18"} viewBox="0 0 16 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconLightning" transform="translate(-2 -1)" fill={color} fillRule="nonzero">
-              <path d="M7.91531294,12.7794118 L3,12.7794118 C2.33182136,12.7794118 1.99719627,11.9715553 2.46966991,11.4990817 L12.3961405,1.57261109 C12.9557578,1.01299383 13.8882515,1.58930666 13.6379831,2.340112 L11.9817459,7.30882353 L16.8970588,7.30882353 C17.5652375,7.30882353 17.8998626,8.11667997 17.4273889,8.58915362 L7.50091832,18.5156242 C6.94130106,19.0752415 6.00880731,18.4989286 6.25907576,17.7481233 L7.91531294,12.7794118 Z M4.81066017,11.2794118 L8.95588235,11.2794118 C9.46780065,11.2794118 9.8292776,11.7809343 9.66739483,12.2665826 L8.68677244,15.2084497 L15.0863987,8.80882353 L10.9411765,8.80882353 C10.4292582,8.80882353 10.0677812,8.30730104 10.229664,7.8216527 L11.2102864,4.87978556 L4.81066017,11.2794118 Z"
-              id="icon-lightning" />
-          </g>
-      </g>
   </svg>,
   Bucket: ({color, width, height}) => <svg width={width || "16"} height={height || "14"} viewBox="0 0 16 14" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
@@ -500,26 +521,6 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  List: ({color, width, height}) => <svg width={width || "16"} height={height || "12"} viewBox="0 0 16 12" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconList" transform="translate(-2 -4)">
-              <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
-              />
-              <path d="M2,5 L6,5" id="Stroke-1" stroke={color} strokeWidth="1.5" strokeLinejoin="round"
-              />
-              <path d="M8,5 L18,5" id="Stroke-3" stroke={color} strokeWidth="1.5" strokeLinejoin="round"
-              />
-              <path d="M2,10 L6,10" id="Stroke-5" stroke={color} strokeWidth="1.5" strokeLinejoin="round"
-              />
-              <path d="M8,10 L18,10" id="Stroke-7" stroke={color} strokeWidth="1.5" strokeLinejoin="round"
-              />
-              <path d="M2,15 L6,15" id="Stroke-9" stroke={color} strokeWidth="1.5" strokeLinejoin="round"
-              />
-              <path d="M8,15 L18,15" id="Stroke-11" stroke={color} strokeWidth="1.5"
-              strokeLinejoin="round" />
-          </g>
-      </g>
-  </svg>,
   No: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconNo" transform="translate(-1 -1)">
@@ -559,36 +560,6 @@ const ICONS = {
               />
               <path d="M10,14 L10,13.9219" id="Stroke-5" stroke={color} strokeWidth="1.5"
               strokeLinecap="square" strokeLinejoin="round" transform="rotate(-180 10 13.96)"
-              />
-          </g>
-      </g>
-  </svg>,
-  Link: ({color, width, height}) => <svg width={width || "18"} height={height || "8"} viewBox="0 0 18 8" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconLink" transform="translate(-1 -6)" fill={color} fillRule="nonzero">
-              <path d="M8.83291837,13.3074687 C10.0181987,12.7203169 10.75,11.6192286 10.75,9.99999549 C10.75,9.9451753 10.758826,9.82161211 10.7866704,9.65454562 C10.833755,9.37203866 10.9181305,9.09078735 11.0458202,8.83540835 C11.3917281,8.14359363 11.9821194,7.75 13,7.75 L15,7.75 C16.2426756,7.75 17.25,8.75732291 17.25,9.99999549 C17.25,11.2426681 16.2426756,12.249991 15,12.249991 L12.25,12.249991 L12.25,13.749991 L15,13.749991 C17.0711022,13.749991 18.75,12.0710957 18.75,9.99999549 C18.75,7.92889528 17.0711022,6.25 15,6.25 L13,6.25 C11.3928806,6.25 10.2957719,6.98140468 9.70417981,8.16458715 C9.36150269,8.84994036 9.25,9.51895548 9.25,9.99999549 C9.25,11.030064 8.85680133,11.6216815 8.16708163,11.9633477 C7.9167821,12.0873385 7.6411264,12.1690533 7.36337439,12.2143313 C7.19546246,12.2417036 7.0677587,12.2503005 7.00422982,12.2500037 L5,12.249991 C3.75732442,12.249991 2.75,11.2426681 2.75,9.99999549 C2.75,8.75732291 3.75732442,7.75 5,7.75 L7.75,7.75 L7.75,6.25 L5,6.25 C2.9288978,6.25 1.25,7.92889528 1.25,9.99999549 C1.25,12.0710957 2.9288978,13.749991 5,13.749991 L6.99803062,13.749991 C7.48887744,13.7521615 8.15451742,13.643528 8.83291837,13.3074687 Z"
-              id="Page-1" />
-          </g>
-      </g>
-  </svg>,
-  LinkBroken: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconLinkBroken" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
-              <path d="M7.75,6.25 L5,6.25 C2.92889755,6.25 1.25,7.92889755 1.25,10 C1.25,12.0711025 2.92889755,13.75 5,13.75 L7.75,13.75 L7.75,12.25 L5,12.25 C3.75732467,12.25 2.75,11.2426753 2.75,10 C2.75,8.75732467 3.75732467,7.75 5,7.75 L7.75,7.75 L7.75,6.25 Z"
-              id="Stroke-1" />
-              <path d="M12.25,7.75 L15,7.75 C16.2426753,7.75 17.25,8.75732467 17.25,10 C17.25,11.2426753 16.2426753,12.25 15,12.25 L12.25,12.25 L12.25,13.75 L15,13.75 C17.0711025,13.75 18.75,12.0711025 18.75,10 C18.75,7.92889755 17.0711025,6.25 15,6.25 L12.25,6.25 L12.25,7.75 Z"
-              id="Stroke-3" />
-              <polygon id="Stroke-5" points="10.75 4.75 10.75 1.25 9.25 1.25 9.25 4.75"
-              />
-              <polygon id="Stroke-7" points="14 5.06066017 16.0606602 3 15 1.93933983 12.9393398 4"
-              />
-              <polygon id="Stroke-9" points="7.06066017 4 5 1.93933983 3.93933983 3 6 5.06066017"
-              />
-              <polygon id="Stroke-11" points="9.25 15.25 9.25 18.75 10.75 18.75 10.75 15.25"
-              />
-              <polygon id="Stroke-13" points="6 14.9393398 3.93933983 17 5 18.0606602 7.06066017 16"
-              />
-              <polygon id="Stroke-15" points="12.9393398 16 15 18.0606602 16.0606602 17 14 14.9393398"
               />
           </g>
       </g>
