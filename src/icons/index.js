@@ -118,12 +118,40 @@ import SoundOn from './symbols/sound-on.js';
 import SpaceAdd from './symbols/space-add.js';
 import StairsDown from './symbols/stairs-down.js';
 import StairsUp from './symbols/stairs-up.js';
+import StarFill from './symbols/star-fill.js';
+import StarOutline from './symbols/star-outline.js';
 import SwapHorizontal from './symbols/swap-horizontal.js';
 import SwapVertical from './symbols/swap-vertical.js';
 import Trash from './symbols/trash.js';
 import Tray from './symbols/tray.js';
 import Upload from './symbols/upload.js';
 import Video from './symbols/video.js';
+import VisibilityHide from './symbols/visibility-hide.js';
+import Workflow from './symbols/workflow.js';
+
+import BabyChanging from './space-functions/baby-changing.js';
+import BreakoutRoom from './space-functions/breakout-room.js';
+import Breakroom from './space-functions/breakroom.js';
+import Cafe from './space-functions/cafe.js';
+import Cafeteria from './space-functions/cafeteria.js';
+import CallRoom from './space-functions/call-room.js';
+import ConferenceRoom from './space-functions/conference-room.js';
+import EventSpace from './space-functions/event-space.js';
+import Gym from './space-functions/gym.js';
+import Kitchen from './space-functions/kitchen.js';
+import Lab from './space-functions/lab.js';
+import Lobby from './space-functions/lobby.js';
+import Lounge from './space-functions/lounge.js';
+import RestroomMen from './space-functions/restroom-men.js';
+import RestroomUnisex from './space-functions/restroom-unisex.js';
+import RestroomWomen from './space-functions/restroom-women.js';
+import Study from './space-functions/study.js';
+import Theater from './space-functions/theater.js';
+import UtilityRoom from './space-functions/utility-room.js';
+
+import Building from './space-types/building.js';
+import Floor from './space-types/floor.js';
+import Space from './space-types/space.js';
 
 // A list of all density icons.
 const ICONS = {
@@ -286,13 +314,50 @@ const ICONS = {
 
   StairsDown: StairsDown,
   StairsUp: StairsUp,
+
+  StarFill: StarFill,
+  StarOutline: StarOutline,
+  Star: StarOutline,
+
   SwapHorizontal: SwapHorizontal,
   SwapVertical: SwapVertical,
 
   Trash: Trash,
   Tray: Tray,
+  Menu: Tray,
   Upload: Upload,
   Video: Video,
+  VisibilityHide: VisibilityHide,
+  Workflow: Workflow,
+
+
+  // Space Functions
+  BabyChanging: BabyChanging,
+  BreakoutRoom: BreakoutRoom,
+  Breakroom: Breakroom,
+  Cafe: Cafe,
+  Cafeteria: Cafeteria,
+  CallRoom: CallRoom,
+  ConferenceRoom: ConferenceRoom,
+  EventSpace: EventSpace,
+  Gym: Gym,
+  Kitchen: Kitchen,
+  Lab: Lab,
+  Lobby: Lobby,
+  Lounge: Lounge,
+  RestroomMen: RestroomMen,
+  RestroomUnisex: RestroomUnisex,
+  RestroomWomen: RestroomWomen,
+  Study: Study,
+  Theater: Theater,
+  UtilityRoom: UtilityRoom,
+
+
+  // Space Types
+  Building: Building,
+  Floor: Floor,
+  Space: Space,
+
 
   L: ({color, width, height}) => <svg width={width || '6'} height={height || '8'} viewBox='0 0 6 8' xmlns='http://www.w3.org/2000/svg'>
     <g id='1' fill='none' fillRule='evenodd'>
@@ -332,22 +397,6 @@ const ICONS = {
                   <rect id='Rectangle' stroke={color} strokeWidth='1.5' strokeLinecap='round'
                   strokeLinejoin='round' x='2' y='7' width='16' height='10' />
               </g>
-          </g>
-      </g>
-  </svg>,
-  Gym: ({color, width, height}) => <svg width={width || "18"} height={height || "12"} viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconGym" transform="translate(-1 -4)" fill={color} fillRule="nonzero">
-              <path d="M5,15.75 C4.58578644,15.75 4.25,15.4142136 4.25,15 L4.25,5 C4.25,4.58578644 4.58578644,4.25 5,4.25 L8,4.25 C8.41421356,4.25 8.75,4.58578644 8.75,5 L8.75,15 C8.75,15.4142136 8.41421356,15.75 8,15.75 L5,15.75 Z M7.25,14.25 L7.25,5.75 L5.75,5.75 L5.75,14.25 L7.25,14.25 Z"
-              id="Stroke-1" />
-              <path d="M2,13.75 C1.58578644,13.75 1.25,13.4142136 1.25,13 L1.25,7 C1.25,6.58578644 1.58578644,6.25 2,6.25 L5,6.25 C5.41421356,6.25 5.75,6.58578644 5.75,7 L5.75,13 C5.75,13.4142136 5.41421356,13.75 5,13.75 L2,13.75 Z M2.75,12.25 L4.25,12.25 L4.25,7.75 L2.75,7.75 L2.75,12.25 Z"
-              id="Stroke-3" />
-              <path d="M15,13.75 C14.5857864,13.75 14.25,13.4142136 14.25,13 L14.25,7 C14.25,6.58578644 14.5857864,6.25 15,6.25 L18,6.25 C18.4142136,6.25 18.75,6.58578644 18.75,7 L18.75,13 C18.75,13.4142136 18.4142136,13.75 18,13.75 L15,13.75 Z M15.75,12.25 L17.25,12.25 L17.25,7.75 L15.75,7.75 L15.75,12.25 Z"
-              id="Stroke-4" />
-              <path d="M12,15.75 C11.5857864,15.75 11.25,15.4142136 11.25,15 L11.25,5 C11.25,4.58578644 11.5857864,4.25 12,4.25 L15,4.25 C15.4142136,4.25 15.75,4.58578644 15.75,5 L15.75,15 C15.75,15.4142136 15.4142136,15.75 15,15.75 L12,15.75 Z M14.25,14.25 L14.25,5.75 L12.75,5.75 L12.75,14.25 L14.25,14.25 Z"
-              id="Stroke-5" />
-              <polygon id="Stroke-7" points="7.25 10.75 12.75 10.75 12.75 9.25 7.25 9.25"
-              />
           </g>
       </g>
   </svg>,
@@ -534,20 +583,6 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  Menu: ({color, width, height}) => <svg width={width || "18"} height={height || "12"} viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconMenu" transform="translate(-1 -4)">
-              <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
-              />
-              <path d="M18,10 L2,10" id="Stroke-3" stroke={color} strokeWidth="1.5" strokeLinecap="square"
-              strokeLinejoin="round" />
-              <path d="M18,5 L2,5" id="Stroke-3-Copy" stroke={color} strokeWidth="1.5"
-              strokeLinecap="square" strokeLinejoin="round" />
-              <path d="M18,15 L2,15" id="Stroke-3-Copy-2" stroke={color} strokeWidth="1.5"
-              strokeLinecap="square" strokeLinejoin="round" />
-          </g>
-      </g>
-  </svg>,
   Tag: ({color, width, height}) => <svg width={width || "19"} height={height || "19"} viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconTag">
@@ -617,22 +652,6 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  Building: ({color, width, height}) => <svg width={width || 18} height={height || 17} viewBox="0 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg">
-    <g id="1.0" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-        <g id="icons" transform="translate(-70.000000, -520.000000)">
-            <g id="IconBuilding" transform="translate(69.000000, 518.000000)">
-                <rect id="bounds" fillOpacity="0" fill="#E3E3E6" x="0" y="0" width="20" height="20"></rect>
-                <polygon id="Path" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" points="9 9 2 9 2 18 18 18 18 3 9 3"></polygon>
-                <path d="M12,6 L15,6" id="---" stroke={color} strokeWidth="1.5" strokeLinecap="square"></path>
-                <path d="M12,9 L15,9" id="----copy" stroke={color} strokeWidth="1.5" strokeLinecap="square"></path>
-                <path d="M12,12 L15,12" id="----copy-2" stroke={color} strokeWidth="1.5" strokeLinecap="square"></path>
-                <path d="M12,15 L15,15" id="----copy-3" stroke={color} strokeWidth="1.5" strokeLinecap="square"></path>
-                <path d="M5,12 L8,12" id="----copy-2" stroke={color} strokeWidth="1.5" strokeLinecap="square"></path>
-                <path d="M5,15 L8,15" id="----copy-3" stroke={color} strokeWidth="1.5" strokeLinecap="square"></path>
-            </g>
-        </g>
-    </g>
-  </svg>,
   Floorplans: ({color, width, height}) => <svg width={width || 20} height={height || 18} viewBox='0 0 20 18' xmlns='http://www.w3.org/2000/svg'>
     <g id='Page-1' fill='none' fillRule='evenodd'>
         <g id='IconFloorplans' transform='translate(0 -1)'>
@@ -679,19 +698,6 @@ const ICONS = {
       />
       <rect id="Rectangle" fill="transparent" stroke={color} strokeWidth="1.5" x="2.5" y="5" width="15" height="10" />
       <polyline id="Path-28" fill="transparent" stroke={color} strokeWidth="1.5" points="2.5 5.83333333 10 10 17.5 5.83333333" />
-    </g>
-  </svg>,
-  Star: ({color, width, height}) => <svg width={width || 20} height={height || 18} viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg">
-    <g id="1" fill="none" fillRule="evenodd">
-      <g id="icons" transform="translate(-225 -518)">
-        <g id="IconStar" transform="translate(225 518)">
-          <rect id="bounds" fillOpacity="0" fill="#E3E3E6" width="20" height="20"
-          />
-          <polygon id="Star" stroke={color} strokeWidth="1.5" strokeLinecap="square"
-            strokeLinejoin="round" points="10 14.5 4.70993273 17.2811529 5.72024568 11.3905765 1.44049135 7.21884705 7.35496636 6.35942353 10 1 12.6450336 6.35942353 18.5595086 7.21884705 14.2797543 11.3905765 15.2900673 17.2811529"
-          />
-        </g>
-      </g>
     </g>
   </svg>,
   Filters: ({color, width, height}) => <svg width={width || 18} height={height || 14} viewBox="0 0 18 14" xmlns="http://www.w3.org/2000/svg">
