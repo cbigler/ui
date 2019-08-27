@@ -94,6 +94,14 @@ import PersonHuddle from './symbols/person-huddle.js';
 import PersonMinus from './symbols/person-minus.js';
 import PersonPlus from './symbols/person-plus.js';
 import PersonRemove from './symbols/person-remove.js';
+import Phone from './symbols/phone.js';
+import PlaybackNext from './symbols/playback-next.js';
+import PlaybackPlay from './symbols/playback-play.js';
+import PlaybackPrev from './symbols/playback-prev.js';
+import Plus from './symbols/plus.js';
+import PlusCircle from './symbols/plus-circle.js';
+import Power from './symbols/power.js';
+import Refresh from './symbols/refresh.js';
 
 // A list of all density icons.
 const ICONS = {
@@ -220,6 +228,15 @@ const ICONS = {
   PersonMinus: PersonMinus,
   PersonPlus: PersonPlus,
   PersonRemove: PersonRemove,
+
+  Phone: Phone,
+  PlaybackNext: PlaybackNext,
+  PlaybackPlay: PlaybackPlay,
+  PlaybackPrev: PlaybackPrev,
+  Plus: Plus,
+  PlusCircle: PlusCircle,
+  Power: Power,
+  Refresh: Refresh,
 
   L: ({color, width, height}) => <svg width={width || '6'} height={height || '8'} viewBox='0 0 6 8' xmlns='http://www.w3.org/2000/svg'>
     <g id='1' fill='none' fillRule='evenodd'>
@@ -499,22 +516,6 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  Refresh: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconRefresh" transform="translate(-1 -1)">
-              <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
-              />
-              <polyline id="Stroke-1" stroke={color} strokeWidth="2" strokeLinecap="square"
-              strokeLinejoin="round" points="2 2 2 7 7 7" />
-              <polyline id="Stroke-3" stroke={color} strokeWidth="2" strokeLinecap="square"
-              strokeLinejoin="round" points="18 18 18 13 13 13" />
-              <path d="M17.4184333,13.0001333 C16.2316556,15.9319111 13.3573222,18.0000222 9.99998889,18.0000222 C5.58176667,18.0000222 1.99998889,14.4182444 1.99998889,10.0000222"
-              id="Stroke-5" stroke={color} strokeWidth="2" strokeLinejoin="round" />
-              <path d="M2.58156667,6.99986667 C3.76834444,4.06808889 6.64267778,1.99997778 10.0000111,1.99997778 C14.4182333,1.99997778 18.0000111,5.58175556 18.0000111,9.99997778"
-              id="Stroke-7" stroke={color} strokeWidth="2" strokeLinejoin="round" />
-          </g>
-      </g>
-  </svg>,
   Tag: ({color, width, height}) => <svg width={width || "19"} height={height || "19"} viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconTag">
@@ -595,28 +596,6 @@ const ICONS = {
                   <polygon id="Stroke-3-Copy-9" transform="rotate(90 13.333 3.953)" points="9.77777778 6.14901961 13.3333333 1.75686275 16.8888889 6.14901961"
                   />
               </g>
-          </g>
-      </g>
-  </svg>,
-  Plus: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconPlus" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
-              <polygon id="Stroke-3" points="18.75 9.25 1.25 9.25 1.25 10.75 18.75 10.75"
-              />
-              <polygon id="Stroke-3" points="9.25 1.25 9.25 18.75 10.75 18.75 10.75 1.25"
-              />
-          </g>
-      </g>
-  </svg>,
-  PlusCircle: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconPlusCircle" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
-              <polygon id="Stroke-1" points="10.7775862 13.5865069 10.7775862 6.46866548 9.27758621 6.46866548 9.27758621 13.5865069"
-              />
-              <polygon id="Stroke-2" points="13.5865069 9.27758621 6.46866548 9.27758621 6.46866548 10.7775862 13.5865069 10.7775862"
-              />
-              <path d="M17.2224138,10.0275862 C17.2224138,6.0539377 14.0012347,2.83275862 10.0275862,2.83275862 C6.05400832,2.83275862 2.83275862,6.05397742 2.83275862,10.0275862 C2.83275862,14.0011244 6.05404805,17.2224138 10.0275862,17.2224138 C14.001195,17.2224138 17.2224138,14.0011641 17.2224138,10.0275862 Z M18.7224138,10.0275862 C18.7224138,14.829588 14.8296253,18.7224138 10.0275862,18.7224138 C5.22562092,18.7224138 1.33275862,14.8295515 1.33275862,10.0275862 C1.33275862,5.22554707 5.22558442,1.33275862 10.0275862,1.33275862 C14.8296618,1.33275862 18.7224138,5.22551058 18.7224138,10.0275862 Z"
-              id="Stroke-3" />
           </g>
       </g>
   </svg>,
