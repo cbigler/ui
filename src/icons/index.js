@@ -18,6 +18,14 @@ import BookmarkOutline from './symbols/bookmark-outline.js';
 import CalendarDetail from './symbols/calendar-detail.js';
 import CalendarSimple from './symbols/calendar-simple.js';
 import Camera from './symbols/camera.js';
+import Chart1 from './symbols/chart-1.js';
+import Chart2 from './symbols/chart-2.js';
+import ChartLineDown from './symbols/chart-line-down.js';
+import ChartLineUp from './symbols/chart-line-up.js';
+import Chat from './symbols/chat.js';
+import Check from './symbols/check.js';
+import CheckBox from './symbols/check-box.js';
+import CheckCircle from './symbols/check-circle.js';
 
 // A list of all density icons.
 const ICONS = {
@@ -41,6 +49,18 @@ const ICONS = {
   Calendar: CalendarDetail,
 
   Camera: Camera,
+
+  Chart1: Chart1,
+  Chart2: Chart2,
+  ChartLineDown: ChartLineDown,
+  ChartLineUp: ChartLineUp,
+
+  Chat: Chat,
+
+  Check: Check,
+  CheckBox: CheckBox,
+  CheckCircle: CheckCircle,
+
 
   ImageUpload: ({color, width, height}) => <svg width={width || '18'} height={height || '18'} viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'>
     <g id='Page-1' fill='none' fillRule='evenodd'>
