@@ -4,8 +4,41 @@ import React from 'react';
 import propTypes from 'prop-types';
 import colorVariables from '../../variables/colors.json';
 
+import Alert from './symbols/alert.js';
+import ArrowDown from './symbols/arrow-down.js';
+import ArrowDownLeft from './symbols/arrow-down-left.js';
+import ArrowDownRight from './symbols/arrow-down-right.js';
+import ArrowLeft from './symbols/arrow-left.js';
+import ArrowRight from './symbols/arrow-right.js';
+import ArrowUp from './symbols/arrow-up.js';
+import ArrowUpLeft from './symbols/arrow-up-left.js';
+import ArrowUpRight from './symbols/arrow-up-right.js';
+import BookmarkFill from './symbols/bookmark-fill.js';
+import BookmarkOutline from './symbols/bookmark-outline.js';
+import CalendarDetail from './symbols/calendar-detail.js';
+import CalendarSimple from './symbols/calendar-simple.js';
+
 // A list of all density icons.
 const ICONS = {
+  Alert: Alert,
+  Notification: Alert,
+
+  ArrowDown: ArrowDown,
+  ArrowDownLeft: ArrowDownLeft,
+  ArrowDownRight: ArrowDownRight,
+  ArrowLeft: ArrowLeft,
+  ArrowRight: ArrowRight,
+  ArrowUp: ArrowUp,
+  ArrowUpLeft: ArrowUpLeft,
+  ArrowUpRight: ArrowUpRight,
+
+  BookmarkFill: BookmarkFill,
+  BookmarkOutline: BookmarkOutline,
+
+  CalendarDetail: CalendarDetail,
+  CalendarSimple: CalendarSimple,
+  Calendar: CalendarDetail,
+
   ImageUpload: ({color, width, height}) => <svg width={width || '18'} height={height || '18'} viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'>
     <g id='Page-1' fill='none' fillRule='evenodd'>
         <g id='IconImageUpload' transform='translate(-1 -1)'>
@@ -434,22 +467,6 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  Calendar: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-    <g id='Page-1' fill='none' fillRule='evenodd'>
-      <g id='IconCalendar' transform='translate(-1 -1)'>
-        <rect id='bounds' fillOpacity='0' fill={color} width='20' height='20'
-        />
-        <path d='M2,18.75 L18,18.75 C18.4142136,18.75 18.75,18.4142136 18.75,18 L18.75,4 C18.75,3.58578644 18.4142136,3.25 18,3.25 L2,3.25 C1.58578644,3.25 1.25,3.58578644 1.25,4 L1.25,18 C1.25,18.4142136 1.58578644,18.75 2,18.75 Z M2.75,4.75 L17.25,4.75 L17.25,17.25 L2.75,17.25 L2.75,4.75 Z'
-        id='icon-square' fill={color} fillRule='nonzero' />
-        <path d='M2,9.75 L17,9.75 C17.4142136,9.75 17.75,9.41421356 17.75,9 C17.75,8.58578644 17.4142136,8.25 17,8.25 L2,8.25 C1.58578644,8.25 1.25,8.58578644 1.25,9 C1.25,9.41421356 1.58578644,9.75 2,9.75 Z'
-        id='Path-3' fill={color} fillRule='nonzero' />
-        <path d='M6.75,6 L6.75,2 C6.75,1.58578644 6.41421356,1.25 6,1.25 C5.58578644,1.25 5.25,1.58578644 5.25,2 L5.25,6 C5.25,6.41421356 5.58578644,6.75 6,6.75 C6.41421356,6.75 6.75,6.41421356 6.75,6 Z'
-        id='Path-4' fill={color} fillRule='nonzero' />
-        <path d='M14.75,6 L14.75,2 C14.75,1.58578644 14.4142136,1.25 14,1.25 C13.5857864,1.25 13.25,1.58578644 13.25,2 L13.25,6 C13.25,6.41421356 13.5857864,6.75 14,6.75 C14.4142136,6.75 14.75,6.41421356 14.75,6 Z'
-        id='Path-4-Copy' fill={color} fillRule='nonzero' />
-      </g>
-    </g>
-  </svg>,
   List: ({color, width, height}) => <svg width={width || "16"} height={height || "12"} viewBox="0 0 16 12" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconList" transform="translate(-2 -4)">
@@ -578,30 +595,6 @@ const ICONS = {
           </g>
       </g>
   </svg>,
-  ArrowRight: ({color, width, height}) => <svg width={width || "17"} height={height || "12"} viewBox="0 0 17 12" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconArrowRight" transform="rotate(90 11 7)">
-              <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
-              />
-              <path d="M10,18 L10,2" id="Stroke-1" stroke={color} strokeWidth="1.5" strokeLinejoin="round"
-              />
-              <polyline id="Stroke-3" stroke={color} strokeWidth="1.5" strokeLinecap="square"
-              strokeLinejoin="round" points="5 7 10 2 15 7" />
-          </g>
-      </g>
-  </svg>,
-  ArrowLeft: ({color, width, height}) => <svg width={width || "17"} height={height || "12"} viewBox="0 0 17 12" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconArrowLeft" transform="rotate(-90 7.5 8.5)">
-              <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
-              />
-              <path d="M10,18 L10,2" id="Stroke-1" stroke={color} strokeWidth="1.5" strokeLinejoin="round"
-              />
-              <polyline id="Stroke-3" stroke={color} strokeWidth="1.5" strokeLinecap="square"
-              strokeLinejoin="round" points="5 7 10 2 15 7" />
-          </g>
-      </g>
-  </svg>,
   Logout: ({color, width, height}) => <svg width={width || "18"} height={height || "17"} viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconLogout" transform="translate(-1 -2)">
@@ -721,24 +714,6 @@ const ICONS = {
                   <path d="M12,11.0606602 L13.0606602,10 L7.53033009,4.46966991 C7.23743687,4.1767767 6.76256313,4.1767767 6.46966991,4.46966991 L0.939339828,10 L2,11.0606602 L7,6.06066017 L12,11.0606602 Z"
                   id="Stroke-3" />
               </g>
-          </g>
-      </g>
-  </svg>,
-  ArrowDown: ({color, width, height}) => <svg width={width || "12"} height={height || "17"} viewBox="0 0 12 17" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconArrowDown" transform="rotate(-180 8 9)" fill={color} fillRule="nonzero">
-              <polygon id="Stroke-1" points="10.75 18 10.75 2 9.25 2 9.25 18" />
-              <path d="M10,3.06066017 L15,8.06066017 L16.0606602,7 L10.5303301,1.46966991 C10.2374369,1.1767767 9.76256313,1.1767767 9.46966991,1.46966991 L3.93933983,7 L5,8.06066017 L10,3.06066017 Z"
-              id="Stroke-3" />
-          </g>
-      </g>
-  </svg>,
-  ArrowUp: ({color, width, height}) => <svg width={width || "12"} height={height || "17"} viewBox="0 0 12 17" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconArrowUp" transform="translate(-4 -1)" fill={color} fillRule="nonzero">
-              <polygon id="Stroke-1" points="10.75 18 10.75 2 9.25 2 9.25 18" />
-              <path d="M10,3.06066017 L15,8.06066017 L16.0606602,7 L10.5303301,1.46966991 C10.2374369,1.1767767 9.76256313,1.1767767 9.46966991,1.46966991 L3.93933983,7 L5,8.06066017 L10,3.06066017 Z"
-              id="Stroke-3" />
           </g>
       </g>
   </svg>,
@@ -954,23 +929,6 @@ const ICONS = {
       <rect id="Rectangle" fill="transparent" stroke={color} strokeWidth="1.5" x="2.5" y="5" width="15" height="10" />
       <polyline id="Path-28" fill="transparent" stroke={color} strokeWidth="1.5" points="2.5 5.83333333 10 10 17.5 5.83333333" />
     </g>
-  </svg>,
-  Notification: ({color, accentColor, width, height}) => <svg width={width || 18} height={height || 20} viewBox="0 0 18 20" version="1.1" xmlns="http://www.w3.org/2000/svg">
-      <g id="Spaces:-Alerts-(release)" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-          <g id="spaces.alerts.success" transform="translate(-1298.000000, -62.000000)">
-              <g id="app-bar" transform="translate(328.000000, 40.000000)">
-                  <g id="button-share" transform="translate(957.000000, 12.000000)">
-                      <g id="icon-/-alerts" transform="translate(10.000000, 8.000000)">
-                          <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
-                          <path d="M19,18 L21,18 L21,20 L13,20 L13,22 L11,22 L11,20 L3,20 L3,18 L5,18 L5,14 C5,10.1340068 8.13400675,7 12,7 C15.8659932,7 19,10.1340068 19,14 L19,18 Z M17,18 L17,14 C17,11.2385763 14.7614237,9 12,9 C9.23857625,9 7,11.2385763 7,14 L7,18 L17,18 Z" id="Combined-Shape" fill={color} fillRule="nonzero"></path>
-                          <polygon id="Path-44" fill={accentColor || color} fillRule="nonzero" transform="translate(17.250000, 4.906733) rotate(-330.000000) translate(-17.250000, -4.906733) " points="18.25 6.40673326 18.25 3.40673326 16.25 3.40673326 16.25 6.40673326"></polygon>
-                          <polygon id="Path-44" fill={accentColor || color} fillRule="nonzero" transform="translate(6.750000, 4.906733) rotate(-30.000000) translate(-6.750000, -4.906733) " points="7.75 6.40673326 7.75 3.40673326 5.75 3.40673326 5.75 6.40673326"></polygon>
-                          <polygon id="Path-44" fill={accentColor || color} fillRule="nonzero" points="13 5 13 2 11 2 11 5"></polygon>
-                      </g>
-                  </g>
-              </g>
-          </g>
-      </g>
   </svg>,
   Star: ({color, width, height}) => <svg width={width || 20} height={height || 18} viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg">
     <g id="1" fill="none" fillRule="evenodd">

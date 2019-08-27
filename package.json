@@ -33,6 +33,7 @@
     "@storybook/addon-storysource": "^5.1.10",
     "@storybook/addons": "^5.1.10",
     "@storybook/react": "^5.1.10",
+    "@svgr/cli": "^4.3.2",
     "babel-loader": "^8.0.5",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.23",
