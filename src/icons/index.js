@@ -102,6 +102,20 @@ import Plus from './symbols/plus.js';
 import PlusCircle from './symbols/plus-circle.js';
 import Power from './symbols/power.js';
 import Refresh from './symbols/refresh.js';
+import Report from './symbols/report.js';
+import ReportAdd from './symbols/report-add.js';
+import Rotate from './symbols/rotate.js';
+import SaveFill from './symbols/save-fill.js';
+import SaveOutline from './symbols/save-outline.js';
+import Search from './symbols/search.js';
+import Security1 from './symbols/security-1.js';
+import Security2 from './symbols/security-2.js';
+import Security3 from './symbols/security-3.js';
+import Security4 from './symbols/security-4.js';
+import Share from './symbols/share.js';
+import SoundOff from './symbols/sound-off.js';
+import SoundOn from './symbols/sound-on.js';
+import SpaceAdd from './symbols/space-add.js';
 
 // A list of all density icons.
 const ICONS = {
@@ -225,6 +239,7 @@ const ICONS = {
 
   Person: Person,
   PersonHuddle: PersonHuddle,
+  Team: PersonHuddle,
   PersonMinus: PersonMinus,
   PersonPlus: PersonPlus,
   PersonRemove: PersonRemove,
@@ -237,6 +252,30 @@ const ICONS = {
   PlusCircle: PlusCircle,
   Power: Power,
   Refresh: Refresh,
+
+  Report: Report,
+  ReportAdd: ReportAdd,
+  AddReport: ReportAdd,
+
+  Rotate: Rotate,
+
+  SaveFill: SaveFill,
+  SaveOutline: SaveOutline,
+  Save: SaveOutline,
+
+  Search: Search,
+
+  Security1: Security1,
+  Security2: Security2,
+  Security3: Security3,
+  Security4: Security4,
+  Security: Security1,
+
+  Share: Share,
+  SoundOff: SoundOff,
+  SoundOn: SoundOn,
+
+  SpaceAdd: SpaceAdd,
 
   L: ({color, width, height}) => <svg width={width || '6'} height={height || '8'} viewBox='0 0 6 8' xmlns='http://www.w3.org/2000/svg'>
     <g id='1' fill='none' fillRule='evenodd'>
@@ -371,30 +410,6 @@ const ICONS = {
                   strokeLinecap="square" />
                   <path d="M0,16 L4,12" id="Path-6" strokeLinecap="square" />
               </g>
-          </g>
-      </g>
-  </svg>,
-  Search: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconSearch" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
-              <g id="Group" transform="translate(0 1)">
-                  <path d="M11.5,13.25 C14.6756495,13.25 17.25,10.6756248 17.25,7.5 C17.25,4.32431773 14.6756823,1.75 11.5,1.75 C8.32437522,1.75 5.75,4.32435052 5.75,7.5 C5.75,10.675592 8.32440801,13.25 11.5,13.25 Z M11.5,14.75 C7.49598088,14.75 4.25,11.5040191 4.25,7.5 C4.25,3.49592017 7.49595131,0.25 11.5,0.25 C15.5041094,0.25 18.75,3.4958906 18.75,7.5 C18.75,11.5040487 15.5040798,14.75 11.5,14.75 Z"
-                  id="icon_circle" />
-                  <polygon id="Path-6" points="2 18.0606602 7.06066017 13 6 11.9393398 0.939339828 17"
-                  />
-              </g>
-          </g>
-      </g>
-  </svg>,
-  Share: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconShare" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
-              <path d="M17.2499556,8.75 L17.2499556,17.25 L2.74995556,17.25 L2.74995556,8.75 L7.75006667,8.75 L7.75006667,7.25 L1.99995556,7.25 C1.58574199,7.25 1.24995556,7.58578644 1.24995556,8 L1.24995556,18 C1.24995556,18.4142136 1.58574199,18.75 1.99995556,18.75 L17.9999556,18.75 C18.4141691,18.75 18.7499556,18.4142136 18.7499556,18 L18.7499556,8 C18.7499556,7.58578644 18.4141691,7.25 17.9999556,7.25 L12.2499556,7.25 L12.2499556,8.75 L17.2499556,8.75 Z"
-              id="Stroke-1" />
-              <path d="M10,3.06066017 L13,6.06066017 L14.0606602,5 L10.5303301,1.46966991 C10.2374369,1.1767767 9.76256313,1.1767767 9.46966991,1.46966991 L5.93933983,5 L7,6.06066017 L10,3.06066017 Z"
-              id="Stroke-3" />
-              <polygon id="Stroke-4" points="10.75 14.75 10.75 2.25 9.25 2.25 9.25 14.75"
-              />
           </g>
       </g>
   </svg>,
@@ -615,36 +630,6 @@ const ICONS = {
         </g>
     </g>
   </svg>,
-  Rotate: ({color, width, height}) => <svg xmlns='http://www.w3.org/2000/svg' xmlnsXlink='http://www.w3.org/1999/xlink' height={height || 31.5} width={width || 31.5}>
-    <defs>
-        <rect id='rect-0' x='0.75' y='0.75' width='30' height='30' rx='0' ry='0'
-        />
-        <path id='path-1' d='M3.7500166666667383,20.249966666666637 L3.7500166666667383,24.749966666666637 L8.250016666666738,24.749966666666637'
-        />
-        <path id='path-2' d='M27.75001666666674,11.249966666666637 L27.75001666666674,6.749966666666637 L23.25001666666674,6.749966666666637'
-        />
-        <path id='path-3' d='M26.87766666666669,8.250099999999943 C25.097500000000018,12.647766666666607 20.786000000000016,15.749933333333274 15.750000000000012,15.749933333333274 C9.122666666666671,15.749933333333274 3.75,10.377266666666609 3.75,3.7499333333332743'
-        />
-        <path id='path-4' d='M4.622366666666721,23.24983333333333 C6.402533333333391,18.852166666666665 10.714033333333397,15.75 15.750033333333402,15.75 C22.37736666666674,15.75 27.750033333333413,21.122666666666664 27.750033333333413,27.75'
-        />
-        <path id='path-5' d='M12.750016666666738,18.749966666666637 L18.75001666666674,18.749966666666637 L18.75001666666674,12.749966666666637 L12.750016666666738,12.749966666666637 L12.750016666666738,18.749966666666637Z'
-        />
-    </defs>
-    <use xlinkHref='#rect-0' fill={color} fillOpacity='0' />
-    <use xlinkHref='#path-1' fillOpacity='0' stroke={color} strokeWidth='1.5'
-    strokeLinecap='square' strokeLinejoin='round' transform='matrix(1 0 0 -1 0 45)'
-    />
-    <use xlinkHref='#path-2' fillOpacity='0' stroke={color} strokeWidth='1.5'
-    strokeLinecap='square' strokeLinejoin='round' transform='matrix(1 0 0 -1 0 18)'
-    />
-    <use xlinkHref='#path-3' fillOpacity='0' stroke={color} strokeWidth='1.5'
-    strokeLinejoin='round' transform='matrix(1 0 0 -1 0 19.5)' />
-    <use xlinkHref='#path-4' fillOpacity='0' stroke={color} strokeWidth='1.5'
-    strokeLinejoin='round' transform='matrix(1 0 0 -1 0 43.5)' />
-    <use xlinkHref='#path-5' fillOpacity='0' stroke={color} strokeWidth='1.5'
-    strokeLinecap='square' strokeLinejoin='round' transform='matrix(1 0 0 -1 0 31.5)'
-    />
-  </svg>,
   Floorplans: ({color, width, height}) => <svg width={width || 20} height={height || 18} viewBox='0 0 20 18' xmlns='http://www.w3.org/2000/svg'>
     <g id='Page-1' fill='none' fillRule='evenodd'>
         <g id='IconFloorplans' transform='translate(0 -1)'>
@@ -685,7 +670,6 @@ const ICONS = {
        </g>
     </g>
   </svg>,
-
   Mail: ({color, width, height}) => <svg width={width || 18} height={height || 18} viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
     <g id="IconMail" transform="translate(0, -4)">
       <rect id="Rectangle" fillOpacity="0" fill="#D8D8D8" width="20" height="20"
@@ -782,34 +766,6 @@ const ICONS = {
       </g>
     </g>
   </svg>,
-  Team: ({color, width, height}) => <svg width={width || 20} height={height || 18} viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg">
-    <g id="1" fill="none" fillRule="evenodd">
-      <g id="icons" transform="translate(-433 -519)">
-        <g id="IconTeam" transform="translate(433 518)">
-          <rect id="bounds" fillOpacity="0" fill="#E3E3E6" width="20" height="20"
-          />
-          <path d="M7.00001111,10 C5.10645556,10 3.57145556,8.20911111 3.57145556,6 C3.57145556,3.79088889 5.10645556,2 7.00001111,2 C8.89356667,2 10.4285667,3.79088889 10.4285667,6 C10.4285667,8.20911111 8.89356667,10 7.00001111,10 Z"
-            id="Stroke-1" stroke={color} strokeWidth="1.5" fill="#FFF" strokeLinejoin="round"
-          />
-          <path d="M13,18 L13,13 C13,11.3368889 11.6392222,10 9.97611111,10 L4.02388889,10 C2.36077778,10 1,11.3368889 1,13 L1,18 L13,18 L13,18 Z"
-            id="Stroke-3" stroke={color} strokeWidth="1.5" fill="#FFF" strokeLinejoin="round"
-          />
-          <path d="M10.0000111,10 C8.10645556,10 6.57145556,8.20911111 6.57145556,6 C6.57145556,3.79088889 8.10645556,2 10.0000111,2 C11.8935667,2 13.4285667,3.79088889 13.4285667,6 C13.4285667,8.20911111 11.8935667,10 10.0000111,10 Z"
-            id="Stroke-1" stroke={color} strokeWidth="1.5" fill="#FFF" strokeLinejoin="round"
-          />
-          <path d="M16,18 L16,13 C16,11.3368889 14.6392222,10 12.9761111,10 L7.02388889,10 C5.36077778,10 4,11.3368889 4,13 L4,18 L16,18 L16,18 Z"
-            id="Stroke-3" stroke={color} strokeWidth="1.5" fill="#FFF" strokeLinejoin="round"
-          />
-          <path d="M13.0000111,10 C11.1064556,10 9.57145556,8.20911111 9.57145556,6 C9.57145556,3.79088889 11.1064556,2 13.0000111,2 C14.8935667,2 16.4285667,3.79088889 16.4285667,6 C16.4285667,8.20911111 14.8935667,10 13.0000111,10 Z"
-            id="Stroke-1" stroke={color} strokeWidth="1.5" fill="#FFF" strokeLinejoin="round"
-          />
-          <path d="M19,18 L19,13 C19,11.3368889 17.6392222,10 15.9761111,10 L10.0238889,10 C8.36077778,10 7,11.3368889 7,13 L7,18 L19,18 L19,18 Z"
-            id="Stroke-3" stroke={color} strokeWidth="1.5" fill="#FFF" strokeLinejoin="round"
-          />
-        </g>
-      </g>
-    </g>
-  </svg>,
   Apps: ({color, width, height}) => <svg width={width || 18} height={height || 18} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
     <g id="1" fill="none" fillRule="evenodd">
       <g id="icons" transform="translate(-486 -519)">
@@ -822,32 +778,6 @@ const ICONS = {
           <path d="M2,8 L16.9991283,8 C17.5518945,8 18,7.54902482 18,7.00922203 L18,2.99077797 C18,2.44358641 17.5553691,2 16.9991283,2 L3.00087166,2 C2.4481055,2 2,2.45097518 2,2.99077797 L2,8 Z"
             id="icon-square-copy-2" stroke={color} strokeWidth="1.5" fill="#FAFAFA"
             strokeLinecap="round" strokeLinejoin="round" />
-        </g>
-      </g>
-    </g>
-  </svg>,
-  AddReport: ({color, width, height}) => <svg width={width || 18} height={height || 18} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-    <g id="1" fill="none" fillRule="evenodd">
-      <g id="icons" transform="translate(-539 -519)">
-        <g id="iconDashboard" transform="translate(537 518)">
-          <rect id="bounds" fillOpacity="0" fill="#E3E3E6" width="20" height="20"
-          />
-          <path d="M12.5,10.5 L12.5,14.5" id="---" stroke={color} strokeWidth="1.5"
-            strokeLinecap="square" strokeLinejoin="round" />
-          <path d="M10,5 L4,5 C3.44771525,5 3,5.44771525 3,6 L3,17 C3,17.5522847 3.44771525,18 4,18 L15,18 C15.5522847,18 16,17.5522847 16,17 L16,11"
-            id="Path-4" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
-          />
-          <g id="plus" transform="translate(13.25 2.25)" stroke={color} strokeLinecap="square"
-            strokeLinejoin="round" strokeWidth="1.5">
-            <path d="M2.80892073,5.61784146 L2.80892073,3.73034936e-14" id="Stroke-1"
-            />
-            <path d="M5.61784146,2.80892073 L3.73034936e-14,2.80892073" id="Stroke-2"
-            />
-          </g>
-          <path d="M9.5,11.5 L9.5,14.5" id="---" stroke={color} strokeWidth="1.5"
-            strokeLinecap="square" strokeLinejoin="round" />
-          <path d="M6.5,9.5 L6.5,14.5" id="---" stroke={color} strokeWidth="1.5"
-            strokeLinecap="square" strokeLinejoin="round" />
         </g>
       </g>
     </g>
@@ -874,38 +804,6 @@ const ICONS = {
       </g>
     </g>
   </svg>,
-  Security: ({color, width, height}) => <svg width={width || 20} height={height || 20} viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-    <g id="1" fill="none" fillRule="evenodd">
-      <g id="icons" transform="translate(-434 -570)">
-        <g id="IconSecurity" transform="translate(434 570)">
-          <rect id="bounds" fillOpacity="0" fill="#E3E3E6" width="20" height="20"
-          />
-          <polygon id="Path" stroke={color} strokeWidth="1.5" points="10 1 1 4 4 15 10 19 16 15 19 4"
-          />
-          <circle id="Oval" stroke={color} strokeWidth="1.5" cx="10" cy="6.5"
-            r="2.75" />
-          <path d="M5,15.5 C5,15.3338815 5.01620211,14.1715473 5.04711229,14.0144913 C5.27311546,12.866159 6.28540659,12 7.5,12 L12.5,12 C13.7163773,12 14.7298576,12.8687051 14.9538784,14.0195528 C14.984144,14.1750342 15,15.3356654 15,15.5"
-            id="Path" stroke={color} strokeWidth="1.5" />
-        </g>
-      </g>
-    </g>
-  </svg>,
-  Save: ({color, width, height}) => <svg width={width || 18} height={height || 17} viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
-    <g id="1" fill="none" fillRule="evenodd">
-      <g id="icons" transform="translate(-486 -571)">
-        <g id="IconSave" transform="translate(485 570)">
-          <rect id="bounds" fillOpacity="0" fill="#E3E3E6" width="20" height="20"
-          />
-          <polygon id="Stroke-3" stroke={color} strokeWidth="1.5" strokeLinecap="round"
-            strokeLinejoin="round" points="2 17 18 17 18 3.875 10 3.875 8 2 2 2 2 3.875"
-          />
-          <polygon id="Star" stroke={color} strokeWidth="1.5" strokeLinecap="square"
-            strokeLinejoin="round" points="9.5 12.75 6.85496636 14.1405765 7.36012284 11.1952882 5.22024568 9.10942353 8.17748318 8.67971176 9.5 6 10.8225168 8.67971176 13.7797543 9.10942353 11.6398772 11.1952882 12.1450336 14.1405765"
-          />
-        </g>
-      </g>
-    </g>
-  </svg>,
   Progress: ({color, width, height}) => <svg width={width || 18} height={height || 18} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
     <g id="1" fill="none" fillRule="evenodd">
       <g id="icons" transform="translate(-538 -571)">
@@ -923,22 +821,6 @@ const ICONS = {
             <path d="M9.04597778,0.106833333 C10.8553111,0.3325 12.4769778,1.16227778 13.7027556,2.38805556 C14.9285333,3.61383333 15.7584222,5.23561111 15.9840889,7.04494444"
               id="Stroke-7" />
           </g>
-        </g>
-      </g>
-    </g>
-  </svg>,
-  Report: ({color, width, height}) => <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-    <g id="Dashboards-(release)" fill="none" fillRule="evenodd">
-      <g id="dashboard.edit" transform="translate(-337 -598)">
-        <rect fill="#FAFAFA" width="1440" height="1058" />
-        <g id="icon-/-reports-/-single" transform="translate(334 595)">
-          <rect id="bounds" width="24" height="24" />
-          <path
-            d="M3,3 L21,3 L21,21 L3,21 L3,3 Z M5,5 L5,19 L19,19 L19,5 L5,5 Z M7,8 L15,8 L15,10 L7,10 L7,8 Z M7,11 L17,11 L17,13 L7,13 L7,11 Z M7,14 L14,14 L14,16 L7,16 L7,14 Z"
-            id="Shape"
-            fill={color}
-            fillRule="nonzero"
-          />
         </g>
       </g>
     </g>
