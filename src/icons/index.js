@@ -60,7 +60,7 @@ import EgressLeft from './symbols/egress-left.js';
 import Filter from './symbols/filter.js';
 import FoodUtensils from './symbols/food-utensils.js';
 import Globe from './symbols/globe.js';
-import Health from './symbols/health.js';
+import HeartBeat from './symbols/heart-beat.js';
 import Heart from './symbols/heart.js';
 import Help from './symbols/help.js';
 import ImageUpload from './symbols/image-upload.js';
@@ -262,9 +262,11 @@ const ICONS = {
   Filter: Filter,
   FoodUtensils: FoodUtensils,
   Globe: Globe,
-  Health: Health,
-  Heartbeat: Health,
+
+  HeartBeat: HeartBeat,
+  Heartbeat: HeartBeat,
   Heart: Heart,
+
   Help: Help,
   ImageUpload: ImageUpload,
   Info: Info,

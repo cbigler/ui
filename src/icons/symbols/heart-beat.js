@@ -1,6 +1,6 @@
 import React from "react";
 
-const Health = ({ width, height, color }) => (
+const HeartBeat = ({ width, height, color }) => (
   <svg width={width || 24} height={height || 24} viewBox="0 0 24 24">
     <g fill="none" fillRule="evenodd">
       <rect width={24} height={24} />
@@ -13,4 +13,4 @@ const Health = ({ width, height, color }) => (
   </svg>
 );
 
-export default Health;
+export default HeartBeat;
