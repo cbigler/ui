@@ -3,7 +3,7 @@ import React from "react";
 const StarOutline = ({ width, height, color }) => (
   <svg width={width || 24} height={height || 24} viewBox="0 0 24 24">
     <g fill="none" fillRule="evenodd">
-      <rect width={24} height={24} fill="#E3E3E6" fillOpacity={0.01} />
+      <rect width={24} height={24} />
       <path
         fill={color}
         fillRule="nonzero"

@@ -181,7 +181,7 @@ export class SelectBox extends React.Component {
           <div className={classnames(styles.inputBoxSelectBoxValueCaret, {
             [styles.inputBoxSelectBoxValueCaretOpened]: opened,
           })}>
-            <Icons.ChevronDown color="primary" width={12} height={12} />
+            <Icons.ChevronDown color="primary" />
           </div>
         </div>
 

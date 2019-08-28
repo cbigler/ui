@@ -174,7 +174,7 @@ export default class TagInput extends Component {
                   {tag.label}
                 </div>
                 <div className={styles.closeIcon} onClick={() => onRemoveTag(tag)}>
-                  <Icons.Close width={12} height={12} color="#fff" />
+                  <Icons.Close color="#fff" />
                 </div>
               </div>
             ))}
