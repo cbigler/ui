@@ -152,6 +152,18 @@ import UtilityRoom from './space-functions/utility-room.js';
 import Building from './space-types/building.js';
 import Floor from './space-types/floor.js';
 import Space from './space-types/space.js';
+import L from './legacy/l.js';
+import Image from './legacy/image.js';
+import Folder from './legacy/folder.js';
+import Bucket from './legacy/bucket.js';
+import Plane from './legacy/plane.js';
+import Soup from './legacy/soup.js';
+import DragDrop from './legacy/drag-drop.js';
+import Zoom from './legacy/zoom.js';
+import Export from './legacy/export.js';
+import Circle from './legacy/circle.js';
+import Progress from './legacy/progress.js';
+import VisibilityShow from './symbols/visibility-show.js';
 
 // A list of all density icons.
 const ICONS = {
@@ -328,7 +340,12 @@ const ICONS = {
   Menu: Tray,
   Upload: Upload,
   Video: Video,
+
   VisibilityHide: VisibilityHide,
+  Hide: VisibilityHide,
+  VisibilityShow: VisibilityShow,
+  Show: VisibilityShow,
+
   Workflow: Workflow,
 
 
@@ -360,190 +377,17 @@ const ICONS = {
   Space: Space,
 
 
-  L: ({color, width, height}) => <svg width={width || '6'} height={height || '8'} viewBox='0 0 6 8' xmlns='http://www.w3.org/2000/svg'>
-    <g id='1' fill='none' fillRule='evenodd'>
-        <g id='icons' transform='translate(-389 -576)'>
-            <g id='IconL' transform='translate(382 570)'>
-                <rect id='bounds' fillOpacity='0' fill='#E3E3E6' width='20' height='20'
-                />
-                <polyline id='Path-10' stroke={color} strokeWidth='1.5' points='8 6 8 13 13 13'
-                />
-            </g>
-          </g>
-      </g>
-  </svg>,
-  Image: ({color, width, height}) => <svg width={width || '18'} height={height || '18'} viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'>
-      <g id='Page-1' fill='none' fillRule='evenodd'>
-          <g id='IconImage' transform='translate(-1 -1)'>
-              <rect id='bounds' fillOpacity='0' fill={color} width='20' height='20'
-              />
-              <polygon id='icon-square-copy' stroke={color} strokeWidth='1.5' strokeLinecap='round'
-              strokeLinejoin='round' points='2 18 18 18 18 2 2 2' />
-              <polyline id='Path-2' stroke={color} strokeWidth='1.5' points='1.99926758 18.0160522 6.0098877 11.0065918 9 14.0160522 13.0057373 6.97216797 18 18.0160522'
-              />
-              <circle id='Oval' stroke={color} strokeWidth='1.5' cx='6' cy='6' r='2'
-              />
-          </g>
-      </g>
-  </svg>,
-  Folder: ({color, width, height}) => <svg width='18' height='17' viewBox='0 0 18 17' xmlns='http://www.w3.org/2000/svg'>
-      <g id='1' fill='none' fillRule='evenodd'>
-          <g id='icons' transform='translate(-331 -571)'>
-              <g id='IconFolder' transform='translate(330 570)'>
-                  <rect id='bounds' fillOpacity='0' fill='#E3E3E6' width='20' height='20'
-                  />
-                  <polygon id='Stroke-3' stroke={color} strokeWidth='1.5' strokeLinecap='round'
-                  strokeLinejoin='round' points='2 17 18 17 18 3.875 10 3.875 8 2 2 2 2 3.875'
-                  />
-                  <rect id='Rectangle' stroke={color} strokeWidth='1.5' strokeLinecap='round'
-                  strokeLinejoin='round' x='2' y='7' width='16' height='10' />
-              </g>
-          </g>
-      </g>
-  </svg>,
-  Bucket: ({color, width, height}) => <svg width={width || "16"} height={height || "14"} viewBox="0 0 16 14" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconBucket" transform="translate(-2 -3)">
-              <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
-              />
-              <g id="Group-7" transform="translate(2 4)" stroke={color} strokeLinejoin="round"
-              strokeWidth="1.5">
-                  <polygon id="Stroke-1" points="2 0 4 12 12 12 14 0" />
-                  <path d="M9.06065556,4.56065556 C8.47487778,5.14643333 7.5251,5.14643333 6.93932222,4.56065556 C6.35354444,3.97487778 6.35354444,3.0251 6.93932222,2.43932222 C7.5251,1.85354444 8.47487778,1.85354444 9.06065556,2.43932222 C9.64643333,3.0251 9.64643333,3.97487778 9.06065556,4.56065556 L9.06065556,4.56065556 Z"
-                  id="Stroke-3" strokeLinecap="round" />
-                  <path d="M0,0 L16,0" id="Stroke-5" />
-                  <path d="M6.93934444,4.56065556 L1.00001111,10.9999889" id="Stroke-7"
-                  />
-              </g>
-          </g>
-      </g>
-  </svg>,
-  Plane: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconPlane" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
-              <path d="M7.25,7.53647451 L1.6645898,10.3291796 C1.41050178,10.4562236 1.25,10.715921 1.25,11 L1.25,14 C1.25,14.5119183 1.75152249,14.8733953 2.23717082,14.7115125 L7.25,13.0405694 L7.25,14.5364745 L5.6645898,15.3291796 C5.41050178,15.4562236 5.25,15.715921 5.25,16 L5.25,18 C5.25,18.4142136 5.58578644,18.75 6,18.75 L14,18.75 C14.4142136,18.75 14.75,18.4142136 14.75,18 L14.75,16 C14.75,15.715921 14.5894982,15.4562236 14.3354102,15.3291796 L12.75,14.5364745 L12.75,13.0405694 L17.7628292,14.7115125 C18.2484775,14.8733953 18.75,14.5119183 18.75,14 L18.75,11 C18.75,10.715921 18.5894982,10.4562236 18.3354102,10.3291796 L12.75,7.53647451 L12.75,4 L11.25,4 L11.25,8 C11.25,8.28407904 11.4105018,8.54377638 11.6645898,8.67082039 L17.25,11.4635255 L17.25,12.9594306 L12.2371708,11.2884875 C11.7515225,11.1266047 11.25,11.4880817 11.25,12 L11.25,15 C11.25,15.284079 11.4105018,15.5437764 11.6645898,15.6708204 L13.25,16.4635255 L13.25,17.25 L6.75,17.25 L6.75,16.4635255 L8.3354102,15.6708204 C8.58949822,15.5437764 8.75,15.284079 8.75,15 L8.75,12 C8.75,11.4880817 8.24847751,11.1266047 7.76282918,11.2884875 L2.75,12.9594306 L2.75,11.4635255 L8.3354102,8.67082039 C8.58949822,8.54377638 8.75,8.28407904 8.75,8 L8.75,4 L7.25,4 L7.25,7.53647451 Z"
-              id="Stroke-1" />
-              <path d="M8.75,4 C8.75,3.30965801 9.30965801,2.75 10,2.75 C10.690342,2.75 11.25,3.30965801 11.25,4 L12.75,4 C12.75,2.48123088 11.5187691,1.25 10,1.25 C8.48123088,1.25 7.25,2.48123088 7.25,4 L8.75,4 Z"
-              id="Stroke-3" />
-          </g>
-      </g>
-  </svg>,
-  Soup: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconSoup" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
-              <path d="M2.78892499,10.7465793 C3.16684474,14.3667532 6.25018659,17.1914069 10,17.1914069 C13.7498823,17.1914069 16.8331675,14.3667845 17.2110765,10.7465793 L2.78892499,10.7465793 Z M18.75,9.99657931 C18.75,14.7997474 14.8313527,18.6914069 10,18.6914069 C5.16872164,18.6914069 1.25,14.7997109 1.25,9.99657931 C1.25,9.58236575 1.58578644,9.24657931 2,9.24657931 L18,9.24657931 C18.4142136,9.24657931 18.75,9.58236575 18.75,9.99657931 Z"
-              id="Stroke-1" />
-              <path d="M9.46174456,1.52946724 C9.34115216,1.65374725 9.18223142,1.85326153 9.02588809,2.11984878 C8.42176924,3.14995593 8.37684001,4.31763642 9.28937354,5.36871412 C9.34658873,5.43461592 9.40729773,5.49945645 9.47150813,5.56322402 C9.55799386,5.64017352 9.6540801,5.74195867 9.75206571,5.88467978 C10.1139506,6.41178385 10.1139506,6.88212563 9.49015659,7.46031814 L10.5098434,8.56042668 C11.7379012,7.42214411 11.7379012,6.12696865 10.988675,5.03568191 C10.8088829,4.77380532 10.6271913,4.58133759 10.4892548,4.46261702 C10.4902947,4.46096637 10.4548445,4.42310368 10.4220536,4.38533433 C9.99179343,3.88975045 10.0103979,3.40623217 10.3197909,2.87867382 C10.408818,2.72687027 10.4952676,2.61833858 10.5382554,2.5740362 L9.46174456,1.52946724 Z"
-              id="Stroke-3" />
-              <path d="M14.1160668,1.52946724 C13.9954744,1.65374725 13.8365536,1.85326153 13.6802103,2.11984878 C13.0760915,3.14995593 13.0311622,4.31763642 13.9436958,5.36871412 C14.000911,5.43461592 14.06162,5.49945645 14.1258304,5.56322402 C14.2123161,5.64017352 14.3084023,5.74195867 14.4063879,5.88467978 C14.7682728,6.41178385 14.7682728,6.88212563 14.1444788,7.46031814 L15.1641656,8.56042668 C16.3922235,7.42214411 16.3922235,6.12696865 15.6429973,5.03568191 C15.4632051,4.77380532 15.2815135,4.58133759 15.143577,4.46261702 C15.1446169,4.46096637 15.1091668,4.42310368 15.0763759,4.38533433 C14.6461157,3.88975045 14.6647201,3.40623217 14.9741131,2.87867382 C15.0631402,2.72687027 15.1495898,2.61833858 15.1925777,2.5740362 L14.1160668,1.52946724 Z"
-              id="Stroke-5" />
-              <path d="M4.72100011,1.52946724 C4.60040771,1.65374725 4.44148698,1.85326153 4.28514364,2.11984878 C3.68102479,3.14995593 3.63609557,4.31763642 4.5486291,5.36871412 C4.60584429,5.43461592 4.66655329,5.49945645 4.73076369,5.56322402 C4.81724942,5.64017352 4.91333565,5.74195867 5.01132127,5.88467978 C5.37320616,6.41178385 5.37320616,6.88212563 4.74941215,7.46031814 L5.76909896,8.56042668 C6.9971568,7.42214411 6.9971568,6.12696865 6.24793059,5.03568191 C6.06813842,4.77380532 5.88644688,4.58133759 5.74851033,4.46261702 C5.74955025,4.46096637 5.7141001,4.42310368 5.68130919,4.38533433 C5.25104899,3.88975045 5.26965348,3.40623217 5.57904648,2.87867382 C5.66807352,2.72687027 5.75452315,2.61833858 5.797511,2.5740362 L4.72100011,1.52946724 Z"
-              id="Stroke-7" />
-          </g>
-      </g>
-  </svg>,
-  DragDrop: ({color, width, height}) => <svg width={width || "18"} height={height || "17"} viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconDragDrop" transform="translate(-1 -2)" fill={color} fillRule="nonzero">
-              <g id="Group-4" transform="translate(1 2)">
-                  <path d="M16.15,7.25 L11.25,7.25 L11.25,8.75 L12,8.75 L15.4,8.75 L16.15,8.75 L16.15,7.25 Z M6.75,7.25 L1.85,7.25 L1.85,8.75 L6.75,8.75 L6.75,7.25 Z"
-                  id="Stroke-3" />
-                  <path d="M8.25,0.85 L8.25,5.75 L9.75,5.75 L9.75,0.85 L8.25,0.85 Z M8.25,10.25 L8.25,15.15 L9.75,15.15 L9.75,10.25 L8.25,10.25 Z"
-                  id="Stroke-3" />
-                  <path d="M10.6,3.46066017 L11.6606602,2.4 L9.53033009,0.269669914 C9.23743687,-0.0232233047 8.76256313,-0.0232233047 8.46966991,0.269669914 L6.33933983,2.4 L7.4,3.46066017 L9,1.86066017 L10.6,3.46066017 Z"
-                  id="Stroke-3" />
-                  <path d="M10.6,16.2606602 L11.6606602,15.2 L9.53033009,13.0696699 C9.23743687,12.7767767 8.76256313,12.7767767 8.46966991,13.0696699 L6.33933983,15.2 L7.4,16.2606602 L9,14.6606602 L10.6,16.2606602 Z"
-                  id="Stroke-3-Copy-5" transform="rotate(-180 9 14.555)" />
-                  <path d="M4.2,9.71599636 L5.26066017,8.65533619 L3.13033009,6.5250061 C2.83743687,6.23211288 2.36256313,6.23211288 2.06966991,6.5250061 L-0.0606601718,8.65533619 L1,9.71599636 L2.6,8.11599636 L4.2,9.71599636 Z"
-                  id="Stroke-3-Copy-6" transform="rotate(-90 2.6 8.01)" />
-                  <path d="M17,9.71599636 L18.0606602,8.65533619 L15.9303301,6.5250061 C15.6374369,6.23211288 15.1625631,6.23211288 14.8696699,6.5250061 L12.7393398,8.65533619 L13.8,9.71599636 L15.4,8.11599636 L17,9.71599636 Z"
-                  id="Stroke-3-Copy-7" transform="rotate(90 15.4 8.01)" />
-              </g>
-          </g>
-      </g>
-  </svg>,
-  Zoom: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconZoom" transform="translate(-1 -1)">
-              <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
-              />
-              <g id="Group" transform="translate(2 2)" stroke={color} strokeLinejoin="round"
-              strokeWidth="1.5">
-                  <path d="M9.5,13 C5.91019444,13 3,10.0898056 3,6.5 C3,2.91010417 5.91019444,0 9.5,0 C13.0898958,0 16,2.91010417 16,6.5 C16,10.0898056 13.0898958,13 9.5,13 Z"
-                  id="icon_circle" strokeLinecap="round" />
-                  <path d="M12.4224494,6.58823529 L6.76470588,6.58823529" id="Stroke-2"
-                  strokeLinecap="square" />
-                  <path d="M9.59357767,3.75936351 L9.59357767,9.41710708" id="Stroke-2"
-                  strokeLinecap="square" />
-                  <path d="M0,16 L4,12" id="Path-6" strokeLinecap="square" />
-              </g>
-          </g>
-      </g>
-  </svg>,
-  Export: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconExport" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
-              <path d="M15.25,17.25 L2.75,17.25 L2.75,4.75 L10.75,4.75 L10.75,3.25 L2,3.25 C1.58578644,3.25 1.25,3.58578644 1.25,4 L1.25,18 C1.25,18.4142136 1.58578644,18.75 2,18.75 L16,18.75 C16.4142136,18.75 16.75,18.4142136 16.75,18 L16.75,9.25 L15.25,9.25 L15.25,17.25 Z"
-              id="Stroke-1" />
-              <path d="M17.25,2.75 L17.25,7.75 L18.75,7.75 L18.75,2 C18.75,1.58578644 18.4142136,1.25 18,1.25 L12.25,1.25 L12.25,2.75 L17.25,2.75 Z"
-              id="Stroke-3" />
-              <polygon id="Stroke-5" points="17.4696699 1.46966991 6.46966991 12.4696699 7.53033009 13.5303301 18.5303301 2.53033009"
-              />
-          </g>
-      </g>
-  </svg>,
-  Circle: ({color, width, height}) => <svg width={width || "18"} height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconCircle" transform="translate(-1 -1)" fill={color} fillRule="nonzero">
-              <path d="M10,17.25 C14.0040798,17.25 17.25,14.0040486 17.25,10 C17.25,5.99588023 14.0041198,2.75 10,2.75 C5.99595135,2.75 2.75,5.99592021 2.75,10 C2.75,14.0040087 5.99599134,17.25 10,17.25 Z M10,18.75 C5.16756422,18.75 1.25,14.8324358 1.25,10 C1.25,5.16748987 5.16752745,1.25 10,1.25 C14.8325469,1.25 18.75,5.1674531 18.75,10 C18.75,14.8324725 14.8325101,18.75 10,18.75 Z"
-              id="icon_circle" />
-          </g>
-      </g>
-  </svg>,
-  Progress: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconProgress" transform="translate(-1 -1)">
-              <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
-              />
-              <g id="Page-1" transform="translate(2 2)" stroke={color} strokeLinejoin="round"
-              strokeWidth="1.5">
-                  <path d="M0.106911111,7.05244444 C0.331133333,5.24011111 1.16157778,3.61555556 2.38902222,2.38811111 C3.6148,1.16233333 5.23657778,0.332444444 7.04591111,0.106888889"
-                  id="Stroke-1" />
-                  <path d="M7.04592222,15.9830444 C5.23658889,15.7573778 3.61492222,14.9276 2.38914444,13.7018222 C1.16158889,12.4743778 0.331144444,10.8498222 0.106922222,9.03748889"
-                  id="Stroke-3" />
-                  <path d="M15.9840444,9.04496667 C15.7583778,10.8543 14.9286,12.4759667 13.7028222,13.7017444 C12.4753778,14.9293 10.8508222,15.7597444 9.03837778,15.9839667"
-                  id="Stroke-5" />
-                  <path d="M9.04597778,0.106833333 C10.8553111,0.3325 12.4769778,1.16227778 13.7027556,2.38805556 C14.9285333,3.61383333 15.7584222,5.23561111 15.9840889,7.04494444"
-                  id="Stroke-7" />
-              </g>
-          </g>
-      </g>
-  </svg>,
-  Show: ({color, width, height}) => <svg width={width || "18"} height={height || "14"} viewBox="0 0 18 14" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconShow" transform="translate(-1 -3)">
-              <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
-              />
-              <path d="M10,16 C5.58177778,16 2,13.3136667 2,10 C2,6.68625 5.58177778,4 10,4 C14.4183333,4 18,6.68625 18,10 C18,13.3136667 14.4183333,16 10,16 Z"
-              id="icon_circle" stroke={color} strokeWidth="1.5" strokeLinecap="round"
-              strokeLinejoin="round" />
-              <circle id="Oval-2" stroke={color} strokeWidth="1.5" cx="10" cy="10" r="2"
-              />
-          </g>
-      </g>
-  </svg>,
-  Hide: ({color, width, height}) => <svg width={width || "18"} height={height || "14"} viewBox="0 0 18 14" xmlns="http://www.w3.org/2000/svg">
-      <g id="Page-1" fill="none" fillRule="evenodd">
-          <g id="IconHide" transform="translate(-1 -3)">
-              <rect id="bounds" fillOpacity="0" fill={color} width="20" height="20"
-              />
-              <path d="M10,16 C5.58177778,16 2,13.3136667 2,10 C2,6.68625 5.58177778,4 10,4 C14.4183333,4 18,6.68625 18,10 C18,13.3136667 14.4183333,16 10,16 Z"
-              id="icon_circle" stroke={color} strokeWidth="1.5" strokeLinecap="round"
-              strokeLinejoin="round" />
-              <path d="M2,10 L18,10" id="Path-9" stroke={color} strokeWidth="1.5" />
-          </g>
-      </g>
-  </svg>,
+  L: L,
+  Image: Image,
+  Folder: Folder,
+  Bucket: Bucket,
+  Plane: Plane,
+  Soup: Soup,
+  DragDrop: DragDrop,
+  Zoom: Zoom,
+  Export: Export,
+  Circle: Circle,
+  Progress: Progress,
   Locate: ({color, width, height}) => <svg width={width || "18"} height={height || "18"} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" fill="none" fillRule="evenodd">
           <g id="IconLocate" transform="translate(-1 -1)">
