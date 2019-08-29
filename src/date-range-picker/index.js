@@ -56,8 +56,8 @@ export default function DateRangePicker(props) {
         anchor={context === 'SMALL_WIDTH' ? ANCHOR_RIGHT : props.anchor}
         value={{
           id: 'icon',
-          label: <div style={{ marginTop: 3, marginLeft: -6, marginRight: 2 }}>
-            <Icons.Calendar color="dark" />
+          label: <div style={{ marginTop: 4, marginLeft: -5, marginRight: 3 }}>
+            <Icons.Calendar width={22} height={22} color="dark" />
           </div>,
         }}
         choices={props.commonRanges.map(range => Object.assign({}, range, {

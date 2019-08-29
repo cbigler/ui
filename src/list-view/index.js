@@ -13,8 +13,8 @@ const TABLE_HEADER = 'TABLE_HEADER',
     'right': 'flex-end'
   },
   SORT_INDICATORS = {
-    'asc': <div style={{marginLeft: 8}}><Icons.ArrowUp height={10} /></div>,
-    'desc': <div style={{marginLeft: 8}}><Icons.ArrowDown height={10} /></div>
+    'asc': <div style={{marginLeft: 8, marginRight: -20}}><Icons.ArrowUp height={12} width={12} /></div>,
+    'desc': <div style={{marginLeft: 8, marginRight: -20}}><Icons.ArrowDown height={12} width={12} /></div>
   };
 
 const ListViewContext = React.createContext({});

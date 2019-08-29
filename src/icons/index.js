@@ -64,6 +64,8 @@ import HeartBeat from './symbols/heart-beat.js';
 import Heart from './symbols/heart.js';
 import Help from './symbols/help.js';
 import ImageUpload from './symbols/image-upload.js';
+import ImpersonateOff from './symbols/impersonate-off.js';
+import ImpersonateOn from './symbols/impersonate-on.js';
 import Info from './symbols/info.js';
 import IngressRight from './symbols/ingress-right.js';
 import IngressUp from './symbols/ingress-up.js';
@@ -112,7 +114,8 @@ import Security1 from './symbols/security-1.js';
 import Security2 from './symbols/security-2.js';
 import Security3 from './symbols/security-3.js';
 import Security4 from './symbols/security-4.js';
-import Share from './symbols/share.js';
+import Share1 from './symbols/share-1.js';
+import Share2 from './symbols/share-2.js';
 import SoundOff from './symbols/sound-off.js';
 import SoundOn from './symbols/sound-on.js';
 import SpaceAdd from './symbols/space-add.js';
@@ -269,6 +272,8 @@ const ICONS = {
 
   Help: Help,
   ImageUpload: ImageUpload,
+  ImpersonateOff: ImpersonateOff,
+  ImpersonateOn: ImpersonateOn,
   Info: Info,
 
   IngressRight: IngressRight,
@@ -340,7 +345,9 @@ const ICONS = {
   Security4: Security4,
   Security: Security1,
 
-  Share: Share,
+  Share1: Share1,
+  Share2: Share2,
+  Share: Share2,
   SoundOff: SoundOff,
   SoundOn: SoundOn,
   SpaceAdd: SpaceAdd,

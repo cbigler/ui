@@ -29,7 +29,7 @@
   font-size: 14px;
   height: 28px;
   padding-left: 8px;
-  padding-right: 8px;
+  padding-right: 1px;
   margin-right: 8px;
   cursor: default;
   user-select: none;
@@ -45,6 +45,7 @@
 
 .closeIcon {
   margin-left: 12px;
+  margin-top: 2px;
   cursor: pointer;
   &:hover { opacity: 0.8; }
   &:active { opacity: 1; }

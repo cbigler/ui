@@ -122,11 +122,7 @@ export default class InfoPopup extends Component {
         })}
         ref={r => { this.icon = r; }}
       >
-        {target || <Icons.Info
-          width={20}
-          height={20}
-          color={infoIconColor || 'primary'}
-        />}
+        {target || <Icons.Info color={infoIconColor || 'primary'}/>}
       </span>
 
       <div className={styles.infoPopupWrapper}>
