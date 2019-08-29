@@ -147,7 +147,6 @@
   align-items: center;
 }
 // When focused, flip the caret.
-.inputBoxSelectBoxValueCaretOpened  { transform: rotate(180deg); }
 .inputBoxSelectBoxValueOpened { border-color: $brandPrimary; }
 
 // When disabled, a selectbox is grayed out and can't be clicked.
