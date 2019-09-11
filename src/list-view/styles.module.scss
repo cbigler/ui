@@ -3,8 +3,10 @@
 
 .listView {
   position: relative;
-  overflow-x: auto;
   width: 100%;
+}
+.listView.scrollX {
+  overflow-x: auto;
 }
 
 .listViewContainer.scrollX {

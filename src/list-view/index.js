@@ -72,7 +72,7 @@ export default function ListView({
   }, 0);
 
   return (
-    <div className={styles.listView}>
+    <div className={classnames(styles.listView, {[styles.scrollX]: scrollX})}>
       <div
         ref={containerRef}
         className={classnames(styles.listViewContainer, {
