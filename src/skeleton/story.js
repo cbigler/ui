@@ -16,6 +16,9 @@ storiesOf('Skeleton', module)
   .add('Big skeleton', () => (
     <Skeleton width={300} height={24} />
   ))
+  .add('Circular skeleton (square skeleton with border radius)', () => (
+    <Skeleton width={32} height={32} borderRadius={16} />
+  ))
   .add('Primary-colored skeleton', () => (
     <Skeleton color={colorVariables.brandPrimary} width={300} height={24} />
   ))
