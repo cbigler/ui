@@ -1,28 +1,38 @@
-$grayCinder: #222A2E;
-$grayDarkest: #445158;
-$grayDarker: #8E9299;
-$grayDark: #B4B8BF;
-$gray: #CBCFD6;
-$grayLight: #E8E8ED;
-$grayLighter: #F0F0F2;
-$grayLightest: #FAFAFA;
-$brandPrimary: #2C4EB9;
-$brandPrimaryNew: #2C4EB9;
-$brandPrimaryLight: #B6C6F6;
-$brandSuccess: #80CD80;
-$brandDanger: #FF7A68;
-$brandWarning: #FFBA08;
-$brandMuted: $grayDarkest;
-$textColorBase: $grayDarkest;
-$textColorLight: #8E9299;
-$textColor: $textColorLight;
-$headerColor: #4E5457;
-$inputFieldTextColor: #CBCFD6;
-$inputFieldTextActiveColor: #4E5457;
-$inputFieldPlaceholderColor: #9B9B9B;
+$black: #0D183A;
+
+$grayDarkest: #494F5C;
+$grayDarker: #9CA1AC;
+$grayDark: #B8C2CC;
+$grayLight: #C9CED7;
+$grayLighter: #E9ECEF;
+$grayLightest: #F7F9FA;
+
+$brandBlue: #5581FF;
+$brandBlueLight #DDE6FF;
+$brandRed: #F46653;
+$brandRedLight: #FFDCD9;
+$brandYellow: #F4AB4E;
+$brandYellowLight: #FFEED6;
+$brandGreen: #249F70;
+$brandGreenLight: #E0EDEC;
+$brandPurple: #AB67B5;
+$brandPurpleLight: #E4D5E6;
+
+$brandPrimary: $black;
+$brandEmphasis: $brandBlue;
+$brandSuccess: $brandGreen;
+$brandDanger: $brandRed;
+$brandWarning: $brandYellow;
+
+
+
+// Form Controls
+// -------------------------------------
+$formControlActiveColor: $brandEmphasis;
+
+$inputFieldTextColor: $grayDarkest;
+$inputFieldPlaceholderColor: $grayDarker;
 $inputFieldBorderColor: $grayDark;
-$reportBlueLight: #97A6D4;
-$reportGreen: #4E8475;
-$reportYellow: #F9B35B;
-$reportOrange: #F26B40;
-$reportRed: #FF7B6C;
+$inputFieldBorderActiveColor: $formControlActiveColor;
+
+
