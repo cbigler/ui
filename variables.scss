@@ -1,3 +1,5 @@
+// Colors
+// -------------------------------------
 $black: #0D183A;
 
 $grayDarkest: #494F5C;
@@ -8,7 +10,7 @@ $grayLighter: #E9ECEF;
 $grayLightest: #F7F9FA;
 
 $brandBlue: #5581FF;
-$brandBlueLight #DDE6FF;
+$brandBlueLight: #DDE6FF;
 $brandRed: #F46653;
 $brandRedLight: #FFDCD9;
 $brandYellow: #F4AB4E;
@@ -26,6 +28,26 @@ $brandWarning: $brandYellow;
 
 
 
+// Typography
+// -------------------------------------
+$fontBase: "Aeonik", "Helvetica", "Arial", sans-serif;
+$fontMonospace: "Source Code Pro", "Menlo", "Monaco", "Consolas", "Courier New", monospace;
+$fontWeightNormal: 400;
+$fontWeightMedium: 600;
+$fontWeightBold: 900;
+
+
+
+// Scaffolding
+// -------------------------------------
+$borderRadiusBase: 4px;
+$borderRadiusSmall: 2px;
+
+// Move this into the reports repo
+// $reportRowHeight: 35px;
+
+
+
 // Form Controls
 // -------------------------------------
 $formControlActiveColor: $brandEmphasis;
@@ -36,3 +58,9 @@ $inputFieldBorderColor: $grayDark;
 $inputFieldBorderActiveColor: $formControlActiveColor;
 
 
+
+// Animations
+// -------------------------------------
+$timingBase: 250ms;
+$timingSmall: 100ms;
+$timingLarge: 350ms;
