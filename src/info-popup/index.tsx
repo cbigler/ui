@@ -1,12 +1,34 @@
-import React, { Component } from 'react';
+import React, { Component, RefObject } from 'react';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
-import propTypes from 'prop-types';
 
 import Icons from '../icons';
 import styles from './styles.scss';
 
-export default class InfoPopup extends Component<any, any> {
+export type InfoPopupProps = {
+  infoIconColor?: string,
+  singleLine?: boolean,
+  horizontalIconOffset?: number,
+  verticalIconOffset?: number,
+  verticalPopupOffset?: number,
+  popupAnchor?: 'left' | 'right' | 'center',
+  popupBackground?: string,
+  popupBorder?: string,
+  popupPadding?: string | number,
+  target?: React.ReactNode,
+  children: React.ReactNode,
+};
+
+export type InfoPopupState = {
+  top: number,
+  left: number,
+  visible: boolean,
+};
+
+export default class InfoPopup extends Component<InfoPopupProps, InfoPopupState> {
+  private icon: RefObject<HTMLSpanElement>;
+  private popup: RefObject<HTMLDivElement>;
+
   constructor(props) {
     super(props);
 
@@ -15,6 +37,9 @@ export default class InfoPopup extends Component<any, any> {
       left: 0,
       visible: false,
     };
+
+    this.icon = React.createRef<HTMLSpanElement>();
+    this.popup = React.createRef<HTMLDivElement>();
 
     this.onShow = this.onShow.bind(this);
     this.onHide = this.onHide.bind(this);
@@ -33,19 +58,25 @@ export default class InfoPopup extends Component<any, any> {
   }
 
   onResize() {
-    if (!(this as any).popup || !(this as any).icon) {
+    if (!this.popup.current || !this.icon.current) {
       return;
     }
-    const { verticalPopupOffset } = this.props;
-    const popupBBox = (this as any).popup.getBoundingClientRect();
-    const iconBBox = (this as any).icon.getBoundingClientRect();
+    const { popupAnchor = 'center', verticalPopupOffset } = this.props;
+    const popupBBox = this.popup.current.getBoundingClientRect();
+    const iconBBox = this.icon.current.getBoundingClientRect();
 
     const windowWidth = window.innerWidth;
 
     let top = iconBBox.bottom + 3 + (verticalPopupOffset || 0);
 
-    // Craft a "left" value that will ensure that the popup is centered underneath the (i).
-    let left = iconBBox.left + (iconBBox.width / 2) - (popupBBox.width / 2);
+    // Craft a "left" value that will ensure that the popup is correctly positioned.
+    console.log(this.props);
+    let left = iconBBox.left;
+    if (popupAnchor === 'center') {
+      left = left + (iconBBox.width / 2) - (popupBBox.width / 2);
+    } else if (popupAnchor === 'right') {
+      left = left - popupBBox.width + iconBBox.width;
+    }
 
     // Attempt to handle the case of the popup going off the left edge of the screen
     if (left < 20) {
@@ -92,6 +123,9 @@ export default class InfoPopup extends Component<any, any> {
       singleLine,
       horizontalIconOffset,
       verticalIconOffset,
+      popupBackground,
+      popupBorder,
+      popupPadding,
       target,
       children,
     } = this.props;
@@ -114,7 +148,7 @@ export default class InfoPopup extends Component<any, any> {
           [styles.infoPopupStockTarget]: !target,
           [styles.infoPopupIconVisible]: visible,
         })}
-        ref={r => { (this as any).icon = r; }}
+        ref={this.icon}
       >
         {target || <Icons.Info color={infoIconColor || 'primary'}/>}
       </span>
@@ -126,8 +160,14 @@ export default class InfoPopup extends Component<any, any> {
               [styles.infoPopupPopupVisible]: visible,
               [styles.infoPopupPopupSingleLine]: singleLine,
             })}
-            style={{top, left}}
-            ref={r => { (this as any).popup = r; }}
+            style={{
+              top,
+              left,
+              background: popupBackground,
+              border: popupBorder,
+              padding: popupPadding
+            }}
+            ref={this.popup}
           >
             {children}
           </div>
@@ -138,17 +178,10 @@ export default class InfoPopup extends Component<any, any> {
   }
 }
 
-// InfoPopup.displayName = 'InfoPopup';
-// InfoPopup.propTypes = {
-//   infoIconColor: propTypes.string,
-//   singleLine: propTypes.bool,
-//   horizontalIconOffset: propTypes.number,
-//   verticalIconOffset: propTypes.number,
-//   target: propTypes.node,
-//   children: propTypes.node.isRequired,
-// };
-
-export const InfoPopupCardWellHighlight: React.FC<any> = p => {
+export const InfoPopupCardWellHighlight: React.FC<{
+  target: React.ReactNode,
+  children: React.ReactNode
+}> = p => {
   const props = Object.assign({}, p);
   const {target, children} = props;
   delete props.target;
@@ -160,9 +193,3 @@ export const InfoPopupCardWellHighlight: React.FC<any> = p => {
     </InfoPopup>
   );
 }
-
-InfoPopupCardWellHighlight.displayName = 'InfoPopupCardWellHighlight';
-InfoPopupCardWellHighlight.propTypes = {
-  target: propTypes.node.isRequired,
-  children: propTypes.node.isRequired,
-};
