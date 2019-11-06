@@ -67,6 +67,7 @@ export default class InfoPopup extends Component<InfoPopupProps, InfoPopupState>
     const iconBBox = this.icon.current.getBoundingClientRect();
 
     const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
 
     let top = iconBBox.bottom + 3 + (verticalPopupOffset || 0);
 
@@ -87,6 +88,11 @@ export default class InfoPopup extends Component<InfoPopupProps, InfoPopupState>
     // Attempt to handle the case of the popup going off the right edge of the screen
     if (left + popupBBox.width > windowWidth-20) {
       left = windowWidth - popupBBox.width - 20;
+    }
+
+    // Place the popup above the target if it is too low
+    if (top + popupBBox.height > windowHeight) {
+      top = iconBBox.top - popupBBox.height - 3;
     }
 
     // Use raw `left` / `top` values, because this popup will render in a portal
