@@ -32,7 +32,6 @@ const InputBoxRaw: React.FC<any> = ({leftIcon, forwardedRef, ...props}) => {
     return <textarea
       {...props}
       style={{width: props.width, height: props.height}}
-      placeholder={props.placeholder}
       className={styles.inputBoxTextarea}
       ref={input}
     />;
