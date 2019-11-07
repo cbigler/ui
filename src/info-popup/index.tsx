@@ -72,7 +72,6 @@ export default class InfoPopup extends Component<InfoPopupProps, InfoPopupState>
     let top = iconBBox.bottom + 3 + (verticalPopupOffset || 0);
 
     // Craft a "left" value that will ensure that the popup is correctly positioned.
-    console.log(this.props);
     let left = iconBBox.left;
     if (popupAnchor === 'center') {
       left = left + (iconBBox.width / 2) - (popupBBox.width / 2);
