@@ -85,9 +85,10 @@ module.exports = {
             loader: 'css-loader',
             options: {
               importLoaders: 1,
-              modules: true,
-              /* for example, dui-styles-button-1SZwRzu8 */
-              localIdentName: 'dui-[name]-[local]-[hash:base64:8]',
+              modules: {
+                /* for example, dui-styles-button-1SZwRzu8 */
+                localIdentName: 'dui-[name]-[local]-[hash:base64:8]',
+              },
             },
           },
           {
