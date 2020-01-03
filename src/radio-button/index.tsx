@@ -10,12 +10,12 @@ const CONTEXT_CLASSES = {
   'LEGACY': styles.contextLegacy
 };
 
-export const RadioButtonContext = React.createContext<any>(null);
+export const RadioButtonContext = React.createContext<string | null>(null);
 
 const RadioButton: React.FC<any> = ({text=null, name, value, defaultChecked, checked, disabled, onChange}) => {
   const unique = v4();
   return <RadioButtonContext.Consumer>{context => (
-    <div className={classnames(CONTEXT_CLASSES[context], styles.radioButton, {
+    <div className={classnames(context && CONTEXT_CLASSES[context], styles.radioButton, {
       [styles.noText]: text === null,
     })}>
       <input
@@ -30,7 +30,7 @@ const RadioButton: React.FC<any> = ({text=null, name, value, defaultChecked, che
         onChange={onChange}
       />
       <label
-        className={classnames(CONTEXT_CLASSES[context], styles.radioButtonLabel)}
+        className={classnames(context && CONTEXT_CLASSES[context], styles.radioButtonLabel)}
         htmlFor={`radio-button-${unique}`}
       >{text}</label>
     </div>

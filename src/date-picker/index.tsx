@@ -15,7 +15,7 @@ const CONTEXT_CLASSES = {
 export const ANCHOR_RIGHT = 'ANCHOR_RIGHT',
   ANCHOR_LEFT = 'ANCHOR_LEFT';
 
-export const DatePickerContext = React.createContext(null);
+export const DatePickerContext = React.createContext<string | null>(null);
 
 const DatePicker: React.FC<any> = (props) => {
   const restProps = Object.assign({}, props);
@@ -26,7 +26,7 @@ const DatePicker: React.FC<any> = (props) => {
   delete restProps.arrowLeftDisabled;
 
   return <DatePickerContext.Consumer>{context => (
-    <div className={classnames(CONTEXT_CLASSES[context], styles.datePicker, {
+    <div className={classnames(context && CONTEXT_CLASSES[context], styles.datePicker, {
       [styles.datePickerAnchorLeft]: !props.anchor || props.anchor === ANCHOR_LEFT,
       [styles.datePickerAnchorRight]: props.anchor === ANCHOR_RIGHT,
       [styles.datePickerFocused]: props.focused,

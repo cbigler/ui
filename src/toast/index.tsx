@@ -5,7 +5,7 @@ import classnames from 'classnames';
 
 import styles from './styles.scss';
 
-export const ToastContext = React.createContext(null);
+export const ToastContext = React.createContext<string | null>(null);
 
 const CONTEXT_CLASSES = {
   MULTILINE: styles.multiline,
@@ -17,7 +17,7 @@ const Toast: React.FC<any> = ({ type, visible, onDismiss, children }) => {
     <div className={classnames(
       styles.toast,
       styles[type],
-      CONTEXT_CLASSES[context],
+      context && CONTEXT_CLASSES[context],
       {[styles.visible]: visible},
     )}>
       <span className={styles.toastText}>{children}</span>

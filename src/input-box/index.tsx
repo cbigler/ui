@@ -16,7 +16,7 @@ const CONTEXT_CLASSES = {
 export const ANCHOR_RIGHT = 'ANCHOR_RIGHT',
   ANCHOR_LEFT = 'ANCHOR_LEFT';
 
-export const InputBoxContext = React.createContext<any>(null);
+export const InputBoxContext = React.createContext<string | null>(null);
 
 const InputBoxRaw: React.FC<any> = ({leftIcon, forwardedRef, ...props}) => {
   const [focused, setFocus] = useState(false);
@@ -146,7 +146,7 @@ export class SelectBox extends React.Component<any, any> {
         <div
           id={id}
           ref={r => { (this as any).selectBoxValueRef = r; }}
-          className={classnames(CONTEXT_CLASSES[context], styles.inputBoxSelectBoxValue, {
+          className={classnames(context && CONTEXT_CLASSES[context], styles.inputBoxSelectBoxValue, {
             [styles.inputBoxSelectBoxValueDisabled]: disabled,
             [styles.inputBoxSelectBoxValueOpened]: opened,
             [styles.invalid]: invalid,
@@ -185,7 +185,7 @@ export class SelectBox extends React.Component<any, any> {
 
         <div
           role="listbox"
-          className={classnames(CONTEXT_CLASSES[context], styles.inputBoxSelectBoxMenu, {
+          className={classnames(context && CONTEXT_CLASSES[context], styles.inputBoxSelectBoxMenu, {
             [styles.inputBoxSelectBoxMenuOpened]: opened,
             [styles.inputBoxSelectBoxMenuAnchorLeft]: (anchor || ANCHOR_LEFT) === ANCHOR_LEFT,
             [styles.inputBoxSelectBoxMenuAnchorRight]: anchor === ANCHOR_RIGHT,
@@ -202,7 +202,7 @@ export class SelectBox extends React.Component<any, any> {
                 key={id}
                 id={`input-box-select-${String(id).replace(' ', '-')}`}
                 role="option"
-                className={classnames(CONTEXT_CLASSES[context], styles.inputBoxSelectBoxMenuLi, {
+                className={classnames(context && CONTEXT_CLASSES[context], styles.inputBoxSelectBoxMenuLi, {
                   [styles.inputBoxSelectBoxMenuLiDisabled]: disabled,
                 })}
                 tabIndex={!choice.disabled && opened ? 0 : -1}

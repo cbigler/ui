@@ -9,7 +9,7 @@ const CONTEXT_CLASSES = {
   'CARD_HEADER': styles.cardHeader,
 };
 
-export const AppBarContext = React.createContext<any>(null);
+export const AppBarContext = React.createContext<string | null>(null);
 
 export const AppBarTitle: React.FC<any> = ({ children }) => {
   return (
@@ -29,7 +29,7 @@ export const AppBarSection: React.FC<any> = ({ children }) => {
 
 const AppBar: React.FC<any> = ({ padding, children }) => {
   const context = useContext(AppBarContext);
-  const containerClasses = classnames(CONTEXT_CLASSES[context], styles.appBar);
+  const containerClasses = classnames(context && CONTEXT_CLASSES[context], styles.appBar);
   return (
     <div className={containerClasses} style={{ padding }}>
       {children}
