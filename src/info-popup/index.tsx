@@ -180,7 +180,7 @@ export default class InfoPopup extends Component<InfoPopupProps, InfoPopupState>
             {children}
           </div>
         </div>,
-        document.querySelector('body')
+        document.querySelector('body') as HTMLBodyElement
       )}
     </span>;
   }

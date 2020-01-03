@@ -112,7 +112,7 @@ const ListView: React.FC<any> = ({
                 className={classnames(styles.listViewRow, {
                   [styles.clickable]: Boolean(onClickRow)
                 })}
-                onClick={onClickRow ? () => onClickRow(item) : null}
+                onClick={onClickRow ? () => onClickRow(item) : undefined}
               >
                 <ListViewContext.Provider value={{
                   mode: TABLE_ROW,
@@ -175,7 +175,7 @@ export const ListViewColumn: React.FC<any> = (props) => {
         style={{width, minWidth, marginLeft: isRowHeader ? (-1 * rowHeaderWidth) : undefined}}
       >
         <div
-          onClick={headerClickable ? () => onClickHeader(id, valueTemplate || template) : null}
+          onClick={headerClickable ? () => onClickHeader(id, valueTemplate || template) : undefined}
           className={classnames(styles.listViewHeader, { [styles.clickable]: headerClickable })}
           style={{height, fontSize, justifyContent: ALIGN_TO_JUSTIFY[align]}}
         >
@@ -187,7 +187,7 @@ export const ListViewColumn: React.FC<any> = (props) => {
   } else {
     const contents = (
       <div
-        onClick={cellClickable ? () => onClick(item) : null}
+        onClick={cellClickable ? () => onClick(item) : undefined}
         className={classnames(styles.listViewCell, { [styles.clickable]: cellClickable })}
         style={{height, fontSize, justifyContent: ALIGN_TO_JUSTIFY[align]}}
       >

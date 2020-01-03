@@ -14,7 +14,7 @@ export const ANCHOR_RIGHT = 'ANCHOR_RIGHT',
   START_DATE_ACTIVE = 'startDate',
   END_DATE_ACTIVE = 'endDate';
 
-export const DateRangePickerContext = React.createContext(null);
+export const DateRangePickerContext = React.createContext<string | null>(null);
 
 // internal date range picker (via ReactDates)
 const ReactDateRangePicker: React.FC<any> = props => {

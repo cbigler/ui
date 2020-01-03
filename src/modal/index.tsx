@@ -12,11 +12,11 @@ const Modal: React.FC<any> = ({
   onBlur,
   onEscape,
 }) => {
-  const dialog = useRef(null);
-  const container = useRef(null);
+  const dialog = useRef<HTMLDivElement>(null);
+  const container = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    dialog.current.focus();
-    container.current.scrollTop = 0;
+    if (dialog.current) { dialog.current.focus(); }
+    if (container.current) { container.current.scrollTop = 0; }
   }, [visible]);
 
   const inlineStyle = {} as any;
