@@ -26,6 +26,7 @@ export const BUTTON_TYPE_STYLES = {
 };
 
 const Button: React.FC<any> = ({
+  ref,
   size,
   children,
   disabled,
@@ -51,6 +52,7 @@ const Button: React.FC<any> = ({
         )}
         style={{ width, height }}
         href={href}
+        forwardedRef={ref}
       >
         {children}
       </a>
@@ -67,6 +69,7 @@ const Button: React.FC<any> = ({
           BUTTON_SIZE_STYLES[size],
         )}
         style={{ width, height }}
+        forwardedRef={ref}
       >
         {children}
       </button>
