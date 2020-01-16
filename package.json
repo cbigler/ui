@@ -1,6 +1,6 @@
 {
   "name": "@density/ui",
-  "version": "20.4.2",
+  "version": "20.4.3",
   "description": "A UI framework for density projects",
   "scripts": {
     "build-storybook": "build-storybook",
@@ -38,7 +38,7 @@
     "babel-loader": "^8.0.5",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.23",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "pretty": "^2.0.0",
     "prop-types": "^15.7.2",
     "react-live": "^2.1.2",

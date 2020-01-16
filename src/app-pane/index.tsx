@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from './styles.module.scss';
+import colors from '../../variables/colors.json';
 
-const AppPane: React.FC<any> = ({ children }) => {
-  return <div className={styles.appPane}>{children}</div>;
+const AppPane: React.FC<any> = ({ backgroundColor=colors.white, children }) => {
+  return <div className={styles.appPane} style={{backgroundColor}}>{children}</div>;
 }
 
 AppPane.displayName = 'AppPane';
