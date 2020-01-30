@@ -12,14 +12,14 @@
   height: 40px;
   padding-right: 16px;
   padding-bottom: 3px;
-  border: 1px solid $gray400;
+  border: 1px solid $gray300;
   border-radius: $borderRadiusBase;
-  background-color: #fff;
+  background-color: $white;
   cursor: text;
   font-family: $fontBase;
 }
 
-.inputBoxFocused { border-color: $midnight; }
+.inputBoxFocused { border-color: $blue; }
 
 .inputBox input {
   flex-grow: 1;
@@ -30,7 +30,7 @@
   background-color: transparent;
   border: 0px;
   outline: none;
-  color: $midnight;
+  color: $gray700;
   font-size: $fontSizeBase;
   font-family: $fontBase;
   width: 100%;
@@ -52,6 +52,10 @@
 }
 .leftIcon svg {
   padding-top: 3px;
+
+  *[fill-rule=nonzero] {
+    fill: $gray400;
+  }
 }
 
 .inputBoxTextarea {
@@ -63,9 +67,9 @@
   padding-left: 17px;
   padding-right: 17px;
   margin: 0;
-  border: 1px solid $gray400;
+  border: 1px solid $gray300;
   border-radius: $borderRadiusBase;
-  background-color: #fff;
+  background-color: $white;
   font-family: $fontBase;
   font-size: $fontSizeBase;
   resize: none;
@@ -78,7 +82,7 @@
   &::-ms-input-placeholder { color: $gray400; }
   &:-ms-input-placeholder { color: $gray400; }
 }
-.inputBoxTextarea:focus { border-color: $midnight; }
+.inputBoxTextarea:focus { border-color: $blue; }
 .inputBoxDisabled {
   border-color: $gray200;
   background-color: $gray200;
@@ -99,8 +103,8 @@
 
   width: calc(100% - 18px - 12px);
 
-  background-color: #fff;
-  border: 1px solid $gray400;
+  background-color: $white;
+  border: 1px solid $gray300;
   border-radius: 4px;
 
   padding-left: 17px;
@@ -123,7 +127,7 @@
   height: (40px - 1px - 1px); // (for borders)
 
   font-size: $fontSizeBase;
-  color: $midnight;
+  color: $gray700;
 
   display: flex;
   flex-direction: row;
@@ -145,9 +149,13 @@
   height: 100%;
   display: flex;
   align-items: center;
+
+  svg *[fill-rule=nonzero] {
+    fill: $gray700;
+  }
 }
 // When focused, flip the caret.
-.inputBoxSelectBoxValueOpened { border-color: $midnight; }
+.inputBoxSelectBoxValueOpened { border-color: $blue; }
 
 // When disabled, a selectbox is grayed out and can't be clicked.
 .inputBoxSelectBoxValueDisabled {
@@ -173,8 +181,8 @@
   width: 100%;
 
   z-index: 999999;
-  color: $midnight;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  color: $gray700;
+  box-shadow: 0px 2px 4px rgba($gray900, 0.1);
   transition: all 100ms ease-in-out;
   user-select: none;
   overflow-y: auto;
@@ -218,13 +226,13 @@
 
   &:focus {
     background-color: $gray100;
-    color: $midnight;
+    color: $gray700;
     text-decoration: underline;
   }
 
   &:hover {
     background-color: $gray100;
-    color: $midnight;
+    color: $gray700;
     text-decoration: underline;
   }
 }
@@ -259,7 +267,7 @@
   font-size: 16px;
 }
 .contextListView.inputBoxSelectBoxValue.inputBoxSelectBoxValueOpened {
-  border: 1px solid $midnight;
+  border: 1px solid $blue;
 }
 .contextListView.inputBoxSelectBoxMenu {
   top: 41px;
@@ -285,10 +293,10 @@
   font-size: 16px;
   font-weight: bold;
   text-decoration: underline;
-  color: #0D183A;
+  color: $gray700;
   background: none;
   border: 1px solid transparent;
 }
 .contextAnalyticsControlBar.inputBoxSelectBoxValue.inputBoxSelectBoxValueOpened {
-  border: 1px solid $midnight;
+  border: 1px solid $blue;
 }
