@@ -14,7 +14,8 @@ const ALIGN_TO_JUSTIFY = {
 };
 const SORT_INDICATORS = {
   'asc': <div style={{marginLeft: 8, marginRight: -20}}><Icons.ArrowUp height={12} width={12} /></div>,
-  'desc': <div style={{marginLeft: 8, marginRight: -20}}><Icons.ArrowDown height={12} width={12} /></div>
+  'desc': <div style={{marginLeft: 8, marginRight: -20}}><Icons.ArrowDown height={12} width={12} /></div>,
+  'none': null,
 };
 
 export type SortDirection = 'asc' | 'desc' | 'none';
@@ -24,18 +25,18 @@ export type SortRule = {
   direction: SortDirection
 }
 
-type ListViewContextType = {
+type ListViewContextType<C extends string = string> = {
   mode: typeof TABLE_ROW | typeof TABLE_HEADER
   height: React.CSSProperties['height']
   fontSize: React.CSSProperties['fontSize']
   rowHeaderWidth: number
   item?: any
   sort?: SortRule[]
-  onClickHeader?: (column: string, value: any) => void
+  onClickHeader?: (column: C, value: any) => void
 }
 
 // In practice, this should not be used, but a React.Context requires a default value
-const DEFAULT_LIST_VIEW_CONTEXT: ListViewContextType = {
+const DEFAULT_LIST_VIEW_CONTEXT: ListViewContextType<string> = {
   mode: 'TABLE_ROW' as const,
   height: 0,
   fontSize: 0,
@@ -110,12 +111,14 @@ export default function ListView<T = any, C extends string = string>(props: List
   } = props;
 
   // Handle scrolling with state, refs, and a listener
-  const containerRef = useRef<HTMLDivElement>();
-  const tableRef = useRef<HTMLTableElement>();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const tableRef = useRef<HTMLTableElement>(null);
   const [tableShadows, setTableShadows] = useState({left: false, right: false});
 
   useEffect(() => {
+    if (!containerRef.current) return;
     function shadowHandler() {
+      if (!(containerRef.current && tableRef.current)) return;
       if (scrollX) {
         const container = containerRef.current.getBoundingClientRect();
         const table = tableRef.current.getBoundingClientRect();
@@ -128,6 +131,7 @@ export default function ListView<T = any, C extends string = string>(props: List
     }
     function cleanup() {
       window.removeEventListener('resize', shadowHandler);
+      if (!containerRef.current) return;
       containerRef.current.removeEventListener('scroll', shadowHandler);
     }
     window.addEventListener('resize', shadowHandler);
@@ -141,6 +145,15 @@ export default function ListView<T = any, C extends string = string>(props: List
     a += n.props.isRowHeader ? n.props.width : 0;
     return a;
   }, 0);
+
+  const headerContextValue: ListViewContextType<C> = {
+    mode: TABLE_HEADER,
+    height: headerHeight,
+    fontSize: headerFontSize,
+    rowHeaderWidth,
+    sort,
+    onClickHeader,
+  }
 
   return (
     <div className={classnames(styles.listView, {[styles.scrollX]: scrollX})}>
@@ -163,14 +176,7 @@ export default function ListView<T = any, C extends string = string>(props: List
           {showHeaders ? (
             <thead>
               <tr className={styles.listViewRow}>
-                <ListViewContext.Provider value={{
-                  mode: TABLE_HEADER,
-                  height: headerHeight,
-                  fontSize: headerFontSize,
-                  rowHeaderWidth,
-                  sort,
-                  onClickHeader,
-                }}>
+                <ListViewContext.Provider value={headerContextValue as any}>
                   {children}
                 </ListViewContext.Provider>
               </tr>
@@ -241,7 +247,7 @@ export function ListViewColumn<T = any>(props: ListViewColumnProps<T>) {
     fontSize,
     rowHeaderWidth,
     item,
-    sort,
+    sort = [],
     onClickHeader,
   } = useContext(ListViewContext);
   
@@ -259,7 +265,7 @@ export function ListViewColumn<T = any>(props: ListViewColumnProps<T>) {
         style={{width, minWidth, marginLeft: isRowHeader ? (-1 * rowHeaderWidth) : undefined}}
       >
         <div
-          onClick={headerClickable ? () => onClickHeader(id, valueTemplate || template) : undefined}
+          onClick={headerClickable && onClickHeader ? () => onClickHeader(id, valueTemplate || template) : undefined}
           className={classnames(styles.listViewHeader, { [styles.clickable]: headerClickable })}
           style={{height, fontSize, justifyContent: ALIGN_TO_JUSTIFY[align]}}
         >
