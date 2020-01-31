@@ -1,11 +1,16 @@
 {
   "white":            "#fff",
   "midnight":         "#0D183A",
-  "midnightOpaque80": "rgba(13, 24, 58, 0.8)",
-  "midnightOpaque40": "rgba(13, 24, 58, 0.4)",
-  "midnightOpaque20": "rgba(13, 24, 58, 0.2)",
-  "midnightOpaque10": "rgba(13, 24, 58, 0.1)",
-  "midnightOpaque05": "rgba(13, 24, 58, 0.05)",
+  "midnightTransparent80": "rgba(13, 24, 58, 0.8)",
+  "midnightTransparent40": "rgba(13, 24, 58, 0.4)",
+  "midnightTransparent20": "rgba(13, 24, 58, 0.2)",
+  "midnightTransparent10": "rgba(13, 24, 58, 0.1)",
+  "midnightTransparent05": "rgba(13, 24, 58, 0.05)",
+  $midnightOpaque80: #3F465F;
+$midnightOpaque40: #9FA3AF;
+$midnightOpaque20: #CFD1D7;
+$midnightOpaque10: #E6E7EB;
+$midnightOpaque05: #F3F3F5;
   "blue":             "#5581FF",
   "blueLight":        "#DDE6FF",
   "blueDark":         "#2749AA",
