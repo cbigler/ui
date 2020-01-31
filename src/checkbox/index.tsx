@@ -32,19 +32,19 @@ function lightenDarkenColor(col, amt) {
 }
 
 const Checkbox: React.FC<{
-  id: React.HTMLProps<HTMLInputElement>['id']
-  checked: React.HTMLProps<HTMLInputElement>['checked']
-  disabled: React.HTMLProps<HTMLInputElement>['disabled']
-  onChange: React.HTMLProps<HTMLInputElement>['onChange']
-  color: React.CSSProperties['color']
-  label: React.ReactNode
+  id?: React.HTMLProps<HTMLInputElement>['id']
+  checked?: React.HTMLProps<HTMLInputElement>['checked']
+  disabled?: React.HTMLProps<HTMLInputElement>['disabled']
+  onChange?: React.HTMLProps<HTMLInputElement>['onChange']
+  color?: React.CSSProperties['color']
+  label?: React.ReactNode
 }> = ({
   id,
   color = colorVariables.midnight,
   checked = false,
   disabled = false,
   onChange,
-  label="",
+  label='',
 }) => {
   const [idProp] = useState(id || `checkbox-${uuid.v4()}`);
   return (
@@ -75,9 +75,9 @@ const Checkbox: React.FC<{
 }
 
 Checkbox.defaultProps = {
-  id: null,
   checked: false,
   disabled: false,
   color: colorVariables.midnight,
+  label: ''
 };
 export default Checkbox;
