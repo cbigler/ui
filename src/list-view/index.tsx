@@ -68,7 +68,7 @@ export type ListViewProps<T, C extends string> = {
 }
 
 interface ObjectWithID {
-  id: string | number | symbol
+  id: string | number
 }
 
 function isAnObjectWithID(thing: unknown): thing is ObjectWithID {
