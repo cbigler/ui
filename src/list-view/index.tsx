@@ -302,12 +302,12 @@ export function ListViewColumn<T = any>(props: ListViewColumnProps<T>) {
 }
 
 
-export const ListViewColumnSpacer: React.FC = () => {
+export const ListViewColumnSpacer: React.FunctionComponent = () => {
   return <ListViewColumn id={v4()} title=" " width="auto" />;
 }
 
-export const ListViewClickableLink: React.FC<{
-  onClick: (evt: React.MouseEvent<HTMLSpanElement>) => void
+export const ListViewClickableLink: React.FunctionComponent<{
+  onClick?: (evt: React.MouseEvent<HTMLSpanElement>) => void
 }> = ({
   onClick,
   children,
