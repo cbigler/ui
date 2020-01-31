@@ -6,8 +6,7 @@ import styles from './styles.module.scss';
 
 export const ButtonContext = React.createContext<any>(null);
 
-const BUTTON_SIZE_STYLES = {
-  default: '' as const,
+export const BUTTON_SIZE_STYLES = {
   small: styles.small,
   large: styles.large,
 };
@@ -26,7 +25,7 @@ export const BUTTON_TYPE_STYLES = {
   muted: styles.muted,
 };
 
-type ButtonProps = React.HTMLProps<HTMLButtonElement> & {
+type ButtonPropsBase = {
   size?: keyof typeof BUTTON_SIZE_STYLES
   variant?: keyof typeof BUTTON_VARIANT_STYLES
   type?: keyof typeof BUTTON_TYPE_STYLES
@@ -36,32 +35,38 @@ type ButtonProps = React.HTMLProps<HTMLButtonElement> & {
   href?: React.HTMLProps<HTMLAnchorElement>['href']
 }
 
-const Button = React.forwardRef<HTMLElement, ButtonProps>(({
-  size = 'default',
-  variant = 'default',
-  type = 'primary',
-  disabled,
-  
-  width,
-  height,
-  
-  href,
-  children,
-  ...props
-}, ref) => {
+type NativeButtonProps = React.HTMLProps<HTMLButtonElement>;
+
+// Allow passing native button props, but Omit those that we define in ButtonPropsBase so they don't conflict
+type ButtonProps = Omit<NativeButtonProps, keyof ButtonPropsBase> & ButtonPropsBase;
+
+const Button = React.forwardRef<HTMLElement, ButtonProps>((props, ref) => {
+  const {
+    size,
+    variant = 'default',
+    type = 'primary',
+    disabled,
+    
+    width,
+    height,
+    
+    href,
+    children,
+    ...otherProps
+  } = props;
   if (href) {
     return (
       <a
-        {...(props as any as React.HTMLProps<HTMLAnchorElement>)}
         className={classnames(
           styles.button,
           BUTTON_TYPE_STYLES[type],
           BUTTON_VARIANT_STYLES[variant],
-          BUTTON_SIZE_STYLES[size],
+          size && BUTTON_SIZE_STYLES[size],
         )}
         style={{ width, height }}
         href={href}
         ref={ref as React.Ref<HTMLAnchorElement>}
+        {...(otherProps as any as React.HTMLProps<HTMLAnchorElement>)}
       >
         {children}
       </a>
@@ -69,16 +74,16 @@ const Button = React.forwardRef<HTMLElement, ButtonProps>(({
   } else {
     return (
       <button
-        {...props}
         disabled={disabled}
         className={classnames(
           styles.button,
           BUTTON_TYPE_STYLES[type],
           BUTTON_VARIANT_STYLES[variant],
-          BUTTON_SIZE_STYLES[size],
+          size && BUTTON_SIZE_STYLES[size],
         )}
         style={{ width, height }}
         ref={ref as React.Ref<HTMLButtonElement>}
+        {...otherProps}
       >
         {children}
       </button>
@@ -102,7 +107,7 @@ Button.propTypes = {
 };
 export default Button;
 
-export const ButtonGroup: React.FC = ({ children }) => {
+export const ButtonGroup: React.FunctionComponent = ({ children }) => {
   return (
     <div className={styles.buttonGroup}>
       {children}

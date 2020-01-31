@@ -3,7 +3,7 @@ import uuid from 'uuid';
 import styles from './styles.module.scss';
 import colorVariables from '../../variables/colors.json';
 
-function lightenDarkenColor(col, amt) {
+function lightenDarkenColor(col: string, amt: number) {
   var usePound = false;
 
   if (col[0] === "#") {

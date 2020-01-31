@@ -25,7 +25,7 @@ export default class DashboardReportGrid extends Component<DashboardReportGridPr
     [id: string]: HTMLDivElement
   }
 
-  constructor(props) {
+  constructor(props: DashboardReportGridProps) {
     super(props);
     this.reportElements = {};
     this.state = { reportHeights: {} };
@@ -41,11 +41,12 @@ export default class DashboardReportGrid extends Component<DashboardReportGridPr
         <div
           className={styles.dashboardReportGridCell}
           key={id}
-          ref={report => {
-            this.reportElements[id] = report;
-            if (report && this.state.reportHeights[id] !== report.clientHeight) {
+          ref={elem => {
+            if (!elem) return;
+            this.reportElements[id] = elem;
+            if (this.state.reportHeights[id] !== elem.clientHeight) {
               this.setState({ 
-                reportHeights: Object.assign(this.state.reportHeights, {[id]: report.clientHeight})
+                reportHeights: Object.assign(this.state.reportHeights, {[id]: elem.clientHeight})
               });
             }
           }}
@@ -77,7 +78,12 @@ export default class DashboardReportGrid extends Component<DashboardReportGridPr
       // For all reports that have heights, sort them into columns.
       const { columnA, columnB } = reportComponents.filter((_, index) => {
         return this.state.reportHeights[reports[index].id];
-      }).reduce(
+      }).reduce<{
+        columnA: JSX.Element[],
+        columnATotalHeight: number,
+        columnB: JSX.Element[],
+        columnBTotalHeight: number,
+      }>(
         ({columnA, columnATotalHeight, columnB, columnBTotalHeight}, reportComponent, index) => {
           const reportId = reports[index].id;
           // Option one: arrange such that higher numbered reports are higher up the list
