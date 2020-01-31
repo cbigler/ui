@@ -7,7 +7,7 @@ import styles from './styles.module.scss';
 export const ButtonContext = React.createContext<any>(null);
 
 const BUTTON_SIZE_STYLES = {
-  default: null,
+  default: '' as const,
   small: styles.small,
   large: styles.large,
 };
@@ -89,7 +89,6 @@ Button.displayName = 'Button';
 Button.defaultProps = {
   variant: 'default',
   type: 'primary',
-  size: 'default',
 };
 Button.propTypes = {
   variant: propTypes.oneOf(['default', 'filled', 'underline']),
