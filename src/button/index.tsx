@@ -7,6 +7,7 @@ import styles from './styles.module.scss';
 export const ButtonContext = React.createContext<any>(null);
 
 const BUTTON_SIZE_STYLES = {
+  default: null,
   small: styles.small,
   large: styles.large,
 };
@@ -36,16 +37,16 @@ type ButtonProps = React.HTMLProps<HTMLButtonElement> & {
 }
 
 const Button = React.forwardRef<HTMLElement, ButtonProps>(({
-  size,
-  children,
-  disabled,
+  size = 'default',
   variant = 'default',
   type = 'primary',
-
+  disabled,
+  
   width,
   height,
-
+  
   href,
+  children,
   ...props
 }, ref) => {
   if (href) {
@@ -88,6 +89,7 @@ Button.displayName = 'Button';
 Button.defaultProps = {
   variant: 'default',
   type: 'primary',
+  size: 'default',
 };
 Button.propTypes = {
   variant: propTypes.oneOf(['default', 'filled', 'underline']),
