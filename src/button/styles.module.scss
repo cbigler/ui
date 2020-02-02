@@ -25,22 +25,19 @@ $buttonBorderColor: $gray300;
   cursor: pointer;
   user-select: none;
   transition: all 100ms ease-in-out;
+  svg *[fill-rule=nonzero] {
+    transition: fill 100ms ease-in-out;
+  }
 
   padding-top: 0px;
   padding-bottom: 0px;
   padding-left: 16px;
   padding-right: 16px;
 
-  &:hover, &:focus { box-shadow: 0 2px 4px 0 rgba(34,42,46,0.09); }
-  &:active {
-		border-color: $midnight;
-    box-shadow: 0 2px 4px 0 rgba(34,42,46,0.09);
-	}
-
   &:disabled {
     color: $gray500;
     border-color: $gray200;
-    cursor: default;
+    cursor: not-allowed;
     &:hover, &:focus { box-shadow: none; }
     &:active { border-color: $buttonBorderColor; }
   }
@@ -60,59 +57,162 @@ $buttonBorderColor: $gray300;
   font-size: 18px;
 }
 
-$themes: primary $midnight,
-         danger $red,
-         warning $yellow,
-         success $green,
-         muted $gray500;
+$themes: (
+  // NOTE: "primary" uses the same colors as "emphasis",
+  // except for special cases, see below
+  primary: (
+    color: $blue,
+    colorLight: $blueLight,
+    colorDark: $blueDark,
+  ),
+  emphasis: (
+    color: $blue,
+    colorLight: $blueLight,
+    colorDark: $blueDark,
+  ),
+  danger: (
+    color: $red,
+    colorLight: $redLight,
+    colorDark: $redDark,
+  ),
+  warning: (
+    color: $yellow,
+    colorLight: $yellowLight,
+    colorDark: $yellowDark,
+  ),
+  success: (
+    color: $green,
+    colorLight: $greenLight,
+    colorDark: $greenDark,
+  ),
+  muted: (
+    color: $gray500,
+    colorLight: $gray200,
+    colorDark: $gray700
+  ),
+);
 
-@each $entry in $themes {
-  $name: nth($entry, 1);
-  $color: nth($entry, 2);
-  .#{$name} {
+@mixin icon-color($color) {
+  svg *[fill-rule=nonzero] {
+    fill: $color;
+  }
+}
+
+@each $themeName, $colors in $themes {
+  $color: map-get($colors, color);
+  $colorLight: map-get($colors, colorLight);
+  .#{$themeName} {
     &.default {
-      color: $color;
-      background-color: #fff;
-      border-color: $gray300;
+      background-color: transparent;
+      @if $themeName == 'primary' {
+        color: $midnight;
+        @include icon-color($midnight);
+        border-color: $midnightTransparent20;
+      } @else {
+        color: $color;
+        @include icon-color($color);
+        border-color: $color;
+      }
     }
-    &.default:hover, &.default:focus { box-shadow: 0 2px 6px 0 rgba(34,42,46,0.09); }
+    &.default:hover {
+      color: $color;
+      @include icon-color($color);
+      background-color: $colorLight;
+      border-color: $colorLight;
+    }
+    &.default:focus {
+      color: $color;
+      @include icon-color($color);
+      background-color: $colorLight;
+      border-color: $color;
+      box-shadow: 0 0 0 1px $color;
+    }
     &.default:disabled {
       color: $gray500;
+      @include icon-color($gray500);
       background-color: $gray200;
       border-color: $gray200;
     }
-    &.default:active { border-color: $color; }
-    &.default:hover:disabled, &.default:active:disabled { box-shadow: none; }
-
-    &.filled {
-      color: #fff;
+    &.default:active {
+      color: $white;
+      @include icon-color($white);
       background-color: $color;
       border-color: $color;
     }
-    &.filled:hover, &.filled:focus { box-shadow: 0 2px 6px 0 rgba(34,42,46,0.09); }
+    &.default:hover:disabled,
+    &.default:focus:disabled,
+    &.default:active:disabled { box-shadow: none; }
+
+    &.filled {
+      color: $white;
+      @if $themeName == primary {
+        background-color: $midnight;
+        border-color: $midnight;
+      } @else {
+        background-color: $color;
+        border-color: $color;
+      }
+    }
+    &.filled:hover {
+      color: $color;
+      background-color: $colorLight;
+      border-color: $colorLight;
+    }
+    &.filled:focus {
+      color: $color;
+      background-color: $colorLight;
+      border-color: $color;
+      box-shadow: 0 0 0 1px $color;
+    }
+    &.filled:active {
+      color: $white;
+      background-color: $color;
+      border-color: $color;
+    }
     &.filled:disabled {
       color: $gray500;
       background-color: $gray200;
       border-color: $gray200;
     }
-    &.filled:hover:disabled, &.filled:active:disabled { box-shadow: none; }
+    &.filled:hover:disabled,
+    &.filled:focus:disabled,
+    &.filled:active:disabled { box-shadow: none; }
 
     &.underline {
-      color: $color;
+      @if $themeName == primary {
+        color: $midnight;
+      } @else {
+        color: $color;
+      }
       background-color: transparent;
       border-color: transparent;
       text-decoration: underline;
     }
-    &.underline:hover, &.underline:focus {
-      border-color: $gray300;
-      box-shadow: none;
+    &.underline:hover {
+      color: $color;
+      background-color: $colorLight;
+      border-color: $colorLight;
     }
-    &.underline:active { border-color: $color; }
+    &.underline:focus {
+      color: $color;
+      background-color: $colorLight;
+      border-color: $color;
+      box-shadow: 0 0 0 1px $color;
+    }
+    &.underline:active {
+      color: $white;
+      background-color: $color;
+      border-color: $color;
+    }
     &.underline:disabled {
       color: $gray500;
       background-color: $gray200;
     }
-    &.underline:hover:disabled, &.underline:active:disabled { border-color: transparent; }
+    &.underline:hover:disabled,
+    &.underline:focus:disabled,
+    &.underline:active:disabled {
+      border-color: transparent;
+    }
   }
 }
 
@@ -128,3 +228,62 @@ $themes: primary $midnight,
 }
 .buttonGroup > .button:first-child { margin-left: 0px; }
 .buttonGroup > .button:last-child { margin-right: 0px; }
+
+
+.hack-outline-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+
+  color: $midnight;
+  background-color: $white;
+  height: 40px;
+  padding-top: 2px;
+  padding-left: 13px;
+  padding-right: 11px;
+  border: 1px solid $midnightTransparent20;
+  border-radius: $borderRadiusBase;
+  outline: none;
+
+  transition: all 100ms ease-in-out;
+  svg *[fill-rule=nonzero] {
+      transition: all 100ms ease-in-out;
+  }
+
+
+  &:hover {
+    background-color: $blueLight;
+    color: $blue;
+    border-color: $blueLight;
+
+    svg *[fill-rule=nonzero] {
+      fill: $blue;
+    }
+  }
+
+  &:focus {
+    background-color: $blueLight;
+    color: $blue;
+    border-color: $blue;
+    box-shadow: 0 0 0 1px $blue;
+
+    svg *[fill-rule=nonzero] {
+      fill: $blue;
+    }
+  }
+
+  &:active {
+    background-color: $blue;
+    color: $white;
+    border-color: $blue;
+
+    svg *[fill-rule=nonzero] {
+      fill: $white;
+    }
+  }
+}
