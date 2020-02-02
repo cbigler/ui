@@ -40,7 +40,7 @@ const Checkbox: React.FC<{
   label?: React.ReactNode
 }> = ({
   id,
-  color = colorVariables.midnight,
+  color = colorVariables.blue,
   checked = false,
   disabled = false,
   onChange,
@@ -77,7 +77,7 @@ const Checkbox: React.FC<{
 Checkbox.defaultProps = {
   checked: false,
   disabled: false,
-  color: colorVariables.midnight,
+  color: colorVariables.blue,
   label: ''
 };
 export default Checkbox;
