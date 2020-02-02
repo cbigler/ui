@@ -3,8 +3,6 @@
 @import "../../variables/fonts.scss";
 @import "../../variables/spacing.scss";
 
-$buttonBorderColor: $gray300;
-
 .button {
   display: inline-block;
   box-sizing: border-box;
@@ -39,7 +37,7 @@ $buttonBorderColor: $gray300;
     border-color: $gray200;
     cursor: not-allowed;
     &:hover, &:focus { box-shadow: none; }
-    &:active { border-color: $buttonBorderColor; }
+    &:active { border-color: $gray200; }
   }
 }
 

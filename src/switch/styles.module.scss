@@ -5,7 +5,7 @@ $switchBaseHeight: 24px;
 $switchHandleSize: 20px;
 $switchHandleBorderSize: 2px;
 
-@mixin make-switch($background: $midnight, $foreground: #fff) {
+@mixin make-switch($background: $blue, $foreground: $white) {
   label {
     outline: 0;
     display: inline-block;
