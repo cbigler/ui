@@ -210,7 +210,7 @@ export default function ListView<T = any, C extends string = string>(props: List
 }
 
 type ListViewColumnProps<T> = {
-  id?: string
+  id: string
   title?: React.ReactNode
   template?: (item: T) => React.ReactNode
   valueTemplate?: (item: T) => SortableValue
