@@ -26,6 +26,9 @@ import { Icons } from '@density/ui';
 
 ## Converting icons from SVG
 
+Instructions for adding new Density UI icons are here: https://densityio.atlassian.net/wiki/spaces/~gus/pages/258801724/How+to+export+Sketch+Icons+as+Density+UI+Icons
+
+These instructions make use of the `convert-icon` utility in this repo:
 ```
 ./utilities/convert-icon ~/path/to/icon-name.svg IconName
 ```

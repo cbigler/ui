@@ -7,7 +7,7 @@ ICONPATH="$1"
   --no-svgo --replace-attr-values "#0D183A"="{color}" < $ICONPATH \
   | sed "s/export default SvgComponent;/export default $2;/" \
   | sed "s/const SvgComponent = props => (/const $2 = ({ width, height, color }) => (/" \
-  | sed 's/<svg width={24} height={24} viewBox="0 0 24 24" {...props}>/<svg width={width || 24} height={height || 24} viewBox="0 0 24 24">/' \
+  | sed 's/<svg width="24px" height="24px" viewBox="0 0 24 24" {...props}>/<svg width={width || 24} height={height || 24} viewBox="0 0 24 24">/' \
   | pbcopy
 
 echo "Copied icon component to clipboard..."

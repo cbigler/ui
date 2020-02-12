@@ -50,6 +50,8 @@ import Copy from './symbols/copy';
 import Danger from './symbols/danger';
 import Dashboard from './symbols/dashboard';
 import DashboardAdd from './symbols/dashboard-add';
+import DeviceSide from './symbols/device-side';
+import DeviceTop from './symbols/device-top';
 import DoNotEnter from './symbols/do-not-enter';
 import Door from './symbols/door';
 import Dot from './symbols/dot';
@@ -255,6 +257,8 @@ const ICONS = {
 
   Dashboard: Dashboard,
   DashboardAdd: DashboardAdd,
+  DeviceSide: DeviceSide,
+  DeviceTop: DeviceTop,
   DoNotEnter: DoNotEnter,
   Door: Door,
   Doorway: Door,
