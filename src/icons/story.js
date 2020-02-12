@@ -10,14 +10,14 @@ storiesOf('Icons', module)
   .add('A sample icon', () => (
     <Icons.ImageUpload />
   ))
-  .add('A sample icon in brand-primary color', () => (
-    <Icons.ImageUpload color="primary" />
+  .add('A sample icon in "blue" color', () => (
+    <Icons.ImageUpload color={colorVariables.blue} />
   ))
-  .add('A sample icon in gray300-darker color', () => (
-    <Icons.ImageUpload color="darker" />
+  .add('A sample icon in gray300 color', () => (
+    <Icons.ImageUpload color={colorVariables.gray300} />
   ))
   .add('A sample icon with color accent', () => (
-    <Icons.Alert color="primary" accentColor="danger" />
+    <Icons.Alert color={colorVariables.blue} accentColor={colorVariables.red} />
   ))
   .add('A sample icon in a random hex color', () => (
     <Icons.ImageUpload color="#FFBA08" />

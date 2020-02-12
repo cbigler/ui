@@ -184,6 +184,9 @@ import Square from './legacy/square';
 import Tag from './legacy/tag';
 import Zoom from './legacy/zoom';
 
+// Regex for testing color values
+const COLOR_REGEX = /^(#([\da-f]{3}){1,2}|(rgb|hsl)a\((\d{1,3}%?,\s?){3}(1|0?\.\d+)\)|(rgb|hsl)\(\d{1,3}%?(,\s?\d{1,3}%?){2}\))$/i;
+
 // A list of all density icons.
 const ICONS = {
 
@@ -435,12 +438,25 @@ const ICONS = {
 };
 
 // colors can either be `primary`, `darker`, or a hex/rgb color.
-function parseColor(color) {
-    return color && typeof color === 'string' ? (
-        colorVariables[`brand${color[0].toUpperCase()}${color.slice(1)}`] || /* ie, midnight */
-        colorVariables[`gray300${color[0].toUpperCase()}${color.slice(1)}`] || /* ie, gray500 */
-        color /* ie, #555 */
-    ) : colorVariables.midnight; /* defaults to gray300-cinder */
+function parseColor(color: string): string {
+  if (color && typeof color === 'string') {
+    let parsedColor = colorVariables[`brand${color[0].toUpperCase()}${color.slice(1)}`];
+    if (parsedColor) { 
+      console.warn('Semantic "brand" color values are deprecated.');
+      return parsedColor;
+    }
+    parsedColor = colorVariables[`gray${color[0].toUpperCase()}${color.slice(1)}`];
+    if (parsedColor) { 
+      console.warn('Semantic "gray-dark" etc. color values are deprecated.');
+      return parsedColor;
+    }
+    if (!COLOR_REGEX.test(color)) {
+      console.warn('Unrecognized color value.');
+    }
+    return color;
+  } else {
+    return colorVariables.midnight; /* defaults to midnight */
+  }
 }
 
 // Wrap each icon in a component.
