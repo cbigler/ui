@@ -269,7 +269,7 @@ export function ListViewColumn<T = any>(props: ListViewColumnProps<T>) {
           className={classnames(styles.listViewHeader, { [styles.clickable]: headerClickable })}
           style={{height, fontSize, justifyContent: ALIGN_TO_JUSTIFY[align]}}
         >
-          {title || id}
+          {title !== null ? title : id}
           {sortIndicator}
         </div>
       </th>
@@ -302,8 +302,8 @@ export function ListViewColumn<T = any>(props: ListViewColumnProps<T>) {
 }
 
 
-export const ListViewColumnSpacer: React.FunctionComponent = () => {
-  return <ListViewColumn id={v4()} title=" " width="auto" />;
+export const ListViewColumnSpacer: React.FunctionComponent<{id?: string}> = ({id}) => {
+  return <ListViewColumn id={id || v4()} title=" " width="auto" />;
 }
 
 export const ListViewClickableLink: React.FunctionComponent<{
