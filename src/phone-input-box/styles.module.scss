@@ -9,14 +9,14 @@
   height          : 40px;
 	display         : flex;
   align-items     : center;
-  border          : 1px solid $gray400;
+  border          : 1px solid $gray300;
   border-radius   : $borderRadiusBase;
   box-sizing      : border-box;
   padding-bottom  : 2px;
 }
 :global(.react-phone-number-input--focus > .react-phone-number-input__row)
 {
-  border: 1px solid $midnight;
+  border: 1px solid $blue;
 }
 :global(.react-phone-number-input--disabled > .react-phone-number-input__row)
 {
@@ -69,7 +69,7 @@
 {
 	margin-left : calc(1.24em + 2px + 0.3em + 0.35em + 0.5em);
 	margin-top  : calc(0.3rem);
-	color       : #D30F00;
+	color       : $redDark;
 }
 
 :global(.react-phone-number-input__icon-image)
@@ -173,7 +173,7 @@
 	border        : none;
   padding       : 0;
   margin-right  : 16px;
-  color         : $midnight;
+  color         : $gray700;
 	border-radius : $borderRadiusBase;
 	font-size     : $fontSizeBase;
   font-family   : $fontBase;
@@ -196,7 +196,7 @@
 :global(.react-phone-number-input__input--invalid),
 :global(.react-phone-number-input__input--invalid:focus)
 {
-	border-color : #EB2010;
+	border-color : $red;
 }
 
 /* Overrides Chrome autofill yellow background color */
