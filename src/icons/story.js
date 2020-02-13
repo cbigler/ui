@@ -22,6 +22,9 @@ storiesOf('Icons', module)
   .add('A sample icon in a random hex color', () => (
     <Icons.ImageUpload color="#FFBA08" />
   ))
+  .add('A sample icon using "currentColor"', () => (
+    <Icons.ImageUpload color="currentColor" />
+  ))
   .add(`A sample icon that's sized smaller`, () => (
     <Icons.ImageUpload width={10} height={10} />
   ))

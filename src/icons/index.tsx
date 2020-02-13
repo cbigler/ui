@@ -187,7 +187,7 @@ import Tag from './legacy/tag';
 import Zoom from './legacy/zoom';
 
 // Regex for testing color values
-const COLOR_REGEX = /^(#([\da-f]{3}){1,2}|(rgb|hsl)a\((\d{1,3}%?,\s?){3}(1|0?\.\d+)\)|(rgb|hsl)\(\d{1,3}%?(,\s?\d{1,3}%?){2}\))$/i;
+const COLOR_REGEX = /^(currentColor)|(#([\da-f]{3}){1,2}|(rgb|hsl)a\((\d{1,3}%?,\s?){3}(1|0?\.\d+)\)|(rgb|hsl)\(\d{1,3}%?(,\s?\d{1,3}%?){2}\))$/i;
 
 // A list of all density icons.
 const ICONS = {
