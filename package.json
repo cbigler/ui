@@ -1,6 +1,6 @@
 {
   "name": "@density/ui",
-  "version": "21.4.10",
+  "version": "21.4.11",
   "description": "A UI framework for density projects",
   "scripts": {
     "build-storybook": "build-storybook",
@@ -59,7 +59,7 @@
     "react-phone-number-input": "^2.3.17",
     "react-svg-pan-zoom": "^3.2.0",
     "regenerator-runtime": "^0.13.1",
-    "typescript": "^3.6.3",
+    "typescript": "^3.7.5",
     "uuid": "^3.3.2"
   },
   "files": [

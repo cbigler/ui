@@ -277,7 +277,7 @@ export function ListViewColumn<T = any>(props: ListViewColumnProps<T>) {
   } else {
     const contents = (
       <div
-        onClick={cellClickable ? () => onClick(item) : undefined}
+        onClick={(cellClickable && onClick) ? () => onClick(item) : undefined}
         className={classnames(styles.listViewCell, { [styles.clickable]: cellClickable })}
         style={{height, fontSize, justifyContent: ALIGN_TO_JUSTIFY[align]}}
       >
