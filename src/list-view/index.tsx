@@ -232,7 +232,7 @@ export function ListViewColumn<T = any>(props: ListViewColumnProps<T>) {
     title = null,
     template = () => null,
     valueTemplate,
-    onClick = () => {},
+    onClick,
     disabled = () => false,
     isRowHeader = false,
   
