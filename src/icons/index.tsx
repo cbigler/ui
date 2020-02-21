@@ -108,6 +108,7 @@ import Power from './symbols/power';
 import Refresh from './symbols/refresh';
 import Report from './symbols/report';
 import ReportAdd from './symbols/report-add';
+import ReportShare from './symbols/report-share';
 import Rotate from './symbols/rotate';
 import SaveFill from './symbols/save-fill';
 import SaveOutline from './symbols/save-outline';
@@ -337,6 +338,7 @@ const ICONS = {
   Report: Report,
   ReportAdd: ReportAdd,
   AddReport: ReportAdd,
+  ReportShare: ReportShare,
 
   Rotate: Rotate,
 
