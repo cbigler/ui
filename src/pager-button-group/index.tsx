@@ -1,6 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
 import propTypes from 'prop-types';
+import Icons from '../icons';
+import colorVariables from '../../variables/colors.json';
 
 import styles from './styles.module.scss';
 
@@ -19,39 +21,46 @@ const PagerButtonGroup: React.FC<any> = ({
 }) => {
   return <div className={styles.pagerButtonGroup}>
     {showFirstLastButtons ? <div
-      className={classnames(styles.pagerButton, {[styles.pagerButtonDisabled]: disabledStart})}
+      className={classnames(styles.pagerButton, styles.pagerButtonPrevStart, {[styles.pagerButtonDisabled]: disabledStart})}
       onClick={e => {
         if (!disabledStart) {
           onClickStart(e);
         }
       }}
-    >&laquo;</div> : null}
+    ><Icons.PlaybackPrev
+    color={disabledStart ? colorVariables.gray400 : colorVariables.midnight}
+    width={20}
+    height={20}/></div> : null}
 
     <div
-      className={classnames(styles.pagerButton, {[styles.pagerButtonDisabled]: disabledPrevious})}
+      className={classnames(styles.pagerButton, styles.pagerButtonPrev, {[styles.pagerButtonDisabled]: disabledPrevious})}
       onClick={e => {
         if (!disabledPrevious) {
           onClickPrevious(e);
         }
       }}
-    >&lsaquo;</div>
+    >Prev</div>
+
     <div
-      className={classnames(styles.pagerButton, {[styles.pagerButtonDisabled]: disabledNext})}
+      className={classnames(styles.pagerButton, styles.pagerButtonNext, {[styles.pagerButtonDisabled]: disabledNext})}
       onClick={e => {
         if (!disabledNext) {
           onClickNext(e);
         }
       }}
-    >&rsaquo;</div>
+    >Next</div>
 
     {showFirstLastButtons ? <div
-      className={classnames(styles.pagerButton, {[styles.pagerButtonDisabled]: disabledEnd})}
+      className={classnames(styles.pagerButton, styles.pagerButtonNextEnd, {[styles.pagerButtonDisabled]: disabledEnd})}
       onClick={e => {
         if (!disabledEnd) {
           onClickEnd(e);
         }
       }}
-    >&raquo;</div> : null}
+    ><Icons.PlaybackNext
+    color={disabledEnd ? colorVariables.gray400 : colorVariables.midnight}
+    width={20}
+    height={20}/></div> : null}
   </div>;
 }
 
