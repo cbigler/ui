@@ -6,14 +6,14 @@
 // equates rgba($brand-primary, 30%).
 // needed a solid color due to using for borders + background
 // (opacity was stacking)
-$blueLight: #b6c6f6;
+$datePickerFontSize: 14px;
 
 .dateRangePicker {
   // Styles from `react-dates`.
   :global {
     .CalendarDay {
-      border: 1px solid #e4e7e7;
       padding: 0;
+      border: 1px solid #e4e7e7;
       box-sizing: border-box;
       color: #565a5c;
       cursor: pointer;
@@ -30,13 +30,17 @@ $blueLight: #b6c6f6;
       padding: 0;
       color: inherit;
       font: inherit;
+      font-size: 14px;
       line-height: normal;
       overflow: visible;
       cursor: pointer;
       box-sizing: border-box;
     }
-    .CalendarDay__button:active {
+    .CalendarDay__button:active,
+    .CalendarDay__button:focus {
       outline: 0;
+      background-color: $blueLight;
+      color: $blue;
     }
 
     .CalendarDay--highlighted-calendar {
@@ -75,13 +79,13 @@ $blueLight: #b6c6f6;
     .CalendarDay--selected-span {
       background: $blueLight;
       border: 1px solid $blueLight;
-      color: #fff;
+      color: $blue;
     }
 
     .CalendarDay--selected-span.CalendarDay--hovered,
     .CalendarDay--selected-span:active {
-      background: $midnight;
-      border: 1px solid $midnight;
+      background: $blueLight;
+      border: 1px solid $blueLight;
     }
     .CalendarDay--selected-span.CalendarDay--last-in-range {
       border-right: $midnight;
@@ -91,7 +95,7 @@ $blueLight: #b6c6f6;
     .CalendarDay--after-hovered-start {
       background: $blueLight;
       border: 1px solid $blueLight;
-      color: #fff;
+      color: $blue;
     }
     .CalendarDay--hovered-span:active,
     .CalendarDay--after-hovered-start:active {
@@ -101,9 +105,9 @@ $blueLight: #b6c6f6;
     .CalendarDay--selected-start,
     .CalendarDay--selected-end,
     .CalendarDay--selected {
-      background: $midnight;
-      border: 1px solid $midnight;
-      color: #fff;
+      background: $blueLight;
+      border: 1px solid $blueLight;
+      color: $blue;
     }
     .CalendarDay--selected-start:active,
     .CalendarDay--selected-end:active,
@@ -807,16 +811,17 @@ $blueLight: #b6c6f6;
 }
 
 .dateRangePicker {
-  display: inline-block;
-  padding-left: 3px;
-  padding-right: 3px;
-  padding-top: 3px;
-  height: 35px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 40px;
+  padding-left: 8px;
+  padding-right: 8px;
   resize: none;
 
   font-family: $fontBase;
-  font-size: $fontSizeBase;
-  font-weight: normal;
+  font-size: $datePickerFontSize;
+  font-weight: bold;
 
   color: $gray500;
   background-color: #fff;
@@ -832,7 +837,7 @@ $blueLight: #b6c6f6;
   :global {
     .DateRangePickerInput {
       border: 0px;
-      height: 32px;
+      height: 28px;
       display: flex;
     }
     .DateRangePickerInput__arrow {
@@ -842,13 +847,15 @@ $blueLight: #b6c6f6;
     .DateInput {
       position: static;
       display: block;
-      width: 100px;
+      height: 28px !important;
+      width: 104px;
       padding: 0px;
       margin: 0px;
       background-color: transparent;
       font-weight: $fontWeightBase;
-      font-size: $fontSizeBase;
-      line-height: 24px;
+      font-size: $datePickerFontSize;
+      font-weight: bold;
+      line-height: 28px;
       text-align: center;
     }
     .DateInput:first-child {
@@ -870,12 +877,23 @@ $blueLight: #b6c6f6;
       top: 47px;
     }
     .DateInput__display-text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      flex-grow: 0;
+      flex-shrink: 0;
+      height: 28px !important;
+      width: 104px;
+      border-radius: 4px;
+      background-color: $gray200;
       color: $gray700;
-      height: 24px;
     }
     .DateInput__display-text--focused {
-      background-color: $midnight;
-      color: white;
+      box-sizing: border-box;;
+      background-color: $blueLight;
+      border: 2px solid $blue;
+      color: $blue;
     }
     .DayPickerKeyboardShortcuts__show {
       display: none;
@@ -922,7 +940,7 @@ $blueLight: #b6c6f6;
 
   margin-left: 8px;
   font-family: $fontBase;
-  font-size: $fontSizeBase;
-  font-weight: normal;
+  font-size: $datePickerFontSize;
+  font-weight: bold;
   user-select: none;
 }
