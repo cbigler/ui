@@ -13,14 +13,14 @@
   align-items: center;
   justify-content: center;
 
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   color: $gray700;
   font-size: 12px;
   font-weight: 500;
   background-color: #fff;
   border: 1px solid $gray400;
-  border-radius: $borderRadiusSmall;
+  border-radius: $borderRadiusBase;
   cursor: pointer;
   user-select: none;
   transition: all 100ms ease-in-out;

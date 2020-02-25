@@ -212,16 +212,21 @@
 }
 
 .inputBoxSelectBoxMenuLi {
-  line-height: 36px;
-  font-size: $fontSizeBase;
-  cursor: pointer;
-
-  padding-left: 15px;
-  padding-right: 15px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 40px;
+  padding-left: 8px;
+  padding-right: 8px;
+  // padding-bottom: 1px;
   margin-left: 8px;
   margin-right: 8px;
-  outline: none;
   border-radius: $borderRadiusBase;
+  outline: none;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
 
   &:focus {
     background-color: $gray100;
@@ -232,7 +237,6 @@
   &:hover {
     background-color: $gray100;
     color: $gray700;
-    text-decoration: underline;
   }
 }
 .inputBoxSelectBoxMenuLiDisabled {
