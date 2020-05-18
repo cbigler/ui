@@ -18,7 +18,7 @@ export const ANCHOR_RIGHT = 'ANCHOR_RIGHT',
 
 export const InputBoxContext = React.createContext<string | null>(null);
 
-const InputBoxRaw: React.FC<any> = ({leftIcon, forwardedRef, ...props}) => {
+const InputBoxRaw: React.FC<any> = ({leftIcon, forwardedRef, invalid, ...props}) => {
   const [focused, setFocus] = useState(false);
   const defaultInputRef = useRef();
   const input = forwardedRef || defaultInputRef;
@@ -26,7 +26,7 @@ const InputBoxRaw: React.FC<any> = ({leftIcon, forwardedRef, ...props}) => {
   switch (props.type) {
 
   case 'select':
-    return <SelectBox {...props} />;
+    return <SelectBox invalid={invalid} {...props} />;
 
   case 'textarea':
     return <textarea
@@ -43,7 +43,7 @@ const InputBoxRaw: React.FC<any> = ({leftIcon, forwardedRef, ...props}) => {
           [styles.inputBoxDisabled]: props.disabled,
           [styles.inputBoxFocused]: focused,
           [styles.inputBoxContainsIcon]: Boolean(leftIcon),
-          [styles.invalid]: props.invalid,
+          [styles.invalid]: invalid,
         })}
         style={{width: props.width}}
         onClick={() => {
