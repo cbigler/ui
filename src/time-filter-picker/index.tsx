@@ -7,9 +7,30 @@ import { MuiPickersUtilsProvider, KeyboardTimePicker } from '@material-ui/picker
 import colorVariables from '../../variables/colors.json';
 import InputBox from '../input-box';
 import DayOfWeekSelector from '../day-of-week-picker';
+import Popup from '../popup';
 
-function TimePickerInput({value, onChange, disabled, error}) {
-  return <InputBox width={108} value={value} onChange={onChange} disabled={disabled} invalid={error ? 'true' : undefined} />;
+function TimePickerInput({value, onChange, disabled=false, error=undefined}) {
+  const [textValue, setTextValue] = useState(value ? value.format('HH:mm') : '');
+
+  return <Popup
+    target={<InputBox
+      width={108}
+      value={textValue}
+      onChange={event => setTextValue(event.target.value)}
+      onBlur={event => {
+        const parsedValue = moment(event.target.value, 'HH:mm');
+        if (parsedValue.isValid()) {
+          setTextValue(parsedValue.format('HH:mm'));
+          onChange(parsedValue);
+        } else {
+          setTextValue('');
+          onChange(null);
+        }
+      }}
+      disabled={disabled}
+      invalid={error ? 'true' : undefined} />}
+    contents={<div>ASDFASDF</div>}
+  />;
 }
 
 function TimePicker({value, onChange}) {
@@ -76,8 +97,8 @@ function TimeFilterDisplay({displayTwoDays, shadedStartPercent, shadedWidthPerce
 }
 
 function TimeFilterPicker() {
-  const [startTimePickerValue, setStartTimePickerValue] = useState(moment('08:00', 'hh:mm'));
-  const [endTimePickerValue, setEndTimePickerValue] = useState(moment('17:00', 'hh:mm'));
+  const [startTimePickerValue, setStartTimePickerValue] = useState(null);
+  const [endTimePickerValue, setEndTimePickerValue] = useState(null);
   const [daysOfWeek, setDaysOfWeek] = useState(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']);
 
   let displayTwoDays = false;
@@ -98,7 +119,7 @@ function TimeFilterPicker() {
   }
 
   // Calculate
-  const startOfDay = startTimePickerValue.clone().startOf('day');
+  const startOfDay = startTimePickerValue && startTimePickerValue.clone().startOf('day');
   const shadedStartPercent = startTimePickerValue ? 
     startTimePickerValue.diff(startOfDay, 'minutes') * 100 / 1440 : 0;
   const shadedWidthPercent = (startTimePickerValue && endTimeNormalized) ? 
@@ -113,9 +134,9 @@ function TimeFilterPicker() {
       paddingRight: 16,
     }}>
       <div style={{display: 'flex'}}>
-        <TimePicker value={startTimePickerValue} onChange={setStartTimePickerValue} />
+        <TimePickerInput value={startTimePickerValue} onChange={setStartTimePickerValue} />
         <div style={{lineHeight: '40px', padding: '0px 8px'}}>to</div>
-        <TimePicker value={endTimeNormalized} onChange={setEndTimePickerValue} />
+        <TimePickerInput value={endTimeNormalized} onChange={setEndTimePickerValue} />
         <div style={{flex:1}}></div>
         <div style={{height: 40, display: 'flex', alignItems: 'center'}}>
           <DayOfWeekSelector daysOfWeek={daysOfWeek} onChange={setDaysOfWeek} />
