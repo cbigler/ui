@@ -6,7 +6,7 @@ import Floorplan, { DPU, CIRCLE } from './index';
 import RadioButton from '../radio-button';
 import Button from '../button';
 
-import uuid from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 storiesOf('Floorplan', module)
   .add('With a few movable doorways', () => {

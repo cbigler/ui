@@ -1,4 +1,3 @@
-import * as uuid from 'uuid';
 import React, { Component } from 'react';
 import classnames from 'classnames';
 

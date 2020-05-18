@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import styles from './styles.module.scss';
 import colorVariables from '../../variables/colors.json';
 
@@ -46,7 +46,7 @@ const Checkbox: React.FC<{
   onChange,
   label='',
 }) => {
-  const [idProp] = useState(id || `checkbox-${uuid.v4()}`);
+  const [idProp] = useState(id || `checkbox-${uuidv4()}`);
   return (
     <div
       // Required so that clicking on the checkbox doesn't produce an `onClick` event in parent
